@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "language": "python",
   "repository": "sellapp/sellapp-python",
-  "sourceSha": "8d8876b1921e931e18baf6f31ed48f79c5282f73",
+  "sourceSha": "e4051383c6618a31c201c050d55d7bdacd157f0c",
   "specSha256": "02043ebfc36589e78743f00a0f4a2f3ac9ac14914b9cf2910f04fc34ad2d0924",
   "runId": "0",
   "runAttempt": "1",
-  "treeDigest": "b5f2d409865a06d8c836c67e2845bda9f3d8863a3deb21075451d0ba2f08a713",
-  "contentDigest": "9d677d01f93d9087aa69f4b76517eea618843ee410da83f388e7bdc54e85d7fa",
+  "treeDigest": "66cd3d8e4c050e90d41d03ca1b3025a6a6861d64b0056b9d9b7e91048cea07f3",
+  "contentDigest": "42a911a37c60ad7ad5e62dac3c48a41203341605c398fbcf25c758454e1a6315",
   "files": [
     {
       "path": ".github/scripts/native-ci.mjs",
@@ -47,7 +47,7 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "sha256": "31599c89a009fd2751a3e37b659af12f3dbf2e7c016edf97f4dde95e7e3c324c"
+      "sha256": "bec8744296813c95e44cb0343cd5e3e95c510f394efa7da2debffb1ec9e67732"
     },
     {
       "path": "docs/methods.md",
@@ -492,22 +492,22 @@
     {
       "path": "generation-manifest.json",
       "mode": "100644",
-      "sha256": "c967443932963c7a78390c53c8612de3ebbc1d8767376dc969080c9bf8ae3881"
+      "sha256": "5bc0d7c16cb61c920c2cd02657dc1733c542b127e27f751d58fcf2a107a03f89"
     },
     {
       "path": "pyproject.toml",
       "mode": "100644",
-      "sha256": "601531e1efa298a50aa0899aa16379d883856d11e4c1260045d68f8d94f523ee"
+      "sha256": "12767d951cb04ebe6e1d7a3f8fa6e5ec9ed1dd4f61f17b7d5b92db3307cda8ee"
     },
     {
       "path": "src/sellapp_sdk/__init__.py",
       "mode": "100644",
-      "sha256": "fa513ab93b98cd38d0d21ec38774067b1c4ea28e161ed22fa02d505ba926a082"
+      "sha256": "4d18112274e48126b56ee4a3a26759eaa5b0a1af2cf3b8fa23a68c8ba822aec1"
     },
     {
       "path": "src/sellapp_sdk/_base_client.py",
       "mode": "100644",
-      "sha256": "09765b407c678dcbeb0f05d15859aecfaea840fe41021e38c751230264cee66c"
+      "sha256": "7bccac4bfa027e40d6c27d35e5978884fbbd9b06ba5eed044fe0b529363f060c"
     },
     {
       "path": "src/sellapp_sdk/_client.py",
