@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -47,7 +47,7 @@ class StoreNotificationChannels:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListNotificationChannelsResponseValue200ApplicationJson:
         """List notification channels
 
@@ -105,7 +105,7 @@ class StoreNotificationChannels:
         self,
         *,
         channel: CreateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateNotificationChannelResponseValue201ApplicationJson:
         """Create a notification channel
 
@@ -156,7 +156,7 @@ class StoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "createNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -184,7 +184,7 @@ class StoreNotificationChannels:
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetNotificationChannelResponseValue200ApplicationJson:
         """Retrieve a notification channel
 
@@ -248,7 +248,7 @@ class StoreNotificationChannels:
         notification_channel: str,
         *,
         channel: ReplaceNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceNotificationChannelResponseValue200ApplicationJson:
         """Update a notification channel
 
@@ -301,7 +301,7 @@ class StoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "replaceNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -330,7 +330,7 @@ class StoreNotificationChannels:
         notification_channel: str,
         *,
         channel: UpdateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateNotificationChannelResponseValue200ApplicationJson:
         """Update a notification channel
 
@@ -383,7 +383,7 @@ class StoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "updateNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -411,7 +411,7 @@ class StoreNotificationChannels:
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a notification channel
 
@@ -477,7 +477,7 @@ class AsyncStoreNotificationChannels:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListNotificationChannelsResponseValue200ApplicationJson:
         """List notification channels
 
@@ -535,7 +535,7 @@ class AsyncStoreNotificationChannels:
         self,
         *,
         channel: CreateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateNotificationChannelResponseValue201ApplicationJson:
         """Create a notification channel
 
@@ -586,7 +586,7 @@ class AsyncStoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "createNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -614,7 +614,7 @@ class AsyncStoreNotificationChannels:
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetNotificationChannelResponseValue200ApplicationJson:
         """Retrieve a notification channel
 
@@ -678,7 +678,7 @@ class AsyncStoreNotificationChannels:
         notification_channel: str,
         *,
         channel: ReplaceNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceNotificationChannelResponseValue200ApplicationJson:
         """Update a notification channel
 
@@ -731,7 +731,7 @@ class AsyncStoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "replaceNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -760,7 +760,7 @@ class AsyncStoreNotificationChannels:
         notification_channel: str,
         *,
         channel: UpdateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateNotificationChannelResponseValue200ApplicationJson:
         """Update a notification channel
 
@@ -813,7 +813,7 @@ class AsyncStoreNotificationChannels:
             "idempotency_supported": False,
             "operation_id": "updateNotificationChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "channel": channel.to_dict(),
         }
         _validate_model(
@@ -841,7 +841,7 @@ class AsyncStoreNotificationChannels:
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a notification channel
 

@@ -12,23 +12,23 @@ List webhook channels
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -75,26 +75,22 @@ def create(
         self,
         *,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWebhookChannelResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | url | `str` | Yes |
-| allowed_notifications | `List[
-            Union[
-                SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+| allowed_notifications | `builtins.list[
+            SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications \| str
         ]` | Yes |
-| name | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateWebhookChannelResponseValue201ApplicationJson`.
 
@@ -144,31 +140,27 @@ Search webhook channels
 def search(
         self,
         *,
-        search: Optional[
-            SearchWebhookChannelsRequestApplicationJsonPropertySearch
-        ] = None,
-        event: Union[Union[Event, str], None, NotGiven] = NOT_GIVEN,
-        page: Optional[int] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: SearchWebhookChannelsRequestApplicationJsonPropertySearch | None = None,
+        event: Event | str | None | NotGiven = NOT_GIVEN,
+        page: int | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| search | `Optional[
-            SearchWebhookChannelsRequestApplicationJsonPropertySearch
-        ]` | No |
-| event | `Union[Union[Event, str], None, NotGiven]` | No |
-| page | `Optional[int]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| search | `SearchWebhookChannelsRequestApplicationJsonPropertySearch \| None` | No |
+| event | `Event \| str \| None \| NotGiven` | No |
+| page | `int \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -218,14 +210,14 @@ def rotate(
         self,
         *,
         signing_secret: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRotateWebhookSigningSecretResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | signing_secret | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRotateWebhookSigningSecretResponseValue200ApplicationJson`.
 
@@ -272,14 +264,14 @@ def get(
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWebhookChannelResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | webhook_channel | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetWebhookChannelResponseValue200ApplicationJson`.
 
@@ -326,28 +318,24 @@ def replace(
         self,
         webhook_channel: str,
         *,
-        name: Optional[str],
+        name: str | None,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWebhookChannelResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | webhook_channel | `str` | Yes |
-| name | `Optional[str]` | Yes |
+| name | `str \| None` | Yes |
 | url | `str` | Yes |
-| allowed_notifications | `List[
-            Union[
-                SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+| allowed_notifications | `builtins.list[
+            SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications \| str
         ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceWebhookChannelResponseValue200ApplicationJson`.
 
@@ -399,34 +387,26 @@ def update(
         self,
         webhook_channel: str,
         *,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        url: Optional[str] = None,
-        allowed_notifications: Optional[
-            List[
-                Union[
-                    SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications,
-                    str,
-                ]
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        url: str | None = None,
+        allowed_notifications: builtins.list[
+            SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications | str
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWebhookChannelResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | webhook_channel | `str` | Yes |
-| name | `Union[str, None, NotGiven]` | No |
-| url | `Optional[str]` | No |
-| allowed_notifications | `Optional[
-            List[
-                Union[
-                    SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications,
-                    str,
-                ]
-            ]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None \| NotGiven` | No |
+| url | `str \| None` | No |
+| allowed_notifications | `builtins.list[
+            SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications \| str
+        ]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateWebhookChannelResponseValue200ApplicationJson`.
 
@@ -477,14 +457,14 @@ def delete(
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | webhook_channel | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -531,16 +511,16 @@ def send(
         self,
         webhook_channel: str,
         *,
-        event: Union[SdkSendTestWebhookRequestApplicationJsonEvent, str],
-        request_options: Optional[RequestOptions] = None,
+        event: SdkSendTestWebhookRequestApplicationJsonEvent | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendTestWebhookResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | webhook_channel | `str` | Yes |
-| event | `Union[SdkSendTestWebhookRequestApplicationJsonEvent, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| event | `SdkSendTestWebhookRequestApplicationJsonEvent \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkSendTestWebhookResponseValue200ApplicationJson`.
 

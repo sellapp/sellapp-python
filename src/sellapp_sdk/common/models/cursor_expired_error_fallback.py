@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CursorExpiredErrorFallback",
     "required": ["transport", "url"],
     "properties": {
@@ -21,7 +21,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CursorExpiredErrorFallback",
     "required": ["transport", "url"],
     "properties": {
@@ -38,13 +38,13 @@ class CursorExpiredErrorFallback:
 
     transport: Literal["cursor_polling"]
     url: str
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> CursorExpiredErrorFallback:
+    def from_dict(cls, data: dict[str, Any]) -> CursorExpiredErrorFallback:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -66,9 +66,9 @@ class CursorExpiredErrorFallback:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("CursorExpiredErrorFallback", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["transport"] = self.transport
         _domain_data["url"] = self.url
         _validate_model(
@@ -79,7 +79,7 @@ class CursorExpiredErrorFallback:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["transport"] = self.transport
         result["url"] = self.url
         return result

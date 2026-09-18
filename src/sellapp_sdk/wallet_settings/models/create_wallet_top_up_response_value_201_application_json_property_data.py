@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.create_wallet_top_up_response_value_201_applicati
     CreateWalletTopUpResponseValue201ApplicationJsonPropertyDataPaymentMethod,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateWalletTopUpResponseValue201ApplicationJsonPropertyData",
     "required": [
         "charge_id",
@@ -92,7 +92,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateWalletTopUpResponseValue201ApplicationJsonPropertyData",
     "required": [
         "charge_id",
@@ -185,16 +185,16 @@ class CreateWalletTopUpResponseValue201ApplicationJsonPropertyData:
         CreateWalletTopUpResponseValue201ApplicationJsonPropertyDataPaymentMethod
     )
     """One enabled payment gateway allowed by the store's wallet settings for USD. CUSTOM_PAYMENT_METHOD also requires custom_payment_method_id."""
-    custom_payment_method_id: Optional[str]
+    custom_payment_method_id: str | None
     """Enabled custom method in this store. Required for CUSTOM_PAYMENT_METHOD; omit or use null for other gateways."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateWalletTopUpResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -233,9 +233,9 @@ class CreateWalletTopUpResponseValue201ApplicationJsonPropertyData:
                 "CreateWalletTopUpResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["charge_id"] = self.charge_id
         _domain_data["amount_cents"] = self.amount_cents
         _domain_data["currency"] = self.currency
@@ -250,7 +250,7 @@ class CreateWalletTopUpResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["charge_id"] = self.charge_id
         result["amount_cents"] = self.amount_cents
         result["currency"] = self.currency

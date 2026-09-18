@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -32,12 +32,12 @@ class VariantDeliverableFiles:
         product: str,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -130,8 +130,8 @@ class VariantDeliverableFiles:
         variant: int,
         *,
         file: bytes,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUploadVariantDeliverableFileResponseValue201ApplicationJson:
         """Upload a variant deliverable file
 
@@ -186,7 +186,7 @@ class VariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "uploadVariantDeliverableFile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "file": file,
         }
         if not isinstance(folder_id, NotGiven):
@@ -214,7 +214,7 @@ class VariantDeliverableFiles:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -246,7 +246,7 @@ class VariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFileResponseValue200ApplicationJson:
         """Retrieve a variant deliverable file
 
@@ -322,12 +322,12 @@ class VariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFileSettingsResponseValue200ApplicationJson:
         """Replace variant deliverable file settings
 
@@ -386,7 +386,7 @@ class VariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableFileSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "watermark": watermark,
@@ -459,12 +459,12 @@ class VariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFileResponseValue200ApplicationJson:
         """Update a variant deliverable file
 
@@ -523,7 +523,7 @@ class VariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "updateVariantDeliverableFile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "watermark": watermark,
@@ -596,7 +596,7 @@ class VariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant deliverable file
 
@@ -675,12 +675,12 @@ class AsyncVariantDeliverableFiles:
         product: str,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -773,8 +773,8 @@ class AsyncVariantDeliverableFiles:
         variant: int,
         *,
         file: bytes,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUploadVariantDeliverableFileResponseValue201ApplicationJson:
         """Upload a variant deliverable file
 
@@ -829,7 +829,7 @@ class AsyncVariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "uploadVariantDeliverableFile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "file": file,
         }
         if not isinstance(folder_id, NotGiven):
@@ -857,7 +857,7 @@ class AsyncVariantDeliverableFiles:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -889,7 +889,7 @@ class AsyncVariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFileResponseValue200ApplicationJson:
         """Retrieve a variant deliverable file
 
@@ -965,12 +965,12 @@ class AsyncVariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFileSettingsResponseValue200ApplicationJson:
         """Replace variant deliverable file settings
 
@@ -1029,7 +1029,7 @@ class AsyncVariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableFileSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "watermark": watermark,
@@ -1102,12 +1102,12 @@ class AsyncVariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFileResponseValue200ApplicationJson:
         """Update a variant deliverable file
 
@@ -1166,7 +1166,7 @@ class AsyncVariantDeliverableFiles:
             "idempotency_supported": False,
             "operation_id": "updateVariantDeliverableFile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "watermark": watermark,
@@ -1239,7 +1239,7 @@ class AsyncVariantDeliverableFiles:
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant deliverable file
 

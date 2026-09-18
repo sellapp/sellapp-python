@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateGroupRequestApplicationJson",
     "required": [],
     "properties": {
@@ -34,7 +34,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateGroupRequestApplicationJson",
     "required": [],
     "properties": {
@@ -62,20 +62,20 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkUpdateGroupRequestApplicationJson:
     """Sdk Update Group Request Application Json model."""
 
-    title: Optional[str] = None
-    unlisted: Optional[bool] = None
-    order: Optional[int] = None
-    product_ids: Optional[List[int]] = None
+    title: str | None = None
+    unlisted: bool | None = None
+    order: int | None = None
+    product_ids: list[int] | None = None
     """Ordered IDs of published standard products in this store. Supply an empty array to remove every product. Missing, draft, or foreign products are rejected."""
-    section_id: Optional[int] = None
+    section_id: int | None = None
     """Section in this store. Omit to preserve it; null removes the section."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkUpdateGroupRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkUpdateGroupRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -100,9 +100,9 @@ class SdkUpdateGroupRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkUpdateGroupRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             _domain_data["title"] = self.title
         if self.unlisted is not None:
@@ -119,7 +119,7 @@ class SdkUpdateGroupRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             result["title"] = self.title
         if self.unlisted is not None:

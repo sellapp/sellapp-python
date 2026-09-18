@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .replace_variant_deliverable_configuration_request_application_json_propert
     ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableConfigurationRequestApplicationJson",
     "required": ["types", "data"],
     "properties": {
@@ -53,7 +53,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableConfigurationRequestApplicationJson",
     "required": ["types", "data"],
     "properties": {
@@ -89,19 +89,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceVariantDeliverableConfigurationRequestApplicationJson:
     """Sdk Replace Variant Deliverable Configuration Request Application Json model."""
 
-    types: List[SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes]
+    types: list[SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes]
     """The complete type list. TEXT, BOOKING, CREDITS, and BUNDLE are owned by their dedicated resources and must remain unchanged here."""
     data: ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData
-    expected_updated_at: Optional[datetime] = None
+    expected_updated_at: datetime | None = None
     """Optional optimistic-concurrency snapshot from the deliverable resource's updated_at field. The request returns 422 if the variant changed after this timestamp was loaded."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceVariantDeliverableConfigurationRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -121,7 +121,7 @@ class SdkReplaceVariantDeliverableConfigurationRequestApplicationJson:
                     for item in cast(list[Any], data["types"])
                 ],
                 data=ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData.from_dict(
-                    cast(Dict[str, Any], data["data"])
+                    cast(dict[str, Any], data["data"])
                 ),
                 expected_updated_at=_parse_datetime(_v_expected_updated_at)
                 if (_v_expected_updated_at := data.get("expected_updated_at"))
@@ -137,9 +137,9 @@ class SdkReplaceVariantDeliverableConfigurationRequestApplicationJson:
                 "SdkReplaceVariantDeliverableConfigurationRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["types"] = self.types
         _domain_data["data"] = self.data
         if self.expected_updated_at is not None:
@@ -152,7 +152,7 @@ class SdkReplaceVariantDeliverableConfigurationRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["types"] = [
             item.value if isinstance(item, Enum) else item for item in self.types
         ]

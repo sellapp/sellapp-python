@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .list_affiliate_referrals_response_value_200_application_json_property_data
     ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItemPropertyCommission,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -90,7 +90,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -164,31 +164,31 @@ class ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem:
     """List Affiliate Referrals Response Value200Application Json Property Data Item model."""
 
     id: int
-    affiliate_id: Optional[int]
+    affiliate_id: int | None
     order_id: int
     """The attributed Order ID."""
-    invoice_v_2_id: Optional[int]
+    invoice_v_2_id: int | None
     """The attributed purchase line-item ID."""
     product_variant_id: int
     amount_usd_cents: int
     commission: ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItemPropertyCommission
     status: ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItemStatus
-    affiliate_email: Optional[str] = None
-    product_title: Optional[str] = None
-    variant_title: Optional[str] = None
-    customer_id: Optional[int] = None
-    eligible_for_payout_at: Optional[datetime] = None
-    payout_id: Optional[int] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    affiliate_email: str | None = None
+    product_title: str | None = None
+    variant_title: str | None = None
+    customer_id: int | None = None
+    eligible_for_payout_at: datetime | None = None
+    payout_id: int | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -208,7 +208,7 @@ class ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem:
                 product_variant_id=data["product_variant_id"],
                 amount_usd_cents=data["amount_usd_cents"],
                 commission=ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItemPropertyCommission.from_dict(
-                    cast(Dict[str, Any], data["commission"])
+                    cast(dict[str, Any], data["commission"])
                 ),
                 status=ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItemStatus(
                     data["status"]
@@ -257,9 +257,9 @@ class ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["affiliate_id"] = self.affiliate_id
         _domain_data["order_id"] = self.order_id
@@ -289,7 +289,7 @@ class ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.affiliate_id is not None:
             result["affiliate_id"] = self.affiliate_id

@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class GetCourseResponseValue200ApplicationJsonPropertyDataAccessType(str, Enum):
@@ -17,7 +17,7 @@ class GetCourseResponseValue200ApplicationJsonPropertyDataAccessType(str, Enum):
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[GetCourseResponseValue200ApplicationJsonPropertyDataAccessType]:
+    ) -> GetCourseResponseValue200ApplicationJsonPropertyDataAccessType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

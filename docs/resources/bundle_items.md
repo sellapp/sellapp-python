@@ -14,7 +14,7 @@ def get(
         bundle: int,
         item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBundleItemResponseValue200ApplicationJson:
 ```
 
@@ -22,7 +22,7 @@ def get(
 | --- | --- | --- |
 | bundle | `int` | Yes |
 | item | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetBundleItemResponseValue200ApplicationJson`.
 
@@ -72,24 +72,24 @@ def list(
         self,
         bundle: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | bundle | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -137,7 +137,7 @@ def attach(
         bundle: int,
         *,
         resources: AttachBundleItemsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAttachBundleItemsResponseValue200ApplicationJson:
 ```
 
@@ -145,7 +145,7 @@ def attach(
 | --- | --- | --- |
 | bundle | `int` | Yes |
 | resources | `AttachBundleItemsRequestApplicationJsonPropertyResources` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAttachBundleItemsResponseValue200ApplicationJson`.
 
@@ -195,16 +195,16 @@ def detach(
         self,
         bundle: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | bundle | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

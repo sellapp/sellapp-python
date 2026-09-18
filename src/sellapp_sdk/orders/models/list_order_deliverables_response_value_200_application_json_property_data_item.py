@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .list_order_deliverables_response_value_200_application_json_property_data_
     ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "order_id",
@@ -50,7 +50,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "order_id",
@@ -87,20 +87,20 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
     line_item_id: int
     type: str
     status: ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemStatus
-    product_variant_id: Optional[int]
+    product_variant_id: int | None
     quantity: int
     deliverable: ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable
-    additional_information: List[
+    additional_information: list[
         ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyAdditionalInformationItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -122,11 +122,11 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                 product_variant_id=data["product_variant_id"],
                 quantity=data["quantity"],
                 deliverable=ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], data["deliverable"])
+                    cast(dict[str, Any], data["deliverable"])
                 ),
                 additional_information=[
                     ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyAdditionalInformationItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["additional_information"])
                 ],
@@ -151,9 +151,9 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["order_id"] = self.order_id
         _domain_data["line_item_id"] = self.line_item_id
         _domain_data["type"] = self.type
@@ -170,7 +170,7 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["order_id"] = self.order_id
         result["line_item_id"] = self.line_item_id
         result["type"] = self.type

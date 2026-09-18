@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -31,7 +31,7 @@ from .batch_create_product_variants_response_value_200_application_json_property
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -86,7 +86,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -154,27 +154,28 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
     deliverable: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable
     pricing: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing
     minimum_purchase_quantity: int
-    maximum_purchase_quantity: Optional[int]
-    bulk_discount: Optional[
-        List[
+    maximum_purchase_quantity: int | None
+    bulk_discount: (
+        list[
             BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem
         ]
-    ]
-    payment_methods: List[str]
+        | None
+    )
+    payment_methods: list[str]
     other_settings: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings
-    order: Optional[int]
+    order: int | None
     created_at: datetime
     updated_at: datetime
-    deleted_at: Optional[datetime]
+    deleted_at: datetime | None
     product: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -192,16 +193,16 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                 title=data["title"],
                 description=data["description"],
                 deliverable=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], data["deliverable"])
+                    cast(dict[str, Any], data["deliverable"])
                 ),
                 pricing=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
-                    cast(Dict[str, Any], data["pricing"])
+                    cast(dict[str, Any], data["pricing"])
                 ),
                 minimum_purchase_quantity=data["minimum_purchase_quantity"],
                 maximum_purchase_quantity=data["maximum_purchase_quantity"],
                 bulk_discount=[
                     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_bulk_discount)
                 ]
@@ -209,7 +210,7 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                 else None,
                 payment_methods=data["payment_methods"],
                 other_settings=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], data["other_settings"])
+                    cast(dict[str, Any], data["other_settings"])
                 ),
                 order=data["order"],
                 created_at=_parse_datetime(data["created_at"]),
@@ -218,7 +219,7 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                 if (_v_deleted_at := data["deleted_at"]) is not None
                 else None,
                 product=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
-                    cast(Dict[str, Any], data["product"])
+                    cast(dict[str, Any], data["product"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -249,9 +250,9 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["product_id"] = self.product_id
         _domain_data["title"] = self.title
@@ -276,7 +277,7 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["product_id"] = self.product_id
         result["title"] = self.title

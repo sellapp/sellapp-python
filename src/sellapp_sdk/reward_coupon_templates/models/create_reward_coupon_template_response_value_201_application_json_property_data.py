@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from sellapp_sdk.common.models.create_reward_coupon_template_response_value_201_
     CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyDataType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -79,7 +79,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -149,21 +149,21 @@ class CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData:
     store_wide: bool
     redemption_mode: CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyDataRedemptionMode
     is_active: bool
-    minimum_amount: Optional[str] = None
-    maximum_discount_amount: Optional[str] = None
-    expires_at: Optional[datetime] = None
-    expires_after_days: Optional[int] = None
-    listing_ids: Optional[List[int]] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    minimum_amount: str | None = None
+    maximum_discount_amount: str | None = None
+    expires_at: datetime | None = None
+    expires_after_days: int | None = None
+    listing_ids: list[int] | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -227,9 +227,9 @@ class CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["type"] = self.type
@@ -253,7 +253,7 @@ class CreateRewardCouponTemplateResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["name"] = self.name
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type

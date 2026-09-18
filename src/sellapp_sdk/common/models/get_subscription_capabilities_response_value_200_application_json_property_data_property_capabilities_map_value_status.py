@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus(
@@ -23,9 +23,10 @@ class GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataProp
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
+    ) -> (
         GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus
-    ]:
+        | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

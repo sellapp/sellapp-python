@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData",
     "required": ["status", "tracker_id"],
     "properties": {
@@ -21,7 +21,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData",
     "required": ["status", "tracker_id"],
     "properties": {
@@ -38,14 +38,14 @@ class QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData:
 
     status: Literal["queued"]
     tracker_id: str
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -70,9 +70,9 @@ class QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData:
                 "QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["status"] = self.status
         _domain_data["tracker_id"] = self.tracker_id
         _validate_model(
@@ -83,7 +83,7 @@ class QueueVariantSerialImportResponseValue202ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["status"] = self.status
         result["tracker_id"] = self.tracker_id
         return result

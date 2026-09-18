@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_add_products_to_group_response_value_200_application_json import (
     SdkAddProductsToGroupResponseValue200ApplicationJson,
@@ -52,8 +54,8 @@ class GroupsProducts:
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkAddProductsToGroupResponseValue200ApplicationJson:
         """Add products to group
 
@@ -106,7 +108,7 @@ class GroupsProducts:
             "idempotency_supported": False,
             "operation_id": "addProductsToGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -139,8 +141,8 @@ class GroupsProducts:
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Remove products from group
 
@@ -190,7 +192,7 @@ class GroupsProducts:
             "idempotency_supported": False,
             "operation_id": "removeProductsFromGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -222,12 +224,12 @@ class GroupsProducts:
         self,
         group: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -309,8 +311,8 @@ class GroupsProducts:
         self,
         group: int,
         *,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkSyncGroupProductsResponseValue200ApplicationJson:
         """Replace ordered group products
 
@@ -363,7 +365,7 @@ class GroupsProducts:
             "idempotency_supported": False,
             "operation_id": "syncGroupProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_ids": product_ids,
         }
         _validate_model(
@@ -398,7 +400,7 @@ class GroupsProducts:
         group: int,
         product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductWithinGroupResponseValue200ApplicationJson:
         """List specific product within group
 
@@ -462,23 +464,25 @@ class GroupsProducts:
         self,
         group: int,
         *,
-        filters: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductsWithinGroupRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertySortItem
+        ]
+        | None = None,
+        search: SearchProductsWithinGroupRequestApplicationJsonPropertySearch
+        | None = None,
+        includes: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -540,7 +544,7 @@ class GroupsProducts:
             "idempotency_supported": False,
             "operation_id": "searchProductsWithinGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -585,8 +589,8 @@ class AsyncGroupsProducts:
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkAddProductsToGroupResponseValue200ApplicationJson:
         """Add products to group
 
@@ -639,7 +643,7 @@ class AsyncGroupsProducts:
             "idempotency_supported": False,
             "operation_id": "addProductsToGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -672,8 +676,8 @@ class AsyncGroupsProducts:
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Remove products from group
 
@@ -723,7 +727,7 @@ class AsyncGroupsProducts:
             "idempotency_supported": False,
             "operation_id": "removeProductsFromGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -755,12 +759,12 @@ class AsyncGroupsProducts:
         self,
         group: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -842,8 +846,8 @@ class AsyncGroupsProducts:
         self,
         group: int,
         *,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkSyncGroupProductsResponseValue200ApplicationJson:
         """Replace ordered group products
 
@@ -896,7 +900,7 @@ class AsyncGroupsProducts:
             "idempotency_supported": False,
             "operation_id": "syncGroupProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_ids": product_ids,
         }
         _validate_model(
@@ -931,7 +935,7 @@ class AsyncGroupsProducts:
         group: int,
         product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductWithinGroupResponseValue200ApplicationJson:
         """List specific product within group
 
@@ -995,23 +999,25 @@ class AsyncGroupsProducts:
         self,
         group: int,
         *,
-        filters: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductsWithinGroupRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertySortItem
+        ]
+        | None = None,
+        search: SearchProductsWithinGroupRequestApplicationJsonPropertySearch
+        | None = None,
+        includes: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -1073,7 +1079,7 @@ class AsyncGroupsProducts:
             "idempotency_supported": False,
             "operation_id": "searchProductsWithinGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]

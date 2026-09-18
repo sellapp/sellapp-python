@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,13 +16,13 @@ from .replace_marketing_settings_request_application_json_property_abandoned_car
     ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceMarketingSettingsRequestApplicationJson",
     "required": ["abandoned_cart"],
     "properties": {"abandoned_cart": {"kind": "any"}},
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceMarketingSettingsRequestApplicationJson",
     "required": ["abandoned_cart"],
     "properties": {"abandoned_cart": {"kind": "any"}},
@@ -35,14 +35,14 @@ class SdkReplaceMarketingSettingsRequestApplicationJson:
     """Sdk Replace Marketing Settings Request Application Json model."""
 
     abandoned_cart: ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceMarketingSettingsRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -56,7 +56,7 @@ class SdkReplaceMarketingSettingsRequestApplicationJson:
             )
             return cls(
                 abandoned_cart=ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart.from_dict(
-                    cast(Dict[str, Any], data["abandoned_cart"])
+                    cast(dict[str, Any], data["abandoned_cart"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["abandoned_cart"]
@@ -68,9 +68,9 @@ class SdkReplaceMarketingSettingsRequestApplicationJson:
                 "SdkReplaceMarketingSettingsRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["abandoned_cart"] = self.abandoned_cart
         _validate_model(
             _domain_data,
@@ -80,6 +80,6 @@ class SdkReplaceMarketingSettingsRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["abandoned_cart"] = self.abandoned_cart.to_dict()
         return result

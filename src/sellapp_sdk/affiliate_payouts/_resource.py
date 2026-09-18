@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -38,14 +38,14 @@ class AffiliatePayouts:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        status: Optional[Union[AffiliatePayoutsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        status: AffiliatePayoutsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliate payouts
 
@@ -127,7 +127,7 @@ class AffiliatePayouts:
         self,
         payout: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliatePayoutResponseValue200ApplicationJson:
         """Retrieve an affiliate payout
 
@@ -190,8 +190,8 @@ class AffiliatePayouts:
         self,
         affiliate: int,
         *,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateAffiliatePayoutResponseValue200ApplicationJson:
         """Create an affiliate payout
 
@@ -255,8 +255,8 @@ class AffiliatePayouts:
         self,
         payout: int,
         *,
-        status: Union[SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson:
         """Update affiliate payout status
 
@@ -309,7 +309,7 @@ class AffiliatePayouts:
             "idempotency_supported": False,
             "operation_id": "updateAffiliatePayoutStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(
@@ -344,14 +344,14 @@ class AsyncAffiliatePayouts:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        status: Optional[Union[AffiliatePayoutsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        status: AffiliatePayoutsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliate payouts
 
@@ -433,7 +433,7 @@ class AsyncAffiliatePayouts:
         self,
         payout: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliatePayoutResponseValue200ApplicationJson:
         """Retrieve an affiliate payout
 
@@ -496,8 +496,8 @@ class AsyncAffiliatePayouts:
         self,
         affiliate: int,
         *,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateAffiliatePayoutResponseValue200ApplicationJson:
         """Create an affiliate payout
 
@@ -561,8 +561,8 @@ class AsyncAffiliatePayouts:
         self,
         payout: int,
         *,
-        status: Union[SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson:
         """Update affiliate payout status
 
@@ -615,7 +615,7 @@ class AsyncAffiliatePayouts:
             "idempotency_supported": False,
             "operation_id": "updateAffiliatePayoutStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(

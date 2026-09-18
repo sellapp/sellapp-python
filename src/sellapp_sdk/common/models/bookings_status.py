@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class BookingsStatus(str, Enum):
@@ -15,7 +15,7 @@ class BookingsStatus(str, Enum):
     INACTIVE = "inactive"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[BookingsStatus]:
+    def _missing_(cls, value: object) -> BookingsStatus | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

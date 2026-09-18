@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -24,7 +24,7 @@ from .replace_credits_product_request_application_json_property_rate_tiers_item 
     ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCreditsProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -147,7 +147,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCreditsProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -276,34 +276,34 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceCreditsProductRequestApplicationJson:
     """Sdk Replace Credits Product Request Application Json model."""
 
-    title: Optional[str] = None
-    slug: Optional[str] = None
-    description: Optional[str] = None
-    visibility: Optional[CatalogVisibility] = None
-    section_id: Optional[int] = None
-    is_draft: Optional[bool] = None
-    price_cents: Optional[int] = None
+    title: str | None = None
+    slug: str | None = None
+    description: str | None = None
+    visibility: CatalogVisibility | None = None
+    section_id: int | None = None
+    is_draft: bool | None = None
+    price_cents: int | None = None
     """Base price in integer minor currency units."""
-    currency: Optional[str] = None
-    minimum_purchase_quantity: Optional[int] = None
-    maximum_purchase_quantity: Optional[int] = None
-    quantity_increment: Optional[int] = None
-    stock: Optional[int] = None
-    payment_methods: Optional[
-        List[SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods]
-    ] = None
-    rate_tiers: Optional[
-        List[ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-    ] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    currency: str | None = None
+    minimum_purchase_quantity: int | None = None
+    maximum_purchase_quantity: int | None = None
+    quantity_increment: int | None = None
+    stock: int | None = None
+    payment_methods: (
+        list[SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods] | None
+    ) = None
+    rate_tiers: (
+        list[ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem] | None
+    ) = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceCreditsProductRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -338,7 +338,7 @@ class SdkReplaceCreditsProductRequestApplicationJson:
                 else None,
                 rate_tiers=[
                     ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_rate_tiers)
                 ]
@@ -375,9 +375,9 @@ class SdkReplaceCreditsProductRequestApplicationJson:
                 "SdkReplaceCreditsProductRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             _domain_data["title"] = self.title
         if self.slug is not None:
@@ -413,7 +413,7 @@ class SdkReplaceCreditsProductRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             result["title"] = self.title
         if self.slug is not None:

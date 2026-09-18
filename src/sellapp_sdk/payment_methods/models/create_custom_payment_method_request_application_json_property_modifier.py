@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier",
     "required": [],
     "properties": {
@@ -39,7 +39,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier",
     "required": [],
     "properties": {
@@ -72,18 +72,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier:
     """Fee or discount for this custom payment method only. Positive values reduce the ordinary order or charge total; negative values add a fee. Percentage is applied first, then the fixed amount once per order or charge in the checkout currency (major units, so 1.50 means $1.50 for USD). Values allow up to two decimal places. Omit modifier to preserve it on updates; send null or an empty object to clear it. A supplied object replaces both values. New methods default to no adjustment. Custom wallet top-ups do not apply these modifiers."""
 
-    percentage: Optional[Union[str, float]] = None
+    percentage: str | float | None = None
     """Percentage from -100 to 100. For example, 5 gives 5% off and -5 adds a 5% fee. Responses use decimal strings."""
-    fixed: Optional[Union[str, float]] = None
+    fixed: str | float | None = None
     """Fixed adjustment from -100000 to 100000 in major units of the checkout currency. Responses use decimal strings."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier:
         """Deserialize from a dictionary."""
         try:
@@ -108,9 +108,9 @@ class CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier:
                 "CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["percentage"] = self.percentage
         _domain_data["fixed"] = self.fixed
         _validate_model(
@@ -121,7 +121,7 @@ class CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.percentage is not None:
             result["percentage"] = self.percentage
         else:

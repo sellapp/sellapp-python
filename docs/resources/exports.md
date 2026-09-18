@@ -12,21 +12,21 @@ List exports
 def list_exports(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -72,25 +72,21 @@ Create an export
 def create_export(
         self,
         *,
-        type: Union[SdkCreateExportRequestApplicationJsonType, str],
-        format: Union[SdkCreateExportRequestApplicationJsonFormat, str],
-        parameters: Optional[
-            CreateExportRequestApplicationJsonPropertyParameters
-        ] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateExportRequestApplicationJsonType | str,
+        format: SdkCreateExportRequestApplicationJsonFormat | str,
+        parameters: CreateExportRequestApplicationJsonPropertyParameters | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateExportResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| type | `Union[SdkCreateExportRequestApplicationJsonType, str]` | Yes |
-| format | `Union[SdkCreateExportRequestApplicationJsonFormat, str]` | Yes |
-| parameters | `Optional[
-            CreateExportRequestApplicationJsonPropertyParameters
-        ]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `SdkCreateExportRequestApplicationJsonType \| str` | Yes |
+| format | `SdkCreateExportRequestApplicationJsonFormat \| str` | Yes |
+| parameters | `CreateExportRequestApplicationJsonPropertyParameters \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateExportResponseValue201ApplicationJson`.
 
@@ -141,14 +137,14 @@ def get_export(
         self,
         export: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetExportResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | export | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetExportResponseValue200ApplicationJson`.
 
@@ -197,7 +193,7 @@ def download_export(
         *,
         expires: int,
         signature: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -206,7 +202,7 @@ def download_export(
 | export | `str` | Yes |
 | expires | `int` | Yes |
 | signature | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 

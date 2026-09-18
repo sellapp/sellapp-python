@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -20,7 +20,7 @@ from .create_custom_payment_method_request_application_json_property_modifier im
     CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCustomPaymentMethodRequestApplicationJson",
     "required": ["type", "name"],
     "properties": {
@@ -83,7 +83,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCustomPaymentMethodRequestApplicationJson",
     "required": ["type", "name"],
     "properties": {
@@ -154,28 +154,28 @@ class SdkCreateCustomPaymentMethodRequestApplicationJson:
 
     type: SdkCreateCustomPaymentMethodRequestApplicationJsonType
     name: str
-    description: Optional[str] = None
-    instructions: Optional[str] = None
+    description: str | None = None
+    instructions: str | None = None
     """For effective type instructions, provide nonblank instructions or at least one nonblank step. Switching to redirect clears this value."""
-    steps: Optional[List[Optional[str]]] = None
-    redirect_url: Optional[str] = None
+    steps: list[str | None] | None = None
+    redirect_url: str | None = None
     """Required for effective type redirect. Must pass public destination validation; existing unchanged destinations retain their established value."""
-    skip_interstitial_page: Optional[bool] = None
-    show_processing_status_page: Optional[bool] = None
-    require_proof_of_payment: Optional[bool] = None
-    enabled: Optional[bool] = None
-    sort_order: Optional[int] = None
-    modifier: Optional[
-        CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    skip_interstitial_page: bool | None = None
+    show_processing_status_page: bool | None = None
+    require_proof_of_payment: bool | None = None
+    enabled: bool | None = None
+    sort_order: int | None = None
+    modifier: CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier | None = (
+        None
+    )
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateCustomPaymentMethodRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -202,7 +202,7 @@ class SdkCreateCustomPaymentMethodRequestApplicationJson:
                 enabled=data.get("enabled"),
                 sort_order=data.get("sort_order"),
                 modifier=CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier.from_dict(
-                    cast(Dict[str, Any], _v_modifier)
+                    cast(dict[str, Any], _v_modifier)
                 )
                 if (_v_modifier := data.get("modifier")) is not None
                 else None,
@@ -230,9 +230,9 @@ class SdkCreateCustomPaymentMethodRequestApplicationJson:
                 "SdkCreateCustomPaymentMethodRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         _domain_data["name"] = self.name
         _domain_data["description"] = self.description
@@ -260,7 +260,7 @@ class SdkCreateCustomPaymentMethodRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["name"] = self.name
         if self.description is not None:

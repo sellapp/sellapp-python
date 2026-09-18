@@ -12,13 +12,13 @@ Retrieve store settings
 def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetStoreSettingsResponseValue200ApplicationJson`.
 
@@ -65,22 +65,22 @@ def replace_general(
         self,
         *,
         name: str,
-        visibility: Union[CourseVisibility, str],
+        visibility: CourseVisibility | str,
         timezone: str,
         currency: str,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | name | `str` | Yes |
-| visibility | `Union[CourseVisibility, str]` | Yes |
+| visibility | `CourseVisibility \| str` | Yes |
 | timezone | `str` | Yes |
 | currency | `str` | Yes |
-| dark_mode | `Union[Union[DarkMode, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| dark_mode | `DarkMode \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson`.
 
@@ -131,23 +131,23 @@ Update general store settings
 def update_general(
         self,
         *,
-        name: Optional[str] = None,
-        visibility: Optional[Union[CourseVisibility, str]] = None,
-        timezone: Optional[str] = None,
-        currency: Optional[str] = None,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        visibility: CourseVisibility | str | None = None,
+        timezone: str | None = None,
+        currency: str | None = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| name | `Optional[str]` | No |
-| visibility | `Optional[Union[CourseVisibility, str]]` | No |
-| timezone | `Optional[str]` | No |
-| currency | `Optional[str]` | No |
-| dark_mode | `Union[Union[DarkMode, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| visibility | `CourseVisibility \| str \| None` | No |
+| timezone | `str \| None` | No |
+| currency | `str \| None` | No |
+| dark_mode | `DarkMode \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson`.
 
@@ -193,25 +193,25 @@ Update analytics settings
 def replace_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| ga_4_measurement_id | `Union[str, None, NotGiven]` | No |
-| meta_pixel_id | `Union[str, None, NotGiven]` | No |
-| tiktok_pixel_id | `Union[str, None, NotGiven]` | No |
-| ga_4_api_secret | `Union[str, None, NotGiven]` | No |
-| meta_access_token | `Union[str, None, NotGiven]` | No |
-| tiktok_access_token | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| ga_4_measurement_id | `str \| None \| NotGiven` | No |
+| meta_pixel_id | `str \| None \| NotGiven` | No |
+| tiktok_pixel_id | `str \| None \| NotGiven` | No |
+| ga_4_api_secret | `str \| None \| NotGiven` | No |
+| meta_access_token | `str \| None \| NotGiven` | No |
+| tiktok_access_token | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson`.
 
@@ -257,25 +257,25 @@ Update analytics settings
 def update_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| ga_4_measurement_id | `Union[str, None, NotGiven]` | No |
-| meta_pixel_id | `Union[str, None, NotGiven]` | No |
-| tiktok_pixel_id | `Union[str, None, NotGiven]` | No |
-| ga_4_api_secret | `Union[str, None, NotGiven]` | No |
-| meta_access_token | `Union[str, None, NotGiven]` | No |
-| tiktok_access_token | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| ga_4_measurement_id | `str \| None \| NotGiven` | No |
+| meta_pixel_id | `str \| None \| NotGiven` | No |
+| tiktok_pixel_id | `str \| None \| NotGiven` | No |
+| ga_4_api_secret | `str \| None \| NotGiven` | No |
+| meta_access_token | `str \| None \| NotGiven` | No |
+| tiktok_access_token | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson`.
 
@@ -322,14 +322,14 @@ def replace_marketing(
         self,
         *,
         abandoned_cart: ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceMarketingSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | abandoned_cart | `ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceMarketingSettingsResponseValue200ApplicationJson`.
 
@@ -376,14 +376,14 @@ def update_marketing(
         self,
         *,
         abandoned_cart: UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateMarketingSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | abandoned_cart | `UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateMarketingSettingsResponseValue200ApplicationJson`.
 

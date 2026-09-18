@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -29,7 +29,7 @@ class WebhookPlatform:
     def list_webhook_event_types(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListWebhookEventTypesResponseValue200ApplicationJson:
         """List webhook event types
 
@@ -88,11 +88,11 @@ class WebhookPlatform:
     def list_webhook_deliveries(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem]:
         """List webhook deliveries
 
@@ -170,7 +170,7 @@ class WebhookPlatform:
         self,
         delivery: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWebhookDeliveryResponseValue200ApplicationJson:
         """Retrieve a webhook delivery
 
@@ -234,8 +234,8 @@ class WebhookPlatform:
         self,
         delivery: str,
         *,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplayWebhookDeliveryResponseValue201ApplicationJson:
         """Replay a webhook delivery
 
@@ -289,7 +289,7 @@ class WebhookPlatform:
             "idempotency_supported": True,
             "operation_id": "replayWebhookDelivery",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         _validate_model(
             body,
             {
@@ -324,7 +324,7 @@ class AsyncWebhookPlatform:
     async def list_webhook_event_types(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListWebhookEventTypesResponseValue200ApplicationJson:
         """List webhook event types
 
@@ -383,11 +383,11 @@ class AsyncWebhookPlatform:
     async def list_webhook_deliveries(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -467,7 +467,7 @@ class AsyncWebhookPlatform:
         self,
         delivery: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWebhookDeliveryResponseValue200ApplicationJson:
         """Retrieve a webhook delivery
 
@@ -531,8 +531,8 @@ class AsyncWebhookPlatform:
         self,
         delivery: str,
         *,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplayWebhookDeliveryResponseValue201ApplicationJson:
         """Replay a webhook delivery
 
@@ -586,7 +586,7 @@ class AsyncWebhookPlatform:
             "idempotency_supported": True,
             "operation_id": "replayWebhookDelivery",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         _validate_model(
             body,
             {

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from sellapp_sdk.common.models.sdk_create_credits_product_request_application_js
     SdkCreateCreditsProductRequestApplicationJsonPaymentMethods,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCreditsProductRequestApplicationJson",
     "required": ["title", "visibility"],
     "properties": {
@@ -149,7 +149,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCreditsProductRequestApplicationJson",
     "required": ["title", "visibility"],
     "properties": {
@@ -283,32 +283,32 @@ class SdkCreateCreditsProductRequestApplicationJson:
 
     title: str
     visibility: CatalogVisibility
-    slug: Optional[str] = None
-    description: Optional[str] = None
-    section_id: Optional[int] = None
-    is_draft: Optional[bool] = None
-    price_cents: Optional[int] = None
+    slug: str | None = None
+    description: str | None = None
+    section_id: int | None = None
+    is_draft: bool | None = None
+    price_cents: int | None = None
     """Base price in integer minor currency units."""
-    currency: Optional[str] = None
-    minimum_purchase_quantity: Optional[int] = None
-    maximum_purchase_quantity: Optional[int] = None
-    quantity_increment: Optional[int] = None
-    stock: Optional[int] = None
-    payment_methods: Optional[
-        List[SdkCreateCreditsProductRequestApplicationJsonPaymentMethods]
-    ] = None
-    rate_tiers: Optional[
-        List[CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-    ] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    currency: str | None = None
+    minimum_purchase_quantity: int | None = None
+    maximum_purchase_quantity: int | None = None
+    quantity_increment: int | None = None
+    stock: int | None = None
+    payment_methods: (
+        list[SdkCreateCreditsProductRequestApplicationJsonPaymentMethods] | None
+    ) = None
+    rate_tiers: (
+        list[CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem] | None
+    ) = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateCreditsProductRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -341,7 +341,7 @@ class SdkCreateCreditsProductRequestApplicationJson:
                 else None,
                 rate_tiers=[
                     CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_rate_tiers)
                 ]
@@ -376,9 +376,9 @@ class SdkCreateCreditsProductRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateCreditsProductRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["visibility"] = self.visibility
         if self.slug is not None:
@@ -411,7 +411,7 @@ class SdkCreateCreditsProductRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["visibility"] = (
             self.visibility.value

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_customer_response_value_201_application_json import (
     SdkCreateCustomerResponseValue201ApplicationJson,
@@ -43,13 +45,13 @@ class Customers:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCustomersResponseValue200ApplicationJson]:
         """List customers
 
@@ -129,12 +131,12 @@ class Customers:
         self,
         *,
         email: str,
-        external_id: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[CreateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        external_id: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: CreateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerResponseValue201ApplicationJson:
         """Create a customer
 
@@ -192,7 +194,7 @@ class Customers:
             "idempotency_supported": True,
             "operation_id": "createCustomer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "external_id": external_id,
@@ -262,23 +264,22 @@ class Customers:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCustomersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCustomersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCustomersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchCustomersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchCustomersResponseValue200ApplicationJson]:
         """Search customers
 
@@ -338,7 +339,7 @@ class Customers:
             "idempotency_supported": False,
             "operation_id": "searchCustomers",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -377,7 +378,7 @@ class Customers:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
         """Retrieve a customer
 
@@ -440,12 +441,12 @@ class Customers:
         self,
         customer: int,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
         """Update a customer
 
@@ -503,7 +504,7 @@ class Customers:
             "idempotency_supported": True,
             "operation_id": "updateCustomer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -573,7 +574,7 @@ class Customers:
         self,
         external_id: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
         """Retrieve a customer by external ID
 
@@ -638,10 +639,10 @@ class Customers:
         external_id: str,
         *,
         email: str,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpsertCustomerRequestApplicationJsonPropertyMetadata] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpsertCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpsertCustomerResponseValue200ApplicationJson:
         """Create or update a customer by external ID
 
@@ -697,7 +698,7 @@ class Customers:
             "idempotency_supported": True,
             "operation_id": "upsertCustomerByExternalId",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -761,12 +762,12 @@ class Customers:
         self,
         external_id: str,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        body_external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        body_external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
         """Update a customer by external ID
 
@@ -824,7 +825,7 @@ class Customers:
             "idempotency_supported": True,
             "operation_id": "updateCustomerByExternalId",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -901,13 +902,13 @@ class AsyncCustomers:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListCustomersResponseValue200ApplicationJson]:
         """List customers
 
@@ -987,12 +988,12 @@ class AsyncCustomers:
         self,
         *,
         email: str,
-        external_id: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[CreateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        external_id: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: CreateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerResponseValue201ApplicationJson:
         """Create a customer
 
@@ -1050,7 +1051,7 @@ class AsyncCustomers:
             "idempotency_supported": True,
             "operation_id": "createCustomer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "external_id": external_id,
@@ -1120,23 +1121,22 @@ class AsyncCustomers:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCustomersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCustomersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCustomersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchCustomersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchCustomersResponseValue200ApplicationJson]:
         """Search customers
 
@@ -1196,7 +1196,7 @@ class AsyncCustomers:
             "idempotency_supported": False,
             "operation_id": "searchCustomers",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1235,7 +1235,7 @@ class AsyncCustomers:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
         """Retrieve a customer
 
@@ -1298,12 +1298,12 @@ class AsyncCustomers:
         self,
         customer: int,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
         """Update a customer
 
@@ -1361,7 +1361,7 @@ class AsyncCustomers:
             "idempotency_supported": True,
             "operation_id": "updateCustomer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -1431,7 +1431,7 @@ class AsyncCustomers:
         self,
         external_id: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
         """Retrieve a customer by external ID
 
@@ -1496,10 +1496,10 @@ class AsyncCustomers:
         external_id: str,
         *,
         email: str,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpsertCustomerRequestApplicationJsonPropertyMetadata] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpsertCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpsertCustomerResponseValue200ApplicationJson:
         """Create or update a customer by external ID
 
@@ -1555,7 +1555,7 @@ class AsyncCustomers:
             "idempotency_supported": True,
             "operation_id": "upsertCustomerByExternalId",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -1619,12 +1619,12 @@ class AsyncCustomers:
         self,
         external_id: str,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        body_external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        body_external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
         """Update a customer by external ID
 
@@ -1682,7 +1682,7 @@ class AsyncCustomers:
             "idempotency_supported": True,
             "operation_id": "updateCustomerByExternalId",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,

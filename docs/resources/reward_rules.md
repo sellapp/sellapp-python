@@ -12,25 +12,25 @@ List reward rules
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardRulesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListRewardRulesResponseValue200ApplicationJson]`.
 
@@ -78,12 +78,14 @@ def create(
         *,
         name: str,
         is_active: bool,
-        trigger_type: Union[SdkCreateRewardRuleRequestApplicationJsonTriggerType, str],
+        trigger_type: SdkCreateRewardRuleRequestApplicationJsonTriggerType | str,
         trigger_threshold: int,
-        outputs: List[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        outputs: builtins.list[
+            CreateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ],
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardRuleResponseValue201ApplicationJson:
 ```
 
@@ -91,12 +93,14 @@ def create(
 | --- | --- | --- |
 | name | `str` | Yes |
 | is_active | `bool` | Yes |
-| trigger_type | `Union[SdkCreateRewardRuleRequestApplicationJsonTriggerType, str]` | Yes |
+| trigger_type | `SdkCreateRewardRuleRequestApplicationJsonTriggerType \| str` | Yes |
 | trigger_threshold | `int` | Yes |
-| outputs | `List[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem]` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| outputs | `builtins.list[
+            CreateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]` | Yes |
+| description | `str \| None \| NotGiven` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateRewardRuleResponseValue201ApplicationJson`.
 
@@ -148,45 +152,47 @@ Search reward rules
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardRulesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchRewardRulesRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchRewardRulesRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchRewardRulesResponseValue200ApplicationJson]`.
 
@@ -236,14 +242,14 @@ def get(
         self,
         reward_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardRuleResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_rule | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetRewardRuleResponseValue200ApplicationJson`.
 
@@ -290,36 +296,38 @@ def replace(
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkReplaceRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkReplaceRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardRuleResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_rule | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| is_active | `Optional[bool]` | No |
-| trigger_type | `Optional[
-            Union[SdkReplaceRewardRuleRequestApplicationJsonTriggerType, str]
-        ]` | No |
-| trigger_threshold | `Optional[int]` | No |
-| outputs | `Optional[
-            List[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| is_active | `bool \| None` | No |
+| trigger_type | `SdkReplaceRewardRuleRequestApplicationJsonTriggerType
+        \| str
+        \| None` | No |
+| trigger_threshold | `int \| None` | No |
+| outputs | `builtins.list[
+            ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceRewardRuleResponseValue200ApplicationJson`.
 
@@ -369,36 +377,38 @@ def update(
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkUpdateRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkUpdateRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardRuleResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_rule | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| is_active | `Optional[bool]` | No |
-| trigger_type | `Optional[
-            Union[SdkUpdateRewardRuleRequestApplicationJsonTriggerType, str]
-        ]` | No |
-| trigger_threshold | `Optional[int]` | No |
-| outputs | `Optional[
-            List[UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| is_active | `bool \| None` | No |
+| trigger_type | `SdkUpdateRewardRuleRequestApplicationJsonTriggerType
+        \| str
+        \| None` | No |
+| trigger_threshold | `int \| None` | No |
+| outputs | `builtins.list[
+            UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateRewardRuleResponseValue200ApplicationJson`.
 

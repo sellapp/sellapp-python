@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.event import Event
 from sellapp_sdk.common.models.sdk_create_webhook_channel_request_application_json_allowed_notifications import (
@@ -48,12 +50,12 @@ class WebhookChannels:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]:
         """List webhook channels
 
@@ -131,13 +133,11 @@ class WebhookChannels:
         self,
         *,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWebhookChannelResponseValue201ApplicationJson:
         """Create a webhook channel
 
@@ -190,7 +190,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "createWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "url": url,
             "allowed_notifications": allowed_notifications,
         }
@@ -269,16 +269,14 @@ class WebhookChannels:
     def search(
         self,
         *,
-        search: Optional[
-            SearchWebhookChannelsRequestApplicationJsonPropertySearch
-        ] = None,
-        event: Union[Union[Event, str], None, NotGiven] = NOT_GIVEN,
-        page: Optional[int] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: SearchWebhookChannelsRequestApplicationJsonPropertySearch | None = None,
+        event: Event | str | None | NotGiven = NOT_GIVEN,
+        page: int | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search webhook channels
 
@@ -336,7 +334,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "searchWebhookChannels",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search.to_dict() if search is not None else None,
@@ -370,7 +368,7 @@ class WebhookChannels:
         self,
         *,
         signing_secret: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRotateWebhookSigningSecretResponseValue200ApplicationJson:
         """Rotate the webhook signing secret
 
@@ -421,7 +419,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "rotateWebhookSigningSecret",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "signing_secret": signing_secret,
         }
         _validate_model(
@@ -455,7 +453,7 @@ class WebhookChannels:
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWebhookChannelResponseValue200ApplicationJson:
         """Retrieve a webhook channel
 
@@ -518,14 +516,12 @@ class WebhookChannels:
         self,
         webhook_channel: str,
         *,
-        name: Optional[str],
+        name: str | None,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWebhookChannelResponseValue200ApplicationJson:
         """Replace a webhook channel
 
@@ -580,7 +576,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "replaceWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "url": url,
             "allowed_notifications": allowed_notifications,
@@ -659,17 +655,13 @@ class WebhookChannels:
         self,
         webhook_channel: str,
         *,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        url: Optional[str] = None,
-        allowed_notifications: Optional[
-            List[
-                Union[
-                    SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications,
-                    str,
-                ]
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        url: str | None = None,
+        allowed_notifications: builtins.list[
+            SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications | str
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWebhookChannelResponseValue200ApplicationJson:
         """Update a webhook channel
 
@@ -724,7 +716,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "updateWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "url": url,
@@ -808,7 +800,7 @@ class WebhookChannels:
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a webhook channel
 
@@ -867,8 +859,8 @@ class WebhookChannels:
         self,
         webhook_channel: str,
         *,
-        event: Union[SdkSendTestWebhookRequestApplicationJsonEvent, str],
-        request_options: Optional[RequestOptions] = None,
+        event: SdkSendTestWebhookRequestApplicationJsonEvent | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendTestWebhookResponseValue200ApplicationJson:
         """Send a test webhook
 
@@ -921,7 +913,7 @@ class WebhookChannels:
             "idempotency_supported": False,
             "operation_id": "sendTestWebhook",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "event": enum_value(event),
         }
         _validate_model(
@@ -987,12 +979,12 @@ class AsyncWebhookChannels:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem]:
         """List webhook channels
 
@@ -1070,13 +1062,11 @@ class AsyncWebhookChannels:
         self,
         *,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkCreateWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWebhookChannelResponseValue201ApplicationJson:
         """Create a webhook channel
 
@@ -1129,7 +1119,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "createWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "url": url,
             "allowed_notifications": allowed_notifications,
         }
@@ -1208,16 +1198,14 @@ class AsyncWebhookChannels:
     async def search(
         self,
         *,
-        search: Optional[
-            SearchWebhookChannelsRequestApplicationJsonPropertySearch
-        ] = None,
-        event: Union[Union[Event, str], None, NotGiven] = NOT_GIVEN,
-        page: Optional[int] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: SearchWebhookChannelsRequestApplicationJsonPropertySearch | None = None,
+        event: Event | str | None | NotGiven = NOT_GIVEN,
+        page: int | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -1277,7 +1265,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "searchWebhookChannels",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search.to_dict() if search is not None else None,
@@ -1311,7 +1299,7 @@ class AsyncWebhookChannels:
         self,
         *,
         signing_secret: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRotateWebhookSigningSecretResponseValue200ApplicationJson:
         """Rotate the webhook signing secret
 
@@ -1362,7 +1350,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "rotateWebhookSigningSecret",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "signing_secret": signing_secret,
         }
         _validate_model(
@@ -1396,7 +1384,7 @@ class AsyncWebhookChannels:
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWebhookChannelResponseValue200ApplicationJson:
         """Retrieve a webhook channel
 
@@ -1459,14 +1447,12 @@ class AsyncWebhookChannels:
         self,
         webhook_channel: str,
         *,
-        name: Optional[str],
+        name: str | None,
         url: str,
-        allowed_notifications: List[
-            Union[
-                SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications, str
-            ]
+        allowed_notifications: builtins.list[
+            SdkReplaceWebhookChannelRequestApplicationJsonAllowedNotifications | str
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWebhookChannelResponseValue200ApplicationJson:
         """Replace a webhook channel
 
@@ -1521,7 +1507,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "replaceWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "url": url,
             "allowed_notifications": allowed_notifications,
@@ -1600,17 +1586,13 @@ class AsyncWebhookChannels:
         self,
         webhook_channel: str,
         *,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        url: Optional[str] = None,
-        allowed_notifications: Optional[
-            List[
-                Union[
-                    SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications,
-                    str,
-                ]
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        url: str | None = None,
+        allowed_notifications: builtins.list[
+            SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications | str
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWebhookChannelResponseValue200ApplicationJson:
         """Update a webhook channel
 
@@ -1665,7 +1647,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "updateWebhookChannel",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "url": url,
@@ -1749,7 +1731,7 @@ class AsyncWebhookChannels:
         self,
         webhook_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a webhook channel
 
@@ -1808,8 +1790,8 @@ class AsyncWebhookChannels:
         self,
         webhook_channel: str,
         *,
-        event: Union[SdkSendTestWebhookRequestApplicationJsonEvent, str],
-        request_options: Optional[RequestOptions] = None,
+        event: SdkSendTestWebhookRequestApplicationJsonEvent | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendTestWebhookResponseValue200ApplicationJson:
         """Send a test webhook
 
@@ -1862,7 +1844,7 @@ class AsyncWebhookChannels:
             "idempotency_supported": False,
             "operation_id": "sendTestWebhook",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "event": enum_value(event),
         }
         _validate_model(

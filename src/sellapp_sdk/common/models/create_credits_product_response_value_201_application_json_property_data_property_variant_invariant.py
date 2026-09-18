@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -17,7 +17,7 @@ from .create_credits_product_response_value_201_application_json_property_data_p
     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariantState,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant",
     "required": ["state", "variant_count"],
     "properties": {
@@ -33,7 +33,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant",
     "required": ["state", "variant_count"],
     "properties": {
@@ -57,14 +57,14 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVar
 
     state: CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariantState
     variant_count: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant:
         """Deserialize from a dictionary."""
         try:
@@ -92,9 +92,9 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVar
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["state"] = self.state
         _domain_data["variant_count"] = self.variant_count
         _validate_model(
@@ -105,7 +105,7 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVar
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["state"] = (
             self.state.value if isinstance(self.state, Enum) else self.state
         )

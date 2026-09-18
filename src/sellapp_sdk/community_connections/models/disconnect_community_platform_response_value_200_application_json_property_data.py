@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.disconnect_community_platform_response_value_200_
     DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyDataPlatform,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "disconnected"],
     "properties": {
@@ -28,7 +28,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "disconnected"],
     "properties": {
@@ -50,14 +50,14 @@ class DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData:
         DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyDataPlatform
     )
     disconnected: Literal[True]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -85,9 +85,9 @@ class DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["platform"] = self.platform
         _domain_data["disconnected"] = self.disconnected
         _validate_model(
@@ -98,7 +98,7 @@ class DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["platform"] = (
             self.platform.value if isinstance(self.platform, Enum) else self.platform
         )

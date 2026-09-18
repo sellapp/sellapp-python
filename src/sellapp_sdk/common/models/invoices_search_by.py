@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class InvoicesSearchBy(str, Enum):
@@ -22,7 +22,7 @@ class InvoicesSearchBy(str, Enum):
     COUPON_CODE = "coupon_code"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[InvoicesSearchBy]:
+    def _missing_(cls, value: object) -> InvoicesSearchBy | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

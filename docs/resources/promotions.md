@@ -12,25 +12,25 @@ List promotions
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListPromotionsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListPromotionsResponseValue200ApplicationJson]`.
 
@@ -77,28 +77,28 @@ def create(
         self,
         *,
         name: str,
-        status: Union[SdkCreatePromotionRequestApplicationJsonStatus, str],
+        status: SdkCreatePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | name | `str` | Yes |
-| status | `Union[SdkCreatePromotionRequestApplicationJsonStatus, str]` | Yes |
+| status | `SdkCreatePromotionRequestApplicationJsonStatus \| str` | Yes |
 | priority | `int` | Yes |
 | is_stackable | `bool` | Yes |
-| phases | `List[CreatePromotionRequestApplicationJsonPropertyPhasesItem]` | Yes |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| max_redemptions | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| phases | `builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem]` | Yes |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| max_redemptions | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreatePromotionResponseValue201ApplicationJson`.
 
@@ -168,45 +168,47 @@ Search promotions
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchPromotionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchPromotionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchPromotionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchPromotionsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchPromotionsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchPromotionsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchPromotionsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchPromotionsResponseValue200ApplicationJson]`.
 
@@ -256,14 +258,14 @@ def get(
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPromotionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetPromotionResponseValue200ApplicationJson`.
 
@@ -310,38 +312,32 @@ def replace(
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkReplacePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkReplacePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| name | `Optional[str]` | No |
-| status | `Optional[
-            Union[SdkReplacePromotionRequestApplicationJsonStatus, str]
-        ]` | No |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| priority | `Optional[int]` | No |
-| is_stackable | `Optional[bool]` | No |
-| max_redemptions | `Union[int, None, NotGiven]` | No |
-| phases | `Optional[
-            List[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| status | `SdkReplacePromotionRequestApplicationJsonStatus \| str \| None` | No |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| priority | `int \| None` | No |
+| is_stackable | `bool \| None` | No |
+| max_redemptions | `int \| None \| NotGiven` | No |
+| phases | `builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplacePromotionResponseValue200ApplicationJson`.
 
@@ -392,38 +388,32 @@ def update(
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkUpdatePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkUpdatePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdatePromotionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| name | `Optional[str]` | No |
-| status | `Optional[
-            Union[SdkUpdatePromotionRequestApplicationJsonStatus, str]
-        ]` | No |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| priority | `Optional[int]` | No |
-| is_stackable | `Optional[bool]` | No |
-| max_redemptions | `Union[int, None, NotGiven]` | No |
-| phases | `Optional[
-            List[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| status | `SdkUpdatePromotionRequestApplicationJsonStatus \| str \| None` | No |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| priority | `int \| None` | No |
+| is_stackable | `bool \| None` | No |
+| max_redemptions | `int \| None \| NotGiven` | No |
+| phases | `builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdatePromotionResponseValue200ApplicationJson`.
 
@@ -474,14 +464,14 @@ def delete(
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -529,14 +519,14 @@ def restore(
         promotion: int,
         *,
         name: str,
-        status: Union[SdkRestorePromotionRequestApplicationJsonStatus, str],
+        status: SdkRestorePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
 ```
 
@@ -544,14 +534,14 @@ def restore(
 | --- | --- | --- |
 | promotion | `int` | Yes |
 | name | `str` | Yes |
-| status | `Union[SdkRestorePromotionRequestApplicationJsonStatus, str]` | Yes |
+| status | `SdkRestorePromotionRequestApplicationJsonStatus \| str` | Yes |
 | priority | `int` | Yes |
 | is_stackable | `bool` | Yes |
-| phases | `List[RestorePromotionRequestApplicationJsonPropertyPhasesItem]` | Yes |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| max_redemptions | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| phases | `builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem]` | Yes |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| max_redemptions | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRestorePromotionResponseValue200ApplicationJson`.
 

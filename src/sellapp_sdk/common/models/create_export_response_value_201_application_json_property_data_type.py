@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CreateExportResponseValue201ApplicationJsonPropertyDataType(str, Enum):
@@ -19,7 +19,7 @@ class CreateExportResponseValue201ApplicationJsonPropertyDataType(str, Enum):
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[CreateExportResponseValue201ApplicationJsonPropertyDataType]:
+    ) -> CreateExportResponseValue201ApplicationJsonPropertyDataType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

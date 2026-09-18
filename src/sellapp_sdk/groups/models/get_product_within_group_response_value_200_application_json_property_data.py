@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -25,7 +25,7 @@ from .get_product_within_group_response_value_200_application_json_property_data
     GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyPivot,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetProductWithinGroupResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -84,7 +84,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetProductWithinGroupResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -153,30 +153,30 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
     title: str
     slug: str
     description: str
-    images: List[
+    images: list[
         GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyImagesItem
     ]
-    order: Optional[int]
+    order: int | None
     visibility: str
     delivery_text: str
-    additional_information: List[str]
+    additional_information: list[str]
     other_settings: GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings
-    deleted_at: Optional[datetime]
+    deleted_at: datetime | None
     created_at: datetime
     updated_at: datetime
     store_id: int
-    section_id: Optional[int]
-    section_order: Optional[int]
+    section_id: int | None
+    section_order: int | None
     is_discoverable: bool
     pivot: GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyPivot
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -195,7 +195,7 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
                 description=data["description"],
                 images=[
                     GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["images"])
                 ],
@@ -204,7 +204,7 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
                 delivery_text=data["delivery_text"],
                 additional_information=data["additional_information"],
                 other_settings=GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], data["other_settings"])
+                    cast(dict[str, Any], data["other_settings"])
                 ),
                 deleted_at=_parse_datetime(_v_deleted_at)
                 if (_v_deleted_at := data["deleted_at"]) is not None
@@ -216,7 +216,7 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
                 section_order=data["section_order"],
                 is_discoverable=data["is_discoverable"],
                 pivot=GetProductWithinGroupResponseValue200ApplicationJsonPropertyDataPropertyPivot.from_dict(
-                    cast(Dict[str, Any], data["pivot"])
+                    cast(dict[str, Any], data["pivot"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -248,9 +248,9 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
                 "GetProductWithinGroupResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["title"] = self.title
         _domain_data["slug"] = self.slug
@@ -277,7 +277,7 @@ class GetProductWithinGroupResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["title"] = self.title
         result["slug"] = self.slug

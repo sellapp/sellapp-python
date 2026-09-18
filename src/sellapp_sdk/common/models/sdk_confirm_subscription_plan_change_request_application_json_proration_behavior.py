@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior(
@@ -21,9 +21,7 @@ class SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior(
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
-        SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
-    ]:
+    ) -> SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

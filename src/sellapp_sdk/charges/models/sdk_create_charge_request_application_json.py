@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -26,7 +26,7 @@ from .create_charge_request_application_json_property_metadata import (
     CreateChargeRequestApplicationJsonPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateChargeRequestApplicationJson",
     "required": ["email", "return_url"],
     "properties": {
@@ -181,7 +181,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateChargeRequestApplicationJson",
     "required": ["email", "return_url"],
     "properties": {
@@ -344,34 +344,34 @@ class SdkCreateChargeRequestApplicationJson:
 
     email: str
     return_url: str
-    cancel_url: Optional[str] = None
-    webhook: Optional[str] = None
+    cancel_url: str | None = None
+    webhook: str | None = None
     """Optional public webhook destination validated for safe delivery. A browser return is not payment confirmation."""
-    reference: Optional[str] = None
-    description: Optional[str] = None
-    currency: Optional[str] = None
+    reference: str | None = None
+    description: str | None = None
+    currency: str | None = None
     """Supported three-letter currency code, normalized to uppercase. Defaults to USD when omitted. When supplied, total is required; supply both for a paid charge."""
-    total: Optional[int] = None
+    total: int | None = None
     """Integer minor units in currency; 1999 USD is $19.99. Required when currency is supplied. Maximum is the minor-unit equivalent of 99,999,999 major currency units. Omit total and currency together for a free USD claim."""
-    payment_method: Optional[SdkCreateChargeRequestApplicationJsonPaymentMethod] = None
-    payment_methods: Optional[
-        List[SdkCreateChargeRequestApplicationJsonPaymentMethods]
-    ] = None
-    custom_payment_method_id: Optional[str] = None
+    payment_method: SdkCreateChargeRequestApplicationJsonPaymentMethod | None = None
+    payment_methods: (
+        list[SdkCreateChargeRequestApplicationJsonPaymentMethods] | None
+    ) = None
+    custom_payment_method_id: str | None = None
     """Required when payment_method is CUSTOM_PAYMENT_METHOD; otherwise omit it. The ULID must identify an enabled, usable method in this store and belong to custom_payment_method_ids when provided."""
-    custom_payment_method_ids: Optional[List[str]] = None
+    custom_payment_method_ids: list[str] | None = None
     """Optional subset of enabled, usable custom method ULIDs for this charge. Include CUSTOM_PAYMENT_METHOD among the allowed gateways. Omit to snapshot all currently usable methods; newly created methods are not added later. Product assignments do not apply. Null and an empty array are invalid."""
-    use_all_payment_methods: Optional[bool] = None
-    deliverable: Optional[CreateChargeRequestApplicationJsonPropertyDeliverable] = None
-    metadata: Optional[CreateChargeRequestApplicationJsonPropertyMetadata] = None
-    coupon_code: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    use_all_payment_methods: bool | None = None
+    deliverable: CreateChargeRequestApplicationJsonPropertyDeliverable | None = None
+    metadata: CreateChargeRequestApplicationJsonPropertyMetadata | None = None
+    coupon_code: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkCreateChargeRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkCreateChargeRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -406,12 +406,12 @@ class SdkCreateChargeRequestApplicationJson:
                 custom_payment_method_ids=data.get("custom_payment_method_ids"),
                 use_all_payment_methods=data.get("use_all_payment_methods"),
                 deliverable=CreateChargeRequestApplicationJsonPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], _v_deliverable)
+                    cast(dict[str, Any], _v_deliverable)
                 )
                 if (_v_deliverable := data.get("deliverable")) is not None
                 else None,
                 metadata=CreateChargeRequestApplicationJsonPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -442,9 +442,9 @@ class SdkCreateChargeRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateChargeRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["email"] = self.email
         _domain_data["return_url"] = self.return_url
         _domain_data["cancel_url"] = self.cancel_url
@@ -477,7 +477,7 @@ class SdkCreateChargeRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["email"] = self.email
         result["return_url"] = self.return_url
         if self.cancel_url is not None:

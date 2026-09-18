@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from .get_order_line_item_response_value_200_application_json_property_data_prop
     GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscountsPropertyModifiersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscounts",
     "required": ["coupon", "modifiers"],
     "properties": {
@@ -28,7 +28,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscounts",
     "required": ["coupon", "modifiers"],
     "properties": {
@@ -43,21 +43,22 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscounts:
     """Get Order Line Item Response Value200Application Json Property Data Property Discounts model."""
 
-    coupon: Optional[
+    coupon: (
         GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscountsPropertyCoupon
-    ]
-    modifiers: List[
+        | None
+    )
+    modifiers: list[
         GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscountsPropertyModifiersItem
     ]
     """Safe historical summaries of discount, fee, and pricing modifiers. Only the documented fields are returned. Coupon codes are included only when the coupon is verified as belonging to the authenticated store."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscounts:
         """Deserialize from a dictionary."""
         try:
@@ -71,13 +72,13 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscoun
             )
             return cls(
                 coupon=GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscountsPropertyCoupon.from_dict(
-                    cast(Dict[str, Any], _v_coupon)
+                    cast(dict[str, Any], _v_coupon)
                 )
                 if (_v_coupon := data["coupon"]) is not None
                 else None,
                 modifiers=[
                     GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscountsPropertyModifiersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["modifiers"])
                 ],
@@ -92,9 +93,9 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscoun
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["coupon"] = self.coupon
         _domain_data["modifiers"] = self.modifiers
         _validate_model(
@@ -105,7 +106,7 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyDiscoun
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.coupon is not None:
             result["coupon"] = self.coupon.to_dict()
         else:

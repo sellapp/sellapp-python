@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.create_promotion_response_value_201_application_j
     CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItem",
     "required": ["id", "promotion_id", "sort_order", "discount_type", "discount_value"],
     "properties": {
@@ -63,7 +63,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItem",
     "required": ["id", "promotion_id", "sort_order", "discount_type", "discount_value"],
     "properties": {
@@ -118,20 +118,20 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesIt
     sort_order: int
     discount_type: CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItemDiscountType
     discount_value: str
-    ends_at: Optional[datetime] = None
-    max_redemptions: Optional[int] = None
-    minimum_amount: Optional[str] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    deleted_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    ends_at: datetime | None = None
+    max_redemptions: int | None = None
+    minimum_amount: str | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    deleted_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItem:
         """Deserialize from a dictionary."""
         try:
@@ -189,9 +189,9 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesIt
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["promotion_id"] = self.promotion_id
         _domain_data["sort_order"] = self.sort_order
@@ -211,7 +211,7 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesIt
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["promotion_id"] = self.promotion_id
         result["sort_order"] = self.sort_order

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -23,7 +23,7 @@ class OAuthManagement:
     def get_oauth_installation(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOAuthInstallationResponseValue200ApplicationJson:
         """Read your CLI connection
 
@@ -77,7 +77,7 @@ class OAuthManagement:
     def delete_oauth_installation(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect your CLI connection
 
@@ -135,7 +135,7 @@ class AsyncOAuthManagement:
     async def get_oauth_installation(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOAuthInstallationResponseValue200ApplicationJson:
         """Read your CLI connection
 
@@ -189,7 +189,7 @@ class AsyncOAuthManagement:
     async def delete_oauth_installation(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect your CLI connection
 

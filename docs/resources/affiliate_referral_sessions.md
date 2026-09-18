@@ -12,14 +12,14 @@ List affiliate referral sessions
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        active: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        active: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListAffiliateReferralSessionsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -27,14 +27,14 @@ def list(
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| affiliate_id | `Optional[int]` | No |
-| active | `Optional[bool]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| affiliate_id | `int \| None` | No |
+| active | `bool \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         ListAffiliateReferralSessionsResponseValue200ApplicationJsonPropertyDataItem
@@ -83,14 +83,14 @@ def get(
         self,
         referral_session: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralSessionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | referral_session | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetAffiliateReferralSessionResponseValue200ApplicationJson`.
 

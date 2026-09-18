@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -31,7 +31,7 @@ from .create_checkout_session_response_value_200_application_json_property_invoi
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertySubtotal,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment",
     "required": [
         "fee",
@@ -51,7 +51,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment",
     "required": [
         "fee",
@@ -83,14 +83,14 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
     expires_at: datetime
     full_price: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyFullPrice
     original_amount: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyOriginalAmount
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment:
         """Deserialize from a dictionary."""
         try:
@@ -104,20 +104,20 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
             )
             return cls(
                 fee=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyFee.from_dict(
-                    cast(Dict[str, Any], data["fee"])
+                    cast(dict[str, Any], data["fee"])
                 ),
                 gateway=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
-                    cast(Dict[str, Any], data["gateway"])
+                    cast(dict[str, Any], data["gateway"])
                 ),
                 subtotal=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertySubtotal.from_dict(
-                    cast(Dict[str, Any], data["subtotal"])
+                    cast(dict[str, Any], data["subtotal"])
                 ),
                 expires_at=_parse_datetime(data["expires_at"]),
                 full_price=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyFullPrice.from_dict(
-                    cast(Dict[str, Any], data["full_price"])
+                    cast(dict[str, Any], data["full_price"])
                 ),
                 original_amount=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyOriginalAmount.from_dict(
-                    cast(Dict[str, Any], data["original_amount"])
+                    cast(dict[str, Any], data["original_amount"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -138,9 +138,9 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["fee"] = self.fee
         _domain_data["gateway"] = self.gateway
         _domain_data["subtotal"] = self.subtotal
@@ -155,7 +155,7 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["fee"] = self.fee.to_dict()
         result["gateway"] = self.gateway.to_dict()
         result["subtotal"] = self.subtotal.to_dict()

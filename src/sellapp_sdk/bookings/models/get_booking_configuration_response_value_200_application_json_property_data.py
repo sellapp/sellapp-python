@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Literal, Optional, cast
+from typing import Any, Literal, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -29,7 +29,7 @@ from .get_booking_configuration_response_value_200_application_json_property_dat
     GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyMeta,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetBookingConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": [
         "product_id",
@@ -116,7 +116,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetBookingConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": [
         "product_id",
@@ -222,26 +222,26 @@ class GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
     max_advance_days: int
     buffer_before_minutes: int
     buffer_after_minutes: int
-    availability: List[
+    availability: list[
         GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyAvailabilityItem
     ]
-    provider_connection_ids: List[int]
+    provider_connection_ids: list[int]
     video_provider: (
         GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider
     )
-    video_provider_connection_id: Optional[int]
+    video_provider_connection_id: int | None
     reminders_enabled: bool
     reminder_offset_value: int
     reminder_offset_unit: GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataReminderOffsetUnit
     meta: GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyMeta
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -269,7 +269,7 @@ class GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
                 buffer_after_minutes=data["buffer_after_minutes"],
                 availability=[
                     GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyAvailabilityItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["availability"])
                 ],
@@ -284,7 +284,7 @@ class GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
                     data["reminder_offset_unit"]
                 ),
                 meta=GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyMeta.from_dict(
-                    cast(Dict[str, Any], data["meta"])
+                    cast(dict[str, Any], data["meta"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -317,9 +317,9 @@ class GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
                 "GetBookingConfigurationResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["product_id"] = self.product_id
         _domain_data["product_variant_id"] = self.product_variant_id
         _domain_data["mode"] = self.mode
@@ -347,7 +347,7 @@ class GetBookingConfigurationResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["product_id"] = self.product_id
         result["product_variant_id"] = self.product_variant_id
         result["mode"] = self.mode

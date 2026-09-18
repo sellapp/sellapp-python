@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .create_export_request_application_json_property_parameters import (
     CreateExportRequestApplicationJsonPropertyParameters,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateExportRequestApplicationJson",
     "required": ["type", "format"],
     "properties": {
@@ -36,7 +36,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateExportRequestApplicationJson",
     "required": ["type", "format"],
     "properties": {
@@ -57,14 +57,14 @@ class SdkCreateExportRequestApplicationJson:
 
     type: SdkCreateExportRequestApplicationJsonType
     format: SdkCreateExportRequestApplicationJsonFormat
-    parameters: Optional[CreateExportRequestApplicationJsonPropertyParameters] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    parameters: CreateExportRequestApplicationJsonPropertyParameters | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkCreateExportRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkCreateExportRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -79,7 +79,7 @@ class SdkCreateExportRequestApplicationJson:
                 type=SdkCreateExportRequestApplicationJsonType(data["type"]),
                 format=SdkCreateExportRequestApplicationJsonFormat(data["format"]),
                 parameters=CreateExportRequestApplicationJsonPropertyParameters.from_dict(
-                    cast(Dict[str, Any], _v_parameters)
+                    cast(dict[str, Any], _v_parameters)
                 )
                 if (_v_parameters := data.get("parameters")) is not None
                 else None,
@@ -91,9 +91,9 @@ class SdkCreateExportRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateExportRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         _domain_data["format"] = self.format
         if self.parameters is not None:
@@ -106,7 +106,7 @@ class SdkCreateExportRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["format"] = (
             self.format.value if isinstance(self.format, Enum) else self.format

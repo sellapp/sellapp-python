@@ -13,14 +13,14 @@ def list(
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPromotionPhasesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListPromotionPhasesResponseValue200ApplicationJson`.
 
@@ -67,16 +67,20 @@ def replace(
         self,
         promotion: int,
         *,
-        phases: List[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem],
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[
+            ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionPhasesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | promotion | `int` | Yes |
-| phases | `List[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| phases | `builtins.list[
+            ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem
+        ]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplacePromotionPhasesResponseValue200ApplicationJson`.
 

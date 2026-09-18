@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.sdk_start_community_connection_request_applicatio
     SdkStartCommunityConnectionRequestApplicationJsonMode,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkStartCommunityConnectionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -24,7 +24,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkStartCommunityConnectionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -38,16 +38,16 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkStartCommunityConnectionRequestApplicationJson:
     """Sdk Start Community Connection Request Application Json model."""
 
-    mode: Optional[SdkStartCommunityConnectionRequestApplicationJsonMode] = None
+    mode: SdkStartCommunityConnectionRequestApplicationJsonMode | None = None
     """Discord-only connection mode."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkStartCommunityConnectionRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -71,9 +71,9 @@ class SdkStartCommunityConnectionRequestApplicationJson:
                 "SdkStartCommunityConnectionRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.mode is not None:
             _domain_data["mode"] = self.mode
         _validate_model(
@@ -84,7 +84,7 @@ class SdkStartCommunityConnectionRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.mode is not None:
             result["mode"] = (
                 self.mode.value if isinstance(self.mode, Enum) else self.mode

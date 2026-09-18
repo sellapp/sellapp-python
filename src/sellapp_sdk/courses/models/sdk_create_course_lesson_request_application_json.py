@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -26,7 +26,7 @@ from .create_course_lesson_request_application_json_property_questions_item impo
     CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCourseLessonRequestApplicationJson",
     "required": ["title", "type"],
     "properties": {
@@ -59,7 +59,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCourseLessonRequestApplicationJson",
     "required": ["title", "type"],
     "properties": {
@@ -100,25 +100,23 @@ class SdkCreateCourseLessonRequestApplicationJson:
 
     title: str
     type: SdkCreateCourseLessonRequestApplicationJsonType
-    content: Optional[str] = None
-    is_preview: Optional[bool] = None
+    content: str | None = None
+    is_preview: bool | None = None
     """Preview is available only for video lessons."""
-    is_published: Optional[bool] = None
-    assignment: Optional[CreateCourseLessonRequestApplicationJsonPropertyAssignment] = (
-        None
-    )
-    questions: Optional[
-        List[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-    ] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    is_published: bool | None = None
+    assignment: CreateCourseLessonRequestApplicationJsonPropertyAssignment | None = None
+    questions: (
+        list[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem] | None
+    ) = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateCourseLessonRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -137,13 +135,13 @@ class SdkCreateCourseLessonRequestApplicationJson:
                 is_preview=data.get("is_preview"),
                 is_published=data.get("is_published"),
                 assignment=CreateCourseLessonRequestApplicationJsonPropertyAssignment.from_dict(
-                    cast(Dict[str, Any], _v_assignment)
+                    cast(dict[str, Any], _v_assignment)
                 )
                 if (_v_assignment := data.get("assignment")) is not None
                 else None,
                 questions=[
                     CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_questions)
                 ]
@@ -171,9 +169,9 @@ class SdkCreateCourseLessonRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateCourseLessonRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["type"] = self.type
         _domain_data["content"] = self.content
@@ -195,7 +193,7 @@ class SdkCreateCourseLessonRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         if self.content is not None:

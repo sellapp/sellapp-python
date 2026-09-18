@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -26,7 +26,7 @@ from .list_affiliates_response_value_200_application_json_property_data_item_pro
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyProfile,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -77,7 +77,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -137,28 +137,29 @@ class ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem:
     id: int
     email: str
     status: ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemStatus
-    profile: Optional[
+    profile: (
         ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyProfile
-    ]
+        | None
+    )
     balances: (
         ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyBalances
     )
     referrals_count: int
     payouts_count: int
-    reason: Optional[str] = None
-    payout_method: Optional[str] = None
-    invited_at: Optional[datetime] = None
-    application_submitted_at: Optional[datetime] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    reason: str | None = None
+    payout_method: str | None = None
+    invited_at: datetime | None = None
+    application_submitted_at: datetime | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -177,12 +178,12 @@ class ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem:
                     data["status"]
                 ),
                 profile=ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyProfile.from_dict(
-                    cast(Dict[str, Any], _v_profile)
+                    cast(dict[str, Any], _v_profile)
                 )
                 if (_v_profile := data["profile"]) is not None
                 else None,
                 balances=ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyBalances.from_dict(
-                    cast(Dict[str, Any], data["balances"])
+                    cast(dict[str, Any], data["balances"])
                 ),
                 referrals_count=data["referrals_count"],
                 payouts_count=data["payouts_count"],
@@ -226,9 +227,9 @@ class ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem:
                 "ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["email"] = self.email
         _domain_data["status"] = self.status
@@ -252,7 +253,7 @@ class ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["email"] = self.email
         result["status"] = (

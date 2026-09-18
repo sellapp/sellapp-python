@@ -13,14 +13,14 @@ def list(
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListHighlightMediaResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListHighlightMediaResponseValue200ApplicationJson`.
 
@@ -68,9 +68,9 @@ def add(
         highlight: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkAddHighlightMediaResponseValue201ApplicationJson:
 ```
 
@@ -78,9 +78,9 @@ def add(
 | --- | --- | --- |
 | highlight | `int` | Yes |
 | file | `bytes` | Yes |
-| cta_title | `Optional[str]` | No |
-| product_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| cta_title | `str \| None` | No |
+| product_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAddHighlightMediaResponseValue201ApplicationJson`.
 
@@ -132,16 +132,16 @@ def reorder(
         self,
         highlight: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightMediaResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReorderHighlightMediaResponseValue200ApplicationJson`.
 
@@ -193,9 +193,9 @@ def replace(
         media: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaResponseValue200ApplicationJson:
 ```
 
@@ -204,9 +204,9 @@ def replace(
 | highlight | `int` | Yes |
 | media | `int` | Yes |
 | file | `bytes` | Yes |
-| cta_title | `Optional[str]` | No |
-| product_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| cta_title | `str \| None` | No |
+| product_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceHighlightMediaResponseValue200ApplicationJson`.
 
@@ -260,9 +260,9 @@ def replace_metadata(
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaMetadataResponseValue200ApplicationJson:
 ```
 
@@ -270,9 +270,9 @@ def replace_metadata(
 | --- | --- | --- |
 | highlight | `int` | Yes |
 | media | `int` | Yes |
-| cta_title | `Optional[str]` | No |
-| product_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| cta_title | `str \| None` | No |
+| product_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceHighlightMediaMetadataResponseValue200ApplicationJson`.
 
@@ -325,9 +325,9 @@ def update(
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightMediaResponseValue200ApplicationJson:
 ```
 
@@ -335,9 +335,9 @@ def update(
 | --- | --- | --- |
 | highlight | `int` | Yes |
 | media | `int` | Yes |
-| cta_title | `Optional[str]` | No |
-| product_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| cta_title | `str \| None` | No |
+| product_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateHighlightMediaResponseValue200ApplicationJson`.
 
@@ -390,7 +390,7 @@ def delete(
         highlight: int,
         media: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -398,7 +398,7 @@ def delete(
 | --- | --- | --- |
 | highlight | `int` | Yes |
 | media | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

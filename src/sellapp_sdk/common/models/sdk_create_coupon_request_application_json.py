@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -20,7 +20,7 @@ from .sdk_create_coupon_request_application_json_type import (
     SdkCreateCouponRequestApplicationJsonType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCouponRequestApplicationJson",
     "required": ["code", "type", "discount", "store_wide"],
     "properties": {
@@ -88,7 +88,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCouponRequestApplicationJson",
     "required": ["code", "type", "discount", "store_wide"],
     "properties": {
@@ -164,25 +164,25 @@ class SdkCreateCouponRequestApplicationJson:
 
     code: str
     type: SdkCreateCouponRequestApplicationJsonType
-    discount: Union[float, str]
+    discount: float | str
     """A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit."""
     store_wide: bool
-    products: Optional[List[int]] = None
+    products: list[int] | None = None
     """Product IDs the coupon applies to when store_wide is false."""
-    product_variants: Optional[List[int]] = None
+    product_variants: list[int] | None = None
     """Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants."""
-    limit: Optional[int] = None
-    expires_at: Optional[datetime] = None
+    limit: int | None = None
+    expires_at: datetime | None = None
     """A future date and time, or null for no expiry."""
-    minimum_amount: Optional[Union[float, str]] = None
+    minimum_amount: float | str | None = None
     """A decimal minimum order amount in the store currency's major unit, or null for no minimum."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkCreateCouponRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkCreateCouponRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -224,9 +224,9 @@ class SdkCreateCouponRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateCouponRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["code"] = self.code
         _domain_data["type"] = self.type
         _domain_data["discount"] = self.discount
@@ -246,7 +246,7 @@ class SdkCreateCouponRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["code"] = self.code
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["discount"] = self.discount

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem",
     "required": ["id", "answer", "is_correct", "sort_order"],
     "properties": {
@@ -27,7 +27,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem",
     "required": ["id", "answer", "is_correct", "sort_order"],
     "properties": {
@@ -52,14 +52,14 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
     answer: str
     is_correct: bool
     sort_order: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem:
         """Deserialize from a dictionary."""
         try:
@@ -87,9 +87,9 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["answer"] = self.answer
         _domain_data["is_correct"] = self.is_correct
@@ -102,7 +102,7 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["answer"] = self.answer
         result["is_correct"] = self.is_correct

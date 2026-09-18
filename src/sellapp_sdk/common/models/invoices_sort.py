@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class InvoicesSort(str, Enum):
@@ -15,7 +15,7 @@ class InvoicesSort(str, Enum):
     CREATED_AT_2 = "-created_at"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[InvoicesSort]:
+    def _missing_(cls, value: object) -> InvoicesSort | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

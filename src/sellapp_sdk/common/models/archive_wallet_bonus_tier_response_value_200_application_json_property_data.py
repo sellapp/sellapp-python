@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -20,7 +20,7 @@ from .archive_wallet_bonus_tier_response_value_200_application_json_property_dat
     ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -92,7 +92,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -175,26 +175,26 @@ class ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData:
     bonus_kind: (
         ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind
     )
-    fixed_bonus_cents: Optional[int]
-    percent_basis: Optional[int]
-    maximum_bonus_cents: Optional[int]
+    fixed_bonus_cents: int | None
+    percent_basis: int | None
+    maximum_bonus_cents: int | None
     priority: int
     is_active: bool
-    superseded_by_id: Optional[int]
+    superseded_by_id: int | None
     """ID of the replacement tier, or null if this tier has not been superseded."""
     restorable: bool
     """True only when this tier is archived and has no replacement tier."""
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    deleted_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    deleted_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -253,9 +253,9 @@ class ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData:
                 "ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["minimum_top_up_cents"] = self.minimum_top_up_cents
         _domain_data["bonus_kind"] = self.bonus_kind
@@ -277,7 +277,7 @@ class ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["minimum_top_up_cents"] = self.minimum_top_up_cents
         result["bonus_kind"] = (

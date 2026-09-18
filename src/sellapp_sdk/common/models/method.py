@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class Method(str, Enum):
@@ -51,7 +51,7 @@ class Method(str, Enum):
     NULL = "null"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[Method]:
+    def _missing_(cls, value: object) -> Method | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

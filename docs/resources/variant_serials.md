@@ -14,13 +14,13 @@ def list(
         product: int,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        search: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        search: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListVariantSerialInventoryResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -30,13 +30,13 @@ def list(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| search | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| search | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         ListVariantSerialInventoryResponseValue200ApplicationJsonPropertyDataItem
@@ -89,9 +89,9 @@ def append(
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAppendVariantSerialInventoryResponseValue201ApplicationJson:
 ```
 
@@ -99,9 +99,9 @@ def append(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| serials | `List[str]` | Yes |
-| remove_duplicates | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| serials | `builtins.list[str]` | Yes |
+| remove_duplicates | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAppendVariantSerialInventoryResponseValue201ApplicationJson`.
 
@@ -154,9 +154,9 @@ def replace(
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantSerialInventoryResponseValue200ApplicationJson:
 ```
 
@@ -164,9 +164,9 @@ def replace(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| serials | `List[str]` | Yes |
-| remove_duplicates | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| serials | `builtins.list[str]` | Yes |
+| remove_duplicates | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceVariantSerialInventoryResponseValue200ApplicationJson`.
 
@@ -220,15 +220,14 @@ def queue(
         variant: int,
         *,
         file: bytes,
-        parsing_mode: Union[
-            SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode, str
-        ],
-        custom_delimiter: Union[str, None, NotGiven] = NOT_GIVEN,
-        remove_duplicates: Optional[bool] = None,
-        mode: Optional[
-            Union[SdkQueueVariantSerialImportRequestMultipartFormDataMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        parsing_mode: SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode
+        | str,
+        custom_delimiter: str | None | NotGiven = NOT_GIVEN,
+        remove_duplicates: bool | None = None,
+        mode: SdkQueueVariantSerialImportRequestMultipartFormDataMode
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkQueueVariantSerialImportResponseValue202ApplicationJson:
 ```
 
@@ -237,15 +236,14 @@ def queue(
 | product | `int` | Yes |
 | variant | `int` | Yes |
 | file | `bytes` | Yes |
-| parsing_mode | `Union[
-            SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode, str
-        ]` | Yes |
-| custom_delimiter | `Union[str, None, NotGiven]` | No |
-| remove_duplicates | `Optional[bool]` | No |
-| mode | `Optional[
-            Union[SdkQueueVariantSerialImportRequestMultipartFormDataMode, str]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| parsing_mode | `SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode
+        \| str` | Yes |
+| custom_delimiter | `str \| None \| NotGiven` | No |
+| remove_duplicates | `bool \| None` | No |
+| mode | `SdkQueueVariantSerialImportRequestMultipartFormDataMode
+        \| str
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkQueueVariantSerialImportResponseValue202ApplicationJson`.
 
@@ -301,7 +299,7 @@ def delete(
         variant: int,
         serial: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -310,7 +308,7 @@ def delete(
 | product | `int` | Yes |
 | variant | `int` | Yes |
 | serial | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

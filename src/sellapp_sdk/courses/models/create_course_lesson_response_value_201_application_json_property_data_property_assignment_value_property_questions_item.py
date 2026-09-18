@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .create_course_lesson_response_value_201_application_json_property_data_pro
     CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItem",
     "required": [
         "id",
@@ -57,7 +57,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItem",
     "required": [
         "id",
@@ -100,21 +100,21 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
     id: int
     prompt: str
     question_type: CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemQuestionType
-    solution: Optional[str]
+    solution: str | None
     sort_order: int
-    answers: List[
+    answers: list[
         CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem
     ]
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItem:
         """Deserialize from a dictionary."""
         try:
@@ -136,7 +136,7 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
                 sort_order=data["sort_order"],
                 answers=[
                     CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["answers"])
                 ],
@@ -163,9 +163,9 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["prompt"] = self.prompt
         _domain_data["question_type"] = self.question_type
@@ -182,7 +182,7 @@ class CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyAssig
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["prompt"] = self.prompt
         result["question_type"] = (

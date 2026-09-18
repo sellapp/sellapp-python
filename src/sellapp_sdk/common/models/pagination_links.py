@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PaginationLinks",
     "required": ["first", "last", "prev", "next"],
     "properties": {
@@ -23,7 +23,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PaginationLinks",
     "required": ["first", "last", "prev", "next"],
     "properties": {
@@ -42,15 +42,15 @@ class PaginationLinks:
 
     first: str
     last: str
-    prev: Optional[str]
-    next: Optional[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    prev: str | None
+    next: str | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> PaginationLinks:
+    def from_dict(cls, data: dict[str, Any]) -> PaginationLinks:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -74,9 +74,9 @@ class PaginationLinks:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("PaginationLinks", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["first"] = self.first
         _domain_data["last"] = self.last
         _domain_data["prev"] = self.prev
@@ -89,7 +89,7 @@ class PaginationLinks:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["first"] = self.first
         result["last"] = self.last
         if self.prev is not None:

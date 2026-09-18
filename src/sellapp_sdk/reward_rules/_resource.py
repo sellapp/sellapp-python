@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_reward_rule_request_application_json_trigger_type import (
     SdkCreateRewardRuleRequestApplicationJsonTriggerType,
@@ -56,13 +58,13 @@ class RewardRules:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardRulesResponseValue200ApplicationJson]:
         """List reward rules
 
@@ -143,12 +145,14 @@ class RewardRules:
         *,
         name: str,
         is_active: bool,
-        trigger_type: Union[SdkCreateRewardRuleRequestApplicationJsonTriggerType, str],
+        trigger_type: SdkCreateRewardRuleRequestApplicationJsonTriggerType | str,
         trigger_threshold: int,
-        outputs: List[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        outputs: builtins.list[
+            CreateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ],
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardRuleResponseValue201ApplicationJson:
         """Create a reward rule
 
@@ -205,7 +209,7 @@ class RewardRules:
             "idempotency_supported": False,
             "operation_id": "createRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -283,23 +287,24 @@ class RewardRules:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardRulesResponseValue200ApplicationJson]:
         """Search reward rules
 
@@ -359,7 +364,7 @@ class RewardRules:
             "idempotency_supported": False,
             "operation_id": "searchRewardRules",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -398,7 +403,7 @@ class RewardRules:
         self,
         reward_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardRuleResponseValue200ApplicationJson:
         """Retrieve a reward rule
 
@@ -461,18 +466,19 @@ class RewardRules:
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkReplaceRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkReplaceRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardRuleResponseValue200ApplicationJson:
         """Update a reward rule
 
@@ -531,7 +537,7 @@ class RewardRules:
             "idempotency_supported": False,
             "operation_id": "replaceRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -608,18 +614,19 @@ class RewardRules:
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkUpdateRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkUpdateRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardRuleResponseValue200ApplicationJson:
         """Update a reward rule
 
@@ -678,7 +685,7 @@ class RewardRules:
             "idempotency_supported": False,
             "operation_id": "updateRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -762,13 +769,13 @@ class AsyncRewardRules:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListRewardRulesResponseValue200ApplicationJson]:
         """List reward rules
 
@@ -849,12 +856,14 @@ class AsyncRewardRules:
         *,
         name: str,
         is_active: bool,
-        trigger_type: Union[SdkCreateRewardRuleRequestApplicationJsonTriggerType, str],
+        trigger_type: SdkCreateRewardRuleRequestApplicationJsonTriggerType | str,
         trigger_threshold: int,
-        outputs: List[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        outputs: builtins.list[
+            CreateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ],
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardRuleResponseValue201ApplicationJson:
         """Create a reward rule
 
@@ -911,7 +920,7 @@ class AsyncRewardRules:
             "idempotency_supported": False,
             "operation_id": "createRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -989,23 +998,24 @@ class AsyncRewardRules:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchRewardRulesResponseValue200ApplicationJson]:
         """Search reward rules
 
@@ -1065,7 +1075,7 @@ class AsyncRewardRules:
             "idempotency_supported": False,
             "operation_id": "searchRewardRules",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1104,7 +1114,7 @@ class AsyncRewardRules:
         self,
         reward_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardRuleResponseValue200ApplicationJson:
         """Retrieve a reward rule
 
@@ -1167,18 +1177,19 @@ class AsyncRewardRules:
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkReplaceRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkReplaceRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardRuleResponseValue200ApplicationJson:
         """Update a reward rule
 
@@ -1237,7 +1248,7 @@ class AsyncRewardRules:
             "idempotency_supported": False,
             "operation_id": "replaceRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1314,18 +1325,19 @@ class AsyncRewardRules:
         self,
         reward_rule: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        trigger_type: Optional[
-            Union[SdkUpdateRewardRuleRequestApplicationJsonTriggerType, str]
-        ] = None,
-        trigger_threshold: Optional[int] = None,
-        outputs: Optional[
-            List[UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        trigger_type: SdkUpdateRewardRuleRequestApplicationJsonTriggerType
+        | str
+        | None = None,
+        trigger_threshold: int | None = None,
+        outputs: builtins.list[
+            UpdateRewardRuleRequestApplicationJsonPropertyOutputsItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardRuleResponseValue200ApplicationJson:
         """Update a reward rule
 
@@ -1384,7 +1396,7 @@ class AsyncRewardRules:
             "idempotency_supported": False,
             "operation_id": "updateRewardRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,

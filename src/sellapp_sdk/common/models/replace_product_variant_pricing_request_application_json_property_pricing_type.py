@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType(str, Enum):
@@ -17,9 +17,7 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType(str,
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
-        ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType
-    ]:
+    ) -> ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

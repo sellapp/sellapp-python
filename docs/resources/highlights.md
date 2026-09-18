@@ -12,25 +12,25 @@ List highlights
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListHighlightsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListHighlightsResponseValue200ApplicationJson]`.
 
@@ -78,8 +78,8 @@ def create(
         *,
         title: str,
         hidden: bool,
-        files: List[bytes],
-        request_options: Optional[RequestOptions] = None,
+        files: builtins.list[bytes],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateHighlightResponseValue201ApplicationJson:
 ```
 
@@ -87,8 +87,8 @@ def create(
 | --- | --- | --- |
 | title | `str` | Yes |
 | hidden | `bool` | Yes |
-| files | `List[bytes]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| files | `builtins.list[bytes]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateHighlightResponseValue201ApplicationJson`.
 
@@ -138,45 +138,47 @@ Search highlights
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchHighlightsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchHighlightsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchHighlightsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchHighlightsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchHighlightsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchHighlightsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchHighlightsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchHighlightsResponseValue200ApplicationJson]`.
 
@@ -225,15 +227,15 @@ Reorder highlights
 def reorder(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReorderHighlightsResponseValue200ApplicationJson`.
 
@@ -280,14 +282,14 @@ def get(
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetHighlightResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetHighlightResponseValue200ApplicationJson`.
 
@@ -334,20 +336,20 @@ def replace(
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| published | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| published | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceHighlightResponseValue200ApplicationJson`.
 
@@ -398,20 +400,20 @@ def update(
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| published | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| published | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateHighlightResponseValue200ApplicationJson`.
 
@@ -462,14 +464,14 @@ def delete(
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | highlight | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -27,11 +27,11 @@ class Refunds:
     def list_refunds(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]:
         """List refunds
 
@@ -109,7 +109,7 @@ class Refunds:
         self,
         refund: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRefundResponseValue200ApplicationJson:
         """Retrieve a refund
 
@@ -180,11 +180,11 @@ class AsyncRefunds:
     async def list_refunds(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]:
         """List refunds
 
@@ -262,7 +262,7 @@ class AsyncRefunds:
         self,
         refund: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRefundResponseValue200ApplicationJson:
         """Retrieve a refund
 

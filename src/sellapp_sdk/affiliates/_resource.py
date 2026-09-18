@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -33,14 +33,14 @@ class Affiliates:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        status: Optional[Union[AffiliatesStatus, str]] = None,
-        search: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        status: AffiliatesStatus | str | None = None,
+        search: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliates
 
@@ -122,7 +122,7 @@ class Affiliates:
         self,
         affiliate: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateResponseValue200ApplicationJson:
         """Retrieve an affiliate
 
@@ -185,8 +185,8 @@ class Affiliates:
         self,
         affiliate: int,
         *,
-        status: Union[SdkUpdateAffiliateStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateAffiliateStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAffiliateStatusResponseValue200ApplicationJson:
         """Update affiliate status
 
@@ -239,7 +239,7 @@ class Affiliates:
             "idempotency_supported": False,
             "operation_id": "updateAffiliateStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(
@@ -279,14 +279,14 @@ class AsyncAffiliates:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        status: Optional[Union[AffiliatesStatus, str]] = None,
-        search: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        status: AffiliatesStatus | str | None = None,
+        search: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliates
 
@@ -368,7 +368,7 @@ class AsyncAffiliates:
         self,
         affiliate: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateResponseValue200ApplicationJson:
         """Retrieve an affiliate
 
@@ -431,8 +431,8 @@ class AsyncAffiliates:
         self,
         affiliate: int,
         *,
-        status: Union[SdkUpdateAffiliateStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateAffiliateStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAffiliateStatusResponseValue200ApplicationJson:
         """Update affiliate status
 
@@ -485,7 +485,7 @@ class AsyncAffiliates:
             "idempotency_supported": False,
             "operation_id": "updateAffiliateStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(

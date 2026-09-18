@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .get_variant_deliverable_configuration_response_value_200_application_json_
     GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": ["types", "data", "webhook_configured", "updated_at"],
     "properties": {
@@ -49,7 +49,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": ["types", "data", "webhook_configured", "updated_at"],
     "properties": {
@@ -81,7 +81,7 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData:
     """Get Variant Deliverable Configuration Response Value200Application Json Property Data model."""
 
-    types: List[
+    types: list[
         GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataTypes
     ]
     data: GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData
@@ -89,14 +89,14 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
     """Whether a dynamic delivery endpoint is configured. The endpoint itself is never returned."""
     updated_at: datetime
     """The current variant snapshot token. Pass this value as expected_updated_at when replacing the configuration to reject stale updates."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -116,7 +116,7 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
                     for item in cast(list[Any], data["types"])
                 ],
                 data=GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData.from_dict(
-                    cast(Dict[str, Any], data["data"])
+                    cast(dict[str, Any], data["data"])
                 ),
                 webhook_configured=data["webhook_configured"],
                 updated_at=_parse_datetime(data["updated_at"]),
@@ -131,9 +131,9 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["types"] = self.types
         _domain_data["data"] = self.data
         _domain_data["webhook_configured"] = self.webhook_configured
@@ -146,7 +146,7 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["types"] = [
             item.value if isinstance(item, Enum) else item for item in self.types
         ]

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
 from sellapp_sdk.common.models.category import Category
@@ -57,13 +59,13 @@ class Courses:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCoursesResponseValue200ApplicationJson]:
         """List courses
 
@@ -142,23 +144,24 @@ class Courses:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchCoursesResponseValue200ApplicationJson]:
         """Search courses
 
@@ -218,7 +221,7 @@ class Courses:
             "idempotency_supported": False,
             "operation_id": "searchCourses",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -257,7 +260,7 @@ class Courses:
         self,
         course: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCourseResponseValue200ApplicationJson:
         """Retrieve a course
 
@@ -320,24 +323,24 @@ class Courses:
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkReplaceCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkReplaceCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkReplaceCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkReplaceCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
         """Update a course
 
@@ -404,7 +407,7 @@ class Courses:
             "idempotency_supported": False,
             "operation_id": "replaceCourse",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "level": enum_value(level) if level is not None else None,
@@ -571,24 +574,24 @@ class Courses:
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkUpdateCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkUpdateCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkUpdateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkUpdateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
         """Update a course
 
@@ -655,7 +658,7 @@ class Courses:
             "idempotency_supported": False,
             "operation_id": "updateCourse",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "level": enum_value(level) if level is not None else None,
@@ -829,13 +832,13 @@ class AsyncCourses:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListCoursesResponseValue200ApplicationJson]:
         """List courses
 
@@ -914,23 +917,24 @@ class AsyncCourses:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchCoursesResponseValue200ApplicationJson]:
         """Search courses
 
@@ -990,7 +994,7 @@ class AsyncCourses:
             "idempotency_supported": False,
             "operation_id": "searchCourses",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1029,7 +1033,7 @@ class AsyncCourses:
         self,
         course: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCourseResponseValue200ApplicationJson:
         """Retrieve a course
 
@@ -1092,24 +1096,24 @@ class AsyncCourses:
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkReplaceCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkReplaceCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkReplaceCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkReplaceCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
         """Update a course
 
@@ -1176,7 +1180,7 @@ class AsyncCourses:
             "idempotency_supported": False,
             "operation_id": "replaceCourse",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "level": enum_value(level) if level is not None else None,
@@ -1343,24 +1347,24 @@ class AsyncCourses:
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkUpdateCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkUpdateCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkUpdateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkUpdateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
         """Update a course
 
@@ -1427,7 +1431,7 @@ class AsyncCourses:
             "idempotency_supported": False,
             "operation_id": "updateCourse",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "level": enum_value(level) if level is not None else None,

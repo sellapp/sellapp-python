@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson",
     "required": [],
     "properties": {
@@ -41,7 +41,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson",
     "required": [],
     "properties": {
@@ -76,19 +76,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson:
     """Sdk Replace Variant Deliverable File Settings Request Application Json model."""
 
-    custom_name: Optional[str] = None
-    folder_id: Optional[int] = None
-    watermark: Optional[bool] = None
-    max_downloads: Optional[int] = None
-    limit_to_purchase_ip: Optional[bool] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    custom_name: str | None = None
+    folder_id: int | None = None
+    watermark: bool | None = None
+    max_downloads: int | None = None
+    limit_to_purchase_ip: bool | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -123,9 +123,9 @@ class SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson:
                 "SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["custom_name"] = self.custom_name
         _domain_data["folder_id"] = self.folder_id
         if self.watermark is not None:
@@ -141,7 +141,7 @@ class SdkReplaceVariantDeliverableFileSettingsRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.custom_name is not None:
             result["custom_name"] = self.custom_name
         else:

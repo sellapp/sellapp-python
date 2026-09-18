@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.add_ons.models.sdk_replace_add_on_s_parent_products_response_value_200_application_json import (
     SdkReplaceAddOnSParentProductsResponseValue200ApplicationJson,
@@ -31,13 +33,13 @@ class AddOnsParentProducts:
         self,
         addon: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListAddOnSParentProductsResponseValue200ApplicationJson]:
         """List an add-on's parent products
 
@@ -119,8 +121,8 @@ class AddOnsParentProducts:
         self,
         addon: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAddOnSParentProductsResponseValue200ApplicationJson:
         """Replace an add-on's parent products
 
@@ -173,7 +175,7 @@ class AddOnsParentProducts:
             "idempotency_supported": False,
             "operation_id": "replaceAddOnSParentProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -215,13 +217,13 @@ class AsyncAddOnsParentProducts:
         self,
         addon: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListAddOnSParentProductsResponseValue200ApplicationJson]:
         """List an add-on's parent products
 
@@ -303,8 +305,8 @@ class AsyncAddOnsParentProducts:
         self,
         addon: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAddOnSParentProductsResponseValue200ApplicationJson:
         """Replace an add-on's parent products
 
@@ -357,7 +359,7 @@ class AsyncAddOnsParentProducts:
             "idempotency_supported": False,
             "operation_id": "replaceAddOnSParentProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_custom_payment_method_request_application_json_type import (
     SdkCreateCustomPaymentMethodRequestApplicationJsonType,
@@ -56,7 +58,7 @@ class PaymentMethodsCustom:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomPaymentMethodsResponseValue200ApplicationJson:
         """List custom payment methods
 
@@ -113,23 +115,21 @@ class PaymentMethodsCustom:
     def create(
         self,
         *,
-        type: Union[SdkCreateCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkCreateCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomPaymentMethodResponseValue201ApplicationJson:
         """Create a custom payment method
 
@@ -191,7 +191,7 @@ class PaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "createCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -302,7 +302,7 @@ class PaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomPaymentMethodResponseValue200ApplicationJson:
         """Retrieve a custom payment method
 
@@ -365,23 +365,21 @@ class PaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        type: Union[SdkReplaceCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkReplaceCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCustomPaymentMethodResponseValue200ApplicationJson:
         """Replace a custom payment method
 
@@ -445,7 +443,7 @@ class PaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "replaceCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -556,25 +554,23 @@ class PaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        type: Optional[
-            Union[SdkUpdateCustomPaymentMethodRequestApplicationJsonType, str]
-        ] = None,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkUpdateCustomPaymentMethodRequestApplicationJsonType
+        | str
+        | None = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomPaymentMethodResponseValue200ApplicationJson:
         """Update a custom payment method
 
@@ -638,7 +634,7 @@ class PaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "updateCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -749,7 +745,7 @@ class PaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a custom payment method
 
@@ -815,7 +811,7 @@ class AsyncPaymentMethodsCustom:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomPaymentMethodsResponseValue200ApplicationJson:
         """List custom payment methods
 
@@ -872,23 +868,21 @@ class AsyncPaymentMethodsCustom:
     async def create(
         self,
         *,
-        type: Union[SdkCreateCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkCreateCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomPaymentMethodResponseValue201ApplicationJson:
         """Create a custom payment method
 
@@ -950,7 +944,7 @@ class AsyncPaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "createCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -1061,7 +1055,7 @@ class AsyncPaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomPaymentMethodResponseValue200ApplicationJson:
         """Retrieve a custom payment method
 
@@ -1124,23 +1118,21 @@ class AsyncPaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        type: Union[SdkReplaceCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkReplaceCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCustomPaymentMethodResponseValue200ApplicationJson:
         """Replace a custom payment method
 
@@ -1204,7 +1196,7 @@ class AsyncPaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "replaceCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -1315,25 +1307,23 @@ class AsyncPaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        type: Optional[
-            Union[SdkUpdateCustomPaymentMethodRequestApplicationJsonType, str]
-        ] = None,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkUpdateCustomPaymentMethodRequestApplicationJsonType
+        | str
+        | None = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomPaymentMethodResponseValue200ApplicationJson:
         """Update a custom payment method
 
@@ -1397,7 +1387,7 @@ class AsyncPaymentMethodsCustom:
             "idempotency_supported": False,
             "operation_id": "updateCustomPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -1508,7 +1498,7 @@ class AsyncPaymentMethodsCustom:
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a custom payment method
 

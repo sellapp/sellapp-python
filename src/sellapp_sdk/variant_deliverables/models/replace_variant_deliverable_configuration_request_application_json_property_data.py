@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -14,7 +14,7 @@ from sellapp_sdk._types import (
 )
 from sellapp_sdk.common.models.license_length_unit import LicenseLengthUnit
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -71,7 +71,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -134,24 +134,24 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData:
     """Replace Variant Deliverable Configuration Request Application Json Property Data model."""
 
-    comment: Optional[str] = None
-    webhook: Optional[str] = None
+    comment: str | None = None
+    webhook: str | None = None
     """Write-only public HTTPS delivery endpoint. It is required when enabling dynamic delivery without an existing endpoint; omit it to preserve an already configured endpoint. Embedded credentials, private, loopback, link-local, and otherwise unsafe destinations are rejected."""
-    license_length: Optional[int] = None
-    license_length_unit: Optional[LicenseLengthUnit] = None
+    license_length: int | None = None
+    license_length_unit: LicenseLengthUnit | None = None
     """The license expiration unit. Either case is accepted on write and the configuration is always read back upper-case."""
-    is_license_length_unlimited: Optional[bool] = None
-    license_limit: Optional[int] = None
-    is_license_limit_unlimited: Optional[bool] = None
-    license_prefix: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    is_license_length_unlimited: bool | None = None
+    license_limit: int | None = None
+    is_license_limit_unlimited: bool | None = None
+    license_prefix: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -195,9 +195,9 @@ class ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["comment"] = self.comment
         _domain_data["webhook"] = self.webhook
         _domain_data["license_length"] = self.license_length
@@ -218,7 +218,7 @@ class ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.comment is not None:
             result["comment"] = self.comment
         else:

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .complete_community_connection_response_value_200_application_json_property
     CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServerPropertyRolesItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer",
     "required": ["id", "name", "type", "health_status", "health_checked_at", "roles"],
     "properties": {
@@ -38,7 +38,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer",
     "required": ["id", "name", "type", "health_status", "health_checked_at", "roles"],
     "properties": {
@@ -65,20 +65,20 @@ class CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataProp
 
     id: str
     name: str
-    type: Optional[str]
-    health_status: Optional[str]
-    health_checked_at: Optional[datetime]
-    roles: List[
+    type: str | None
+    health_status: str | None
+    health_checked_at: datetime | None
+    roles: list[
         CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServerPropertyRolesItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer:
         """Deserialize from a dictionary."""
         try:
@@ -100,7 +100,7 @@ class CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataProp
                 else None,
                 roles=[
                     CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServerPropertyRolesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["roles"])
                 ],
@@ -123,9 +123,9 @@ class CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataProp
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["type"] = self.type
@@ -140,7 +140,7 @@ class CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataProp
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["name"] = self.name
         if self.type is not None:

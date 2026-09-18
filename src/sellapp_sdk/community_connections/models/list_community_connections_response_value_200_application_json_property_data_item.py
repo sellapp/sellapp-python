@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -29,7 +29,7 @@ from .list_community_connections_response_value_200_application_json_property_da
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyServersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "platform",
@@ -76,7 +76,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "platform",
@@ -135,28 +135,28 @@ class ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem:
     label: str
     configured: bool
     healthy: bool
-    credential_health_status: Optional[str]
+    credential_health_status: str | None
     """Provider credential health for an existing connection. This contributes to its overall connection status."""
-    credential_health_checked_at: Optional[datetime]
+    credential_health_checked_at: datetime | None
     pending_grant_count: int
     failed_grant_count: int
-    issues: List[
+    issues: list[
         ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyIssuesItem
     ]
-    accounts: List[
+    accounts: list[
         ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyAccountsItem
     ]
-    servers: List[
+    servers: list[
         ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyServersItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -190,19 +190,19 @@ class ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem:
                 failed_grant_count=data["failed_grant_count"],
                 issues=[
                     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyIssuesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["issues"])
                 ],
                 accounts=[
                     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyAccountsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["accounts"])
                 ],
                 servers=[
                     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyServersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["servers"])
                 ],
@@ -230,9 +230,9 @@ class ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["platform"] = self.platform
         _domain_data["label"] = self.label
         _domain_data["configured"] = self.configured
@@ -252,7 +252,7 @@ class ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["platform"] = (
             self.platform.value if isinstance(self.platform, Enum) else self.platform
         )

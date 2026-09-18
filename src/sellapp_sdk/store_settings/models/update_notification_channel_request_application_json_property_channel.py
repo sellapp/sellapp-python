@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.update_notification_channel_request_application_j
     UpdateNotificationChannelRequestApplicationJsonPropertyChannelType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "UpdateNotificationChannelRequestApplicationJsonPropertyChannel",
     "required": [],
     "properties": {
@@ -32,7 +32,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     "additionalProperties": True,
     "constraints": {"minProperties": 1},
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "UpdateNotificationChannelRequestApplicationJsonPropertyChannel",
     "required": [],
     "properties": {
@@ -54,21 +54,21 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class UpdateNotificationChannelRequestApplicationJsonPropertyChannel:
     """Update Notification Channel Request Application Json Property Channel model."""
 
-    type: Optional[
-        UpdateNotificationChannelRequestApplicationJsonPropertyChannelType
-    ] = None
-    email: Optional[str] = None
-    channel: Optional[str] = None
-    webhook: Optional[str] = None
-    allowed_notifications: Optional[List[str]] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    type: UpdateNotificationChannelRequestApplicationJsonPropertyChannelType | None = (
+        None
+    )
+    email: str | None = None
+    channel: str | None = None
+    webhook: str | None = None
+    allowed_notifications: list[str] | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> UpdateNotificationChannelRequestApplicationJsonPropertyChannel:
         """Deserialize from a dictionary."""
         try:
@@ -101,9 +101,9 @@ class UpdateNotificationChannelRequestApplicationJsonPropertyChannel:
                 "UpdateNotificationChannelRequestApplicationJsonPropertyChannel", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.type is not None:
             _domain_data["type"] = self.type
         if self.email is not None:
@@ -122,7 +122,7 @@ class UpdateNotificationChannelRequestApplicationJsonPropertyChannel:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.type is not None:
             result["type"] = (
                 self.type.value if isinstance(self.type, Enum) else self.type

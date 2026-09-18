@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
     "required": [],
     "properties": {
@@ -24,7 +24,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
     "required": [],
     "properties": {
@@ -42,19 +42,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
     """Sdk Cancel Customer Subscription At Period End Request Application Json model."""
 
-    preview_id: Optional[str] = None
-    product_variant_id: Optional[int] = None
-    renewal_date: Optional[str] = None
-    return_url: Optional[str] = None
-    reason: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    preview_id: str | None = None
+    product_variant_id: int | None = None
+    renewal_date: str | None = None
+    return_url: str | None = None
+    reason: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -89,9 +89,9 @@ class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
                 "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.preview_id is not None:
             _domain_data["preview_id"] = self.preview_id
         if self.product_variant_id is not None:
@@ -110,7 +110,7 @@ class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.preview_id is not None:
             result["preview_id"] = self.preview_id
         if self.product_variant_id is not None:

@@ -15,19 +15,16 @@ def replace(
         variant: int,
         *,
         pricing: ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[
-                SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods, str
-            ]
+        payment_methods: list[
+            SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods | str
         ],
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantPricingResponseValue200ApplicationJson:
 ```
 
@@ -36,19 +33,16 @@ def replace(
 | product | `int` | Yes |
 | variant | `int` | Yes |
 | pricing | `ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing` | Yes |
-| payment_methods | `List[
-            Union[
-                SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods, str
-            ]
+| payment_methods | `list[
+            SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods \| str
         ]` | Yes |
-| custom_payment_method_ids | `Optional[List[str]]` | No |
-| bulk_discount | `Optional[
-            List[
-                ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| custom_payment_method_ids | `list[str] \| None` | No |
+| bulk_discount | `list[
+            ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceProductVariantPricingResponseValue200ApplicationJson`.
 
@@ -106,25 +100,19 @@ def update(
         product: int,
         variant: int,
         *,
-        pricing: Optional[
-            UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        pricing: UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
+        | None = None,
+        payment_methods: list[
+            SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantPricingResponseValue200ApplicationJson:
 ```
 
@@ -132,25 +120,19 @@ def update(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| pricing | `Optional[
-            UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
-        ]` | No |
-| payment_methods | `Optional[
-            List[
-                Union[
-                    SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ]` | No |
-| custom_payment_method_ids | `Optional[List[str]]` | No |
-| bulk_discount | `Optional[
-            List[
-                UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| pricing | `UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
+        \| None` | No |
+| payment_methods | `list[
+            SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| custom_payment_method_ids | `list[str] \| None` | No |
+| bulk_discount | `list[
+            UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateProductVariantPricingResponseValue200ApplicationJson`.
 

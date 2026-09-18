@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -14,7 +14,7 @@ from sellapp_sdk._types import (
 
 from .pagination_meta_link import PaginationMetaLink
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PaginationMeta",
     "required": [
         "current_page",
@@ -41,7 +41,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PaginationMeta",
     "required": [
         "current_page",
@@ -72,20 +72,20 @@ class PaginationMeta:
     """Pagination Meta model."""
 
     current_page: int
-    from_: Optional[int]
+    from_: int | None
     last_page: int
-    links: List[PaginationMetaLink]
+    links: list[PaginationMetaLink]
     path: str
     per_page: int
-    to: Optional[int]
+    to: int | None
     total: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> PaginationMeta:
+    def from_dict(cls, data: dict[str, Any]) -> PaginationMeta:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -101,7 +101,7 @@ class PaginationMeta:
                 from_=data["from"],
                 last_page=data["last_page"],
                 links=[
-                    PaginationMetaLink.from_dict(cast(Dict[str, Any], item))
+                    PaginationMetaLink.from_dict(cast(dict[str, Any], item))
                     for item in cast(list[Any], data["links"])
                 ],
                 path=data["path"],
@@ -126,9 +126,9 @@ class PaginationMeta:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("PaginationMeta", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["current_page"] = self.current_page
         _domain_data["from_"] = self.from_
         _domain_data["last_page"] = self.last_page
@@ -145,7 +145,7 @@ class PaginationMeta:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["current_page"] = self.current_page
         if self.from_ is not None:
             result["from"] = self.from_

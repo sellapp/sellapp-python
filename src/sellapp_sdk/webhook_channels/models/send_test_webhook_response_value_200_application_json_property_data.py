@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.send_test_webhook_response_value_200_application_
     SendTestWebhookResponseValue200ApplicationJsonPropertyDataEvent,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SendTestWebhookResponseValue200ApplicationJsonPropertyData",
     "required": ["channel_id", "event", "status"],
     "properties": {
@@ -55,7 +55,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SendTestWebhookResponseValue200ApplicationJsonPropertyData",
     "required": ["channel_id", "event", "status"],
     "properties": {
@@ -104,14 +104,14 @@ class SendTestWebhookResponseValue200ApplicationJsonPropertyData:
     event: SendTestWebhookResponseValue200ApplicationJsonPropertyDataEvent
     """Public event name used by channel configuration, search, tests, and delivered webhook payloads."""
     status: Literal["delivered"]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SendTestWebhookResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -139,9 +139,9 @@ class SendTestWebhookResponseValue200ApplicationJsonPropertyData:
                 "SendTestWebhookResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["channel_id"] = self.channel_id
         _domain_data["event"] = self.event
         _domain_data["status"] = self.status
@@ -153,7 +153,7 @@ class SendTestWebhookResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["channel_id"] = self.channel_id
         result["event"] = (
             self.event.value if isinstance(self.event, Enum) else self.event

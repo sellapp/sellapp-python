@@ -12,23 +12,19 @@ Create a customer session
 def create_customer_session(
         self,
         *,
-        body: Union[
-            CreateCustomerSessionRequestApplicationJsonOneOfValue1,
-            CreateCustomerSessionRequestApplicationJsonOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: CreateCustomerSessionRequestApplicationJsonOneOfValue1
+        | CreateCustomerSessionRequestApplicationJsonOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerSessionResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| body | `Union[
-            CreateCustomerSessionRequestApplicationJsonOneOfValue1,
-            CreateCustomerSessionRequestApplicationJsonOneOfValue2,
-            Dict[str, Any],
-        ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| body | `CreateCustomerSessionRequestApplicationJsonOneOfValue1
+        \| CreateCustomerSessionRequestApplicationJsonOneOfValue2
+        \| dict[str, Any]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCustomerSessionResponseValue201ApplicationJson`.
 
@@ -75,14 +71,14 @@ def revoke_customer_session(
         self,
         session: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | session | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

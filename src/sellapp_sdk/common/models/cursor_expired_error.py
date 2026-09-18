@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Literal, cast
+from typing import Any, Literal, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -14,7 +14,7 @@ from sellapp_sdk._types import (
 
 from .cursor_expired_error_fallback import CursorExpiredErrorFallback
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CursorExpiredError",
     "required": ["message", "type", "code", "status", "fallback"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CursorExpiredError",
     "required": ["message", "type", "code", "status", "fallback"],
     "properties": {
@@ -49,13 +49,13 @@ class CursorExpiredError:
     code: Literal["cursor_expired"]
     status: Literal[410]
     fallback: CursorExpiredErrorFallback
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> CursorExpiredError:
+    def from_dict(cls, data: dict[str, Any]) -> CursorExpiredError:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -72,7 +72,7 @@ class CursorExpiredError:
                 code=data.get("code", "cursor_expired"),
                 status=data.get("status", 410),
                 fallback=CursorExpiredErrorFallback.from_dict(
-                    cast(Dict[str, Any], data["fallback"])
+                    cast(dict[str, Any], data["fallback"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["message", "type", "code", "status", "fallback"]
@@ -82,9 +82,9 @@ class CursorExpiredError:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("CursorExpiredError", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["message"] = self.message
         _domain_data["type"] = self.type
         _domain_data["code"] = self.code
@@ -98,7 +98,7 @@ class CursorExpiredError:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["message"] = self.message
         result["type"] = self.type
         result["code"] = self.code

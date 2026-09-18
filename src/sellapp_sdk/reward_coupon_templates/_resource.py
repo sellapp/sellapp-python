@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_reward_coupon_template_request_application_json_redemption_mode import (
     SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode,
@@ -62,13 +64,13 @@ class RewardCouponTemplates:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardCouponTemplatesResponseValue200ApplicationJson]:
         """List reward coupon templates
 
@@ -148,20 +150,19 @@ class RewardCouponTemplates:
         self,
         *,
         name: str,
-        type: Union[SdkCreateRewardCouponTemplateRequestApplicationJsonType, str],
-        discount: Union[str, float],
+        type: SdkCreateRewardCouponTemplateRequestApplicationJsonType | str,
+        discount: str | float,
         store_wide: bool,
-        redemption_mode: Union[
-            SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-        ],
+        redemption_mode: SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str,
         is_active: bool,
-        listing_ids: List[int],
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        listing_ids: builtins.list[int],
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardCouponTemplateResponseValue201ApplicationJson:
         """Create a reward coupon template
 
@@ -223,7 +224,7 @@ class RewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "createRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -366,23 +367,24 @@ class RewardCouponTemplates:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardCouponTemplatesResponseValue200ApplicationJson]:
         """Search reward coupon templates
 
@@ -442,7 +444,7 @@ class RewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "searchRewardCouponTemplates",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -481,7 +483,7 @@ class RewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardCouponTemplateResponseValue200ApplicationJson:
         """Retrieve a reward coupon template
 
@@ -544,25 +546,23 @@ class RewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkReplaceRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardCouponTemplateResponseValue200ApplicationJson:
         """Update a reward coupon template
 
@@ -626,7 +626,7 @@ class RewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "replaceRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -764,25 +764,23 @@ class RewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkUpdateRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardCouponTemplateResponseValue200ApplicationJson:
         """Update a reward coupon template
 
@@ -846,7 +844,7 @@ class RewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "updateRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -991,13 +989,13 @@ class AsyncRewardCouponTemplates:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListRewardCouponTemplatesResponseValue200ApplicationJson]:
         """List reward coupon templates
 
@@ -1077,20 +1075,19 @@ class AsyncRewardCouponTemplates:
         self,
         *,
         name: str,
-        type: Union[SdkCreateRewardCouponTemplateRequestApplicationJsonType, str],
-        discount: Union[str, float],
+        type: SdkCreateRewardCouponTemplateRequestApplicationJsonType | str,
+        discount: str | float,
         store_wide: bool,
-        redemption_mode: Union[
-            SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-        ],
+        redemption_mode: SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str,
         is_active: bool,
-        listing_ids: List[int],
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        listing_ids: builtins.list[int],
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardCouponTemplateResponseValue201ApplicationJson:
         """Create a reward coupon template
 
@@ -1152,7 +1149,7 @@ class AsyncRewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "createRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1295,23 +1292,24 @@ class AsyncRewardCouponTemplates:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchRewardCouponTemplatesResponseValue200ApplicationJson]:
         """Search reward coupon templates
 
@@ -1371,7 +1369,7 @@ class AsyncRewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "searchRewardCouponTemplates",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1410,7 +1408,7 @@ class AsyncRewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardCouponTemplateResponseValue200ApplicationJson:
         """Retrieve a reward coupon template
 
@@ -1473,25 +1471,23 @@ class AsyncRewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkReplaceRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardCouponTemplateResponseValue200ApplicationJson:
         """Update a reward coupon template
 
@@ -1555,7 +1551,7 @@ class AsyncRewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "replaceRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1693,25 +1689,23 @@ class AsyncRewardCouponTemplates:
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkUpdateRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardCouponTemplateResponseValue200ApplicationJson:
         """Update a reward coupon template
 
@@ -1775,7 +1769,7 @@ class AsyncRewardCouponTemplates:
             "idempotency_supported": False,
             "operation_id": "updateRewardCouponTemplate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.highlights.models.sdk_add_highlight_media_response_value_201_application_json import (
     SdkAddHighlightMediaResponseValue201ApplicationJson,
@@ -42,7 +44,7 @@ class HighlightsMedia:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListHighlightMediaResponseValue200ApplicationJson:
         """List highlight media
 
@@ -106,9 +108,9 @@ class HighlightsMedia:
         highlight: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkAddHighlightMediaResponseValue201ApplicationJson:
         """Add highlight media
 
@@ -163,7 +165,7 @@ class HighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "addHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -201,7 +203,7 @@ class HighlightsMedia:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -223,8 +225,8 @@ class HighlightsMedia:
         self,
         highlight: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightMediaResponseValue200ApplicationJson:
         """Reorder highlight media
 
@@ -277,7 +279,7 @@ class HighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "reorderHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -313,9 +315,9 @@ class HighlightsMedia:
         media: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaResponseValue200ApplicationJson:
         """Replace highlight media
 
@@ -371,7 +373,7 @@ class HighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "replaceHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -409,7 +411,7 @@ class HighlightsMedia:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -432,9 +434,9 @@ class HighlightsMedia:
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaMetadataResponseValue200ApplicationJson:
         """Update highlight media
 
@@ -489,7 +491,7 @@ class HighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "replaceHighlightMediaMetadata",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cta_title": cta_title,
@@ -538,9 +540,9 @@ class HighlightsMedia:
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightMediaResponseValue200ApplicationJson:
         """Update highlight media
 
@@ -595,7 +597,7 @@ class HighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "updateHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cta_title": cta_title,
@@ -644,7 +646,7 @@ class HighlightsMedia:
         highlight: int,
         media: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete highlight media
 
@@ -712,7 +714,7 @@ class AsyncHighlightsMedia:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListHighlightMediaResponseValue200ApplicationJson:
         """List highlight media
 
@@ -776,9 +778,9 @@ class AsyncHighlightsMedia:
         highlight: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkAddHighlightMediaResponseValue201ApplicationJson:
         """Add highlight media
 
@@ -833,7 +835,7 @@ class AsyncHighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "addHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -871,7 +873,7 @@ class AsyncHighlightsMedia:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -893,8 +895,8 @@ class AsyncHighlightsMedia:
         self,
         highlight: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightMediaResponseValue200ApplicationJson:
         """Reorder highlight media
 
@@ -947,7 +949,7 @@ class AsyncHighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "reorderHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -983,9 +985,9 @@ class AsyncHighlightsMedia:
         media: int,
         *,
         file: bytes,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaResponseValue200ApplicationJson:
         """Replace highlight media
 
@@ -1041,7 +1043,7 @@ class AsyncHighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "replaceHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -1079,7 +1081,7 @@ class AsyncHighlightsMedia:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -1102,9 +1104,9 @@ class AsyncHighlightsMedia:
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightMediaMetadataResponseValue200ApplicationJson:
         """Update highlight media
 
@@ -1159,7 +1161,7 @@ class AsyncHighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "replaceHighlightMediaMetadata",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cta_title": cta_title,
@@ -1208,9 +1210,9 @@ class AsyncHighlightsMedia:
         highlight: int,
         media: int,
         *,
-        cta_title: Optional[str] = None,
-        product_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cta_title: str | None = None,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightMediaResponseValue200ApplicationJson:
         """Update highlight media
 
@@ -1265,7 +1267,7 @@ class AsyncHighlightsMedia:
             "idempotency_supported": False,
             "operation_id": "updateHighlightMedia",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cta_title": cta_title,
@@ -1314,7 +1316,7 @@ class AsyncHighlightsMedia:
         highlight: int,
         media: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete highlight media
 

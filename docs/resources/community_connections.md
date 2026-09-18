@@ -12,13 +12,13 @@ List community connections
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCommunityConnectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListCommunityConnectionsResponseValue200ApplicationJson`.
 
@@ -63,22 +63,18 @@ Start a community connection
 ```python
 def start(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        mode: Optional[
-            Union[SdkStartCommunityConnectionRequestApplicationJsonMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: SdkStartCommunityConnectionRequestApplicationJsonMode | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkStartCommunityConnectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| platform | `Union[CommunityConnectionsPlatform, str]` | Yes |
-| mode | `Optional[
-            Union[SdkStartCommunityConnectionRequestApplicationJsonMode, str]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| platform | `CommunityConnectionsPlatform \| str` | Yes |
+| mode | `SdkStartCommunityConnectionRequestApplicationJsonMode \| str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkStartCommunityConnectionResponseValue200ApplicationJson`.
 
@@ -126,18 +122,18 @@ Poll a community connection
 ```python
 def poll(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPollCommunityConnectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| platform | `Union[CommunityConnectionsPlatform, str]` | Yes |
+| platform | `CommunityConnectionsPlatform \| str` | Yes |
 | status_token | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPollCommunityConnectionResponseValue200ApplicationJson`.
 
@@ -185,20 +181,20 @@ Complete a community connection
 ```python
 def complete(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
         server_id: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCompleteCommunityConnectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| platform | `Union[CommunityConnectionsPlatform, str]` | Yes |
+| platform | `CommunityConnectionsPlatform \| str` | Yes |
 | status_token | `str` | Yes |
 | server_id | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCompleteCommunityConnectionResponseValue200ApplicationJson`.
 
@@ -247,16 +243,16 @@ Verify a community connection
 ```python
 def verify(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkVerifyCommunityConnectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| platform | `Union[CommunityConnectionsPlatform, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| platform | `CommunityConnectionsPlatform \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkVerifyCommunityConnectionResponseValue200ApplicationJson`.
 
@@ -301,16 +297,16 @@ Disconnect a community platform
 ```python
 def disconnect(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| platform | `Union[CommunityConnectionsPlatform, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| platform | `CommunityConnectionsPlatform \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

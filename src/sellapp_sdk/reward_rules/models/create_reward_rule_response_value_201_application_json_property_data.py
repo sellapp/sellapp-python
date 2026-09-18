@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .create_reward_rule_response_value_201_application_json_property_data_prope
     CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -65,7 +65,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -120,20 +120,20 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyData:
     trigger_threshold: int
     fire_once_per_customer: bool
     """Always true for dashboard-managed rules. A customer cannot receive a duplicate grant from the same rule."""
-    outputs: List[
+    outputs: list[
         CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem
     ]
-    description: Optional[str] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    description: str | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateRewardRuleResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -156,7 +156,7 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyData:
                 fire_once_per_customer=data["fire_once_per_customer"],
                 outputs=[
                     CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["outputs"])
                 ],
@@ -189,9 +189,9 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyData:
                 "CreateRewardRuleResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["is_active"] = self.is_active
@@ -210,7 +210,7 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["name"] = self.name
         result["is_active"] = self.is_active

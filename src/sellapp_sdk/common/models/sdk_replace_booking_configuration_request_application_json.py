@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Literal, Optional, cast
+from typing import Any, Literal, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -29,7 +29,7 @@ from .sdk_replace_booking_configuration_request_application_json_video_provider 
     SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceBookingConfigurationRequestApplicationJson",
     "required": [],
     "properties": {
@@ -94,7 +94,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceBookingConfigurationRequestApplicationJson",
     "required": [],
     "properties": {
@@ -165,39 +165,40 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceBookingConfigurationRequestApplicationJson:
     """Sdk Replace Booking Configuration Request Application Json model."""
 
-    mode: Optional[Literal["native"]] = None
-    conflict_scope: Optional[
-        SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope
-    ] = None
-    timezone: Optional[str] = None
-    duration_minutes: Optional[int] = None
-    capacity_per_slot: Optional[int] = None
-    min_notice_minutes: Optional[int] = None
-    max_advance_days: Optional[int] = None
-    buffer_before_minutes: Optional[int] = None
-    buffer_after_minutes: Optional[int] = None
-    availability: Optional[
-        List[ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem]
-    ] = None
-    provider_connection_ids: Optional[List[int]] = None
-    video_provider: Optional[
-        SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider
-    ] = None
-    video_provider_connection_id: Optional[int] = None
-    reminders_enabled: Optional[bool] = None
-    reminder_offset_value: Optional[int] = None
-    reminder_offset_unit: Optional[
-        SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit
-    ] = None
-    meta: Optional[ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    mode: Literal["native"] | None = None
+    conflict_scope: (
+        SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope | None
+    ) = None
+    timezone: str | None = None
+    duration_minutes: int | None = None
+    capacity_per_slot: int | None = None
+    min_notice_minutes: int | None = None
+    max_advance_days: int | None = None
+    buffer_before_minutes: int | None = None
+    buffer_after_minutes: int | None = None
+    availability: (
+        list[ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem]
+        | None
+    ) = None
+    provider_connection_ids: list[int] | None = None
+    video_provider: (
+        SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider | None
+    ) = None
+    video_provider_connection_id: int | None = None
+    reminders_enabled: bool | None = None
+    reminder_offset_value: int | None = None
+    reminder_offset_unit: (
+        SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit | None
+    ) = None
+    meta: ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceBookingConfigurationRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -225,7 +226,7 @@ class SdkReplaceBookingConfigurationRequestApplicationJson:
                 buffer_after_minutes=data.get("buffer_after_minutes"),
                 availability=[
                     ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_availability)
                 ]
@@ -247,7 +248,7 @@ class SdkReplaceBookingConfigurationRequestApplicationJson:
                 is not None
                 else None,
                 meta=ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta.from_dict(
-                    cast(Dict[str, Any], _v_meta)
+                    cast(dict[str, Any], _v_meta)
                 )
                 if (_v_meta := data.get("meta")) is not None
                 else None,
@@ -280,9 +281,9 @@ class SdkReplaceBookingConfigurationRequestApplicationJson:
                 "SdkReplaceBookingConfigurationRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.mode is not None:
             _domain_data["mode"] = self.mode
         if self.conflict_scope is not None:
@@ -324,7 +325,7 @@ class SdkReplaceBookingConfigurationRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.mode is not None:
             result["mode"] = self.mode
         if self.conflict_scope is not None:

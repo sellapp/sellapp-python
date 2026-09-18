@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Literal, Optional, Union
+from typing import TYPE_CHECKING, Any, Literal
 
 from .._base_client import WithRawResponse
 
@@ -32,7 +32,7 @@ class OAuth:
     def get_oauth_authorization_server_metadata(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
         """Read OAuth server metadata
 
@@ -83,11 +83,11 @@ class OAuth:
         response_type: Literal["code"],
         client_id: str,
         redirect_uri: str,
-        scope: Optional[str] = None,
+        scope: str | None = None,
         state: str,
         code_challenge: str,
         code_challenge_method: Literal["S256"],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Review CLI authorization
 
@@ -136,7 +136,7 @@ class OAuth:
             "idempotency_supported": False,
             "operation_id": "getOAuthAuthorizationRequest",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "response_type": response_type,
@@ -163,7 +163,7 @@ class OAuth:
         client_id: str,
         state: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Approve CLI access
 
@@ -211,7 +211,7 @@ class OAuth:
             "idempotency_supported": False,
             "operation_id": "approveOAuthAuthorization",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "auth_token": auth_token,
             "client_id": client_id,
             "state": state,
@@ -255,7 +255,7 @@ class OAuth:
         *,
         auth_token: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Deny CLI access
 
@@ -299,7 +299,7 @@ class OAuth:
             "idempotency_supported": False,
             "operation_id": "denyOAuthAuthorization",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "auth_token": auth_token,
             "_token": token,
         }
@@ -329,12 +329,10 @@ class OAuth:
     def exchange_oauth_token(
         self,
         *,
-        body: Union[
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1,
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1
+        | ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkExchangeOAuthTokenResponseValue200ApplicationJson:
         """Exchange or refresh OAuth tokens
 
@@ -380,7 +378,7 @@ class OAuth:
             "idempotency_supported": False,
             "operation_id": "exchangeOAuthToken",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return self._client.request(
             method="post",
             path=("oauth", "token"),
@@ -393,15 +391,12 @@ class OAuth:
         self,
         *,
         token: str,
-        client_id: Optional[str] = None,
-        client_secret: Optional[str] = None,
-        token_type_hint: Optional[
-            Union[
-                SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint,
-                str,
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        client_id: str | None = None,
+        client_secret: str | None = None,
+        token_type_hint: SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Revoke an OAuth token
 
@@ -450,7 +445,7 @@ class OAuth:
             "idempotency_supported": False,
             "operation_id": "revokeOAuthToken",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "client_id": client_id,
@@ -505,7 +500,7 @@ class AsyncOAuth:
     async def get_oauth_authorization_server_metadata(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
         """Read OAuth server metadata
 
@@ -556,11 +551,11 @@ class AsyncOAuth:
         response_type: Literal["code"],
         client_id: str,
         redirect_uri: str,
-        scope: Optional[str] = None,
+        scope: str | None = None,
         state: str,
         code_challenge: str,
         code_challenge_method: Literal["S256"],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Review CLI authorization
 
@@ -609,7 +604,7 @@ class AsyncOAuth:
             "idempotency_supported": False,
             "operation_id": "getOAuthAuthorizationRequest",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "response_type": response_type,
@@ -636,7 +631,7 @@ class AsyncOAuth:
         client_id: str,
         state: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Approve CLI access
 
@@ -684,7 +679,7 @@ class AsyncOAuth:
             "idempotency_supported": False,
             "operation_id": "approveOAuthAuthorization",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "auth_token": auth_token,
             "client_id": client_id,
             "state": state,
@@ -728,7 +723,7 @@ class AsyncOAuth:
         *,
         auth_token: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Deny CLI access
 
@@ -772,7 +767,7 @@ class AsyncOAuth:
             "idempotency_supported": False,
             "operation_id": "denyOAuthAuthorization",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "auth_token": auth_token,
             "_token": token,
         }
@@ -802,12 +797,10 @@ class AsyncOAuth:
     async def exchange_oauth_token(
         self,
         *,
-        body: Union[
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1,
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1
+        | ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkExchangeOAuthTokenResponseValue200ApplicationJson:
         """Exchange or refresh OAuth tokens
 
@@ -853,7 +846,7 @@ class AsyncOAuth:
             "idempotency_supported": False,
             "operation_id": "exchangeOAuthToken",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return await self._client.request(
             method="post",
             path=("oauth", "token"),
@@ -866,15 +859,12 @@ class AsyncOAuth:
         self,
         *,
         token: str,
-        client_id: Optional[str] = None,
-        client_secret: Optional[str] = None,
-        token_type_hint: Optional[
-            Union[
-                SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint,
-                str,
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        client_id: str | None = None,
+        client_secret: str | None = None,
+        token_type_hint: SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Revoke an OAuth token
 
@@ -923,7 +913,7 @@ class AsyncOAuth:
             "idempotency_supported": False,
             "operation_id": "revokeOAuthToken",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "client_id": client_id,

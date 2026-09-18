@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -40,7 +40,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -73,19 +73,19 @@ class ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem:
 
     id: int
     author: str
-    sender: Optional[str]
+    sender: str | None
     content: str
     created_at: datetime
     updated_at: datetime
     ticket_id: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -124,9 +124,9 @@ class ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem:
                 "ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["author"] = self.author
         _domain_data["sender"] = self.sender
@@ -142,7 +142,7 @@ class ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["author"] = self.author
         if self.sender is not None:

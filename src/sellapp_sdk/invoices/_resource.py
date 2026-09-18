@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.create_invoice_request_application_json_property_extra import (
     CreateInvoiceRequestApplicationJsonPropertyExtra,
@@ -68,27 +70,27 @@ class Invoices:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        search: Optional[str] = None,
-        search_by: Optional[Union[InvoicesSearchBy, str]] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[List[Union[InvoicesStatus, str]]] = None,
-        payment_methods: Optional[List[Union[InvoicesPaymentMethods, str]]] = None,
-        sort: Optional[Union[InvoicesSort, str]] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        search_by: InvoicesSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[InvoicesStatus | str] | None = None,
+        payment_methods: builtins.list[InvoicesPaymentMethods | str] | None = None,
+        sort: InvoicesSort | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all invoices
 
@@ -196,15 +198,15 @@ class Invoices:
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateInvoiceRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateInvoiceRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateInvoiceRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateInvoiceRequestApplicationJsonPropertyExtra] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateInvoiceRequestApplicationJsonPropertyExtra | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceResponseValue201ApplicationJson:
         """Create an invoice
 
@@ -263,7 +265,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "createInvoice",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -365,32 +367,30 @@ class Invoices:
     def search(
         self,
         *,
-        search: Optional[str] = None,
-        search_by: Optional[
-            Union[SdkSearchInvoicesRequestApplicationJsonSearchBy, str]
-        ] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonStatus, str]]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        sort: Optional[Union[SdkSearchInvoicesRequestApplicationJsonSort, str]] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        search_by: SdkSearchInvoicesRequestApplicationJsonSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[SdkSearchInvoicesRequestApplicationJsonStatus | str]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkSearchInvoicesRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        sort: SdkSearchInvoicesRequestApplicationJsonSort | str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
         """Search invoices
 
@@ -459,7 +459,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "searchInvoices",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search,
@@ -503,7 +503,7 @@ class Invoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceResponseValue200ApplicationJson:
         """Retrieve an invoice
 
@@ -566,7 +566,7 @@ class Invoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCheckoutSessionResponseValue200ApplicationJson:
         """Create a checkout session
 
@@ -629,7 +629,7 @@ class Invoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceDeliverablesResponseValue200ApplicationJson:
         """View invoice deliverables
 
@@ -692,8 +692,8 @@ class Invoices:
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceCompletedResponseValue200ApplicationJson:
         """Mark pending invoice completed
 
@@ -746,7 +746,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "markPendingInvoiceCompleted",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -796,8 +796,8 @@ class Invoices:
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceVoidedResponseValue200ApplicationJson:
         """Mark pending invoice voided
 
@@ -850,7 +850,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "markPendingInvoiceVoided",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -901,7 +901,7 @@ class Invoices:
         invoice: int,
         *,
         product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
         """Issue replacement for completed invoice
 
@@ -954,7 +954,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "issueReplacementForCompletedInvoice",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_variants": product_variants.to_dict(),
         }
         _validate_model(
@@ -982,9 +982,9 @@ class Invoices:
         self,
         invoice: int,
         *,
-        status: Union[SdkUpdateInvoiceStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateInvoiceStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateInvoiceStatusResponseValue200ApplicationJson:
         """Update invoice status
 
@@ -1038,7 +1038,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "updateInvoiceStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         if not isinstance(expected_status, NotGiven):
@@ -1094,8 +1094,8 @@ class Invoices:
         self,
         invoice: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
         """Create invoice refund
 
@@ -1148,7 +1148,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "createInvoiceRefund",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
         _validate_model(
@@ -1188,8 +1188,8 @@ class Invoices:
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentRetryResponseValue200ApplicationJson:
         """Create fulfillment retry
 
@@ -1242,7 +1242,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "createFulfillmentRetry",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         _validate_model(
@@ -1281,7 +1281,7 @@ class Invoices:
         invoice: int,
         *,
         delivered_product_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson:
         """Create dynamic delivery retry
 
@@ -1334,7 +1334,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "createDynamicDeliveryRetry",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "delivered_product_id": delivered_product_id,
         }
         _validate_model(
@@ -1368,9 +1368,9 @@ class Invoices:
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentNotificationsResponseValue200ApplicationJson:
         """Create fulfillment notifications
 
@@ -1424,7 +1424,7 @@ class Invoices:
             "idempotency_supported": False,
             "operation_id": "createFulfillmentNotifications",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         if not isinstance(product_variant_ids, NotGiven):
@@ -1483,27 +1483,27 @@ class AsyncInvoices:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        search: Optional[str] = None,
-        search_by: Optional[Union[InvoicesSearchBy, str]] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[List[Union[InvoicesStatus, str]]] = None,
-        payment_methods: Optional[List[Union[InvoicesPaymentMethods, str]]] = None,
-        sort: Optional[Union[InvoicesSort, str]] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        search_by: InvoicesSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[InvoicesStatus | str] | None = None,
+        payment_methods: builtins.list[InvoicesPaymentMethods | str] | None = None,
+        sort: InvoicesSort | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all invoices
 
@@ -1611,15 +1611,15 @@ class AsyncInvoices:
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateInvoiceRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateInvoiceRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateInvoiceRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateInvoiceRequestApplicationJsonPropertyExtra] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateInvoiceRequestApplicationJsonPropertyExtra | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceResponseValue201ApplicationJson:
         """Create an invoice
 
@@ -1678,7 +1678,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "createInvoice",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -1780,32 +1780,30 @@ class AsyncInvoices:
     async def search(
         self,
         *,
-        search: Optional[str] = None,
-        search_by: Optional[
-            Union[SdkSearchInvoicesRequestApplicationJsonSearchBy, str]
-        ] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonStatus, str]]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        sort: Optional[Union[SdkSearchInvoicesRequestApplicationJsonSort, str]] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        search_by: SdkSearchInvoicesRequestApplicationJsonSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[SdkSearchInvoicesRequestApplicationJsonStatus | str]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkSearchInvoicesRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        sort: SdkSearchInvoicesRequestApplicationJsonSort | str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
         """Search invoices
 
@@ -1874,7 +1872,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "searchInvoices",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search,
@@ -1918,7 +1916,7 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceResponseValue200ApplicationJson:
         """Retrieve an invoice
 
@@ -1981,7 +1979,7 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCheckoutSessionResponseValue200ApplicationJson:
         """Create a checkout session
 
@@ -2044,7 +2042,7 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceDeliverablesResponseValue200ApplicationJson:
         """View invoice deliverables
 
@@ -2107,8 +2105,8 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceCompletedResponseValue200ApplicationJson:
         """Mark pending invoice completed
 
@@ -2161,7 +2159,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "markPendingInvoiceCompleted",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -2211,8 +2209,8 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceVoidedResponseValue200ApplicationJson:
         """Mark pending invoice voided
 
@@ -2265,7 +2263,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "markPendingInvoiceVoided",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -2316,7 +2314,7 @@ class AsyncInvoices:
         invoice: int,
         *,
         product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
         """Issue replacement for completed invoice
 
@@ -2369,7 +2367,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "issueReplacementForCompletedInvoice",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_variants": product_variants.to_dict(),
         }
         _validate_model(
@@ -2397,9 +2395,9 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        status: Union[SdkUpdateInvoiceStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateInvoiceStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateInvoiceStatusResponseValue200ApplicationJson:
         """Update invoice status
 
@@ -2453,7 +2451,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "updateInvoiceStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         if not isinstance(expected_status, NotGiven):
@@ -2509,8 +2507,8 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
         """Create invoice refund
 
@@ -2563,7 +2561,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "createInvoiceRefund",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
         _validate_model(
@@ -2603,8 +2601,8 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentRetryResponseValue200ApplicationJson:
         """Create fulfillment retry
 
@@ -2657,7 +2655,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "createFulfillmentRetry",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         _validate_model(
@@ -2696,7 +2694,7 @@ class AsyncInvoices:
         invoice: int,
         *,
         delivered_product_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson:
         """Create dynamic delivery retry
 
@@ -2749,7 +2747,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "createDynamicDeliveryRetry",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "delivered_product_id": delivered_product_id,
         }
         _validate_model(
@@ -2783,9 +2781,9 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentNotificationsResponseValue200ApplicationJson:
         """Create fulfillment notifications
 
@@ -2839,7 +2837,7 @@ class AsyncInvoices:
             "idempotency_supported": False,
             "operation_id": "createFulfillmentNotifications",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         if not isinstance(product_variant_ids, NotGiven):

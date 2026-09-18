@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -51,7 +51,7 @@ from .list_order_line_items_response_value_200_application_json_property_data_it
     ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyVariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -175,7 +175,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -317,36 +317,39 @@ class ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem:
         ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyVariant
     )
     quantity: int
-    currency: Optional[str]
+    currency: str | None
     amounts: (
         ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyAmounts
     )
     discounts: ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyDiscounts
     tax: ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyTax
-    promotion: Optional[
+    promotion: (
         ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPromotion
-    ]
-    referral: Optional[
+        | None
+    )
+    referral: (
         ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyReferral
-    ]
-    subscription: Optional[
+        | None
+    )
+    subscription: (
         ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertySubscription
-    ]
+        | None
+    )
     fulfillment: ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyFulfillment
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    customer_id: Optional[int] = None
+    created_at: datetime | None
+    updated_at: datetime | None
+    customer_id: int | None = None
     """The customer ID when the referenced customer belongs to the authenticated store; otherwise null."""
-    currency_rate: Optional[str] = None
-    payment_method: Optional[PaymentMethod] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    currency_rate: str | None = None
+    payment_method: PaymentMethod | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -361,45 +364,45 @@ class ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem:
             return cls(
                 id=data["id"],
                 order=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyOrder.from_dict(
-                    cast(Dict[str, Any], data["order"])
+                    cast(dict[str, Any], data["order"])
                 ),
                 status=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemStatus(
                     data["status"]
                 ),
                 product=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
-                    cast(Dict[str, Any], data["product"])
+                    cast(dict[str, Any], data["product"])
                 ),
                 variant=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyVariant.from_dict(
-                    cast(Dict[str, Any], data["variant"])
+                    cast(dict[str, Any], data["variant"])
                 ),
                 quantity=data["quantity"],
                 currency=data["currency"],
                 amounts=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyAmounts.from_dict(
-                    cast(Dict[str, Any], data["amounts"])
+                    cast(dict[str, Any], data["amounts"])
                 ),
                 discounts=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyDiscounts.from_dict(
-                    cast(Dict[str, Any], data["discounts"])
+                    cast(dict[str, Any], data["discounts"])
                 ),
                 tax=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyTax.from_dict(
-                    cast(Dict[str, Any], data["tax"])
+                    cast(dict[str, Any], data["tax"])
                 ),
                 promotion=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPromotion.from_dict(
-                    cast(Dict[str, Any], _v_promotion)
+                    cast(dict[str, Any], _v_promotion)
                 )
                 if (_v_promotion := data["promotion"]) is not None
                 else None,
                 referral=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyReferral.from_dict(
-                    cast(Dict[str, Any], _v_referral)
+                    cast(dict[str, Any], _v_referral)
                 )
                 if (_v_referral := data["referral"]) is not None
                 else None,
                 subscription=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertySubscription.from_dict(
-                    cast(Dict[str, Any], _v_subscription)
+                    cast(dict[str, Any], _v_subscription)
                 )
                 if (_v_subscription := data["subscription"]) is not None
                 else None,
                 fulfillment=ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItemPropertyFulfillment.from_dict(
-                    cast(Dict[str, Any], data["fulfillment"])
+                    cast(dict[str, Any], data["fulfillment"])
                 ),
                 created_at=_parse_datetime(_v_created_at)
                 if (_v_created_at := data["created_at"]) is not None
@@ -443,9 +446,9 @@ class ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem:
                 "ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["order"] = self.order
         _domain_data["status"] = self.status
@@ -473,7 +476,7 @@ class ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["order"] = self.order.to_dict()
         result["status"] = (

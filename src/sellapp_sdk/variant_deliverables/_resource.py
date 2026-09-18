@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -33,7 +33,7 @@ class VariantDeliverables:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson:
         """Retrieve variant deliverable configuration
 
@@ -105,15 +105,12 @@ class VariantDeliverables:
         product: str,
         variant: int,
         *,
-        types: List[
-            Union[
-                SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes,
-                str,
-            ]
+        types: list[
+            SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes | str
         ],
         data: ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson:
         """Replace variant deliverable configuration
 
@@ -169,7 +166,7 @@ class VariantDeliverables:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "types": types,
@@ -243,7 +240,7 @@ class AsyncVariantDeliverables:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson:
         """Retrieve variant deliverable configuration
 
@@ -315,15 +312,12 @@ class AsyncVariantDeliverables:
         product: str,
         variant: int,
         *,
-        types: List[
-            Union[
-                SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes,
-                str,
-            ]
+        types: list[
+            SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes | str
         ],
         data: ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson:
         """Replace variant deliverable configuration
 
@@ -379,7 +373,7 @@ class AsyncVariantDeliverables:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "types": types,

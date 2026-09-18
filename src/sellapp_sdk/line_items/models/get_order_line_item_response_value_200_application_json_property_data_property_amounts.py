@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts",
     "required": [
         "unit_price",
@@ -66,7 +66,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts",
     "required": [
         "unit_price",
@@ -126,26 +126,26 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts:
     """Line-item accounting values. All integer amounts are minor currency units. USD-suffixed values are US dollar cents."""
 
-    unit_price: Optional[str]
+    unit_price: str | None
     """The historical decimal unit-price snapshot stored for the line item."""
-    subtotal_cents: Optional[int]
+    subtotal_cents: int | None
     total_cents: int
-    revenue_cents: Optional[int]
-    fee_cents: Optional[int]
-    credit_cents: Optional[int] = None
-    total_exclusive_cents: Optional[int] = None
-    total_exclusive_usd_cents: Optional[int] = None
-    total_usd_cents: Optional[int] = None
-    revenue_usd_cents: Optional[int] = None
-    fee_rate: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    revenue_cents: int | None
+    fee_cents: int | None
+    credit_cents: int | None = None
+    total_exclusive_cents: int | None = None
+    total_exclusive_usd_cents: int | None = None
+    total_usd_cents: int | None = None
+    revenue_usd_cents: int | None = None
+    fee_rate: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts:
         """Deserialize from a dictionary."""
         try:
@@ -193,9 +193,9 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["unit_price"] = self.unit_price
         _domain_data["subtotal_cents"] = self.subtotal_cents
         _domain_data["total_cents"] = self.total_cents
@@ -215,7 +215,7 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyAmounts
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.unit_price is not None:
             result["unit_price"] = self.unit_price
         else:

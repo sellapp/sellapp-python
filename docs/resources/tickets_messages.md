@@ -13,24 +13,24 @@ def list(
         self,
         ticket: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -73,7 +73,7 @@ def reply(
         ticket: int,
         *,
         content: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplyToTicketResponseValue201ApplicationJson:
 ```
 
@@ -81,7 +81,7 @@ def reply(
 | --- | --- | --- |
 | ticket | `int` | Yes |
 | content | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplyToTicketResponseValue201ApplicationJson`.
 
@@ -127,7 +127,7 @@ def get(
         ticket: int,
         message: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetTicketMessageResponseValue200ApplicationJson:
 ```
 
@@ -135,7 +135,7 @@ def get(
 | --- | --- | --- |
 | ticket | `int` | Yes |
 | message | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetTicketMessageResponseValue200ApplicationJson`.
 
@@ -180,46 +180,44 @@ def search(
         self,
         ticket: int,
         *,
-        filters: Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchTicketMessagesRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchTicketMessagesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchTicketMessagesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| filters | `Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[
-            SearchTicketMessagesRequestApplicationJsonPropertySearch
-        ]` | No |
-| includes | `Optional[
-            List[SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchTicketMessagesRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchTicketMessagesRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -265,24 +263,24 @@ def v2_list_ticket_messages(
         self,
         ticket: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -330,7 +328,7 @@ def v2_reply_to_ticket(
         ticket: int,
         *,
         content: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplyToTicketResponseValue201ApplicationJson:
 ```
 
@@ -338,7 +336,7 @@ def v2_reply_to_ticket(
 | --- | --- | --- |
 | ticket | `int` | Yes |
 | content | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplyToTicketResponseValue201ApplicationJson`.
 
@@ -388,23 +386,25 @@ def v2_search_ticket_messages(
         self,
         ticket: int,
         *,
-        filters: Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            V2SearchTicketMessagesRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertySortItem
+        ]
+        | None = None,
+        search: V2SearchTicketMessagesRequestApplicationJsonPropertySearch
+        | None = None,
+        includes: builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         V2SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -413,23 +413,25 @@ def v2_search_ticket_messages(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| filters | `Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[
-            V2SearchTicketMessagesRequestApplicationJsonPropertySearch
-        ]` | No |
-| includes | `Optional[
-            List[V2SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertySortItem
+        ]
+        \| None` | No |
+| search | `V2SearchTicketMessagesRequestApplicationJsonPropertySearch
+        \| None` | No |
+| includes | `builtins.list[
+            V2SearchTicketMessagesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         V2SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem
@@ -483,7 +485,7 @@ def v2_get_ticket_message(
         ticket: int,
         message: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetTicketMessageResponseValue200ApplicationJson:
 ```
 
@@ -491,7 +493,7 @@ def v2_get_ticket_message(
 | --- | --- | --- |
 | ticket | `int` | Yes |
 | message | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2GetTicketMessageResponseValue200ApplicationJson`.
 

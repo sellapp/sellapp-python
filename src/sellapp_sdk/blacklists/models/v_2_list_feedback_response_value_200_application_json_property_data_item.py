@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .v_2_list_feedback_response_value_200_application_json_property_data_item_p
     V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -90,7 +90,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -165,32 +165,32 @@ class V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
 
     id: int
     feedback: str
-    rating: Optional[int]
-    deleted_at: Optional[datetime]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
+    rating: int | None
+    deleted_at: datetime | None
+    created_at: datetime | None
+    updated_at: datetime | None
     store_id: int
     metadata: (
         V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata
     )
-    message: Optional[str]
-    reply: Optional[str]
+    message: str | None
+    reply: str | None
     is_automatic: bool
-    product_id: Optional[int]
+    product_id: int | None
     """Product associated with the feedback, when available."""
-    order_id: Optional[int]
+    order_id: int | None
     """Purchase associated with the feedback, when available."""
     sentiment: V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemSentiment
-    variant_id: Optional[int]
-    product_title: Optional[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    variant_id: int | None
+    product_title: str | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -217,7 +217,7 @@ class V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
                 else None,
                 store_id=data["store_id"],
                 metadata=V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], data["metadata"])
+                    cast(dict[str, Any], data["metadata"])
                 ),
                 message=data["message"],
                 reply=data["reply"],
@@ -257,9 +257,9 @@ class V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
                 "V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["feedback"] = self.feedback
         _domain_data["rating"] = self.rating
@@ -284,7 +284,7 @@ class V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["feedback"] = self.feedback
         if self.rating is not None:

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -14,7 +14,7 @@ from sellapp_sdk._types import (
 )
 from sellapp_sdk.common.models.discount_type import DiscountType
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateUpsellOfferRequestApplicationJsonPropertyItemsItem",
     "required": ["target_listing_id", "target_variant_id"],
     "properties": {
@@ -96,7 +96,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateUpsellOfferRequestApplicationJsonPropertyItemsItem",
     "required": ["target_listing_id", "target_variant_id"],
     "properties": {
@@ -186,23 +186,23 @@ class CreateUpsellOfferRequestApplicationJsonPropertyItemsItem:
 
     target_listing_id: int
     target_variant_id: int
-    id: Optional[int] = None
+    id: int | None = None
     """Existing item ID when updating. It must belong to this offer and store. Omit it to create a new item."""
-    headline: Optional[str] = None
-    description: Optional[str] = None
-    discount_type: Optional[DiscountType] = None
-    discount_value: Optional[Union[float, str]] = None
+    headline: str | None = None
+    description: str | None = None
+    discount_type: DiscountType | None = None
+    discount_value: float | str | None = None
     """Positive decimal. Percentage discounts may not exceed 100; fixed discounts may not exceed 99999999.99."""
-    maximum_discount_amount: Optional[Union[float, str]] = None
+    maximum_discount_amount: float | str | None = None
     """Optional percentage-discount cap; may not exceed 99999999.99."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateUpsellOfferRequestApplicationJsonPropertyItemsItem:
         """Deserialize from a dictionary."""
         try:
@@ -245,9 +245,9 @@ class CreateUpsellOfferRequestApplicationJsonPropertyItemsItem:
                 "CreateUpsellOfferRequestApplicationJsonPropertyItemsItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["target_listing_id"] = self.target_listing_id
         _domain_data["target_variant_id"] = self.target_variant_id
         _domain_data["id"] = self.id
@@ -264,7 +264,7 @@ class CreateUpsellOfferRequestApplicationJsonPropertyItemsItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["target_listing_id"] = self.target_listing_id
         result["target_variant_id"] = self.target_variant_id
         if self.id is not None:

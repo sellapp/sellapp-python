@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -24,7 +24,7 @@ from sellapp_sdk.common.models.sdk_replace_course_request_application_json_level
     SdkReplaceCourseRequestApplicationJsonLevel,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCourseRequestApplicationJson",
     "required": [],
     "properties": {
@@ -135,7 +135,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCourseRequestApplicationJson",
     "required": [],
     "properties": {
@@ -252,29 +252,29 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceCourseRequestApplicationJson:
     """Sdk Replace Course Request Application Json model."""
 
-    category: Optional[Category] = None
-    level: Optional[SdkReplaceCourseRequestApplicationJsonLevel] = None
-    language: Optional[str] = None
-    subtitle: Optional[str] = None
-    author: Optional[str] = None
-    subcategory: Optional[str] = None
-    what_you_learn: Optional[List[str]] = None
-    requirements: Optional[List[str]] = None
-    certificate_enabled: Optional[bool] = None
-    access_type: Optional[SdkReplaceCourseRequestApplicationJsonAccessType] = None
-    access_duration_days: Optional[int] = None
+    category: Category | None = None
+    level: SdkReplaceCourseRequestApplicationJsonLevel | None = None
+    language: str | None = None
+    subtitle: str | None = None
+    author: str | None = None
+    subcategory: str | None = None
+    what_you_learn: list[str] | None = None
+    requirements: list[str] | None = None
+    certificate_enabled: bool | None = None
+    access_type: SdkReplaceCourseRequestApplicationJsonAccessType | None = None
+    access_duration_days: int | None = None
     """Required when access_type is limited; cleared otherwise."""
-    enrollment_limit: Optional[int] = None
-    delivery_text: Optional[str] = None
-    visibility: Optional[CatalogVisibility] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    enrollment_limit: int | None = None
+    delivery_text: str | None = None
+    visibility: CatalogVisibility | None = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkReplaceCourseRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkReplaceCourseRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -339,9 +339,9 @@ class SdkReplaceCourseRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplaceCourseRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["category"] = self.category
         if self.level is not None:
             _domain_data["level"] = self.level
@@ -373,7 +373,7 @@ class SdkReplaceCourseRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.category is not None:
             result["category"] = (
                 self.category.value

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from sellapp_sdk.common.models.sdk_replace_reward_coupon_template_request_applic
     SdkReplaceRewardCouponTemplateRequestApplicationJsonType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceRewardCouponTemplateRequestApplicationJson",
     "required": [],
     "properties": {
@@ -113,7 +113,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceRewardCouponTemplateRequestApplicationJson",
     "required": [],
     "properties": {
@@ -210,28 +210,28 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceRewardCouponTemplateRequestApplicationJson:
     """Sdk Replace Reward Coupon Template Request Application Json model."""
 
-    name: Optional[str] = None
-    type: Optional[SdkReplaceRewardCouponTemplateRequestApplicationJsonType] = None
-    discount: Optional[Union[str, float]] = None
-    store_wide: Optional[bool] = None
-    minimum_amount: Optional[Union[str, float]] = None
-    maximum_discount_amount: Optional[Union[str, float]] = None
-    expires_at: Optional[datetime] = None
-    expires_after_days: Optional[int] = None
-    redemption_mode: Optional[
-        SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode
-    ] = None
-    is_active: Optional[bool] = None
-    listing_ids: Optional[List[int]] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    name: str | None = None
+    type: SdkReplaceRewardCouponTemplateRequestApplicationJsonType | None = None
+    discount: str | float | None = None
+    store_wide: bool | None = None
+    minimum_amount: str | float | None = None
+    maximum_discount_amount: str | float | None = None
+    expires_at: datetime | None = None
+    expires_after_days: int | None = None
+    redemption_mode: (
+        SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode | None
+    ) = None
+    is_active: bool | None = None
+    listing_ids: list[int] | None = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceRewardCouponTemplateRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -291,9 +291,9 @@ class SdkReplaceRewardCouponTemplateRequestApplicationJson:
                 "SdkReplaceRewardCouponTemplateRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             _domain_data["name"] = self.name
         if self.type is not None:
@@ -322,7 +322,7 @@ class SdkReplaceRewardCouponTemplateRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             result["name"] = self.name
         if self.type is not None:

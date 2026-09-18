@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from .batch_create_product_variants_response_value_200_application_json_property
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing",
     "required": ["humble", "frequency", "type", "price"],
     "properties": {
@@ -30,7 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing",
     "required": ["humble", "frequency", "type", "price"],
     "properties": {
@@ -51,14 +51,14 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
     frequency: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency
     type: str
     price: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing:
         """Deserialize from a dictionary."""
         try:
@@ -73,11 +73,11 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
             return cls(
                 humble=data["humble"],
                 frequency=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency.from_dict(
-                    cast(Dict[str, Any], data["frequency"])
+                    cast(dict[str, Any], data["frequency"])
                 ),
                 type=data["type"],
                 price=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice.from_dict(
-                    cast(Dict[str, Any], data["price"])
+                    cast(dict[str, Any], data["price"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["humble", "frequency", "type", "price"]
@@ -90,9 +90,9 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["humble"] = self.humble
         _domain_data["frequency"] = self.frequency
         _domain_data["type"] = self.type
@@ -105,7 +105,7 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["humble"] = self.humble
         result["frequency"] = self.frequency.to_dict()
         result["type"] = self.type

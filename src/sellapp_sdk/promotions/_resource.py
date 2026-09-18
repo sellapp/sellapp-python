@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_promotion_request_application_json_status import (
     SdkCreatePromotionRequestApplicationJsonStatus,
@@ -53,13 +55,13 @@ class Promotions:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListPromotionsResponseValue200ApplicationJson]:
         """List promotions
 
@@ -139,14 +141,14 @@ class Promotions:
         self,
         *,
         name: str,
-        status: Union[SdkCreatePromotionRequestApplicationJsonStatus, str],
+        status: SdkCreatePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
         """Create a promotion
 
@@ -204,7 +206,7 @@ class Promotions:
             "idempotency_supported": False,
             "operation_id": "createPromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "status": enum_value(status),
             "priority": priority,
@@ -283,23 +285,24 @@ class Promotions:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchPromotionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchPromotionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchPromotionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchPromotionsResponseValue200ApplicationJson]:
         """Search promotions
 
@@ -359,7 +362,7 @@ class Promotions:
             "idempotency_supported": False,
             "operation_id": "searchPromotions",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -398,7 +401,7 @@ class Promotions:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPromotionResponseValue200ApplicationJson:
         """Retrieve a promotion
 
@@ -461,19 +464,16 @@ class Promotions:
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkReplacePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkReplacePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionResponseValue200ApplicationJson:
         """Update a promotion
 
@@ -533,7 +533,7 @@ class Promotions:
             "idempotency_supported": False,
             "operation_id": "replacePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -619,19 +619,16 @@ class Promotions:
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkUpdatePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkUpdatePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdatePromotionResponseValue200ApplicationJson:
         """Update a promotion
 
@@ -691,7 +688,7 @@ class Promotions:
             "idempotency_supported": False,
             "operation_id": "updatePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -777,7 +774,7 @@ class Promotions:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a promotion
 
@@ -837,14 +834,14 @@ class Promotions:
         promotion: int,
         *,
         name: str,
-        status: Union[SdkRestorePromotionRequestApplicationJsonStatus, str],
+        status: SdkRestorePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
         """Restore a promotion
 
@@ -904,7 +901,7 @@ class Promotions:
             "idempotency_supported": False,
             "operation_id": "restorePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "status": enum_value(status),
             "priority": priority,
@@ -991,13 +988,13 @@ class AsyncPromotions:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListPromotionsResponseValue200ApplicationJson]:
         """List promotions
 
@@ -1077,14 +1074,14 @@ class AsyncPromotions:
         self,
         *,
         name: str,
-        status: Union[SdkCreatePromotionRequestApplicationJsonStatus, str],
+        status: SdkCreatePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
         """Create a promotion
 
@@ -1142,7 +1139,7 @@ class AsyncPromotions:
             "idempotency_supported": False,
             "operation_id": "createPromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "status": enum_value(status),
             "priority": priority,
@@ -1221,23 +1218,24 @@ class AsyncPromotions:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchPromotionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchPromotionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchPromotionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchPromotionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchPromotionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchPromotionsResponseValue200ApplicationJson]:
         """Search promotions
 
@@ -1297,7 +1295,7 @@ class AsyncPromotions:
             "idempotency_supported": False,
             "operation_id": "searchPromotions",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1336,7 +1334,7 @@ class AsyncPromotions:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPromotionResponseValue200ApplicationJson:
         """Retrieve a promotion
 
@@ -1399,19 +1397,16 @@ class AsyncPromotions:
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkReplacePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkReplacePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionResponseValue200ApplicationJson:
         """Update a promotion
 
@@ -1471,7 +1466,7 @@ class AsyncPromotions:
             "idempotency_supported": False,
             "operation_id": "replacePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1557,19 +1552,16 @@ class AsyncPromotions:
         self,
         promotion: int,
         *,
-        name: Optional[str] = None,
-        status: Optional[
-            Union[SdkUpdatePromotionRequestApplicationJsonStatus, str]
-        ] = None,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_stackable: Optional[bool] = None,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        phases: Optional[
-            List[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        status: SdkUpdatePromotionRequestApplicationJsonStatus | str | None = None,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_stackable: bool | None = None,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdatePromotionResponseValue200ApplicationJson:
         """Update a promotion
 
@@ -1629,7 +1621,7 @@ class AsyncPromotions:
             "idempotency_supported": False,
             "operation_id": "updatePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1715,7 +1707,7 @@ class AsyncPromotions:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a promotion
 
@@ -1775,14 +1767,14 @@ class AsyncPromotions:
         promotion: int,
         *,
         name: str,
-        status: Union[SdkRestorePromotionRequestApplicationJsonStatus, str],
+        status: SdkRestorePromotionRequestApplicationJsonStatus | str,
         priority: int,
         is_stackable: bool,
-        phases: List[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        max_redemptions: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem],
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
         """Restore a promotion
 
@@ -1842,7 +1834,7 @@ class AsyncPromotions:
             "idempotency_supported": False,
             "operation_id": "restorePromotion",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "status": enum_value(status),
             "priority": priority,

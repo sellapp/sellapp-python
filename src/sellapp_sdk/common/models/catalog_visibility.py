@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CatalogVisibility(str, Enum):
@@ -17,7 +17,7 @@ class CatalogVisibility(str, Enum):
     PRIVATE = "PRIVATE"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[CatalogVisibility]:
+    def _missing_(cls, value: object) -> CatalogVisibility | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

@@ -12,13 +12,13 @@ Retrieve wallet settings
 def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWalletSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetWalletSettingsResponseValue200ApplicationJson`.
 
@@ -65,22 +65,22 @@ def replace(
         self,
         *,
         enabled: bool,
-        minimum_top_up_cents: Optional[int],
-        maximum_top_up_cents: Optional[int],
-        expiration_days: Optional[int],
-        payment_methods: List[str],
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None,
+        maximum_top_up_cents: int | None,
+        expiration_days: int | None,
+        payment_methods: list[str],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletSettingsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | enabled | `bool` | Yes |
-| minimum_top_up_cents | `Optional[int]` | Yes |
-| maximum_top_up_cents | `Optional[int]` | Yes |
-| expiration_days | `Optional[int]` | Yes |
-| payment_methods | `List[str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| minimum_top_up_cents | `int \| None` | Yes |
+| maximum_top_up_cents | `int \| None` | Yes |
+| expiration_days | `int \| None` | Yes |
+| payment_methods | `list[str]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceWalletSettingsResponseValue200ApplicationJson`.
 

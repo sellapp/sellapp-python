@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSetBookingDateAvailabilityRequestApplicationJson",
     "required": ["dates", "available"],
     "properties": {
@@ -33,7 +33,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSetBookingDateAvailabilityRequestApplicationJson",
     "required": ["dates", "available"],
     "properties": {
@@ -60,18 +60,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkSetBookingDateAvailabilityRequestApplicationJson:
     """Sdk Set Booking Date Availability Request Application Json model."""
 
-    dates: List[str]
+    dates: list[str]
     available: bool
     """Set false to block the dates and true to clear the exact block or open an inherited block for the variant."""
-    product_variant_id: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    product_variant_id: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkSetBookingDateAvailabilityRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -97,9 +97,9 @@ class SdkSetBookingDateAvailabilityRequestApplicationJson:
                 "SdkSetBookingDateAvailabilityRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["dates"] = self.dates
         _domain_data["available"] = self.available
         _domain_data["product_variant_id"] = self.product_variant_id
@@ -111,7 +111,7 @@ class SdkSetBookingDateAvailabilityRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["dates"] = self.dates
         result["available"] = self.available
         if self.product_variant_id is not None:

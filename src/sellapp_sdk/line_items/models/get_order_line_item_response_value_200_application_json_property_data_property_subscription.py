@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscription",
     "required": ["id", "provider", "status", "cancel_at_period_end"],
     "properties": {
@@ -40,7 +40,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscription",
     "required": ["id", "provider", "status", "cancel_at_period_end"],
     "properties": {
@@ -72,19 +72,19 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscri
     """Get Order Line Item Response Value200Application Json Property Data Property Subscription model."""
 
     id: int
-    provider: Optional[str]
-    status: Optional[str]
+    provider: str | None
+    status: str | None
     cancel_at_period_end: bool
-    current_period_start: Optional[datetime] = None
-    current_period_end: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    current_period_start: datetime | None = None
+    current_period_end: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> (
         GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscription
     ):
@@ -129,9 +129,9 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscri
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["provider"] = self.provider
         _domain_data["status"] = self.status
@@ -146,7 +146,7 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertySubscri
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.provider is not None:
             result["provider"] = self.provider

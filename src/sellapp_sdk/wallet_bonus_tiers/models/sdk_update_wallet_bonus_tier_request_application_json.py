@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.sdk_update_wallet_bonus_tier_request_application_
     SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateWalletBonusTierRequestApplicationJson",
     "required": [],
     "properties": {
@@ -59,7 +59,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateWalletBonusTierRequestApplicationJson",
     "required": [],
     "properties": {
@@ -108,21 +108,21 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkUpdateWalletBonusTierRequestApplicationJson:
     """Sdk Update Wallet Bonus Tier Request Application Json model."""
 
-    minimum_top_up_cents: Optional[int] = None
-    bonus_kind: Optional[SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind] = None
-    fixed_bonus_cents: Optional[int] = None
-    percent_basis: Optional[int] = None
-    maximum_bonus_cents: Optional[int] = None
-    priority: Optional[int] = None
-    is_active: Optional[bool] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    minimum_top_up_cents: int | None = None
+    bonus_kind: SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind | None = None
+    fixed_bonus_cents: int | None = None
+    percent_basis: int | None = None
+    maximum_bonus_cents: int | None = None
+    priority: int | None = None
+    is_active: bool | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkUpdateWalletBonusTierRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -165,9 +165,9 @@ class SdkUpdateWalletBonusTierRequestApplicationJson:
                 "SdkUpdateWalletBonusTierRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.minimum_top_up_cents is not None:
             _domain_data["minimum_top_up_cents"] = self.minimum_top_up_cents
         if self.bonus_kind is not None:
@@ -187,7 +187,7 @@ class SdkUpdateWalletBonusTierRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.minimum_top_up_cents is not None:
             result["minimum_top_up_cents"] = self.minimum_top_up_cents
         if self.bonus_kind is not None:

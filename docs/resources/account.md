@@ -12,13 +12,13 @@ Read your profile
 def get_account(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAccountResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetAccountResponseValue200ApplicationJson`.
 
@@ -63,13 +63,13 @@ List accessible stores
 def list_stores(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListStoresResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListStoresResponseValue200ApplicationJson`.
 
@@ -116,9 +116,9 @@ def create_store(
         *,
         name: str,
         slug: str,
-        visibility: Optional[Union[StoreVisibility, str]] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: StoreVisibility | str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateStoreResponseValue201ApplicationJson:
 ```
 
@@ -126,9 +126,9 @@ def create_store(
 | --- | --- | --- |
 | name | `str` | Yes |
 | slug | `str` | Yes |
-| visibility | `Optional[Union[StoreVisibility, str]]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| visibility | `StoreVisibility \| str \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateStoreResponseValue201ApplicationJson`.
 
@@ -178,14 +178,14 @@ def get_store(
         self,
         store: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | store | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetStoreResponseValue200ApplicationJson`.
 
@@ -230,13 +230,13 @@ Inspect effective permissions
 def get_store_permissions(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStorePermissionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetStorePermissionsResponseValue200ApplicationJson`.
 

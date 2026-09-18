@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.create_notification_channel_response_value_201_ap
     CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateNotificationChannelResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "type", "webhook_configured", "allowed_notifications"],
     "properties": {
@@ -38,7 +38,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateNotificationChannelResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "type", "webhook_configured", "allowed_notifications"],
     "properties": {
@@ -70,17 +70,17 @@ class CreateNotificationChannelResponseValue201ApplicationJsonPropertyData:
     """The channel identifier inside the store settings document. Generated when the channel is created; channels that predate identifiers derive one from their attributes."""
     type: CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType
     webhook_configured: bool
-    allowed_notifications: List[str]
-    email: Optional[str] = None
-    channel: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    allowed_notifications: list[str]
+    email: str | None = None
+    channel: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateNotificationChannelResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -120,9 +120,9 @@ class CreateNotificationChannelResponseValue201ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["type"] = self.type
         _domain_data["webhook_configured"] = self.webhook_configured
@@ -137,7 +137,7 @@ class CreateNotificationChannelResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["webhook_configured"] = self.webhook_configured

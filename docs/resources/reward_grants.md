@@ -12,25 +12,25 @@ List reward grants
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardGrantsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListRewardGrantsResponseValue200ApplicationJson]`.
 
@@ -78,7 +78,7 @@ def issue(
         *,
         reward_rule_id: int,
         customer_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueEligibleRewardGrantResponseValue200ApplicationJson:
 ```
 
@@ -86,7 +86,7 @@ def issue(
 | --- | --- | --- |
 | reward_rule_id | `int` | Yes |
 | customer_id | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkIssueEligibleRewardGrantResponseValue200ApplicationJson`.
 
@@ -135,45 +135,47 @@ Search reward grants
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardGrantsResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchRewardRulesRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchRewardRulesRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchRewardGrantsResponseValue200ApplicationJson]`.
 
@@ -223,14 +225,14 @@ def get(
         self,
         reward_grant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardGrantResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_grant | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetRewardGrantResponseValue200ApplicationJson`.
 

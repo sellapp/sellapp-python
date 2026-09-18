@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .batch_create_product_variants_request_application_json_property_resources_
     BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyData",
     "required": [],
     "properties": {
@@ -44,7 +44,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyData",
     "required": [],
     "properties": {
@@ -71,31 +71,34 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyData:
     """Batch Create Product Variants Request Application Json Property Resources Item Property Deliverable Property Data model."""
 
-    stock: Optional[int] = None
-    serials: Optional[List[str]] = None
-    remove_duplicate: Optional[bool] = None
-    parsing_mode: Optional[
+    stock: int | None = None
+    serials: list[str] | None = None
+    remove_duplicate: bool | None = None
+    parsing_mode: (
         BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataParsingMode
-    ] = None
-    comment: Optional[str] = None
-    webhook: Optional[str] = None
-    booking: Optional[
+        | None
+    ) = None
+    comment: str | None = None
+    webhook: str | None = None
+    booking: (
         BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyBooking
-    ] = None
-    credit_rate_tiers: Optional[
-        List[
+        | None
+    ) = None
+    credit_rate_tiers: (
+        list[
             BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem
         ]
-    ] = None
+        | None
+    ) = None
     """Tiered unit prices for credit products. Credit products must include at least one priced tier."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -119,13 +122,13 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
                 comment=data.get("comment"),
                 webhook=data.get("webhook"),
                 booking=BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyBooking.from_dict(
-                    cast(Dict[str, Any], _v_booking)
+                    cast(dict[str, Any], _v_booking)
                 )
                 if (_v_booking := data.get("booking")) is not None
                 else None,
                 credit_rate_tiers=[
                     BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_credit_rate_tiers)
                 ]
@@ -152,9 +155,9 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["stock"] = self.stock
         if self.serials is not None:
             _domain_data["serials"] = self.serials
@@ -178,7 +181,7 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.stock is not None:
             result["stock"] = self.stock
         else:

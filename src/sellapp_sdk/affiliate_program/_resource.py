@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model
@@ -31,7 +33,7 @@ class AffiliateProgram:
     def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Retrieve affiliate program configuration
 
@@ -90,10 +92,10 @@ class AffiliateProgram:
         *,
         enabled: bool,
         settings: ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
-        products: List[
+        products: builtins.list[
             ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Replace affiliate program configuration
 
@@ -146,7 +148,7 @@ class AffiliateProgram:
             "idempotency_supported": False,
             "operation_id": "replaceAffiliateProgramConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
             "settings": settings.to_dict(),
             "products": [item.to_dict() for item in products],
@@ -179,12 +181,12 @@ class AffiliateProgram:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListPendingAffiliateInvitationsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -264,7 +266,7 @@ class AffiliateProgram:
         self,
         *,
         email: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkInviteAffiliateResponseValue201ApplicationJson:
         """Invite an affiliate
 
@@ -315,7 +317,7 @@ class AffiliateProgram:
             "idempotency_supported": False,
             "operation_id": "inviteAffiliate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "email": email,
         }
         _validate_model(
@@ -357,7 +359,7 @@ class AsyncAffiliateProgram:
     async def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Retrieve affiliate program configuration
 
@@ -416,10 +418,10 @@ class AsyncAffiliateProgram:
         *,
         enabled: bool,
         settings: ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
-        products: List[
+        products: builtins.list[
             ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Replace affiliate program configuration
 
@@ -472,7 +474,7 @@ class AsyncAffiliateProgram:
             "idempotency_supported": False,
             "operation_id": "replaceAffiliateProgramConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
             "settings": settings.to_dict(),
             "products": [item.to_dict() for item in products],
@@ -505,12 +507,12 @@ class AsyncAffiliateProgram:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListPendingAffiliateInvitationsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -590,7 +592,7 @@ class AsyncAffiliateProgram:
         self,
         *,
         email: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkInviteAffiliateResponseValue201ApplicationJson:
         """Invite an affiliate
 
@@ -641,7 +643,7 @@ class AsyncAffiliateProgram:
             "idempotency_supported": False,
             "operation_id": "inviteAffiliate",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "email": email,
         }
         _validate_model(

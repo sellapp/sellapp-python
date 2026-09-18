@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -20,7 +20,7 @@ from .get_invoice_deliverables_response_value_200_application_json_property_data
     GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable",
     "required": ["types", "data"],
     "properties": {
@@ -44,7 +44,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable",
     "required": ["types", "data"],
     "properties": {
@@ -74,18 +74,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable:
     """Get Invoice Deliverables Response Value200Application Json Property Data Item Property Deliverable model."""
 
-    types: List[
+    types: list[
         GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverableTypes
     ]
     data: GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable:
         """Deserialize from a dictionary."""
         try:
@@ -105,7 +105,7 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPrope
                     for item in cast(list[Any], data["types"])
                 ],
                 data=GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
-                    cast(Dict[str, Any], data["data"])
+                    cast(dict[str, Any], data["data"])
                 ),
                 additional_properties=_preserve_unknown_fields(data, ["types", "data"]),
                 _from_response=True,
@@ -116,9 +116,9 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPrope
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["types"] = self.types
         _domain_data["data"] = self.data
         _validate_model(
@@ -129,7 +129,7 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPrope
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["types"] = [
             item.value if isinstance(item, Enum) else item for item in self.types
         ]

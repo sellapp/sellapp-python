@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -28,12 +28,12 @@ class LicensesInstances:
         self,
         license_key: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListLicenseKeyInstancesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -116,7 +116,7 @@ class LicensesInstances:
         license_key: int,
         instance: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetLicenseInstanceResponseValue200ApplicationJson:
         """Retrieve a license instance
 
@@ -188,12 +188,12 @@ class AsyncLicensesInstances:
         self,
         license_key: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListLicenseKeyInstancesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -276,7 +276,7 @@ class AsyncLicensesInstances:
         license_key: int,
         instance: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetLicenseInstanceResponseValue200ApplicationJson:
         """Retrieve a license instance
 

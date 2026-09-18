@@ -13,24 +13,24 @@ def list(
         self,
         order: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order_: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order_: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrderSLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order_ | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order_ | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListOrderSLineItemsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -77,40 +77,38 @@ def search(
         self,
         order: int,
         *,
-        filters: Optional[
-            List[SearchOrderSLineItemsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchOrderSLineItemsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        pagination: Optional[
-            SearchOrderSLineItemsRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order_: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchOrderSLineItemsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchOrderSLineItemsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrderSLineItemsRequestApplicationJsonPropertyPagination
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order_: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchOrderSLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| filters | `Optional[
-            List[SearchOrderSLineItemsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchOrderSLineItemsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| pagination | `Optional[
-            SearchOrderSLineItemsRequestApplicationJsonPropertyPagination
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order_ | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchOrderSLineItemsRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchOrderSLineItemsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| pagination | `SearchOrderSLineItemsRequestApplicationJsonPropertyPagination
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order_ | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchOrderSLineItemsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -158,7 +156,7 @@ def get(
         order: int,
         line_item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderSLineItemResponseValue200ApplicationJson:
 ```
 
@@ -166,7 +164,7 @@ def get(
 | --- | --- | --- |
 | order | `int` | Yes |
 | line_item | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetOrderSLineItemResponseValue200ApplicationJson`.
 

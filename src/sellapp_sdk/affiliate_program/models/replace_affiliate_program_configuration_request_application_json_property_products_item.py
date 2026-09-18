@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .replace_affiliate_program_configuration_request_application_json_property_
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItemPropertyCommission,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem",
     "required": ["id", "enabled"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem",
     "required": ["id", "enabled"],
     "properties": {
@@ -45,17 +45,18 @@ class ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProducts
     id: int
     """A product variant ID owned by the authenticated store."""
     enabled: bool
-    commission: Optional[
+    commission: (
         ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItemPropertyCommission
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem:
         """Deserialize from a dictionary."""
         try:
@@ -71,7 +72,7 @@ class ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProducts
                 id=data["id"],
                 enabled=data["enabled"],
                 commission=ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItemPropertyCommission.from_dict(
-                    cast(Dict[str, Any], _v_commission)
+                    cast(dict[str, Any], _v_commission)
                 )
                 if (_v_commission := data.get("commission")) is not None
                 else None,
@@ -86,9 +87,9 @@ class ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProducts
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["enabled"] = self.enabled
         if self.commission is not None:
@@ -101,7 +102,7 @@ class ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProducts
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["enabled"] = self.enabled
         if self.commission is not None:

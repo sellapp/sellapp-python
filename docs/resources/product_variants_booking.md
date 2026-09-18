@@ -14,10 +14,10 @@ def list_availability(
         product: int,
         variant: int,
         *,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        quantity: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        from_: str | None = None,
+        to: str | None = None,
+        quantity: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListBookingAvailabilityResponseValue200ApplicationJson:
 ```
 
@@ -25,10 +25,10 @@ def list_availability(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| from_ | `Optional[str]` | No |
-| to | `Optional[str]` | No |
-| quantity | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| from_ | `str \| None` | No |
+| to | `str \| None` | No |
+| quantity | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListBookingAvailabilityResponseValue200ApplicationJson`.
 
@@ -80,10 +80,10 @@ def create_hold(
         variant: int,
         *,
         slot_start_at: str,
-        quantity: Optional[int] = None,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta: Optional[CreateBookingHoldRequestApplicationJsonPropertyMeta] = None,
-        request_options: Optional[RequestOptions] = None,
+        quantity: int | None = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        meta: CreateBookingHoldRequestApplicationJsonPropertyMeta | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateBookingHoldResponseValue201ApplicationJson:
 ```
 
@@ -92,10 +92,10 @@ def create_hold(
 | product | `int` | Yes |
 | variant | `int` | Yes |
 | slot_start_at | `str` | Yes |
-| quantity | `Optional[int]` | No |
-| customer_key | `Union[str, None, NotGiven]` | No |
-| meta | `Optional[CreateBookingHoldRequestApplicationJsonPropertyMeta]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| quantity | `int \| None` | No |
+| customer_key | `str \| None \| NotGiven` | No |
+| meta | `CreateBookingHoldRequestApplicationJsonPropertyMeta \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateBookingHoldResponseValue201ApplicationJson`.
 
@@ -150,8 +150,8 @@ def release_hold(
         product: int,
         hold: str,
         *,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -159,8 +159,8 @@ def release_hold(
 | --- | --- | --- |
 | product | `int` | Yes |
 | hold | `str` | Yes |
-| customer_key | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| customer_key | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -212,7 +212,7 @@ def get(
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBookingConfigurationResponseValue200ApplicationJson:
 ```
 
@@ -220,7 +220,7 @@ def get(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetBookingConfigurationResponseValue200ApplicationJson`.
 
@@ -271,43 +271,34 @@ def replace(
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope, str
-            ]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider, str
-            ]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceBookingConfigurationResponseValue200ApplicationJson:
 ```
 
@@ -315,43 +306,34 @@ def replace(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| mode | `Optional[Literal["native"]]` | No |
-| conflict_scope | `Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope, str
-            ]
-        ]` | No |
-| timezone | `Optional[str]` | No |
-| duration_minutes | `Optional[int]` | No |
-| capacity_per_slot | `Optional[int]` | No |
-| min_notice_minutes | `Optional[int]` | No |
-| max_advance_days | `Optional[int]` | No |
-| buffer_before_minutes | `Optional[int]` | No |
-| buffer_after_minutes | `Optional[int]` | No |
-| availability | `Optional[
-            List[
-                ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ]` | No |
-| provider_connection_ids | `Optional[List[int]]` | No |
-| video_provider | `Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider, str
-            ]
-        ]` | No |
-| video_provider_connection_id | `Union[int, None, NotGiven]` | No |
-| reminders_enabled | `Optional[bool]` | No |
-| reminder_offset_value | `Optional[int]` | No |
-| reminder_offset_unit | `Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ]` | No |
-| meta | `Optional[
-            ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| mode | `Literal["native"] \| None` | No |
+| conflict_scope | `SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope
+        \| str
+        \| None` | No |
+| timezone | `str \| None` | No |
+| duration_minutes | `int \| None` | No |
+| capacity_per_slot | `int \| None` | No |
+| min_notice_minutes | `int \| None` | No |
+| max_advance_days | `int \| None` | No |
+| buffer_before_minutes | `int \| None` | No |
+| buffer_after_minutes | `int \| None` | No |
+| availability | `list[
+            ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        \| None` | No |
+| provider_connection_ids | `list[int] \| None` | No |
+| video_provider | `SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider
+        \| str
+        \| None` | No |
+| video_provider_connection_id | `int \| None \| NotGiven` | No |
+| reminders_enabled | `bool \| None` | No |
+| reminder_offset_value | `int \| None` | No |
+| reminder_offset_unit | `SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        \| str
+        \| None` | No |
+| meta | `ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceBookingConfigurationResponseValue200ApplicationJson`.
 
@@ -407,39 +389,34 @@ def update(
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope, str]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider, str]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateBookingConfigurationResponseValue200ApplicationJson:
 ```
 
@@ -447,39 +424,34 @@ def update(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| mode | `Optional[Literal["native"]]` | No |
-| conflict_scope | `Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope, str]
-        ]` | No |
-| timezone | `Optional[str]` | No |
-| duration_minutes | `Optional[int]` | No |
-| capacity_per_slot | `Optional[int]` | No |
-| min_notice_minutes | `Optional[int]` | No |
-| max_advance_days | `Optional[int]` | No |
-| buffer_before_minutes | `Optional[int]` | No |
-| buffer_after_minutes | `Optional[int]` | No |
-| availability | `Optional[
-            List[
-                UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ]` | No |
-| provider_connection_ids | `Optional[List[int]]` | No |
-| video_provider | `Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider, str]
-        ]` | No |
-| video_provider_connection_id | `Union[int, None, NotGiven]` | No |
-| reminders_enabled | `Optional[bool]` | No |
-| reminder_offset_value | `Optional[int]` | No |
-| reminder_offset_unit | `Optional[
-            Union[
-                SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ]` | No |
-| meta | `Optional[
-            UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| mode | `Literal["native"] \| None` | No |
+| conflict_scope | `SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope
+        \| str
+        \| None` | No |
+| timezone | `str \| None` | No |
+| duration_minutes | `int \| None` | No |
+| capacity_per_slot | `int \| None` | No |
+| min_notice_minutes | `int \| None` | No |
+| max_advance_days | `int \| None` | No |
+| buffer_before_minutes | `int \| None` | No |
+| buffer_after_minutes | `int \| None` | No |
+| availability | `list[
+            UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        \| None` | No |
+| provider_connection_ids | `list[int] \| None` | No |
+| video_provider | `SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider
+        \| str
+        \| None` | No |
+| video_provider_connection_id | `int \| None \| NotGiven` | No |
+| reminders_enabled | `bool \| None` | No |
+| reminder_offset_value | `int \| None` | No |
+| reminder_offset_unit | `SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        \| str
+        \| None` | No |
+| meta | `UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateBookingConfigurationResponseValue200ApplicationJson`.
 

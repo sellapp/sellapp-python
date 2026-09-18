@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -36,7 +36,7 @@ class CommunityConnections:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCommunityConnectionsResponseValue200ApplicationJson:
         """List community connections
 
@@ -92,12 +92,10 @@ class CommunityConnections:
 
     def start(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        mode: Optional[
-            Union[SdkStartCommunityConnectionRequestApplicationJsonMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: SdkStartCommunityConnectionRequestApplicationJsonMode | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkStartCommunityConnectionResponseValue200ApplicationJson:
         """Start a community connection
 
@@ -150,7 +148,7 @@ class CommunityConnections:
             "idempotency_supported": False,
             "operation_id": "startCommunityConnection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": enum_value(mode) if mode is not None else None,
@@ -185,10 +183,10 @@ class CommunityConnections:
 
     def poll(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPollCommunityConnectionResponseValue200ApplicationJson:
         """Poll a community connection
 
@@ -241,7 +239,7 @@ class CommunityConnections:
             "idempotency_supported": False,
             "operation_id": "pollCommunityConnection",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             "status_token": status_token,
         }
         return self._client.request(
@@ -254,11 +252,11 @@ class CommunityConnections:
 
     def complete(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
         server_id: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCompleteCommunityConnectionResponseValue200ApplicationJson:
         """Complete a community connection
 
@@ -312,7 +310,7 @@ class CommunityConnections:
             "idempotency_supported": False,
             "operation_id": "completeCommunityConnection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status_token": status_token,
             "server_id": server_id,
         }
@@ -350,9 +348,9 @@ class CommunityConnections:
 
     def verify(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkVerifyCommunityConnectionResponseValue200ApplicationJson:
         """Verify a community connection
 
@@ -413,9 +411,9 @@ class CommunityConnections:
 
     def disconnect(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect a community platform
 
@@ -481,7 +479,7 @@ class AsyncCommunityConnections:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCommunityConnectionsResponseValue200ApplicationJson:
         """List community connections
 
@@ -537,12 +535,10 @@ class AsyncCommunityConnections:
 
     async def start(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        mode: Optional[
-            Union[SdkStartCommunityConnectionRequestApplicationJsonMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: SdkStartCommunityConnectionRequestApplicationJsonMode | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkStartCommunityConnectionResponseValue200ApplicationJson:
         """Start a community connection
 
@@ -595,7 +591,7 @@ class AsyncCommunityConnections:
             "idempotency_supported": False,
             "operation_id": "startCommunityConnection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": enum_value(mode) if mode is not None else None,
@@ -630,10 +626,10 @@ class AsyncCommunityConnections:
 
     async def poll(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPollCommunityConnectionResponseValue200ApplicationJson:
         """Poll a community connection
 
@@ -686,7 +682,7 @@ class AsyncCommunityConnections:
             "idempotency_supported": False,
             "operation_id": "pollCommunityConnection",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             "status_token": status_token,
         }
         return await self._client.request(
@@ -699,11 +695,11 @@ class AsyncCommunityConnections:
 
     async def complete(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
         status_token: str,
         server_id: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCompleteCommunityConnectionResponseValue200ApplicationJson:
         """Complete a community connection
 
@@ -757,7 +753,7 @@ class AsyncCommunityConnections:
             "idempotency_supported": False,
             "operation_id": "completeCommunityConnection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status_token": status_token,
             "server_id": server_id,
         }
@@ -795,9 +791,9 @@ class AsyncCommunityConnections:
 
     async def verify(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkVerifyCommunityConnectionResponseValue200ApplicationJson:
         """Verify a community connection
 
@@ -858,9 +854,9 @@ class AsyncCommunityConnections:
 
     async def disconnect(
         self,
-        platform: Union[CommunityConnectionsPlatform, str],
+        platform: CommunityConnectionsPlatform | str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect a community platform
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetLicenseKeyResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -67,7 +67,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetLicenseKeyResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -130,25 +130,25 @@ class GetLicenseKeyResponseValue200ApplicationJsonPropertyData:
     limit: int
     active: int
     status: str
-    expires_at: Optional[datetime]
+    expires_at: datetime | None
     is_expired: bool
     store_id: int
-    order_id: Optional[int]
-    invoice_id: Optional[int]
+    order_id: int | None
+    invoice_id: int | None
     product_id: int
     variant_id: int
     customer_id: int
-    subscription_id: Optional[int]
+    subscription_id: int | None
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetLicenseKeyResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -207,9 +207,9 @@ class GetLicenseKeyResponseValue200ApplicationJsonPropertyData:
                 "GetLicenseKeyResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["key"] = self.key
         _domain_data["limit"] = self.limit
@@ -234,7 +234,7 @@ class GetLicenseKeyResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["key"] = self.key
         result["limit"] = self.limit

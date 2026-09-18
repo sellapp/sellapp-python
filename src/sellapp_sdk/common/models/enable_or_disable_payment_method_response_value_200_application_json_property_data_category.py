@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataCategory(
@@ -19,9 +19,10 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataCat
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
+    ) -> (
         EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataCategory
-    ]:
+        | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

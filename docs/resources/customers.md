@@ -12,25 +12,25 @@ List customers
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCustomersResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListCustomersResponseValue200ApplicationJson]`.
 
@@ -77,24 +77,24 @@ def create_customer(
         self,
         *,
         email: str,
-        external_id: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[CreateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        external_id: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: CreateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | email | `str` | Yes |
-| external_id | `Optional[str]` | No |
-| name | `Union[str, None, NotGiven]` | No |
-| locale | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[CreateCustomerRequestApplicationJsonPropertyMetadata]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| external_id | `str \| None` | No |
+| name | `str \| None \| NotGiven` | No |
+| locale | `str \| None \| NotGiven` | No |
+| metadata | `CreateCustomerRequestApplicationJsonPropertyMetadata \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCustomerResponseValue201ApplicationJson`.
 
@@ -146,45 +146,43 @@ Search customers
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCustomersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCustomersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCustomersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchCustomersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchCustomersResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchCustomersRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchCustomersRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchCustomersRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchCustomersRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchCustomersRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchCustomersRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchCustomersRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchCustomersResponseValue200ApplicationJson]`.
 
@@ -234,14 +232,14 @@ def get(
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCustomerResponseValue200ApplicationJson`.
 
@@ -288,24 +286,24 @@ def update_customer(
         self,
         customer: int,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer | `int` | Yes |
-| email | `Optional[str]` | No |
-| name | `Union[str, None, NotGiven]` | No |
-| locale | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata]` | No |
-| external_id | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None` | No |
+| name | `str \| None \| NotGiven` | No |
+| locale | `str \| None \| NotGiven` | No |
+| metadata | `UpdateCustomerRequestApplicationJsonPropertyMetadata \| None` | No |
+| external_id | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCustomerResponseValue200ApplicationJson`.
 
@@ -355,14 +353,14 @@ def get_customer_by_external_id(
         self,
         external_id: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | external_id | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCustomerResponseValue200ApplicationJson`.
 
@@ -410,10 +408,10 @@ def upsert_by_external_id(
         external_id: str,
         *,
         email: str,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpsertCustomerRequestApplicationJsonPropertyMetadata] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpsertCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpsertCustomerResponseValue200ApplicationJson:
 ```
 
@@ -421,10 +419,10 @@ def upsert_by_external_id(
 | --- | --- | --- |
 | external_id | `str` | Yes |
 | email | `str` | Yes |
-| name | `Union[str, None, NotGiven]` | No |
-| locale | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[UpsertCustomerRequestApplicationJsonPropertyMetadata]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None \| NotGiven` | No |
+| locale | `str \| None \| NotGiven` | No |
+| metadata | `UpsertCustomerRequestApplicationJsonPropertyMetadata \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpsertCustomerResponseValue200ApplicationJson`.
 
@@ -475,24 +473,24 @@ def update_customer_by_external_id(
         self,
         external_id: str,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None,
-        body_external_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None,
+        body_external_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | external_id | `str` | Yes |
-| email | `Optional[str]` | No |
-| name | `Union[str, None, NotGiven]` | No |
-| locale | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata]` | No |
-| body_external_id | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None` | No |
+| name | `str \| None \| NotGiven` | No |
+| locale | `str \| None \| NotGiven` | No |
+| metadata | `UpdateCustomerRequestApplicationJsonPropertyMetadata \| None` | No |
+| body_external_id | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCustomerResponseValue200ApplicationJson`.
 

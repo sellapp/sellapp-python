@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -30,7 +30,7 @@ from .create_product_request_application_json_property_variants_item import (
     CreateProductRequestApplicationJsonPropertyVariantsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateProductRequestApplicationJson",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -61,7 +61,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateProductRequestApplicationJson",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -101,30 +101,31 @@ class SdkCreateProductRequestApplicationJson:
     title: str
     description: str
     visibility: CatalogVisibility
-    slug: Optional[str] = None
-    type: Optional[SdkCreateProductRequestApplicationJsonType] = None
-    section: Optional[int] = None
-    additional_information: Optional[
-        List[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-    ] = None
-    other_settings: Optional[
-        CreateProductRequestApplicationJsonPropertyOtherSettings
-    ] = None
-    variants: Optional[
-        List[CreateProductRequestApplicationJsonPropertyVariantsItem]
-    ] = None
+    slug: str | None = None
+    type: SdkCreateProductRequestApplicationJsonType | None = None
+    section: int | None = None
+    additional_information: (
+        list[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
+        | None
+    ) = None
+    other_settings: CreateProductRequestApplicationJsonPropertyOtherSettings | None = (
+        None
+    )
+    variants: list[CreateProductRequestApplicationJsonPropertyVariantsItem] | None = (
+        None
+    )
     """Optional initial variants, using the same fields as variant creation. A bundle accepts exactly one variant. A validation failure rolls back the product and every variant."""
-    bundle_items: Optional[
-        List[CreateProductRequestApplicationJsonPropertyBundleItemsItem]
-    ] = None
+    bundle_items: (
+        list[CreateProductRequestApplicationJsonPropertyBundleItemsItem] | None
+    ) = None
     """Only for type bundle, with exactly one initial variant. Same-store standard product variants to include. Each variant ID must be unique."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkCreateProductRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkCreateProductRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -146,7 +147,7 @@ class SdkCreateProductRequestApplicationJson:
                 section=data.get("section"),
                 additional_information=[
                     CreateProductRequestApplicationJsonPropertyAdditionalInformationItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_additional_information)
                 ]
@@ -154,13 +155,13 @@ class SdkCreateProductRequestApplicationJson:
                 is not None
                 else None,
                 other_settings=CreateProductRequestApplicationJsonPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], _v_other_settings)
+                    cast(dict[str, Any], _v_other_settings)
                 )
                 if (_v_other_settings := data.get("other_settings")) is not None
                 else None,
                 variants=[
                     CreateProductRequestApplicationJsonPropertyVariantsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_variants)
                 ]
@@ -168,7 +169,7 @@ class SdkCreateProductRequestApplicationJson:
                 else None,
                 bundle_items=[
                     CreateProductRequestApplicationJsonPropertyBundleItemsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_bundle_items)
                 ]
@@ -194,9 +195,9 @@ class SdkCreateProductRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateProductRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["description"] = self.description
         _domain_data["visibility"] = self.visibility
@@ -221,7 +222,7 @@ class SdkCreateProductRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["description"] = self.description
         result["visibility"] = (

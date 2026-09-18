@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkExchangeOAuthTokenResponseValue200ApplicationJson",
     "required": ["token_type", "expires_in", "access_token", "refresh_token"],
     "properties": {
@@ -23,7 +23,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkExchangeOAuthTokenResponseValue200ApplicationJson",
     "required": ["token_type", "expires_in", "access_token", "refresh_token"],
     "properties": {
@@ -44,14 +44,14 @@ class SdkExchangeOAuthTokenResponseValue200ApplicationJson:
     expires_in: Literal[3600]
     access_token: str
     refresh_token: str
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkExchangeOAuthTokenResponseValue200ApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -78,9 +78,9 @@ class SdkExchangeOAuthTokenResponseValue200ApplicationJson:
                 "SdkExchangeOAuthTokenResponseValue200ApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["token_type"] = self.token_type
         _domain_data["expires_in"] = self.expires_in
         _domain_data["access_token"] = self.access_token
@@ -93,7 +93,7 @@ class SdkExchangeOAuthTokenResponseValue200ApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["token_type"] = self.token_type
         result["expires_in"] = self.expires_in
         result["access_token"] = self.access_token

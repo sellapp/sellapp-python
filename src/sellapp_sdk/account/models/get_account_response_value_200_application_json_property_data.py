@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.get_account_response_value_200_application_json_p
     GetAccountResponseValue200ApplicationJsonPropertyDataCredentialType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAccountResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "username", "email", "credential_type"],
     "properties": {
@@ -30,7 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAccountResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "username", "email", "credential_type"],
     "properties": {
@@ -51,17 +51,17 @@ class GetAccountResponseValue200ApplicationJsonPropertyData:
     """Get Account Response Value200Application Json Property Data model."""
 
     id: str
-    username: Optional[str]
+    username: str | None
     email: str
     credential_type: GetAccountResponseValue200ApplicationJsonPropertyDataCredentialType
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetAccountResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -90,9 +90,9 @@ class GetAccountResponseValue200ApplicationJsonPropertyData:
                 "GetAccountResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["username"] = self.username
         _domain_data["email"] = self.email
@@ -105,7 +105,7 @@ class GetAccountResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.username is not None:
             result["username"] = self.username

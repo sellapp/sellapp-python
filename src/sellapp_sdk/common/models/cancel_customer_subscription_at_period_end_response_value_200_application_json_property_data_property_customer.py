@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .cancel_customer_subscription_at_period_end_response_value_200_application_
     CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomer",
     "required": ["id", "email", "external_id", "name", "locale", "metadata"],
     "properties": {
@@ -50,7 +50,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomer",
     "required": ["id", "email", "external_id", "name", "locale", "metadata"],
     "properties": {
@@ -92,18 +92,18 @@ class CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonProper
 
     id: int
     email: str
-    external_id: Optional[str]
-    name: Optional[str]
-    locale: Optional[str]
+    external_id: str | None
+    name: str | None
+    locale: str | None
     metadata: CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomer:
         """Deserialize from a dictionary."""
         try:
@@ -122,7 +122,7 @@ class CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonProper
                 name=data["name"],
                 locale=data["locale"],
                 metadata=CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], data["metadata"])
+                    cast(dict[str, Any], data["metadata"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["id", "email", "external_id", "name", "locale", "metadata"]
@@ -135,9 +135,9 @@ class CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonProper
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["email"] = self.email
         _domain_data["external_id"] = self.external_id
@@ -152,7 +152,7 @@ class CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonProper
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["email"] = self.email
         if self.external_id is not None:

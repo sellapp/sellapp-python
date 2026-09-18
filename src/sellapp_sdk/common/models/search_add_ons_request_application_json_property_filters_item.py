@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -20,7 +20,7 @@ from .search_add_ons_request_application_json_property_filters_item_type import 
     SearchAddOnsRequestApplicationJsonPropertyFiltersItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchAddOnsRequestApplicationJsonPropertyFiltersItem",
     "required": [],
     "properties": {
@@ -32,7 +32,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchAddOnsRequestApplicationJsonPropertyFiltersItem",
     "required": [],
     "properties": {
@@ -50,21 +50,22 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SearchAddOnsRequestApplicationJsonPropertyFiltersItem:
     """Search Add Ons Request Application Json Property Filters Item model."""
 
-    field: Optional[str] = None
-    operator: Optional[str] = None
-    value: Optional[Any] = None
-    type: Optional[SearchAddOnsRequestApplicationJsonPropertyFiltersItemType] = None
-    nested: Optional[
-        List[SearchAddOnsRequestApplicationJsonPropertyFiltersItemPropertyNestedItem]
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    field: str | None = None
+    operator: str | None = None
+    value: Any | None = None
+    type: SearchAddOnsRequestApplicationJsonPropertyFiltersItemType | None = None
+    nested: (
+        list[SearchAddOnsRequestApplicationJsonPropertyFiltersItemPropertyNestedItem]
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SearchAddOnsRequestApplicationJsonPropertyFiltersItem:
         """Deserialize from a dictionary."""
         try:
@@ -85,7 +86,7 @@ class SearchAddOnsRequestApplicationJsonPropertyFiltersItem:
                 else None,
                 nested=[
                     SearchAddOnsRequestApplicationJsonPropertyFiltersItemPropertyNestedItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_nested)
                 ]
@@ -101,9 +102,9 @@ class SearchAddOnsRequestApplicationJsonPropertyFiltersItem:
                 "SearchAddOnsRequestApplicationJsonPropertyFiltersItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.field is not None:
             _domain_data["field"] = self.field
         if self.operator is not None:
@@ -122,7 +123,7 @@ class SearchAddOnsRequestApplicationJsonPropertyFiltersItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.field is not None:
             result["field"] = self.field
         if self.operator is not None:

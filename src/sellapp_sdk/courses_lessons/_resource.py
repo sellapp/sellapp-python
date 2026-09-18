@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -68,18 +68,16 @@ class CoursesLessons:
         section: int,
         *,
         title: str,
-        type: Union[SdkCreateCourseLessonRequestApplicationJsonType, str],
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            CreateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateCourseLessonRequestApplicationJsonType | str,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: CreateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseLessonResponseValue201ApplicationJson:
         """Create a course lesson
 
@@ -140,7 +138,7 @@ class CoursesLessons:
             "idempotency_supported": False,
             "operation_id": "createCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -210,21 +208,17 @@ class CoursesLessons:
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkReplaceCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseLessonResponseValue200ApplicationJson:
         """Update a course lesson
 
@@ -285,7 +279,7 @@ class CoursesLessons:
             "idempotency_supported": False,
             "operation_id": "replaceCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -355,21 +349,17 @@ class CoursesLessons:
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            UpdateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkUpdateCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: UpdateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseLessonResponseValue200ApplicationJson:
         """Update a course lesson
 
@@ -430,7 +420,7 @@ class CoursesLessons:
             "idempotency_supported": False,
             "operation_id": "updateCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -500,7 +490,7 @@ class CoursesLessons:
         course: str,
         lesson: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a course lesson
 
@@ -560,10 +550,10 @@ class CoursesLessons:
         self,
         course: str,
         *,
-        resources: List[
+        resources: list[
             ReorderCourseLessonsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseLessonsResponseValue200ApplicationJson:
         """Reorder course lessons
 
@@ -616,7 +606,7 @@ class CoursesLessons:
             "idempotency_supported": False,
             "operation_id": "reorderCourseLessons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -656,18 +646,16 @@ class AsyncCoursesLessons:
         section: int,
         *,
         title: str,
-        type: Union[SdkCreateCourseLessonRequestApplicationJsonType, str],
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            CreateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateCourseLessonRequestApplicationJsonType | str,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: CreateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseLessonResponseValue201ApplicationJson:
         """Create a course lesson
 
@@ -728,7 +716,7 @@ class AsyncCoursesLessons:
             "idempotency_supported": False,
             "operation_id": "createCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -798,21 +786,17 @@ class AsyncCoursesLessons:
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkReplaceCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseLessonResponseValue200ApplicationJson:
         """Update a course lesson
 
@@ -873,7 +857,7 @@ class AsyncCoursesLessons:
             "idempotency_supported": False,
             "operation_id": "replaceCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -943,21 +927,17 @@ class AsyncCoursesLessons:
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            UpdateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkUpdateCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: UpdateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseLessonResponseValue200ApplicationJson:
         """Update a course lesson
 
@@ -1018,7 +998,7 @@ class AsyncCoursesLessons:
             "idempotency_supported": False,
             "operation_id": "updateCourseLesson",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1088,7 +1068,7 @@ class AsyncCoursesLessons:
         course: str,
         lesson: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a course lesson
 
@@ -1148,10 +1128,10 @@ class AsyncCoursesLessons:
         self,
         course: str,
         *,
-        resources: List[
+        resources: list[
             ReorderCourseLessonsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseLessonsResponseValue200ApplicationJson:
         """Reorder course lessons
 
@@ -1204,7 +1184,7 @@ class AsyncCoursesLessons:
             "idempotency_supported": False,
             "operation_id": "reorderCourseLessons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_create_charge_request_application_json_payment_method import (
     SdkCreateChargeRequestApplicationJsonPaymentMethod,
@@ -39,12 +41,12 @@ class Charges:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all charges
 
@@ -123,27 +125,27 @@ class Charges:
         *,
         email: str,
         return_url: str,
-        cancel_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        webhook: Union[str, None, NotGiven] = NOT_GIVEN,
-        reference: Union[str, None, NotGiven] = NOT_GIVEN,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        currency: Optional[str] = None,
-        total: Optional[int] = None,
-        payment_method: Optional[
-            Union[SdkCreateChargeRequestApplicationJsonPaymentMethod, str]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkCreateChargeRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        use_all_payment_methods: Optional[bool] = None,
-        deliverable: Optional[
-            CreateChargeRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        metadata: Optional[CreateChargeRequestApplicationJsonPropertyMetadata] = None,
-        coupon_code: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cancel_url: str | None | NotGiven = NOT_GIVEN,
+        webhook: str | None | NotGiven = NOT_GIVEN,
+        reference: str | None | NotGiven = NOT_GIVEN,
+        description: str | None | NotGiven = NOT_GIVEN,
+        currency: str | None = None,
+        total: int | None = None,
+        payment_method: SdkCreateChargeRequestApplicationJsonPaymentMethod
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateChargeRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        custom_payment_method_ids: builtins.list[str] | None = None,
+        use_all_payment_methods: bool | None = None,
+        deliverable: CreateChargeRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        metadata: CreateChargeRequestApplicationJsonPropertyMetadata | None = None,
+        coupon_code: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateChargeResponseValue201ApplicationJson:
         """Create a charge
 
@@ -209,7 +211,7 @@ class Charges:
             "idempotency_supported": False,
             "operation_id": "createCharge",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -427,7 +429,7 @@ class Charges:
         self,
         charge: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetChargeResponseValue200ApplicationJson:
         """Retrieve a charge
 
@@ -490,7 +492,7 @@ class Charges:
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeCompletedResponseValue200ApplicationJson:
         """Mark pending charge completed
 
@@ -553,7 +555,7 @@ class Charges:
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeVoidedResponseValue200ApplicationJson:
         """Mark pending charge voided
 
@@ -623,12 +625,12 @@ class AsyncCharges:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all charges
 
@@ -707,27 +709,27 @@ class AsyncCharges:
         *,
         email: str,
         return_url: str,
-        cancel_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        webhook: Union[str, None, NotGiven] = NOT_GIVEN,
-        reference: Union[str, None, NotGiven] = NOT_GIVEN,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        currency: Optional[str] = None,
-        total: Optional[int] = None,
-        payment_method: Optional[
-            Union[SdkCreateChargeRequestApplicationJsonPaymentMethod, str]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkCreateChargeRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        use_all_payment_methods: Optional[bool] = None,
-        deliverable: Optional[
-            CreateChargeRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        metadata: Optional[CreateChargeRequestApplicationJsonPropertyMetadata] = None,
-        coupon_code: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cancel_url: str | None | NotGiven = NOT_GIVEN,
+        webhook: str | None | NotGiven = NOT_GIVEN,
+        reference: str | None | NotGiven = NOT_GIVEN,
+        description: str | None | NotGiven = NOT_GIVEN,
+        currency: str | None = None,
+        total: int | None = None,
+        payment_method: SdkCreateChargeRequestApplicationJsonPaymentMethod
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateChargeRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        custom_payment_method_ids: builtins.list[str] | None = None,
+        use_all_payment_methods: bool | None = None,
+        deliverable: CreateChargeRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        metadata: CreateChargeRequestApplicationJsonPropertyMetadata | None = None,
+        coupon_code: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateChargeResponseValue201ApplicationJson:
         """Create a charge
 
@@ -793,7 +795,7 @@ class AsyncCharges:
             "idempotency_supported": False,
             "operation_id": "createCharge",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -1011,7 +1013,7 @@ class AsyncCharges:
         self,
         charge: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetChargeResponseValue200ApplicationJson:
         """Retrieve a charge
 
@@ -1074,7 +1076,7 @@ class AsyncCharges:
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeCompletedResponseValue200ApplicationJson:
         """Mark pending charge completed
 
@@ -1137,7 +1139,7 @@ class AsyncCharges:
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeVoidedResponseValue200ApplicationJson:
         """Mark pending charge voided
 

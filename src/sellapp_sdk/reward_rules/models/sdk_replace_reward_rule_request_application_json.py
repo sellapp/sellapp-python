@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .replace_reward_rule_request_application_json_property_outputs_item import 
     ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceRewardRuleRequestApplicationJson",
     "required": [],
     "properties": {
@@ -60,7 +60,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceRewardRuleRequestApplicationJson",
     "required": [],
     "properties": {
@@ -103,23 +103,23 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceRewardRuleRequestApplicationJson:
     """Sdk Replace Reward Rule Request Application Json model."""
 
-    name: Optional[str] = None
-    description: Optional[str] = None
-    is_active: Optional[bool] = None
-    trigger_type: Optional[SdkReplaceRewardRuleRequestApplicationJsonTriggerType] = None
-    trigger_threshold: Optional[int] = None
-    outputs: Optional[
-        List[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem]
-    ] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    name: str | None = None
+    description: str | None = None
+    is_active: bool | None = None
+    trigger_type: SdkReplaceRewardRuleRequestApplicationJsonTriggerType | None = None
+    trigger_threshold: int | None = None
+    outputs: list[ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem] | None = (
+        None
+    )
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceRewardRuleRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -143,7 +143,7 @@ class SdkReplaceRewardRuleRequestApplicationJson:
                 trigger_threshold=data.get("trigger_threshold"),
                 outputs=[
                     ReplaceRewardRuleRequestApplicationJsonPropertyOutputsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_outputs)
                 ]
@@ -170,9 +170,9 @@ class SdkReplaceRewardRuleRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplaceRewardRuleRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             _domain_data["name"] = self.name
         _domain_data["description"] = self.description
@@ -194,7 +194,7 @@ class SdkReplaceRewardRuleRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             result["name"] = self.name
         if self.description is not None:

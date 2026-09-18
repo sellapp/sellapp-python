@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -27,14 +27,14 @@ class AffiliateReferralSessions:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        active: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        active: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListAffiliateReferralSessionsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -118,7 +118,7 @@ class AffiliateReferralSessions:
         self,
         referral_session: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralSessionResponseValue200ApplicationJson:
         """Retrieve an affiliate referral session
 
@@ -188,14 +188,14 @@ class AsyncAffiliateReferralSessions:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        active: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        active: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListAffiliateReferralSessionsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -279,7 +279,7 @@ class AsyncAffiliateReferralSessions:
         self,
         referral_session: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralSessionResponseValue200ApplicationJson:
         """Retrieve an affiliate referral session
 

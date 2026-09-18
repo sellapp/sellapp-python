@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -36,7 +36,7 @@ class StoreSettings:
     def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreSettingsResponseValue200ApplicationJson:
         """Retrieve store settings
 
@@ -94,11 +94,11 @@ class StoreSettings:
         self,
         *,
         name: str,
-        visibility: Union[CourseVisibility, str],
+        visibility: CourseVisibility | str,
         timezone: str,
         currency: str,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson:
         """Update general store settings
 
@@ -153,7 +153,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceGeneralStoreSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "visibility": enum_value(visibility),
             "timezone": timezone,
@@ -208,12 +208,12 @@ class StoreSettings:
     def update_general(
         self,
         *,
-        name: Optional[str] = None,
-        visibility: Optional[Union[CourseVisibility, str]] = None,
-        timezone: Optional[str] = None,
-        currency: Optional[str] = None,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        visibility: CourseVisibility | str | None = None,
+        timezone: str | None = None,
+        currency: str | None = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson:
         """Update general store settings
 
@@ -268,7 +268,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateGeneralStoreSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -329,13 +329,13 @@ class StoreSettings:
     def replace_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson:
         """Update analytics settings
 
@@ -391,7 +391,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceAnalyticsSettings",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(ga_4_measurement_id, NotGiven):
             body["ga4_measurement_id"] = ga_4_measurement_id
         if not isinstance(meta_pixel_id, NotGiven):
@@ -477,13 +477,13 @@ class StoreSettings:
     def update_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson:
         """Update analytics settings
 
@@ -539,7 +539,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateAnalyticsSettings",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(ga_4_measurement_id, NotGiven):
             body["ga4_measurement_id"] = ga_4_measurement_id
         if not isinstance(meta_pixel_id, NotGiven):
@@ -626,7 +626,7 @@ class StoreSettings:
         self,
         *,
         abandoned_cart: ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceMarketingSettingsResponseValue200ApplicationJson:
         """Update marketing settings
 
@@ -677,7 +677,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceMarketingSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "abandoned_cart": abandoned_cart.to_dict(),
         }
         _validate_model(
@@ -705,7 +705,7 @@ class StoreSettings:
         self,
         *,
         abandoned_cart: UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateMarketingSettingsResponseValue200ApplicationJson:
         """Update marketing settings
 
@@ -756,7 +756,7 @@ class StoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateMarketingSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "abandoned_cart": abandoned_cart.to_dict(),
         }
         _validate_model(
@@ -791,7 +791,7 @@ class AsyncStoreSettings:
     async def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreSettingsResponseValue200ApplicationJson:
         """Retrieve store settings
 
@@ -849,11 +849,11 @@ class AsyncStoreSettings:
         self,
         *,
         name: str,
-        visibility: Union[CourseVisibility, str],
+        visibility: CourseVisibility | str,
         timezone: str,
         currency: str,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson:
         """Update general store settings
 
@@ -908,7 +908,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceGeneralStoreSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "name": name,
             "visibility": enum_value(visibility),
             "timezone": timezone,
@@ -963,12 +963,12 @@ class AsyncStoreSettings:
     async def update_general(
         self,
         *,
-        name: Optional[str] = None,
-        visibility: Optional[Union[CourseVisibility, str]] = None,
-        timezone: Optional[str] = None,
-        currency: Optional[str] = None,
-        dark_mode: Union[Union[DarkMode, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        visibility: CourseVisibility | str | None = None,
+        timezone: str | None = None,
+        currency: str | None = None,
+        dark_mode: DarkMode | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson:
         """Update general store settings
 
@@ -1023,7 +1023,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateGeneralStoreSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1084,13 +1084,13 @@ class AsyncStoreSettings:
     async def replace_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson:
         """Update analytics settings
 
@@ -1146,7 +1146,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceAnalyticsSettings",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(ga_4_measurement_id, NotGiven):
             body["ga4_measurement_id"] = ga_4_measurement_id
         if not isinstance(meta_pixel_id, NotGiven):
@@ -1232,13 +1232,13 @@ class AsyncStoreSettings:
     async def update_analytics(
         self,
         *,
-        ga_4_measurement_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_pixel_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        ga_4_api_secret: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        tiktok_access_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        ga_4_measurement_id: str | None | NotGiven = NOT_GIVEN,
+        meta_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        tiktok_pixel_id: str | None | NotGiven = NOT_GIVEN,
+        ga_4_api_secret: str | None | NotGiven = NOT_GIVEN,
+        meta_access_token: str | None | NotGiven = NOT_GIVEN,
+        tiktok_access_token: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson:
         """Update analytics settings
 
@@ -1294,7 +1294,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateAnalyticsSettings",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(ga_4_measurement_id, NotGiven):
             body["ga4_measurement_id"] = ga_4_measurement_id
         if not isinstance(meta_pixel_id, NotGiven):
@@ -1381,7 +1381,7 @@ class AsyncStoreSettings:
         self,
         *,
         abandoned_cart: ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceMarketingSettingsResponseValue200ApplicationJson:
         """Update marketing settings
 
@@ -1432,7 +1432,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "replaceMarketingSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "abandoned_cart": abandoned_cart.to_dict(),
         }
         _validate_model(
@@ -1460,7 +1460,7 @@ class AsyncStoreSettings:
         self,
         *,
         abandoned_cart: UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateMarketingSettingsResponseValue200ApplicationJson:
         """Update marketing settings
 
@@ -1511,7 +1511,7 @@ class AsyncStoreSettings:
             "idempotency_supported": False,
             "operation_id": "updateMarketingSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "abandoned_cart": abandoned_cart.to_dict(),
         }
         _validate_model(

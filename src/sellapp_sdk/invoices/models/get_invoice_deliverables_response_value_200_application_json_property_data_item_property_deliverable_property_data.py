@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData",
     "required": [],
     "properties": {
@@ -31,7 +31,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData",
     "required": [],
     "properties": {
@@ -56,21 +56,21 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData:
     """Get Invoice Deliverables Response Value200Application Json Property Data Item Property Deliverable Property Data model."""
 
-    serials: Optional[List[str]] = None
-    delivered_files: Optional[List[str]] = None
-    dynamic: Optional[str] = None
-    manual: Optional[str] = None
-    license_keys: Optional[List[str]] = None
-    credits_granted: Optional[int] = None
+    serials: list[str] | None = None
+    delivered_files: list[str] | None = None
+    dynamic: str | None = None
+    manual: str | None = None
+    license_keys: list[str] | None = None
+    credits_granted: int | None = None
     """Number of credits granted by a credits deliverable."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -108,9 +108,9 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPrope
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.serials is not None:
             _domain_data["serials"] = self.serials
         if self.delivered_files is not None:
@@ -131,7 +131,7 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPrope
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.serials is not None:
             result["serials"] = self.serials
         if self.delivered_files is not None:

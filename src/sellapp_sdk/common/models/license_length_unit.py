@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class LicenseLengthUnit(str, Enum):
@@ -17,7 +17,7 @@ class LicenseLengthUnit(str, Enum):
     NULL = "null"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[LicenseLengthUnit]:
+    def _missing_(cls, value: object) -> LicenseLengthUnit | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

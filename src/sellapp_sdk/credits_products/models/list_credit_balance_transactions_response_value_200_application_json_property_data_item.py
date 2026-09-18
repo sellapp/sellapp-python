@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .list_credit_balance_transactions_response_value_200_application_json_prope
     ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -73,7 +73,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -139,22 +139,23 @@ class ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataIt
     amount_units: int
     balance_after_units: int
     idempotency_key: str
-    source_type: Optional[str] = None
-    source_id: Optional[str] = None
-    reason: Optional[str] = None
-    metadata: Optional[
+    source_type: str | None = None
+    source_id: str | None = None
+    reason: str | None = None
+    metadata: (
         ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata
-    ] = None
-    actor_user_id: Optional[int] = None
-    created_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    actor_user_id: int | None = None
+    created_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -181,7 +182,7 @@ class ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataIt
                 source_id=data.get("source_id"),
                 reason=data.get("reason"),
                 metadata=ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -216,9 +217,9 @@ class ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataIt
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["store_id"] = self.store_id
         _domain_data["customer_id"] = self.customer_id
@@ -243,7 +244,7 @@ class ListCreditBalanceTransactionsResponseValue200ApplicationJsonPropertyDataIt
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["store_id"] = self.store_id
         result["customer_id"] = self.customer_id

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,13 +16,13 @@ from .get_store_settings_response_value_200_application_json_property_data_prope
     GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketingPropertyAbandonedCart,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing",
     "required": [],
     "properties": {"abandoned_cart": {"kind": "any"}},
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing",
     "required": [],
     "properties": {"abandoned_cart": {"kind": "any"}},
@@ -34,17 +34,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing:
     """Get Store Settings Response Value200Application Json Property Data Property Marketing model."""
 
-    abandoned_cart: Optional[
+    abandoned_cart: (
         GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketingPropertyAbandonedCart
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing:
         """Deserialize from a dictionary."""
         try:
@@ -58,7 +59,7 @@ class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketi
             )
             return cls(
                 abandoned_cart=GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketingPropertyAbandonedCart.from_dict(
-                    cast(Dict[str, Any], _v_abandoned_cart)
+                    cast(dict[str, Any], _v_abandoned_cart)
                 )
                 if (_v_abandoned_cart := data.get("abandoned_cart")) is not None
                 else None,
@@ -73,9 +74,9 @@ class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketi
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.abandoned_cart is not None:
             _domain_data["abandoned_cart"] = self.abandoned_cart
         _validate_model(
@@ -86,7 +87,7 @@ class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketi
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.abandoned_cart is not None:
             result["abandoned_cart"] = self.abandoned_cart.to_dict()
         return result

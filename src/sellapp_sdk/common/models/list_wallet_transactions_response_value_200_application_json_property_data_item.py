@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -20,7 +20,7 @@ from .list_wallet_transactions_response_value_200_application_json_property_data
     ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": ["id", "wallet_id", "type", "amount_cents", "balance_after_cents"],
     "properties": {
@@ -100,7 +100,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": ["id", "wallet_id", "type", "amount_cents", "balance_after_cents"],
     "properties": {
@@ -192,25 +192,25 @@ class ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem:
     amount_cents: int
     """Signed USD cents: positive credits increase the balance; negative debits decrease it."""
     balance_after_cents: int
-    currency_at_source: Optional[str] = None
-    exchange_rate_to_usd: Optional[str] = None
-    order_id: Optional[int] = None
-    charge_id: Optional[int] = None
-    reverses_entry_id: Optional[int] = None
-    expired_at: Optional[datetime] = None
-    note: Optional[str] = None
-    idempotency_key: Optional[str] = None
-    expires_at: Optional[datetime] = None
-    created_by_user_id: Optional[int] = None
-    created_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    currency_at_source: str | None = None
+    exchange_rate_to_usd: str | None = None
+    order_id: int | None = None
+    charge_id: int | None = None
+    reverses_entry_id: int | None = None
+    expired_at: datetime | None = None
+    note: str | None = None
+    idempotency_key: str | None = None
+    expires_at: datetime | None = None
+    created_by_user_id: int | None = None
+    created_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -276,9 +276,9 @@ class ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["wallet_id"] = self.wallet_id
         _domain_data["type"] = self.type
@@ -303,7 +303,7 @@ class ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["wallet_id"] = self.wallet_id
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -24,7 +24,7 @@ from .batch_create_products_request_application_json_property_resources_item_pro
     BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItem",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -45,7 +45,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItem",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -75,27 +75,29 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
     title: str
     description: str
     visibility: CatalogVisibility
-    slug: Optional[str] = None
-    type: Optional[
-        BatchCreateProductsRequestApplicationJsonPropertyResourcesItemType
-    ] = None
-    section: Optional[int] = None
-    additional_information: Optional[
-        List[
+    slug: str | None = None
+    type: BatchCreateProductsRequestApplicationJsonPropertyResourcesItemType | None = (
+        None
+    )
+    section: int | None = None
+    additional_information: (
+        list[
             BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItem
         ]
-    ] = None
-    other_settings: Optional[
+        | None
+    ) = None
+    other_settings: (
         BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
         """Deserialize from a dictionary."""
         try:
@@ -120,7 +122,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
                 section=data.get("section"),
                 additional_information=[
                     BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_additional_information)
                 ]
@@ -128,7 +130,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
                 is not None
                 else None,
                 other_settings=BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], _v_other_settings)
+                    cast(dict[str, Any], _v_other_settings)
                 )
                 if (_v_other_settings := data.get("other_settings")) is not None
                 else None,
@@ -152,9 +154,9 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
                 "BatchCreateProductsRequestApplicationJsonPropertyResourcesItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["description"] = self.description
         _domain_data["visibility"] = self.visibility
@@ -175,7 +177,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["description"] = self.description
         result["visibility"] = (

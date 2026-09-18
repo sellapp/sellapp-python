@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -57,10 +57,10 @@ class Subscriptions:
         subscription: int,
         *,
         cancel_at_period_end: bool,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionResponseValue200ApplicationJson:
         """Cancel a subscription
 
@@ -116,7 +116,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cancel_at_period_end": cancel_at_period_end,
@@ -164,7 +164,7 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """View subscription capabilities
 
@@ -227,9 +227,9 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel a subscription at period end
 
@@ -283,7 +283,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscriptionAtPeriodEnd",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         if not isinstance(reason, NotGiven):
@@ -336,11 +336,11 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel a subscription immediately
 
@@ -396,7 +396,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscriptionImmediately",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "refund_last_payment": refund_last_payment,
@@ -458,10 +458,10 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        resume_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkPauseSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
@@ -516,7 +516,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "pauseSubscription",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         if not isinstance(resume_at, NotGiven):
@@ -573,8 +573,8 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkResumeSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
@@ -627,7 +627,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "resumeSubscription",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         _validate_model(
@@ -670,8 +670,8 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Update a subscription payment method
 
@@ -724,7 +724,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "updateSubscriptionPaymentMethod",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         _validate_model(
@@ -767,23 +767,16 @@ class Subscriptions:
         product_subscription: int,
         *,
         target_variant_id: int,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Preview a subscription plan change
 
@@ -840,7 +833,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "previewSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "target_variant_id": target_variant_id,
@@ -913,23 +906,16 @@ class Subscriptions:
         *,
         target_variant_id: int,
         preview_token: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Confirm a subscription plan change
 
@@ -987,7 +973,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "confirmSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "target_variant_id": target_variant_id,
@@ -1065,12 +1051,11 @@ class Subscriptions:
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a subscription renewal date change
 
@@ -1126,7 +1111,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "previewSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "renewal_date": renewal_date,
@@ -1194,13 +1179,12 @@ class Subscriptions:
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        preview_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a subscription renewal date change
 
@@ -1257,7 +1241,7 @@ class Subscriptions:
             "idempotency_supported": True,
             "operation_id": "confirmSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "renewal_date": renewal_date,
@@ -1333,11 +1317,11 @@ class Subscriptions:
     def list_subscriptions(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List subscriptions
 
@@ -1414,13 +1398,13 @@ class Subscriptions:
     def search_subscriptions(
         self,
         *,
-        search: Optional[str] = None,
-        status: Optional[str] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        status: str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search subscriptions
 
@@ -1478,7 +1462,7 @@ class Subscriptions:
             "idempotency_supported": False,
             "operation_id": "searchSubscriptions",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search,
@@ -1509,7 +1493,7 @@ class Subscriptions:
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
         """Retrieve a subscription
 
@@ -1582,10 +1566,10 @@ class AsyncSubscriptions:
         subscription: int,
         *,
         cancel_at_period_end: bool,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionResponseValue200ApplicationJson:
         """Cancel a subscription
 
@@ -1641,7 +1625,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "cancel_at_period_end": cancel_at_period_end,
@@ -1689,7 +1673,7 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """View subscription capabilities
 
@@ -1752,9 +1736,9 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel a subscription at period end
 
@@ -1808,7 +1792,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscriptionAtPeriodEnd",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         if not isinstance(reason, NotGiven):
@@ -1861,11 +1845,11 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel a subscription immediately
 
@@ -1921,7 +1905,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "cancelSubscriptionImmediately",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "refund_last_payment": refund_last_payment,
@@ -1983,10 +1967,10 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        resume_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkPauseSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
@@ -2041,7 +2025,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "pauseSubscription",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         if not isinstance(resume_at, NotGiven):
@@ -2098,8 +2082,8 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkResumeSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
@@ -2152,7 +2136,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "resumeSubscription",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         _validate_model(
@@ -2195,8 +2179,8 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Update a subscription payment method
 
@@ -2249,7 +2233,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "updateSubscriptionPaymentMethod",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
         _validate_model(
@@ -2292,23 +2276,16 @@ class AsyncSubscriptions:
         product_subscription: int,
         *,
         target_variant_id: int,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Preview a subscription plan change
 
@@ -2365,7 +2342,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "previewSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "target_variant_id": target_variant_id,
@@ -2438,23 +2415,16 @@ class AsyncSubscriptions:
         *,
         target_variant_id: int,
         preview_token: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Confirm a subscription plan change
 
@@ -2512,7 +2482,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "confirmSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "target_variant_id": target_variant_id,
@@ -2590,12 +2560,11 @@ class AsyncSubscriptions:
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a subscription renewal date change
 
@@ -2651,7 +2620,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "previewSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "renewal_date": renewal_date,
@@ -2719,13 +2688,12 @@ class AsyncSubscriptions:
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        preview_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a subscription renewal date change
 
@@ -2782,7 +2750,7 @@ class AsyncSubscriptions:
             "idempotency_supported": True,
             "operation_id": "confirmSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "renewal_date": renewal_date,
@@ -2858,11 +2826,11 @@ class AsyncSubscriptions:
     async def list_subscriptions(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List subscriptions
 
@@ -2939,13 +2907,13 @@ class AsyncSubscriptions:
     async def search_subscriptions(
         self,
         *,
-        search: Optional[str] = None,
-        status: Optional[str] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        status: str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search subscriptions
 
@@ -3003,7 +2971,7 @@ class AsyncSubscriptions:
             "idempotency_supported": False,
             "operation_id": "searchSubscriptions",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "search": search,
@@ -3034,7 +3002,7 @@ class AsyncSubscriptions:
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
         """Retrieve a subscription
 

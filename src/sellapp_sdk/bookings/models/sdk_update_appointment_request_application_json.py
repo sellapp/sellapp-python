@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateAppointmentRequestApplicationJson",
     "required": ["slot_start_at"],
     "properties": {
@@ -27,7 +27,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateAppointmentRequestApplicationJson",
     "required": ["slot_start_at"],
     "properties": {
@@ -47,16 +47,16 @@ class SdkUpdateAppointmentRequestApplicationJson:
 
     slot_start_at: datetime
     """A future slot start including an explicit UTC offset."""
-    timezone: Optional[str] = None
+    timezone: str | None = None
     """IANA timezone used for appointment display and availability rules."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkUpdateAppointmentRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -79,9 +79,9 @@ class SdkUpdateAppointmentRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkUpdateAppointmentRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["slot_start_at"] = self.slot_start_at
         _domain_data["timezone"] = self.timezone
         _validate_model(
@@ -92,7 +92,7 @@ class SdkUpdateAppointmentRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["slot_start_at"] = _format_datetime(self.slot_start_at)
         if self.timezone is not None:
             result["timezone"] = self.timezone

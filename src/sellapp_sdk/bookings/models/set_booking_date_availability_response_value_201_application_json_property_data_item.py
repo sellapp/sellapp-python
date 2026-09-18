@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from sellapp_sdk.common.models.set_booking_date_availability_response_value_201_
     SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -58,7 +58,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -101,8 +101,8 @@ class SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem:
     """Set Booking Date Availability Response Value201Application Json Property Data Item model."""
 
     id: str
-    product_id: Optional[int]
-    product_variant_id: Optional[int]
+    product_id: int | None
+    product_variant_id: int | None
     type: SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItemType
     status: (
         SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItemStatus
@@ -113,14 +113,14 @@ class SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem:
     timezone: str
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -172,9 +172,9 @@ class SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["product_id"] = self.product_id
         _domain_data["product_variant_id"] = self.product_variant_id
@@ -194,7 +194,7 @@ class SetBookingDateAvailabilityResponseValue201ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.product_id is not None:
             result["product_id"] = self.product_id

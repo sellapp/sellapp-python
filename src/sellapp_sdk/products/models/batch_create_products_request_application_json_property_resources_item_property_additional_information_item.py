@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -20,7 +20,7 @@ from .batch_create_products_request_application_json_property_resources_item_pro
     BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItemPropertyDateOptions,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItem",
     "required": ["type", "required", "label"],
     "properties": {
@@ -56,7 +56,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItem",
     "required": ["type", "required", "label"],
     "properties": {
@@ -101,22 +101,23 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAddi
     type: BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItemType
     required: bool
     label: str
-    key: Optional[str] = None
-    options: Optional[List[str]] = None
-    placeholder: Optional[str] = None
-    description: Optional[str] = None
-    variant: Optional[str] = None
-    date_options: Optional[
+    key: str | None = None
+    options: list[str] | None = None
+    placeholder: str | None = None
+    description: str | None = None
+    variant: str | None = None
+    date_options: (
         BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItemPropertyDateOptions
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItem:
         """Deserialize from a dictionary."""
         try:
@@ -140,7 +141,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAddi
                 description=data.get("description"),
                 variant=data.get("variant"),
                 date_options=BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAdditionalInformationItemPropertyDateOptions.from_dict(
-                    cast(Dict[str, Any], _v_date_options)
+                    cast(dict[str, Any], _v_date_options)
                 )
                 if (_v_date_options := data.get("date_options")) is not None
                 else None,
@@ -166,9 +167,9 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAddi
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         _domain_data["required"] = self.required
         _domain_data["label"] = self.label
@@ -192,7 +193,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyAddi
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["required"] = self.required
         result["label"] = self.label

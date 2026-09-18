@@ -14,6 +14,9 @@ Already building an integration? Jump to [configuration](https://github.com/sell
 **Install from source for now.** This SDK is pre-release, and publication of
 `sellapp-sdk` on PyPI has not been verified.
 
+Requires Python 3.10 or newer. Use a currently supported Python release for new
+integrations.
+
 You'll need access to [this private repository](https://github.com/sellapp/sellapp-python). Open a terminal
 in your local copy, then create a virtual environment and install the SDK there.
 The virtual environment keeps this project's Python packages together:
@@ -26,11 +29,6 @@ python -m pip install .
 
 On Windows, activate with `.venv\Scripts\Activate.ps1`. The distribution name
 is `sellapp-sdk`; the import is `sellapp_sdk`.
-
-Use Python 3.12, the tested native toolchain. The package metadata currently says
-3.9+, but generated type aliases import `typing.TypeAlias` (introduced in 3.10),
-so Python 3.9 is not usable. Support for the other declared versions has not been
-validated in this onboarding pass.
 
 ## First request
 

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_get_reward_grant_response_value_200_application_json import (
     SdkGetRewardGrantResponseValue200ApplicationJson,
@@ -44,13 +46,13 @@ class RewardGrants:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardGrantsResponseValue200ApplicationJson]:
         """List reward grants
 
@@ -131,7 +133,7 @@ class RewardGrants:
         *,
         reward_rule_id: int,
         customer_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueEligibleRewardGrantResponseValue200ApplicationJson:
         """Issue an eligible reward grant
 
@@ -183,7 +185,7 @@ class RewardGrants:
             "idempotency_supported": False,
             "operation_id": "issueEligibleRewardGrant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reward_rule_id": reward_rule_id,
             "customer_id": customer_id,
         }
@@ -214,23 +216,24 @@ class RewardGrants:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardGrantsResponseValue200ApplicationJson]:
         """Search reward grants
 
@@ -290,7 +293,7 @@ class RewardGrants:
             "idempotency_supported": False,
             "operation_id": "searchRewardGrants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -329,7 +332,7 @@ class RewardGrants:
         self,
         reward_grant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardGrantResponseValue200ApplicationJson:
         """Retrieve a reward grant
 
@@ -399,13 +402,13 @@ class AsyncRewardGrants:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListRewardGrantsResponseValue200ApplicationJson]:
         """List reward grants
 
@@ -486,7 +489,7 @@ class AsyncRewardGrants:
         *,
         reward_rule_id: int,
         customer_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueEligibleRewardGrantResponseValue200ApplicationJson:
         """Issue an eligible reward grant
 
@@ -538,7 +541,7 @@ class AsyncRewardGrants:
             "idempotency_supported": False,
             "operation_id": "issueEligibleRewardGrant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reward_rule_id": reward_rule_id,
             "customer_id": customer_id,
         }
@@ -569,23 +572,24 @@ class AsyncRewardGrants:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchRewardGrantsResponseValue200ApplicationJson]:
         """Search reward grants
 
@@ -645,7 +649,7 @@ class AsyncRewardGrants:
             "idempotency_supported": False,
             "operation_id": "searchRewardGrants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -684,7 +688,7 @@ class AsyncRewardGrants:
         self,
         reward_grant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardGrantResponseValue200ApplicationJson:
         """Retrieve a reward grant
 

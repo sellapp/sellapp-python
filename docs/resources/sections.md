@@ -12,23 +12,23 @@ List all sections
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListSectionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -71,7 +71,7 @@ def create(
         *,
         title: str,
         hidden: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateSectionResponseValue201ApplicationJson:
 ```
 
@@ -79,7 +79,7 @@ def create(
 | --- | --- | --- |
 | title | `str` | Yes |
 | hidden | `bool` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateSectionResponseValue201ApplicationJson`.
 
@@ -124,14 +124,14 @@ def get(
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetSectionResponseValue200ApplicationJson`.
 
@@ -173,18 +173,18 @@ def replace(
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceSectionResponseValue200ApplicationJson`.
 
@@ -230,18 +230,18 @@ def update(
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateSectionResponseValue200ApplicationJson`.
 
@@ -287,14 +287,14 @@ def delete(
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -335,15 +335,15 @@ Replace section order
 def replace_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionOrderResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceSectionOrderResponseValue200ApplicationJson`.
 
@@ -385,16 +385,16 @@ def replace_products(
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionProductsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceSectionProductsResponseValue200ApplicationJson`.
 
@@ -439,16 +439,16 @@ def replace_groups(
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionGroupsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceSectionGroupsResponseValue200ApplicationJson`.
 
@@ -492,41 +492,39 @@ Search sections
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchSectionsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchSectionsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchSectionsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchSectionsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -570,15 +568,19 @@ Batch create sections
 def batch_create(
         self,
         *,
-        resources: List[BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateSectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[
+            BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
+        ]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchCreateSectionsResponseValue200ApplicationJson`.
 
@@ -620,14 +622,14 @@ def batch_update(
         self,
         *,
         resources: BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateSectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | resources | `BatchUpdateSectionsRequestApplicationJsonPropertyResources` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchUpdateSectionsResponseValue200ApplicationJson`.
 
@@ -668,15 +670,15 @@ Batch delete sections
 def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -717,23 +719,23 @@ List all sections
 def v2_list_sections(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListSectionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -781,8 +783,8 @@ def v2_create_section(
         *,
         title: str,
         hidden: bool,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateSectionResponseValue201ApplicationJson:
 ```
 
@@ -790,8 +792,8 @@ def v2_create_section(
 | --- | --- | --- |
 | title | `str` | Yes |
 | hidden | `bool` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2CreateSectionResponseValue201ApplicationJson`.
 
@@ -840,43 +842,45 @@ Search sections
 def v2_search_sections(
         self,
         *,
-        filters: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[V2SearchSectionsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[V2SearchSectionsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `V2SearchSectionsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -926,14 +930,14 @@ def v2_get_section(
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2GetSectionResponseValue200ApplicationJson`.
 
@@ -980,18 +984,18 @@ def v2_replace_section(
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceSectionResponseValue200ApplicationJson`.
 
@@ -1042,18 +1046,18 @@ def v2_update_section(
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateSectionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| hidden | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| hidden | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2UpdateSectionResponseValue200ApplicationJson`.
 
@@ -1104,14 +1108,14 @@ def v2_delete_section(
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -1157,21 +1161,21 @@ Batch create sections
 def v2_batch_create_sections(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateSectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[
+| resources | `builtins.list[
             V2BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
         ]` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2BatchCreateSectionsResponseValue200ApplicationJson`.
 
@@ -1218,14 +1222,14 @@ def v2_batch_update_sections(
         self,
         *,
         resources: V2BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateSectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | resources | `V2BatchUpdateSectionsRequestApplicationJsonPropertyResources` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2BatchUpdateSectionsResponseValue200ApplicationJson`.
 
@@ -1271,15 +1275,15 @@ Batch delete sections
 def v2_batch_delete_sections(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -1325,15 +1329,15 @@ Replace section order
 def v2_replace_section_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionOrderResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceSectionOrderResponseValue200ApplicationJson`.
 
@@ -1380,16 +1384,16 @@ def v2_replace_section_products(
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionProductsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceSectionProductsResponseValue200ApplicationJson`.
 
@@ -1439,16 +1443,16 @@ def v2_replace_section_groups(
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionGroupsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | section | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceSectionGroupsResponseValue200ApplicationJson`.
 

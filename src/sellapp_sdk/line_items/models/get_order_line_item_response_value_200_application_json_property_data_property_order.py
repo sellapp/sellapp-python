@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -18,7 +18,7 @@ from sellapp_sdk._types import (
 from sellapp_sdk.common.models.payment_method import PaymentMethod
 from sellapp_sdk.common.models.status import Status
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder",
     "required": ["id", "status", "payment_method", "customer_id"],
     "properties": {
@@ -101,7 +101,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder",
     "required": ["id", "status", "payment_method", "customer_id"],
     "properties": {
@@ -191,19 +191,19 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder:
     """Get Order Line Item Response Value200Application Json Property Data Property Order model."""
 
     id: int
-    status: Optional[Status]
-    payment_method: Optional[PaymentMethod]
-    customer_id: Optional[int]
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    status: Status | None
+    payment_method: PaymentMethod | None
+    customer_id: int | None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder:
         """Deserialize from a dictionary."""
         try:
@@ -249,9 +249,9 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["status"] = self.status
         _domain_data["payment_method"] = self.payment_method
@@ -266,7 +266,7 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyOrder:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.status is not None:
             result["status"] = (

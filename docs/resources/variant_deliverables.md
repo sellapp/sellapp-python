@@ -14,7 +14,7 @@ def get(
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson:
 ```
 
@@ -22,7 +22,7 @@ def get(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson`.
 
@@ -73,15 +73,12 @@ def replace(
         product: str,
         variant: int,
         *,
-        types: List[
-            Union[
-                SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes,
-                str,
-            ]
+        types: list[
+            SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes | str
         ],
         data: ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson:
 ```
 
@@ -89,15 +86,12 @@ def replace(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| types | `List[
-            Union[
-                SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes,
-                str,
-            ]
+| types | `list[
+            SdkReplaceVariantDeliverableConfigurationRequestApplicationJsonTypes \| str
         ]` | Yes |
 | data | `ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData` | Yes |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson`.
 

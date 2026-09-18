@@ -14,10 +14,10 @@ def cancel(
         subscription: int,
         *,
         cancel_at_period_end: bool,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionResponseValue200ApplicationJson:
 ```
 
@@ -25,10 +25,10 @@ def cancel(
 | --- | --- | --- |
 | subscription | `int` | Yes |
 | cancel_at_period_end | `bool` | Yes |
-| refund_last_payment | `Optional[bool]` | No |
-| pro_rated_refund | `Optional[bool]` | No |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| refund_last_payment | `bool \| None` | No |
+| pro_rated_refund | `bool \| None` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCancelSubscriptionResponseValue200ApplicationJson`.
 
@@ -79,14 +79,14 @@ def get_capabilities(
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson`.
 
@@ -133,18 +133,18 @@ def cancel_at_period_end(
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| reason | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson`.
 
@@ -194,22 +194,22 @@ def cancel_immediately(
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        refund_last_payment: Optional[bool] = None,
-        pro_rated_refund: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        refund_last_payment: bool | None = None,
+        pro_rated_refund: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| reason | `Union[str, None, NotGiven]` | No |
-| refund_last_payment | `Optional[bool]` | No |
-| pro_rated_refund | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| refund_last_payment | `bool \| None` | No |
+| pro_rated_refund | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson`.
 
@@ -259,20 +259,20 @@ def pause(
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        resume_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkPauseSubscriptionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| resume_at | `Union[str, None, NotGiven]` | No |
-| reason | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| resume_at | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPauseSubscriptionResponseValue200ApplicationJson`.
 
@@ -323,16 +323,16 @@ def resume(
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkResumeSubscriptionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkResumeSubscriptionResponseValue200ApplicationJson`.
 
@@ -379,16 +379,16 @@ def update_payment_method(
         self,
         product_subscription: int,
         *,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -436,23 +436,16 @@ def preview_plan_change(
         product_subscription: int,
         *,
         target_variant_id: int,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -460,23 +453,16 @@ def preview_plan_change(
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
 | target_variant_id | `int` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| effective_timing | `Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ]` | No |
-| proration_behavior | `Optional[
-            Union[
-                SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ]` | No |
-| metadata | `Optional[
-            PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| effective_timing | `SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        \| str
+        \| None` | No |
+| proration_behavior | `SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        \| str
+        \| None` | No |
+| metadata | `PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -530,23 +516,16 @@ def confirm_plan_change(
         *,
         target_variant_id: int,
         preview_token: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        effective_timing: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ] = None,
-        proration_behavior: Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ] = None,
-        metadata: Optional[
-            ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        effective_timing: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -555,23 +534,16 @@ def confirm_plan_change(
 | product_subscription | `int` | Yes |
 | target_variant_id | `int` | Yes |
 | preview_token | `str` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| effective_timing | `Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
-                str,
-            ]
-        ]` | No |
-| proration_behavior | `Optional[
-            Union[
-                SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
-                str,
-            ]
-        ]` | No |
-| metadata | `Optional[
-            ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| effective_timing | `SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        \| str
+        \| None` | No |
+| proration_behavior | `SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        \| str
+        \| None` | No |
+| metadata | `ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -623,12 +595,11 @@ def preview_renewal_date(
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
 ```
 
@@ -636,12 +607,11 @@ def preview_renewal_date(
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
 | renewal_date | `str` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| reason | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[
-            PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| metadata | `PreviewSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson`.
 
@@ -693,13 +663,12 @@ def confirm_renewal_date(
         product_subscription: int,
         *,
         renewal_date: str,
-        idempotency_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        preview_token: Union[str, None, NotGiven] = NOT_GIVEN,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
 ```
 
@@ -707,13 +676,12 @@ def confirm_renewal_date(
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
 | renewal_date | `str` | Yes |
-| idempotency_key | `Union[str, None, NotGiven]` | No |
-| preview_token | `Union[str, None, NotGiven]` | No |
-| reason | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[
-            ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| preview_token | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| metadata | `ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson`.
 
@@ -764,21 +732,21 @@ List subscriptions
 def list_subscriptions(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -824,25 +792,25 @@ Search subscriptions
 def search_subscriptions(
         self,
         *,
-        search: Optional[str] = None,
-        status: Optional[str] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        status: str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| search | `Optional[str]` | No |
-| status | `Optional[str]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| search | `str \| None` | No |
+| status | `str \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -892,14 +860,14 @@ def get_subscription(
         self,
         product_subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetSubscriptionResponseValue200ApplicationJson`.
 

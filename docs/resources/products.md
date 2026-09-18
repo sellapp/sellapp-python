@@ -12,27 +12,27 @@ List all products
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| with_drafts | `Optional[bool]` | No |
-| only_drafts | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -80,23 +80,23 @@ def create(
         *,
         title: str,
         description: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        type: Optional[Union[SdkCreateProductRequestApplicationJsonType, str]] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        variants: Optional[
-            List[CreateProductRequestApplicationJsonPropertyVariantsItem]
-        ] = None,
-        bundle_items: Optional[
-            List[CreateProductRequestApplicationJsonPropertyBundleItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        type: SdkCreateProductRequestApplicationJsonType | str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            CreateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: CreateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        variants: builtins.list[CreateProductRequestApplicationJsonPropertyVariantsItem]
+        | None = None,
+        bundle_items: builtins.list[
+            CreateProductRequestApplicationJsonPropertyBundleItemsItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductResponseValue201ApplicationJson:
 ```
 
@@ -104,23 +104,23 @@ def create(
 | --- | --- | --- |
 | title | `str` | Yes |
 | description | `str` | Yes |
-| visibility | `Union[CatalogVisibility, str]` | Yes |
-| slug | `Optional[str]` | No |
-| type | `Optional[Union[SdkCreateProductRequestApplicationJsonType, str]]` | No |
-| section | `Union[int, None, NotGiven]` | No |
-| additional_information | `Optional[
-            List[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ]` | No |
-| other_settings | `Optional[
-            CreateProductRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| variants | `Optional[
-            List[CreateProductRequestApplicationJsonPropertyVariantsItem]
-        ]` | No |
-| bundle_items | `Optional[
-            List[CreateProductRequestApplicationJsonPropertyBundleItemsItem]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| visibility | `CatalogVisibility \| str` | Yes |
+| slug | `str \| None` | No |
+| type | `SdkCreateProductRequestApplicationJsonType \| str \| None` | No |
+| section | `int \| None \| NotGiven` | No |
+| additional_information | `builtins.list[
+            CreateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        \| None` | No |
+| other_settings | `CreateProductRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| variants | `builtins.list[CreateProductRequestApplicationJsonPropertyVariantsItem]
+        \| None` | No |
+| bundle_items | `builtins.list[
+            CreateProductRequestApplicationJsonPropertyBundleItemsItem
+        ]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateProductResponseValue201ApplicationJson`.
 
@@ -171,18 +171,18 @@ def get(
         self,
         product: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| with_drafts | `Optional[bool]` | No |
-| only_drafts | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetProductResponseValue200ApplicationJson`.
 
@@ -229,38 +229,38 @@ def replace(
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: ReplaceProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| visibility | `Optional[Union[CatalogVisibility, str]]` | No |
-| slug | `Optional[str]` | No |
-| section | `Union[int, None, NotGiven]` | No |
-| additional_information | `Optional[
-            List[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ]` | No |
-| other_settings | `Optional[
-            ReplaceProductRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| slug | `str \| None` | No |
+| section | `int \| None \| NotGiven` | No |
+| additional_information | `builtins.list[
+            ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        \| None` | No |
+| other_settings | `ReplaceProductRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceProductResponseValue200ApplicationJson`.
 
@@ -313,38 +313,38 @@ def update(
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: UpdateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| visibility | `Optional[Union[CatalogVisibility, str]]` | No |
-| slug | `Optional[str]` | No |
-| section | `Union[int, None, NotGiven]` | No |
-| additional_information | `Optional[
-            List[UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ]` | No |
-| other_settings | `Optional[
-            UpdateProductRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| slug | `str \| None` | No |
+| section | `int \| None \| NotGiven` | No |
+| additional_information | `builtins.list[
+            UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        \| None` | No |
+| other_settings | `UpdateProductRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateProductResponseValue200ApplicationJson`.
 
@@ -397,16 +397,16 @@ def delete(
         self,
         product: int,
         *,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -455,43 +455,41 @@ Search products
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchProductsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchProductsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchProductsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchProductsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchProductsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchProductsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchProductsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchProductsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchProductsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchProductsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -540,15 +538,19 @@ Batch create products
 def batch_create(
         self,
         *,
-        resources: List[BatchCreateProductsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateProductsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[BatchCreateProductsRequestApplicationJsonPropertyResourcesItem]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[
+            BatchCreateProductsRequestApplicationJsonPropertyResourcesItem
+        ]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchCreateProductsResponseValue200ApplicationJson`.
 
@@ -604,14 +606,14 @@ def batch_update(
         self,
         *,
         resources: BatchUpdateProductsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | resources | `BatchUpdateProductsRequestApplicationJsonPropertyResources` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchUpdateProductsResponseValue200ApplicationJson`.
 
@@ -657,15 +659,15 @@ Batch delete products
 def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

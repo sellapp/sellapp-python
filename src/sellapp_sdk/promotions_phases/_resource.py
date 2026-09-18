@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.promotions.models.replace_promotion_phases_request_application_json_property_phases_item import (
     ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem,
@@ -33,7 +35,7 @@ class PromotionsPhases:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPromotionPhasesResponseValue200ApplicationJson:
         """List promotion phases
 
@@ -96,8 +98,10 @@ class PromotionsPhases:
         self,
         promotion: int,
         *,
-        phases: List[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem],
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[
+            ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionPhasesResponseValue200ApplicationJson:
         """Replace promotion phases
 
@@ -150,7 +154,7 @@ class PromotionsPhases:
             "idempotency_supported": False,
             "operation_id": "replacePromotionPhases",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "phases": [item.to_dict() for item in phases],
         }
         _validate_model(
@@ -192,7 +196,7 @@ class AsyncPromotionsPhases:
         self,
         promotion: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPromotionPhasesResponseValue200ApplicationJson:
         """List promotion phases
 
@@ -255,8 +259,10 @@ class AsyncPromotionsPhases:
         self,
         promotion: int,
         *,
-        phases: List[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem],
-        request_options: Optional[RequestOptions] = None,
+        phases: builtins.list[
+            ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplacePromotionPhasesResponseValue200ApplicationJson:
         """Replace promotion phases
 
@@ -309,7 +315,7 @@ class AsyncPromotionsPhases:
             "idempotency_supported": False,
             "operation_id": "replacePromotionPhases",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "phases": [item.to_dict() for item in phases],
         }
         _validate_model(

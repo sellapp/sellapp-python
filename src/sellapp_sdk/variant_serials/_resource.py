@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.sdk_queue_variant_serial_import_request_multipart_form_data_mode import (
     SdkQueueVariantSerialImportRequestMultipartFormDataMode,
@@ -38,13 +40,13 @@ class VariantSerials:
         product: int,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        search: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        search: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListVariantSerialInventoryResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -130,9 +132,9 @@ class VariantSerials:
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAppendVariantSerialInventoryResponseValue201ApplicationJson:
         """Append variant serial inventory
 
@@ -187,7 +189,7 @@ class VariantSerials:
             "idempotency_supported": False,
             "operation_id": "appendVariantSerialInventory",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "serials": serials,
@@ -232,9 +234,9 @@ class VariantSerials:
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantSerialInventoryResponseValue200ApplicationJson:
         """Replace variant serial inventory
 
@@ -289,7 +291,7 @@ class VariantSerials:
             "idempotency_supported": False,
             "operation_id": "replaceVariantSerialInventory",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "serials": serials,
@@ -335,15 +337,14 @@ class VariantSerials:
         variant: int,
         *,
         file: bytes,
-        parsing_mode: Union[
-            SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode, str
-        ],
-        custom_delimiter: Union[str, None, NotGiven] = NOT_GIVEN,
-        remove_duplicates: Optional[bool] = None,
-        mode: Optional[
-            Union[SdkQueueVariantSerialImportRequestMultipartFormDataMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        parsing_mode: SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode
+        | str,
+        custom_delimiter: str | None | NotGiven = NOT_GIVEN,
+        remove_duplicates: bool | None = None,
+        mode: SdkQueueVariantSerialImportRequestMultipartFormDataMode
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkQueueVariantSerialImportResponseValue202ApplicationJson:
         """Queue a variant serial import
 
@@ -401,7 +402,7 @@ class VariantSerials:
             "idempotency_supported": False,
             "operation_id": "queueVariantSerialImport",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -447,7 +448,7 @@ class VariantSerials:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -479,7 +480,7 @@ class VariantSerials:
         variant: int,
         serial: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant serial
 
@@ -557,13 +558,13 @@ class AsyncVariantSerials:
         product: int,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        search: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        search: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListVariantSerialInventoryResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -649,9 +650,9 @@ class AsyncVariantSerials:
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAppendVariantSerialInventoryResponseValue201ApplicationJson:
         """Append variant serial inventory
 
@@ -706,7 +707,7 @@ class AsyncVariantSerials:
             "idempotency_supported": False,
             "operation_id": "appendVariantSerialInventory",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "serials": serials,
@@ -751,9 +752,9 @@ class AsyncVariantSerials:
         product: int,
         variant: int,
         *,
-        serials: List[str],
-        remove_duplicates: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        serials: builtins.list[str],
+        remove_duplicates: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantSerialInventoryResponseValue200ApplicationJson:
         """Replace variant serial inventory
 
@@ -808,7 +809,7 @@ class AsyncVariantSerials:
             "idempotency_supported": False,
             "operation_id": "replaceVariantSerialInventory",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "serials": serials,
@@ -854,15 +855,14 @@ class AsyncVariantSerials:
         variant: int,
         *,
         file: bytes,
-        parsing_mode: Union[
-            SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode, str
-        ],
-        custom_delimiter: Union[str, None, NotGiven] = NOT_GIVEN,
-        remove_duplicates: Optional[bool] = None,
-        mode: Optional[
-            Union[SdkQueueVariantSerialImportRequestMultipartFormDataMode, str]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        parsing_mode: SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode
+        | str,
+        custom_delimiter: str | None | NotGiven = NOT_GIVEN,
+        remove_duplicates: bool | None = None,
+        mode: SdkQueueVariantSerialImportRequestMultipartFormDataMode
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkQueueVariantSerialImportResponseValue202ApplicationJson:
         """Queue a variant serial import
 
@@ -920,7 +920,7 @@ class AsyncVariantSerials:
             "idempotency_supported": False,
             "operation_id": "queueVariantSerialImport",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "file": file,
@@ -966,7 +966,7 @@ class AsyncVariantSerials:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         if "file" in body:
             multipart_files["file"] = body.pop("file")
         request_options = {
@@ -998,7 +998,7 @@ class AsyncVariantSerials:
         variant: int,
         serial: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant serial
 

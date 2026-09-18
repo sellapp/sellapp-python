@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -18,7 +18,7 @@ from .create_add_on_draft_request_application_json_property_variant import (
     CreateAddOnDraftRequestApplicationJsonPropertyVariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateAddOnDraftRequestApplicationJson",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -51,7 +51,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateAddOnDraftRequestApplicationJson",
     "required": ["title", "description", "visibility"],
     "properties": {
@@ -95,21 +95,21 @@ class SdkCreateAddOnDraftRequestApplicationJson:
     description: str
     """Description shown when the add-on is offered."""
     visibility: CatalogVisibility
-    slug: Optional[str] = None
+    slug: str | None = None
     """Optional store-unique slug. When omitted during creation, SellApp generates one from the title."""
-    is_draft: Optional[bool] = None
+    is_draft: bool | None = None
     """Defaults to true on creation. Set false to publish. Publication requires exactly one published, fixed-price, single-payment variant; creation can include that variant in the same request."""
-    parent_product_ids: Optional[List[int]] = None
+    parent_product_ids: list[int] | None = None
     """Ordered IDs of same-store, non-subscription products, courses, or bookings to assign. Supplying the field replaces the complete assignment set."""
-    variant: Optional[CreateAddOnDraftRequestApplicationJsonPropertyVariant] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    variant: CreateAddOnDraftRequestApplicationJsonPropertyVariant | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateAddOnDraftRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -129,7 +129,7 @@ class SdkCreateAddOnDraftRequestApplicationJson:
                 is_draft=data.get("is_draft"),
                 parent_product_ids=data.get("parent_product_ids"),
                 variant=CreateAddOnDraftRequestApplicationJsonPropertyVariant.from_dict(
-                    cast(Dict[str, Any], _v_variant)
+                    cast(dict[str, Any], _v_variant)
                 )
                 if (_v_variant := data.get("variant")) is not None
                 else None,
@@ -150,9 +150,9 @@ class SdkCreateAddOnDraftRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateAddOnDraftRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["description"] = self.description
         _domain_data["visibility"] = self.visibility
@@ -172,7 +172,7 @@ class SdkCreateAddOnDraftRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["description"] = self.description
         result["visibility"] = (

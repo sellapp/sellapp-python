@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.search_orders_request_application_json_property_f
     SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchOrdersRequestApplicationJsonPropertyFiltersItem",
     "required": ["field", "operator", "value"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchOrdersRequestApplicationJsonPropertyFiltersItem",
     "required": ["field", "operator", "value"],
     "properties": {
@@ -45,14 +45,14 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
     field: str
     operator: SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator
     value: Any
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SearchOrdersRequestApplicationJsonPropertyFiltersItem:
         """Deserialize from a dictionary."""
         try:
@@ -80,9 +80,9 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
                 "SearchOrdersRequestApplicationJsonPropertyFiltersItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["field"] = self.field
         _domain_data["operator"] = self.operator
         _domain_data["value"] = self.value
@@ -94,7 +94,7 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["field"] = self.field
         result["operator"] = (
             self.operator.value if isinstance(self.operator, Enum) else self.operator

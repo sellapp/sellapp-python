@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class BlacklistType(str, Enum):
@@ -18,7 +18,7 @@ class BlacklistType(str, Enum):
     WILDCARD_EMAIL = "WILDCARD_EMAIL"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[BlacklistType]:
+    def _missing_(cls, value: object) -> BlacklistType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

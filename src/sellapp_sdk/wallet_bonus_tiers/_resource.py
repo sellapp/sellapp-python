@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -41,7 +41,7 @@ class WalletBonusTiers:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListWalletBonusTiersResponseValue200ApplicationJson:
         """List wallet bonus tiers
 
@@ -99,13 +99,13 @@ class WalletBonusTiers:
         self,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[SdkCreateWalletBonusTierRequestApplicationJsonBonusKind, str],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkCreateWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletBonusTierResponseValue201ApplicationJson:
         """Create a wallet bonus tier
 
@@ -162,7 +162,7 @@ class WalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "createWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "minimum_top_up_cents": minimum_top_up_cents,
             "bonus_kind": enum_value(bonus_kind),
             "fixed_bonus_cents": fixed_bonus_cents,
@@ -242,15 +242,13 @@ class WalletBonusTiers:
         bonus_tier: int,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[
-            SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind, str
-        ],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
@@ -309,7 +307,7 @@ class WalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "replaceWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "minimum_top_up_cents": minimum_top_up_cents,
             "bonus_kind": enum_value(bonus_kind),
             "fixed_bonus_cents": fixed_bonus_cents,
@@ -388,16 +386,16 @@ class WalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        minimum_top_up_cents: Optional[int] = None,
-        bonus_kind: Optional[
-            Union[SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind, str]
-        ] = None,
-        fixed_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        percent_basis: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_active: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None = None,
+        bonus_kind: SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind
+        | str
+        | None = None,
+        fixed_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        percent_basis: int | None | NotGiven = NOT_GIVEN,
+        maximum_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_active: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
@@ -456,7 +454,7 @@ class WalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "updateWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "minimum_top_up_cents": minimum_top_up_cents,
@@ -536,7 +534,7 @@ class WalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Archive a wallet bonus tier
 
@@ -595,7 +593,7 @@ class WalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreWalletBonusTierResponseValue200ApplicationJson:
         """Restore a wallet bonus tier
 
@@ -665,7 +663,7 @@ class AsyncWalletBonusTiers:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListWalletBonusTiersResponseValue200ApplicationJson:
         """List wallet bonus tiers
 
@@ -723,13 +721,13 @@ class AsyncWalletBonusTiers:
         self,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[SdkCreateWalletBonusTierRequestApplicationJsonBonusKind, str],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkCreateWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletBonusTierResponseValue201ApplicationJson:
         """Create a wallet bonus tier
 
@@ -786,7 +784,7 @@ class AsyncWalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "createWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "minimum_top_up_cents": minimum_top_up_cents,
             "bonus_kind": enum_value(bonus_kind),
             "fixed_bonus_cents": fixed_bonus_cents,
@@ -866,15 +864,13 @@ class AsyncWalletBonusTiers:
         bonus_tier: int,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[
-            SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind, str
-        ],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
@@ -933,7 +929,7 @@ class AsyncWalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "replaceWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "minimum_top_up_cents": minimum_top_up_cents,
             "bonus_kind": enum_value(bonus_kind),
             "fixed_bonus_cents": fixed_bonus_cents,
@@ -1012,16 +1008,16 @@ class AsyncWalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        minimum_top_up_cents: Optional[int] = None,
-        bonus_kind: Optional[
-            Union[SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind, str]
-        ] = None,
-        fixed_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        percent_basis: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_active: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None = None,
+        bonus_kind: SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind
+        | str
+        | None = None,
+        fixed_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        percent_basis: int | None | NotGiven = NOT_GIVEN,
+        maximum_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_active: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
@@ -1080,7 +1076,7 @@ class AsyncWalletBonusTiers:
             "idempotency_supported": False,
             "operation_id": "updateWalletBonusTier",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "minimum_top_up_cents": minimum_top_up_cents,
@@ -1160,7 +1156,7 @@ class AsyncWalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Archive a wallet bonus tier
 
@@ -1219,7 +1215,7 @@ class AsyncWalletBonusTiers:
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreWalletBonusTierResponseValue200ApplicationJson:
         """Restore a wallet bonus tier
 

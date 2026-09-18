@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.blacklists.models.list_tickets_response_value_200_application_json_property_data_item import (
     ListTicketsResponseValue200ApplicationJsonPropertyDataItem,
@@ -72,12 +74,12 @@ class Tickets:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
@@ -153,7 +155,7 @@ class Tickets:
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetTicketResponseValue200ApplicationJson:
         """Retrieve specific ticket
 
@@ -213,21 +215,18 @@ class Tickets:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
@@ -283,7 +282,7 @@ class Tickets:
             "idempotency_supported": False,
             "operation_id": "searchTickets",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -319,12 +318,12 @@ class Tickets:
     def v2_list_tickets(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
@@ -401,21 +400,20 @@ class Tickets:
     def v2_search_tickets(
         self,
         *,
-        filters: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
@@ -473,7 +471,7 @@ class Tickets:
             "idempotency_supported": False,
             "operation_id": "v2SearchTickets",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -510,7 +508,7 @@ class Tickets:
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetTicketResponseValue200ApplicationJson:
         """Retrieve specific ticket
 
@@ -573,11 +571,9 @@ class Tickets:
         self,
         ticket: int,
         *,
-        status: Optional[
-            Union[SdkUpdateTicketRequestApplicationJsonStatus, str]
-        ] = None,
-        archived: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateTicketRequestApplicationJsonStatus | str | None = None,
+        archived: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateTicketResponseValue200ApplicationJson:
         """Close, reopen, or archive a ticket
 
@@ -631,7 +627,7 @@ class Tickets:
             "idempotency_supported": True,
             "operation_id": "updateTicket",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "status": enum_value(status) if status is not None else None,
@@ -674,12 +670,12 @@ class AsyncTickets:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
@@ -755,7 +751,7 @@ class AsyncTickets:
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetTicketResponseValue200ApplicationJson:
         """Retrieve specific ticket
 
@@ -815,21 +811,18 @@ class AsyncTickets:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
@@ -885,7 +878,7 @@ class AsyncTickets:
             "idempotency_supported": False,
             "operation_id": "searchTickets",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -921,12 +914,12 @@ class AsyncTickets:
     async def v2_list_tickets(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
@@ -1003,21 +996,20 @@ class AsyncTickets:
     async def v2_search_tickets(
         self,
         *,
-        filters: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
@@ -1075,7 +1067,7 @@ class AsyncTickets:
             "idempotency_supported": False,
             "operation_id": "v2SearchTickets",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1112,7 +1104,7 @@ class AsyncTickets:
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetTicketResponseValue200ApplicationJson:
         """Retrieve specific ticket
 
@@ -1175,11 +1167,9 @@ class AsyncTickets:
         self,
         ticket: int,
         *,
-        status: Optional[
-            Union[SdkUpdateTicketRequestApplicationJsonStatus, str]
-        ] = None,
-        archived: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateTicketRequestApplicationJsonStatus | str | None = None,
+        archived: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateTicketResponseValue200ApplicationJson:
         """Close, reopen, or archive a ticket
 
@@ -1233,7 +1223,7 @@ class AsyncTickets:
             "idempotency_supported": True,
             "operation_id": "updateTicket",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "status": enum_value(status) if status is not None else None,

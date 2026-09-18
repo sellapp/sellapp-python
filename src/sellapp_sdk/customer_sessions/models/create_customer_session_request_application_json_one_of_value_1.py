@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,13 +12,13 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerSessionRequestApplicationJsonOneOfValue1",
     "required": ["customer_id"],
     "properties": {"customer_id": {"kind": "primitive", "type": "integer"}},
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerSessionRequestApplicationJsonOneOfValue1",
     "required": ["customer_id"],
     "properties": {"customer_id": {"kind": "primitive", "type": "integer"}},
@@ -31,14 +31,14 @@ class CreateCustomerSessionRequestApplicationJsonOneOfValue1:
     """Create Customer Session Request Application Json One Of Value1 model."""
 
     customer_id: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCustomerSessionRequestApplicationJsonOneOfValue1:
         """Deserialize from a dictionary."""
         try:
@@ -60,9 +60,9 @@ class CreateCustomerSessionRequestApplicationJsonOneOfValue1:
                 "CreateCustomerSessionRequestApplicationJsonOneOfValue1", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["customer_id"] = self.customer_id
         _validate_model(
             _domain_data,
@@ -72,6 +72,6 @@ class CreateCustomerSessionRequestApplicationJsonOneOfValue1:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["customer_id"] = self.customer_id
         return result

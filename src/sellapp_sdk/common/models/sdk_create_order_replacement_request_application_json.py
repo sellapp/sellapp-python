@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,13 +16,13 @@ from .create_order_replacement_request_application_json_property_product_variant
     CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateOrderReplacementRequestApplicationJson",
     "required": ["product_variants"],
     "properties": {"product_variants": {"kind": "any"}},
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateOrderReplacementRequestApplicationJson",
     "required": ["product_variants"],
     "properties": {"product_variants": {"kind": "any"}},
@@ -37,14 +37,14 @@ class SdkCreateOrderReplacementRequestApplicationJson:
     product_variants: (
         CreateOrderReplacementRequestApplicationJsonPropertyProductVariants
     )
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateOrderReplacementRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -58,7 +58,7 @@ class SdkCreateOrderReplacementRequestApplicationJson:
             )
             return cls(
                 product_variants=CreateOrderReplacementRequestApplicationJsonPropertyProductVariants.from_dict(
-                    cast(Dict[str, Any], data["product_variants"])
+                    cast(dict[str, Any], data["product_variants"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["product_variants"]
@@ -70,9 +70,9 @@ class SdkCreateOrderReplacementRequestApplicationJson:
                 "SdkCreateOrderReplacementRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["product_variants"] = self.product_variants
         _validate_model(
             _domain_data,
@@ -82,6 +82,6 @@ class SdkCreateOrderReplacementRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["product_variants"] = self.product_variants.to_dict()
         return result

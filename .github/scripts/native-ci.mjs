@@ -59,6 +59,8 @@ const config = {
         "executable": "uv",
         "args": [
           "venv",
+          "--python",
+          "3.10.20",
           ".validation-consumer"
         ]
       },
@@ -76,7 +78,7 @@ const config = {
         "executable": "$SDK_ROOT/.validation-consumer/bin/python",
         "args": [
           "-c",
-          "import sellapp_sdk"
+          "import importlib, pkgutil, sellapp_sdk; modules = list(pkgutil.walk_packages(sellapp_sdk.__path__, sellapp_sdk.__name__ + '.')); [importlib.import_module(module.name) for module in modules]; print(f'Imported {len(modules)} SDK modules')"
         ]
       },
       {
@@ -96,23 +98,16 @@ const config = {
         ]
       },
       {
-        "stage": "install",
+        "stage": "audit",
         "executable": "uv",
         "args": [
-          "pip",
-          "install",
+          "tool",
+          "run",
           "--python",
-          ".validation-consumer/bin/python",
-          "pip-audit"
-        ]
-      },
-      {
-        "stage": "audit",
-        "executable": "$SDK_ROOT/.validation-consumer/bin/python",
-        "args": [
-          "-m",
-          "pip_audit",
-          "--local"
+          "3.12",
+          "pip-audit",
+          "--path",
+          "$SDK_ROOT/.validation-consumer/lib/python3.10/site-packages"
         ]
       }
     ]

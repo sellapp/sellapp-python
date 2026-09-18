@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from sellapp_sdk.common.models.cancel_subscription_at_period_end_response_value_
     CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataStatus,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -73,7 +73,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -130,29 +130,31 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
     """Cancel Subscription At Period End Response Value200Application Json Property Data model."""
 
-    id: Optional[int] = None
-    product_subscription_id: Optional[int] = None
-    subscription_id: Optional[str] = None
-    action: Optional[
+    id: int | None = None
+    product_subscription_id: int | None = None
+    subscription_id: str | None = None
+    action: (
         CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataAction
-    ] = None
-    status: Optional[
+        | None
+    ) = None
+    status: (
         CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataStatus
-    ] = None
-    provider: Optional[str] = None
-    customer_message: Optional[str] = None
-    confirmed_at: Optional[datetime] = None
-    failed_at: Optional[datetime] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    provider: str | None = None
+    customer_message: str | None = None
+    confirmed_at: datetime | None = None
+    failed_at: datetime | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -216,9 +218,9 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.id is not None:
             _domain_data["id"] = self.id
         if self.product_subscription_id is not None:
@@ -245,7 +247,7 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.id is not None:
             result["id"] = self.id
         if self.product_subscription_id is not None:

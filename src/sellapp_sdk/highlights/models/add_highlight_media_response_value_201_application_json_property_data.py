@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.add_highlight_media_response_value_201_applicatio
     AddHighlightMediaResponseValue201ApplicationJsonPropertyDataType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "AddHighlightMediaResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -52,7 +52,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "AddHighlightMediaResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -99,17 +99,17 @@ class AddHighlightMediaResponseValue201ApplicationJsonPropertyData:
     size: int
     mime_type: str
     cta_title: str
-    product_id: Optional[int]
+    product_id: int | None
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> AddHighlightMediaResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -158,9 +158,9 @@ class AddHighlightMediaResponseValue201ApplicationJsonPropertyData:
                 "AddHighlightMediaResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["sort_order"] = self.sort_order
         _domain_data["type"] = self.type
@@ -180,7 +180,7 @@ class AddHighlightMediaResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["sort_order"] = self.sort_order
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .create_custom_payment_method_response_value_201_application_json_property_
     CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyDataPropertyModifier,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "type", "name", "enabled", "sort_order"],
     "properties": {
@@ -96,7 +96,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "type", "name", "enabled", "sort_order"],
     "properties": {
@@ -180,28 +180,29 @@ class CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData:
     name: str
     enabled: bool
     sort_order: int
-    description: Optional[str] = None
-    instructions: Optional[str] = None
-    steps: Optional[List[str]] = None
-    redirect_url: Optional[str] = None
-    skip_interstitial_page: Optional[bool] = None
-    show_processing_status_page: Optional[bool] = None
-    require_proof_of_payment: Optional[bool] = None
-    modifier: Optional[
+    description: str | None = None
+    instructions: str | None = None
+    steps: list[str] | None = None
+    redirect_url: str | None = None
+    skip_interstitial_page: bool | None = None
+    show_processing_status_page: bool | None = None
+    require_proof_of_payment: bool | None = None
+    modifier: (
         CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyDataPropertyModifier
-    ] = None
-    icon_url: Optional[str] = None
+        | None
+    ) = None
+    icon_url: str | None = None
     """A link to the stored icon. Local-disk storage returns a root-relative path rather than an absolute URL, so resolve it against the store's origin before using it."""
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -229,7 +230,7 @@ class CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData:
                 show_processing_status_page=data.get("show_processing_status_page"),
                 require_proof_of_payment=data.get("require_proof_of_payment"),
                 modifier=CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyDataPropertyModifier.from_dict(
-                    cast(Dict[str, Any], _v_modifier)
+                    cast(dict[str, Any], _v_modifier)
                 )
                 if (_v_modifier := data.get("modifier")) is not None
                 else None,
@@ -269,9 +270,9 @@ class CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["type"] = self.type
         _domain_data["name"] = self.name
@@ -301,7 +302,7 @@ class CreateCustomPaymentMethodResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["name"] = self.name

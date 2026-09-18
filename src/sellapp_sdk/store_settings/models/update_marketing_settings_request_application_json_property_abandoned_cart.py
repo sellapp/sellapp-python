@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -18,7 +18,7 @@ from .update_marketing_settings_request_application_json_property_abandoned_cart
     UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCartPropertyRemindersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart",
     "required": [],
     "properties": {
@@ -67,7 +67,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart",
     "required": [],
     "properties": {
@@ -122,25 +122,26 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart:
     """Update Marketing Settings Request Application Json Property Abandoned Cart model."""
 
-    enabled: Optional[bool] = None
-    min_total_cents: Optional[int] = None
-    max_total_cents: Optional[int] = None
-    reminders: Optional[
-        List[
+    enabled: bool | None = None
+    min_total_cents: int | None = None
+    max_total_cents: int | None = None
+    reminders: (
+        list[
             UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCartPropertyRemindersItem
         ]
-    ] = None
-    incentive_mode: Optional[IncentiveMode] = None
-    coupon_id: Optional[int] = None
-    send_incentive_on_step: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    incentive_mode: IncentiveMode | None = None
+    coupon_id: int | None = None
+    send_incentive_on_step: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart:
         """Deserialize from a dictionary."""
         try:
@@ -158,7 +159,7 @@ class UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart:
                 max_total_cents=data.get("max_total_cents"),
                 reminders=[
                     UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCartPropertyRemindersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_reminders)
                 ]
@@ -188,9 +189,9 @@ class UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart:
                 "UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.enabled is not None:
             _domain_data["enabled"] = self.enabled
         _domain_data["min_total_cents"] = self.min_total_cents
@@ -208,7 +209,7 @@ class UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.enabled is not None:
             result["enabled"] = self.enabled
         if self.min_total_cents is not None:

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
@@ -34,12 +36,12 @@ class Groups:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all groups
 
@@ -118,10 +120,10 @@ class Groups:
         *,
         title: str,
         unlisted: bool,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateGroupResponseValue201ApplicationJson:
         """Create a group
 
@@ -176,7 +178,7 @@ class Groups:
             "idempotency_supported": False,
             "operation_id": "createGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -230,7 +232,7 @@ class Groups:
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetGroupResponseValue200ApplicationJson:
         """Retrieve a group
 
@@ -293,12 +295,12 @@ class Groups:
         self,
         group: int,
         *,
-        title: Optional[str] = None,
-        unlisted: Optional[bool] = None,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        unlisted: bool | None = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGroupResponseValue200ApplicationJson:
         """Update a group
 
@@ -355,7 +357,7 @@ class Groups:
             "idempotency_supported": False,
             "operation_id": "updateGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -409,7 +411,7 @@ class Groups:
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a group
 
@@ -467,19 +469,18 @@ class Groups:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchGroupsRequestApplicationJsonPropertySortItem]] = None,
-        search: Optional[SearchGroupsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchGroupsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchGroupsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search groups
 
@@ -537,7 +538,7 @@ class Groups:
             "idempotency_supported": False,
             "operation_id": "searchGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -581,12 +582,12 @@ class AsyncGroups:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all groups
 
@@ -665,10 +666,10 @@ class AsyncGroups:
         *,
         title: str,
         unlisted: bool,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateGroupResponseValue201ApplicationJson:
         """Create a group
 
@@ -723,7 +724,7 @@ class AsyncGroups:
             "idempotency_supported": False,
             "operation_id": "createGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -777,7 +778,7 @@ class AsyncGroups:
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetGroupResponseValue200ApplicationJson:
         """Retrieve a group
 
@@ -840,12 +841,12 @@ class AsyncGroups:
         self,
         group: int,
         *,
-        title: Optional[str] = None,
-        unlisted: Optional[bool] = None,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        unlisted: bool | None = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGroupResponseValue200ApplicationJson:
         """Update a group
 
@@ -902,7 +903,7 @@ class AsyncGroups:
             "idempotency_supported": False,
             "operation_id": "updateGroup",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -956,7 +957,7 @@ class AsyncGroups:
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a group
 
@@ -1014,19 +1015,18 @@ class AsyncGroups:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchGroupsRequestApplicationJsonPropertySortItem]] = None,
-        search: Optional[SearchGroupsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchGroupsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchGroupsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search groups
 
@@ -1084,7 +1084,7 @@ class AsyncGroups:
             "idempotency_supported": False,
             "operation_id": "searchGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .list_feedback_response_value_200_application_json_property_data_item_prope
     ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListFeedbackResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -56,7 +56,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListFeedbackResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -102,26 +102,27 @@ class ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
     id: int
     feedback: str
     rating: int
-    deleted_at: Optional[datetime]
+    deleted_at: datetime | None
     created_at: datetime
     updated_at: datetime
     listing_id: int
     invoice_id: int
     store_id: int
-    metadata: Optional[
+    metadata: (
         ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata
-    ]
+        | None
+    )
     message: str
-    reply: Optional[str]
+    reply: str | None
     is_automatic: bool
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -146,7 +147,7 @@ class ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
                 invoice_id=data["invoice_id"],
                 store_id=data["store_id"],
                 metadata=ListFeedbackResponseValue200ApplicationJsonPropertyDataItemPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data["metadata"]) is not None
                 else None,
@@ -178,9 +179,9 @@ class ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
                 "ListFeedbackResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["feedback"] = self.feedback
         _domain_data["rating"] = self.rating
@@ -202,7 +203,7 @@ class ListFeedbackResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["feedback"] = self.feedback
         result["rating"] = self.rating

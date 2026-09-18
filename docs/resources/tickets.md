@@ -12,23 +12,23 @@ List all tickets
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListTicketsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -70,14 +70,14 @@ def get(
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetTicketResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetTicketResponseValue200ApplicationJson`.
 
@@ -118,41 +118,35 @@ Search tickets
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchTicketsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchTicketsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchTicketsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchTicketsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[SearchTicketsRequestApplicationJsonPropertyIncludesItem]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -196,23 +190,23 @@ List all tickets
 def v2_list_tickets(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -258,41 +252,39 @@ Search tickets
 def v2_search_tickets(
         self,
         *,
-        filters: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchTicketsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchTicketsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchTicketsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[V2SearchTicketsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[V2SearchTicketsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[V2SearchTicketsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[V2SearchTicketsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `V2SearchTicketsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -342,14 +334,14 @@ def v2_get_ticket(
         self,
         ticket: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetTicketResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2GetTicketResponseValue200ApplicationJson`.
 
@@ -396,22 +388,18 @@ def update(
         self,
         ticket: int,
         *,
-        status: Optional[
-            Union[SdkUpdateTicketRequestApplicationJsonStatus, str]
-        ] = None,
-        archived: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateTicketRequestApplicationJsonStatus | str | None = None,
+        archived: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateTicketResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | ticket | `int` | Yes |
-| status | `Optional[
-            Union[SdkUpdateTicketRequestApplicationJsonStatus, str]
-        ]` | No |
-| archived | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateTicketRequestApplicationJsonStatus \| str \| None` | No |
+| archived | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateTicketResponseValue200ApplicationJson`.
 

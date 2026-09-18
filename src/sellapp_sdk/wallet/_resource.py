@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -39,12 +39,12 @@ class Wallet:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListCustomerWalletsResponseValue200ApplicationJsonPropertyDataItem]:
         """List customer wallets
 
@@ -122,7 +122,7 @@ class Wallet:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerWalletResponseValue200ApplicationJson:
         """Retrieve a customer wallet
 
@@ -188,7 +188,7 @@ class Wallet:
         amount_cents: int,
         idempotency_key: str,
         note: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAdjustCustomerWalletResponseValue200ApplicationJson:
         """Adjust a customer wallet
 
@@ -243,7 +243,7 @@ class Wallet:
             "idempotency_supported": False,
             "operation_id": "adjustCustomerWallet",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "amount_cents": amount_cents,
             "idempotency_key": idempotency_key,
             "note": note,
@@ -296,8 +296,8 @@ class Wallet:
         self,
         customer: int,
         *,
-        status: Union[SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerWalletStatusResponseValue200ApplicationJson:
         """Update a customer wallet status
 
@@ -350,7 +350,7 @@ class Wallet:
             "idempotency_supported": False,
             "operation_id": "updateCustomerWalletStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(
@@ -387,12 +387,12 @@ class AsyncWallet:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListCustomerWalletsResponseValue200ApplicationJsonPropertyDataItem]:
         """List customer wallets
 
@@ -470,7 +470,7 @@ class AsyncWallet:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerWalletResponseValue200ApplicationJson:
         """Retrieve a customer wallet
 
@@ -536,7 +536,7 @@ class AsyncWallet:
         amount_cents: int,
         idempotency_key: str,
         note: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAdjustCustomerWalletResponseValue200ApplicationJson:
         """Adjust a customer wallet
 
@@ -591,7 +591,7 @@ class AsyncWallet:
             "idempotency_supported": False,
             "operation_id": "adjustCustomerWallet",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "amount_cents": amount_cents,
             "idempotency_key": idempotency_key,
             "note": note,
@@ -644,8 +644,8 @@ class AsyncWallet:
         self,
         customer: int,
         *,
-        status: Union[SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerWalletStatusResponseValue200ApplicationJson:
         """Update a customer wallet status
 
@@ -698,7 +698,7 @@ class AsyncWallet:
             "idempotency_supported": False,
             "operation_id": "updateCustomerWalletStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -32,7 +32,7 @@ from .sdk_create_product_variant_request_application_json_payment_methods import
     SdkCreateProductVariantRequestApplicationJsonPaymentMethods,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateProductVariantRequestApplicationJson",
     "required": ["title", "description", "deliverable", "pricing", "payment_methods"],
     "properties": {
@@ -101,7 +101,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateProductVariantRequestApplicationJson",
     "required": ["title", "description", "deliverable", "pricing", "payment_methods"],
     "properties": {
@@ -180,25 +180,25 @@ class SdkCreateProductVariantRequestApplicationJson:
     description: str
     deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable
     pricing: CreateProductVariantRequestApplicationJsonPropertyPricing
-    payment_methods: List[SdkCreateProductVariantRequestApplicationJsonPaymentMethods]
-    minimum_purchase_quantity: Optional[int] = None
-    maximum_purchase_quantity: Optional[int] = None
-    bulk_discount: Optional[
-        List[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-    ] = None
-    other_settings: Optional[
-        CreateProductVariantRequestApplicationJsonPropertyOtherSettings
-    ] = None
-    expected_updated_at: Optional[datetime] = None
+    payment_methods: list[SdkCreateProductVariantRequestApplicationJsonPaymentMethods]
+    minimum_purchase_quantity: int | None = None
+    maximum_purchase_quantity: int | None = None
+    bulk_discount: (
+        list[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem] | None
+    ) = None
+    other_settings: (
+        CreateProductVariantRequestApplicationJsonPropertyOtherSettings | None
+    ) = None
+    expected_updated_at: datetime | None = None
     """Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateProductVariantRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -214,10 +214,10 @@ class SdkCreateProductVariantRequestApplicationJson:
                 title=data["title"],
                 description=data["description"],
                 deliverable=CreateProductVariantRequestApplicationJsonPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], data["deliverable"])
+                    cast(dict[str, Any], data["deliverable"])
                 ),
                 pricing=CreateProductVariantRequestApplicationJsonPropertyPricing.from_dict(
-                    cast(Dict[str, Any], data["pricing"])
+                    cast(dict[str, Any], data["pricing"])
                 ),
                 payment_methods=[
                     SdkCreateProductVariantRequestApplicationJsonPaymentMethods(item)
@@ -227,14 +227,14 @@ class SdkCreateProductVariantRequestApplicationJson:
                 maximum_purchase_quantity=data.get("maximum_purchase_quantity"),
                 bulk_discount=[
                     CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_bulk_discount)
                 ]
                 if (_v_bulk_discount := data.get("bulk_discount")) is not None
                 else None,
                 other_settings=CreateProductVariantRequestApplicationJsonPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], _v_other_settings)
+                    cast(dict[str, Any], _v_other_settings)
                 )
                 if (_v_other_settings := data.get("other_settings")) is not None
                 else None,
@@ -262,9 +262,9 @@ class SdkCreateProductVariantRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateProductVariantRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["title"] = self.title
         _domain_data["description"] = self.description
         _domain_data["deliverable"] = self.deliverable
@@ -287,7 +287,7 @@ class SdkCreateProductVariantRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["title"] = self.title
         result["description"] = self.description
         result["deliverable"] = self.deliverable.to_dict()

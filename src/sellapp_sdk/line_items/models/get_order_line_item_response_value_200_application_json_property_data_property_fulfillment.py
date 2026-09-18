@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.get_order_line_item_response_value_200_applicatio
     GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfillmentTypes,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfillment",
     "required": ["deliveries_count", "delivered_quantity", "types"],
     "properties": {
@@ -60,7 +60,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfillment",
     "required": ["deliveries_count", "delivered_quantity", "types"],
     "properties": {
@@ -109,19 +109,19 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfill
 
     deliveries_count: int
     delivered_quantity: int
-    types: List[
+    types: list[
         GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfillmentTypes
     ]
-    first_delivered_at: Optional[datetime] = None
-    last_delivered_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    first_delivered_at: datetime | None = None
+    last_delivered_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfillment:
         """Deserialize from a dictionary."""
         try:
@@ -166,9 +166,9 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfill
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["deliveries_count"] = self.deliveries_count
         _domain_data["delivered_quantity"] = self.delivered_quantity
         _domain_data["types"] = self.types
@@ -182,7 +182,7 @@ class GetOrderLineItemResponseValue200ApplicationJsonPropertyDataPropertyFulfill
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["deliveries_count"] = self.deliveries_count
         result["delivered_quantity"] = self.delivered_quantity
         result["types"] = [

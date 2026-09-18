@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkDeleteCreditsProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -27,7 +27,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkDeleteCreditsProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -45,15 +45,15 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkDeleteCreditsProductRequestApplicationJson:
     """Sdk Delete Credits Product Request Application Json model."""
 
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkDeleteCreditsProductRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -78,9 +78,9 @@ class SdkDeleteCreditsProductRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkDeleteCreditsProductRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.expected_updated_at is not None:
             _domain_data["expected_updated_at"] = self.expected_updated_at
         _validate_model(
@@ -91,7 +91,7 @@ class SdkDeleteCreditsProductRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.expected_updated_at is not None:
             result["expected_updated_at"] = _format_datetime(self.expected_updated_at)
         return result

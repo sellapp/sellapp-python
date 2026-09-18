@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances",
     "required": ["available_usd_cents", "pending_usd_cents", "paid_usd_cents"],
     "properties": {
@@ -34,7 +34,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances",
     "required": ["available_usd_cents", "pending_usd_cents", "paid_usd_cents"],
     "properties": {
@@ -65,14 +65,14 @@ class GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances:
     available_usd_cents: int
     pending_usd_cents: int
     paid_usd_cents: int
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances:
         """Deserialize from a dictionary."""
         try:
@@ -99,9 +99,9 @@ class GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["available_usd_cents"] = self.available_usd_cents
         _domain_data["pending_usd_cents"] = self.pending_usd_cents
         _domain_data["paid_usd_cents"] = self.paid_usd_cents
@@ -113,7 +113,7 @@ class GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["available_usd_cents"] = self.available_usd_cents
         result["pending_usd_cents"] = self.pending_usd_cents
         result["paid_usd_cents"] = self.paid_usd_cents

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelSubscriptionImmediatelyRequestApplicationJson",
     "required": [],
     "properties": {
@@ -37,7 +37,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelSubscriptionImmediatelyRequestApplicationJson",
     "required": [],
     "properties": {
@@ -68,21 +68,21 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkCancelSubscriptionImmediatelyRequestApplicationJson:
     """Sdk Cancel Subscription Immediately Request Application Json model."""
 
-    idempotency_key: Optional[str] = None
+    idempotency_key: str | None = None
     """Optional idempotency key. You may also send this as the Idempotency-Key header."""
-    reason: Optional[str] = None
-    refund_last_payment: Optional[bool] = None
+    reason: str | None = None
+    refund_last_payment: bool | None = None
     """Request a real refund of the latest payment during immediate cancellation. Cancellation success does not prove refund success; verify provider/order refund records."""
-    pro_rated_refund: Optional[bool] = None
+    pro_rated_refund: bool | None = None
     """Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCancelSubscriptionImmediatelyRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -115,9 +115,9 @@ class SdkCancelSubscriptionImmediatelyRequestApplicationJson:
                 "SdkCancelSubscriptionImmediatelyRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["idempotency_key"] = self.idempotency_key
         _domain_data["reason"] = self.reason
         if self.refund_last_payment is not None:
@@ -132,7 +132,7 @@ class SdkCancelSubscriptionImmediatelyRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.idempotency_key is not None:
             result["idempotency_key"] = self.idempotency_key
         else:

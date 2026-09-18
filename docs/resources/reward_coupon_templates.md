@@ -12,25 +12,25 @@ List reward coupon templates
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListRewardCouponTemplatesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListRewardCouponTemplatesResponseValue200ApplicationJson]`.
 
@@ -77,40 +77,38 @@ def create(
         self,
         *,
         name: str,
-        type: Union[SdkCreateRewardCouponTemplateRequestApplicationJsonType, str],
-        discount: Union[str, float],
+        type: SdkCreateRewardCouponTemplateRequestApplicationJsonType | str,
+        discount: str | float,
         store_wide: bool,
-        redemption_mode: Union[
-            SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-        ],
+        redemption_mode: SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str,
         is_active: bool,
-        listing_ids: List[int],
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        listing_ids: builtins.list[int],
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateRewardCouponTemplateResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | name | `str` | Yes |
-| type | `Union[SdkCreateRewardCouponTemplateRequestApplicationJsonType, str]` | Yes |
-| discount | `Union[str, float]` | Yes |
+| type | `SdkCreateRewardCouponTemplateRequestApplicationJsonType \| str` | Yes |
+| discount | `str \| float` | Yes |
 | store_wide | `bool` | Yes |
-| redemption_mode | `Union[
-            SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-        ]` | Yes |
+| redemption_mode | `SdkCreateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        \| str` | Yes |
 | is_active | `bool` | Yes |
-| listing_ids | `List[int]` | Yes |
-| minimum_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| maximum_discount_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| expires_after_days | `Union[int, None, NotGiven]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| listing_ids | `builtins.list[int]` | Yes |
+| minimum_amount | `str \| float \| None \| NotGiven` | No |
+| maximum_discount_amount | `str \| float \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| expires_after_days | `int \| None \| NotGiven` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateRewardCouponTemplateResponseValue201ApplicationJson`.
 
@@ -164,45 +162,47 @@ Search reward coupon templates
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchRewardCouponTemplatesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchRewardRulesRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchRewardRulesRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchRewardCouponTemplatesResponseValue200ApplicationJson]`.
 
@@ -252,14 +252,14 @@ def get(
         self,
         reward_coupon_template: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetRewardCouponTemplateResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_coupon_template | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetRewardCouponTemplateResponseValue200ApplicationJson`.
 
@@ -306,50 +306,46 @@ def replace(
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkReplaceRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceRewardCouponTemplateResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_coupon_template | `int` | Yes |
-| name | `Optional[str]` | No |
-| type | `Optional[
-            Union[SdkReplaceRewardCouponTemplateRequestApplicationJsonType, str]
-        ]` | No |
-| discount | `Optional[Union[str, float]]` | No |
-| store_wide | `Optional[bool]` | No |
-| minimum_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| maximum_discount_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| expires_after_days | `Union[int, None, NotGiven]` | No |
-| redemption_mode | `Optional[
-            Union[
-                SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ]` | No |
-| is_active | `Optional[bool]` | No |
-| listing_ids | `Optional[List[int]]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| type | `SdkReplaceRewardCouponTemplateRequestApplicationJsonType
+        \| str
+        \| None` | No |
+| discount | `str \| float \| None` | No |
+| store_wide | `bool \| None` | No |
+| minimum_amount | `str \| float \| None \| NotGiven` | No |
+| maximum_discount_amount | `str \| float \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| expires_after_days | `int \| None \| NotGiven` | No |
+| redemption_mode | `SdkReplaceRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        \| str
+        \| None` | No |
+| is_active | `bool \| None` | No |
+| listing_ids | `builtins.list[int] \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceRewardCouponTemplateResponseValue200ApplicationJson`.
 
@@ -399,50 +395,46 @@ def update(
         self,
         reward_coupon_template: int,
         *,
-        name: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateRewardCouponTemplateRequestApplicationJsonType, str]
-        ] = None,
-        discount: Optional[Union[str, float]] = None,
-        store_wide: Optional[bool] = None,
-        minimum_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        maximum_discount_amount: Union[Union[str, float], None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        expires_after_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        redemption_mode: Optional[
-            Union[
-                SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ] = None,
-        is_active: Optional[bool] = None,
-        listing_ids: Optional[List[int]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        type: SdkUpdateRewardCouponTemplateRequestApplicationJsonType
+        | str
+        | None = None,
+        discount: str | float | None = None,
+        store_wide: bool | None = None,
+        minimum_amount: str | float | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: str | float | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        expires_after_days: int | None | NotGiven = NOT_GIVEN,
+        redemption_mode: SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        | str
+        | None = None,
+        is_active: bool | None = None,
+        listing_ids: builtins.list[int] | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateRewardCouponTemplateResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | reward_coupon_template | `int` | Yes |
-| name | `Optional[str]` | No |
-| type | `Optional[
-            Union[SdkUpdateRewardCouponTemplateRequestApplicationJsonType, str]
-        ]` | No |
-| discount | `Optional[Union[str, float]]` | No |
-| store_wide | `Optional[bool]` | No |
-| minimum_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| maximum_discount_amount | `Union[Union[str, float], None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| expires_after_days | `Union[int, None, NotGiven]` | No |
-| redemption_mode | `Optional[
-            Union[
-                SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode, str
-            ]
-        ]` | No |
-| is_active | `Optional[bool]` | No |
-| listing_ids | `Optional[List[int]]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| type | `SdkUpdateRewardCouponTemplateRequestApplicationJsonType
+        \| str
+        \| None` | No |
+| discount | `str \| float \| None` | No |
+| store_wide | `bool \| None` | No |
+| minimum_amount | `str \| float \| None \| NotGiven` | No |
+| maximum_discount_amount | `str \| float \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| expires_after_days | `int \| None \| NotGiven` | No |
+| redemption_mode | `SdkUpdateRewardCouponTemplateRequestApplicationJsonRedemptionMode
+        \| str
+        \| None` | No |
+| is_active | `bool \| None` | No |
+| listing_ids | `builtins.list[int] \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateRewardCouponTemplateResponseValue200ApplicationJson`.
 

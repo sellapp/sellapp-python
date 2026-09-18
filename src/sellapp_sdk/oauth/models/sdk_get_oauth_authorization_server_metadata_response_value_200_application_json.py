@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson",
     "required": [
         "issuer",
@@ -62,7 +62,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson",
     "required": [
         "issuer",
@@ -122,20 +122,20 @@ class SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
     authorization_endpoint: str
     token_endpoint: str
     revocation_endpoint: str
-    response_types_supported: List[str]
-    grant_types_supported: List[str]
-    code_challenge_methods_supported: List[str]
-    token_endpoint_auth_methods_supported: List[str]
-    revocation_endpoint_auth_methods_supported: List[str]
-    scopes_supported: List[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    response_types_supported: list[str]
+    grant_types_supported: list[str]
+    code_challenge_methods_supported: list[str]
+    token_endpoint_auth_methods_supported: list[str]
+    revocation_endpoint_auth_methods_supported: list[str]
+    scopes_supported: list[str]
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -187,9 +187,9 @@ class SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["issuer"] = self.issuer
         _domain_data["authorization_endpoint"] = self.authorization_endpoint
         _domain_data["token_endpoint"] = self.token_endpoint
@@ -214,7 +214,7 @@ class SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["issuer"] = self.issuer
         result["authorization_endpoint"] = self.authorization_endpoint
         result["token_endpoint"] = self.token_endpoint

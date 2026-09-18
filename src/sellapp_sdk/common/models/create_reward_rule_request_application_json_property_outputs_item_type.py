@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType(str, Enum):
@@ -19,7 +19,7 @@ class CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType(str, Enum):
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType]:
+    ) -> CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

@@ -12,23 +12,23 @@ List all groups
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListGroupsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListGroupsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -76,10 +76,10 @@ def create(
         *,
         title: str,
         unlisted: bool,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateGroupResponseValue201ApplicationJson:
 ```
 
@@ -87,10 +87,10 @@ def create(
 | --- | --- | --- |
 | title | `str` | Yes |
 | unlisted | `bool` | Yes |
-| order | `Union[int, None, NotGiven]` | No |
-| product_ids | `Optional[List[int]]` | No |
-| section_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| order | `int \| None \| NotGiven` | No |
+| product_ids | `builtins.list[int] \| None` | No |
+| section_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateGroupResponseValue201ApplicationJson`.
 
@@ -140,14 +140,14 @@ def get(
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetGroupResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetGroupResponseValue200ApplicationJson`.
 
@@ -194,24 +194,24 @@ def update(
         self,
         group: int,
         *,
-        title: Optional[str] = None,
-        unlisted: Optional[bool] = None,
-        order: Union[int, None, NotGiven] = NOT_GIVEN,
-        product_ids: Optional[List[int]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        unlisted: bool | None = None,
+        order: int | None | NotGiven = NOT_GIVEN,
+        product_ids: builtins.list[int] | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateGroupResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| title | `Optional[str]` | No |
-| unlisted | `Optional[bool]` | No |
-| order | `Union[int, None, NotGiven]` | No |
-| product_ids | `Optional[List[int]]` | No |
-| section_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| unlisted | `bool \| None` | No |
+| order | `int \| None \| NotGiven` | No |
+| product_ids | `builtins.list[int] \| None` | No |
+| section_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateGroupResponseValue200ApplicationJson`.
 
@@ -262,14 +262,14 @@ def delete(
         self,
         group: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -315,37 +315,35 @@ Search groups
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchGroupsRequestApplicationJsonPropertySortItem]] = None,
-        search: Optional[SearchGroupsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchGroupsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchGroupsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[List[SearchGroupsRequestApplicationJsonPropertySortItem]]` | No |
-| search | `Optional[SearchGroupsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchGroupsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchGroupsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchGroupsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[SearchGroupsRequestApplicationJsonPropertyIncludesItem]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]`.
 

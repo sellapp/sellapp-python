@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .confirm_subscription_plan_change_request_application_json_property_metadat
     ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkConfirmSubscriptionPlanChangeRequestApplicationJson",
     "required": ["target_variant_id", "preview_token"],
     "properties": {
@@ -55,7 +55,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkConfirmSubscriptionPlanChangeRequestApplicationJson",
     "required": ["target_variant_id", "preview_token"],
     "properties": {
@@ -95,25 +95,25 @@ class SdkConfirmSubscriptionPlanChangeRequestApplicationJson:
 
     target_variant_id: int
     preview_token: str
-    idempotency_key: Optional[str] = None
+    idempotency_key: str | None = None
     """Optional idempotency key. You may also send this as the Idempotency-Key header."""
-    effective_timing: Optional[
-        SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
-    ] = None
-    proration_behavior: Optional[
-        SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
-    ] = None
-    metadata: Optional[
-        ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    effective_timing: (
+        SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming | None
+    ) = None
+    proration_behavior: (
+        SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior | None
+    ) = None
+    metadata: (
+        ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkConfirmSubscriptionPlanChangeRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -140,7 +140,7 @@ class SdkConfirmSubscriptionPlanChangeRequestApplicationJson:
                 if (_v_proration_behavior := data.get("proration_behavior")) is not None
                 else None,
                 metadata=ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -162,9 +162,9 @@ class SdkConfirmSubscriptionPlanChangeRequestApplicationJson:
                 "SdkConfirmSubscriptionPlanChangeRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["target_variant_id"] = self.target_variant_id
         _domain_data["preview_token"] = self.preview_token
         _domain_data["idempotency_key"] = self.idempotency_key
@@ -182,7 +182,7 @@ class SdkConfirmSubscriptionPlanChangeRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["target_variant_id"] = self.target_variant_id
         result["preview_token"] = self.preview_token
         if self.idempotency_key is not None:

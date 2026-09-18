@@ -12,29 +12,29 @@ List credit balances
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        customer_id: Optional[int] = None,
-        product_id: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        customer_id: int | None = None,
+        product_id: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCreditBalancesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| customer_id | `Optional[int]` | No |
-| product_id | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| customer_id | `int \| None` | No |
+| product_id | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListCreditBalancesResponseValue200ApplicationJson]`.
 
@@ -82,7 +82,7 @@ def get(
         customer: int,
         credit_product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCreditBalanceResponseValue200ApplicationJson:
 ```
 
@@ -90,7 +90,7 @@ def get(
 | --- | --- | --- |
 | customer | `int` | Yes |
 | credit_product | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCreditBalanceResponseValue200ApplicationJson`.
 

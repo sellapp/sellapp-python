@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .create_checkout_session_response_value_201_application_json_property_invoi
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoice,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCheckoutSessionResponseValue201ApplicationJson",
     "required": ["message", "invoice"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateCheckoutSessionResponseValue201ApplicationJson",
     "required": ["message", "invoice"],
     "properties": {
@@ -44,15 +44,15 @@ class SdkCreateCheckoutSessionResponseValue201ApplicationJson:
 
     message: str
     invoice: CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoice
-    payment_url: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    payment_url: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateCheckoutSessionResponseValue201ApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -67,7 +67,7 @@ class SdkCreateCheckoutSessionResponseValue201ApplicationJson:
             return cls(
                 message=data["message"],
                 invoice=CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoice.from_dict(
-                    cast(Dict[str, Any], data["invoice"])
+                    cast(dict[str, Any], data["invoice"])
                 ),
                 payment_url=data.get("payment_url"),
                 additional_properties=_preserve_unknown_fields(
@@ -80,9 +80,9 @@ class SdkCreateCheckoutSessionResponseValue201ApplicationJson:
                 "SdkCreateCheckoutSessionResponseValue201ApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["message"] = self.message
         _domain_data["invoice"] = self.invoice
         if self.payment_url is not None:
@@ -95,7 +95,7 @@ class SdkCreateCheckoutSessionResponseValue201ApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["message"] = self.message
         result["invoice"] = self.invoice.to_dict()
         if self.payment_url is not None:

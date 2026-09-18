@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData",
     "required": ["payment_method", "connect_url", "status_url", "expires_at"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData",
     "required": ["payment_method", "connect_url", "status_url", "expires_at"],
     "properties": {
@@ -47,14 +47,14 @@ class CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData:
     connect_url: str
     status_url: str
     expires_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -82,9 +82,9 @@ class CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["payment_method"] = self.payment_method
         _domain_data["connect_url"] = self.connect_url
         _domain_data["status_url"] = self.status_url
@@ -97,7 +97,7 @@ class CreatePaymentConnectionHandoffResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["payment_method"] = self.payment_method
         result["connect_url"] = self.connect_url
         result["status_url"] = self.status_url

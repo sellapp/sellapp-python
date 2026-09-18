@@ -14,7 +14,7 @@ def activate(
         *,
         license_key: str,
         instance_name: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkActivateLicenseKeyResponseValue200ApplicationJson:
 ```
 
@@ -22,7 +22,7 @@ def activate(
 | --- | --- | --- |
 | license_key | `str` | Yes |
 | instance_name | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkActivateLicenseKeyResponseValue200ApplicationJson`.
 
@@ -72,16 +72,16 @@ def validate(
         self,
         *,
         license_key: str,
-        instance_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        instance_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateLicenseKeyResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | license_key | `str` | Yes |
-| instance_id | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| instance_id | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkValidateLicenseKeyResponseValue200ApplicationJson`.
 
@@ -127,23 +127,23 @@ List all license keys
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]`.
 
@@ -190,14 +190,14 @@ def get(
         self,
         license_key: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetLicenseKeyResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | license_key | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetLicenseKeyResponseValue200ApplicationJson`.
 
@@ -244,20 +244,20 @@ def update(
         self,
         license_key: int,
         *,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        active: Union[bool, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        active: bool | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateLicenseKeyResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | license_key | `int` | Yes |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| active | `Union[bool, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| active | `bool \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateLicenseKeyResponseValue200ApplicationJson`.
 
@@ -309,8 +309,8 @@ def deactivate_license(
         *,
         license_key: str,
         instance_id: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkDeactivateLicenseResponseValue200ApplicationJson:
 ```
 
@@ -318,8 +318,8 @@ def deactivate_license(
 | --- | --- | --- |
 | license_key | `str` | Yes |
 | instance_id | `str` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkDeactivateLicenseResponseValue200ApplicationJson`.
 

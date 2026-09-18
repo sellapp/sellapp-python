@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -29,7 +29,7 @@ from .enable_or_disable_payment_method_response_value_200_application_json_prope
     EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -80,7 +80,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -150,22 +150,22 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData:
     enabled: bool
     health_status: EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataHealthStatus
     configuration_supported: bool
-    required_input: List[
+    required_input: list[
         EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem
     ]
-    connect_url: Optional[str]
+    connect_url: str | None
     """Short-lived or provider-hosted setup handoff when the method supports OAuth-style connection."""
-    configuration_url: Optional[str]
+    configuration_url: str | None
     status_url: str
-    actionable_error: Optional[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    actionable_error: str | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -197,7 +197,7 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData:
                 configuration_supported=data["configuration_supported"],
                 required_input=[
                     EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["required_input"])
                 ],
@@ -232,9 +232,9 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["description"] = self.description
@@ -257,7 +257,7 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["name"] = self.name
         result["description"] = self.description

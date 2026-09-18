@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5",
     "required": ["address"],
     "properties": {
@@ -39,7 +39,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5",
     "required": ["address"],
     "properties": {
@@ -74,17 +74,17 @@ class ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
 
     address: str
     """Write-only secret. SellApp never returns the stored value."""
-    private_view_key: Optional[str] = None
+    private_view_key: str | None = None
     """Write-only secret. SellApp never returns the stored value."""
-    min_withdraw_amount: Optional[Union[float, str]] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    min_withdraw_amount: float | str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5:
         """Deserialize from a dictionary."""
         try:
@@ -111,9 +111,9 @@ class ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["address"] = self.address
         if self.private_view_key is not None:
             _domain_data["private_view_key"] = self.private_view_key
@@ -126,7 +126,7 @@ class ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["address"] = self.address
         if self.private_view_key is not None:
             result["private_view_key"] = self.private_view_key

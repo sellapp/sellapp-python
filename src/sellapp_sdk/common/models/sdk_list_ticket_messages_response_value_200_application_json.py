@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -22,7 +22,7 @@ from .list_ticket_messages_response_value_200_application_json_property_meta imp
     ListTicketMessagesResponseValue200ApplicationJsonPropertyMeta,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkListTicketMessagesResponseValue200ApplicationJson",
     "required": ["data", "links", "meta"],
     "properties": {
@@ -32,7 +32,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkListTicketMessagesResponseValue200ApplicationJson",
     "required": ["data", "links", "meta"],
     "properties": {
@@ -48,17 +48,17 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkListTicketMessagesResponseValue200ApplicationJson:
     """Sdk List Ticket Messages Response Value200Application Json model."""
 
-    data: List[ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]
+    data: list[ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem]
     links: ListTicketMessagesResponseValue200ApplicationJsonPropertyLinks
     meta: ListTicketMessagesResponseValue200ApplicationJsonPropertyMeta
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkListTicketMessagesResponseValue200ApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -73,15 +73,15 @@ class SdkListTicketMessagesResponseValue200ApplicationJson:
             return cls(
                 data=[
                     ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["data"])
                 ],
                 links=ListTicketMessagesResponseValue200ApplicationJsonPropertyLinks.from_dict(
-                    cast(Dict[str, Any], data["links"])
+                    cast(dict[str, Any], data["links"])
                 ),
                 meta=ListTicketMessagesResponseValue200ApplicationJsonPropertyMeta.from_dict(
-                    cast(Dict[str, Any], data["meta"])
+                    cast(dict[str, Any], data["meta"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["data", "links", "meta"]
@@ -93,9 +93,9 @@ class SdkListTicketMessagesResponseValue200ApplicationJson:
                 "SdkListTicketMessagesResponseValue200ApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["data"] = self.data
         _domain_data["links"] = self.links
         _domain_data["meta"] = self.meta
@@ -107,7 +107,7 @@ class SdkListTicketMessagesResponseValue200ApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["data"] = [item.to_dict() for item in self.data]
         result["links"] = self.links.to_dict()
         result["meta"] = self.meta.to_dict()

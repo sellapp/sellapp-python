@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.create_reward_rule_request_application_json_prope
     CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleRequestApplicationJsonPropertyOutputsItem",
     "required": ["type"],
     "properties": {
@@ -67,7 +67,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleRequestApplicationJsonPropertyOutputsItem",
     "required": ["type"],
     "properties": {
@@ -122,20 +122,18 @@ class CreateRewardRuleRequestApplicationJsonPropertyOutputsItem:
     """Create Reward Rule Request Application Json Property Outputs Item model."""
 
     type: CreateRewardRuleRequestApplicationJsonPropertyOutputsItemType
-    amount_cents: Optional[int] = None
-    reward_coupon_template_id: Optional[int] = None
-    label: Optional[str] = None
-    color: Optional[CreateRewardRuleRequestApplicationJsonPropertyOutputsItemColor] = (
-        None
-    )
-    additional_properties: Dict[str, Any] = dataclass_field(
+    amount_cents: int | None = None
+    reward_coupon_template_id: int | None = None
+    label: str | None = None
+    color: CreateRewardRuleRequestApplicationJsonPropertyOutputsItemColor | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateRewardRuleRequestApplicationJsonPropertyOutputsItem:
         """Deserialize from a dictionary."""
         try:
@@ -176,9 +174,9 @@ class CreateRewardRuleRequestApplicationJsonPropertyOutputsItem:
                 "CreateRewardRuleRequestApplicationJsonPropertyOutputsItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         if self.amount_cents is not None:
             _domain_data["amount_cents"] = self.amount_cents
@@ -195,7 +193,7 @@ class CreateRewardRuleRequestApplicationJsonPropertyOutputsItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         if self.amount_cents is not None:
             result["amount_cents"] = self.amount_cents

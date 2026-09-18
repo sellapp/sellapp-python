@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateLicenseKeyRequestApplicationJson",
     "required": [],
     "properties": {
@@ -34,7 +34,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateLicenseKeyRequestApplicationJson",
     "required": [],
     "properties": {
@@ -59,17 +59,17 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkUpdateLicenseKeyRequestApplicationJson:
     """Sdk Update License Key Request Application Json model."""
 
-    limit: Optional[int] = None
-    expires_at: Optional[datetime] = None
-    active: Optional[bool] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    limit: int | None = None
+    expires_at: datetime | None = None
+    active: bool | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkUpdateLicenseKeyRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -95,9 +95,9 @@ class SdkUpdateLicenseKeyRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkUpdateLicenseKeyRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["limit"] = self.limit
         _domain_data["expires_at"] = self.expires_at
         _domain_data["active"] = self.active
@@ -109,7 +109,7 @@ class SdkUpdateLicenseKeyRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.limit is not None:
             result["limit"] = self.limit
         else:

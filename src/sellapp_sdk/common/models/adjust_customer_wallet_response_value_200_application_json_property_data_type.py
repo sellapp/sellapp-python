@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class AdjustCustomerWalletResponseValue200ApplicationJsonPropertyDataType(str, Enum):
@@ -26,7 +26,7 @@ class AdjustCustomerWalletResponseValue200ApplicationJsonPropertyDataType(str, E
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[AdjustCustomerWalletResponseValue200ApplicationJsonPropertyDataType]:
+    ) -> AdjustCustomerWalletResponseValue200ApplicationJsonPropertyDataType | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

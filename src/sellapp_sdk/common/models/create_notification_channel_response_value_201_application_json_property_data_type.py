@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType(
@@ -19,9 +19,9 @@ class CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType(
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
-        CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType
-    ]:
+    ) -> (
+        CreateNotificationChannelResponseValue201ApplicationJsonPropertyDataType | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

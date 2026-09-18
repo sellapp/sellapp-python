@@ -12,23 +12,23 @@ List orders
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrdersResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListOrdersResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -75,34 +75,34 @@ def create(
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateOrderRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateOrderRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateOrderRequestApplicationJsonPropertyExtra] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateOrderRequestApplicationJsonPropertyExtra | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer_email | `str` | Yes |
-| payment_method | `Union[SdkCreateOrderRequestApplicationJsonPaymentMethod, str]` | Yes |
+| payment_method | `SdkCreateOrderRequestApplicationJsonPaymentMethod \| str` | Yes |
 | product_variants | `CreateOrderRequestApplicationJsonPropertyProductVariants` | Yes |
-| customer_ip | `Union[str, None, NotGiven]` | No |
-| coupon | `Optional[str]` | No |
-| vat_id | `Optional[str]` | No |
-| country | `Optional[str]` | No |
-| affiliate | `Union[str, None, NotGiven]` | No |
-| extra | `Optional[CreateOrderRequestApplicationJsonPropertyExtra]` | No |
-| custom_payment_method_id | `Union[str, None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| customer_ip | `str \| None \| NotGiven` | No |
+| coupon | `str \| None` | No |
+| vat_id | `str \| None` | No |
+| country | `str \| None` | No |
+| affiliate | `str \| None \| NotGiven` | No |
+| extra | `CreateOrderRequestApplicationJsonPropertyExtra \| None` | No |
+| custom_payment_method_id | `str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateOrderResponseValue201ApplicationJson`.
 
@@ -153,35 +153,31 @@ Search orders
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchOrdersRequestApplicationJsonPropertySortItem]] = None,
-        pagination: Optional[
-            SearchOrdersRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchOrdersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrdersRequestApplicationJsonPropertyPagination | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchOrdersResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[List[SearchOrdersRequestApplicationJsonPropertySortItem]]` | No |
-| pagination | `Optional[
-            SearchOrdersRequestApplicationJsonPropertyPagination
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchOrdersRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| pagination | `SearchOrdersRequestApplicationJsonPropertyPagination \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchOrdersResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -235,14 +231,14 @@ def get(
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetOrderResponseValue200ApplicationJson`.
 
@@ -289,18 +285,18 @@ def update_status(
         self,
         order: int,
         *,
-        status: Union[SdkUpdateOrderStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateOrderStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateOrderStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| status | `Union[SdkUpdateOrderStatusRequestApplicationJsonStatus, str]` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateOrderStatusRequestApplicationJsonStatus \| str` | Yes |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateOrderStatusResponseValue200ApplicationJson`.
 
@@ -352,18 +348,18 @@ def create_checkout(
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderCheckoutResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateOrderCheckoutResponseValue200ApplicationJson`.
 
@@ -414,8 +410,8 @@ def create_replacement(
         order: int,
         *,
         product_variants: CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderReplacementResponseValue200ApplicationJson:
 ```
 
@@ -423,8 +419,8 @@ def create_replacement(
 | --- | --- | --- |
 | order | `int` | Yes |
 | product_variants | `CreateOrderReplacementRequestApplicationJsonPropertyProductVariants` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateOrderReplacementResponseValue200ApplicationJson`.
 
@@ -475,18 +471,18 @@ def create_refund(
         self,
         order: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderRefundResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| amount | `Union[str, None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| amount | `str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateOrderRefundResponseValue200ApplicationJson`.
 
@@ -537,18 +533,18 @@ def retry_fulfillment(
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderFulfillmentResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| email | `Union[str, None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRetryOrderFulfillmentResponseValue200ApplicationJson`.
 
@@ -600,8 +596,8 @@ def retry_dynamic_delivery(
         order: int,
         *,
         delivered_product_id: int,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson:
 ```
 
@@ -609,8 +605,8 @@ def retry_dynamic_delivery(
 | --- | --- | --- |
 | order | `int` | Yes |
 | delivered_product_id | `int` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson`.
 
@@ -661,20 +657,20 @@ def send_fulfillment_notifications(
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendOrderFulfillmentNotificationsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| email | `Union[str, None, NotGiven]` | No |
-| product_variant_ids | `Union[List[int], None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None \| NotGiven` | No |
+| product_variant_ids | `builtins.list[int] \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkSendOrderFulfillmentNotificationsResponseValue200ApplicationJson`.
 
@@ -726,14 +722,14 @@ def list_deliverables(
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListOrderDeliverablesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListOrderDeliverablesResponseValue200ApplicationJson`.
 
@@ -781,14 +777,14 @@ def create_from_wallet(
         *,
         customer_email: str,
         product_variants: CreateWalletOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateWalletOrderRequestApplicationJsonPropertyExtra] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateWalletOrderRequestApplicationJsonPropertyExtra | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletOrderResponseValue201ApplicationJson:
 ```
 
@@ -796,14 +792,14 @@ def create_from_wallet(
 | --- | --- | --- |
 | customer_email | `str` | Yes |
 | product_variants | `CreateWalletOrderRequestApplicationJsonPropertyProductVariants` | Yes |
-| customer_ip | `Union[str, None, NotGiven]` | No |
-| coupon | `Optional[str]` | No |
-| vat_id | `Optional[str]` | No |
-| country | `Optional[str]` | No |
-| affiliate | `Union[str, None, NotGiven]` | No |
-| extra | `Optional[CreateWalletOrderRequestApplicationJsonPropertyExtra]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| customer_ip | `str \| None \| NotGiven` | No |
+| coupon | `str \| None` | No |
+| vat_id | `str \| None` | No |
+| country | `str \| None` | No |
+| affiliate | `str \| None \| NotGiven` | No |
+| extra | `CreateWalletOrderRequestApplicationJsonPropertyExtra \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateWalletOrderResponseValue201ApplicationJson`.
 
@@ -855,18 +851,18 @@ def pay_from_wallet(
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPayOrderFromWalletResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPayOrderFromWalletResponseValue200ApplicationJson`.
 

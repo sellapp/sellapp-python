@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.create_product_variant_request_application_json_property_bulk_discount_item import (
     CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem,
@@ -72,14 +74,14 @@ class ProductVariants:
         self,
         product: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all product variants
 
@@ -167,19 +169,19 @@ class ProductVariants:
         description: str,
         deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable,
         pricing: CreateProductVariantRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[SdkCreateProductVariantRequestApplicationJsonPaymentMethods, str]
+        payment_methods: builtins.list[
+            SdkCreateProductVariantRequestApplicationJsonPaymentMethods | str
         ],
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductVariantResponseValue201ApplicationJson:
         """Create a product variant
 
@@ -241,7 +243,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "createProductVariant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -360,9 +362,9 @@ class ProductVariants:
         product: int,
         variant: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductVariantResponseValue200ApplicationJson:
         """Retrieve a product variant
 
@@ -417,7 +419,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "getProductVariant",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_drafts": with_drafts,
@@ -438,34 +440,26 @@ class ProductVariants:
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
         """Update a product variant with PUT
 
@@ -528,7 +522,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "replaceProductVariantWithPut",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -643,29 +637,26 @@ class ProductVariants:
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[SdkUpdateProductVariantRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: UpdateProductVariantRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: UpdateProductVariantRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
         """Update a product variant
 
@@ -728,7 +719,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "updateProductVariant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -843,7 +834,7 @@ class ProductVariants:
         product: int,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product variant
 
@@ -903,23 +894,22 @@ class ProductVariants:
         self,
         product: int,
         *,
-        filters: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductVariantsRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchProductVariantsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductVariantsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search product variants
 
@@ -979,7 +969,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "searchProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1016,10 +1006,10 @@ class ProductVariants:
         self,
         product: int,
         *,
-        resources: List[
+        resources: builtins.list[
             BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductVariantsResponseValue200ApplicationJson:
         """Batch create product variants
 
@@ -1072,7 +1062,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchCreateProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -1103,7 +1093,7 @@ class ProductVariants:
         product: int,
         *,
         resources: BatchUpdateProductVariantsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductVariantsResponseValue200ApplicationJson:
         """Batch update product variants
 
@@ -1156,7 +1146,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchUpdateProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -1184,8 +1174,8 @@ class ProductVariants:
         self,
         product: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete product variants
 
@@ -1235,7 +1225,7 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchDeleteProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -1275,14 +1265,14 @@ class AsyncProductVariants:
         self,
         product: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all product variants
 
@@ -1370,19 +1360,19 @@ class AsyncProductVariants:
         description: str,
         deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable,
         pricing: CreateProductVariantRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[SdkCreateProductVariantRequestApplicationJsonPaymentMethods, str]
+        payment_methods: builtins.list[
+            SdkCreateProductVariantRequestApplicationJsonPaymentMethods | str
         ],
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductVariantResponseValue201ApplicationJson:
         """Create a product variant
 
@@ -1444,7 +1434,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "createProductVariant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1563,9 +1553,9 @@ class AsyncProductVariants:
         product: int,
         variant: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductVariantResponseValue200ApplicationJson:
         """Retrieve a product variant
 
@@ -1620,7 +1610,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "getProductVariant",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_drafts": with_drafts,
@@ -1641,34 +1631,26 @@ class AsyncProductVariants:
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
         """Update a product variant with PUT
 
@@ -1731,7 +1713,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "replaceProductVariantWithPut",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1846,29 +1828,26 @@ class AsyncProductVariants:
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[SdkUpdateProductVariantRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: UpdateProductVariantRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: UpdateProductVariantRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
         """Update a product variant
 
@@ -1931,7 +1910,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "updateProductVariant",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -2046,7 +2025,7 @@ class AsyncProductVariants:
         product: int,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product variant
 
@@ -2106,23 +2085,22 @@ class AsyncProductVariants:
         self,
         product: int,
         *,
-        filters: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductVariantsRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchProductVariantsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductVariantsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -2184,7 +2162,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "searchProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -2221,10 +2199,10 @@ class AsyncProductVariants:
         self,
         product: int,
         *,
-        resources: List[
+        resources: builtins.list[
             BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductVariantsResponseValue200ApplicationJson:
         """Batch create product variants
 
@@ -2277,7 +2255,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchCreateProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -2308,7 +2286,7 @@ class AsyncProductVariants:
         product: int,
         *,
         resources: BatchUpdateProductVariantsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductVariantsResponseValue200ApplicationJson:
         """Batch update product variants
 
@@ -2361,7 +2339,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchUpdateProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -2389,8 +2367,8 @@ class AsyncProductVariants:
         self,
         product: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete product variants
 
@@ -2440,7 +2418,7 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "batchDeleteProductVariants",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

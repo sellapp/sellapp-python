@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -30,15 +30,15 @@ class CreditsBalances:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        customer_id: Optional[int] = None,
-        product_id: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        customer_id: int | None = None,
+        product_id: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCreditBalancesResponseValue200ApplicationJson]:
         """List credit balances
 
@@ -123,7 +123,7 @@ class CreditsBalances:
         customer: int,
         credit_product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCreditBalanceResponseValue200ApplicationJson:
         """Retrieve a credit balance
 
@@ -194,15 +194,15 @@ class AsyncCreditsBalances:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        customer_id: Optional[int] = None,
-        product_id: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        customer_id: int | None = None,
+        product_id: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListCreditBalancesResponseValue200ApplicationJson]:
         """List credit balances
 
@@ -287,7 +287,7 @@ class AsyncCreditsBalances:
         customer: int,
         credit_product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCreditBalanceResponseValue200ApplicationJson:
         """Retrieve a credit balance
 

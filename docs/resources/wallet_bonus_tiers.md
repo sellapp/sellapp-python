@@ -12,13 +12,13 @@ List wallet bonus tiers
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListWalletBonusTiersResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListWalletBonusTiersResponseValue200ApplicationJson`.
 
@@ -65,26 +65,26 @@ def create(
         self,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[SdkCreateWalletBonusTierRequestApplicationJsonBonusKind, str],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkCreateWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletBonusTierResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | minimum_top_up_cents | `int` | Yes |
-| bonus_kind | `Union[SdkCreateWalletBonusTierRequestApplicationJsonBonusKind, str]` | Yes |
-| fixed_bonus_cents | `Optional[int]` | Yes |
-| percent_basis | `Optional[int]` | Yes |
-| maximum_bonus_cents | `Optional[int]` | Yes |
+| bonus_kind | `SdkCreateWalletBonusTierRequestApplicationJsonBonusKind \| str` | Yes |
+| fixed_bonus_cents | `int \| None` | Yes |
+| percent_basis | `int \| None` | Yes |
+| maximum_bonus_cents | `int \| None` | Yes |
 | priority | `int` | Yes |
 | is_active | `bool` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateWalletBonusTierResponseValue201ApplicationJson`.
 
@@ -140,15 +140,13 @@ def replace(
         bonus_tier: int,
         *,
         minimum_top_up_cents: int,
-        bonus_kind: Union[
-            SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind, str
-        ],
-        fixed_bonus_cents: Optional[int],
-        percent_basis: Optional[int],
-        maximum_bonus_cents: Optional[int],
+        bonus_kind: SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind | str,
+        fixed_bonus_cents: int | None,
+        percent_basis: int | None,
+        maximum_bonus_cents: int | None,
         priority: int,
         is_active: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletBonusTierResponseValue200ApplicationJson:
 ```
 
@@ -156,15 +154,13 @@ def replace(
 | --- | --- | --- |
 | bonus_tier | `int` | Yes |
 | minimum_top_up_cents | `int` | Yes |
-| bonus_kind | `Union[
-            SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind, str
-        ]` | Yes |
-| fixed_bonus_cents | `Optional[int]` | Yes |
-| percent_basis | `Optional[int]` | Yes |
-| maximum_bonus_cents | `Optional[int]` | Yes |
+| bonus_kind | `SdkReplaceWalletBonusTierRequestApplicationJsonBonusKind \| str` | Yes |
+| fixed_bonus_cents | `int \| None` | Yes |
+| percent_basis | `int \| None` | Yes |
+| maximum_bonus_cents | `int \| None` | Yes |
 | priority | `int` | Yes |
 | is_active | `bool` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceWalletBonusTierResponseValue200ApplicationJson`.
 
@@ -220,32 +216,32 @@ def update(
         self,
         bonus_tier: int,
         *,
-        minimum_top_up_cents: Optional[int] = None,
-        bonus_kind: Optional[
-            Union[SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind, str]
-        ] = None,
-        fixed_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        percent_basis: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_bonus_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        priority: Optional[int] = None,
-        is_active: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None = None,
+        bonus_kind: SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind
+        | str
+        | None = None,
+        fixed_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        percent_basis: int | None | NotGiven = NOT_GIVEN,
+        maximum_bonus_cents: int | None | NotGiven = NOT_GIVEN,
+        priority: int | None = None,
+        is_active: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateWalletBonusTierResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | bonus_tier | `int` | Yes |
-| minimum_top_up_cents | `Optional[int]` | No |
-| bonus_kind | `Optional[
-            Union[SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind, str]
-        ]` | No |
-| fixed_bonus_cents | `Union[int, None, NotGiven]` | No |
-| percent_basis | `Union[int, None, NotGiven]` | No |
-| maximum_bonus_cents | `Union[int, None, NotGiven]` | No |
-| priority | `Optional[int]` | No |
-| is_active | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| minimum_top_up_cents | `int \| None` | No |
+| bonus_kind | `SdkUpdateWalletBonusTierRequestApplicationJsonBonusKind
+        \| str
+        \| None` | No |
+| fixed_bonus_cents | `int \| None \| NotGiven` | No |
+| percent_basis | `int \| None \| NotGiven` | No |
+| maximum_bonus_cents | `int \| None \| NotGiven` | No |
+| priority | `int \| None` | No |
+| is_active | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateWalletBonusTierResponseValue200ApplicationJson`.
 
@@ -295,14 +291,14 @@ def archive(
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | bonus_tier | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -349,14 +345,14 @@ def restore(
         self,
         bonus_tier: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreWalletBonusTierResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | bonus_tier | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRestoreWalletBonusTierResponseValue200ApplicationJson`.
 

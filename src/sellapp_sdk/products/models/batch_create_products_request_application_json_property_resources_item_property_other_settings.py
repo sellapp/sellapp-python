@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -13,7 +13,7 @@ from sellapp_sdk._types import (
 )
 from sellapp_sdk.common.models.product_faq_input import ProductFaqInput
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings",
     "required": [],
     "properties": {
@@ -25,7 +25,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings",
     "required": [],
     "properties": {
@@ -43,19 +43,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings:
     """Batch Create Products Request Application Json Property Resources Item Property Other Settings model."""
 
-    redirect_url: Optional[str] = None
-    video_url: Optional[str] = None
-    product_title: Optional[str] = None
-    product_description: Optional[str] = None
-    faq: Optional[List[ProductFaqInput]] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    redirect_url: str | None = None
+    video_url: str | None = None
+    product_title: str | None = None
+    product_description: str | None = None
+    faq: list[ProductFaqInput] | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings:
         """Deserialize from a dictionary."""
         try:
@@ -73,7 +73,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOthe
                 product_title=data.get("product_title"),
                 product_description=data.get("product_description"),
                 faq=[
-                    ProductFaqInput.from_dict(cast(Dict[str, Any], item))
+                    ProductFaqInput.from_dict(cast(dict[str, Any], item))
                     for item in cast(list[Any], _v_faq)
                 ]
                 if (_v_faq := data.get("faq")) is not None
@@ -96,9 +96,9 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOthe
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.redirect_url is not None:
             _domain_data["redirect_url"] = self.redirect_url
         if self.video_url is not None:
@@ -117,7 +117,7 @@ class BatchCreateProductsRequestApplicationJsonPropertyResourcesItemPropertyOthe
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.redirect_url is not None:
             result["redirect_url"] = self.redirect_url
         if self.video_url is not None:

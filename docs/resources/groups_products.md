@@ -13,16 +13,16 @@ def add(
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkAddProductsToGroupResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAddProductsToGroupResponseValue200ApplicationJson`.
 
@@ -72,16 +72,16 @@ def remove(
         self,
         group: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -131,12 +131,12 @@ def list(
         self,
         group: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -145,12 +145,12 @@ def list(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         ListProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
@@ -199,16 +199,16 @@ def replace(
         self,
         group: int,
         *,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkSyncGroupProductsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| product_ids | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| product_ids | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkSyncGroupProductsResponseValue200ApplicationJson`.
 
@@ -259,7 +259,7 @@ def get(
         group: int,
         product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductWithinGroupResponseValue200ApplicationJson:
 ```
 
@@ -267,7 +267,7 @@ def get(
 | --- | --- | --- |
 | group | `int` | Yes |
 | product | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetProductWithinGroupResponseValue200ApplicationJson`.
 
@@ -317,23 +317,25 @@ def search(
         self,
         group: int,
         *,
-        filters: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductsWithinGroupRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertySortItem
+        ]
+        | None = None,
+        search: SearchProductsWithinGroupRequestApplicationJsonPropertySearch
+        | None = None,
+        includes: builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -342,23 +344,25 @@ def search(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | group | `int` | Yes |
-| filters | `Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[
-            SearchProductsWithinGroupRequestApplicationJsonPropertySearch
-        ]` | No |
-| includes | `Optional[
-            List[SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertySortItem
+        ]
+        \| None` | No |
+| search | `SearchProductsWithinGroupRequestApplicationJsonPropertySearch
+        \| None` | No |
+| includes | `builtins.list[
+            SearchProductsWithinGroupRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem

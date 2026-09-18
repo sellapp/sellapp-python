@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -25,7 +25,7 @@ from sellapp_sdk.common.models.sdk_search_invoices_request_application_json_stat
     SdkSearchInvoicesRequestApplicationJsonStatus,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSearchInvoicesRequestApplicationJson",
     "required": [],
     "properties": {
@@ -121,7 +121,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSearchInvoicesRequestApplicationJson",
     "required": [],
     "properties": {
@@ -223,30 +223,30 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkSearchInvoicesRequestApplicationJson:
     """Sdk Search Invoices Request Application Json model."""
 
-    search: Optional[str] = None
-    search_by: Optional[SdkSearchInvoicesRequestApplicationJsonSearchBy] = None
-    id: Optional[str] = None
-    email: Optional[str] = None
-    transaction_id: Optional[str] = None
-    serial_code: Optional[str] = None
-    additional_info: Optional[str] = None
-    product_name: Optional[str] = None
-    discord_data: Optional[str] = None
-    crypto_txid: Optional[str] = None
-    crypto_address: Optional[str] = None
-    coupon_code: Optional[str] = None
-    status: Optional[List[SdkSearchInvoicesRequestApplicationJsonStatus]] = None
-    payment_methods: Optional[
-        List[SdkSearchInvoicesRequestApplicationJsonPaymentMethods]
-    ] = None
-    sort: Optional[SdkSearchInvoicesRequestApplicationJsonSort] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    search: str | None = None
+    search_by: SdkSearchInvoicesRequestApplicationJsonSearchBy | None = None
+    id: str | None = None
+    email: str | None = None
+    transaction_id: str | None = None
+    serial_code: str | None = None
+    additional_info: str | None = None
+    product_name: str | None = None
+    discord_data: str | None = None
+    crypto_txid: str | None = None
+    crypto_address: str | None = None
+    coupon_code: str | None = None
+    status: list[SdkSearchInvoicesRequestApplicationJsonStatus] | None = None
+    payment_methods: (
+        list[SdkSearchInvoicesRequestApplicationJsonPaymentMethods] | None
+    ) = None
+    sort: SdkSearchInvoicesRequestApplicationJsonSort | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkSearchInvoicesRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkSearchInvoicesRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -312,9 +312,9 @@ class SdkSearchInvoicesRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkSearchInvoicesRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.search is not None:
             _domain_data["search"] = self.search
         if self.search_by is not None:
@@ -353,7 +353,7 @@ class SdkSearchInvoicesRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.search is not None:
             result["search"] = self.search
         if self.search_by is not None:

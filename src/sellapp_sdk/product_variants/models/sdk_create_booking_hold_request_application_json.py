@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .create_booking_hold_request_application_json_property_meta import (
     CreateBookingHoldRequestApplicationJsonPropertyMeta,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateBookingHoldRequestApplicationJson",
     "required": ["slot_start_at"],
     "properties": {
@@ -37,7 +37,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateBookingHoldRequestApplicationJson",
     "required": ["slot_start_at"],
     "properties": {
@@ -62,17 +62,17 @@ class SdkCreateBookingHoldRequestApplicationJson:
     """Sdk Create Booking Hold Request Application Json model."""
 
     slot_start_at: datetime
-    quantity: Optional[int] = None
-    customer_key: Optional[str] = None
-    meta: Optional[CreateBookingHoldRequestApplicationJsonPropertyMeta] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    quantity: int | None = None
+    customer_key: str | None = None
+    meta: CreateBookingHoldRequestApplicationJsonPropertyMeta | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateBookingHoldRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -89,7 +89,7 @@ class SdkCreateBookingHoldRequestApplicationJson:
                 quantity=data.get("quantity"),
                 customer_key=data.get("customer_key"),
                 meta=CreateBookingHoldRequestApplicationJsonPropertyMeta.from_dict(
-                    cast(Dict[str, Any], _v_meta)
+                    cast(dict[str, Any], _v_meta)
                 )
                 if (_v_meta := data.get("meta")) is not None
                 else None,
@@ -101,9 +101,9 @@ class SdkCreateBookingHoldRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateBookingHoldRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["slot_start_at"] = self.slot_start_at
         if self.quantity is not None:
             _domain_data["quantity"] = self.quantity
@@ -118,7 +118,7 @@ class SdkCreateBookingHoldRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["slot_start_at"] = _format_datetime(self.slot_start_at)
         if self.quantity is not None:
             result["quantity"] = self.quantity

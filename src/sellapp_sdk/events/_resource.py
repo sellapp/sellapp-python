@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import TYPE_CHECKING, Literal
 
 from .._base_client import WithRawResponse
 
@@ -27,15 +27,15 @@ class Events:
     def list_integration_events(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        cursor: Optional[str] = None,
-        type: Optional[str] = None,
-        subject_type: Optional[Literal["order"]] = None,
-        subject_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        cursor: str | None = None,
+        type: str | None = None,
+        subject_type: Literal["order"] | None = None,
+        subject_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItem]:
         """List integration events
 
@@ -121,12 +121,12 @@ class Events:
         self,
         order: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order_: Optional[str] = None,
-        cursor: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order_: str | None = None,
+        cursor: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrderEventsResponseValue200ApplicationJsonPropertyDataItem]:
         """List order events
 
@@ -214,15 +214,15 @@ class AsyncEvents:
     async def list_integration_events(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        cursor: Optional[str] = None,
-        type: Optional[str] = None,
-        subject_type: Optional[Literal["order"]] = None,
-        subject_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        cursor: str | None = None,
+        type: str | None = None,
+        subject_type: Literal["order"] | None = None,
+        subject_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -310,12 +310,12 @@ class AsyncEvents:
         self,
         order: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order_: Optional[str] = None,
-        cursor: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order_: str | None = None,
+        cursor: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListOrderEventsResponseValue200ApplicationJsonPropertyDataItem]:
         """List order events
 

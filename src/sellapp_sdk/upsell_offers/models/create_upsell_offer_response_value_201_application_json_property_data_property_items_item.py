@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -24,7 +24,7 @@ from .create_upsell_offer_response_value_201_application_json_property_data_prop
     CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetVariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItem",
     "required": [
         "id",
@@ -91,7 +91,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItem",
     "required": [
         "id",
@@ -167,30 +167,32 @@ class CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsI
     id: int
     target_listing_id: int
     target_variant_id: int
-    headline: Optional[str]
-    description: Optional[str]
-    discount_type: Optional[DiscountType]
-    discount_value: Optional[str]
+    headline: str | None
+    description: str | None
+    discount_type: DiscountType | None
+    discount_value: str | None
     """Decimal percentage or fixed major-unit discount. Currency arithmetic is performed in integer minor units by checkout."""
-    maximum_discount_amount: Optional[str]
+    maximum_discount_amount: str | None
     """Optional major-unit cap for percentage discounts. Must be null for fixed discounts."""
     sort_order: int
-    target_product: Optional[
+    target_product: (
         CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetProduct
-    ]
-    target_variant: Optional[
+        | None
+    )
+    target_variant: (
         CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetVariant
-    ]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    )
+    created_at: datetime | None
+    updated_at: datetime | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItem:
         """Deserialize from a dictionary."""
         try:
@@ -215,12 +217,12 @@ class CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsI
                 maximum_discount_amount=data["maximum_discount_amount"],
                 sort_order=data["sort_order"],
                 target_product=CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetProduct.from_dict(
-                    cast(Dict[str, Any], _v_target_product)
+                    cast(dict[str, Any], _v_target_product)
                 )
                 if (_v_target_product := data["target_product"]) is not None
                 else None,
                 target_variant=CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetVariant.from_dict(
-                    cast(Dict[str, Any], _v_target_variant)
+                    cast(dict[str, Any], _v_target_variant)
                 )
                 if (_v_target_variant := data["target_variant"]) is not None
                 else None,
@@ -256,9 +258,9 @@ class CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsI
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["target_listing_id"] = self.target_listing_id
         _domain_data["target_variant_id"] = self.target_variant_id
@@ -280,7 +282,7 @@ class CreateUpsellOfferResponseValue201ApplicationJsonPropertyDataPropertyItemsI
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["target_listing_id"] = self.target_listing_id
         result["target_variant_id"] = self.target_variant_id

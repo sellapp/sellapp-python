@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -31,7 +31,7 @@ class VariantDeliverableFolders:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListVariantDeliverableFoldersResponseValue200ApplicationJson:
         """List variant deliverable folders
 
@@ -105,10 +105,10 @@ class VariantDeliverableFolders:
         variant: int,
         *,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateVariantDeliverableFolderResponseValue201ApplicationJson:
         """Create a variant deliverable folder
 
@@ -165,7 +165,7 @@ class VariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "createVariantDeliverableFolder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -239,7 +239,7 @@ class VariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFolderResponseValue200ApplicationJson:
         """Retrieve a variant deliverable folder
 
@@ -315,11 +315,11 @@ class VariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFolderSettingsResponseValue200ApplicationJson:
         """Replace variant deliverable folder settings
 
@@ -377,7 +377,7 @@ class VariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableFolderSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -452,11 +452,11 @@ class VariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFolderResponseValue200ApplicationJson:
         """Update a variant deliverable folder
 
@@ -514,7 +514,7 @@ class VariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "updateVariantDeliverableFolder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -589,7 +589,7 @@ class VariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant deliverable folder
 
@@ -668,7 +668,7 @@ class AsyncVariantDeliverableFolders:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListVariantDeliverableFoldersResponseValue200ApplicationJson:
         """List variant deliverable folders
 
@@ -742,10 +742,10 @@ class AsyncVariantDeliverableFolders:
         variant: int,
         *,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateVariantDeliverableFolderResponseValue201ApplicationJson:
         """Create a variant deliverable folder
 
@@ -802,7 +802,7 @@ class AsyncVariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "createVariantDeliverableFolder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -876,7 +876,7 @@ class AsyncVariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFolderResponseValue200ApplicationJson:
         """Retrieve a variant deliverable folder
 
@@ -952,11 +952,11 @@ class AsyncVariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFolderSettingsResponseValue200ApplicationJson:
         """Replace variant deliverable folder settings
 
@@ -1014,7 +1014,7 @@ class AsyncVariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "replaceVariantDeliverableFolderSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1089,11 +1089,11 @@ class AsyncVariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFolderResponseValue200ApplicationJson:
         """Update a variant deliverable folder
 
@@ -1151,7 +1151,7 @@ class AsyncVariantDeliverableFolders:
             "idempotency_supported": False,
             "operation_id": "updateVariantDeliverableFolder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1226,7 +1226,7 @@ class AsyncVariantDeliverableFolders:
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a variant deliverable folder
 

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -20,7 +20,7 @@ from .list_coupons_response_value_200_application_json_property_data_item_type i
     ListCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCouponsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -79,7 +79,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCouponsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -148,30 +148,30 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
     code: str
     type: ListCouponsResponseValue200ApplicationJsonPropertyDataItemType
     discount: str
-    limit: Optional[int]
+    limit: int | None
     store_wide: bool
-    minimum_amount: Optional[str]
+    minimum_amount: str | None
     """The decimal minimum order amount in the store currency's major unit, or null when no minimum applies."""
-    expires_at: Optional[str]
+    expires_at: str | None
     """When the coupon stops applying, as a `Y-m-d H:i:s` timestamp in the store timezone, or null when it never expires. Unlike the other timestamps in this API, this is not an ISO 8601 instant."""
     created_at: datetime
     updated_at: datetime
     store_id: int
-    deleted_at: Optional[datetime]
-    maximum_discount_amount: Optional[str]
+    deleted_at: datetime | None
+    maximum_discount_amount: str | None
     """The maximum decimal discount in the store currency's major unit for percentage coupons. This field is managed from the dashboard and is read-only in the v1 Coupons API."""
-    products: List[int]
+    products: list[int]
     """Product IDs this coupon applies to. Store-wide coupons return an empty array."""
-    product_variants: List[int]
+    product_variants: list[int]
     """Variant IDs explicitly included in the coupon scope. An empty array means all variants of the selected products are eligible."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -230,9 +230,9 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
                 "ListCouponsResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["code"] = self.code
         _domain_data["type"] = self.type
@@ -256,7 +256,7 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["code"] = self.code
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type

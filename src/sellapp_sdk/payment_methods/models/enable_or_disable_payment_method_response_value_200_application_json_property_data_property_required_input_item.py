@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.enable_or_disable_payment_method_response_value_2
     EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem",
     "required": ["name", "type", "required", "secret"],
     "properties": {
@@ -30,7 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem",
     "required": ["name", "type", "required", "secret"],
     "properties": {
@@ -55,14 +55,14 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPro
     required: bool
     secret: bool
     """When true, the corresponding setup value is write-only and is never returned by SellApp."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem:
         """Deserialize from a dictionary."""
         try:
@@ -92,9 +92,9 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPro
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["name"] = self.name
         _domain_data["type"] = self.type
         _domain_data["required"] = self.required
@@ -107,7 +107,7 @@ class EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPro
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["name"] = self.name
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["required"] = self.required

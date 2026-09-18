@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -22,7 +22,7 @@ from .create_checkout_session_response_value_200_application_json_property_invoi
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyDiscordData,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformation",
     "required": [
         "id",
@@ -53,7 +53,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformation",
     "required": [
         "id",
@@ -92,24 +92,25 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
 
     id: int
     email: str
-    country: Optional[str]
+    country: str | None
     location: str
     ip: str
     proxied: bool
     browser_agent: str
-    vat: Optional[
+    vat: (
         CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyVat
-    ]
+        | None
+    )
     discord_data: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyDiscordData
     billing_details: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyBillingDetails
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformation:
         """Deserialize from a dictionary."""
         try:
@@ -130,15 +131,15 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                 proxied=data["proxied"],
                 browser_agent=data["browser_agent"],
                 vat=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyVat.from_dict(
-                    cast(Dict[str, Any], _v_vat)
+                    cast(dict[str, Any], _v_vat)
                 )
                 if (_v_vat := data["vat"]) is not None
                 else None,
                 discord_data=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyDiscordData.from_dict(
-                    cast(Dict[str, Any], data["discord_data"])
+                    cast(dict[str, Any], data["discord_data"])
                 ),
                 billing_details=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformationPropertyBillingDetails.from_dict(
-                    cast(Dict[str, Any], data["billing_details"])
+                    cast(dict[str, Any], data["billing_details"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -163,9 +164,9 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["email"] = self.email
         _domain_data["country"] = self.country
@@ -184,7 +185,7 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["email"] = self.email
         if self.country is not None:

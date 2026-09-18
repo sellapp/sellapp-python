@@ -14,16 +14,15 @@ def record(
         *,
         customer_id: int,
         product_id: int,
-        kind: Union[SdkRecordCreditTransactionRequestApplicationJsonKind, str],
+        kind: SdkRecordCreditTransactionRequestApplicationJsonKind | str,
         amount_units: int,
         idempotency_key: str,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_type: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            RecordCreditTransactionRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        source_type: str | None | NotGiven = NOT_GIVEN,
+        source_id: str | None | NotGiven = NOT_GIVEN,
+        metadata: RecordCreditTransactionRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRecordCreditTransactionResponseValue200ApplicationJson:
 ```
 
@@ -31,16 +30,15 @@ def record(
 | --- | --- | --- |
 | customer_id | `int` | Yes |
 | product_id | `int` | Yes |
-| kind | `Union[SdkRecordCreditTransactionRequestApplicationJsonKind, str]` | Yes |
+| kind | `SdkRecordCreditTransactionRequestApplicationJsonKind \| str` | Yes |
 | amount_units | `int` | Yes |
 | idempotency_key | `str` | Yes |
-| reason | `Union[str, None, NotGiven]` | No |
-| source_type | `Union[str, None, NotGiven]` | No |
-| source_id | `Union[str, None, NotGiven]` | No |
-| metadata | `Optional[
-            RecordCreditTransactionRequestApplicationJsonPropertyMetadata
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| reason | `str \| None \| NotGiven` | No |
+| source_type | `str \| None \| NotGiven` | No |
+| source_id | `str \| None \| NotGiven` | No |
+| metadata | `RecordCreditTransactionRequestApplicationJsonPropertyMetadata
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRecordCreditTransactionResponseValue200ApplicationJson`.
 

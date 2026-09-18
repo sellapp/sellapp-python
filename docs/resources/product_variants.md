@@ -13,28 +13,28 @@ def list(
         self,
         product: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| with_drafts | `Optional[bool]` | No |
-| only_drafts | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -85,19 +85,19 @@ def create(
         description: str,
         deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable,
         pricing: CreateProductVariantRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[SdkCreateProductVariantRequestApplicationJsonPaymentMethods, str]
+        payment_methods: builtins.list[
+            SdkCreateProductVariantRequestApplicationJsonPaymentMethods | str
         ],
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductVariantResponseValue201ApplicationJson:
 ```
 
@@ -108,19 +108,19 @@ def create(
 | description | `str` | Yes |
 | deliverable | `CreateProductVariantRequestApplicationJsonPropertyDeliverable` | Yes |
 | pricing | `CreateProductVariantRequestApplicationJsonPropertyPricing` | Yes |
-| payment_methods | `List[
-            Union[SdkCreateProductVariantRequestApplicationJsonPaymentMethods, str]
+| payment_methods | `builtins.list[
+            SdkCreateProductVariantRequestApplicationJsonPaymentMethods \| str
         ]` | Yes |
-| minimum_purchase_quantity | `Optional[int]` | No |
-| maximum_purchase_quantity | `Union[int, None, NotGiven]` | No |
-| bulk_discount | `Optional[
-            List[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ]` | No |
-| other_settings | `Optional[
-            CreateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| minimum_purchase_quantity | `int \| None` | No |
+| maximum_purchase_quantity | `int \| None \| NotGiven` | No |
+| bulk_discount | `builtins.list[
+            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        \| None` | No |
+| other_settings | `CreateProductVariantRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateProductVariantResponseValue201ApplicationJson`.
 
@@ -178,9 +178,9 @@ def get(
         product: int,
         variant: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductVariantResponseValue200ApplicationJson:
 ```
 
@@ -188,9 +188,9 @@ def get(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| with_drafts | `Optional[bool]` | No |
-| only_drafts | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetProductVariantResponseValue200ApplicationJson`.
 
@@ -241,34 +241,26 @@ def replace(
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
 ```
 
@@ -276,34 +268,26 @@ def replace(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| deliverable | `Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
-        ]` | No |
-| pricing | `Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
-        ]` | No |
-| minimum_purchase_quantity | `Optional[int]` | No |
-| maximum_purchase_quantity | `Union[int, None, NotGiven]` | No |
-| bulk_discount | `Optional[
-            List[
-                ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ]` | No |
-| payment_methods | `Optional[
-            List[
-                Union[
-                    SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ]` | No |
-| other_settings | `Optional[
-            ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None` | No |
+| deliverable | `ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
+        \| None` | No |
+| pricing | `ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
+        \| None` | No |
+| minimum_purchase_quantity | `int \| None` | No |
+| maximum_purchase_quantity | `int \| None \| NotGiven` | No |
+| bulk_discount | `builtins.list[
+            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        \| None` | No |
+| payment_methods | `builtins.list[
+            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| other_settings | `ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceProductVariantWithPutResponseValue200ApplicationJson`.
 
@@ -356,29 +340,26 @@ def update(
         product: int,
         variant: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        deliverable: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        pricing: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyPricing
-        ] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        bulk_discount: Optional[
-            List[UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[SdkUpdateProductVariantRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        deliverable: UpdateProductVariantRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        pricing: UpdateProductVariantRequestApplicationJsonPropertyPricing
+        | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        bulk_discount: builtins.list[
+            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
 ```
 
@@ -386,29 +367,26 @@ def update(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| deliverable | `Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyDeliverable
-        ]` | No |
-| pricing | `Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyPricing
-        ]` | No |
-| minimum_purchase_quantity | `Optional[int]` | No |
-| maximum_purchase_quantity | `Union[int, None, NotGiven]` | No |
-| bulk_discount | `Optional[
-            List[UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem]
-        ]` | No |
-| payment_methods | `Optional[
-            List[
-                Union[SdkUpdateProductVariantRequestApplicationJsonPaymentMethods, str]
-            ]
-        ]` | No |
-| other_settings | `Optional[
-            UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None` | No |
+| deliverable | `UpdateProductVariantRequestApplicationJsonPropertyDeliverable
+        \| None` | No |
+| pricing | `UpdateProductVariantRequestApplicationJsonPropertyPricing
+        \| None` | No |
+| minimum_purchase_quantity | `int \| None` | No |
+| maximum_purchase_quantity | `int \| None \| NotGiven` | No |
+| bulk_discount | `builtins.list[
+            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        \| None` | No |
+| payment_methods | `builtins.list[
+            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| other_settings | `UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateProductVariantResponseValue200ApplicationJson`.
 
@@ -461,7 +439,7 @@ def delete(
         product: int,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -469,7 +447,7 @@ def delete(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -519,46 +497,44 @@ def search(
         self,
         product: int,
         *,
-        filters: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchProductVariantsRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchProductVariantsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductVariantsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| filters | `Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[
-            SearchProductVariantsRequestApplicationJsonPropertySearch
-        ]` | No |
-| includes | `Optional[
-            List[SearchProductVariantsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchProductVariantsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchProductVariantsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchProductVariantsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -609,20 +585,20 @@ def batch_create(
         self,
         product: int,
         *,
-        resources: List[
+        resources: builtins.list[
             BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductVariantsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| resources | `List[
+| resources | `builtins.list[
             BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItem
         ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchCreateProductVariantsResponseValue200ApplicationJson`.
 
@@ -684,7 +660,7 @@ def batch_update(
         product: int,
         *,
         resources: BatchUpdateProductVariantsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductVariantsResponseValue200ApplicationJson:
 ```
 
@@ -692,7 +668,7 @@ def batch_update(
 | --- | --- | --- |
 | product | `int` | Yes |
 | resources | `BatchUpdateProductVariantsRequestApplicationJsonPropertyResources` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchUpdateProductVariantsResponseValue200ApplicationJson`.
 
@@ -742,16 +718,16 @@ def batch_delete(
         self,
         product: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product | `int` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

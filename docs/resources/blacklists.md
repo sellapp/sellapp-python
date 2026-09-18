@@ -12,23 +12,23 @@ List all blacklist rules
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[Blacklist]`.
 
@@ -69,19 +69,19 @@ Create a blacklist rule
 def create(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| type | `Union[BlacklistType, str]` | Yes |
+| type | `BlacklistType \| str` | Yes |
 | data | `str` | Yes |
 | description | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -127,14 +127,14 @@ def get(
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -176,20 +176,20 @@ def update(
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| type | `Optional[Union[BlacklistType, str]]` | No |
-| data | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `BlacklistType \| str \| None` | No |
+| data | `str \| None` | No |
+| description | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -231,14 +231,14 @@ def delete(
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -279,21 +279,21 @@ List blacklist rules
 def v2_list_blacklists(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[Blacklist]`.
 
@@ -339,21 +339,21 @@ Create a blacklist rule
 def v2_create_blacklist(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| type | `Union[BlacklistType, str]` | Yes |
+| type | `BlacklistType \| str` | Yes |
 | data | `str` | Yes |
 | description | `str` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -404,14 +404,14 @@ def v2_get_blacklist(
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -458,20 +458,20 @@ def v2_replace_blacklist(
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| type | `Optional[Union[BlacklistType, str]]` | No |
-| data | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `BlacklistType \| str \| None` | No |
+| data | `str \| None` | No |
+| description | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -521,20 +521,20 @@ def v2_update_blacklist(
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| type | `Optional[Union[BlacklistType, str]]` | No |
-| data | `Optional[str]` | No |
-| description | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `BlacklistType \| str \| None` | No |
+| data | `str \| None` | No |
+| description | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `BlacklistResponse`.
 
@@ -584,14 +584,14 @@ def v2_delete_blacklist(
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | blacklist | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

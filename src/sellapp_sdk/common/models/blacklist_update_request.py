@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
 
 from .blacklist_type import BlacklistType
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BlacklistUpdateRequest",
     "required": [],
     "properties": {
@@ -28,7 +28,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BlacklistUpdateRequest",
     "required": [],
     "properties": {
@@ -47,18 +47,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class BlacklistUpdateRequest:
     """Provide one or more fields to update an existing blacklist rule."""
 
-    type: Optional[BlacklistType] = None
-    data: Optional[str] = None
+    type: BlacklistType | None = None
+    data: str | None = None
     """The updated value to blacklist."""
-    description: Optional[str] = None
+    description: str | None = None
     """The updated reason for this rule."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> BlacklistUpdateRequest:
+    def from_dict(cls, data: dict[str, Any]) -> BlacklistUpdateRequest:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -83,9 +83,9 @@ class BlacklistUpdateRequest:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("BlacklistUpdateRequest", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.type is not None:
             _domain_data["type"] = self.type
         if self.data is not None:
@@ -100,7 +100,7 @@ class BlacklistUpdateRequest:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.type is not None:
             result["type"] = (
                 self.type.value if isinstance(self.type, Enum) else self.type

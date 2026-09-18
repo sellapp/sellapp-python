@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from .replace_affiliate_program_configuration_request_application_json_property_
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceAffiliateProgramConfigurationRequestApplicationJson",
     "required": ["enabled", "settings", "products"],
     "properties": {
@@ -29,7 +29,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceAffiliateProgramConfigurationRequestApplicationJson",
     "required": ["enabled", "settings", "products"],
     "properties": {
@@ -47,17 +47,17 @@ class SdkReplaceAffiliateProgramConfigurationRequestApplicationJson:
 
     enabled: bool
     settings: ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings
-    products: List[
+    products: list[
         ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceAffiliateProgramConfigurationRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -72,11 +72,11 @@ class SdkReplaceAffiliateProgramConfigurationRequestApplicationJson:
             return cls(
                 enabled=data["enabled"],
                 settings=ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings.from_dict(
-                    cast(Dict[str, Any], data["settings"])
+                    cast(dict[str, Any], data["settings"])
                 ),
                 products=[
                     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["products"])
                 ],
@@ -90,9 +90,9 @@ class SdkReplaceAffiliateProgramConfigurationRequestApplicationJson:
                 "SdkReplaceAffiliateProgramConfigurationRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["enabled"] = self.enabled
         _domain_data["settings"] = self.settings
         _domain_data["products"] = self.products
@@ -104,7 +104,7 @@ class SdkReplaceAffiliateProgramConfigurationRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["enabled"] = self.enabled
         result["settings"] = self.settings.to_dict()
         result["products"] = [item.to_dict() for item in self.products]

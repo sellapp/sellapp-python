@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .create_reward_rule_request_application_json_property_outputs_item import (
     CreateRewardRuleRequestApplicationJsonPropertyOutputsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateRewardRuleRequestApplicationJson",
     "required": ["name", "is_active", "trigger_type", "trigger_threshold", "outputs"],
     "properties": {
@@ -60,7 +60,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateRewardRuleRequestApplicationJson",
     "required": ["name", "is_active", "trigger_type", "trigger_threshold", "outputs"],
     "properties": {
@@ -107,17 +107,17 @@ class SdkCreateRewardRuleRequestApplicationJson:
     is_active: bool
     trigger_type: SdkCreateRewardRuleRequestApplicationJsonTriggerType
     trigger_threshold: int
-    outputs: List[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem]
-    description: Optional[str] = None
-    expected_updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    outputs: list[CreateRewardRuleRequestApplicationJsonPropertyOutputsItem]
+    description: str | None = None
+    expected_updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateRewardRuleRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -138,7 +138,7 @@ class SdkCreateRewardRuleRequestApplicationJson:
                 trigger_threshold=data["trigger_threshold"],
                 outputs=[
                     CreateRewardRuleRequestApplicationJsonPropertyOutputsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["outputs"])
                 ],
@@ -164,9 +164,9 @@ class SdkCreateRewardRuleRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateRewardRuleRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["name"] = self.name
         _domain_data["is_active"] = self.is_active
         _domain_data["trigger_type"] = self.trigger_type
@@ -183,7 +183,7 @@ class SdkCreateRewardRuleRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["name"] = self.name
         result["is_active"] = self.is_active
         result["trigger_type"] = (

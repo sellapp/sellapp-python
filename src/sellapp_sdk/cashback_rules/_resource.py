@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
 from .models import (
@@ -29,7 +31,7 @@ class CashbackRules:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCashbackRulesResponseValue200ApplicationJson:
         """List cashback rules
 
@@ -87,10 +89,10 @@ class CashbackRules:
         self,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCashbackRuleResponseValue201ApplicationJson:
         """Create a cashback rule
 
@@ -144,7 +146,7 @@ class CashbackRules:
             "idempotency_supported": False,
             "operation_id": "createCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "percent_basis": percent_basis,
             "maximum_cashback_cents": maximum_cashback_cents,
             "is_active": is_active,
@@ -201,10 +203,10 @@ class CashbackRules:
         cashback_rule: int,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
@@ -260,7 +262,7 @@ class CashbackRules:
             "idempotency_supported": False,
             "operation_id": "replaceCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "percent_basis": percent_basis,
             "maximum_cashback_cents": maximum_cashback_cents,
             "is_active": is_active,
@@ -316,11 +318,11 @@ class CashbackRules:
         self,
         cashback_rule: int,
         *,
-        percent_basis: Optional[int] = None,
-        maximum_cashback_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        percent_basis: int | None = None,
+        maximum_cashback_cents: int | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
@@ -376,7 +378,7 @@ class CashbackRules:
             "idempotency_supported": False,
             "operation_id": "updateCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "percent_basis": percent_basis,
@@ -432,7 +434,7 @@ class CashbackRules:
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Archive a cashback rule
 
@@ -491,7 +493,7 @@ class CashbackRules:
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreCashbackRuleResponseValue200ApplicationJson:
         """Restore a cashback rule
 
@@ -561,7 +563,7 @@ class AsyncCashbackRules:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCashbackRulesResponseValue200ApplicationJson:
         """List cashback rules
 
@@ -619,10 +621,10 @@ class AsyncCashbackRules:
         self,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCashbackRuleResponseValue201ApplicationJson:
         """Create a cashback rule
 
@@ -676,7 +678,7 @@ class AsyncCashbackRules:
             "idempotency_supported": False,
             "operation_id": "createCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "percent_basis": percent_basis,
             "maximum_cashback_cents": maximum_cashback_cents,
             "is_active": is_active,
@@ -733,10 +735,10 @@ class AsyncCashbackRules:
         cashback_rule: int,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
@@ -792,7 +794,7 @@ class AsyncCashbackRules:
             "idempotency_supported": False,
             "operation_id": "replaceCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "percent_basis": percent_basis,
             "maximum_cashback_cents": maximum_cashback_cents,
             "is_active": is_active,
@@ -848,11 +850,11 @@ class AsyncCashbackRules:
         self,
         cashback_rule: int,
         *,
-        percent_basis: Optional[int] = None,
-        maximum_cashback_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        percent_basis: int | None = None,
+        maximum_cashback_cents: int | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
@@ -908,7 +910,7 @@ class AsyncCashbackRules:
             "idempotency_supported": False,
             "operation_id": "updateCashbackRule",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "percent_basis": percent_basis,
@@ -964,7 +966,7 @@ class AsyncCashbackRules:
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Archive a cashback rule
 
@@ -1023,7 +1025,7 @@ class AsyncCashbackRules:
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreCashbackRuleResponseValue200ApplicationJson:
         """Restore a cashback rule
 

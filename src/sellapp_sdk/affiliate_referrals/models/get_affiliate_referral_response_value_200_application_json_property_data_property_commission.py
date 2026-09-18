@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.get_affiliate_referral_response_value_200_applica
     GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCommissionType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCommission",
     "required": ["type", "percentage", "amount_usd_cents"],
     "properties": {
@@ -36,7 +36,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCommission",
     "required": ["type", "percentage", "amount_usd_cents"],
     "properties": {
@@ -63,18 +63,18 @@ class GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCom
     """Get Affiliate Referral Response Value200Application Json Property Data Property Commission model."""
 
     type: GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCommissionType
-    percentage: Optional[str]
+    percentage: str | None
     """The percentage commission as a decimal string when type is percentage."""
-    amount_usd_cents: Optional[int]
+    amount_usd_cents: int | None
     """The fixed commission in integer USD cents when type is fixed."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCommission:
         """Deserialize from a dictionary."""
         try:
@@ -103,9 +103,9 @@ class GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCom
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         _domain_data["percentage"] = self.percentage
         _domain_data["amount_usd_cents"] = self.amount_usd_cents
@@ -117,7 +117,7 @@ class GetAffiliateReferralResponseValue200ApplicationJsonPropertyDataPropertyCom
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         if self.percentage is not None:
             result["percentage"] = self.percentage

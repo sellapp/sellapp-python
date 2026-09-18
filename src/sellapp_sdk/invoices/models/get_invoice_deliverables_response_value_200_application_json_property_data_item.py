@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from .get_invoice_deliverables_response_value_200_application_json_property_data
     GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "invoice_id",
@@ -37,7 +37,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "invoice_id",
@@ -65,17 +65,17 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
     product_variant_id: int
     deliverable: GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable
     quantity: int
-    additional_information: List[
+    additional_information: list[
         GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyAdditionalInformationItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -91,12 +91,12 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                 invoice_id=data["invoice_id"],
                 product_variant_id=data["product_variant_id"],
                 deliverable=GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], data["deliverable"])
+                    cast(dict[str, Any], data["deliverable"])
                 ),
                 quantity=data["quantity"],
                 additional_information=[
                     GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyAdditionalInformationItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["additional_information"])
                 ],
@@ -118,9 +118,9 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["invoice_id"] = self.invoice_id
         _domain_data["product_variant_id"] = self.product_variant_id
         _domain_data["deliverable"] = self.deliverable
@@ -134,7 +134,7 @@ class GetInvoiceDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["invoice_id"] = self.invoice_id
         result["product_variant_id"] = self.product_variant_id
         result["deliverable"] = self.deliverable.to_dict()

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -22,7 +22,7 @@ from .search_orders_request_application_json_property_sort_item import (
     SearchOrdersRequestApplicationJsonPropertySortItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSearchOrdersRequestApplicationJson",
     "required": [],
     "properties": {
@@ -40,7 +40,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkSearchOrdersRequestApplicationJson",
     "required": [],
     "properties": {
@@ -64,18 +64,16 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkSearchOrdersRequestApplicationJson:
     """Sdk Search Orders Request Application Json model."""
 
-    filters: Optional[List[SearchOrdersRequestApplicationJsonPropertyFiltersItem]] = (
-        None
-    )
-    sort: Optional[List[SearchOrdersRequestApplicationJsonPropertySortItem]] = None
-    pagination: Optional[SearchOrdersRequestApplicationJsonPropertyPagination] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    filters: list[SearchOrdersRequestApplicationJsonPropertyFiltersItem] | None = None
+    sort: list[SearchOrdersRequestApplicationJsonPropertySortItem] | None = None
+    pagination: SearchOrdersRequestApplicationJsonPropertyPagination | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkSearchOrdersRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkSearchOrdersRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -89,7 +87,7 @@ class SdkSearchOrdersRequestApplicationJson:
             return cls(
                 filters=[
                     SearchOrdersRequestApplicationJsonPropertyFiltersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_filters)
                 ]
@@ -97,14 +95,14 @@ class SdkSearchOrdersRequestApplicationJson:
                 else None,
                 sort=[
                     SearchOrdersRequestApplicationJsonPropertySortItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_sort)
                 ]
                 if (_v_sort := data.get("sort")) is not None
                 else None,
                 pagination=SearchOrdersRequestApplicationJsonPropertyPagination.from_dict(
-                    cast(Dict[str, Any], _v_pagination)
+                    cast(dict[str, Any], _v_pagination)
                 )
                 if (_v_pagination := data.get("pagination")) is not None
                 else None,
@@ -116,9 +114,9 @@ class SdkSearchOrdersRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkSearchOrdersRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.filters is not None:
             _domain_data["filters"] = self.filters
         if self.sort is not None:
@@ -133,7 +131,7 @@ class SdkSearchOrdersRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.filters is not None:
             result["filters"] = [item.to_dict() for item in self.filters]
         if self.sort is not None:

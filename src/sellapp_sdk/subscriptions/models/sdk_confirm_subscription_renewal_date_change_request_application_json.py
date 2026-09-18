@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .confirm_subscription_renewal_date_change_request_application_json_property
     ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson",
     "required": ["renewal_date"],
     "properties": {
@@ -52,7 +52,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson",
     "required": ["renewal_date"],
     "properties": {
@@ -92,21 +92,22 @@ class SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson:
     """Sdk Confirm Subscription Renewal Date Change Request Application Json model."""
 
     renewal_date: datetime
-    idempotency_key: Optional[str] = None
+    idempotency_key: str | None = None
     """Optional idempotency key. You may also send this as the Idempotency-Key header."""
-    preview_token: Optional[str] = None
-    reason: Optional[str] = None
-    metadata: Optional[
+    preview_token: str | None = None
+    reason: str | None = None
+    metadata: (
         ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -124,7 +125,7 @@ class SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson:
                 preview_token=data.get("preview_token"),
                 reason=data.get("reason"),
                 metadata=ConfirmSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -145,9 +146,9 @@ class SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson:
                 "SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["renewal_date"] = self.renewal_date
         _domain_data["idempotency_key"] = self.idempotency_key
         _domain_data["preview_token"] = self.preview_token
@@ -162,7 +163,7 @@ class SdkConfirmSubscriptionRenewalDateChangeRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["renewal_date"] = _format_datetime(self.renewal_date)
         if self.idempotency_key is not None:
             result["idempotency_key"] = self.idempotency_key

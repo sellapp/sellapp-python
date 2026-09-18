@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .replace_promotion_request_application_json_property_phases_item import (
     ReplacePromotionRequestApplicationJsonPropertyPhasesItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplacePromotionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -63,7 +63,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplacePromotionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -109,26 +109,24 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplacePromotionRequestApplicationJson:
     """Sdk Replace Promotion Request Application Json model."""
 
-    name: Optional[str] = None
-    status: Optional[SdkReplacePromotionRequestApplicationJsonStatus] = None
-    starts_at: Optional[datetime] = None
-    ends_at: Optional[datetime] = None
+    name: str | None = None
+    status: SdkReplacePromotionRequestApplicationJsonStatus | None = None
+    starts_at: datetime | None = None
+    ends_at: datetime | None = None
     """A date and time after starts_at and after the current time, or null for no end date."""
-    priority: Optional[int] = None
-    is_stackable: Optional[bool] = None
-    max_redemptions: Optional[int] = None
-    phases: Optional[List[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]] = (
-        None
-    )
+    priority: int | None = None
+    is_stackable: bool | None = None
+    max_redemptions: int | None = None
+    phases: list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem] | None = None
     """The complete ordered phase set. Array order becomes phase position."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplacePromotionRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -156,7 +154,7 @@ class SdkReplacePromotionRequestApplicationJson:
                 max_redemptions=data.get("max_redemptions"),
                 phases=[
                     ReplacePromotionRequestApplicationJsonPropertyPhasesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_phases)
                 ]
@@ -180,9 +178,9 @@ class SdkReplacePromotionRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplacePromotionRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             _domain_data["name"] = self.name
         if self.status is not None:
@@ -204,7 +202,7 @@ class SdkReplacePromotionRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             result["name"] = self.name
         if self.status is not None:

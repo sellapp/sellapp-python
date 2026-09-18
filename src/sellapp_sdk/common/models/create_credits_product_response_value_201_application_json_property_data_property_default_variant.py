@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .create_credits_product_response_value_201_application_json_property_data_p
     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariantValuePropertyRateTiersItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariant",
     "required": [
         "id",
@@ -65,7 +65,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariant",
     "required": [
         "id",
@@ -125,20 +125,20 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDef
     currency: str
     minimum_purchase_quantity: int
     quantity_increment: int
-    payment_methods: List[str]
-    rate_tiers: List[
+    payment_methods: list[str]
+    rate_tiers: list[
         CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariantValuePropertyRateTiersItem
     ]
-    maximum_purchase_quantity: Optional[int] = None
-    stock: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    maximum_purchase_quantity: int | None = None
+    stock: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariant:
         """Deserialize from a dictionary."""
         try:
@@ -159,7 +159,7 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDef
                 payment_methods=data["payment_methods"],
                 rate_tiers=[
                     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariantValuePropertyRateTiersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["rate_tiers"])
                 ],
@@ -187,9 +187,9 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDef
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["price_cents"] = self.price_cents
         _domain_data["currency"] = self.currency
@@ -207,7 +207,7 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDef
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["price_cents"] = self.price_cents
         result["currency"] = self.currency

@@ -12,27 +12,27 @@ List all coupons
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListCouponsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -74,30 +74,30 @@ def create(
         self,
         *,
         code: str,
-        type: Union[SdkCreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkCreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | code | `str` | Yes |
-| type | `Union[SdkCreateCouponRequestApplicationJsonType, str]` | Yes |
-| discount | `Union[float, str]` | Yes |
+| type | `SdkCreateCouponRequestApplicationJsonType \| str` | Yes |
+| discount | `float \| str` | Yes |
 | store_wide | `bool` | Yes |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCouponResponseValue201ApplicationJson`.
 
@@ -146,18 +146,18 @@ def get(
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCouponResponseValue200ApplicationJson`.
 
@@ -199,36 +199,36 @@ def replace(
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| code | `Optional[str]` | No |
-| type | `Optional[Union[SdkReplaceCouponRequestApplicationJsonType, str]]` | No |
-| discount | `Optional[Union[float, str]]` | No |
-| store_wide | `Optional[bool]` | No |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| code | `str \| None` | No |
+| type | `SdkReplaceCouponRequestApplicationJsonType \| str \| None` | No |
+| discount | `float \| str \| None` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCouponResponseValue200ApplicationJson`.
 
@@ -275,36 +275,36 @@ def update(
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkUpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkUpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| code | `Optional[str]` | No |
-| type | `Optional[Union[SdkUpdateCouponRequestApplicationJsonType, str]]` | No |
-| discount | `Optional[Union[float, str]]` | No |
-| store_wide | `Optional[bool]` | No |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| code | `str \| None` | No |
+| type | `SdkUpdateCouponRequestApplicationJsonType \| str \| None` | No |
+| discount | `float \| str \| None` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCouponResponseValue200ApplicationJson`.
 
@@ -351,18 +351,18 @@ def delete(
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -403,45 +403,39 @@ Search coupons
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchCouponsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchCouponsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchCouponsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchCouponsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -485,15 +479,19 @@ Batch create coupons
 def batch_create(
         self,
         *,
-        resources: List[BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateCouponsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[
+            BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
+        ]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchCreateCouponsResponseValue200ApplicationJson`.
 
@@ -546,18 +544,18 @@ def batch_update(
         self,
         *,
         resources: BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateCouponsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | resources | `BatchUpdateCouponsRequestApplicationJsonPropertyResources` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkBatchUpdateCouponsResponseValue200ApplicationJson`.
 
@@ -602,19 +600,19 @@ Batch delete coupons
 def batch_delete(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -655,27 +653,27 @@ List all coupons
 def v2_list_coupons(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListCouponsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -722,32 +720,32 @@ def v2_create_coupon(
         self,
         *,
         code: str,
-        type: Union[SdkV2CreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkV2CreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | code | `str` | Yes |
-| type | `Union[SdkV2CreateCouponRequestApplicationJsonType, str]` | Yes |
-| discount | `Union[float, str]` | Yes |
+| type | `SdkV2CreateCouponRequestApplicationJsonType \| str` | Yes |
+| discount | `float \| str` | Yes |
 | store_wide | `bool` | Yes |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2CreateCouponResponseValue201ApplicationJson`.
 
@@ -800,47 +798,45 @@ Search coupons
 def v2_search_coupons(
         self,
         *,
-        filters: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchCouponsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[V2SearchCouponsRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[V2SearchCouponsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `V2SearchCouponsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            V2SearchCouponsRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -890,18 +886,18 @@ def v2_get_coupon(
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2GetCouponResponseValue200ApplicationJson`.
 
@@ -948,36 +944,36 @@ def v2_replace_coupon(
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2ReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2ReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| code | `Optional[str]` | No |
-| type | `Optional[Union[SdkV2ReplaceCouponRequestApplicationJsonType, str]]` | No |
-| discount | `Optional[Union[float, str]]` | No |
-| store_wide | `Optional[bool]` | No |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| code | `str \| None` | No |
+| type | `SdkV2ReplaceCouponRequestApplicationJsonType \| str \| None` | No |
+| discount | `float \| str \| None` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceCouponResponseValue200ApplicationJson`.
 
@@ -1029,36 +1025,36 @@ def v2_update_coupon(
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2UpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2UpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateCouponResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| code | `Optional[str]` | No |
-| type | `Optional[Union[SdkV2UpdateCouponRequestApplicationJsonType, str]]` | No |
-| discount | `Optional[Union[float, str]]` | No |
-| store_wide | `Optional[bool]` | No |
-| products | `Optional[List[int]]` | No |
-| product_variants | `Optional[List[int]]` | No |
-| limit | `Union[int, None, NotGiven]` | No |
-| expires_at | `Union[str, None, NotGiven]` | No |
-| minimum_amount | `Union[Union[float, str], None, NotGiven]` | No |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| code | `str \| None` | No |
+| type | `SdkV2UpdateCouponRequestApplicationJsonType \| str \| None` | No |
+| discount | `float \| str \| None` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
+| limit | `int \| None \| NotGiven` | No |
+| expires_at | `str \| None \| NotGiven` | No |
+| minimum_amount | `float \| str \| None \| NotGiven` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2UpdateCouponResponseValue200ApplicationJson`.
 
@@ -1110,18 +1106,18 @@ def v2_delete_coupon(
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | coupon | `int` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -1167,21 +1163,21 @@ Batch create coupons
 def v2_batch_create_coupons(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateCouponsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[
+| resources | `builtins.list[
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
         ]` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2BatchCreateCouponsResponseValue200ApplicationJson`.
 
@@ -1239,18 +1235,18 @@ def v2_batch_update_coupons(
         self,
         *,
         resources: V2BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateCouponsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | resources | `V2BatchUpdateCouponsRequestApplicationJsonPropertyResources` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2BatchUpdateCouponsResponseValue200ApplicationJson`.
 
@@ -1300,19 +1296,19 @@ Batch delete coupons
 def v2_batch_delete_coupons(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| resources | `List[int]` | Yes |
-| with_trashed | `Optional[bool]` | No |
-| only_trashed | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `builtins.list[int]` | Yes |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

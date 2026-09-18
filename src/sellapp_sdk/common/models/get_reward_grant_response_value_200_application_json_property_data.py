@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -26,7 +26,7 @@ from .get_reward_grant_response_value_200_application_json_property_data_trigger
     GetRewardGrantResponseValue200ApplicationJsonPropertyDataTriggerType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetRewardGrantResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -57,7 +57,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetRewardGrantResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -100,22 +100,22 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyData:
     trigger_type: GetRewardGrantResponseValue200ApplicationJsonPropertyDataTriggerType
     trigger_value: int
     trigger_threshold: int
-    outputs: List[
+    outputs: list[
         GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItem
     ]
-    customer: Optional[
-        GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyCustomer
-    ] = None
-    granted_at: Optional[datetime] = None
-    created_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    customer: (
+        GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyCustomer | None
+    ) = None
+    granted_at: datetime | None = None
+    created_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetRewardGrantResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -138,12 +138,12 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyData:
                 trigger_threshold=data["trigger_threshold"],
                 outputs=[
                     GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["outputs"])
                 ],
                 customer=GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
-                    cast(Dict[str, Any], _v_customer)
+                    cast(dict[str, Any], _v_customer)
                 )
                 if (_v_customer := data.get("customer")) is not None
                 else None,
@@ -175,9 +175,9 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyData:
                 "GetRewardGrantResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["reward_rule_id"] = self.reward_rule_id
         _domain_data["customer_id"] = self.customer_id
@@ -196,7 +196,7 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["reward_rule_id"] = self.reward_rule_id
         result["customer_id"] = self.customer_id

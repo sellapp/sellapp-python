@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.list_webhook_channels_response_value_200_applicat
     ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemAllowedNotifications,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -67,7 +67,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -126,24 +126,24 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
 
     id: str
     """Stable identifier for this webhook channel."""
-    name: Optional[str]
+    name: str | None
     """Optional seller-facing reference name."""
     url: str
     """Public HTTP or HTTPS destination. Local, private, reserved, link-local, metadata, credential-bearing, and Discord webhook URLs are rejected. Delivery resolves and pins a public address and does not follow redirects."""
-    allowed_notifications: List[
+    allowed_notifications: list[
         ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemAllowedNotifications
     ]
     """Complete set of public webhook event names enabled for this destination. Updating this field replaces the previous filter."""
     signing_secret_configured: bool
     """Whether the store has an outbound webhook signing secret. The stored secret is never returned."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -183,9 +183,9 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
                 "ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["url"] = self.url
@@ -199,7 +199,7 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         if self.name is not None:
             result["name"] = self.name

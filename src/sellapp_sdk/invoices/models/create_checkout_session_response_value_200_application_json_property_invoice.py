@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -31,7 +31,7 @@ from .create_checkout_session_response_value_200_application_json_property_invoi
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyProductVariantsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice",
     "required": [
         "id",
@@ -72,7 +72,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice",
     "required": [
         "id",
@@ -122,27 +122,27 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
     id: int
     payment: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment
     status: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus
-    webhooks: List[
+    webhooks: list[
         CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyWebhooksItem
     ]
-    feedback: Optional[str]
+    feedback: str | None
     created_at: datetime
     updated_at: datetime
     store_id: int
-    coupon_id: Optional[int]
-    subscription_id: Optional[int]
+    coupon_id: int | None
+    subscription_id: int | None
     customer_information: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformation
-    product_variants: List[
+    product_variants: list[
         CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyProductVariantsItem
     ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
         """Deserialize from a dictionary."""
         try:
@@ -157,14 +157,14 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
             return cls(
                 id=data["id"],
                 payment=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment.from_dict(
-                    cast(Dict[str, Any], data["payment"])
+                    cast(dict[str, Any], data["payment"])
                 ),
                 status=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus.from_dict(
-                    cast(Dict[str, Any], data["status"])
+                    cast(dict[str, Any], data["status"])
                 ),
                 webhooks=[
                     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyWebhooksItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["webhooks"])
                 ],
@@ -175,11 +175,11 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
                 coupon_id=data["coupon_id"],
                 subscription_id=data["subscription_id"],
                 customer_information=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyCustomerInformation.from_dict(
-                    cast(Dict[str, Any], data["customer_information"])
+                    cast(dict[str, Any], data["customer_information"])
                 ),
                 product_variants=[
                     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyProductVariantsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["product_variants"])
                 ],
@@ -207,9 +207,9 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
                 "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["payment"] = self.payment
         _domain_data["status"] = self.status
@@ -230,7 +230,7 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["payment"] = self.payment.to_dict()
         result["status"] = self.status.to_dict()

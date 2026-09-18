@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -31,12 +31,10 @@ class WalletTopups:
         customer: int,
         *,
         amount_cents: int,
-        payment_method: Union[
-            SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod, str
-        ],
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        payment_method: SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod | str,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletTopUpResponseValue201ApplicationJson:
         """Create a wallet top-up payment link
 
@@ -93,7 +91,7 @@ class WalletTopups:
             "idempotency_supported": True,
             "operation_id": "createWalletTopUp",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "amount_cents": amount_cents,
             "payment_method": enum_value(payment_method),
         }
@@ -194,12 +192,10 @@ class AsyncWalletTopups:
         customer: int,
         *,
         amount_cents: int,
-        payment_method: Union[
-            SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod, str
-        ],
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        payment_method: SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod | str,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletTopUpResponseValue201ApplicationJson:
         """Create a wallet top-up payment link
 
@@ -256,7 +252,7 @@ class AsyncWalletTopups:
             "idempotency_supported": True,
             "operation_id": "createWalletTopUp",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "amount_cents": amount_cents,
             "payment_method": enum_value(payment_method),
         }

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -14,7 +14,7 @@ from sellapp_sdk._types import (
 
 from .product_faq_item import ProductFaqItem
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings",
     "required": [
         "faq",
@@ -32,7 +32,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings",
     "required": [
         "faq",
@@ -56,19 +56,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings:
     """Batch Create Products Response Value200Application Json Property Data Item Property Other Settings model."""
 
-    faq: List[ProductFaqItem]
+    faq: list[ProductFaqItem]
     video_url: str
     redirect_url: str
     product_title: str
     product_description: str
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings:
         """Deserialize from a dictionary."""
         try:
@@ -82,7 +82,7 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemProperty
             )
             return cls(
                 faq=[
-                    ProductFaqItem.from_dict(cast(Dict[str, Any], item))
+                    ProductFaqItem.from_dict(cast(dict[str, Any], item))
                     for item in cast(list[Any], data["faq"])
                 ],
                 video_url=data["video_url"],
@@ -107,9 +107,9 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemProperty
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["faq"] = self.faq
         _domain_data["video_url"] = self.video_url
         _domain_data["redirect_url"] = self.redirect_url
@@ -123,7 +123,7 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemProperty
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["faq"] = [item.to_dict() for item in self.faq]
         result["video_url"] = self.video_url
         result["redirect_url"] = self.redirect_url

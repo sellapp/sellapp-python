@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -50,19 +50,16 @@ class ProductVariantsPricing:
         variant: int,
         *,
         pricing: ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[
-                SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods, str
-            ]
+        payment_methods: list[
+            SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods | str
         ],
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantPricingResponseValue200ApplicationJson:
         """Replace product variant pricing
 
@@ -120,7 +117,7 @@ class ProductVariantsPricing:
             "idempotency_supported": False,
             "operation_id": "replaceProductVariantPricing",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "pricing": pricing.to_dict(),
@@ -222,25 +219,19 @@ class ProductVariantsPricing:
         product: int,
         variant: int,
         *,
-        pricing: Optional[
-            UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        pricing: UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
+        | None = None,
+        payment_methods: list[
+            SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantPricingResponseValue200ApplicationJson:
         """Partially update product variant pricing
 
@@ -298,7 +289,7 @@ class ProductVariantsPricing:
             "idempotency_supported": False,
             "operation_id": "updateProductVariantPricing",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "pricing": pricing.to_dict() if pricing is not None else None,
@@ -409,19 +400,16 @@ class AsyncProductVariantsPricing:
         variant: int,
         *,
         pricing: ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing,
-        payment_methods: List[
-            Union[
-                SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods, str
-            ]
+        payment_methods: list[
+            SdkReplaceProductVariantPricingRequestApplicationJsonPaymentMethods | str
         ],
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantPricingResponseValue200ApplicationJson:
         """Replace product variant pricing
 
@@ -479,7 +467,7 @@ class AsyncProductVariantsPricing:
             "idempotency_supported": False,
             "operation_id": "replaceProductVariantPricing",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "pricing": pricing.to_dict(),
@@ -581,25 +569,19 @@ class AsyncProductVariantsPricing:
         product: int,
         variant: int,
         *,
-        pricing: Optional[
-            UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
-        ] = None,
-        payment_methods: Optional[
-            List[
-                Union[
-                    SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods,
-                    str,
-                ]
-            ]
-        ] = None,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        bulk_discount: Optional[
-            List[
-                UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
-            ]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        pricing: UpdateProductVariantPricingRequestApplicationJsonPropertyPricing
+        | None = None,
+        payment_methods: list[
+            SdkUpdateProductVariantPricingRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_ids: list[str] | None = None,
+        bulk_discount: list[
+            UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantPricingResponseValue200ApplicationJson:
         """Partially update product variant pricing
 
@@ -657,7 +639,7 @@ class AsyncProductVariantsPricing:
             "idempotency_supported": False,
             "operation_id": "updateProductVariantPricing",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "pricing": pricing.to_dict() if pricing is not None else None,

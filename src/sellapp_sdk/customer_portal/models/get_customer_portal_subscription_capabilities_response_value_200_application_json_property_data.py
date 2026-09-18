@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .get_customer_portal_subscription_capabilities_response_value_200_applicati
     GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilities,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData",
     "required": ["subscription_id", "capabilities"],
     "properties": {
@@ -25,7 +25,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData",
     "required": ["subscription_id", "capabilities"],
     "properties": {
@@ -42,14 +42,14 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
 
     subscription_id: int
     capabilities: GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilities
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -64,7 +64,7 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
             return cls(
                 subscription_id=data["subscription_id"],
                 capabilities=GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilities.from_dict(
-                    cast(Dict[str, Any], data["capabilities"])
+                    cast(dict[str, Any], data["capabilities"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["subscription_id", "capabilities"]
@@ -77,9 +77,9 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["subscription_id"] = self.subscription_id
         _domain_data["capabilities"] = self.capabilities
         _validate_model(
@@ -90,7 +90,7 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["subscription_id"] = self.subscription_id
         result["capabilities"] = self.capabilities.to_dict()
         return result

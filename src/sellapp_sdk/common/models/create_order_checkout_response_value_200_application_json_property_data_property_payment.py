@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
 
 from .method import Method
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPayment",
     "required": [
         "method",
@@ -102,7 +102,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPayment",
     "required": [
         "method",
@@ -195,23 +195,23 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPayment:
     """Payment summary. Create-order and checkout responses include checkout_url; other order reads omit it."""
 
-    method: Optional[Method]
-    transaction_id: Optional[str]
-    payment_id: Optional[str]
-    payment_capture_id: Optional[str]
-    blockchain_txid: Optional[str]
-    settlement_gateway: Optional[str]
+    method: Method | None
+    transaction_id: str | None
+    payment_id: str | None
+    payment_capture_id: str | None
+    blockchain_txid: str | None
+    settlement_gateway: str | None
     has_checkout_url: bool
-    checkout_url: Optional[str]
+    checkout_url: str | None
     """Returned payment handoff URL, or null when no external handoff is needed. A browser return does not prove payment."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPayment:
         """Deserialize from a dictionary."""
         try:
@@ -255,9 +255,9 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPaym
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["method"] = self.method
         _domain_data["transaction_id"] = self.transaction_id
         _domain_data["payment_id"] = self.payment_id
@@ -274,7 +274,7 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyPaym
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.method is not None:
             result["method"] = (
                 self.method.value if isinstance(self.method, Enum) else self.method

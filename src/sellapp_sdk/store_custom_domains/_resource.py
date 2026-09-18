@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -35,7 +35,7 @@ class StoreCustomDomains:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomDomainsResponseValue200ApplicationJson:
         """List custom domains
 
@@ -93,7 +93,7 @@ class StoreCustomDomains:
         self,
         *,
         domain: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConnectCustomDomainResponseValue201ApplicationJson:
         """Connect a custom domain
 
@@ -144,7 +144,7 @@ class StoreCustomDomains:
             "idempotency_supported": False,
             "operation_id": "connectCustomDomain",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "domain": domain,
         }
         _validate_model(
@@ -178,7 +178,7 @@ class StoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomDomainResponseValue200ApplicationJson:
         """Retrieve a custom domain
 
@@ -241,7 +241,7 @@ class StoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect a custom domain
 
@@ -300,7 +300,7 @@ class StoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRefreshCustomDomainStatusResponseValue200ApplicationJson:
         """Refresh custom domain status
 
@@ -370,7 +370,7 @@ class AsyncStoreCustomDomains:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomDomainsResponseValue200ApplicationJson:
         """List custom domains
 
@@ -428,7 +428,7 @@ class AsyncStoreCustomDomains:
         self,
         *,
         domain: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConnectCustomDomainResponseValue201ApplicationJson:
         """Connect a custom domain
 
@@ -479,7 +479,7 @@ class AsyncStoreCustomDomains:
             "idempotency_supported": False,
             "operation_id": "connectCustomDomain",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "domain": domain,
         }
         _validate_model(
@@ -513,7 +513,7 @@ class AsyncStoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomDomainResponseValue200ApplicationJson:
         """Retrieve a custom domain
 
@@ -576,7 +576,7 @@ class AsyncStoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Disconnect a custom domain
 
@@ -635,7 +635,7 @@ class AsyncStoreCustomDomains:
         self,
         custom_domain: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRefreshCustomDomainStatusResponseValue200ApplicationJson:
         """Refresh custom domain status
 

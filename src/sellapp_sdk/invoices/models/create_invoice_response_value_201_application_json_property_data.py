@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -28,7 +28,7 @@ from .create_invoice_response_value_201_application_json_property_data_property_
     CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyWebhooksItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateInvoiceResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -72,7 +72,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateInvoiceResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -125,25 +125,25 @@ class CreateInvoiceResponseValue201ApplicationJsonPropertyData:
     id: int
     payment: CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPayment
     status: CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyStatus
-    webhooks: List[
+    webhooks: list[
         CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyWebhooksItem
     ]
-    feedback: Optional[str]
+    feedback: str | None
     created_at: datetime
     updated_at: datetime
     store_id: int
-    coupon_id: Optional[int]
-    subscription_id: Optional[int]
-    checkout: Optional[str]
+    coupon_id: int | None
+    subscription_id: int | None
+    checkout: str | None
     customer_information: CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyCustomerInformation
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateInvoiceResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -158,14 +158,14 @@ class CreateInvoiceResponseValue201ApplicationJsonPropertyData:
             return cls(
                 id=data["id"],
                 payment=CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPayment.from_dict(
-                    cast(Dict[str, Any], data["payment"])
+                    cast(dict[str, Any], data["payment"])
                 ),
                 status=CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyStatus.from_dict(
-                    cast(Dict[str, Any], data["status"])
+                    cast(dict[str, Any], data["status"])
                 ),
                 webhooks=[
                     CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyWebhooksItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["webhooks"])
                 ],
@@ -177,7 +177,7 @@ class CreateInvoiceResponseValue201ApplicationJsonPropertyData:
                 subscription_id=data["subscription_id"],
                 checkout=data["checkout"],
                 customer_information=CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyCustomerInformation.from_dict(
-                    cast(Dict[str, Any], data["customer_information"])
+                    cast(dict[str, Any], data["customer_information"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -203,9 +203,9 @@ class CreateInvoiceResponseValue201ApplicationJsonPropertyData:
                 "CreateInvoiceResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["payment"] = self.payment
         _domain_data["status"] = self.status
@@ -226,7 +226,7 @@ class CreateInvoiceResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["payment"] = self.payment.to_dict()
         result["status"] = self.status.to_dict()

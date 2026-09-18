@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,13 +16,13 @@ from .batch_create_coupons_response_value_200_application_json_property_data_ite
     BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkBatchCreateCouponsResponseValue200ApplicationJson",
     "required": ["data"],
     "properties": {"data": {"kind": "array", "items": {"kind": "any"}}},
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkBatchCreateCouponsResponseValue200ApplicationJson",
     "required": ["data"],
     "properties": {"data": {"kind": "array", "items": {"kind": "any"}}},
@@ -34,15 +34,15 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkBatchCreateCouponsResponseValue200ApplicationJson:
     """Sdk Batch Create Coupons Response Value200Application Json model."""
 
-    data: List[BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    data: list[BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem]
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkBatchCreateCouponsResponseValue200ApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -57,7 +57,7 @@ class SdkBatchCreateCouponsResponseValue200ApplicationJson:
             return cls(
                 data=[
                     BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["data"])
                 ],
@@ -69,9 +69,9 @@ class SdkBatchCreateCouponsResponseValue200ApplicationJson:
                 "SdkBatchCreateCouponsResponseValue200ApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["data"] = self.data
         _validate_model(
             _domain_data,
@@ -81,6 +81,6 @@ class SdkBatchCreateCouponsResponseValue200ApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["data"] = [item.to_dict() for item in self.data]
         return result

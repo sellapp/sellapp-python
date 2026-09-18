@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -24,7 +24,7 @@ from .replace_product_request_application_json_property_other_settings import (
     ReplaceProductRequestApplicationJsonPropertyOtherSettings,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -49,7 +49,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceProductRequestApplicationJson",
     "required": [],
     "properties": {
@@ -80,26 +80,27 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceProductRequestApplicationJson:
     """Sdk Replace Product Request Application Json model."""
 
-    title: Optional[str] = None
-    description: Optional[str] = None
-    visibility: Optional[CatalogVisibility] = None
-    slug: Optional[str] = None
-    section: Optional[int] = None
-    additional_information: Optional[
-        List[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
-    ] = None
-    other_settings: Optional[
-        ReplaceProductRequestApplicationJsonPropertyOtherSettings
-    ] = None
-    expected_updated_at: Optional[datetime] = None
+    title: str | None = None
+    description: str | None = None
+    visibility: CatalogVisibility | None = None
+    slug: str | None = None
+    section: int | None = None
+    additional_information: (
+        list[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
+        | None
+    ) = None
+    other_settings: ReplaceProductRequestApplicationJsonPropertyOtherSettings | None = (
+        None
+    )
+    expected_updated_at: datetime | None = None
     """Optional optimistic-concurrency snapshot. Send the exact `updated_at` value from the product you last retrieved; the mutation is rejected if the product has changed."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkReplaceProductRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkReplaceProductRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -120,7 +121,7 @@ class SdkReplaceProductRequestApplicationJson:
                 section=data.get("section"),
                 additional_information=[
                     ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_additional_information)
                 ]
@@ -128,7 +129,7 @@ class SdkReplaceProductRequestApplicationJson:
                 is not None
                 else None,
                 other_settings=ReplaceProductRequestApplicationJsonPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], _v_other_settings)
+                    cast(dict[str, Any], _v_other_settings)
                 )
                 if (_v_other_settings := data.get("other_settings")) is not None
                 else None,
@@ -154,9 +155,9 @@ class SdkReplaceProductRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplaceProductRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             _domain_data["title"] = self.title
         if self.description is not None:
@@ -180,7 +181,7 @@ class SdkReplaceProductRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             result["title"] = self.title
         if self.description is not None:

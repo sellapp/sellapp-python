@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics",
     "required": [],
     "properties": {
@@ -34,7 +34,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics",
     "required": [],
     "properties": {
@@ -62,20 +62,20 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics:
     """Get Store Settings Response Value200Application Json Property Data Property Analytics model."""
 
-    ga_4_measurement_id: Optional[str] = None
-    meta_pixel_id: Optional[str] = None
-    tiktok_pixel_id: Optional[str] = None
-    ga_4_api_secret_configured: Optional[bool] = None
-    meta_access_token_configured: Optional[bool] = None
-    tiktok_access_token_configured: Optional[bool] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    ga_4_measurement_id: str | None = None
+    meta_pixel_id: str | None = None
+    tiktok_pixel_id: str | None = None
+    ga_4_api_secret_configured: bool | None = None
+    meta_access_token_configured: bool | None = None
+    tiktok_access_token_configured: bool | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics:
         """Deserialize from a dictionary."""
         try:
@@ -115,9 +115,9 @@ class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalyti
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["ga_4_measurement_id"] = self.ga_4_measurement_id
         _domain_data["meta_pixel_id"] = self.meta_pixel_id
         _domain_data["tiktok_pixel_id"] = self.tiktok_pixel_id
@@ -139,7 +139,7 @@ class GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalyti
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.ga_4_measurement_id is not None:
             result["ga4_measurement_id"] = self.ga_4_measurement_id
         else:

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.replace_product_variant_pricing_request_applicati
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPriceCurrency,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice",
     "required": ["price", "currency"],
     "properties": {
@@ -62,7 +62,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice",
     "required": ["price", "currency"],
     "properties": {
@@ -116,14 +116,14 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyC
 
     price: int
     currency: ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPriceCurrency
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice:
         """Deserialize from a dictionary."""
         try:
@@ -151,9 +151,9 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyC
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["price"] = self.price
         _domain_data["currency"] = self.currency
         _validate_model(
@@ -164,7 +164,7 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyC
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["price"] = self.price
         result["currency"] = (
             self.currency.value if isinstance(self.currency, Enum) else self.currency

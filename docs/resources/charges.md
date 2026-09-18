@@ -12,23 +12,23 @@ List all charges
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -76,27 +76,27 @@ def create(
         *,
         email: str,
         return_url: str,
-        cancel_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        webhook: Union[str, None, NotGiven] = NOT_GIVEN,
-        reference: Union[str, None, NotGiven] = NOT_GIVEN,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        currency: Optional[str] = None,
-        total: Optional[int] = None,
-        payment_method: Optional[
-            Union[SdkCreateChargeRequestApplicationJsonPaymentMethod, str]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkCreateChargeRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        custom_payment_method_ids: Optional[List[str]] = None,
-        use_all_payment_methods: Optional[bool] = None,
-        deliverable: Optional[
-            CreateChargeRequestApplicationJsonPropertyDeliverable
-        ] = None,
-        metadata: Optional[CreateChargeRequestApplicationJsonPropertyMetadata] = None,
-        coupon_code: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        cancel_url: str | None | NotGiven = NOT_GIVEN,
+        webhook: str | None | NotGiven = NOT_GIVEN,
+        reference: str | None | NotGiven = NOT_GIVEN,
+        description: str | None | NotGiven = NOT_GIVEN,
+        currency: str | None = None,
+        total: int | None = None,
+        payment_method: SdkCreateChargeRequestApplicationJsonPaymentMethod
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateChargeRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        custom_payment_method_ids: builtins.list[str] | None = None,
+        use_all_payment_methods: bool | None = None,
+        deliverable: CreateChargeRequestApplicationJsonPropertyDeliverable
+        | None = None,
+        metadata: CreateChargeRequestApplicationJsonPropertyMetadata | None = None,
+        coupon_code: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateChargeResponseValue201ApplicationJson:
 ```
 
@@ -104,27 +104,27 @@ def create(
 | --- | --- | --- |
 | email | `str` | Yes |
 | return_url | `str` | Yes |
-| cancel_url | `Union[str, None, NotGiven]` | No |
-| webhook | `Union[str, None, NotGiven]` | No |
-| reference | `Union[str, None, NotGiven]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| currency | `Optional[str]` | No |
-| total | `Optional[int]` | No |
-| payment_method | `Optional[
-            Union[SdkCreateChargeRequestApplicationJsonPaymentMethod, str]
-        ]` | No |
-| payment_methods | `Optional[
-            List[Union[SdkCreateChargeRequestApplicationJsonPaymentMethods, str]]
-        ]` | No |
-| custom_payment_method_id | `Union[str, None, NotGiven]` | No |
-| custom_payment_method_ids | `Optional[List[str]]` | No |
-| use_all_payment_methods | `Optional[bool]` | No |
-| deliverable | `Optional[
-            CreateChargeRequestApplicationJsonPropertyDeliverable
-        ]` | No |
-| metadata | `Optional[CreateChargeRequestApplicationJsonPropertyMetadata]` | No |
-| coupon_code | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| cancel_url | `str \| None \| NotGiven` | No |
+| webhook | `str \| None \| NotGiven` | No |
+| reference | `str \| None \| NotGiven` | No |
+| description | `str \| None \| NotGiven` | No |
+| currency | `str \| None` | No |
+| total | `int \| None` | No |
+| payment_method | `SdkCreateChargeRequestApplicationJsonPaymentMethod
+        \| str
+        \| None` | No |
+| payment_methods | `builtins.list[
+            SdkCreateChargeRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| custom_payment_method_id | `str \| None \| NotGiven` | No |
+| custom_payment_method_ids | `builtins.list[str] \| None` | No |
+| use_all_payment_methods | `bool \| None` | No |
+| deliverable | `CreateChargeRequestApplicationJsonPropertyDeliverable
+        \| None` | No |
+| metadata | `CreateChargeRequestApplicationJsonPropertyMetadata \| None` | No |
+| coupon_code | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateChargeResponseValue201ApplicationJson`.
 
@@ -178,14 +178,14 @@ def get(
         self,
         charge: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetChargeResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | charge | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetChargeResponseValue200ApplicationJson`.
 
@@ -232,14 +232,14 @@ def mark_completed(
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeCompletedResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | charge_id | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkMarkPendingChargeCompletedResponseValue200ApplicationJson`.
 
@@ -286,14 +286,14 @@ def mark_voided(
         self,
         charge_id: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingChargeVoidedResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | charge_id | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkMarkPendingChargeVoidedResponseValue200ApplicationJson`.
 

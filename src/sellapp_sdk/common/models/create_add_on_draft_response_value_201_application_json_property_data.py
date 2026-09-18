@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Literal, Optional, cast
+from typing import Any, Literal, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -21,7 +21,7 @@ from .create_add_on_draft_response_value_201_application_json_property_data_prop
     CreateAddOnDraftResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateAddOnDraftResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -66,7 +66,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateAddOnDraftResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -126,23 +126,23 @@ class CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
     type: Literal["addon"]
     is_draft: bool
     is_discoverable: bool
-    parent_product_ids: List[int]
+    parent_product_ids: list[int]
     """Ordered IDs of products, courses, and bookings that offer this add-on."""
-    variants: List[
+    variants: list[
         CreateAddOnDraftResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem
     ]
     """Add-ons support exactly one fixed-price, single-payment variant when published."""
     created_at: datetime
     updated_at: datetime
-    deleted_at: Optional[datetime]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    deleted_at: datetime | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -167,7 +167,7 @@ class CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
                 parent_product_ids=data["parent_product_ids"],
                 variants=[
                     CreateAddOnDraftResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["variants"])
                 ],
@@ -202,9 +202,9 @@ class CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
                 "CreateAddOnDraftResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["store_id"] = self.store_id
         _domain_data["title"] = self.title
@@ -227,7 +227,7 @@ class CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["store_id"] = self.store_id
         result["title"] = self.title

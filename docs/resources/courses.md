@@ -12,25 +12,25 @@ List courses
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCoursesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListCoursesResponseValue200ApplicationJson]`.
 
@@ -76,45 +76,47 @@ Search courses
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchRewardRulesRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchRewardRulesRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchCoursesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchRewardRulesRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchRewardRulesRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchRewardRulesRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchRewardRulesRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchRewardRulesRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchCoursesResponseValue200ApplicationJson]`.
 
@@ -164,14 +166,14 @@ def get(
         self,
         course: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCourseResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | course | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCourseResponseValue200ApplicationJson`.
 
@@ -218,48 +220,48 @@ def replace(
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkReplaceCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkReplaceCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkReplaceCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkReplaceCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | course | `str` | Yes |
-| category | `Union[Union[Category, str], None, NotGiven]` | No |
-| level | `Optional[Union[SdkReplaceCourseRequestApplicationJsonLevel, str]]` | No |
-| language | `Optional[str]` | No |
-| subtitle | `Union[str, None, NotGiven]` | No |
-| author | `Union[str, None, NotGiven]` | No |
-| subcategory | `Union[str, None, NotGiven]` | No |
-| what_you_learn | `Optional[List[str]]` | No |
-| requirements | `Optional[List[str]]` | No |
-| certificate_enabled | `Optional[bool]` | No |
-| access_type | `Optional[
-            Union[SdkReplaceCourseRequestApplicationJsonAccessType, str]
-        ]` | No |
-| access_duration_days | `Union[int, None, NotGiven]` | No |
-| enrollment_limit | `Union[int, None, NotGiven]` | No |
-| delivery_text | `Union[str, None, NotGiven]` | No |
-| visibility | `Optional[Union[CatalogVisibility, str]]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| category | `Category \| str \| None \| NotGiven` | No |
+| level | `SdkReplaceCourseRequestApplicationJsonLevel \| str \| None` | No |
+| language | `str \| None` | No |
+| subtitle | `str \| None \| NotGiven` | No |
+| author | `str \| None \| NotGiven` | No |
+| subcategory | `str \| None \| NotGiven` | No |
+| what_you_learn | `builtins.list[str] \| None` | No |
+| requirements | `builtins.list[str] \| None` | No |
+| certificate_enabled | `bool \| None` | No |
+| access_type | `SdkReplaceCourseRequestApplicationJsonAccessType
+        \| str
+        \| None` | No |
+| access_duration_days | `int \| None \| NotGiven` | No |
+| enrollment_limit | `int \| None \| NotGiven` | No |
+| delivery_text | `str \| None \| NotGiven` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCourseResponseValue200ApplicationJson`.
 
@@ -310,48 +312,48 @@ def update(
         self,
         course: str,
         *,
-        category: Union[Union[Category, str], None, NotGiven] = NOT_GIVEN,
-        level: Optional[Union[SdkUpdateCourseRequestApplicationJsonLevel, str]] = None,
-        language: Optional[str] = None,
-        subtitle: Union[str, None, NotGiven] = NOT_GIVEN,
-        author: Union[str, None, NotGiven] = NOT_GIVEN,
-        subcategory: Union[str, None, NotGiven] = NOT_GIVEN,
-        what_you_learn: Optional[List[str]] = None,
-        requirements: Optional[List[str]] = None,
-        certificate_enabled: Optional[bool] = None,
-        access_type: Optional[
-            Union[SdkUpdateCourseRequestApplicationJsonAccessType, str]
-        ] = None,
-        access_duration_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        enrollment_limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        delivery_text: Union[str, None, NotGiven] = NOT_GIVEN,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkUpdateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkUpdateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | course | `str` | Yes |
-| category | `Union[Union[Category, str], None, NotGiven]` | No |
-| level | `Optional[Union[SdkUpdateCourseRequestApplicationJsonLevel, str]]` | No |
-| language | `Optional[str]` | No |
-| subtitle | `Union[str, None, NotGiven]` | No |
-| author | `Union[str, None, NotGiven]` | No |
-| subcategory | `Union[str, None, NotGiven]` | No |
-| what_you_learn | `Optional[List[str]]` | No |
-| requirements | `Optional[List[str]]` | No |
-| certificate_enabled | `Optional[bool]` | No |
-| access_type | `Optional[
-            Union[SdkUpdateCourseRequestApplicationJsonAccessType, str]
-        ]` | No |
-| access_duration_days | `Union[int, None, NotGiven]` | No |
-| enrollment_limit | `Union[int, None, NotGiven]` | No |
-| delivery_text | `Union[str, None, NotGiven]` | No |
-| visibility | `Optional[Union[CatalogVisibility, str]]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| category | `Category \| str \| None \| NotGiven` | No |
+| level | `SdkUpdateCourseRequestApplicationJsonLevel \| str \| None` | No |
+| language | `str \| None` | No |
+| subtitle | `str \| None \| NotGiven` | No |
+| author | `str \| None \| NotGiven` | No |
+| subcategory | `str \| None \| NotGiven` | No |
+| what_you_learn | `builtins.list[str] \| None` | No |
+| requirements | `builtins.list[str] \| None` | No |
+| certificate_enabled | `bool \| None` | No |
+| access_type | `SdkUpdateCourseRequestApplicationJsonAccessType
+        \| str
+        \| None` | No |
+| access_duration_days | `int \| None \| NotGiven` | No |
+| enrollment_limit | `int \| None \| NotGiven` | No |
+| delivery_text | `str \| None \| NotGiven` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCourseResponseValue200ApplicationJson`.
 

@@ -12,13 +12,13 @@ List notification channels
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListNotificationChannelsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListNotificationChannelsResponseValue200ApplicationJson`.
 
@@ -65,14 +65,14 @@ def create(
         self,
         *,
         channel: CreateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateNotificationChannelResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | channel | `CreateNotificationChannelRequestApplicationJsonPropertyChannel` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateNotificationChannelResponseValue201ApplicationJson`.
 
@@ -119,14 +119,14 @@ def get(
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetNotificationChannelResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | notification_channel | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetNotificationChannelResponseValue200ApplicationJson`.
 
@@ -174,7 +174,7 @@ def replace(
         notification_channel: str,
         *,
         channel: ReplaceNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceNotificationChannelResponseValue200ApplicationJson:
 ```
 
@@ -182,7 +182,7 @@ def replace(
 | --- | --- | --- |
 | notification_channel | `str` | Yes |
 | channel | `ReplaceNotificationChannelRequestApplicationJsonPropertyChannel` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceNotificationChannelResponseValue200ApplicationJson`.
 
@@ -233,7 +233,7 @@ def update(
         notification_channel: str,
         *,
         channel: UpdateNotificationChannelRequestApplicationJsonPropertyChannel,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateNotificationChannelResponseValue200ApplicationJson:
 ```
 
@@ -241,7 +241,7 @@ def update(
 | --- | --- | --- |
 | notification_channel | `str` | Yes |
 | channel | `UpdateNotificationChannelRequestApplicationJsonPropertyChannel` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateNotificationChannelResponseValue200ApplicationJson`.
 
@@ -291,14 +291,14 @@ def delete(
         self,
         notification_channel: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | notification_channel | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

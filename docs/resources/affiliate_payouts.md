@@ -12,27 +12,27 @@ List affiliate payouts
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        status: Optional[Union[AffiliatePayoutsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        status: AffiliatePayoutsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| affiliate_id | `Optional[int]` | No |
-| status | `Optional[Union[AffiliatePayoutsStatus, str]]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| affiliate_id | `int \| None` | No |
+| status | `AffiliatePayoutsStatus \| str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -79,14 +79,14 @@ def get(
         self,
         payout: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliatePayoutResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | payout | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetAffiliatePayoutResponseValue200ApplicationJson`.
 
@@ -133,16 +133,16 @@ def create(
         self,
         affiliate: int,
         *,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateAffiliatePayoutResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | affiliate | `int` | Yes |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateAffiliatePayoutResponseValue200ApplicationJson`.
 
@@ -192,16 +192,16 @@ def update(
         self,
         payout: int,
         *,
-        status: Union[SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | payout | `int` | Yes |
-| status | `Union[SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson`.
 

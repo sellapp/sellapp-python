@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.sdk_revoke_oauth_token_request_application_x_www_
     SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded",
     "required": ["token"],
     "properties": {
@@ -30,7 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded",
     "required": ["token"],
     "properties": {
@@ -51,21 +51,21 @@ class SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded:
     """Sdk Revoke O Auth Token Request Application X Www Form Urlencoded model."""
 
     token: str
-    client_id: Optional[str] = None
+    client_id: str | None = None
     """The configured official CLI public client ID. It identifies the registration, not the executable."""
-    client_secret: Optional[str] = None
+    client_secret: str | None = None
     """Legacy SDK field retained for compatibility. Omit for the official CLI; it has no client secret."""
-    token_type_hint: Optional[
-        SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    token_type_hint: (
+        SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded:
         """Deserialize from a dictionary."""
         try:
@@ -96,9 +96,9 @@ class SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded:
                 "SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["token"] = self.token
         if self.client_id is not None:
             _domain_data["client_id"] = self.client_id
@@ -114,7 +114,7 @@ class SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencoded:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["token"] = self.token
         if self.client_id is not None:
             result["client_id"] = self.client_id

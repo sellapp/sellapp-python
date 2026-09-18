@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model
@@ -36,13 +38,13 @@ class Highlights:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListHighlightsResponseValue200ApplicationJson]:
         """List highlights
 
@@ -123,8 +125,8 @@ class Highlights:
         *,
         title: str,
         hidden: bool,
-        files: List[bytes],
-        request_options: Optional[RequestOptions] = None,
+        files: builtins.list[bytes],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateHighlightResponseValue201ApplicationJson:
         """Create a highlight
 
@@ -178,7 +180,7 @@ class Highlights:
             "idempotency_supported": False,
             "operation_id": "createHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
             "files": files,
@@ -212,7 +214,7 @@ class Highlights:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         request_options = {
             **(request_options or {}),
             "files": {
@@ -231,23 +233,24 @@ class Highlights:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchHighlightsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchHighlightsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchHighlightsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchHighlightsResponseValue200ApplicationJson]:
         """Search highlights
 
@@ -307,7 +310,7 @@ class Highlights:
             "idempotency_supported": False,
             "operation_id": "searchHighlights",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -345,8 +348,8 @@ class Highlights:
     def reorder(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightsResponseValue200ApplicationJson:
         """Reorder highlights
 
@@ -398,7 +401,7 @@ class Highlights:
             "idempotency_supported": False,
             "operation_id": "reorderHighlights",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -432,7 +435,7 @@ class Highlights:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetHighlightResponseValue200ApplicationJson:
         """Retrieve a highlight
 
@@ -495,10 +498,10 @@ class Highlights:
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightResponseValue200ApplicationJson:
         """Update a highlight
 
@@ -553,7 +556,7 @@ class Highlights:
             "idempotency_supported": False,
             "operation_id": "replaceHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -595,10 +598,10 @@ class Highlights:
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightResponseValue200ApplicationJson:
         """Update a highlight
 
@@ -653,7 +656,7 @@ class Highlights:
             "idempotency_supported": False,
             "operation_id": "updateHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -695,7 +698,7 @@ class Highlights:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a highlight
 
@@ -761,13 +764,13 @@ class AsyncHighlights:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListHighlightsResponseValue200ApplicationJson]:
         """List highlights
 
@@ -848,8 +851,8 @@ class AsyncHighlights:
         *,
         title: str,
         hidden: bool,
-        files: List[bytes],
-        request_options: Optional[RequestOptions] = None,
+        files: builtins.list[bytes],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateHighlightResponseValue201ApplicationJson:
         """Create a highlight
 
@@ -903,7 +906,7 @@ class AsyncHighlights:
             "idempotency_supported": False,
             "operation_id": "createHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
             "files": files,
@@ -937,7 +940,7 @@ class AsyncHighlights:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        multipart_files: Dict[str, Any] = {}
+        multipart_files: dict[str, Any] = {}
         request_options = {
             **(request_options or {}),
             "files": {
@@ -956,23 +959,24 @@ class AsyncHighlights:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchHighlightsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchHighlightsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchHighlightsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchHighlightsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchHighlightsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchHighlightsResponseValue200ApplicationJson]:
         """Search highlights
 
@@ -1032,7 +1036,7 @@ class AsyncHighlights:
             "idempotency_supported": False,
             "operation_id": "searchHighlights",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1070,8 +1074,8 @@ class AsyncHighlights:
     async def reorder(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderHighlightsResponseValue200ApplicationJson:
         """Reorder highlights
 
@@ -1123,7 +1127,7 @@ class AsyncHighlights:
             "idempotency_supported": False,
             "operation_id": "reorderHighlights",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -1157,7 +1161,7 @@ class AsyncHighlights:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetHighlightResponseValue200ApplicationJson:
         """Retrieve a highlight
 
@@ -1220,10 +1224,10 @@ class AsyncHighlights:
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceHighlightResponseValue200ApplicationJson:
         """Update a highlight
 
@@ -1278,7 +1282,7 @@ class AsyncHighlights:
             "idempotency_supported": False,
             "operation_id": "replaceHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1320,10 +1324,10 @@ class AsyncHighlights:
         self,
         highlight: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        published: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        published: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateHighlightResponseValue200ApplicationJson:
         """Update a highlight
 
@@ -1378,7 +1382,7 @@ class AsyncHighlights:
             "idempotency_supported": False,
             "operation_id": "updateHighlight",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1420,7 +1424,7 @@ class AsyncHighlights:
         self,
         highlight: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a highlight
 

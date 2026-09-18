@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -26,7 +26,7 @@ class WalletSettings:
     def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWalletSettingsResponseValue200ApplicationJson:
         """Retrieve wallet settings
 
@@ -84,11 +84,11 @@ class WalletSettings:
         self,
         *,
         enabled: bool,
-        minimum_top_up_cents: Optional[int],
-        maximum_top_up_cents: Optional[int],
-        expiration_days: Optional[int],
-        payment_methods: List[str],
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None,
+        maximum_top_up_cents: int | None,
+        expiration_days: int | None,
+        payment_methods: list[str],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletSettingsResponseValue200ApplicationJson:
         """Update wallet settings
 
@@ -143,7 +143,7 @@ class WalletSettings:
             "idempotency_supported": False,
             "operation_id": "replaceWalletSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
             "minimum_top_up_cents": minimum_top_up_cents,
             "maximum_top_up_cents": maximum_top_up_cents,
@@ -218,7 +218,7 @@ class AsyncWalletSettings:
     async def get(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetWalletSettingsResponseValue200ApplicationJson:
         """Retrieve wallet settings
 
@@ -276,11 +276,11 @@ class AsyncWalletSettings:
         self,
         *,
         enabled: bool,
-        minimum_top_up_cents: Optional[int],
-        maximum_top_up_cents: Optional[int],
-        expiration_days: Optional[int],
-        payment_methods: List[str],
-        request_options: Optional[RequestOptions] = None,
+        minimum_top_up_cents: int | None,
+        maximum_top_up_cents: int | None,
+        expiration_days: int | None,
+        payment_methods: list[str],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceWalletSettingsResponseValue200ApplicationJson:
         """Update wallet settings
 
@@ -335,7 +335,7 @@ class AsyncWalletSettings:
             "idempotency_supported": False,
             "operation_id": "replaceWalletSettings",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
             "minimum_top_up_cents": minimum_top_up_cents,
             "maximum_top_up_cents": maximum_top_up_cents,

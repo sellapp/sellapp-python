@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPayoutMethods(
@@ -35,9 +35,10 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
+    ) -> (
         GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPayoutMethods
-    ]:
+        | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

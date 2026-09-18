@@ -14,7 +14,7 @@ def list(
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListVariantDeliverableFoldersResponseValue200ApplicationJson:
 ```
 
@@ -22,7 +22,7 @@ def list(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListVariantDeliverableFoldersResponseValue200ApplicationJson`.
 
@@ -74,10 +74,10 @@ def create(
         variant: int,
         *,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateVariantDeliverableFolderResponseValue201ApplicationJson:
 ```
 
@@ -86,10 +86,10 @@ def create(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | name | `str` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| parent_id | `Union[int, None, NotGiven]` | No |
-| sort_order | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| description | `str \| None \| NotGiven` | No |
+| parent_id | `int \| None \| NotGiven` | No |
+| sort_order | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateVariantDeliverableFolderResponseValue201ApplicationJson`.
 
@@ -143,7 +143,7 @@ def get(
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFolderResponseValue200ApplicationJson:
 ```
 
@@ -152,7 +152,7 @@ def get(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | folder | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetVariantDeliverableFolderResponseValue200ApplicationJson`.
 
@@ -205,11 +205,11 @@ def replace(
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFolderSettingsResponseValue200ApplicationJson:
 ```
 
@@ -218,11 +218,11 @@ def replace(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | folder | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| parent_id | `Union[int, None, NotGiven]` | No |
-| sort_order | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| parent_id | `int \| None \| NotGiven` | No |
+| sort_order | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceVariantDeliverableFolderSettingsResponseValue200ApplicationJson`.
 
@@ -276,11 +276,11 @@ def update(
         variant: int,
         folder: int,
         *,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        parent_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        sort_order: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        parent_id: int | None | NotGiven = NOT_GIVEN,
+        sort_order: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFolderResponseValue200ApplicationJson:
 ```
 
@@ -289,11 +289,11 @@ def update(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | folder | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| parent_id | `Union[int, None, NotGiven]` | No |
-| sort_order | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| parent_id | `int \| None \| NotGiven` | No |
+| sort_order | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateVariantDeliverableFolderResponseValue200ApplicationJson`.
 
@@ -347,7 +347,7 @@ def delete(
         variant: int,
         folder: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -356,7 +356,7 @@ def delete(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | folder | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

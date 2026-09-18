@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -35,7 +35,7 @@ class PaymentMethods:
     def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPaymentMethodsResponseValue200ApplicationJson:
         """List payment methods
 
@@ -93,7 +93,7 @@ class PaymentMethods:
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPaymentMethodStatusResponseValue200ApplicationJson:
         """Retrieve payment method status
 
@@ -157,7 +157,7 @@ class PaymentMethods:
         payment_method: str,
         *,
         enabled: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkEnableOrDisablePaymentMethodResponseValue200ApplicationJson:
         """Enable or disable a payment method
 
@@ -210,7 +210,7 @@ class PaymentMethods:
             "idempotency_supported": False,
             "operation_id": "enableOrDisablePaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
         }
         _validate_model(
@@ -238,7 +238,7 @@ class PaymentMethods:
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePaymentConnectionHandoffResponseValue200ApplicationJson:
         """Create a payment connection handoff
 
@@ -301,16 +301,14 @@ class PaymentMethods:
         self,
         payment_method: str,
         *,
-        body: Union[
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson:
         """Validate and save payment method configuration
 
@@ -363,7 +361,7 @@ class PaymentMethods:
             "idempotency_supported": False,
             "operation_id": "validateAndSavePaymentMethodConfiguration",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return self._client.request(
             method="put",
             path=("v2", "payment-methods", str(payment_method), "configuration"),
@@ -383,7 +381,7 @@ class AsyncPaymentMethods:
     async def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPaymentMethodsResponseValue200ApplicationJson:
         """List payment methods
 
@@ -441,7 +439,7 @@ class AsyncPaymentMethods:
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPaymentMethodStatusResponseValue200ApplicationJson:
         """Retrieve payment method status
 
@@ -505,7 +503,7 @@ class AsyncPaymentMethods:
         payment_method: str,
         *,
         enabled: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkEnableOrDisablePaymentMethodResponseValue200ApplicationJson:
         """Enable or disable a payment method
 
@@ -558,7 +556,7 @@ class AsyncPaymentMethods:
             "idempotency_supported": False,
             "operation_id": "enableOrDisablePaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "enabled": enabled,
         }
         _validate_model(
@@ -586,7 +584,7 @@ class AsyncPaymentMethods:
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePaymentConnectionHandoffResponseValue200ApplicationJson:
         """Create a payment connection handoff
 
@@ -649,16 +647,14 @@ class AsyncPaymentMethods:
         self,
         payment_method: str,
         *,
-        body: Union[
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson:
         """Validate and save payment method configuration
 
@@ -711,7 +707,7 @@ class AsyncPaymentMethods:
             "idempotency_supported": False,
             "operation_id": "validateAndSavePaymentMethodConfiguration",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return await self._client.request(
             method="put",
             path=("v2", "payment-methods", str(payment_method), "configuration"),

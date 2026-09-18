@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .replace_promotion_phases_request_application_json_property_phases_item imp
     ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplacePromotionPhasesRequestApplicationJson",
     "required": ["phases"],
     "properties": {
@@ -28,7 +28,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplacePromotionPhasesRequestApplicationJson",
     "required": ["phases"],
     "properties": {
@@ -46,15 +46,15 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplacePromotionPhasesRequestApplicationJson:
     """Sdk Replace Promotion Phases Request Application Json model."""
 
-    phases: List[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    phases: list[ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem]
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplacePromotionPhasesRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -69,7 +69,7 @@ class SdkReplacePromotionPhasesRequestApplicationJson:
             return cls(
                 phases=[
                     ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["phases"])
                 ],
@@ -81,9 +81,9 @@ class SdkReplacePromotionPhasesRequestApplicationJson:
                 "SdkReplacePromotionPhasesRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["phases"] = self.phases
         _validate_model(
             _domain_data,
@@ -93,6 +93,6 @@ class SdkReplacePromotionPhasesRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["phases"] = [item.to_dict() for item in self.phases]
         return result

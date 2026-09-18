@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
 from sellapp_sdk.common.models.list_products_response_value_200_application_json_property_data_item import (
@@ -56,14 +58,14 @@ class Products:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all products
 
@@ -146,23 +148,23 @@ class Products:
         *,
         title: str,
         description: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        type: Optional[Union[SdkCreateProductRequestApplicationJsonType, str]] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        variants: Optional[
-            List[CreateProductRequestApplicationJsonPropertyVariantsItem]
-        ] = None,
-        bundle_items: Optional[
-            List[CreateProductRequestApplicationJsonPropertyBundleItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        type: SdkCreateProductRequestApplicationJsonType | str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            CreateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: CreateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        variants: builtins.list[CreateProductRequestApplicationJsonPropertyVariantsItem]
+        | None = None,
+        bundle_items: builtins.list[
+            CreateProductRequestApplicationJsonPropertyBundleItemsItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductResponseValue201ApplicationJson:
         """Create a product
 
@@ -222,7 +224,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "createProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -302,9 +304,9 @@ class Products:
         self,
         product: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductResponseValue200ApplicationJson:
         """Retrieve a product
 
@@ -358,7 +360,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "getProduct",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_drafts": with_drafts,
@@ -378,19 +380,19 @@ class Products:
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: ReplaceProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductResponseValue200ApplicationJson:
         """Update a product
 
@@ -450,7 +452,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "replaceProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -520,19 +522,19 @@ class Products:
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: UpdateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductResponseValue200ApplicationJson:
         """Update a product
 
@@ -592,7 +594,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "updateProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -662,8 +664,8 @@ class Products:
         self,
         product: int,
         *,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product
 
@@ -713,7 +715,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "deleteProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "expected_updated_at": expected_updated_at,
@@ -749,22 +751,21 @@ class Products:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchProductsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchProductsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchProductsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search products
 
@@ -823,7 +824,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "searchProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -860,8 +861,10 @@ class Products:
     def batch_create(
         self,
         *,
-        resources: List[BatchCreateProductsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateProductsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductsResponseValue200ApplicationJson:
         """Batch create products
 
@@ -912,7 +915,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "batchCreateProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -942,7 +945,7 @@ class Products:
         self,
         *,
         resources: BatchUpdateProductsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductsResponseValue200ApplicationJson:
         """Batch update products
 
@@ -993,7 +996,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "batchUpdateProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -1020,8 +1023,8 @@ class Products:
     def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete products
 
@@ -1069,7 +1072,7 @@ class Products:
             "idempotency_supported": False,
             "operation_id": "batchDeleteProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -1109,14 +1112,14 @@ class AsyncProducts:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all products
 
@@ -1199,23 +1202,23 @@ class AsyncProducts:
         *,
         title: str,
         description: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        type: Optional[Union[SdkCreateProductRequestApplicationJsonType, str]] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[CreateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            CreateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        variants: Optional[
-            List[CreateProductRequestApplicationJsonPropertyVariantsItem]
-        ] = None,
-        bundle_items: Optional[
-            List[CreateProductRequestApplicationJsonPropertyBundleItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        type: SdkCreateProductRequestApplicationJsonType | str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            CreateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: CreateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        variants: builtins.list[CreateProductRequestApplicationJsonPropertyVariantsItem]
+        | None = None,
+        bundle_items: builtins.list[
+            CreateProductRequestApplicationJsonPropertyBundleItemsItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateProductResponseValue201ApplicationJson:
         """Create a product
 
@@ -1275,7 +1278,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "createProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1355,9 +1358,9 @@ class AsyncProducts:
         self,
         product: int,
         *,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetProductResponseValue200ApplicationJson:
         """Retrieve a product
 
@@ -1411,7 +1414,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "getProduct",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_drafts": with_drafts,
@@ -1431,19 +1434,19 @@ class AsyncProducts:
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            ReplaceProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: ReplaceProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductResponseValue200ApplicationJson:
         """Update a product
 
@@ -1503,7 +1506,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "replaceProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1573,19 +1576,19 @@ class AsyncProducts:
         self,
         product: int,
         *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        slug: Optional[str] = None,
-        section: Union[int, None, NotGiven] = NOT_GIVEN,
-        additional_information: Optional[
-            List[UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem]
-        ] = None,
-        other_settings: Optional[
-            UpdateProductRequestApplicationJsonPropertyOtherSettings
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        slug: str | None = None,
+        section: int | None | NotGiven = NOT_GIVEN,
+        additional_information: builtins.list[
+            UpdateProductRequestApplicationJsonPropertyAdditionalInformationItem
+        ]
+        | None = None,
+        other_settings: UpdateProductRequestApplicationJsonPropertyOtherSettings
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductResponseValue200ApplicationJson:
         """Update a product
 
@@ -1645,7 +1648,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "updateProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1715,8 +1718,8 @@ class AsyncProducts:
         self,
         product: int,
         *,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product
 
@@ -1766,7 +1769,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "deleteProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "expected_updated_at": expected_updated_at,
@@ -1802,22 +1805,21 @@ class AsyncProducts:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchProductsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchProductsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchProductsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchProductsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchProductsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchProductsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search products
 
@@ -1876,7 +1878,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "searchProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1913,8 +1915,10 @@ class AsyncProducts:
     async def batch_create(
         self,
         *,
-        resources: List[BatchCreateProductsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateProductsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateProductsResponseValue200ApplicationJson:
         """Batch create products
 
@@ -1965,7 +1969,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "batchCreateProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -1995,7 +1999,7 @@ class AsyncProducts:
         self,
         *,
         resources: BatchUpdateProductsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateProductsResponseValue200ApplicationJson:
         """Batch update products
 
@@ -2046,7 +2050,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "batchUpdateProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -2073,8 +2077,8 @@ class AsyncProducts:
     async def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete products
 
@@ -2122,7 +2126,7 @@ class AsyncProducts:
             "idempotency_supported": False,
             "operation_id": "batchDeleteProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

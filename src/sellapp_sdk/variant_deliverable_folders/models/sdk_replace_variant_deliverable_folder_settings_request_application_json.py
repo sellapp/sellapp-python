@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson",
     "required": [],
     "properties": {
@@ -45,7 +45,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson",
     "required": [],
     "properties": {
@@ -84,18 +84,18 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson:
     """Sdk Replace Variant Deliverable Folder Settings Request Application Json model."""
 
-    name: Optional[str] = None
-    description: Optional[str] = None
-    parent_id: Optional[int] = None
-    sort_order: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    name: str | None = None
+    description: str | None = None
+    parent_id: int | None = None
+    sort_order: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -122,9 +122,9 @@ class SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson:
                 "SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             _domain_data["name"] = self.name
         _domain_data["description"] = self.description
@@ -139,7 +139,7 @@ class SdkReplaceVariantDeliverableFolderSettingsRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             result["name"] = self.name
         if self.description is not None:

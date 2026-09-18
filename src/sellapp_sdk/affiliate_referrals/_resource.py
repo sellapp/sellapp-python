@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -35,15 +35,15 @@ class AffiliateReferrals:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        order_id: Optional[int] = None,
-        status: Optional[Union[AffiliateReferralsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        order_id: int | None = None,
+        status: AffiliateReferralsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -129,7 +129,7 @@ class AffiliateReferrals:
         self,
         referral: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralResponseValue200ApplicationJson:
         """Retrieve an affiliate referral
 
@@ -192,8 +192,8 @@ class AffiliateReferrals:
         self,
         referral: int,
         *,
-        status: Union[SdkUpdateReferralStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateReferralStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateReferralStatusResponseValue200ApplicationJson:
         """Update referral status
 
@@ -246,7 +246,7 @@ class AffiliateReferrals:
             "idempotency_supported": False,
             "operation_id": "updateReferralStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(
@@ -286,15 +286,15 @@ class AsyncAffiliateReferrals:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        order_id: Optional[int] = None,
-        status: Optional[Union[AffiliateReferralsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        order_id: int | None = None,
+        status: AffiliateReferralsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -380,7 +380,7 @@ class AsyncAffiliateReferrals:
         self,
         referral: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralResponseValue200ApplicationJson:
         """Retrieve an affiliate referral
 
@@ -443,8 +443,8 @@ class AsyncAffiliateReferrals:
         self,
         referral: int,
         *,
-        status: Union[SdkUpdateReferralStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateReferralStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateReferralStatusResponseValue200ApplicationJson:
         """Update referral status
 
@@ -497,7 +497,7 @@ class AsyncAffiliateReferrals:
             "idempotency_supported": False,
             "operation_id": "updateReferralStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         _validate_model(

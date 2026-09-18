@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -20,7 +20,7 @@ from .sdk_replace_coupon_request_application_json_type import (
     SdkReplaceCouponRequestApplicationJsonType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCouponRequestApplicationJson",
     "required": [],
     "properties": {
@@ -88,7 +88,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceCouponRequestApplicationJson",
     "required": [],
     "properties": {
@@ -162,27 +162,27 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceCouponRequestApplicationJson:
     """Sdk Replace Coupon Request Application Json model."""
 
-    code: Optional[str] = None
-    type: Optional[SdkReplaceCouponRequestApplicationJsonType] = None
-    discount: Optional[Union[float, str]] = None
+    code: str | None = None
+    type: SdkReplaceCouponRequestApplicationJsonType | None = None
+    discount: float | str | None = None
     """A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit."""
-    store_wide: Optional[bool] = None
-    products: Optional[List[int]] = None
+    store_wide: bool | None = None
+    products: list[int] | None = None
     """Product IDs the coupon applies to when store_wide is false."""
-    product_variants: Optional[List[int]] = None
+    product_variants: list[int] | None = None
     """Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products."""
-    limit: Optional[int] = None
-    expires_at: Optional[datetime] = None
+    limit: int | None = None
+    expires_at: datetime | None = None
     """A future date and time, or null for no expiry."""
-    minimum_amount: Optional[Union[float, str]] = None
+    minimum_amount: float | str | None = None
     """A decimal minimum order amount in the store currency's major unit, or null for no minimum."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkReplaceCouponRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkReplaceCouponRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -226,9 +226,9 @@ class SdkReplaceCouponRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplaceCouponRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.code is not None:
             _domain_data["code"] = self.code
         if self.type is not None:
@@ -252,7 +252,7 @@ class SdkReplaceCouponRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.code is not None:
             result["code"] = self.code
         if self.type is not None:

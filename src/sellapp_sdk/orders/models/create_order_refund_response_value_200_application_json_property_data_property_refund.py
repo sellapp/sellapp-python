@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -17,7 +17,7 @@ from sellapp_sdk.common.models.create_order_refund_response_value_200_applicatio
 )
 from sellapp_sdk.common.models.provider import Provider
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund",
     "required": [
         "status",
@@ -63,7 +63,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund",
     "required": [
         "status",
@@ -118,19 +118,19 @@ class CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund
     status: (
         CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefundStatus
     )
-    provider: Optional[Provider]
-    provider_refund_id: Optional[str]
-    amount_cents: Optional[int]
+    provider: Provider | None
+    provider_refund_id: str | None
+    amount_cents: int | None
     """Refund amount in integer minor units; 500 means $5.00 in USD."""
-    currency: Optional[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    currency: str | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund:
         """Deserialize from a dictionary."""
         try:
@@ -170,9 +170,9 @@ class CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["status"] = self.status
         _domain_data["provider"] = self.provider
         _domain_data["provider_refund_id"] = self.provider_refund_id
@@ -186,7 +186,7 @@ class CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyRefund
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["status"] = (
             self.status.value if isinstance(self.status, Enum) else self.status
         )

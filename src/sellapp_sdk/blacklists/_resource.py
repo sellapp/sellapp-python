@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -27,12 +27,12 @@ class Blacklists:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
         """List all blacklist rules
 
@@ -107,10 +107,10 @@ class Blacklists:
     def create(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Create a blacklist rule
 
@@ -161,7 +161,7 @@ class Blacklists:
             "idempotency_supported": False,
             "operation_id": "createBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "type": enum_value(type),
             "data": data,
             "description": description,
@@ -198,7 +198,7 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Retrieve a blacklist rule
 
@@ -259,10 +259,10 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Update a blacklist rule
 
@@ -315,7 +315,7 @@ class Blacklists:
             "idempotency_supported": False,
             "operation_id": "updateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -356,7 +356,7 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a blacklist rule
 
@@ -412,11 +412,11 @@ class Blacklists:
     def v2_list_blacklists(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
         """List blacklist rules
 
@@ -493,11 +493,11 @@ class Blacklists:
     def v2_create_blacklist(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Create a blacklist rule
 
@@ -553,7 +553,7 @@ class Blacklists:
             "idempotency_supported": True,
             "operation_id": "v2CreateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "type": enum_value(type),
             "data": data,
             "description": description,
@@ -591,7 +591,7 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Retrieve a blacklist rule
 
@@ -655,10 +655,10 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Replace a blacklist rule
 
@@ -714,7 +714,7 @@ class Blacklists:
             "idempotency_supported": True,
             "operation_id": "v2ReplaceBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -755,10 +755,10 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Update a blacklist rule
 
@@ -814,7 +814,7 @@ class Blacklists:
             "idempotency_supported": True,
             "operation_id": "v2UpdateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -855,7 +855,7 @@ class Blacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a blacklist rule
 
@@ -922,12 +922,12 @@ class AsyncBlacklists:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[Blacklist]:
         """List all blacklist rules
 
@@ -1002,10 +1002,10 @@ class AsyncBlacklists:
     async def create(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Create a blacklist rule
 
@@ -1056,7 +1056,7 @@ class AsyncBlacklists:
             "idempotency_supported": False,
             "operation_id": "createBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "type": enum_value(type),
             "data": data,
             "description": description,
@@ -1093,7 +1093,7 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Retrieve a blacklist rule
 
@@ -1154,10 +1154,10 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Update a blacklist rule
 
@@ -1210,7 +1210,7 @@ class AsyncBlacklists:
             "idempotency_supported": False,
             "operation_id": "updateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -1251,7 +1251,7 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a blacklist rule
 
@@ -1307,11 +1307,11 @@ class AsyncBlacklists:
     async def v2_list_blacklists(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[Blacklist]:
         """List blacklist rules
 
@@ -1388,11 +1388,11 @@ class AsyncBlacklists:
     async def v2_create_blacklist(
         self,
         *,
-        type: Union[BlacklistType, str],
+        type: BlacklistType | str,
         data: str,
         description: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Create a blacklist rule
 
@@ -1448,7 +1448,7 @@ class AsyncBlacklists:
             "idempotency_supported": True,
             "operation_id": "v2CreateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "type": enum_value(type),
             "data": data,
             "description": description,
@@ -1486,7 +1486,7 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Retrieve a blacklist rule
 
@@ -1550,10 +1550,10 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Replace a blacklist rule
 
@@ -1609,7 +1609,7 @@ class AsyncBlacklists:
             "idempotency_supported": True,
             "operation_id": "v2ReplaceBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -1650,10 +1650,10 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        type: Optional[Union[BlacklistType, str]] = None,
-        data: Optional[str] = None,
-        description: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: BlacklistType | str | None = None,
+        data: str | None = None,
+        description: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> BlacklistResponse:
         """Update a blacklist rule
 
@@ -1709,7 +1709,7 @@ class AsyncBlacklists:
             "idempotency_supported": True,
             "operation_id": "v2UpdateBlacklist",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type) if type is not None else None,
@@ -1750,7 +1750,7 @@ class AsyncBlacklists:
         self,
         blacklist: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a blacklist rule
 

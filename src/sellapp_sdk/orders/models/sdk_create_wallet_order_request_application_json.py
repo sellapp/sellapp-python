@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from .create_wallet_order_request_application_json_property_product_variants imp
     CreateWalletOrderRequestApplicationJsonPropertyProductVariants,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateWalletOrderRequestApplicationJson",
     "required": ["customer_email", "product_variants"],
     "properties": {
@@ -40,7 +40,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCreateWalletOrderRequestApplicationJson",
     "required": ["customer_email", "product_variants"],
     "properties": {
@@ -69,20 +69,20 @@ class SdkCreateWalletOrderRequestApplicationJson:
 
     customer_email: str
     product_variants: CreateWalletOrderRequestApplicationJsonPropertyProductVariants
-    customer_ip: Optional[str] = None
-    coupon: Optional[str] = None
-    vat_id: Optional[str] = None
-    country: Optional[str] = None
-    affiliate: Optional[str] = None
-    extra: Optional[CreateWalletOrderRequestApplicationJsonPropertyExtra] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    customer_ip: str | None = None
+    coupon: str | None = None
+    vat_id: str | None = None
+    country: str | None = None
+    affiliate: str | None = None
+    extra: CreateWalletOrderRequestApplicationJsonPropertyExtra | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkCreateWalletOrderRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -97,7 +97,7 @@ class SdkCreateWalletOrderRequestApplicationJson:
             return cls(
                 customer_email=data["customer_email"],
                 product_variants=CreateWalletOrderRequestApplicationJsonPropertyProductVariants.from_dict(
-                    cast(Dict[str, Any], data["product_variants"])
+                    cast(dict[str, Any], data["product_variants"])
                 ),
                 customer_ip=data.get("customer_ip"),
                 coupon=data.get("coupon"),
@@ -105,7 +105,7 @@ class SdkCreateWalletOrderRequestApplicationJson:
                 country=data.get("country"),
                 affiliate=data.get("affiliate"),
                 extra=CreateWalletOrderRequestApplicationJsonPropertyExtra.from_dict(
-                    cast(Dict[str, Any], _v_extra)
+                    cast(dict[str, Any], _v_extra)
                 )
                 if (_v_extra := data.get("extra")) is not None
                 else None,
@@ -127,9 +127,9 @@ class SdkCreateWalletOrderRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkCreateWalletOrderRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["customer_email"] = self.customer_email
         _domain_data["product_variants"] = self.product_variants
         _domain_data["customer_ip"] = self.customer_ip
@@ -150,7 +150,7 @@ class SdkCreateWalletOrderRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["customer_email"] = self.customer_email
         result["product_variants"] = self.product_variants.to_dict()
         if self.customer_ip is not None:

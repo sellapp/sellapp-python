@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -46,7 +46,7 @@ class CustomerPortal:
     def get_customer_portal_profile(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalProfileResponseValue200ApplicationJson:
         """Retrieve the signed-in customer
 
@@ -99,13 +99,12 @@ class CustomerPortal:
     def update_customer_portal_profile(
         self,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            UpdateCustomerPortalProfileRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerPortalProfileRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerPortalProfileResponseValue200ApplicationJson:
         """Update the signed-in customer
 
@@ -155,7 +154,7 @@ class CustomerPortal:
             "idempotency_supported": False,
             "operation_id": "updateCustomerPortalProfile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -218,11 +217,11 @@ class CustomerPortal:
     def list_customer_portal_orders(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[CustomerPortalOrder]:
         """List customer orders
 
@@ -294,7 +293,7 @@ class CustomerPortal:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalOrderResponseValue200ApplicationJson:
         """Retrieve a customer order
 
@@ -351,7 +350,7 @@ class CustomerPortal:
     def list_customer_portal_subscriptions(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
         """List customer subscriptions
 
@@ -405,7 +404,7 @@ class CustomerPortal:
         self,
         subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalSubscriptionResponseValue200ApplicationJson:
         """Retrieve a customer subscription
 
@@ -463,7 +462,7 @@ class CustomerPortal:
         self,
         subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """Retrieve subscription capabilities
 
@@ -526,7 +525,7 @@ class CustomerPortal:
     def list_customer_portal_entitlements(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerPortalEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 
@@ -580,13 +579,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel at period end
 
@@ -639,7 +638,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionAtPeriodEnd",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -697,13 +696,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel immediately
 
@@ -756,7 +755,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionImmediately",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -814,13 +813,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
@@ -873,7 +872,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "pauseCustomerSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -931,13 +930,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
@@ -990,7 +989,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "resumeCustomerSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1048,13 +1047,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update payment method
 
@@ -1107,7 +1106,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "updateCustomerSubscriptionPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1165,13 +1164,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a plan change
 
@@ -1224,7 +1223,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "previewCustomerSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1283,13 +1282,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a plan change
 
@@ -1342,7 +1341,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "confirmCustomerSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1401,13 +1400,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a renewal-date change
 
@@ -1460,7 +1459,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "previewCustomerSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1519,13 +1518,13 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a renewal-date change
 
@@ -1578,7 +1577,7 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "confirmCustomerSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -1644,7 +1643,7 @@ class AsyncCustomerPortal:
     async def get_customer_portal_profile(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalProfileResponseValue200ApplicationJson:
         """Retrieve the signed-in customer
 
@@ -1697,13 +1696,12 @@ class AsyncCustomerPortal:
     async def update_customer_portal_profile(
         self,
         *,
-        email: Optional[str] = None,
-        name: Union[str, None, NotGiven] = NOT_GIVEN,
-        locale: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            UpdateCustomerPortalProfileRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None = None,
+        name: str | None | NotGiven = NOT_GIVEN,
+        locale: str | None | NotGiven = NOT_GIVEN,
+        metadata: UpdateCustomerPortalProfileRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerPortalProfileResponseValue200ApplicationJson:
         """Update the signed-in customer
 
@@ -1753,7 +1751,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": False,
             "operation_id": "updateCustomerPortalProfile",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "email": email,
@@ -1816,11 +1814,11 @@ class AsyncCustomerPortal:
     async def list_customer_portal_orders(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[CustomerPortalOrder]:
         """List customer orders
 
@@ -1892,7 +1890,7 @@ class AsyncCustomerPortal:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalOrderResponseValue200ApplicationJson:
         """Retrieve a customer order
 
@@ -1949,7 +1947,7 @@ class AsyncCustomerPortal:
     async def list_customer_portal_subscriptions(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
         """List customer subscriptions
 
@@ -2003,7 +2001,7 @@ class AsyncCustomerPortal:
         self,
         subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalSubscriptionResponseValue200ApplicationJson:
         """Retrieve a customer subscription
 
@@ -2061,7 +2059,7 @@ class AsyncCustomerPortal:
         self,
         subscription: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """Retrieve subscription capabilities
 
@@ -2124,7 +2122,7 @@ class AsyncCustomerPortal:
     async def list_customer_portal_entitlements(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerPortalEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 
@@ -2178,13 +2176,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel at period end
 
@@ -2237,7 +2235,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionAtPeriodEnd",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2295,13 +2293,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel immediately
 
@@ -2354,7 +2352,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionImmediately",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2412,13 +2410,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
@@ -2471,7 +2469,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "pauseCustomerSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2529,13 +2527,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
@@ -2588,7 +2586,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "resumeCustomerSubscription",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2646,13 +2644,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update payment method
 
@@ -2705,7 +2703,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "updateCustomerSubscriptionPaymentMethod",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2763,13 +2761,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a plan change
 
@@ -2822,7 +2820,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "previewCustomerSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2881,13 +2879,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a plan change
 
@@ -2940,7 +2938,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "confirmCustomerSubscriptionPlanChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -2999,13 +2997,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a renewal-date change
 
@@ -3058,7 +3056,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "previewCustomerSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,
@@ -3117,13 +3115,13 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        renewal_date: Optional[str] = None,
-        return_url: Optional[str] = None,
-        reason: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        preview_id: str | None = None,
+        product_variant_id: int | None = None,
+        renewal_date: str | None = None,
+        return_url: str | None = None,
+        reason: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a renewal-date change
 
@@ -3176,7 +3174,7 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "confirmCustomerSubscriptionRenewalDateChange",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "preview_id": preview_id,

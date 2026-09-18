@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.add_ons.models.sdk_list_product_s_add_ons_response_value_200_application_json import (
     SdkListProductSAddOnsResponseValue200ApplicationJson,
@@ -31,13 +33,13 @@ class ProductsAddons:
         self,
         product: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListProductSAddOnsResponseValue200ApplicationJson]:
         """List a product's add-ons
 
@@ -119,8 +121,8 @@ class ProductsAddons:
         self,
         product: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductSAddOnsResponseValue200ApplicationJson:
         """Replace a product's add-ons
 
@@ -173,7 +175,7 @@ class ProductsAddons:
             "idempotency_supported": False,
             "operation_id": "replaceProductSAddOns",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -215,13 +217,13 @@ class AsyncProductsAddons:
         self,
         product: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListProductSAddOnsResponseValue200ApplicationJson]:
         """List a product's add-ons
 
@@ -303,8 +305,8 @@ class AsyncProductsAddons:
         self,
         product: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductSAddOnsResponseValue200ApplicationJson:
         """Replace a product's add-ons
 
@@ -357,7 +359,7 @@ class AsyncProductsAddons:
             "idempotency_supported": False,
             "operation_id": "replaceProductSAddOns",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

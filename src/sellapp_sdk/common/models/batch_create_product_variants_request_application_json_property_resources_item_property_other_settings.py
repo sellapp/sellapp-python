@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,13 +12,13 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings",
     "required": [],
     "properties": {"quantity_increments": {"kind": "primitive", "type": "integer"}},
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings",
     "required": [],
     "properties": {"quantity_increments": {"kind": "primitive", "type": "integer"}},
@@ -30,15 +30,15 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings:
     """Batch Create Product Variants Request Application Json Property Resources Item Property Other Settings model."""
 
-    quantity_increments: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    quantity_increments: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyOtherSettings:
         """Deserialize from a dictionary."""
         try:
@@ -63,9 +63,9 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.quantity_increments is not None:
             _domain_data["quantity_increments"] = self.quantity_increments
         _validate_model(
@@ -76,7 +76,7 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.quantity_increments is not None:
             result["quantity_increments"] = self.quantity_increments
         return result

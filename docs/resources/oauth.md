@@ -12,13 +12,13 @@ Read OAuth server metadata
 def get_oauth_authorization_server_metadata(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetOAuthAuthorizationServerMetadataResponseValue200ApplicationJson`.
 
@@ -57,11 +57,11 @@ def get_oauth_authorization_request(
         response_type: Literal["code"],
         client_id: str,
         redirect_uri: str,
-        scope: Optional[str] = None,
+        scope: str | None = None,
         state: str,
         code_challenge: str,
         code_challenge_method: Literal["S256"],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -70,11 +70,11 @@ def get_oauth_authorization_request(
 | response_type | `Literal["code"]` | Yes |
 | client_id | `str` | Yes |
 | redirect_uri | `str` | Yes |
-| scope | `Optional[str]` | No |
+| scope | `str \| None` | No |
 | state | `str` | Yes |
 | code_challenge | `str` | Yes |
 | code_challenge_method | `Literal["S256"]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -121,7 +121,7 @@ def approve_oauth_authorization(
         client_id: str,
         state: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -131,7 +131,7 @@ def approve_oauth_authorization(
 | client_id | `str` | Yes |
 | state | `str` | Yes |
 | token | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -178,7 +178,7 @@ def deny_oauth_authorization(
         *,
         auth_token: str,
         token: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
@@ -186,7 +186,7 @@ def deny_oauth_authorization(
 | --- | --- | --- |
 | auth_token | `str` | Yes |
 | token | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 
@@ -229,23 +229,19 @@ Exchange or refresh OAuth tokens
 def exchange_oauth_token(
         self,
         *,
-        body: Union[
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1,
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1
+        | ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkExchangeOAuthTokenResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| body | `Union[
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1,
-            ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2,
-            Dict[str, Any],
-        ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| body | `ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1
+        \| ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue2
+        \| dict[str, Any]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkExchangeOAuthTokenResponseValue200ApplicationJson`.
 
@@ -295,30 +291,24 @@ def revoke_oauth_token(
         self,
         *,
         token: str,
-        client_id: Optional[str] = None,
-        client_secret: Optional[str] = None,
-        token_type_hint: Optional[
-            Union[
-                SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint,
-                str,
-            ]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        client_id: str | None = None,
+        client_secret: str | None = None,
+        token_type_hint: SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint
+        | str
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | token | `str` | Yes |
-| client_id | `Optional[str]` | No |
-| client_secret | `Optional[str]` | No |
-| token_type_hint | `Optional[
-            Union[
-                SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint,
-                str,
-            ]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| client_id | `str \| None` | No |
+| client_secret | `str \| None` | No |
+| token_type_hint | `SdkRevokeOAuthTokenRequestApplicationXWwwFormUrlencodedTokenTypeHint
+        \| str
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `Any`.
 

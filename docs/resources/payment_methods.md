@@ -12,13 +12,13 @@ List payment methods
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListPaymentMethodsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListPaymentMethodsResponseValue200ApplicationJson`.
 
@@ -65,14 +65,14 @@ def get(
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetPaymentMethodStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | payment_method | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetPaymentMethodStatusResponseValue200ApplicationJson`.
 
@@ -120,7 +120,7 @@ def enable(
         payment_method: str,
         *,
         enabled: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkEnableOrDisablePaymentMethodResponseValue200ApplicationJson:
 ```
 
@@ -128,7 +128,7 @@ def enable(
 | --- | --- | --- |
 | payment_method | `str` | Yes |
 | enabled | `bool` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkEnableOrDisablePaymentMethodResponseValue200ApplicationJson`.
 
@@ -178,14 +178,14 @@ def connect(
         self,
         payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreatePaymentConnectionHandoffResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | payment_method | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreatePaymentConnectionHandoffResponseValue200ApplicationJson`.
 
@@ -232,32 +232,28 @@ def validate(
         self,
         payment_method: str,
         *,
-        body: Union[
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
+        | ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | payment_method | `str` | Yes |
-| body | `Union[
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5,
-            ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6,
-            Dict[str, Any],
-        ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| body | `ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue1
+        \| ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue2
+        \| ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue3
+        \| ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue4
+        \| ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue5
+        \| ValidateAndSavePaymentMethodConfigurationRequestApplicationJsonOneOfValue6
+        \| dict[str, Any]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson`.
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.create_export_request_application_json_property_p
     CreateExportRequestApplicationJsonPropertyParametersReportType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateExportRequestApplicationJsonPropertyParameters",
     "required": [],
     "properties": {
@@ -32,7 +32,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": False,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateExportRequestApplicationJsonPropertyParameters",
     "required": [],
     "properties": {
@@ -54,21 +54,21 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class CreateExportRequestApplicationJsonPropertyParameters:
     """Create Export Request Application Json Property Parameters model."""
 
-    from_: Optional[str] = None
+    from_: str | None = None
     """Inclusive start date. Omitted or null uses 365 days before to."""
-    to: Optional[str] = None
+    to: str | None = None
     """Inclusive end date. Omitted or null uses today. The range may span at most 366 calendar days."""
-    report_type: Optional[
-        CreateExportRequestApplicationJsonPropertyParametersReportType
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    report_type: (
+        CreateExportRequestApplicationJsonPropertyParametersReportType | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateExportRequestApplicationJsonPropertyParameters:
         """Deserialize from a dictionary."""
         try:
@@ -98,9 +98,9 @@ class CreateExportRequestApplicationJsonPropertyParameters:
                 "CreateExportRequestApplicationJsonPropertyParameters", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["from_"] = self.from_
         _domain_data["to"] = self.to
         if self.report_type is not None:
@@ -113,7 +113,7 @@ class CreateExportRequestApplicationJsonPropertyParameters:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or False),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.from_ is not None:
             result["from"] = self.from_
         else:

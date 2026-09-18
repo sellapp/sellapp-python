@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -17,7 +17,7 @@ from .search_add_ons_request_application_json_property_sort_item_direction impor
     SearchAddOnsRequestApplicationJsonPropertySortItemDirection,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchAddOnsRequestApplicationJsonPropertySortItem",
     "required": ["field"],
     "properties": {
@@ -26,7 +26,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchAddOnsRequestApplicationJsonPropertySortItem",
     "required": ["field"],
     "properties": {
@@ -42,17 +42,15 @@ class SearchAddOnsRequestApplicationJsonPropertySortItem:
     """Search Add Ons Request Application Json Property Sort Item model."""
 
     field: str
-    direction: Optional[SearchAddOnsRequestApplicationJsonPropertySortItemDirection] = (
-        None
-    )
-    additional_properties: Dict[str, Any] = dataclass_field(
+    direction: SearchAddOnsRequestApplicationJsonPropertySortItemDirection | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SearchAddOnsRequestApplicationJsonPropertySortItem:
         """Deserialize from a dictionary."""
         try:
@@ -81,9 +79,9 @@ class SearchAddOnsRequestApplicationJsonPropertySortItem:
                 "SearchAddOnsRequestApplicationJsonPropertySortItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["field"] = self.field
         if self.direction is not None:
             _domain_data["direction"] = self.direction
@@ -95,7 +93,7 @@ class SearchAddOnsRequestApplicationJsonPropertySortItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["field"] = self.field
         if self.direction is not None:
             result["direction"] = (

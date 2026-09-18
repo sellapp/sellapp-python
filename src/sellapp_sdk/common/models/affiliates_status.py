@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class AffiliatesStatus(str, Enum):
@@ -18,7 +18,7 @@ class AffiliatesStatus(str, Enum):
     BLOCKED = "blocked"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[AffiliatesStatus]:
+    def _missing_(cls, value: object) -> AffiliatesStatus | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -34,16 +34,15 @@ class Credits:
         *,
         customer_id: int,
         product_id: int,
-        kind: Union[SdkRecordCreditTransactionRequestApplicationJsonKind, str],
+        kind: SdkRecordCreditTransactionRequestApplicationJsonKind | str,
         amount_units: int,
         idempotency_key: str,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_type: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            RecordCreditTransactionRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        source_type: str | None | NotGiven = NOT_GIVEN,
+        source_id: str | None | NotGiven = NOT_GIVEN,
+        metadata: RecordCreditTransactionRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRecordCreditTransactionResponseValue200ApplicationJson:
         """Record a credit transaction
 
@@ -102,7 +101,7 @@ class Credits:
             "idempotency_supported": False,
             "operation_id": "recordCreditTransaction",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_id": customer_id,
@@ -198,16 +197,15 @@ class AsyncCredits:
         *,
         customer_id: int,
         product_id: int,
-        kind: Union[SdkRecordCreditTransactionRequestApplicationJsonKind, str],
+        kind: SdkRecordCreditTransactionRequestApplicationJsonKind | str,
         amount_units: int,
         idempotency_key: str,
-        reason: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_type: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        metadata: Optional[
-            RecordCreditTransactionRequestApplicationJsonPropertyMetadata
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        source_type: str | None | NotGiven = NOT_GIVEN,
+        source_id: str | None | NotGiven = NOT_GIVEN,
+        metadata: RecordCreditTransactionRequestApplicationJsonPropertyMetadata
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRecordCreditTransactionResponseValue200ApplicationJson:
         """Record a credit transaction
 
@@ -266,7 +264,7 @@ class AsyncCredits:
             "idempotency_supported": False,
             "operation_id": "recordCreditTransaction",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_id": customer_id,

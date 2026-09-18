@@ -15,18 +15,16 @@ def create(
         section: int,
         *,
         title: str,
-        type: Union[SdkCreateCourseLessonRequestApplicationJsonType, str],
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            CreateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateCourseLessonRequestApplicationJsonType | str,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: CreateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseLessonResponseValue201ApplicationJson:
 ```
 
@@ -35,18 +33,16 @@ def create(
 | course | `str` | Yes |
 | section | `int` | Yes |
 | title | `str` | Yes |
-| type | `Union[SdkCreateCourseLessonRequestApplicationJsonType, str]` | Yes |
-| content | `Union[str, None, NotGiven]` | No |
-| is_preview | `Optional[bool]` | No |
-| is_published | `Optional[bool]` | No |
-| assignment | `Optional[
-            CreateCourseLessonRequestApplicationJsonPropertyAssignment
-        ]` | No |
-| questions | `Optional[
-            List[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `SdkCreateCourseLessonRequestApplicationJsonType \| str` | Yes |
+| content | `str \| None \| NotGiven` | No |
+| is_preview | `bool \| None` | No |
+| is_published | `bool \| None` | No |
+| assignment | `CreateCourseLessonRequestApplicationJsonPropertyAssignment
+        \| None` | No |
+| questions | `list[CreateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCourseLessonResponseValue201ApplicationJson`.
 
@@ -101,21 +97,17 @@ def replace(
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkReplaceCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkReplaceCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseLessonResponseValue200ApplicationJson:
 ```
 
@@ -123,21 +115,17 @@ def replace(
 | --- | --- | --- |
 | course | `str` | Yes |
 | lesson | `int` | Yes |
-| title | `Optional[str]` | No |
-| type | `Optional[
-            Union[SdkReplaceCourseLessonRequestApplicationJsonType, str]
-        ]` | No |
-| content | `Union[str, None, NotGiven]` | No |
-| is_preview | `Optional[bool]` | No |
-| is_published | `Optional[bool]` | No |
-| assignment | `Optional[
-            ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
-        ]` | No |
-| questions | `Optional[
-            List[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| type | `SdkReplaceCourseLessonRequestApplicationJsonType \| str \| None` | No |
+| content | `str \| None \| NotGiven` | No |
+| is_preview | `bool \| None` | No |
+| is_published | `bool \| None` | No |
+| assignment | `ReplaceCourseLessonRequestApplicationJsonPropertyAssignment
+        \| None` | No |
+| questions | `list[ReplaceCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCourseLessonResponseValue200ApplicationJson`.
 
@@ -190,21 +178,17 @@ def update(
         course: str,
         lesson: int,
         *,
-        title: Optional[str] = None,
-        type: Optional[
-            Union[SdkUpdateCourseLessonRequestApplicationJsonType, str]
-        ] = None,
-        content: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_preview: Optional[bool] = None,
-        is_published: Optional[bool] = None,
-        assignment: Optional[
-            UpdateCourseLessonRequestApplicationJsonPropertyAssignment
-        ] = None,
-        questions: Optional[
-            List[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        type: SdkUpdateCourseLessonRequestApplicationJsonType | str | None = None,
+        content: str | None | NotGiven = NOT_GIVEN,
+        is_preview: bool | None = None,
+        is_published: bool | None = None,
+        assignment: UpdateCourseLessonRequestApplicationJsonPropertyAssignment
+        | None = None,
+        questions: list[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseLessonResponseValue200ApplicationJson:
 ```
 
@@ -212,21 +196,17 @@ def update(
 | --- | --- | --- |
 | course | `str` | Yes |
 | lesson | `int` | Yes |
-| title | `Optional[str]` | No |
-| type | `Optional[
-            Union[SdkUpdateCourseLessonRequestApplicationJsonType, str]
-        ]` | No |
-| content | `Union[str, None, NotGiven]` | No |
-| is_preview | `Optional[bool]` | No |
-| is_published | `Optional[bool]` | No |
-| assignment | `Optional[
-            UpdateCourseLessonRequestApplicationJsonPropertyAssignment
-        ]` | No |
-| questions | `Optional[
-            List[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
-        ]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| type | `SdkUpdateCourseLessonRequestApplicationJsonType \| str \| None` | No |
+| content | `str \| None \| NotGiven` | No |
+| is_preview | `bool \| None` | No |
+| is_published | `bool \| None` | No |
+| assignment | `UpdateCourseLessonRequestApplicationJsonPropertyAssignment
+        \| None` | No |
+| questions | `list[UpdateCourseLessonRequestApplicationJsonPropertyQuestionsItem]
+        \| None` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCourseLessonResponseValue200ApplicationJson`.
 
@@ -279,7 +259,7 @@ def delete(
         course: str,
         lesson: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -287,7 +267,7 @@ def delete(
 | --- | --- | --- |
 | course | `str` | Yes |
 | lesson | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -337,20 +317,20 @@ def reorder(
         self,
         course: str,
         *,
-        resources: List[
+        resources: list[
             ReorderCourseLessonsRequestApplicationJsonPropertyResourcesItem
         ],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseLessonsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | course | `str` | Yes |
-| resources | `List[
+| resources | `list[
             ReorderCourseLessonsRequestApplicationJsonPropertyResourcesItem
         ]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReorderCourseLessonsResponseValue200ApplicationJson`.
 

@@ -12,13 +12,13 @@ List custom payment methods
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomPaymentMethodsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListCustomPaymentMethodsResponseValue200ApplicationJson`.
 
@@ -64,45 +64,41 @@ Create a custom payment method
 def create(
         self,
         *,
-        type: Union[SdkCreateCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkCreateCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomPaymentMethodResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| type | `Union[SdkCreateCustomPaymentMethodRequestApplicationJsonType, str]` | Yes |
+| type | `SdkCreateCustomPaymentMethodRequestApplicationJsonType \| str` | Yes |
 | name | `str` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| instructions | `Union[str, None, NotGiven]` | No |
-| steps | `Union[List[Optional[str]], None, NotGiven]` | No |
-| redirect_url | `Union[str, None, NotGiven]` | No |
-| skip_interstitial_page | `Optional[bool]` | No |
-| show_processing_status_page | `Optional[bool]` | No |
-| require_proof_of_payment | `Optional[bool]` | No |
-| enabled | `Optional[bool]` | No |
-| sort_order | `Optional[int]` | No |
-| modifier | `Union[
-            CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| description | `str \| None \| NotGiven` | No |
+| instructions | `str \| None \| NotGiven` | No |
+| steps | `builtins.list[str \| None] \| None \| NotGiven` | No |
+| redirect_url | `str \| None \| NotGiven` | No |
+| skip_interstitial_page | `bool \| None` | No |
+| show_processing_status_page | `bool \| None` | No |
+| require_proof_of_payment | `bool \| None` | No |
+| enabled | `bool \| None` | No |
+| sort_order | `int \| None` | No |
+| modifier | `CreateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        \| None
+        \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCustomPaymentMethodResponseValue201ApplicationJson`.
 
@@ -155,14 +151,14 @@ def get(
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomPaymentMethodResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | custom_payment_method | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCustomPaymentMethodResponseValue200ApplicationJson`.
 
@@ -209,46 +205,42 @@ def replace(
         self,
         custom_payment_method: str,
         *,
-        type: Union[SdkReplaceCustomPaymentMethodRequestApplicationJsonType, str],
+        type: SdkReplaceCustomPaymentMethodRequestApplicationJsonType | str,
         name: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCustomPaymentMethodResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | custom_payment_method | `str` | Yes |
-| type | `Union[SdkReplaceCustomPaymentMethodRequestApplicationJsonType, str]` | Yes |
+| type | `SdkReplaceCustomPaymentMethodRequestApplicationJsonType \| str` | Yes |
 | name | `str` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| instructions | `Union[str, None, NotGiven]` | No |
-| steps | `Union[List[Optional[str]], None, NotGiven]` | No |
-| redirect_url | `Union[str, None, NotGiven]` | No |
-| skip_interstitial_page | `Optional[bool]` | No |
-| show_processing_status_page | `Optional[bool]` | No |
-| require_proof_of_payment | `Optional[bool]` | No |
-| enabled | `Optional[bool]` | No |
-| sort_order | `Optional[int]` | No |
-| modifier | `Union[
-            ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| description | `str \| None \| NotGiven` | No |
+| instructions | `str \| None \| NotGiven` | No |
+| steps | `builtins.list[str \| None] \| None \| NotGiven` | No |
+| redirect_url | `str \| None \| NotGiven` | No |
+| skip_interstitial_page | `bool \| None` | No |
+| show_processing_status_page | `bool \| None` | No |
+| require_proof_of_payment | `bool \| None` | No |
+| enabled | `bool \| None` | No |
+| sort_order | `int \| None` | No |
+| modifier | `ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        \| None
+        \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCustomPaymentMethodResponseValue200ApplicationJson`.
 
@@ -301,50 +293,46 @@ def update(
         self,
         custom_payment_method: str,
         *,
-        type: Optional[
-            Union[SdkUpdateCustomPaymentMethodRequestApplicationJsonType, str]
-        ] = None,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        instructions: Union[str, None, NotGiven] = NOT_GIVEN,
-        steps: Union[List[Optional[str]], None, NotGiven] = NOT_GIVEN,
-        redirect_url: Union[str, None, NotGiven] = NOT_GIVEN,
-        skip_interstitial_page: Optional[bool] = None,
-        show_processing_status_page: Optional[bool] = None,
-        require_proof_of_payment: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        sort_order: Optional[int] = None,
-        modifier: Union[
-            UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkUpdateCustomPaymentMethodRequestApplicationJsonType
+        | str
+        | None = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        instructions: str | None | NotGiven = NOT_GIVEN,
+        steps: builtins.list[str | None] | None | NotGiven = NOT_GIVEN,
+        redirect_url: str | None | NotGiven = NOT_GIVEN,
+        skip_interstitial_page: bool | None = None,
+        show_processing_status_page: bool | None = None,
+        require_proof_of_payment: bool | None = None,
+        enabled: bool | None = None,
+        sort_order: int | None = None,
+        modifier: UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomPaymentMethodResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | custom_payment_method | `str` | Yes |
-| type | `Optional[
-            Union[SdkUpdateCustomPaymentMethodRequestApplicationJsonType, str]
-        ]` | No |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| instructions | `Union[str, None, NotGiven]` | No |
-| steps | `Union[List[Optional[str]], None, NotGiven]` | No |
-| redirect_url | `Union[str, None, NotGiven]` | No |
-| skip_interstitial_page | `Optional[bool]` | No |
-| show_processing_status_page | `Optional[bool]` | No |
-| require_proof_of_payment | `Optional[bool]` | No |
-| enabled | `Optional[bool]` | No |
-| sort_order | `Optional[int]` | No |
-| modifier | `Union[
-            UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
-            None,
-            NotGiven,
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| type | `SdkUpdateCustomPaymentMethodRequestApplicationJsonType
+        \| str
+        \| None` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| instructions | `str \| None \| NotGiven` | No |
+| steps | `builtins.list[str \| None] \| None \| NotGiven` | No |
+| redirect_url | `str \| None \| NotGiven` | No |
+| skip_interstitial_page | `bool \| None` | No |
+| show_processing_status_page | `bool \| None` | No |
+| require_proof_of_payment | `bool \| None` | No |
+| enabled | `bool \| None` | No |
+| sort_order | `int \| None` | No |
+| modifier | `UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier
+        \| None
+        \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCustomPaymentMethodResponseValue200ApplicationJson`.
 
@@ -395,14 +383,14 @@ def delete(
         self,
         custom_payment_method: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | custom_payment_method | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

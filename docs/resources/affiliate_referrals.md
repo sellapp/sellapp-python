@@ -12,15 +12,15 @@ List affiliate referrals
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        affiliate_id: Optional[int] = None,
-        order_id: Optional[int] = None,
-        status: Optional[Union[AffiliateReferralsStatus, str]] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        affiliate_id: int | None = None,
+        order_id: int | None = None,
+        status: AffiliateReferralsStatus | str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -28,15 +28,15 @@ def list(
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| affiliate_id | `Optional[int]` | No |
-| order_id | `Optional[int]` | No |
-| status | `Optional[Union[AffiliateReferralsStatus, str]]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| affiliate_id | `int \| None` | No |
+| order_id | `int \| None` | No |
+| status | `AffiliateReferralsStatus \| str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         ListAffiliateReferralsResponseValue200ApplicationJsonPropertyDataItem
@@ -85,14 +85,14 @@ def get(
         self,
         referral: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAffiliateReferralResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | referral | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetAffiliateReferralResponseValue200ApplicationJson`.
 
@@ -139,16 +139,16 @@ def update(
         self,
         referral: int,
         *,
-        status: Union[SdkUpdateReferralStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateReferralStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateReferralStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | referral | `int` | Yes |
-| status | `Union[SdkUpdateReferralStatusRequestApplicationJsonStatus, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateReferralStatusRequestApplicationJsonStatus \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateReferralStatusResponseValue200ApplicationJson`.
 

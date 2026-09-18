@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.search_order_line_items_request_application_json_property_pagination import (
     SearchOrderLineItemsRequestApplicationJsonPropertyPagination,
@@ -34,12 +36,12 @@ class LineItems:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """List order line items
 
@@ -116,20 +118,19 @@ class LineItems:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchOrderLineItemsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchOrderLineItemsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        pagination: Optional[
-            SearchOrderLineItemsRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchOrderLineItemsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchOrderLineItemsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrderLineItemsRequestApplicationJsonPropertyPagination
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search order line items
 
@@ -186,7 +187,7 @@ class LineItems:
             "idempotency_supported": False,
             "operation_id": "searchOrderLineItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -220,7 +221,7 @@ class LineItems:
         self,
         line_item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderLineItemResponseValue200ApplicationJson:
         """Retrieve an order line item
 
@@ -290,12 +291,12 @@ class AsyncLineItems:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """List order line items
 
@@ -372,20 +373,19 @@ class AsyncLineItems:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchOrderLineItemsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchOrderLineItemsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        pagination: Optional[
-            SearchOrderLineItemsRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchOrderLineItemsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchOrderLineItemsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrderLineItemsRequestApplicationJsonPropertyPagination
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchOrderLineItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search order line items
 
@@ -442,7 +442,7 @@ class AsyncLineItems:
             "idempotency_supported": False,
             "operation_id": "searchOrderLineItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -476,7 +476,7 @@ class AsyncLineItems:
         self,
         line_item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderLineItemResponseValue200ApplicationJson:
         """Retrieve an order line item
 

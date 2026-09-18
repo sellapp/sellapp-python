@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .get_affiliate_program_configuration_response_value_200_application_json_pr
     GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPropertyCommission,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings",
     "required": [
         "auto_approve_affiliates",
@@ -84,7 +84,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings",
     "required": [
         "auto_approve_affiliates",
@@ -152,26 +152,26 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
     """Get Affiliate Program Configuration Response Value200Application Json Property Data Property Settings model."""
 
     auto_approve_affiliates: bool
-    minimum_payout: Optional[str]
+    minimum_payout: str | None
     """Minimum payout balance in USD major units, or null before initial configuration."""
     commission: GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPropertyCommission
     referrer_type: GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsReferrerType
     tracking_length: int
     subscription_commission: bool
     enabled_specific_products: bool
-    payout_methods: List[
+    payout_methods: list[
         GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPayoutMethods
     ]
     """The payout methods affiliates may choose from. Empty until the store configures them; configuration writes must include at least one."""
     enable_hub: bool
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings:
         """Deserialize from a dictionary."""
         try:
@@ -187,7 +187,7 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
                 auto_approve_affiliates=data["auto_approve_affiliates"],
                 minimum_payout=data["minimum_payout"],
                 commission=GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPropertyCommission.from_dict(
-                    cast(Dict[str, Any], data["commission"])
+                    cast(dict[str, Any], data["commission"])
                 ),
                 referrer_type=GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsReferrerType(
                     data["referrer_type"]
@@ -224,9 +224,9 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["auto_approve_affiliates"] = self.auto_approve_affiliates
         _domain_data["minimum_payout"] = self.minimum_payout
         _domain_data["commission"] = self.commission
@@ -244,7 +244,7 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["auto_approve_affiliates"] = self.auto_approve_affiliates
         if self.minimum_payout is not None:
             result["minimum_payout"] = self.minimum_payout

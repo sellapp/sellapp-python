@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -25,7 +25,7 @@ from .delete_upsell_offer_response_value_200_application_json_property_data_prop
     DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceVariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -139,7 +139,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -261,43 +261,46 @@ class DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData:
 
     id: int
     name: str
-    description: Optional[str]
+    description: str | None
     is_active: bool
     source_listing_id: int
-    source_variant_id: Optional[int]
-    minimum_order_total_usd_cents: Optional[int]
+    source_variant_id: int | None
+    minimum_order_total_usd_cents: int | None
     """Minimum qualifying source-order total in integer USD cents."""
-    maximum_order_total_usd_cents: Optional[int]
+    maximum_order_total_usd_cents: int | None
     """Maximum qualifying source-order total in integer USD cents."""
-    starts_at: Optional[datetime]
-    ends_at: Optional[datetime]
-    available_for_days: Optional[int]
-    max_accepts_per_customer: Optional[int]
+    starts_at: datetime | None
+    ends_at: datetime | None
+    available_for_days: int | None
+    max_accepts_per_customer: int | None
     sort_order: int
     version: int
     """Current version. Send this value when updating to avoid overwriting a newer edit."""
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    deleted_at: Optional[datetime]
-    source_product: Optional[
+    created_at: datetime | None
+    updated_at: datetime | None
+    deleted_at: datetime | None
+    source_product: (
         DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceProduct
-    ] = None
-    source_variant: Optional[
+        | None
+    ) = None
+    source_variant: (
         DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceVariant
-    ] = None
-    items: Optional[
-        List[
+        | None
+    ) = None
+    items: (
+        list[
             DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertyItemsItem
         ]
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -338,18 +341,18 @@ class DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData:
                 if (_v_deleted_at := data["deleted_at"]) is not None
                 else None,
                 source_product=DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceProduct.from_dict(
-                    cast(Dict[str, Any], _v_source_product)
+                    cast(dict[str, Any], _v_source_product)
                 )
                 if (_v_source_product := data.get("source_product")) is not None
                 else None,
                 source_variant=DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceVariant.from_dict(
-                    cast(Dict[str, Any], _v_source_variant)
+                    cast(dict[str, Any], _v_source_variant)
                 )
                 if (_v_source_variant := data.get("source_variant")) is not None
                 else None,
                 items=[
                     DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertyItemsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_items)
                 ]
@@ -387,9 +390,9 @@ class DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData:
                 "DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["name"] = self.name
         _domain_data["description"] = self.description
@@ -423,7 +426,7 @@ class DeleteUpsellOfferResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["name"] = self.name
         if self.description is not None:

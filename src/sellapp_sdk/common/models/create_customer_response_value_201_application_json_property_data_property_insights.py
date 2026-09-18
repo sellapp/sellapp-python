@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights",
     "required": [
         "orders_count",
@@ -76,7 +76,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights",
     "required": [
         "orders_count",
@@ -151,18 +151,18 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights:
     subscriptions_count: int
     revenue_usd_cents: int
     """Completed line-item revenue in integer USD minor units."""
-    first_purchase_at: Optional[datetime]
-    last_purchase_at: Optional[datetime]
-    favorite_payment_method: Optional[str]
+    first_purchase_at: datetime | None
+    last_purchase_at: datetime | None
+    favorite_payment_method: str | None
     """The most frequently used line-item payment method."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights:
         """Deserialize from a dictionary."""
         try:
@@ -212,9 +212,9 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["orders_count"] = self.orders_count
         _domain_data["line_items_count"] = self.line_items_count
         _domain_data["completed_line_items_count"] = self.completed_line_items_count
@@ -233,7 +233,7 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["orders_count"] = self.orders_count
         result["line_items_count"] = self.line_items_count
         result["completed_line_items_count"] = self.completed_line_items_count

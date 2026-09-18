@@ -7,7 +7,7 @@ import unicodedata
 from collections.abc import Mapping, Sequence
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, NoReturn, TypedDict, Union
+from typing import Any, NoReturn, TypedDict
 
 from ._errors import SchemaValidationError, SerializationError
 
@@ -15,13 +15,13 @@ from ._errors import SchemaValidationError, SerializationError
 class RequestOptions(TypedDict, total=False):
     timeout: float
     max_retries: int
-    headers: Dict[str, str]
-    extra_query: Dict[str, Any]
-    extra_body: Dict[str, Any]
+    headers: dict[str, str]
+    extra_query: dict[str, Any]
+    extra_body: dict[str, Any]
     operation_id: str
-    files: Dict[str, Any]
+    files: dict[str, Any]
     response_callback: Any
-    auth: Dict[str, Any]
+    auth: dict[str, Any]
     server: str
     encoding: str
     no_retry: bool
@@ -36,7 +36,7 @@ class NotGiven:
 NOT_GIVEN = NotGiven()
 
 
-def enum_value(value: Union[Enum, str]) -> str:
+def enum_value(value: Enum | str) -> str:
     return str(value.value if isinstance(value, Enum) else value)
 
 
@@ -54,7 +54,7 @@ def _raise_deserialize_error(model_name: str, error: Exception) -> NoReturn:
 
 def _preserve_unknown_fields(
     value: Mapping[str, Any], known_keys: Sequence[str]
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     known = set(known_keys)
     return {key: item for key, item in value.items() if key not in known}
 

@@ -14,8 +14,8 @@ def create(
         course: str,
         *,
         title: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseSectionResponseValue201ApplicationJson:
 ```
 
@@ -23,8 +23,8 @@ def create(
 | --- | --- | --- |
 | course | `str` | Yes |
 | title | `str` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| description | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCourseSectionResponseValue201ApplicationJson`.
 
@@ -75,10 +75,10 @@ def replace(
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseSectionResponseValue200ApplicationJson:
 ```
 
@@ -86,10 +86,10 @@ def replace(
 | --- | --- | --- |
 | course | `str` | Yes |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCourseSectionResponseValue200ApplicationJson`.
 
@@ -141,10 +141,10 @@ def update(
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseSectionResponseValue200ApplicationJson:
 ```
 
@@ -152,10 +152,10 @@ def update(
 | --- | --- | --- |
 | course | `str` | Yes |
 | section | `int` | Yes |
-| title | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| expected_updated_at | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| title | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| expected_updated_at | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCourseSectionResponseValue200ApplicationJson`.
 
@@ -207,7 +207,7 @@ def delete(
         course: str,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -215,7 +215,7 @@ def delete(
 | --- | --- | --- |
 | course | `str` | Yes |
 | section | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -265,16 +265,16 @@ def reorder(
         self,
         course: str,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseSectionsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | course | `str` | Yes |
-| resources | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| resources | `list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReorderCourseSectionsResponseValue200ApplicationJson`.
 

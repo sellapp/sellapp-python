@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from .preview_subscription_renewal_date_change_response_value_200_application_js
     PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyRequestPayload,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -47,7 +47,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData",
     "required": [],
     "properties": {
@@ -78,24 +78,26 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData:
     """Preview Subscription Renewal Date Change Response Value200Application Json Property Data model."""
 
-    preview_token: Optional[str] = None
-    expires_at: Optional[datetime] = None
-    preview_payload: Optional[
+    preview_token: str | None = None
+    expires_at: datetime | None = None
+    preview_payload: (
         PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyPreviewPayload
-    ] = None
-    request_payload: Optional[
+        | None
+    ) = None
+    request_payload: (
         PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyRequestPayload
-    ] = None
-    customer_message: Optional[str] = None
-    seller_message: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    customer_message: str | None = None
+    seller_message: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> (
         PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData
     ):
@@ -115,12 +117,12 @@ class PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropert
                 if (_v_expires_at := data.get("expires_at")) is not None
                 else None,
                 preview_payload=PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyPreviewPayload.from_dict(
-                    cast(Dict[str, Any], _v_preview_payload)
+                    cast(dict[str, Any], _v_preview_payload)
                 )
                 if (_v_preview_payload := data.get("preview_payload")) is not None
                 else None,
                 request_payload=PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyRequestPayload.from_dict(
-                    cast(Dict[str, Any], _v_request_payload)
+                    cast(dict[str, Any], _v_request_payload)
                 )
                 if (_v_request_payload := data.get("request_payload")) is not None
                 else None,
@@ -145,9 +147,9 @@ class PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropert
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["preview_token"] = self.preview_token
         _domain_data["expires_at"] = self.expires_at
         if self.preview_payload is not None:
@@ -164,7 +166,7 @@ class PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropert
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.preview_token is not None:
             result["preview_token"] = self.preview_token
         else:

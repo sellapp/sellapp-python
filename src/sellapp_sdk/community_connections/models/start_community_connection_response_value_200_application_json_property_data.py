@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from sellapp_sdk.common.models.start_community_connection_response_value_200_app
     StartCommunityConnectionResponseValue200ApplicationJsonPropertyDataType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "StartCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "type"],
     "properties": {
@@ -47,7 +47,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "StartCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "type"],
     "properties": {
@@ -82,24 +82,24 @@ class StartCommunityConnectionResponseValue200ApplicationJsonPropertyData:
         StartCommunityConnectionResponseValue200ApplicationJsonPropertyDataPlatform
     )
     type: StartCommunityConnectionResponseValue200ApplicationJsonPropertyDataType
-    mode: Optional[str] = None
-    connect_url: Optional[str] = None
+    mode: str | None = None
+    connect_url: str | None = None
     """Short-lived provider authorization URL containing protected OAuth state. The provider callback does not need the API bearer token or a dashboard session. Use exactly as returned; do not append credentials, reconstruct, or reuse it."""
-    verification_token: Optional[str] = None
+    verification_token: str | None = None
     """Short-lived Telegram verification token to post in the target group."""
-    status_token: Optional[str] = None
+    status_token: str | None = None
     """Encrypted, store-bound token used to poll Telegram or WhatsApp connection state."""
-    expires_at: Optional[datetime] = None
-    bot_username: Optional[str] = None
-    qr_code: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    expires_at: datetime | None = None
+    bot_username: str | None = None
+    qr_code: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> StartCommunityConnectionResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -148,9 +148,9 @@ class StartCommunityConnectionResponseValue200ApplicationJsonPropertyData:
                 "StartCommunityConnectionResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["platform"] = self.platform
         _domain_data["type"] = self.type
         if self.mode is not None:
@@ -173,7 +173,7 @@ class StartCommunityConnectionResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["platform"] = (
             self.platform.value if isinstance(self.platform, Enum) else self.platform
         )

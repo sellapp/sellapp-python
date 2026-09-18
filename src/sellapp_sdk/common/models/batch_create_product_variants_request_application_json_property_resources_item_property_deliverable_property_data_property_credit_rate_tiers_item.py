@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem",
     "required": ["min_quantity", "max_quantity", "unit_price"],
     "properties": {
@@ -33,7 +33,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem",
     "required": ["min_quantity", "max_quantity", "unit_price"],
     "properties": {
@@ -61,17 +61,17 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
     """Batch Create Product Variants Request Application Json Property Resources Item Property Deliverable Property Data Property Credit Rate Tiers Item model."""
 
     min_quantity: int
-    max_quantity: Optional[int]
+    max_quantity: int | None
     unit_price: str
     """Unit price per credit in major currency units. Fractional unit prices are supported."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyDeliverablePropertyDataPropertyCreditRateTiersItem:
         """Deserialize from a dictionary."""
         try:
@@ -98,9 +98,9 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["min_quantity"] = self.min_quantity
         _domain_data["max_quantity"] = self.max_quantity
         _domain_data["unit_price"] = self.unit_price
@@ -112,7 +112,7 @@ class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPrope
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["min_quantity"] = self.min_quantity
         if self.max_quantity is not None:
             result["max_quantity"] = self.max_quantity

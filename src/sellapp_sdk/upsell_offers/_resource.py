@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
@@ -38,13 +40,13 @@ class UpsellOffers:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]:
         """List upsell offers
 
@@ -126,17 +128,17 @@ class UpsellOffers:
         name: str,
         is_active: bool,
         source_listing_id: int,
-        items: List[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_version: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        items: builtins.list[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
+        description: str | None | NotGiven = NOT_GIVEN,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        expected_version: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateUpsellOfferResponseValue201ApplicationJson:
         """Create an upsell offer
 
@@ -199,7 +201,7 @@ class UpsellOffers:
             "idempotency_supported": False,
             "operation_id": "createUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -328,23 +330,24 @@ class UpsellOffers:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchUpsellOffersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchUpsellOffersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]:
         """Search upsell offers
 
@@ -404,7 +407,7 @@ class UpsellOffers:
             "idempotency_supported": False,
             "operation_id": "searchUpsellOffers",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -443,7 +446,7 @@ class UpsellOffers:
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetUpsellOfferResponseValue200ApplicationJson:
         """Retrieve an upsell offer
 
@@ -507,21 +510,20 @@ class UpsellOffers:
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
@@ -586,7 +588,7 @@ class UpsellOffers:
             "idempotency_supported": False,
             "operation_id": "replaceUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -719,21 +721,20 @@ class UpsellOffers:
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
@@ -798,7 +799,7 @@ class UpsellOffers:
             "idempotency_supported": False,
             "operation_id": "updateUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -930,7 +931,7 @@ class UpsellOffers:
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete an upsell offer
 
@@ -996,13 +997,13 @@ class AsyncUpsellOffers:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]:
         """List upsell offers
 
@@ -1084,17 +1085,17 @@ class AsyncUpsellOffers:
         name: str,
         is_active: bool,
         source_listing_id: int,
-        items: List[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_version: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        items: builtins.list[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
+        description: str | None | NotGiven = NOT_GIVEN,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        expected_version: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateUpsellOfferResponseValue201ApplicationJson:
         """Create an upsell offer
 
@@ -1157,7 +1158,7 @@ class AsyncUpsellOffers:
             "idempotency_supported": False,
             "operation_id": "createUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1286,23 +1287,24 @@ class AsyncUpsellOffers:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchUpsellOffersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchUpsellOffersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]:
         """Search upsell offers
 
@@ -1362,7 +1364,7 @@ class AsyncUpsellOffers:
             "idempotency_supported": False,
             "operation_id": "searchUpsellOffers",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1401,7 +1403,7 @@ class AsyncUpsellOffers:
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetUpsellOfferResponseValue200ApplicationJson:
         """Retrieve an upsell offer
 
@@ -1465,21 +1467,20 @@ class AsyncUpsellOffers:
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
@@ -1544,7 +1545,7 @@ class AsyncUpsellOffers:
             "idempotency_supported": False,
             "operation_id": "replaceUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1677,21 +1678,20 @@ class AsyncUpsellOffers:
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
@@ -1756,7 +1756,7 @@ class AsyncUpsellOffers:
             "idempotency_supported": False,
             "operation_id": "updateUpsellOffer",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -1888,7 +1888,7 @@ class AsyncUpsellOffers:
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete an upsell offer
 

@@ -12,29 +12,29 @@ List integration events
 def list_integration_events(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        cursor: Optional[str] = None,
-        type: Optional[str] = None,
-        subject_type: Optional[Literal["order"]] = None,
-        subject_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        cursor: str | None = None,
+        type: str | None = None,
+        subject_type: Literal["order"] | None = None,
+        subject_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| cursor | `Optional[str]` | No |
-| type | `Optional[str]` | No |
-| subject_type | `Optional[Literal["order"]]` | No |
-| subject_id | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| cursor | `str \| None` | No |
+| type | `str \| None` | No |
+| subject_type | `Literal["order"] \| None` | No |
+| subject_id | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -81,24 +81,24 @@ def list_order_events(
         self,
         order: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order_: Optional[str] = None,
-        cursor: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order_: str | None = None,
+        cursor: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrderEventsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order_ | `Optional[str]` | No |
-| cursor | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order_ | `str \| None` | No |
+| cursor | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListOrderEventsResponseValue200ApplicationJsonPropertyDataItem]`.
 

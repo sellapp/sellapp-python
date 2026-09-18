@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -26,7 +26,7 @@ from .connect_custom_domain_response_value_201_application_json_property_data_pr
     ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataPropertySslValidationRecordsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ConnectCustomDomainResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "domain", "status", "cname_target"],
     "properties": {
@@ -58,7 +58,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ConnectCustomDomainResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "domain", "status", "cname_target"],
     "properties": {
@@ -101,26 +101,28 @@ class ConnectCustomDomainResponseValue201ApplicationJsonPropertyData:
     status: ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataStatus
     cname_target: str
     """DNS CNAME destination configured for this API environment. Use the value returned here; the default is sell-beacon.net."""
-    hostname_status: Optional[str] = None
-    ssl_status: Optional[str] = None
-    ownership_verification: Optional[
+    hostname_status: str | None = None
+    ssl_status: str | None = None
+    ownership_verification: (
         ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataPropertyOwnershipVerification
-    ] = None
-    ssl_validation_records: Optional[
-        List[
+        | None
+    ) = None
+    ssl_validation_records: (
+        list[
             ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataPropertySslValidationRecordsItem
         ]
-    ] = None
-    last_checked_at: Optional[datetime] = None
-    verified_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    last_checked_at: datetime | None = None
+    verified_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ConnectCustomDomainResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -142,14 +144,14 @@ class ConnectCustomDomainResponseValue201ApplicationJsonPropertyData:
                 hostname_status=data.get("hostname_status"),
                 ssl_status=data.get("ssl_status"),
                 ownership_verification=ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataPropertyOwnershipVerification.from_dict(
-                    cast(Dict[str, Any], _v_ownership_verification)
+                    cast(dict[str, Any], _v_ownership_verification)
                 )
                 if (_v_ownership_verification := data.get("ownership_verification"))
                 is not None
                 else None,
                 ssl_validation_records=[
                     ConnectCustomDomainResponseValue201ApplicationJsonPropertyDataPropertySslValidationRecordsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_ssl_validation_records)
                 ]
@@ -184,9 +186,9 @@ class ConnectCustomDomainResponseValue201ApplicationJsonPropertyData:
                 "ConnectCustomDomainResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["domain"] = self.domain
         _domain_data["status"] = self.status
@@ -206,7 +208,7 @@ class ConnectCustomDomainResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["domain"] = self.domain
         result["status"] = (

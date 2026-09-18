@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -25,7 +25,7 @@ from .get_customer_response_value_200_application_json_property_data_property_wa
     GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyWallet,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -79,7 +79,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -142,24 +142,24 @@ class GetCustomerResponseValue200ApplicationJsonPropertyData:
     id: int
     email: str
     """The customer's store-specific purchase identity. Treat this value as personal data."""
-    external_id: Optional[str]
-    name: Optional[str]
-    locale: Optional[str]
+    external_id: str | None
+    name: str | None
+    locale: str | None
     metadata: GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyMetadata
     insights: GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyInsights
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    wallet: Optional[
-        GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyWallet
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    created_at: datetime | None
+    updated_at: datetime | None
+    wallet: (
+        GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyWallet | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetCustomerResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -178,10 +178,10 @@ class GetCustomerResponseValue200ApplicationJsonPropertyData:
                 name=data["name"],
                 locale=data["locale"],
                 metadata=GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], data["metadata"])
+                    cast(dict[str, Any], data["metadata"])
                 ),
                 insights=GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyInsights.from_dict(
-                    cast(Dict[str, Any], data["insights"])
+                    cast(dict[str, Any], data["insights"])
                 ),
                 created_at=_parse_datetime(_v_created_at)
                 if (_v_created_at := data["created_at"]) is not None
@@ -190,7 +190,7 @@ class GetCustomerResponseValue200ApplicationJsonPropertyData:
                 if (_v_updated_at := data["updated_at"]) is not None
                 else None,
                 wallet=GetCustomerResponseValue200ApplicationJsonPropertyDataPropertyWallet.from_dict(
-                    cast(Dict[str, Any], _v_wallet)
+                    cast(dict[str, Any], _v_wallet)
                 )
                 if (_v_wallet := data.get("wallet")) is not None
                 else None,
@@ -216,9 +216,9 @@ class GetCustomerResponseValue200ApplicationJsonPropertyData:
                 "GetCustomerResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["email"] = self.email
         _domain_data["external_id"] = self.external_id
@@ -237,7 +237,7 @@ class GetCustomerResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["email"] = self.email
         if self.external_id is not None:

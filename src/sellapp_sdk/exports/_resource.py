@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -36,11 +36,11 @@ class Exports:
     def list_exports(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
         """List exports
 
@@ -117,13 +117,11 @@ class Exports:
     def create_export(
         self,
         *,
-        type: Union[SdkCreateExportRequestApplicationJsonType, str],
-        format: Union[SdkCreateExportRequestApplicationJsonFormat, str],
-        parameters: Optional[
-            CreateExportRequestApplicationJsonPropertyParameters
-        ] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateExportRequestApplicationJsonType | str,
+        format: SdkCreateExportRequestApplicationJsonFormat | str,
+        parameters: CreateExportRequestApplicationJsonPropertyParameters | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateExportResponseValue201ApplicationJson:
         """Create an export
 
@@ -179,7 +177,7 @@ class Exports:
             "idempotency_supported": True,
             "operation_id": "createExport",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -221,7 +219,7 @@ class Exports:
         self,
         export: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetExportResponseValue200ApplicationJson:
         """Retrieve an export
 
@@ -287,7 +285,7 @@ class Exports:
         *,
         expires: int,
         signature: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Download an export
 
@@ -342,7 +340,7 @@ class Exports:
             "idempotency_supported": False,
             "operation_id": "downloadExport",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             "expires": expires,
             "signature": signature,
         }
@@ -364,11 +362,11 @@ class AsyncExports:
     async def list_exports(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
         """List exports
 
@@ -445,13 +443,11 @@ class AsyncExports:
     async def create_export(
         self,
         *,
-        type: Union[SdkCreateExportRequestApplicationJsonType, str],
-        format: Union[SdkCreateExportRequestApplicationJsonFormat, str],
-        parameters: Optional[
-            CreateExportRequestApplicationJsonPropertyParameters
-        ] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        type: SdkCreateExportRequestApplicationJsonType | str,
+        format: SdkCreateExportRequestApplicationJsonFormat | str,
+        parameters: CreateExportRequestApplicationJsonPropertyParameters | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateExportResponseValue201ApplicationJson:
         """Create an export
 
@@ -507,7 +503,7 @@ class AsyncExports:
             "idempotency_supported": True,
             "operation_id": "createExport",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "type": enum_value(type),
@@ -549,7 +545,7 @@ class AsyncExports:
         self,
         export: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetExportResponseValue200ApplicationJson:
         """Retrieve an export
 
@@ -615,7 +611,7 @@ class AsyncExports:
         *,
         expires: int,
         signature: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> Any:
         """Download an export
 
@@ -670,7 +666,7 @@ class AsyncExports:
             "idempotency_supported": False,
             "operation_id": "downloadExport",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             "expires": expires,
             "signature": signature,
         }

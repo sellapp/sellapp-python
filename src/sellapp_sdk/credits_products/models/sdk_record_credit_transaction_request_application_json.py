@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -20,7 +20,7 @@ from .record_credit_transaction_request_application_json_property_metadata impor
     RecordCreditTransactionRequestApplicationJsonPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkRecordCreditTransactionRequestApplicationJson",
     "required": [
         "customer_id",
@@ -67,7 +67,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkRecordCreditTransactionRequestApplicationJson",
     "required": [
         "customer_id",
@@ -126,20 +126,20 @@ class SdkRecordCreditTransactionRequestApplicationJson:
     amount_units: int
     """The signed amount of credit units. Must not be zero."""
     idempotency_key: str
-    reason: Optional[str] = None
-    source_type: Optional[str] = None
-    source_id: Optional[str] = None
-    metadata: Optional[
-        RecordCreditTransactionRequestApplicationJsonPropertyMetadata
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    reason: str | None = None
+    source_type: str | None = None
+    source_id: str | None = None
+    metadata: RecordCreditTransactionRequestApplicationJsonPropertyMetadata | None = (
+        None
+    )
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkRecordCreditTransactionRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -161,7 +161,7 @@ class SdkRecordCreditTransactionRequestApplicationJson:
                 source_type=data.get("source_type"),
                 source_id=data.get("source_id"),
                 metadata=RecordCreditTransactionRequestApplicationJsonPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -186,9 +186,9 @@ class SdkRecordCreditTransactionRequestApplicationJson:
                 "SdkRecordCreditTransactionRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["customer_id"] = self.customer_id
         _domain_data["product_id"] = self.product_id
         _domain_data["kind"] = self.kind
@@ -207,7 +207,7 @@ class SdkRecordCreditTransactionRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["customer_id"] = self.customer_id
         result["product_id"] = self.product_id
         result["kind"] = self.kind.value if isinstance(self.kind, Enum) else self.kind

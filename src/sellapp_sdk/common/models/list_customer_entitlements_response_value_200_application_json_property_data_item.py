@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -23,7 +23,7 @@ from .list_customer_entitlements_response_value_200_application_json_property_da
     ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemState,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem",
     "required": ["id", "kind", "state", "customer_id", "subject"],
     "properties": {
@@ -59,7 +59,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem",
     "required": ["id", "kind", "state", "customer_id", "subject"],
     "properties": {
@@ -106,14 +106,14 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
     state: ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemState
     customer_id: int
     subject: ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemPropertySubject
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -135,7 +135,7 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
                 ),
                 customer_id=data["customer_id"],
                 subject=ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemPropertySubject.from_dict(
-                    cast(Dict[str, Any], data["subject"])
+                    cast(dict[str, Any], data["subject"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data, ["id", "kind", "state", "customer_id", "subject"]
@@ -148,9 +148,9 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["kind"] = self.kind
         _domain_data["state"] = self.state
@@ -164,7 +164,7 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["kind"] = self.kind.value if isinstance(self.kind, Enum) else self.kind
         result["state"] = (

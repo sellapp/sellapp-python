@@ -12,23 +12,23 @@ List all feedback
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -70,14 +70,14 @@ def get(
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetFeedbackResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | feedback | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetFeedbackResponseValue200ApplicationJson`.
 
@@ -120,7 +120,7 @@ def reply(
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplyToFeedbackResponseValue200ApplicationJson:
 ```
 
@@ -128,7 +128,7 @@ def reply(
 | --- | --- | --- |
 | feedback | `int` | Yes |
 | reply | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplyToFeedbackResponseValue200ApplicationJson`.
 
@@ -172,41 +172,39 @@ Search feedback
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchFeedbackRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `builtins.list[SearchFeedbackRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchFeedbackRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -250,23 +248,23 @@ List all feedback
 def v2_list_feedback(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -312,41 +310,43 @@ Search feedback
 def v2_search_feedback(
         self,
         *,
-        filters: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[V2SearchFeedbackRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `V2SearchFeedbackRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -396,14 +396,14 @@ def v2_get_feedback(
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetFeedbackResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | feedback | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2GetFeedbackResponseValue200ApplicationJson`.
 
@@ -451,7 +451,7 @@ def v2_replace_feedback(
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceFeedbackResponseValue200ApplicationJson:
 ```
 
@@ -459,7 +459,7 @@ def v2_replace_feedback(
 | --- | --- | --- |
 | feedback | `int` | Yes |
 | reply | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplaceFeedbackResponseValue200ApplicationJson`.
 
@@ -510,7 +510,7 @@ def v2_reply_to_feedback(
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplyToFeedbackResponseValue200ApplicationJson:
 ```
 
@@ -518,7 +518,7 @@ def v2_reply_to_feedback(
 | --- | --- | --- |
 | feedback | `int` | Yes |
 | reply | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkV2ReplyToFeedbackResponseValue200ApplicationJson`.
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.sdk_queue_variant_serial_import_request_multipart
     SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkQueueVariantSerialImportRequestMultipartFormData",
     "required": ["file", "parsing_mode"],
     "properties": {
@@ -46,7 +46,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkQueueVariantSerialImportRequestMultipartFormData",
     "required": ["file", "parsing_mode"],
     "properties": {
@@ -83,18 +83,18 @@ class SdkQueueVariantSerialImportRequestMultipartFormData:
     """A text file up to 100 MiB."""
     parsing_mode: SdkQueueVariantSerialImportRequestMultipartFormDataParsingMode
     """How the uploaded file is split into serials. CUSTOM requires custom_delimiter; sending CUSTOM without it fails validation with a 422."""
-    custom_delimiter: Optional[str] = None
+    custom_delimiter: str | None = None
     """The delimiter to split on. Required when parsing_mode is CUSTOM (omitting it fails validation with a 422); ignored otherwise."""
-    remove_duplicates: Optional[bool] = None
-    mode: Optional[SdkQueueVariantSerialImportRequestMultipartFormDataMode] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    remove_duplicates: bool | None = None
+    mode: SdkQueueVariantSerialImportRequestMultipartFormDataMode | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkQueueVariantSerialImportRequestMultipartFormData:
         """Deserialize from a dictionary."""
         try:
@@ -133,9 +133,9 @@ class SdkQueueVariantSerialImportRequestMultipartFormData:
                 "SdkQueueVariantSerialImportRequestMultipartFormData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["file"] = self.file
         _domain_data["parsing_mode"] = self.parsing_mode
         _domain_data["custom_delimiter"] = self.custom_delimiter
@@ -151,7 +151,7 @@ class SdkQueueVariantSerialImportRequestMultipartFormData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["file"] = self.file
         result["parsing_mode"] = (
             self.parsing_mode.value

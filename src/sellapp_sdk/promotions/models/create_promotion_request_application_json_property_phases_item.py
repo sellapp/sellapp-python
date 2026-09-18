@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from sellapp_sdk.common.models.create_promotion_request_application_json_propert
     CreatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionRequestApplicationJsonPropertyPhasesItem",
     "required": ["discount_type", "discount_value"],
     "properties": {
@@ -72,7 +72,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionRequestApplicationJsonPropertyPhasesItem",
     "required": ["discount_type", "discount_value"],
     "properties": {
@@ -132,20 +132,20 @@ class CreatePromotionRequestApplicationJsonPropertyPhasesItem:
     """Create Promotion Request Application Json Property Phases Item model."""
 
     discount_type: CreatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType
-    discount_value: Union[float, str]
+    discount_value: float | str
     """Percentage from 1 through 100, or a fixed decimal amount of at least 1."""
-    ends_at: Optional[datetime] = None
+    ends_at: datetime | None = None
     """A future date and time, or null for no time limit."""
-    max_redemptions: Optional[int] = None
-    minimum_amount: Optional[Union[float, str]] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    max_redemptions: int | None = None
+    minimum_amount: float | str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreatePromotionRequestApplicationJsonPropertyPhasesItem:
         """Deserialize from a dictionary."""
         try:
@@ -184,9 +184,9 @@ class CreatePromotionRequestApplicationJsonPropertyPhasesItem:
                 "CreatePromotionRequestApplicationJsonPropertyPhasesItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["discount_type"] = self.discount_type
         _domain_data["discount_value"] = self.discount_value
         _domain_data["ends_at"] = self.ends_at
@@ -200,7 +200,7 @@ class CreatePromotionRequestApplicationJsonPropertyPhasesItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["discount_type"] = (
             self.discount_type.value
             if isinstance(self.discount_type, Enum)

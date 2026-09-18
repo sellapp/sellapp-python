@@ -12,25 +12,25 @@ List upsell offers
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]`.
 
@@ -79,17 +79,17 @@ def create(
         name: str,
         is_active: bool,
         source_listing_id: int,
-        items: List[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        expected_version: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        items: builtins.list[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem],
+        description: str | None | NotGiven = NOT_GIVEN,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        expected_version: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateUpsellOfferResponseValue201ApplicationJson:
 ```
 
@@ -98,17 +98,17 @@ def create(
 | name | `str` | Yes |
 | is_active | `bool` | Yes |
 | source_listing_id | `int` | Yes |
-| items | `List[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem]` | Yes |
-| description | `Union[str, None, NotGiven]` | No |
-| source_variant_id | `Union[int, None, NotGiven]` | No |
-| minimum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| maximum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| available_for_days | `Union[int, None, NotGiven]` | No |
-| max_accepts_per_customer | `Union[int, None, NotGiven]` | No |
-| expected_version | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| items | `builtins.list[CreateUpsellOfferRequestApplicationJsonPropertyItemsItem]` | Yes |
+| description | `str \| None \| NotGiven` | No |
+| source_variant_id | `int \| None \| NotGiven` | No |
+| minimum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| maximum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| available_for_days | `int \| None \| NotGiven` | No |
+| max_accepts_per_customer | `int \| None \| NotGiven` | No |
+| expected_version | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateUpsellOfferResponseValue201ApplicationJson`.
 
@@ -175,45 +175,47 @@ Search upsell offers
 def search(
         self,
         *,
-        filters: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchUpsellOffersRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchUpsellOffersRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| filters | `Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem]
-        ]` | No |
-| sort | `Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
-        ]` | No |
-| search | `Optional[SearchUpsellOffersRequestApplicationJsonPropertySearch]` | No |
-| includes | `Optional[
-            List[SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem]
-        ]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| pagination | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| filters | `builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyFiltersItem
+        ]
+        \| None` | No |
+| sort | `builtins.list[SearchUpsellOffersRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchUpsellOffersRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `builtins.list[
+            SearchUpsellOffersRequestApplicationJsonPropertyIncludesItem
+        ]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]`.
 
@@ -263,14 +265,14 @@ def get(
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetUpsellOfferResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | upsell_offer | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetUpsellOfferResponseValue200ApplicationJson`.
 
@@ -318,21 +320,20 @@ def replace(
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceUpsellOfferResponseValue200ApplicationJson:
 ```
 
@@ -340,21 +341,20 @@ def replace(
 | --- | --- | --- |
 | upsell_offer | `int` | Yes |
 | expected_version | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| is_active | `Optional[bool]` | No |
-| source_listing_id | `Optional[int]` | No |
-| source_variant_id | `Union[int, None, NotGiven]` | No |
-| minimum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| maximum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| available_for_days | `Union[int, None, NotGiven]` | No |
-| max_accepts_per_customer | `Union[int, None, NotGiven]` | No |
-| items | `Optional[
-            List[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| is_active | `bool \| None` | No |
+| source_listing_id | `int \| None` | No |
+| source_variant_id | `int \| None \| NotGiven` | No |
+| minimum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| maximum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| available_for_days | `int \| None \| NotGiven` | No |
+| max_accepts_per_customer | `int \| None \| NotGiven` | No |
+| items | `builtins.list[ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceUpsellOfferResponseValue200ApplicationJson`.
 
@@ -407,21 +407,20 @@ def update(
         upsell_offer: int,
         *,
         expected_version: int,
-        name: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        source_listing_id: Optional[int] = None,
-        source_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        minimum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        maximum_order_total_usd_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        starts_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        ends_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        available_for_days: Union[int, None, NotGiven] = NOT_GIVEN,
-        max_accepts_per_customer: Union[int, None, NotGiven] = NOT_GIVEN,
-        items: Optional[
-            List[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        name: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        source_listing_id: int | None = None,
+        source_variant_id: int | None | NotGiven = NOT_GIVEN,
+        minimum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        maximum_order_total_usd_cents: int | None | NotGiven = NOT_GIVEN,
+        starts_at: str | None | NotGiven = NOT_GIVEN,
+        ends_at: str | None | NotGiven = NOT_GIVEN,
+        available_for_days: int | None | NotGiven = NOT_GIVEN,
+        max_accepts_per_customer: int | None | NotGiven = NOT_GIVEN,
+        items: builtins.list[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateUpsellOfferResponseValue200ApplicationJson:
 ```
 
@@ -429,21 +428,20 @@ def update(
 | --- | --- | --- |
 | upsell_offer | `int` | Yes |
 | expected_version | `int` | Yes |
-| name | `Optional[str]` | No |
-| description | `Union[str, None, NotGiven]` | No |
-| is_active | `Optional[bool]` | No |
-| source_listing_id | `Optional[int]` | No |
-| source_variant_id | `Union[int, None, NotGiven]` | No |
-| minimum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| maximum_order_total_usd_cents | `Union[int, None, NotGiven]` | No |
-| starts_at | `Union[str, None, NotGiven]` | No |
-| ends_at | `Union[str, None, NotGiven]` | No |
-| available_for_days | `Union[int, None, NotGiven]` | No |
-| max_accepts_per_customer | `Union[int, None, NotGiven]` | No |
-| items | `Optional[
-            List[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
-        ]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| name | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| is_active | `bool \| None` | No |
+| source_listing_id | `int \| None` | No |
+| source_variant_id | `int \| None \| NotGiven` | No |
+| minimum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| maximum_order_total_usd_cents | `int \| None \| NotGiven` | No |
+| starts_at | `str \| None \| NotGiven` | No |
+| ends_at | `str \| None \| NotGiven` | No |
+| available_for_days | `int \| None \| NotGiven` | No |
+| max_accepts_per_customer | `int \| None \| NotGiven` | No |
+| items | `builtins.list[UpdateUpsellOfferRequestApplicationJsonPropertyItemsItem]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateUpsellOfferResponseValue200ApplicationJson`.
 
@@ -495,14 +493,14 @@ def delete(
         self,
         upsell_offer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | upsell_offer | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

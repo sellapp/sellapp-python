@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class Category(str, Enum):
@@ -23,7 +23,7 @@ class Category(str, Enum):
     NULL = "null"
 
     @classmethod
-    def _missing_(cls, value: object) -> Optional[Category]:
+    def _missing_(cls, value: object) -> Category | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

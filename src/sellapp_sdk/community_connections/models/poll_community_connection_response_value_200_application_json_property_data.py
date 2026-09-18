@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -29,7 +29,7 @@ from .poll_community_connection_response_value_200_application_json_property_dat
     PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PollCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "status"],
     "properties": {
@@ -60,7 +60,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "PollCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": ["platform", "status"],
     "properties": {
@@ -99,26 +99,28 @@ class PollCommunityConnectionResponseValue200ApplicationJsonPropertyData:
 
     platform: PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPlatform
     status: PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataStatus
-    expires_at: Optional[datetime] = None
-    qr_code: Optional[str] = None
-    server: Optional[
+    expires_at: datetime | None = None
+    qr_code: str | None = None
+    server: (
         PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer
-    ] = None
-    groups_loaded: Optional[bool] = None
-    available_servers: Optional[
-        List[
+        | None
+    ) = None
+    groups_loaded: bool | None = None
+    available_servers: (
+        list[
             PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyAvailableServersItem
         ]
-    ] = None
+        | None
+    ) = None
     """WhatsApp groups returned by the authenticated QR session. Pass one of these IDs to the completion endpoint."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> PollCommunityConnectionResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -142,14 +144,14 @@ class PollCommunityConnectionResponseValue200ApplicationJsonPropertyData:
                 else None,
                 qr_code=data.get("qr_code"),
                 server=PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer.from_dict(
-                    cast(Dict[str, Any], _v_server)
+                    cast(dict[str, Any], _v_server)
                 )
                 if (_v_server := data.get("server")) is not None
                 else None,
                 groups_loaded=data.get("groups_loaded"),
                 available_servers=[
                     PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyAvailableServersItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_available_servers)
                 ]
@@ -174,9 +176,9 @@ class PollCommunityConnectionResponseValue200ApplicationJsonPropertyData:
                 "PollCommunityConnectionResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["platform"] = self.platform
         _domain_data["status"] = self.status
         _domain_data["expires_at"] = self.expires_at
@@ -194,7 +196,7 @@ class PollCommunityConnectionResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["platform"] = (
             self.platform.value if isinstance(self.platform, Enum) else self.platform
         )

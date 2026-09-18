@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -27,11 +27,11 @@ class Disputes:
     def list_disputes(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]:
         """List disputes
 
@@ -109,7 +109,7 @@ class Disputes:
         self,
         dispute: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetDisputeResponseValue200ApplicationJson:
         """Retrieve a dispute
 
@@ -180,11 +180,11 @@ class AsyncDisputes:
     async def list_disputes(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]:
         """List disputes
 
@@ -262,7 +262,7 @@ class AsyncDisputes:
         self,
         dispute: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetDisputeResponseValue200ApplicationJson:
         """Retrieve a dispute
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -17,7 +17,7 @@ from .create_customer_response_value_201_application_json_property_data_property
     CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWalletStatus,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet",
     "required": ["status", "balance_cents"],
     "properties": {
@@ -30,7 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet",
     "required": ["status", "balance_cents"],
     "properties": {
@@ -54,14 +54,14 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet:
     )
     balance_cents: int
     """Current wallet balance in integer USD minor units."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet:
         """Deserialize from a dictionary."""
         try:
@@ -89,9 +89,9 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["status"] = self.status
         _domain_data["balance_cents"] = self.balance_cents
         _validate_model(
@@ -102,7 +102,7 @@ class CreateCustomerResponseValue201ApplicationJsonPropertyDataPropertyWallet:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["status"] = (
             self.status.value if isinstance(self.status, Enum) else self.status
         )

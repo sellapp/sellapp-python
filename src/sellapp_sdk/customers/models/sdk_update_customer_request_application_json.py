@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .update_customer_request_application_json_property_metadata import (
     UpdateCustomerRequestApplicationJsonPropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateCustomerRequestApplicationJson",
     "required": [],
     "properties": {
@@ -54,7 +54,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateCustomerRequestApplicationJson",
     "required": [],
     "properties": {
@@ -98,19 +98,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkUpdateCustomerRequestApplicationJson:
     """Sdk Update Customer Request Application Json model."""
 
-    email: Optional[str] = None
-    name: Optional[str] = None
-    locale: Optional[str] = None
-    metadata: Optional[UpdateCustomerRequestApplicationJsonPropertyMetadata] = None
-    external_id: Optional[str] = None
+    email: str | None = None
+    name: str | None = None
+    locale: str | None = None
+    metadata: UpdateCustomerRequestApplicationJsonPropertyMetadata | None = None
+    external_id: str | None = None
     """May be assigned when unset; an existing value is immutable."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkUpdateCustomerRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkUpdateCustomerRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -126,7 +126,7 @@ class SdkUpdateCustomerRequestApplicationJson:
                 name=data.get("name"),
                 locale=data.get("locale"),
                 metadata=UpdateCustomerRequestApplicationJsonPropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -139,9 +139,9 @@ class SdkUpdateCustomerRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkUpdateCustomerRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.email is not None:
             _domain_data["email"] = self.email
         _domain_data["name"] = self.name
@@ -158,7 +158,7 @@ class SdkUpdateCustomerRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.email is not None:
             result["email"] = self.email
         if self.name is not None:

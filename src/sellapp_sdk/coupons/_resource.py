@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.blacklists.models.batch_update_coupons_request_application_json_property_resources import (
     BatchUpdateCouponsRequestApplicationJsonPropertyResources,
@@ -126,14 +128,14 @@ class Coupons:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all coupons
 
@@ -213,15 +215,15 @@ class Coupons:
         self,
         *,
         code: str,
-        type: Union[SdkCreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkCreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
         """Create a coupon
 
@@ -278,7 +280,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "createCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -387,9 +389,9 @@ class Coupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCouponResponseValue200ApplicationJson:
         """Retrieve a coupon
 
@@ -441,7 +443,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "getCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -461,18 +463,18 @@ class Coupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -533,7 +535,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "replaceCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -630,7 +632,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -651,18 +653,18 @@ class Coupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkUpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkUpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -723,7 +725,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "updateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -820,7 +822,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -841,9 +843,9 @@ class Coupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a coupon
 
@@ -892,7 +894,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "deleteCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -910,23 +912,20 @@ class Coupons:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search coupons
 
@@ -984,7 +983,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "searchCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1022,8 +1021,10 @@ class Coupons:
     def batch_create(
         self,
         *,
-        resources: List[BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateCouponsResponseValue200ApplicationJson:
         """Batch create coupons
 
@@ -1072,7 +1073,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "batchCreateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -1102,9 +1103,9 @@ class Coupons:
         self,
         *,
         resources: BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateCouponsResponseValue200ApplicationJson:
         """Batch update coupons
 
@@ -1155,7 +1156,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "batchUpdateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -1171,7 +1172,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -1191,10 +1192,10 @@ class Coupons:
     def batch_delete(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete coupons
 
@@ -1242,7 +1243,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "batchDeleteCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -1263,7 +1264,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -1282,14 +1283,14 @@ class Coupons:
     def v2_list_coupons(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all coupons
 
@@ -1371,16 +1372,16 @@ class Coupons:
         self,
         *,
         code: str,
-        type: Union[SdkV2CreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkV2CreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
         """Create a coupon
 
@@ -1440,7 +1441,7 @@ class Coupons:
             "idempotency_supported": True,
             "operation_id": "v2CreateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -1549,24 +1550,23 @@ class Coupons:
     def v2_search_coupons(
         self,
         *,
-        filters: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchCouponsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search coupons
 
@@ -1627,7 +1627,7 @@ class Coupons:
             "idempotency_supported": True,
             "operation_id": "v2SearchCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1666,9 +1666,9 @@ class Coupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetCouponResponseValue200ApplicationJson:
         """Retrieve a coupon
 
@@ -1722,7 +1722,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "v2GetCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -1742,18 +1742,18 @@ class Coupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2ReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2ReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -1816,7 +1816,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -1913,7 +1913,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -1934,18 +1934,18 @@ class Coupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2UpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2UpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -2008,7 +2008,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "v2UpdateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -2105,7 +2105,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -2126,9 +2126,9 @@ class Coupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a coupon
 
@@ -2179,7 +2179,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "v2DeleteCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -2197,11 +2197,11 @@ class Coupons:
     def v2_batch_create_coupons(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateCouponsResponseValue200ApplicationJson:
         """Batch create coupons
 
@@ -2253,7 +2253,7 @@ class Coupons:
             "idempotency_supported": True,
             "operation_id": "v2BatchCreateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -2284,9 +2284,9 @@ class Coupons:
         self,
         *,
         resources: V2BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateCouponsResponseValue200ApplicationJson:
         """Batch update coupons
 
@@ -2339,7 +2339,7 @@ class Coupons:
             "idempotency_supported": True,
             "operation_id": "v2BatchUpdateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -2355,7 +2355,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -2375,10 +2375,10 @@ class Coupons:
     def v2_batch_delete_coupons(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete coupons
 
@@ -2428,7 +2428,7 @@ class Coupons:
             "idempotency_supported": False,
             "operation_id": "v2BatchDeleteCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2449,7 +2449,7 @@ class Coupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -2476,14 +2476,14 @@ class AsyncCoupons:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all coupons
 
@@ -2563,15 +2563,15 @@ class AsyncCoupons:
         self,
         *,
         code: str,
-        type: Union[SdkCreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkCreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
         """Create a coupon
 
@@ -2628,7 +2628,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "createCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -2737,9 +2737,9 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCouponResponseValue200ApplicationJson:
         """Retrieve a coupon
 
@@ -2791,7 +2791,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "getCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -2811,18 +2811,18 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -2883,7 +2883,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "replaceCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -2980,7 +2980,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -3001,18 +3001,18 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkUpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkUpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -3073,7 +3073,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "updateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -3170,7 +3170,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -3191,9 +3191,9 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a coupon
 
@@ -3242,7 +3242,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "deleteCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -3260,23 +3260,20 @@ class AsyncCoupons:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchCouponsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search coupons
 
@@ -3334,7 +3331,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "searchCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -3372,8 +3369,10 @@ class AsyncCoupons:
     async def batch_create(
         self,
         *,
-        resources: List[BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateCouponsResponseValue200ApplicationJson:
         """Batch create coupons
 
@@ -3422,7 +3421,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "batchCreateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -3452,9 +3451,9 @@ class AsyncCoupons:
         self,
         *,
         resources: BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateCouponsResponseValue200ApplicationJson:
         """Batch update coupons
 
@@ -3505,7 +3504,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "batchUpdateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -3521,7 +3520,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -3541,10 +3540,10 @@ class AsyncCoupons:
     async def batch_delete(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete coupons
 
@@ -3592,7 +3591,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "batchDeleteCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -3613,7 +3612,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -3632,14 +3631,14 @@ class AsyncCoupons:
     async def v2_list_coupons(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all coupons
 
@@ -3721,16 +3720,16 @@ class AsyncCoupons:
         self,
         *,
         code: str,
-        type: Union[SdkV2CreateCouponRequestApplicationJsonType, str],
-        discount: Union[float, str],
+        type: SdkV2CreateCouponRequestApplicationJsonType | str,
+        discount: float | str,
         store_wide: bool,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
         """Create a coupon
 
@@ -3790,7 +3789,7 @@ class AsyncCoupons:
             "idempotency_supported": True,
             "operation_id": "v2CreateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -3899,24 +3898,23 @@ class AsyncCoupons:
     async def v2_search_coupons(
         self,
         *,
-        filters: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchCouponsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchCouponsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[V2SearchCouponsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[V2SearchCouponsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchCouponsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchCouponsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search coupons
 
@@ -3977,7 +3975,7 @@ class AsyncCoupons:
             "idempotency_supported": True,
             "operation_id": "v2SearchCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -4016,9 +4014,9 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetCouponResponseValue200ApplicationJson:
         """Retrieve a coupon
 
@@ -4072,7 +4070,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "v2GetCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -4092,18 +4090,18 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2ReplaceCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2ReplaceCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -4166,7 +4164,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -4263,7 +4261,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -4284,18 +4282,18 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        code: Optional[str] = None,
-        type: Optional[Union[SdkV2UpdateCouponRequestApplicationJsonType, str]] = None,
-        discount: Optional[Union[float, str]] = None,
-        store_wide: Optional[bool] = None,
-        products: Optional[List[int]] = None,
-        product_variants: Optional[List[int]] = None,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        minimum_amount: Union[Union[float, str], None, NotGiven] = NOT_GIVEN,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        code: str | None = None,
+        type: SdkV2UpdateCouponRequestApplicationJsonType | str | None = None,
+        discount: float | str | None = None,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateCouponResponseValue200ApplicationJson:
         """Update a coupon
 
@@ -4358,7 +4356,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "v2UpdateCoupon",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "code": code,
@@ -4455,7 +4453,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -4476,9 +4474,9 @@ class AsyncCoupons:
         self,
         coupon: int,
         *,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a coupon
 
@@ -4529,7 +4527,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "v2DeleteCoupon",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -4547,11 +4545,11 @@ class AsyncCoupons:
     async def v2_batch_create_coupons(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateCouponsResponseValue200ApplicationJson:
         """Batch create coupons
 
@@ -4603,7 +4601,7 @@ class AsyncCoupons:
             "idempotency_supported": True,
             "operation_id": "v2BatchCreateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -4634,9 +4632,9 @@ class AsyncCoupons:
         self,
         *,
         resources: V2BatchUpdateCouponsRequestApplicationJsonPropertyResources,
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateCouponsResponseValue200ApplicationJson:
         """Batch update coupons
 
@@ -4689,7 +4687,7 @@ class AsyncCoupons:
             "idempotency_supported": True,
             "operation_id": "v2BatchUpdateCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -4705,7 +4703,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,
@@ -4725,10 +4723,10 @@ class AsyncCoupons:
     async def v2_batch_delete_coupons(
         self,
         *,
-        resources: List[int],
-        with_trashed: Optional[bool] = None,
-        only_trashed: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete coupons
 
@@ -4778,7 +4776,7 @@ class AsyncCoupons:
             "idempotency_supported": False,
             "operation_id": "v2BatchDeleteCoupons",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -4799,7 +4797,7 @@ class AsyncCoupons:
             allow_unknown_union_variants=False,
             allow_unknown_fields=True,
         )
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "with_trashed": with_trashed,

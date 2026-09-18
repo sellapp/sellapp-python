@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.attach_bundle_items_request_application_json_property_resources import (
     AttachBundleItemsRequestApplicationJsonPropertyResources,
@@ -34,7 +36,7 @@ class BundleItems:
         bundle: int,
         item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBundleItemResponseValue200ApplicationJson:
         """Retrieve a bundle item
 
@@ -98,12 +100,12 @@ class BundleItems:
         self,
         bundle: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """List bundle items
 
@@ -184,7 +186,7 @@ class BundleItems:
         bundle: int,
         *,
         resources: AttachBundleItemsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAttachBundleItemsResponseValue200ApplicationJson:
         """Attach bundle items
 
@@ -237,7 +239,7 @@ class BundleItems:
             "idempotency_supported": False,
             "operation_id": "attachBundleItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -265,8 +267,8 @@ class BundleItems:
         self,
         bundle: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Detach bundle items
 
@@ -316,7 +318,7 @@ class BundleItems:
             "idempotency_supported": False,
             "operation_id": "detachBundleItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -357,7 +359,7 @@ class AsyncBundleItems:
         bundle: int,
         item: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBundleItemResponseValue200ApplicationJson:
         """Retrieve a bundle item
 
@@ -421,12 +423,12 @@ class AsyncBundleItems:
         self,
         bundle: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem]:
         """List bundle items
 
@@ -507,7 +509,7 @@ class AsyncBundleItems:
         bundle: int,
         *,
         resources: AttachBundleItemsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAttachBundleItemsResponseValue200ApplicationJson:
         """Attach bundle items
 
@@ -560,7 +562,7 @@ class AsyncBundleItems:
             "idempotency_supported": False,
             "operation_id": "attachBundleItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -588,8 +590,8 @@ class AsyncBundleItems:
         self,
         bundle: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Detach bundle items
 
@@ -639,7 +641,7 @@ class AsyncBundleItems:
             "idempotency_supported": False,
             "operation_id": "detachBundleItems",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

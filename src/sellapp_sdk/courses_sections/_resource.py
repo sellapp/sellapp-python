@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -37,8 +37,8 @@ class CoursesSections:
         course: str,
         *,
         title: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseSectionResponseValue201ApplicationJson:
         """Create a course section
 
@@ -92,7 +92,7 @@ class CoursesSections:
             "idempotency_supported": False,
             "operation_id": "createCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
         }
         if not isinstance(description, NotGiven):
@@ -137,10 +137,10 @@ class CoursesSections:
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseSectionResponseValue200ApplicationJson:
         """Update a course section
 
@@ -196,7 +196,7 @@ class CoursesSections:
             "idempotency_supported": False,
             "operation_id": "replaceCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -251,10 +251,10 @@ class CoursesSections:
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseSectionResponseValue200ApplicationJson:
         """Update a course section
 
@@ -310,7 +310,7 @@ class CoursesSections:
             "idempotency_supported": False,
             "operation_id": "updateCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -365,7 +365,7 @@ class CoursesSections:
         course: str,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a course section
 
@@ -425,8 +425,8 @@ class CoursesSections:
         self,
         course: str,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseSectionsResponseValue200ApplicationJson:
         """Reorder course sections
 
@@ -479,7 +479,7 @@ class CoursesSections:
             "idempotency_supported": False,
             "operation_id": "reorderCourseSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -526,8 +526,8 @@ class AsyncCoursesSections:
         course: str,
         *,
         title: str,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCourseSectionResponseValue201ApplicationJson:
         """Create a course section
 
@@ -581,7 +581,7 @@ class AsyncCoursesSections:
             "idempotency_supported": False,
             "operation_id": "createCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
         }
         if not isinstance(description, NotGiven):
@@ -626,10 +626,10 @@ class AsyncCoursesSections:
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseSectionResponseValue200ApplicationJson:
         """Update a course section
 
@@ -685,7 +685,7 @@ class AsyncCoursesSections:
             "idempotency_supported": False,
             "operation_id": "replaceCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -740,10 +740,10 @@ class AsyncCoursesSections:
         course: str,
         section: int,
         *,
-        title: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseSectionResponseValue200ApplicationJson:
         """Update a course section
 
@@ -799,7 +799,7 @@ class AsyncCoursesSections:
             "idempotency_supported": False,
             "operation_id": "updateCourseSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -854,7 +854,7 @@ class AsyncCoursesSections:
         course: str,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a course section
 
@@ -914,8 +914,8 @@ class AsyncCoursesSections:
         self,
         course: str,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReorderCourseSectionsResponseValue200ApplicationJson:
         """Reorder course sections
 
@@ -968,7 +968,7 @@ class AsyncCoursesSections:
             "idempotency_supported": False,
             "operation_id": "reorderCourseSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

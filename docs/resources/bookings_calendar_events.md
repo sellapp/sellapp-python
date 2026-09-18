@@ -12,33 +12,33 @@ List booking date overrides
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        status: Optional[Union[BookingsStatus, str]] = None,
-        pagination: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        product_variant_id: int | None = None,
+        from_: str | None = None,
+        to: str | None = None,
+        status: BookingsStatus | str | None = None,
+        pagination: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListBookingDateOverridesResponseValue200ApplicationJson]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| product_variant_id | `Optional[int]` | No |
-| from_ | `Optional[str]` | No |
-| to | `Optional[str]` | No |
-| status | `Optional[Union[BookingsStatus, str]]` | No |
-| pagination | `Optional[bool]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| product_variant_id | `int \| None` | No |
+| from_ | `str \| None` | No |
+| to | `str \| None` | No |
+| status | `BookingsStatus \| str \| None` | No |
+| pagination | `bool \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListBookingDateOverridesResponseValue200ApplicationJson]`.
 
@@ -84,19 +84,19 @@ Set booking date availability
 def set(
         self,
         *,
-        dates: List[str],
+        dates: builtins.list[str],
         available: bool,
-        product_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        product_variant_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkSetBookingDateAvailabilityResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| dates | `List[str]` | Yes |
+| dates | `builtins.list[str]` | Yes |
 | available | `bool` | Yes |
-| product_variant_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| product_variant_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkSetBookingDateAvailabilityResponseValue201ApplicationJson`.
 

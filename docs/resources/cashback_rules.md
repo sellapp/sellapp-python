@@ -12,13 +12,13 @@ List cashback rules
 def list(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCashbackRulesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkListCashbackRulesResponseValue200ApplicationJson`.
 
@@ -65,20 +65,20 @@ def create(
         self,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCashbackRuleResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | percent_basis | `int` | Yes |
-| maximum_cashback_cents | `Optional[int]` | Yes |
+| maximum_cashback_cents | `int \| None` | Yes |
 | is_active | `bool` | Yes |
-| product_ids | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| product_ids | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCashbackRuleResponseValue201ApplicationJson`.
 
@@ -131,10 +131,10 @@ def replace(
         cashback_rule: int,
         *,
         percent_basis: int,
-        maximum_cashback_cents: Optional[int],
+        maximum_cashback_cents: int | None,
         is_active: bool,
-        product_ids: List[int],
-        request_options: Optional[RequestOptions] = None,
+        product_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCashbackRuleResponseValue200ApplicationJson:
 ```
 
@@ -142,10 +142,10 @@ def replace(
 | --- | --- | --- |
 | cashback_rule | `int` | Yes |
 | percent_basis | `int` | Yes |
-| maximum_cashback_cents | `Optional[int]` | Yes |
+| maximum_cashback_cents | `int \| None` | Yes |
 | is_active | `bool` | Yes |
-| product_ids | `List[int]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| product_ids | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCashbackRuleResponseValue200ApplicationJson`.
 
@@ -198,22 +198,22 @@ def update(
         self,
         cashback_rule: int,
         *,
-        percent_basis: Optional[int] = None,
-        maximum_cashback_cents: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_active: Optional[bool] = None,
-        product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        percent_basis: int | None = None,
+        maximum_cashback_cents: int | None | NotGiven = NOT_GIVEN,
+        is_active: bool | None = None,
+        product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCashbackRuleResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | cashback_rule | `int` | Yes |
-| percent_basis | `Optional[int]` | No |
-| maximum_cashback_cents | `Union[int, None, NotGiven]` | No |
-| is_active | `Optional[bool]` | No |
-| product_ids | `Optional[List[int]]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| percent_basis | `int \| None` | No |
+| maximum_cashback_cents | `int \| None \| NotGiven` | No |
+| is_active | `bool \| None` | No |
+| product_ids | `builtins.list[int] \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCashbackRuleResponseValue200ApplicationJson`.
 
@@ -263,14 +263,14 @@ def archive(
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | cashback_rule | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 
@@ -317,14 +317,14 @@ def restore(
         self,
         cashback_rule: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRestoreCashbackRuleResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | cashback_rule | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRestoreCashbackRuleResponseValue200ApplicationJson`.
 

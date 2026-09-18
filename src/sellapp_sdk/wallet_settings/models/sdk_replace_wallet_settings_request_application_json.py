@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceWalletSettingsRequestApplicationJson",
     "required": [
         "enabled",
@@ -54,7 +54,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceWalletSettingsRequestApplicationJson",
     "required": [
         "enabled",
@@ -103,19 +103,19 @@ class SdkReplaceWalletSettingsRequestApplicationJson:
     """Sdk Replace Wallet Settings Request Application Json model."""
 
     enabled: bool
-    minimum_top_up_cents: Optional[int]
-    maximum_top_up_cents: Optional[int]
-    expiration_days: Optional[int]
-    payment_methods: List[str]
+    minimum_top_up_cents: int | None
+    maximum_top_up_cents: int | None
+    expiration_days: int | None
+    payment_methods: list[str]
     """Effective top-up gateway groups. CUSTOM_PAYMENT_METHOD enables all usable custom methods; customers choose an individual method in the portal. With no saved restriction, every currently configurable group is returned, including custom methods. An empty array disables all methods. Custom top-ups charge and credit the exact USD deposit amount, plus any wallet bonus, without custom-method discounts or fees."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceWalletSettingsRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -150,9 +150,9 @@ class SdkReplaceWalletSettingsRequestApplicationJson:
                 "SdkReplaceWalletSettingsRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["enabled"] = self.enabled
         _domain_data["minimum_top_up_cents"] = self.minimum_top_up_cents
         _domain_data["maximum_top_up_cents"] = self.maximum_top_up_cents
@@ -166,7 +166,7 @@ class SdkReplaceWalletSettingsRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["enabled"] = self.enabled
         if self.minimum_top_up_cents is not None:
             result["minimum_top_up_cents"] = self.minimum_top_up_cents

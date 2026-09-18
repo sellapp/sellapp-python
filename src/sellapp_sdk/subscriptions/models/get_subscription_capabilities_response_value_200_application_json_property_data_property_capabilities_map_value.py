@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.get_subscription_capabilities_response_value_200_
     GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue",
     "required": [],
     "properties": {
@@ -42,7 +42,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue",
     "required": [],
     "properties": {
@@ -74,19 +74,20 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue:
     """Get Subscription Capabilities Response Value200Application Json Property Data Property Capabilities Map Value model."""
 
-    status: Optional[
+    status: (
         GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus
-    ] = None
-    customer_reason: Optional[str] = None
-    seller_reason: Optional[str] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    customer_reason: str | None = None
+    seller_reason: str | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue:
         """Deserialize from a dictionary."""
         try:
@@ -117,9 +118,9 @@ class GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataProp
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.status is not None:
             _domain_data["status"] = self.status
         _domain_data["customer_reason"] = self.customer_reason
@@ -132,7 +133,7 @@ class GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataProp
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.status is not None:
             result["status"] = (
                 self.status.value if isinstance(self.status, Enum) else self.status

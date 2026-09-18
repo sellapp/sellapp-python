@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Literal, Optional, cast
+from typing import Any, Literal, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -24,7 +24,7 @@ from .create_credits_product_response_value_201_application_json_property_data_p
     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -68,7 +68,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCreditsProductResponseValue201ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -126,25 +126,27 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyData:
     type: Literal["credits"]
     is_draft: bool
     is_discoverable: bool
-    default_variant: Optional[
+    default_variant: (
         CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariant
-    ]
-    description: Optional[str] = None
-    section_id: Optional[int] = None
-    variant_invariant: Optional[
+        | None
+    )
+    description: str | None = None
+    section_id: int | None = None
+    variant_invariant: (
         CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant
-    ] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    deleted_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    deleted_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateCreditsProductResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -166,14 +168,14 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyData:
                 is_draft=data["is_draft"],
                 is_discoverable=data["is_discoverable"],
                 default_variant=CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyDefaultVariant.from_dict(
-                    cast(Dict[str, Any], _v_default_variant)
+                    cast(dict[str, Any], _v_default_variant)
                 )
                 if (_v_default_variant := data["default_variant"]) is not None
                 else None,
                 description=data.get("description"),
                 section_id=data.get("section_id"),
                 variant_invariant=CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant.from_dict(
-                    cast(Dict[str, Any], _v_variant_invariant)
+                    cast(dict[str, Any], _v_variant_invariant)
                 )
                 if (_v_variant_invariant := data.get("variant_invariant")) is not None
                 else None,
@@ -213,9 +215,9 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyData:
                 "CreateCreditsProductResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["store_id"] = self.store_id
         _domain_data["title"] = self.title
@@ -242,7 +244,7 @@ class CreateCreditsProductResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["store_id"] = self.store_id
         result["title"] = self.title

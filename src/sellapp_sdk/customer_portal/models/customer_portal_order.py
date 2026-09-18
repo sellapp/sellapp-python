@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -17,7 +17,7 @@ from sellapp_sdk._types import (
 
 from .customer_portal_order_line_item import CustomerPortalOrderLineItem
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CustomerPortalOrder",
     "required": [
         "id",
@@ -47,7 +47,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CustomerPortalOrder",
     "required": [
         "id",
@@ -91,16 +91,16 @@ class CustomerPortalOrder:
     """Order subtotal in minor currency units; 1999 means USD 19.99 when currency is USD."""
     total_cents: int
     """Order total including tax, in minor currency units."""
-    line_items: List[CustomerPortalOrderLineItem]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    line_items: list[CustomerPortalOrderLineItem]
+    created_at: datetime | None
+    updated_at: datetime | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> CustomerPortalOrder:
+    def from_dict(cls, data: dict[str, Any]) -> CustomerPortalOrder:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -118,7 +118,7 @@ class CustomerPortalOrder:
                 subtotal_cents=data["subtotal_cents"],
                 total_cents=data["total_cents"],
                 line_items=[
-                    CustomerPortalOrderLineItem.from_dict(cast(Dict[str, Any], item))
+                    CustomerPortalOrderLineItem.from_dict(cast(dict[str, Any], item))
                     for item in cast(list[Any], data["line_items"])
                 ],
                 created_at=_parse_datetime(_v_created_at)
@@ -145,9 +145,9 @@ class CustomerPortalOrder:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("CustomerPortalOrder", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["status"] = self.status
         _domain_data["currency"] = self.currency
@@ -164,7 +164,7 @@ class CustomerPortalOrder:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["status"] = self.status
         result["currency"] = self.currency

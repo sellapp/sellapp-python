@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemKind(
@@ -22,9 +22,10 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemKin
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
+    ) -> (
         ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemKind
-    ]:
+        | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.verify_community_connection_response_value_200_ap
     VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyDataPlatform,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": [
         "platform",
@@ -63,7 +63,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData",
     "required": [
         "platform",
@@ -123,16 +123,16 @@ class VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData:
     issue_count: int
     retried_count: int
     skipped_count: int
-    skipped_products: List[str]
-    unchanged_products: List[str]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    skipped_products: list[str]
+    unchanged_products: list[str]
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -174,9 +174,9 @@ class VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData:
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["platform"] = self.platform
         _domain_data["healthy_count"] = self.healthy_count
         _domain_data["issue_count"] = self.issue_count
@@ -192,7 +192,7 @@ class VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["platform"] = (
             self.platform.value if isinstance(self.platform, Enum) else self.platform
         )

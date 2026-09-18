@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .create_group_response_value_201_application_json_property_data_property_im
     CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImageValuePropertyMetadata,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage",
     "required": [],
     "properties": {
@@ -25,7 +25,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage",
     "required": [],
     "properties": {
@@ -40,18 +40,19 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage:
     """The stored group image, or null when the group has none."""
 
-    path: Optional[str] = None
-    metadata: Optional[
+    path: str | None = None
+    metadata: (
         CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImageValuePropertyMetadata
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage:
         """Deserialize from a dictionary."""
         try:
@@ -66,7 +67,7 @@ class CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage:
             return cls(
                 path=data.get("path"),
                 metadata=CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImageValuePropertyMetadata.from_dict(
-                    cast(Dict[str, Any], _v_metadata)
+                    cast(dict[str, Any], _v_metadata)
                 )
                 if (_v_metadata := data.get("metadata")) is not None
                 else None,
@@ -80,9 +81,9 @@ class CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage:
                 "CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.path is not None:
             _domain_data["path"] = self.path
         if self.metadata is not None:
@@ -95,7 +96,7 @@ class CreateGroupResponseValue201ApplicationJsonPropertyDataPropertyImage:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.path is not None:
             result["path"] = self.path
         if self.metadata is not None:

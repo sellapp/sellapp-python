@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Literal
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1",
     "required": ["grant_type", "code", "redirect_uri", "code_verifier"],
     "properties": {
@@ -33,7 +33,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1",
     "required": ["grant_type", "code", "redirect_uri", "code_verifier"],
     "properties": {
@@ -64,18 +64,18 @@ class ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1:
     code: str
     redirect_uri: str
     code_verifier: str
-    client_id: Optional[str] = None
+    client_id: str | None = None
     """The configured official CLI public client ID. It identifies the registration, not the executable."""
-    client_secret: Optional[str] = None
+    client_secret: str | None = None
     """Legacy SDK field retained for compatibility. Omit for the official CLI; it has no client secret."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1:
         """Deserialize from a dictionary."""
         try:
@@ -112,9 +112,9 @@ class ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1:
                 "ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["grant_type"] = self.grant_type
         _domain_data["code"] = self.code
         _domain_data["redirect_uri"] = self.redirect_uri
@@ -131,7 +131,7 @@ class ExchangeOAuthTokenRequestApplicationXWwwFormUrlencodedOneOfValue1:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["grant_type"] = self.grant_type
         result["code"] = self.code
         result["redirect_uri"] = self.redirect_uri

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
 from sellapp_sdk.common.models.search_add_ons_request_application_json_property_filters_item import (
@@ -46,15 +48,15 @@ class AddOns:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListAddOnsResponseValue200ApplicationJson]:
         """List add-ons
 
@@ -139,12 +141,12 @@ class AddOns:
         *,
         title: str,
         description: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        variant: Optional[CreateAddOnDraftRequestApplicationJsonPropertyVariant] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        variant: CreateAddOnDraftRequestApplicationJsonPropertyVariant | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateAddOnDraftResponseValue201ApplicationJson:
         """Create an add-on draft
 
@@ -201,7 +203,7 @@ class AddOns:
             "idempotency_supported": False,
             "operation_id": "createAddOnDraft",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -268,23 +270,22 @@ class AddOns:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchAddOnsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchAddOnsRequestApplicationJsonPropertySortItem]] = None,
-        search: Optional[SearchAddOnsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchAddOnsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchAddOnsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchAddOnsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchAddOnsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchAddOnsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchAddOnsResponseValue200ApplicationJson]:
         """Search add-ons
 
@@ -346,7 +347,7 @@ class AddOns:
             "idempotency_supported": False,
             "operation_id": "searchAddOns",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -387,10 +388,10 @@ class AddOns:
         self,
         addon: int,
         *,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAddOnResponseValue200ApplicationJson:
         """Retrieve an add-on
 
@@ -445,7 +446,7 @@ class AddOns:
             "idempotency_supported": False,
             "operation_id": "getAddOn",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "pagination": pagination,
@@ -466,13 +467,13 @@ class AddOns:
         self,
         addon: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAddOnResponseValue200ApplicationJson:
         """Update an add-on
 
@@ -530,7 +531,7 @@ class AddOns:
             "idempotency_supported": False,
             "operation_id": "replaceAddOn",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -598,13 +599,13 @@ class AddOns:
         self,
         addon: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAddOnResponseValue200ApplicationJson:
         """Update an add-on
 
@@ -662,7 +663,7 @@ class AddOns:
             "idempotency_supported": False,
             "operation_id": "updateAddOn",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -730,7 +731,7 @@ class AddOns:
         self,
         addon: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete an add-on
 
@@ -796,15 +797,15 @@ class AsyncAddOns:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListAddOnsResponseValue200ApplicationJson]:
         """List add-ons
 
@@ -889,12 +890,12 @@ class AsyncAddOns:
         *,
         title: str,
         description: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        variant: Optional[CreateAddOnDraftRequestApplicationJsonPropertyVariant] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        variant: CreateAddOnDraftRequestApplicationJsonPropertyVariant | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateAddOnDraftResponseValue201ApplicationJson:
         """Create an add-on draft
 
@@ -951,7 +952,7 @@ class AsyncAddOns:
             "idempotency_supported": False,
             "operation_id": "createAddOnDraft",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1018,23 +1019,22 @@ class AsyncAddOns:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchAddOnsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchAddOnsRequestApplicationJsonPropertySortItem]] = None,
-        search: Optional[SearchAddOnsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchAddOnsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchAddOnsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchAddOnsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchAddOnsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[SearchAddOnsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchAddOnsResponseValue200ApplicationJson]:
         """Search add-ons
 
@@ -1096,7 +1096,7 @@ class AsyncAddOns:
             "idempotency_supported": False,
             "operation_id": "searchAddOns",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1137,10 +1137,10 @@ class AsyncAddOns:
         self,
         addon: int,
         *,
-        pagination: Optional[bool] = None,
-        with_drafts: Optional[bool] = None,
-        only_drafts: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        pagination: bool | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAddOnResponseValue200ApplicationJson:
         """Retrieve an add-on
 
@@ -1195,7 +1195,7 @@ class AsyncAddOns:
             "idempotency_supported": False,
             "operation_id": "getAddOn",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "pagination": pagination,
@@ -1216,13 +1216,13 @@ class AsyncAddOns:
         self,
         addon: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceAddOnResponseValue200ApplicationJson:
         """Update an add-on
 
@@ -1280,7 +1280,7 @@ class AsyncAddOns:
             "idempotency_supported": False,
             "operation_id": "replaceAddOn",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1348,13 +1348,13 @@ class AsyncAddOns:
         self,
         addon: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        is_draft: Optional[bool] = None,
-        parent_product_ids: Optional[List[int]] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        is_draft: bool | None = None,
+        parent_product_ids: builtins.list[int] | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAddOnResponseValue200ApplicationJson:
         """Update an add-on
 
@@ -1412,7 +1412,7 @@ class AsyncAddOns:
             "idempotency_supported": False,
             "operation_id": "updateAddOn",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1480,7 +1480,7 @@ class AsyncAddOns:
         self,
         addon: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete an add-on
 

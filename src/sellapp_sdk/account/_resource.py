@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -31,7 +31,7 @@ class Account:
     def get_account(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAccountResponseValue200ApplicationJson:
         """Read your profile
 
@@ -86,7 +86,7 @@ class Account:
     def list_stores(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListStoresResponseValue200ApplicationJson:
         """List accessible stores
 
@@ -143,9 +143,9 @@ class Account:
         *,
         name: str,
         slug: str,
-        visibility: Optional[Union[StoreVisibility, str]] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: StoreVisibility | str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateStoreResponseValue201ApplicationJson:
         """Create a store
 
@@ -198,7 +198,7 @@ class Account:
             "idempotency_supported": True,
             "operation_id": "createStore",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -258,7 +258,7 @@ class Account:
         self,
         store: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreResponseValue200ApplicationJson:
         """Read an accessible store
 
@@ -317,7 +317,7 @@ class Account:
     def get_store_permissions(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStorePermissionsResponseValue200ApplicationJson:
         """Inspect effective permissions
 
@@ -386,7 +386,7 @@ class AsyncAccount:
     async def get_account(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAccountResponseValue200ApplicationJson:
         """Read your profile
 
@@ -441,7 +441,7 @@ class AsyncAccount:
     async def list_stores(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListStoresResponseValue200ApplicationJson:
         """List accessible stores
 
@@ -498,9 +498,9 @@ class AsyncAccount:
         *,
         name: str,
         slug: str,
-        visibility: Optional[Union[StoreVisibility, str]] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: StoreVisibility | str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateStoreResponseValue201ApplicationJson:
         """Create a store
 
@@ -553,7 +553,7 @@ class AsyncAccount:
             "idempotency_supported": True,
             "operation_id": "createStore",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "name": name,
@@ -613,7 +613,7 @@ class AsyncAccount:
         self,
         store: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStoreResponseValue200ApplicationJson:
         """Read an accessible store
 
@@ -672,7 +672,7 @@ class AsyncAccount:
     async def get_store_permissions(
         self,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetStorePermissionsResponseValue200ApplicationJson:
         """Inspect effective permissions
 

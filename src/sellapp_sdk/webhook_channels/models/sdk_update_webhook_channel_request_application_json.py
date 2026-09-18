@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from sellapp_sdk.common.models.sdk_update_webhook_channel_request_application_js
     SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateWebhookChannelRequestApplicationJson",
     "required": [],
     "properties": {
@@ -71,7 +71,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkUpdateWebhookChannelRequestApplicationJson",
     "required": [],
     "properties": {
@@ -132,22 +132,22 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkUpdateWebhookChannelRequestApplicationJson:
     """Sdk Update Webhook Channel Request Application Json model."""
 
-    name: Optional[str] = None
+    name: str | None = None
     """Optional seller-facing reference name."""
-    url: Optional[str] = None
+    url: str | None = None
     """Public HTTP or HTTPS destination. The same canonical URL cannot be configured twice for one store."""
-    allowed_notifications: Optional[
-        List[SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications]
-    ] = None
+    allowed_notifications: (
+        list[SdkUpdateWebhookChannelRequestApplicationJsonAllowedNotifications] | None
+    ) = None
     """Complete set of public webhook event names enabled for this destination."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkUpdateWebhookChannelRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -179,9 +179,9 @@ class SdkUpdateWebhookChannelRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkUpdateWebhookChannelRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["name"] = self.name
         if self.url is not None:
             _domain_data["url"] = self.url
@@ -195,7 +195,7 @@ class SdkUpdateWebhookChannelRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.name is not None:
             result["name"] = self.name
         else:

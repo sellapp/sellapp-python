@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.bookings.models.sdk_list_booking_date_overrides_response_value_200_application_json import (
     SdkListBookingDateOverridesResponseValue200ApplicationJson,
@@ -31,17 +33,17 @@ class BookingsCalendarEvents:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        status: Optional[Union[BookingsStatus, str]] = None,
-        pagination: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        product_variant_id: int | None = None,
+        from_: str | None = None,
+        to: str | None = None,
+        status: BookingsStatus | str | None = None,
+        pagination: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListBookingDateOverridesResponseValue200ApplicationJson]:
         """List booking date overrides
 
@@ -129,10 +131,10 @@ class BookingsCalendarEvents:
     def set(
         self,
         *,
-        dates: List[str],
+        dates: builtins.list[str],
         available: bool,
-        product_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        product_variant_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkSetBookingDateAvailabilityResponseValue201ApplicationJson:
         """Set booking date availability
 
@@ -186,7 +188,7 @@ class BookingsCalendarEvents:
             "idempotency_supported": False,
             "operation_id": "setBookingDateAvailability",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "dates": dates,
             "available": available,
         }
@@ -247,17 +249,17 @@ class AsyncBookingsCalendarEvents:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        product_variant_id: Optional[int] = None,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        status: Optional[Union[BookingsStatus, str]] = None,
-        pagination: Optional[bool] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        product_variant_id: int | None = None,
+        from_: str | None = None,
+        to: str | None = None,
+        status: BookingsStatus | str | None = None,
+        pagination: bool | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListBookingDateOverridesResponseValue200ApplicationJson]:
         """List booking date overrides
 
@@ -345,10 +347,10 @@ class AsyncBookingsCalendarEvents:
     async def set(
         self,
         *,
-        dates: List[str],
+        dates: builtins.list[str],
         available: bool,
-        product_variant_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        product_variant_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkSetBookingDateAvailabilityResponseValue201ApplicationJson:
         """Set booking date availability
 
@@ -402,7 +404,7 @@ class AsyncBookingsCalendarEvents:
             "idempotency_supported": False,
             "operation_id": "setBookingDateAvailability",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "dates": dates,
             "available": available,
         }

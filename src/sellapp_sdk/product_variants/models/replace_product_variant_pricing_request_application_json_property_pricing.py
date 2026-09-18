@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -26,7 +26,7 @@ from .replace_product_variant_pricing_request_application_json_property_pricing_
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing",
     "required": ["type", "price", "humble"],
     "properties": {
@@ -38,7 +38,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing",
     "required": ["type", "price", "humble"],
     "properties": {
@@ -61,20 +61,22 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing:
         ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice
     )
     humble: bool
-    compare_at_price: Optional[
+    compare_at_price: (
         ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice
-    ] = None
-    frequency: Optional[
+        | None
+    ) = None
+    frequency: (
         ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyFrequency
-    ] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing:
         """Deserialize from a dictionary."""
         try:
@@ -91,16 +93,16 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing:
                     data["type"]
                 ),
                 price=ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice.from_dict(
-                    cast(Dict[str, Any], data["price"])
+                    cast(dict[str, Any], data["price"])
                 ),
                 humble=data["humble"],
                 compare_at_price=ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice.from_dict(
-                    cast(Dict[str, Any], _v_compare_at_price)
+                    cast(dict[str, Any], _v_compare_at_price)
                 )
                 if (_v_compare_at_price := data.get("compare_at_price")) is not None
                 else None,
                 frequency=ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyFrequency.from_dict(
-                    cast(Dict[str, Any], _v_frequency)
+                    cast(dict[str, Any], _v_frequency)
                 )
                 if (_v_frequency := data.get("frequency")) is not None
                 else None,
@@ -114,9 +116,9 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing:
                 "ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["type"] = self.type
         _domain_data["price"] = self.price
         _domain_data["humble"] = self.humble
@@ -131,7 +133,7 @@ class ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["price"] = self.price.to_dict()
         result["humble"] = self.humble

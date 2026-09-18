@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .delete_course_section_response_value_200_application_json_property_data_pr
     DeleteCourseSectionResponseValue200ApplicationJsonPropertyDataPropertyLessonsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DeleteCourseSectionResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -48,7 +48,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "DeleteCourseSectionResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -85,21 +85,21 @@ class DeleteCourseSectionResponseValue200ApplicationJsonPropertyData:
 
     id: int
     title: str
-    description: Optional[str]
+    description: str | None
     sort_order: int
-    lessons: List[
+    lessons: list[
         DeleteCourseSectionResponseValue200ApplicationJsonPropertyDataPropertyLessonsItem
     ]
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> DeleteCourseSectionResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -118,7 +118,7 @@ class DeleteCourseSectionResponseValue200ApplicationJsonPropertyData:
                 sort_order=data["sort_order"],
                 lessons=[
                     DeleteCourseSectionResponseValue200ApplicationJsonPropertyDataPropertyLessonsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["lessons"])
                 ],
@@ -143,9 +143,9 @@ class DeleteCourseSectionResponseValue200ApplicationJsonPropertyData:
                 "DeleteCourseSectionResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["title"] = self.title
         _domain_data["description"] = self.description
@@ -161,7 +161,7 @@ class DeleteCourseSectionResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["title"] = self.title
         if self.description is not None:

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.blacklists.models.list_feedback_response_value_200_application_json_property_data_item import (
     ListFeedbackResponseValue200ApplicationJsonPropertyDataItem,
@@ -75,12 +77,12 @@ class Feedback:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
@@ -156,7 +158,7 @@ class Feedback:
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetFeedbackResponseValue200ApplicationJson:
         """Retrieve specific feedback
 
@@ -218,7 +220,7 @@ class Feedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplyToFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -269,7 +271,7 @@ class Feedback:
             "idempotency_supported": False,
             "operation_id": "replyToFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(
@@ -296,21 +298,20 @@ class Feedback:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
@@ -366,7 +367,7 @@ class Feedback:
             "idempotency_supported": False,
             "operation_id": "searchFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -402,12 +403,12 @@ class Feedback:
     def v2_list_feedback(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
@@ -484,21 +485,22 @@ class Feedback:
     def v2_search_feedback(
         self,
         *,
-        filters: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
@@ -556,7 +558,7 @@ class Feedback:
             "idempotency_supported": False,
             "operation_id": "v2SearchFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -593,7 +595,7 @@ class Feedback:
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetFeedbackResponseValue200ApplicationJson:
         """Retrieve specific feedback
 
@@ -657,7 +659,7 @@ class Feedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -710,7 +712,7 @@ class Feedback:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(
@@ -739,7 +741,7 @@ class Feedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplyToFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -792,7 +794,7 @@ class Feedback:
             "idempotency_supported": False,
             "operation_id": "v2ReplyToFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(
@@ -827,12 +829,12 @@ class AsyncFeedback:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
@@ -908,7 +910,7 @@ class AsyncFeedback:
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetFeedbackResponseValue200ApplicationJson:
         """Retrieve specific feedback
 
@@ -970,7 +972,7 @@ class AsyncFeedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplyToFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -1021,7 +1023,7 @@ class AsyncFeedback:
             "idempotency_supported": False,
             "operation_id": "replyToFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(
@@ -1048,21 +1050,20 @@ class AsyncFeedback:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
@@ -1118,7 +1119,7 @@ class AsyncFeedback:
             "idempotency_supported": False,
             "operation_id": "searchFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1154,12 +1155,12 @@ class AsyncFeedback:
     async def v2_list_feedback(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
@@ -1236,21 +1237,22 @@ class AsyncFeedback:
     async def v2_search_feedback(
         self,
         *,
-        filters: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchFeedbackRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchFeedbackRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchFeedbackRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
@@ -1308,7 +1310,7 @@ class AsyncFeedback:
             "idempotency_supported": False,
             "operation_id": "v2SearchFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1345,7 +1347,7 @@ class AsyncFeedback:
         self,
         feedback: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetFeedbackResponseValue200ApplicationJson:
         """Retrieve specific feedback
 
@@ -1409,7 +1411,7 @@ class AsyncFeedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -1462,7 +1464,7 @@ class AsyncFeedback:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(
@@ -1491,7 +1493,7 @@ class AsyncFeedback:
         feedback: int,
         *,
         reply: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplyToFeedbackResponseValue200ApplicationJson:
         """Reply to feedback
 
@@ -1544,7 +1546,7 @@ class AsyncFeedback:
             "idempotency_supported": False,
             "operation_id": "v2ReplyToFeedback",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "reply": reply,
         }
         _validate_model(

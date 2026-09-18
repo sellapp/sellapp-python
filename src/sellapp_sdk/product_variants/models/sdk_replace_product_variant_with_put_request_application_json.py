@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -32,7 +32,7 @@ from .replace_product_variant_with_put_request_application_json_property_pricing
     ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceProductVariantWithPutRequestApplicationJson",
     "required": [],
     "properties": {
@@ -101,7 +101,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceProductVariantWithPutRequestApplicationJson",
     "required": [],
     "properties": {
@@ -176,35 +176,36 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceProductVariantWithPutRequestApplicationJson:
     """Sdk Replace Product Variant With Put Request Application Json model."""
 
-    title: Optional[str] = None
-    description: Optional[str] = None
-    deliverable: Optional[
-        ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable
-    ] = None
-    pricing: Optional[
-        ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing
-    ] = None
-    minimum_purchase_quantity: Optional[int] = None
-    maximum_purchase_quantity: Optional[int] = None
-    bulk_discount: Optional[
-        List[ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem]
-    ] = None
-    payment_methods: Optional[
-        List[SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods]
-    ] = None
-    other_settings: Optional[
-        ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
-    ] = None
-    expected_updated_at: Optional[datetime] = None
+    title: str | None = None
+    description: str | None = None
+    deliverable: (
+        ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable | None
+    ) = None
+    pricing: (
+        ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing | None
+    ) = None
+    minimum_purchase_quantity: int | None = None
+    maximum_purchase_quantity: int | None = None
+    bulk_discount: (
+        list[ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem]
+        | None
+    ) = None
+    payment_methods: (
+        list[SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods] | None
+    ) = None
+    other_settings: (
+        ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings | None
+    ) = None
+    expected_updated_at: datetime | None = None
     """Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response."""
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> SdkReplaceProductVariantWithPutRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
@@ -220,12 +221,12 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 title=data.get("title"),
                 description=data.get("description"),
                 deliverable=ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], _v_deliverable)
+                    cast(dict[str, Any], _v_deliverable)
                 )
                 if (_v_deliverable := data.get("deliverable")) is not None
                 else None,
                 pricing=ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing.from_dict(
-                    cast(Dict[str, Any], _v_pricing)
+                    cast(dict[str, Any], _v_pricing)
                 )
                 if (_v_pricing := data.get("pricing")) is not None
                 else None,
@@ -233,7 +234,7 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 maximum_purchase_quantity=data.get("maximum_purchase_quantity"),
                 bulk_discount=[
                     ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_bulk_discount)
                 ]
@@ -248,7 +249,7 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 if (_v_payment_methods := data.get("payment_methods")) is not None
                 else None,
                 other_settings=ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], _v_other_settings)
+                    cast(dict[str, Any], _v_other_settings)
                 )
                 if (_v_other_settings := data.get("other_settings")) is not None
                 else None,
@@ -278,9 +279,9 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 "SdkReplaceProductVariantWithPutRequestApplicationJson", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             _domain_data["title"] = self.title
         if self.description is not None:
@@ -308,7 +309,7 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             result["title"] = self.title
         if self.description is not None:

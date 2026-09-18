@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -29,7 +29,7 @@ from .cancel_appointment_response_value_200_application_json_property_data_prope
     CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyVariant,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelAppointmentResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -113,7 +113,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelAppointmentResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -208,8 +208,8 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyData:
     product_variant_id: int
     order_id: int
     invoice_id: int
-    customer_id: Optional[int]
-    customer_email: Optional[str]
+    customer_id: int | None
+    customer_email: str | None
     slot_start_at: datetime
     slot_end_at: datetime
     timezone: str
@@ -218,28 +218,30 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyData:
     calendar_sync_status: (
         CancelAppointmentResponseValue200ApplicationJsonPropertyDataCalendarSyncStatus
     )
-    external_event_link: Optional[str]
+    external_event_link: str | None
     """Calendar event URL. Always null after cancellation."""
-    video_join_url: Optional[str]
+    video_join_url: str | None
     """Video meeting URL. Always null after cancellation."""
-    confirmed_at: Optional[datetime]
-    cancelled_at: Optional[datetime]
+    confirmed_at: datetime | None
+    cancelled_at: datetime | None
     created_at: datetime
     updated_at: datetime
-    product: Optional[
+    product: (
         CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyProduct
-    ]
-    variant: Optional[
+        | None
+    )
+    variant: (
         CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyVariant
-    ]
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    )
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CancelAppointmentResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -280,12 +282,12 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyData:
                 created_at=_parse_datetime(data["created_at"]),
                 updated_at=_parse_datetime(data["updated_at"]),
                 product=CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
-                    cast(Dict[str, Any], _v_product)
+                    cast(dict[str, Any], _v_product)
                 )
                 if (_v_product := data["product"]) is not None
                 else None,
                 variant=CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyVariant.from_dict(
-                    cast(Dict[str, Any], _v_variant)
+                    cast(dict[str, Any], _v_variant)
                 )
                 if (_v_variant := data["variant"]) is not None
                 else None,
@@ -322,9 +324,9 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyData:
                 "CancelAppointmentResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["product_id"] = self.product_id
         _domain_data["product_variant_id"] = self.product_variant_id
@@ -354,7 +356,7 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["product_id"] = self.product_id
         result["product_variant_id"] = self.product_variant_id

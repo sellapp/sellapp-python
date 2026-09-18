@@ -14,12 +14,10 @@ def create(
         customer: int,
         *,
         amount_cents: int,
-        payment_method: Union[
-            SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod, str
-        ],
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        payment_method: SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod | str,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletTopUpResponseValue201ApplicationJson:
 ```
 
@@ -27,12 +25,10 @@ def create(
 | --- | --- | --- |
 | customer | `int` | Yes |
 | amount_cents | `int` | Yes |
-| payment_method | `Union[
-            SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod, str
-        ]` | Yes |
-| custom_payment_method_id | `Union[str, None, NotGiven]` | No |
-| idempotency_key | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| payment_method | `SdkCreateWalletTopUpRequestApplicationJsonPaymentMethod \| str` | Yes |
+| custom_payment_method_id | `str \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateWalletTopUpResponseValue201ApplicationJson`.
 

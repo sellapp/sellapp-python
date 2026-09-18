@@ -9,7 +9,7 @@ import time
 from collections.abc import Mapping
 from dataclasses import dataclass
 from email.utils import parsedate_to_datetime
-from typing import Any, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, TypeVar, Union
 from urllib.parse import quote, urlencode, urlparse
 
 import httpx
@@ -63,7 +63,7 @@ from ._pagination import AsyncPage, SyncPage
 from ._types import RequestOptions
 
 T = TypeVar("T")
-Path = Union[str, tuple[str, ...], List[str]]
+Path = Union[str, tuple[str, ...], list[str]]
 RETRY_STATUS_CODES = {408, 409, 429, 500, 502, 503, 504}
 SAFE_METHODS = {"GET", "HEAD", "OPTIONS", "TRACE", "PUT", "DELETE"}
 
@@ -73,7 +73,7 @@ class RawResponse:
     data: Any
     status: int
     headers: Mapping[str, str]
-    request_id: Optional[str] = None
+    request_id: str | None = None
 
 
 class WithRawResponse:
@@ -86,7 +86,7 @@ class WithRawResponse:
         operation = getattr(self._resource, name)
 
         def invoke(*args: Any, **kwargs: Any) -> Any:
-            captured: Dict[str, RawResponse] = {}
+            captured: dict[str, RawResponse] = {}
             request_options = dict(kwargs.get("request_options") or {})
             request_options["response_callback"] = lambda response: captured.setdefault(
                 "response", response
@@ -136,17 +136,17 @@ class _BaseSellAppClient:
     def __init__(
         self,
         *,
-        api_key: Optional[str] = None,
-        store: Optional[str] = None,
-        access_token: Optional[str] = None,
-        customer_session: Optional[str] = None,
-        client_basic: Optional[tuple[str, str]] = None,
-        browser_session: Optional[str] = None,
-        authorization_base_url: Optional[str] = None,
-        base_url: Optional[str] = None,
+        api_key: str | None = None,
+        store: str | None = None,
+        access_token: str | None = None,
+        customer_session: str | None = None,
+        client_basic: tuple[str, str] | None = None,
+        browser_session: str | None = None,
+        authorization_base_url: str | None = None,
+        base_url: str | None = None,
         timeout: float = 60.0,
         max_retries: int = 2,
-        on_request: Optional[Any] = None,
+        on_request: Any | None = None,
     ) -> None:
         self.api_key = api_key if api_key is not None else os.getenv("SELLAPP_API_KEY")
         self.store = store if store is not None else os.getenv("SELLAPP_STORE")
@@ -168,7 +168,7 @@ class _BaseSellAppClient:
         if not isinstance(timeout, (int, float)) or timeout <= 0:
             raise ValueError("timeout must be positive")
 
-    def _auth_headers(self, options: Mapping[str, Any]) -> Dict[str, str]:
+    def _auth_headers(self, options: Mapping[str, Any]) -> dict[str, str]:
         policy = options.get("auth") or {"apiKey": True, "apiKeyRequiresStore": True}
         headers = {"User-Agent": "SellApp python/0.1.1", "Accept": "application/json"}
         token = None
@@ -226,9 +226,9 @@ class _BaseSellAppClient:
         attempt: int,
         started: float,
         *,
-        status: Optional[int] = None,
-        request_id: Optional[str] = None,
-        error_type: Optional[str] = None,
+        status: int | None = None,
+        request_id: str | None = None,
+        error_type: str | None = None,
     ) -> None:
         if self.on_request:
             self.on_request(
@@ -251,8 +251,8 @@ class _BaseSellAppClient:
     def build_url(
         self,
         path: Path,
-        params: Optional[Mapping[str, Any]] = None,
-        server: Optional[str] = None,
+        params: Mapping[str, Any] | None = None,
+        server: str | None = None,
     ) -> str:
         base = (self.authorization_base_url or server) if server else self.base_url
         url = f"{base.rstrip('/')}{self._encode_path(path)}"
@@ -260,9 +260,9 @@ class _BaseSellAppClient:
 
     def _request_config(
         self,
-        request_options: Optional[RequestOptions],
-        idempotency_key: Optional[str],
-    ) -> tuple[Dict[str, str], float, int]:
+        request_options: RequestOptions | None,
+        idempotency_key: str | None,
+    ) -> tuple[dict[str, str], float, int]:
         options = request_options or {}
         headers = dict(options.get("headers", {}))
         if any(
@@ -340,7 +340,7 @@ class _BaseSellAppClient:
 
     @staticmethod
     def _decode(
-        response: httpx.Response, model: Optional[Type[T]], text_response: bool = False
+        response: httpx.Response, model: type[T] | None, text_response: bool = False
     ) -> Any:
         if 300 <= response.status_code < 400:
             return response.headers.get("Location")
@@ -362,7 +362,7 @@ class _BaseSellAppClient:
 
 class SellAppClient(_BaseSellAppClient):
     def __init__(
-        self, *, http_client: Optional[httpx.Client] = None, **kwargs: Any
+        self, *, http_client: httpx.Client | None = None, **kwargs: Any
     ) -> None:
         super().__init__(**kwargs)
         self._owns_http_client = http_client is None
@@ -384,10 +384,10 @@ class SellAppClient(_BaseSellAppClient):
         method: str,
         path: Path,
         body: Any = None,
-        params: Optional[Mapping[str, Any]] = None,
-        model: Optional[Type[T]] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        params: Mapping[str, Any] | None = None,
+        model: type[T] | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
         _return_raw: bool = False,
     ) -> Any:
         headers, timeout, retries = self._request_config(
@@ -525,16 +525,16 @@ class SellAppClient(_BaseSellAppClient):
             method=method, path=path, request_options=options, **kwargs
         )
 
-    def request_list(self, **kwargs: Any) -> List[Any]:
+    def request_list(self, **kwargs: Any) -> list[Any]:
         payload = self.request(**kwargs)
         return payload.get("data", payload) if isinstance(payload, dict) else payload
 
     def request_page(
         self,
         *,
-        model: Type[T],
-        params: Optional[Mapping[str, Any]] = None,
-        _seen_pages: Optional[set[Any]] = None,
+        model: type[T],
+        params: Mapping[str, Any] | None = None,
+        _seen_pages: set[Any] | None = None,
         **kwargs: Any,
     ) -> SyncPage[T]:
         raw = self.request(params=params, **kwargs)
@@ -581,7 +581,7 @@ class SellAppClient(_BaseSellAppClient):
 
 class AsyncSellAppClient(_BaseSellAppClient):
     def __init__(
-        self, *, http_client: Optional[httpx.AsyncClient] = None, **kwargs: Any
+        self, *, http_client: httpx.AsyncClient | None = None, **kwargs: Any
     ) -> None:
         super().__init__(**kwargs)
         self._owns_http_client = http_client is None
@@ -603,10 +603,10 @@ class AsyncSellAppClient(_BaseSellAppClient):
         method: str,
         path: Path,
         body: Any = None,
-        params: Optional[Mapping[str, Any]] = None,
-        model: Optional[Type[T]] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        params: Mapping[str, Any] | None = None,
+        model: type[T] | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
         _return_raw: bool = False,
     ) -> Any:
         headers, timeout, retries = self._request_config(
@@ -752,16 +752,16 @@ class AsyncSellAppClient(_BaseSellAppClient):
             method=method, path=path, request_options=options, **kwargs
         )
 
-    async def request_list(self, **kwargs: Any) -> List[Any]:
+    async def request_list(self, **kwargs: Any) -> list[Any]:
         payload = await self.request(**kwargs)
         return payload.get("data", payload) if isinstance(payload, dict) else payload
 
     async def request_page(
         self,
         *,
-        model: Type[T],
-        params: Optional[Mapping[str, Any]] = None,
-        _seen_pages: Optional[set[Any]] = None,
+        model: type[T],
+        params: Mapping[str, Any] | None = None,
+        _seen_pages: set[Any] | None = None,
         **kwargs: Any,
     ) -> AsyncPage[T]:
         raw = await self.request(params=params, **kwargs)

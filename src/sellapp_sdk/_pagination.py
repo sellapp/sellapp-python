@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
-from collections.abc import AsyncIterator, Awaitable, Iterator
+from collections.abc import AsyncIterator, Awaitable, Callable, Iterator
 from dataclasses import dataclass
 from typing import (
     Any,
-    Callable,
     Generic,
-    List,
-    Optional,
     TypeVar,
 )
 
@@ -18,10 +15,10 @@ T = TypeVar("T")
 
 @dataclass
 class SyncPage(Generic[T]):
-    data: List[T]
+    data: list[T]
     links: Any = None
     meta: Any = None
-    _next: Optional[Callable[[], SyncPage[T]]] = None
+    _next: Callable[[], SyncPage[T]] | None = None
 
     def __iter__(self) -> Iterator[T]:
         return iter(self.data)
@@ -29,11 +26,11 @@ class SyncPage(Generic[T]):
     def has_next_page(self) -> bool:
         return self._next is not None
 
-    def get_next_page(self) -> Optional[SyncPage[T]]:
+    def get_next_page(self) -> SyncPage[T] | None:
         return self._next() if self._next else None
 
     def items(
-        self, *, max_items: Optional[int] = None, max_pages: Optional[int] = None
+        self, *, max_items: int | None = None, max_pages: int | None = None
     ) -> Iterator[T]:
         page, count, pages = self, 0, 0
         while page is not None:
@@ -50,10 +47,10 @@ class SyncPage(Generic[T]):
 
 @dataclass
 class AsyncPage(Generic[T]):
-    data: List[T]
+    data: list[T]
     links: Any = None
     meta: Any = None
-    _next: Optional[Callable[[], Awaitable[AsyncPage[T]]]] = None
+    _next: Callable[[], Awaitable[AsyncPage[T]]] | None = None
 
     def __iter__(self) -> Iterator[T]:
         return iter(self.data)
@@ -61,11 +58,11 @@ class AsyncPage(Generic[T]):
     def has_next_page(self) -> bool:
         return self._next is not None
 
-    async def get_next_page(self) -> Optional[AsyncPage[T]]:
+    async def get_next_page(self) -> AsyncPage[T] | None:
         return await self._next() if self._next else None
 
     async def items(
-        self, *, max_items: Optional[int] = None, max_pages: Optional[int] = None
+        self, *, max_items: int | None = None, max_pages: int | None = None
     ) -> AsyncIterator[T]:
         page, count, pages = self, 0, 0
         while page is not None:

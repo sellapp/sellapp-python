@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -31,7 +31,7 @@ from .list_bundle_items_response_value_200_application_json_property_data_item_p
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -80,7 +80,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -145,26 +145,26 @@ class ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
     )
     minimum_purchase_quantity: int
     maximum_purchase_quantity: int
-    bulk_discount: List[
+    bulk_discount: list[
         ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem
     ]
-    payment_methods: List[str]
+    payment_methods: list[str]
     other_settings: ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings
-    order: Optional[int]
+    order: int | None
     created_at: datetime
     updated_at: datetime
-    deleted_at: Optional[datetime]
+    deleted_at: datetime | None
     product: (
         ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct
     )
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -182,22 +182,22 @@ class ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
                 title=data["title"],
                 description=data["description"],
                 deliverable=ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
-                    cast(Dict[str, Any], data["deliverable"])
+                    cast(dict[str, Any], data["deliverable"])
                 ),
                 pricing=ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
-                    cast(Dict[str, Any], data["pricing"])
+                    cast(dict[str, Any], data["pricing"])
                 ),
                 minimum_purchase_quantity=data["minimum_purchase_quantity"],
                 maximum_purchase_quantity=data["maximum_purchase_quantity"],
                 bulk_discount=[
                     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["bulk_discount"])
                 ],
                 payment_methods=data["payment_methods"],
                 other_settings=ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings.from_dict(
-                    cast(Dict[str, Any], data["other_settings"])
+                    cast(dict[str, Any], data["other_settings"])
                 ),
                 order=data["order"],
                 created_at=_parse_datetime(data["created_at"]),
@@ -206,7 +206,7 @@ class ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
                 if (_v_deleted_at := data["deleted_at"]) is not None
                 else None,
                 product=ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
-                    cast(Dict[str, Any], data["product"])
+                    cast(dict[str, Any], data["product"])
                 ),
                 additional_properties=_preserve_unknown_fields(
                     data,
@@ -236,9 +236,9 @@ class ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
                 "ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["product_id"] = self.product_id
         _domain_data["title"] = self.title
@@ -263,7 +263,7 @@ class ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["product_id"] = self.product_id
         result["title"] = self.title

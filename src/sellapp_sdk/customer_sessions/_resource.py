@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -27,12 +27,10 @@ class CustomerSessions:
     def create_customer_session(
         self,
         *,
-        body: Union[
-            CreateCustomerSessionRequestApplicationJsonOneOfValue1,
-            CreateCustomerSessionRequestApplicationJsonOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: CreateCustomerSessionRequestApplicationJsonOneOfValue1
+        | CreateCustomerSessionRequestApplicationJsonOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerSessionResponseValue201ApplicationJson:
         """Create a customer session
 
@@ -85,7 +83,7 @@ class CustomerSessions:
             "idempotency_supported": False,
             "operation_id": "createCustomerSession",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return self._client.request(
             method="post",
             path=("v2", "customer-sessions"),
@@ -98,7 +96,7 @@ class CustomerSessions:
         self,
         session: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Revoke a customer session
 
@@ -165,12 +163,10 @@ class AsyncCustomerSessions:
     async def create_customer_session(
         self,
         *,
-        body: Union[
-            CreateCustomerSessionRequestApplicationJsonOneOfValue1,
-            CreateCustomerSessionRequestApplicationJsonOneOfValue2,
-            Dict[str, Any],
-        ],
-        request_options: Optional[RequestOptions] = None,
+        body: CreateCustomerSessionRequestApplicationJsonOneOfValue1
+        | CreateCustomerSessionRequestApplicationJsonOneOfValue2
+        | dict[str, Any],
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCustomerSessionResponseValue201ApplicationJson:
         """Create a customer session
 
@@ -223,7 +219,7 @@ class AsyncCustomerSessions:
             "idempotency_supported": False,
             "operation_id": "createCustomerSession",
         }
-        _body: Dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
+        _body: dict[str, Any] = body if isinstance(body, dict) else body.to_dict()
         return await self._client.request(
             method="post",
             path=("v2", "customer-sessions"),
@@ -236,7 +232,7 @@ class AsyncCustomerSessions:
         self,
         session: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Revoke a customer session
 

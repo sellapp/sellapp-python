@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -12,7 +12,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceSectionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -25,7 +25,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkReplaceSectionRequestApplicationJson",
     "required": [],
     "properties": {
@@ -44,15 +44,15 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class SdkReplaceSectionRequestApplicationJson:
     """Sdk Replace Section Request Application Json model."""
 
-    title: Optional[str] = None
-    hidden: Optional[bool] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    title: str | None = None
+    hidden: bool | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> SdkReplaceSectionRequestApplicationJson:
+    def from_dict(cls, data: dict[str, Any]) -> SdkReplaceSectionRequestApplicationJson:
         """Deserialize from a dictionary."""
         try:
             _validate_model(
@@ -74,9 +74,9 @@ class SdkReplaceSectionRequestApplicationJson:
         except (KeyError, ValueError) as e:
             _raise_deserialize_error("SdkReplaceSectionRequestApplicationJson", e)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             _domain_data["title"] = self.title
         if self.hidden is not None:
@@ -89,7 +89,7 @@ class SdkReplaceSectionRequestApplicationJson:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.title is not None:
             result["title"] = self.title
         if self.hidden is not None:

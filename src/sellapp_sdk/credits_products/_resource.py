@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
 from sellapp_sdk.common.models.create_credits_product_request_application_json_property_rate_tiers_item import (
@@ -51,13 +53,13 @@ class CreditsProducts:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListCreditsProductsResponseValue200ApplicationJson]:
         """List credits products
 
@@ -137,27 +139,27 @@ class CreditsProducts:
         self,
         *,
         title: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkCreateCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkCreateCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCreditsProductResponseValue201ApplicationJson:
         """Create a credits product
 
@@ -222,7 +224,7 @@ class CreditsProducts:
             "idempotency_supported": False,
             "operation_id": "createCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -396,25 +398,24 @@ class CreditsProducts:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchCreditsProductsRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchCreditsProductsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchCreditsProductsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCreditsProductsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchCreditsProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchCreditsProductsResponseValue200ApplicationJson]:
         """Search credits products
 
@@ -474,7 +475,7 @@ class CreditsProducts:
             "idempotency_supported": False,
             "operation_id": "searchCreditsProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -513,7 +514,7 @@ class CreditsProducts:
         self,
         credit_product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCreditsProductResponseValue200ApplicationJson:
         """Retrieve a credits product
 
@@ -576,28 +577,28 @@ class CreditsProducts:
         self,
         credit_product: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCreditsProductResponseValue200ApplicationJson:
         """Replace a credits product
 
@@ -664,7 +665,7 @@ class CreditsProducts:
             "idempotency_supported": False,
             "operation_id": "replaceCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -837,28 +838,28 @@ class CreditsProducts:
         self,
         credit_product: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkUpdateCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[UpdateCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkUpdateCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            UpdateCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCreditsProductResponseValue200ApplicationJson:
         """Update a credits product
 
@@ -925,7 +926,7 @@ class CreditsProducts:
             "idempotency_supported": False,
             "operation_id": "updateCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1098,8 +1099,8 @@ class CreditsProducts:
         self,
         credit_product: int,
         *,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a credits product
 
@@ -1149,7 +1150,7 @@ class CreditsProducts:
             "idempotency_supported": False,
             "operation_id": "deleteCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "expected_updated_at": expected_updated_at,
@@ -1193,13 +1194,13 @@ class AsyncCreditsProducts:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListCreditsProductsResponseValue200ApplicationJson]:
         """List credits products
 
@@ -1279,27 +1280,27 @@ class AsyncCreditsProducts:
         self,
         *,
         title: str,
-        visibility: Union[CatalogVisibility, str],
-        slug: Optional[str] = None,
-        description: Union[str, None, NotGiven] = NOT_GIVEN,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkCreateCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        visibility: CatalogVisibility | str,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkCreateCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            CreateCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCreditsProductResponseValue201ApplicationJson:
         """Create a credits product
 
@@ -1364,7 +1365,7 @@ class AsyncCreditsProducts:
             "idempotency_supported": False,
             "operation_id": "createCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1538,25 +1539,24 @@ class AsyncCreditsProducts:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[
-            SearchCreditsProductsRequestApplicationJsonPropertySearch
-        ] = None,
-        includes: Optional[
-            List[SearchCreditsProductsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchCreditsProductsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchCreditsProductsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchCreditsProductsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchCreditsProductsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchCreditsProductsResponseValue200ApplicationJson]:
         """Search credits products
 
@@ -1616,7 +1616,7 @@ class AsyncCreditsProducts:
             "idempotency_supported": False,
             "operation_id": "searchCreditsProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1655,7 +1655,7 @@ class AsyncCreditsProducts:
         self,
         credit_product: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCreditsProductResponseValue200ApplicationJson:
         """Retrieve a credits product
 
@@ -1718,28 +1718,28 @@ class AsyncCreditsProducts:
         self,
         credit_product: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkReplaceCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            ReplaceCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceCreditsProductResponseValue200ApplicationJson:
         """Replace a credits product
 
@@ -1806,7 +1806,7 @@ class AsyncCreditsProducts:
             "idempotency_supported": False,
             "operation_id": "replaceCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1979,28 +1979,28 @@ class AsyncCreditsProducts:
         self,
         credit_product: int,
         *,
-        title: Optional[str] = None,
-        slug: Optional[str] = None,
-        description: Optional[str] = None,
-        visibility: Optional[Union[CatalogVisibility, str]] = None,
-        section_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        is_draft: Optional[bool] = None,
-        price_cents: Optional[int] = None,
-        currency: Optional[str] = None,
-        minimum_purchase_quantity: Optional[int] = None,
-        maximum_purchase_quantity: Union[int, None, NotGiven] = NOT_GIVEN,
-        quantity_increment: Optional[int] = None,
-        stock: Union[int, None, NotGiven] = NOT_GIVEN,
-        payment_methods: Optional[
-            List[
-                Union[SdkUpdateCreditsProductRequestApplicationJsonPaymentMethods, str]
-            ]
-        ] = None,
-        rate_tiers: Optional[
-            List[UpdateCreditsProductRequestApplicationJsonPropertyRateTiersItem]
-        ] = None,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None = None,
+        visibility: CatalogVisibility | str | None = None,
+        section_id: int | None | NotGiven = NOT_GIVEN,
+        is_draft: bool | None = None,
+        price_cents: int | None = None,
+        currency: str | None = None,
+        minimum_purchase_quantity: int | None = None,
+        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,
+        quantity_increment: int | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
+        payment_methods: builtins.list[
+            SdkUpdateCreditsProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        rate_tiers: builtins.list[
+            UpdateCreditsProductRequestApplicationJsonPropertyRateTiersItem
+        ]
+        | None = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCreditsProductResponseValue200ApplicationJson:
         """Update a credits product
 
@@ -2067,7 +2067,7 @@ class AsyncCreditsProducts:
             "idempotency_supported": False,
             "operation_id": "updateCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -2240,8 +2240,8 @@ class AsyncCreditsProducts:
         self,
         credit_product: int,
         *,
-        expected_updated_at: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_updated_at: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a credits product
 
@@ -2291,7 +2291,7 @@ class AsyncCreditsProducts:
             "idempotency_supported": False,
             "operation_id": "deleteCreditsProduct",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "expected_updated_at": expected_updated_at,

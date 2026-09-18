@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyRefundStatus(
@@ -21,9 +21,10 @@ class CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyRefu
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[
+    ) -> (
         CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyRefundStatus
-    ]:
+        | None
+    ):
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

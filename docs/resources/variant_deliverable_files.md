@@ -14,12 +14,12 @@ def list(
         product: str,
         variant: int,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[
         ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
     ]:
@@ -29,12 +29,12 @@ def list(
 | --- | --- | --- |
 | product | `str` | Yes |
 | variant | `int` | Yes |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[
         ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
@@ -88,8 +88,8 @@ def upload(
         variant: int,
         *,
         file: bytes,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUploadVariantDeliverableFileResponseValue201ApplicationJson:
 ```
 
@@ -98,8 +98,8 @@ def upload(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | file | `bytes` | Yes |
-| folder_id | `Union[int, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| folder_id | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUploadVariantDeliverableFileResponseValue201ApplicationJson`.
 
@@ -152,7 +152,7 @@ def get(
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetVariantDeliverableFileResponseValue200ApplicationJson:
 ```
 
@@ -161,7 +161,7 @@ def get(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | file | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetVariantDeliverableFileResponseValue200ApplicationJson`.
 
@@ -214,12 +214,12 @@ def replace(
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceVariantDeliverableFileSettingsResponseValue200ApplicationJson:
 ```
 
@@ -228,12 +228,12 @@ def replace(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | file | `int` | Yes |
-| custom_name | `Union[str, None, NotGiven]` | No |
-| folder_id | `Union[int, None, NotGiven]` | No |
-| watermark | `Optional[bool]` | No |
-| max_downloads | `Union[int, None, NotGiven]` | No |
-| limit_to_purchase_ip | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| custom_name | `str \| None \| NotGiven` | No |
+| folder_id | `int \| None \| NotGiven` | No |
+| watermark | `bool \| None` | No |
+| max_downloads | `int \| None \| NotGiven` | No |
+| limit_to_purchase_ip | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceVariantDeliverableFileSettingsResponseValue200ApplicationJson`.
 
@@ -287,12 +287,12 @@ def update(
         variant: int,
         file: int,
         *,
-        custom_name: Union[str, None, NotGiven] = NOT_GIVEN,
-        folder_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        watermark: Optional[bool] = None,
-        max_downloads: Union[int, None, NotGiven] = NOT_GIVEN,
-        limit_to_purchase_ip: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        custom_name: str | None | NotGiven = NOT_GIVEN,
+        folder_id: int | None | NotGiven = NOT_GIVEN,
+        watermark: bool | None = None,
+        max_downloads: int | None | NotGiven = NOT_GIVEN,
+        limit_to_purchase_ip: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateVariantDeliverableFileResponseValue200ApplicationJson:
 ```
 
@@ -301,12 +301,12 @@ def update(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | file | `int` | Yes |
-| custom_name | `Union[str, None, NotGiven]` | No |
-| folder_id | `Union[int, None, NotGiven]` | No |
-| watermark | `Optional[bool]` | No |
-| max_downloads | `Union[int, None, NotGiven]` | No |
-| limit_to_purchase_ip | `Optional[bool]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| custom_name | `str \| None \| NotGiven` | No |
+| folder_id | `int \| None \| NotGiven` | No |
+| watermark | `bool \| None` | No |
+| max_downloads | `int \| None \| NotGiven` | No |
+| limit_to_purchase_ip | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateVariantDeliverableFileResponseValue200ApplicationJson`.
 
@@ -360,7 +360,7 @@ def delete(
         variant: int,
         file: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
 ```
 
@@ -369,7 +369,7 @@ def delete(
 | product | `str` | Yes |
 | variant | `int` | Yes |
 | file | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.
 

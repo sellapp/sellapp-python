@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -31,7 +31,7 @@ from .get_course_response_value_200_application_json_property_data_property_sect
     GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCourseResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -143,7 +143,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCourseResponseValue200ApplicationJsonPropertyData",
     "required": [
         "id",
@@ -264,38 +264,38 @@ class GetCourseResponseValue200ApplicationJsonPropertyData:
     id: int
     title: str
     slug: str
-    description: Optional[str]
+    description: str | None
     visibility: CatalogVisibility
     is_draft: bool
-    delivery_text: Optional[str]
-    category: Optional[Category]
+    delivery_text: str | None
+    category: Category | None
     level: GetCourseResponseValue200ApplicationJsonPropertyDataLevel
     language: str
-    subtitle: Optional[str]
-    author: Optional[str]
-    subcategory: Optional[str]
-    what_you_learn: List[str]
-    requirements: List[str]
+    subtitle: str | None
+    author: str | None
+    subcategory: str | None
+    what_you_learn: list[str]
+    requirements: list[str]
     certificate_enabled: bool
     access_type: GetCourseResponseValue200ApplicationJsonPropertyDataAccessType
-    access_duration_days: Optional[int]
-    enrollment_limit: Optional[int]
-    promo_video: Optional[
-        GetCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo
-    ]
-    sections: List[
+    access_duration_days: int | None
+    enrollment_limit: int | None
+    promo_video: (
+        GetCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo | None
+    )
+    sections: list[
         GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItem
     ]
     created_at: datetime
     updated_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetCourseResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -334,13 +334,13 @@ class GetCourseResponseValue200ApplicationJsonPropertyData:
                 access_duration_days=data["access_duration_days"],
                 enrollment_limit=data["enrollment_limit"],
                 promo_video=GetCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo.from_dict(
-                    cast(Dict[str, Any], _v_promo_video)
+                    cast(dict[str, Any], _v_promo_video)
                 )
                 if (_v_promo_video := data["promo_video"]) is not None
                 else None,
                 sections=[
                     GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["sections"])
                 ],
@@ -381,9 +381,9 @@ class GetCourseResponseValue200ApplicationJsonPropertyData:
                 "GetCourseResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["title"] = self.title
         _domain_data["slug"] = self.slug
@@ -415,7 +415,7 @@ class GetCourseResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["title"] = self.title
         result["slug"] = self.slug

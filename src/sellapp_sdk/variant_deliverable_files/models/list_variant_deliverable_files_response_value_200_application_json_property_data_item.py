@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -63,7 +63,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -126,19 +126,19 @@ class ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
     limit_to_purchase_ip: bool
     variant_id: int
     product_id: int
-    custom_name: Optional[str] = None
-    max_downloads: Optional[int] = None
-    folder_id: Optional[int] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    custom_name: str | None = None
+    max_downloads: int | None = None
+    folder_id: int | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -196,9 +196,9 @@ class ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["filename"] = self.filename
         _domain_data["extension"] = self.extension
@@ -223,7 +223,7 @@ class ListVariantDeliverableFilesResponseValue200ApplicationJsonPropertyDataItem
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["filename"] = self.filename
         result["extension"] = self.extension

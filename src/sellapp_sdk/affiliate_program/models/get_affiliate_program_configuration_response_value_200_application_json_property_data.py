@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -22,7 +22,7 @@ from .get_affiliate_program_configuration_response_value_200_application_json_pr
     GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "enabled", "settings", "products", "created_at", "updated_at"],
     "properties": {
@@ -41,7 +41,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "enabled", "settings", "products", "created_at", "updated_at"],
     "properties": {
@@ -66,22 +66,22 @@ _WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
 class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyData:
     """Get Affiliate Program Configuration Response Value200Application Json Property Data model."""
 
-    id: Optional[int]
+    id: int | None
     enabled: bool
     settings: GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings
-    products: List[
+    products: list[
         GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertyProductsItem
     ]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
-    additional_properties: Dict[str, Any] = dataclass_field(
+    created_at: datetime | None
+    updated_at: datetime | None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -97,11 +97,11 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
                 id=data["id"],
                 enabled=data["enabled"],
                 settings=GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings.from_dict(
-                    cast(Dict[str, Any], data["settings"])
+                    cast(dict[str, Any], data["settings"])
                 ),
                 products=[
                     GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], data["products"])
                 ],
@@ -130,9 +130,9 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["enabled"] = self.enabled
         _domain_data["settings"] = self.settings
@@ -147,7 +147,7 @@ class GetAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDat
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         if self.id is not None:
             result["id"] = self.id
         else:

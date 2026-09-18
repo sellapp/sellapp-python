@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -36,7 +36,7 @@ class Licenses:
         *,
         license_key: str,
         instance_name: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkActivateLicenseKeyResponseValue200ApplicationJson:
         """Activate a license key
 
@@ -88,7 +88,7 @@ class Licenses:
             "idempotency_supported": False,
             "operation_id": "activateLicenseKey",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "license_key": license_key,
             "instance_name": instance_name,
         }
@@ -120,8 +120,8 @@ class Licenses:
         self,
         *,
         license_key: str,
-        instance_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        instance_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateLicenseKeyResponseValue200ApplicationJson:
         """Validate a license key
 
@@ -173,7 +173,7 @@ class Licenses:
             "idempotency_supported": False,
             "operation_id": "validateLicenseKey",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "license_key": license_key,
@@ -208,12 +208,12 @@ class Licenses:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
         """List all license keys
 
@@ -291,7 +291,7 @@ class Licenses:
         self,
         license_key: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetLicenseKeyResponseValue200ApplicationJson:
         """Retrieve a license key
 
@@ -354,10 +354,10 @@ class Licenses:
         self,
         license_key: int,
         *,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        active: Union[bool, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        active: bool | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateLicenseKeyResponseValue200ApplicationJson:
         """Update a license key
 
@@ -412,7 +412,7 @@ class Licenses:
             "idempotency_supported": False,
             "operation_id": "updateLicenseKey",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(limit, NotGiven):
             body["limit"] = limit
         if not isinstance(expires_at, NotGiven):
@@ -462,8 +462,8 @@ class Licenses:
         *,
         license_key: str,
         instance_id: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkDeactivateLicenseResponseValue200ApplicationJson:
         """Deactivate a license instance
 
@@ -518,7 +518,7 @@ class Licenses:
             "idempotency_supported": True,
             "operation_id": "deactivateLicense",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "license_key": license_key,
             "instance_id": instance_id,
         }
@@ -560,7 +560,7 @@ class AsyncLicenses:
         *,
         license_key: str,
         instance_name: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkActivateLicenseKeyResponseValue200ApplicationJson:
         """Activate a license key
 
@@ -612,7 +612,7 @@ class AsyncLicenses:
             "idempotency_supported": False,
             "operation_id": "activateLicenseKey",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "license_key": license_key,
             "instance_name": instance_name,
         }
@@ -644,8 +644,8 @@ class AsyncLicenses:
         self,
         *,
         license_key: str,
-        instance_id: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        instance_id: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkValidateLicenseKeyResponseValue200ApplicationJson:
         """Validate a license key
 
@@ -697,7 +697,7 @@ class AsyncLicenses:
             "idempotency_supported": False,
             "operation_id": "validateLicenseKey",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "license_key": license_key,
@@ -732,12 +732,12 @@ class AsyncLicenses:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
         """List all license keys
 
@@ -815,7 +815,7 @@ class AsyncLicenses:
         self,
         license_key: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetLicenseKeyResponseValue200ApplicationJson:
         """Retrieve a license key
 
@@ -878,10 +878,10 @@ class AsyncLicenses:
         self,
         license_key: int,
         *,
-        limit: Union[int, None, NotGiven] = NOT_GIVEN,
-        expires_at: Union[str, None, NotGiven] = NOT_GIVEN,
-        active: Union[bool, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None | NotGiven = NOT_GIVEN,
+        expires_at: str | None | NotGiven = NOT_GIVEN,
+        active: bool | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateLicenseKeyResponseValue200ApplicationJson:
         """Update a license key
 
@@ -936,7 +936,7 @@ class AsyncLicenses:
             "idempotency_supported": False,
             "operation_id": "updateLicenseKey",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(limit, NotGiven):
             body["limit"] = limit
         if not isinstance(expires_at, NotGiven):
@@ -986,8 +986,8 @@ class AsyncLicenses:
         *,
         license_key: str,
         instance_id: str,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkDeactivateLicenseResponseValue200ApplicationJson:
         """Deactivate a license instance
 
@@ -1042,7 +1042,7 @@ class AsyncLicenses:
             "idempotency_supported": True,
             "operation_id": "deactivateLicense",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "license_key": license_key,
             "instance_id": instance_id,
         }

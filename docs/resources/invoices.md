@@ -12,53 +12,53 @@ List all invoices
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        search: Optional[str] = None,
-        search_by: Optional[Union[InvoicesSearchBy, str]] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[List[Union[InvoicesStatus, str]]] = None,
-        payment_methods: Optional[List[Union[InvoicesPaymentMethods, str]]] = None,
-        sort: Optional[Union[InvoicesSort, str]] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        search_by: InvoicesSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[InvoicesStatus | str] | None = None,
+        payment_methods: builtins.list[InvoicesPaymentMethods | str] | None = None,
+        sort: InvoicesSort | str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| search | `Optional[str]` | No |
-| search_by | `Optional[Union[InvoicesSearchBy, str]]` | No |
-| id | `Optional[str]` | No |
-| email | `Optional[str]` | No |
-| transaction_id | `Optional[str]` | No |
-| serial_code | `Optional[str]` | No |
-| additional_info | `Optional[str]` | No |
-| product_name | `Optional[str]` | No |
-| discord_data | `Optional[str]` | No |
-| crypto_txid | `Optional[str]` | No |
-| crypto_address | `Optional[str]` | No |
-| coupon_code | `Optional[str]` | No |
-| status | `Optional[List[Union[InvoicesStatus, str]]]` | No |
-| payment_methods | `Optional[List[Union[InvoicesPaymentMethods, str]]]` | No |
-| sort | `Optional[Union[InvoicesSort, str]]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| search | `str \| None` | No |
+| search_by | `InvoicesSearchBy \| str \| None` | No |
+| id | `str \| None` | No |
+| email | `str \| None` | No |
+| transaction_id | `str \| None` | No |
+| serial_code | `str \| None` | No |
+| additional_info | `str \| None` | No |
+| product_name | `str \| None` | No |
+| discord_data | `str \| None` | No |
+| crypto_txid | `str \| None` | No |
+| crypto_address | `str \| None` | No |
+| coupon_code | `str \| None` | No |
+| status | `builtins.list[InvoicesStatus \| str] \| None` | No |
+| payment_methods | `builtins.list[InvoicesPaymentMethods \| str] \| None` | No |
+| sort | `InvoicesSort \| str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListInvoicesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -105,30 +105,30 @@ def create(
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateInvoiceRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateInvoiceRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateInvoiceRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateInvoiceRequestApplicationJsonPropertyExtra] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateInvoiceRequestApplicationJsonPropertyExtra | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceResponseValue201ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer_email | `str` | Yes |
-| payment_method | `Union[SdkCreateInvoiceRequestApplicationJsonPaymentMethod, str]` | Yes |
+| payment_method | `SdkCreateInvoiceRequestApplicationJsonPaymentMethod \| str` | Yes |
 | product_variants | `CreateInvoiceRequestApplicationJsonPropertyProductVariants` | Yes |
-| customer_ip | `Union[str, None, NotGiven]` | No |
-| coupon | `Optional[str]` | No |
-| vat_id | `Optional[str]` | No |
-| country | `Optional[str]` | No |
-| affiliate | `Union[str, None, NotGiven]` | No |
-| extra | `Optional[CreateInvoiceRequestApplicationJsonPropertyExtra]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| customer_ip | `str \| None \| NotGiven` | No |
+| coupon | `str \| None` | No |
+| vat_id | `str \| None` | No |
+| country | `str \| None` | No |
+| affiliate | `str \| None \| NotGiven` | No |
+| extra | `CreateInvoiceRequestApplicationJsonPropertyExtra \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateInvoiceResponseValue201ApplicationJson`.
 
@@ -178,63 +178,59 @@ Search invoices
 def search(
         self,
         *,
-        search: Optional[str] = None,
-        search_by: Optional[
-            Union[SdkSearchInvoicesRequestApplicationJsonSearchBy, str]
-        ] = None,
-        id: Optional[str] = None,
-        email: Optional[str] = None,
-        transaction_id: Optional[str] = None,
-        serial_code: Optional[str] = None,
-        additional_info: Optional[str] = None,
-        product_name: Optional[str] = None,
-        discord_data: Optional[str] = None,
-        crypto_txid: Optional[str] = None,
-        crypto_address: Optional[str] = None,
-        coupon_code: Optional[str] = None,
-        status: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonStatus, str]]
-        ] = None,
-        payment_methods: Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonPaymentMethods, str]]
-        ] = None,
-        sort: Optional[Union[SdkSearchInvoicesRequestApplicationJsonSort, str]] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        search: str | None = None,
+        search_by: SdkSearchInvoicesRequestApplicationJsonSearchBy | str | None = None,
+        id: str | None = None,
+        email: str | None = None,
+        transaction_id: str | None = None,
+        serial_code: str | None = None,
+        additional_info: str | None = None,
+        product_name: str | None = None,
+        discord_data: str | None = None,
+        crypto_txid: str | None = None,
+        crypto_address: str | None = None,
+        coupon_code: str | None = None,
+        status: builtins.list[SdkSearchInvoicesRequestApplicationJsonStatus | str]
+        | None = None,
+        payment_methods: builtins.list[
+            SdkSearchInvoicesRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        sort: SdkSearchInvoicesRequestApplicationJsonSort | str | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchInvoicesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| search | `Optional[str]` | No |
-| search_by | `Optional[
-            Union[SdkSearchInvoicesRequestApplicationJsonSearchBy, str]
-        ]` | No |
-| id | `Optional[str]` | No |
-| email | `Optional[str]` | No |
-| transaction_id | `Optional[str]` | No |
-| serial_code | `Optional[str]` | No |
-| additional_info | `Optional[str]` | No |
-| product_name | `Optional[str]` | No |
-| discord_data | `Optional[str]` | No |
-| crypto_txid | `Optional[str]` | No |
-| crypto_address | `Optional[str]` | No |
-| coupon_code | `Optional[str]` | No |
-| status | `Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonStatus, str]]
-        ]` | No |
-| payment_methods | `Optional[
-            List[Union[SdkSearchInvoicesRequestApplicationJsonPaymentMethods, str]]
-        ]` | No |
-| sort | `Optional[Union[SdkSearchInvoicesRequestApplicationJsonSort, str]]` | No |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| search | `str \| None` | No |
+| search_by | `SdkSearchInvoicesRequestApplicationJsonSearchBy \| str \| None` | No |
+| id | `str \| None` | No |
+| email | `str \| None` | No |
+| transaction_id | `str \| None` | No |
+| serial_code | `str \| None` | No |
+| additional_info | `str \| None` | No |
+| product_name | `str \| None` | No |
+| discord_data | `str \| None` | No |
+| crypto_txid | `str \| None` | No |
+| crypto_address | `str \| None` | No |
+| coupon_code | `str \| None` | No |
+| status | `builtins.list[SdkSearchInvoicesRequestApplicationJsonStatus \| str]
+        \| None` | No |
+| payment_methods | `builtins.list[
+            SdkSearchInvoicesRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| sort | `SdkSearchInvoicesRequestApplicationJsonSort \| str \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchInvoicesResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -284,14 +280,14 @@ def get(
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetInvoiceResponseValue200ApplicationJson`.
 
@@ -338,14 +334,14 @@ def go_to_checkout(
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateCheckoutSessionResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCheckoutSessionResponseValue200ApplicationJson`.
 
@@ -392,14 +388,14 @@ def get_deliverables(
         self,
         invoice: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetInvoiceDeliverablesResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetInvoiceDeliverablesResponseValue200ApplicationJson`.
 
@@ -446,16 +442,16 @@ def mark_completed(
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceCompletedResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkMarkPendingInvoiceCompletedResponseValue200ApplicationJson`.
 
@@ -505,16 +501,16 @@ def mark_voided(
         self,
         invoice: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkMarkPendingInvoiceVoidedResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkMarkPendingInvoiceVoidedResponseValue200ApplicationJson`.
 
@@ -565,7 +561,7 @@ def issue_replacement(
         invoice: int,
         *,
         product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
 ```
 
@@ -573,7 +569,7 @@ def issue_replacement(
 | --- | --- | --- |
 | invoice | `int` | Yes |
 | product_variants | `IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson`.
 
@@ -623,18 +619,18 @@ def update_status(
         self,
         invoice: int,
         *,
-        status: Union[SdkUpdateInvoiceStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateInvoiceStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateInvoiceStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| status | `Union[SdkUpdateInvoiceStatusRequestApplicationJsonStatus, str]` | Yes |
-| expected_status | `Union[Union[ExpectedStatus, str], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateInvoiceStatusRequestApplicationJsonStatus \| str` | Yes |
+| expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateInvoiceStatusResponseValue200ApplicationJson`.
 
@@ -685,16 +681,16 @@ def create_refund(
         self,
         invoice: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| amount | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| amount | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateInvoiceRefundResponseValue200ApplicationJson`.
 
@@ -744,16 +740,16 @@ def retry_fulfillment(
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentRetryResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| email | `Union[str, None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateFulfillmentRetryResponseValue200ApplicationJson`.
 
@@ -801,7 +797,7 @@ def retry_dynamic_delivery(
         invoice: int,
         *,
         delivered_product_id: int,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson:
 ```
 
@@ -809,7 +805,7 @@ def retry_dynamic_delivery(
 | --- | --- | --- |
 | invoice | `int` | Yes |
 | delivered_product_id | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson`.
 
@@ -859,18 +855,18 @@ def notify_fulfillment(
         self,
         invoice: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateFulfillmentNotificationsResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| email | `Union[str, None, NotGiven]` | No |
-| product_variant_ids | `Union[List[int], None, NotGiven]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| email | `str \| None \| NotGiven` | No |
+| product_variant_ids | `builtins.list[int] \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateFulfillmentNotificationsResponseValue200ApplicationJson`.
 

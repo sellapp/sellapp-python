@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .get_reward_grant_response_value_200_application_json_property_data_propert
     GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItemType,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItem",
     "required": ["id", "type", "payload"],
     "properties": {
@@ -48,7 +48,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItem",
     "required": ["id", "type", "payload"],
     "properties": {
@@ -84,17 +84,17 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsIt
         GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItemType
     )
     payload: GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItemPropertyPayload
-    coupon_id: Optional[int] = None
-    wallet_ledger_entry_id: Optional[int] = None
-    created_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    coupon_id: int | None = None
+    wallet_ledger_entry_id: int | None = None
+    created_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItem:
         """Deserialize from a dictionary."""
         try:
@@ -112,7 +112,7 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsIt
                     data["type"]
                 ),
                 payload=GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsItemPropertyPayload.from_dict(
-                    cast(Dict[str, Any], data["payload"])
+                    cast(dict[str, Any], data["payload"])
                 ),
                 coupon_id=data.get("coupon_id"),
                 wallet_ledger_entry_id=data.get("wallet_ledger_entry_id"),
@@ -138,9 +138,9 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsIt
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["type"] = self.type
         _domain_data["payload"] = self.payload
@@ -155,7 +155,7 @@ class GetRewardGrantResponseValue200ApplicationJsonPropertyDataPropertyOutputsIt
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["payload"] = self.payload.to_dict()

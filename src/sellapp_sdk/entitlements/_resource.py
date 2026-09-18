@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from .._base_client import WithRawResponse
 
@@ -27,7 +27,7 @@ class Entitlements:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 
@@ -91,7 +91,7 @@ class Entitlements:
         self,
         external_id: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 
@@ -163,7 +163,7 @@ class AsyncEntitlements:
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 
@@ -227,7 +227,7 @@ class AsyncEntitlements:
         self,
         external_id: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListCustomerEntitlementsResponseValue200ApplicationJson:
         """List customer entitlements
 

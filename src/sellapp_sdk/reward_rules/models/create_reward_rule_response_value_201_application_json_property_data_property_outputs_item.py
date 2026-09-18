@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -23,7 +23,7 @@ from .create_reward_rule_response_value_201_application_json_property_data_prope
     CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItemPropertyPayload,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem",
     "required": ["id", "type", "sort_order", "payload"],
     "properties": {
@@ -45,7 +45,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem",
     "required": ["id", "type", "sort_order", "payload"],
     "properties": {
@@ -77,16 +77,16 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputs
     type: CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItemType
     sort_order: int
     payload: CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItemPropertyPayload
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem:
         """Deserialize from a dictionary."""
         try:
@@ -105,7 +105,7 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputs
                 ),
                 sort_order=data["sort_order"],
                 payload=CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputsItemPropertyPayload.from_dict(
-                    cast(Dict[str, Any], data["payload"])
+                    cast(dict[str, Any], data["payload"])
                 ),
                 created_at=_parse_datetime(_v_created_at)
                 if (_v_created_at := data.get("created_at")) is not None
@@ -125,9 +125,9 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputs
                 e,
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["type"] = self.type
         _domain_data["sort_order"] = self.sort_order
@@ -142,7 +142,7 @@ class CreateRewardRuleResponseValue201ApplicationJsonPropertyDataPropertyOutputs
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["type"] = self.type.value if isinstance(self.type, Enum) else self.type
         result["sort_order"] = self.sort_order

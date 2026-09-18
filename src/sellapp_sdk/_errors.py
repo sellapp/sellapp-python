@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, Optional
+from typing import Any
 
 
 class SellAppError(Exception):
@@ -17,14 +17,14 @@ class AuthenticationError(SellAppError):
         self,
         message: str,
         *,
-        type: Optional[str] = None,
-        code: Optional[str] = None,
-        status: Optional[int] = None,
-        param: Optional[str] = None,
-        request_id: Optional[str] = None,
-        docs_url: Optional[str] = None,
-        body: Optional[Mapping[str, Any]] = None,
-        headers: Optional[Mapping[str, str]] = None,
+        type: str | None = None,
+        code: str | None = None,
+        status: int | None = None,
+        param: str | None = None,
+        request_id: str | None = None,
+        docs_url: str | None = None,
+        body: Mapping[str, Any] | None = None,
+        headers: Mapping[str, str] | None = None,
         raw_body: bytes = b"",
     ) -> None:
         super().__init__(message)
@@ -61,14 +61,14 @@ class ApiError(SellAppError):
         self,
         message: str,
         *,
-        type: Optional[str] = None,
-        code: Optional[str] = None,
-        status: Optional[int] = None,
-        param: Optional[str] = None,
-        request_id: Optional[str] = None,
-        docs_url: Optional[str] = None,
-        body: Optional[Mapping[str, Any]] = None,
-        headers: Optional[Mapping[str, str]] = None,
+        type: str | None = None,
+        code: str | None = None,
+        status: int | None = None,
+        param: str | None = None,
+        request_id: str | None = None,
+        docs_url: str | None = None,
+        body: Mapping[str, Any] | None = None,
+        headers: Mapping[str, str] | None = None,
         raw_body: bytes = b"",
     ) -> None:
         super().__init__(message)

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
-from typing import Any, Dict, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _preserve_unknown_fields,
@@ -16,7 +16,7 @@ from .list_subscriptions_response_value_200_application_json_property_data_item_
     ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -49,7 +49,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
         "id",
@@ -90,24 +90,24 @@ class ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem:
 
     id: int
     status: str
-    provider_subscription_id: Optional[str]
-    provider_customer_id: Optional[str]
+    provider_subscription_id: str | None
+    provider_customer_id: str | None
     customer: (
         ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer
     )
-    subscription_id: Optional[str] = None
+    subscription_id: str | None = None
     """.. deprecated:: This field is deprecated."""
-    customer_id: Optional[str] = None
+    customer_id: str | None = None
     """.. deprecated:: This field is deprecated."""
-    product_variant_id: Optional[int] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+    product_variant_id: int | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem:
         """Deserialize from a dictionary."""
         try:
@@ -125,7 +125,7 @@ class ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem:
                 provider_subscription_id=data["provider_subscription_id"],
                 provider_customer_id=data["provider_customer_id"],
                 customer=ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-                    cast(Dict[str, Any], data["customer"])
+                    cast(dict[str, Any], data["customer"])
                 ),
                 subscription_id=data.get("subscription_id"),
                 customer_id=data.get("customer_id"),
@@ -150,9 +150,9 @@ class ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem:
                 "ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["status"] = self.status
         _domain_data["provider_subscription_id"] = self.provider_subscription_id
@@ -170,7 +170,7 @@ class ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["status"] = self.status
         if self.provider_subscription_id is not None:

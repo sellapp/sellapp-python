@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.blacklists.models.batch_update_sections_request_application_json_property_resources import (
     BatchUpdateSectionsRequestApplicationJsonPropertyResources,
@@ -126,12 +128,12 @@ class Sections:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all sections
 
@@ -208,7 +210,7 @@ class Sections:
         *,
         title: str,
         hidden: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateSectionResponseValue201ApplicationJson:
         """Create a section
 
@@ -258,7 +260,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "createSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
         }
@@ -294,7 +296,7 @@ class Sections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSectionResponseValue200ApplicationJson:
         """Retrieve a section
 
@@ -355,9 +357,9 @@ class Sections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -409,7 +411,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "replaceSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -449,9 +451,9 @@ class Sections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -503,7 +505,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "updateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -543,7 +545,7 @@ class Sections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a section
 
@@ -599,8 +601,8 @@ class Sections:
     def replace_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionOrderResponseValue200ApplicationJson:
         """Replace section order
 
@@ -649,7 +651,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -683,8 +685,8 @@ class Sections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionProductsResponseValue200ApplicationJson:
         """Replace section products
 
@@ -735,7 +737,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -769,8 +771,8 @@ class Sections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionGroupsResponseValue200ApplicationJson:
         """Replace section groups
 
@@ -821,7 +823,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -854,21 +856,20 @@ class Sections:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search sections
 
@@ -924,7 +925,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "searchSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -960,8 +961,10 @@ class Sections:
     def batch_create(
         self,
         *,
-        resources: List[BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateSectionsResponseValue200ApplicationJson:
         """Batch create sections
 
@@ -1010,7 +1013,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "batchCreateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -1040,7 +1043,7 @@ class Sections:
         self,
         *,
         resources: BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateSectionsResponseValue200ApplicationJson:
         """Batch update sections
 
@@ -1089,7 +1092,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "batchUpdateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -1116,8 +1119,8 @@ class Sections:
     def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete sections
 
@@ -1163,7 +1166,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "batchDeleteSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -1194,12 +1197,12 @@ class Sections:
     def v2_list_sections(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all sections
 
@@ -1278,8 +1281,8 @@ class Sections:
         *,
         title: str,
         hidden: bool,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateSectionResponseValue201ApplicationJson:
         """Create a section
 
@@ -1332,7 +1335,7 @@ class Sections:
             "idempotency_supported": True,
             "operation_id": "v2CreateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
         }
@@ -1368,22 +1371,23 @@ class Sections:
     def v2_search_sections(
         self,
         *,
-        filters: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search sections
 
@@ -1442,7 +1446,7 @@ class Sections:
             "idempotency_supported": True,
             "operation_id": "v2SearchSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1479,7 +1483,7 @@ class Sections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetSectionResponseValue200ApplicationJson:
         """Retrieve a section
 
@@ -1542,9 +1546,9 @@ class Sections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -1598,7 +1602,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1638,9 +1642,9 @@ class Sections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -1694,7 +1698,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2UpdateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -1734,7 +1738,7 @@ class Sections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a section
 
@@ -1792,11 +1796,11 @@ class Sections:
     def v2_batch_create_sections(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateSectionsResponseValue200ApplicationJson:
         """Batch create sections
 
@@ -1848,7 +1852,7 @@ class Sections:
             "idempotency_supported": True,
             "operation_id": "v2BatchCreateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -1879,7 +1883,7 @@ class Sections:
         self,
         *,
         resources: V2BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateSectionsResponseValue200ApplicationJson:
         """Batch update sections
 
@@ -1930,7 +1934,7 @@ class Sections:
             "idempotency_supported": True,
             "operation_id": "v2BatchUpdateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -1957,8 +1961,8 @@ class Sections:
     def v2_batch_delete_sections(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete sections
 
@@ -2006,7 +2010,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2BatchDeleteSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2037,8 +2041,8 @@ class Sections:
     def v2_replace_section_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionOrderResponseValue200ApplicationJson:
         """Replace section order
 
@@ -2089,7 +2093,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2123,8 +2127,8 @@ class Sections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionProductsResponseValue200ApplicationJson:
         """Replace section products
 
@@ -2177,7 +2181,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2211,8 +2215,8 @@ class Sections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionGroupsResponseValue200ApplicationJson:
         """Replace section groups
 
@@ -2265,7 +2269,7 @@ class Sections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2306,12 +2310,12 @@ class AsyncSections:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all sections
 
@@ -2388,7 +2392,7 @@ class AsyncSections:
         *,
         title: str,
         hidden: bool,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateSectionResponseValue201ApplicationJson:
         """Create a section
 
@@ -2438,7 +2442,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "createSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
         }
@@ -2474,7 +2478,7 @@ class AsyncSections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetSectionResponseValue200ApplicationJson:
         """Retrieve a section
 
@@ -2535,9 +2539,9 @@ class AsyncSections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -2589,7 +2593,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "replaceSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -2629,9 +2633,9 @@ class AsyncSections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -2683,7 +2687,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "updateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -2723,7 +2727,7 @@ class AsyncSections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a section
 
@@ -2779,8 +2783,8 @@ class AsyncSections:
     async def replace_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionOrderResponseValue200ApplicationJson:
         """Replace section order
 
@@ -2829,7 +2833,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2863,8 +2867,8 @@ class AsyncSections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionProductsResponseValue200ApplicationJson:
         """Replace section products
 
@@ -2915,7 +2919,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -2949,8 +2953,8 @@ class AsyncSections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceSectionGroupsResponseValue200ApplicationJson:
         """Replace section groups
 
@@ -3001,7 +3005,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "replaceSectionGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -3034,21 +3038,20 @@ class AsyncSections:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchSectionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search sections
 
@@ -3104,7 +3107,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "searchSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -3140,8 +3143,10 @@ class AsyncSections:
     async def batch_create(
         self,
         *,
-        resources: List[BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[
+            BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
+        ],
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchCreateSectionsResponseValue200ApplicationJson:
         """Batch create sections
 
@@ -3190,7 +3195,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "batchCreateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -3220,7 +3225,7 @@ class AsyncSections:
         self,
         *,
         resources: BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkBatchUpdateSectionsResponseValue200ApplicationJson:
         """Batch update sections
 
@@ -3269,7 +3274,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "batchUpdateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -3296,8 +3301,8 @@ class AsyncSections:
     async def batch_delete(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete sections
 
@@ -3343,7 +3348,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "batchDeleteSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -3374,12 +3379,12 @@ class AsyncSections:
     async def v2_list_sections(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all sections
 
@@ -3458,8 +3463,8 @@ class AsyncSections:
         *,
         title: str,
         hidden: bool,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2CreateSectionResponseValue201ApplicationJson:
         """Create a section
 
@@ -3512,7 +3517,7 @@ class AsyncSections:
             "idempotency_supported": True,
             "operation_id": "v2CreateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "title": title,
             "hidden": hidden,
         }
@@ -3548,22 +3553,23 @@ class AsyncSections:
     async def v2_search_sections(
         self,
         *,
-        filters: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[V2SearchSectionsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[V2SearchSectionsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[V2SearchSectionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: V2SearchSectionsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            V2SearchSectionsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search sections
 
@@ -3622,7 +3628,7 @@ class AsyncSections:
             "idempotency_supported": True,
             "operation_id": "v2SearchSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -3659,7 +3665,7 @@ class AsyncSections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2GetSectionResponseValue200ApplicationJson:
         """Retrieve a section
 
@@ -3722,9 +3728,9 @@ class AsyncSections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -3778,7 +3784,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -3818,9 +3824,9 @@ class AsyncSections:
         self,
         section: int,
         *,
-        title: Optional[str] = None,
-        hidden: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        title: str | None = None,
+        hidden: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2UpdateSectionResponseValue200ApplicationJson:
         """Update a section
 
@@ -3874,7 +3880,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2UpdateSection",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "title": title,
@@ -3914,7 +3920,7 @@ class AsyncSections:
         self,
         section: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a section
 
@@ -3972,11 +3978,11 @@ class AsyncSections:
     async def v2_batch_create_sections(
         self,
         *,
-        resources: List[
+        resources: builtins.list[
             V2BatchCreateSectionsRequestApplicationJsonPropertyResourcesItem
         ],
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchCreateSectionsResponseValue200ApplicationJson:
         """Batch create sections
 
@@ -4028,7 +4034,7 @@ class AsyncSections:
             "idempotency_supported": True,
             "operation_id": "v2BatchCreateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": [item.to_dict() for item in resources],
         }
         _validate_model(
@@ -4059,7 +4065,7 @@ class AsyncSections:
         self,
         *,
         resources: V2BatchUpdateSectionsRequestApplicationJsonPropertyResources,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkV2BatchUpdateSectionsResponseValue200ApplicationJson:
         """Batch update sections
 
@@ -4110,7 +4116,7 @@ class AsyncSections:
             "idempotency_supported": True,
             "operation_id": "v2BatchUpdateSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources.to_dict(),
         }
         _validate_model(
@@ -4137,8 +4143,8 @@ class AsyncSections:
     async def v2_batch_delete_sections(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Batch delete sections
 
@@ -4186,7 +4192,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2BatchDeleteSections",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -4217,8 +4223,8 @@ class AsyncSections:
     async def v2_replace_section_order(
         self,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionOrderResponseValue200ApplicationJson:
         """Replace section order
 
@@ -4269,7 +4275,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -4303,8 +4309,8 @@ class AsyncSections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionProductsResponseValue200ApplicationJson:
         """Replace section products
 
@@ -4357,7 +4363,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionProducts",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(
@@ -4391,8 +4397,8 @@ class AsyncSections:
         self,
         section: int,
         *,
-        resources: List[int],
-        request_options: Optional[RequestOptions] = None,
+        resources: builtins.list[int],
+        request_options: RequestOptions | None = None,
     ) -> SdkV2ReplaceSectionGroupsResponseValue200ApplicationJson:
         """Replace section groups
 
@@ -4445,7 +4451,7 @@ class AsyncSections:
             "idempotency_supported": False,
             "operation_id": "v2ReplaceSectionGroups",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "resources": resources,
         }
         _validate_model(

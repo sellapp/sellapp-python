@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Literal, Optional, Union
+from typing import TYPE_CHECKING, Any, Literal
 
 from .._base_client import WithRawResponse
 
@@ -73,10 +73,10 @@ class ProductVariantsBooking:
         product: int,
         variant: int,
         *,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        quantity: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        from_: str | None = None,
+        to: str | None = None,
+        quantity: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListBookingAvailabilityResponseValue200ApplicationJson:
         """List booking availability
 
@@ -132,7 +132,7 @@ class ProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "listBookingAvailability",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "from": from_,
@@ -163,10 +163,10 @@ class ProductVariantsBooking:
         variant: int,
         *,
         slot_start_at: str,
-        quantity: Optional[int] = None,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta: Optional[CreateBookingHoldRequestApplicationJsonPropertyMeta] = None,
-        request_options: Optional[RequestOptions] = None,
+        quantity: int | None = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        meta: CreateBookingHoldRequestApplicationJsonPropertyMeta | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateBookingHoldResponseValue201ApplicationJson:
         """Create a booking hold
 
@@ -223,7 +223,7 @@ class ProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "createBookingHold",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "slot_start_at": slot_start_at,
@@ -284,8 +284,8 @@ class ProductVariantsBooking:
         product: int,
         hold: str,
         *,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Release a booking hold
 
@@ -336,7 +336,7 @@ class ProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "releaseBookingHold",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(customer_key, NotGiven):
             body["customer_key"] = customer_key
         _validate_model(
@@ -377,7 +377,7 @@ class ProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBookingConfigurationResponseValue200ApplicationJson:
         """Retrieve booking configuration
 
@@ -442,43 +442,34 @@ class ProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope, str
-            ]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider, str
-            ]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceBookingConfigurationResponseValue200ApplicationJson:
         """Update booking configuration
 
@@ -548,7 +539,7 @@ class ProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "replaceBookingConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": mode,
@@ -679,39 +670,34 @@ class ProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope, str]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider, str]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateBookingConfigurationResponseValue200ApplicationJson:
         """Update booking configuration
 
@@ -781,7 +767,7 @@ class ProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "updateBookingConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": mode,
@@ -920,10 +906,10 @@ class AsyncProductVariantsBooking:
         product: int,
         variant: int,
         *,
-        from_: Optional[str] = None,
-        to: Optional[str] = None,
-        quantity: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        from_: str | None = None,
+        to: str | None = None,
+        quantity: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListBookingAvailabilityResponseValue200ApplicationJson:
         """List booking availability
 
@@ -979,7 +965,7 @@ class AsyncProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "listBookingAvailability",
         }
-        params: Dict[str, Any] = {
+        params: dict[str, Any] = {
             k: v
             for k, v in {
                 "from": from_,
@@ -1010,10 +996,10 @@ class AsyncProductVariantsBooking:
         variant: int,
         *,
         slot_start_at: str,
-        quantity: Optional[int] = None,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        meta: Optional[CreateBookingHoldRequestApplicationJsonPropertyMeta] = None,
-        request_options: Optional[RequestOptions] = None,
+        quantity: int | None = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        meta: CreateBookingHoldRequestApplicationJsonPropertyMeta | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateBookingHoldResponseValue201ApplicationJson:
         """Create a booking hold
 
@@ -1070,7 +1056,7 @@ class AsyncProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "createBookingHold",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "slot_start_at": slot_start_at,
@@ -1131,8 +1117,8 @@ class AsyncProductVariantsBooking:
         product: int,
         hold: str,
         *,
-        customer_key: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        customer_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> None:
         """Release a booking hold
 
@@ -1183,7 +1169,7 @@ class AsyncProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "releaseBookingHold",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(customer_key, NotGiven):
             body["customer_key"] = customer_key
         _validate_model(
@@ -1224,7 +1210,7 @@ class AsyncProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetBookingConfigurationResponseValue200ApplicationJson:
         """Retrieve booking configuration
 
@@ -1289,43 +1275,34 @@ class AsyncProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope, str
-            ]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider, str
-            ]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkReplaceBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            ReplaceBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkReplaceBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkReplaceBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: ReplaceBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkReplaceBookingConfigurationResponseValue200ApplicationJson:
         """Update booking configuration
 
@@ -1395,7 +1372,7 @@ class AsyncProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "replaceBookingConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": mode,
@@ -1526,39 +1503,34 @@ class AsyncProductVariantsBooking:
         product: str,
         variant: int,
         *,
-        mode: Optional[Literal["native"]] = None,
-        conflict_scope: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope, str]
-        ] = None,
-        timezone: Optional[str] = None,
-        duration_minutes: Optional[int] = None,
-        capacity_per_slot: Optional[int] = None,
-        min_notice_minutes: Optional[int] = None,
-        max_advance_days: Optional[int] = None,
-        buffer_before_minutes: Optional[int] = None,
-        buffer_after_minutes: Optional[int] = None,
-        availability: Optional[
-            List[
-                UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
-            ]
-        ] = None,
-        provider_connection_ids: Optional[List[int]] = None,
-        video_provider: Optional[
-            Union[SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider, str]
-        ] = None,
-        video_provider_connection_id: Union[int, None, NotGiven] = NOT_GIVEN,
-        reminders_enabled: Optional[bool] = None,
-        reminder_offset_value: Optional[int] = None,
-        reminder_offset_unit: Optional[
-            Union[
-                SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit,
-                str,
-            ]
-        ] = None,
-        meta: Optional[
-            UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
-        ] = None,
-        request_options: Optional[RequestOptions] = None,
+        mode: Literal["native"] | None = None,
+        conflict_scope: SdkUpdateBookingConfigurationRequestApplicationJsonConflictScope
+        | str
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        capacity_per_slot: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        availability: list[
+            UpdateBookingConfigurationRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        provider_connection_ids: list[int] | None = None,
+        video_provider: SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkUpdateBookingConfigurationRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        meta: UpdateBookingConfigurationRequestApplicationJsonPropertyMeta
+        | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateBookingConfigurationResponseValue200ApplicationJson:
         """Update booking configuration
 
@@ -1628,7 +1600,7 @@ class AsyncProductVariantsBooking:
             "idempotency_supported": False,
             "operation_id": "updateBookingConfiguration",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "mode": mode,

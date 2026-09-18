@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus(str, Enum):
@@ -20,7 +20,7 @@ class CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus(str, En
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus]:
+    ) -> CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

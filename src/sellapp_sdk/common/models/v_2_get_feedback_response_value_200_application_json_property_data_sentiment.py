@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Literal, Optional, TypeAlias
+from typing import Literal, TypeAlias
 
 
 class V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment(str, Enum):
@@ -18,7 +18,7 @@ class V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment(str, Enu
     @classmethod
     def _missing_(
         cls, value: object
-    ) -> Optional[V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment]:
+    ) -> V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment | None:
         if not isinstance(value, str):
             return None
         unknown = str.__new__(cls, value)

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -19,7 +19,7 @@ from .get_credit_balance_response_value_200_application_json_property_data_prope
     GetCreditBalanceResponseValue200ApplicationJsonPropertyDataPropertyLedgerEntriesItem,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCreditBalanceResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "store_id", "customer_id", "product_id", "balance_units"],
     "properties": {
@@ -46,7 +46,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCreditBalanceResponseValue200ApplicationJsonPropertyData",
     "required": ["id", "store_id", "customer_id", "product_id", "balance_units"],
     "properties": {
@@ -84,25 +84,26 @@ class GetCreditBalanceResponseValue200ApplicationJsonPropertyData:
     customer_id: int
     product_id: int
     balance_units: int
-    customer_email: Optional[str] = None
+    customer_email: str | None = None
     """The email of the customer holding the balance, or null once the customer is deleted."""
-    product_title: Optional[str] = None
+    product_title: str | None = None
     """The title of the credits product, or null once the product is soft-deleted."""
-    ledger_entries: Optional[
-        List[
+    ledger_entries: (
+        list[
             GetCreditBalanceResponseValue200ApplicationJsonPropertyDataPropertyLedgerEntriesItem
         ]
-    ] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = dataclass_field(
+        | None
+    ) = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> GetCreditBalanceResponseValue200ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -124,7 +125,7 @@ class GetCreditBalanceResponseValue200ApplicationJsonPropertyData:
                 product_title=data.get("product_title"),
                 ledger_entries=[
                     GetCreditBalanceResponseValue200ApplicationJsonPropertyDataPropertyLedgerEntriesItem.from_dict(
-                        cast(Dict[str, Any], item)
+                        cast(dict[str, Any], item)
                     )
                     for item in cast(list[Any], _v_ledger_entries)
                 ]
@@ -158,9 +159,9 @@ class GetCreditBalanceResponseValue200ApplicationJsonPropertyData:
                 "GetCreditBalanceResponseValue200ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["store_id"] = self.store_id
         _domain_data["customer_id"] = self.customer_id
@@ -182,7 +183,7 @@ class GetCreditBalanceResponseValue200ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["store_id"] = self.store_id
         result["customer_id"] = self.customer_id

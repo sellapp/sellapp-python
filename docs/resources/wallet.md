@@ -12,23 +12,23 @@ List customer wallets
 def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListCustomerWalletsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
-| limit | `Optional[int]` | No |
-| before | `Optional[str]` | No |
-| after | `Optional[str]` | No |
-| order | `Optional[str]` | No |
-| page | `Optional[int]` | No |
-| request_options | `Optional[RequestOptions]` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListCustomerWalletsResponseValue200ApplicationJsonPropertyDataItem]`.
 
@@ -75,14 +75,14 @@ def get(
         self,
         customer: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetCustomerWalletResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer | `int` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkGetCustomerWalletResponseValue200ApplicationJson`.
 
@@ -132,7 +132,7 @@ def adjust(
         amount_cents: int,
         idempotency_key: str,
         note: str,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkAdjustCustomerWalletResponseValue200ApplicationJson:
 ```
 
@@ -142,7 +142,7 @@ def adjust(
 | amount_cents | `int` | Yes |
 | idempotency_key | `str` | Yes |
 | note | `str` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAdjustCustomerWalletResponseValue200ApplicationJson`.
 
@@ -194,16 +194,16 @@ def update_status(
         self,
         customer: int,
         *,
-        status: Union[SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus, str],
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus | str,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerWalletStatusResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | customer | `int` | Yes |
-| status | `Union[SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus, str]` | Yes |
-| request_options | `Optional[RequestOptions]` | No |
+| status | `SdkUpdateCustomerWalletStatusRequestApplicationJsonStatus \| str` | Yes |
+| request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCustomerWalletStatusResponseValue200ApplicationJson`.
 

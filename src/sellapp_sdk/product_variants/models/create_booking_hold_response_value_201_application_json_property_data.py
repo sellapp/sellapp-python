@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -15,7 +15,7 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-_DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
+_DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateBookingHoldResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "slot_start_at", "slot_end_at", "quantity", "expires_at"],
     "properties": {
@@ -27,7 +27,7 @@ _DOMAIN_RUNTIME_SCHEMA: Dict[str, Any] = {
     },
     "additionalProperties": True,
 }
-_WIRE_RUNTIME_SCHEMA: Dict[str, Any] = {
+_WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateBookingHoldResponseValue201ApplicationJsonPropertyData",
     "required": ["id", "slot_start_at", "slot_end_at", "quantity", "expires_at"],
     "properties": {
@@ -50,14 +50,14 @@ class CreateBookingHoldResponseValue201ApplicationJsonPropertyData:
     slot_end_at: datetime
     quantity: int
     expires_at: datetime
-    additional_properties: Dict[str, Any] = dataclass_field(
+    additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
     _from_response: bool = dataclass_field(default=False, repr=False, compare=False)
 
     @classmethod
     def from_dict(
-        cls, data: Dict[str, Any]
+        cls, data: dict[str, Any]
     ) -> CreateBookingHoldResponseValue201ApplicationJsonPropertyData:
         """Deserialize from a dictionary."""
         try:
@@ -86,9 +86,9 @@ class CreateBookingHoldResponseValue201ApplicationJsonPropertyData:
                 "CreateBookingHoldResponseValue201ApplicationJsonPropertyData", e
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
-        _domain_data: Dict[str, Any] = dict(self.additional_properties)
+        _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["id"] = self.id
         _domain_data["slot_start_at"] = self.slot_start_at
         _domain_data["slot_end_at"] = self.slot_end_at
@@ -102,7 +102,7 @@ class CreateBookingHoldResponseValue201ApplicationJsonPropertyData:
             allow_unknown_union_variants=self._from_response,
             allow_unknown_fields=(self._from_response or True),
         )
-        result: Dict[str, Any] = dict(self.additional_properties)
+        result: dict[str, Any] = dict(self.additional_properties)
         result["id"] = self.id
         result["slot_start_at"] = _format_datetime(self.slot_start_at)
         result["slot_end_at"] = _format_datetime(self.slot_end_at)

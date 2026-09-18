@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from sellapp_sdk.common.models.create_order_replacement_request_application_json_property_product_variants import (
     CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
@@ -59,12 +61,12 @@ class Orders:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[ListOrdersResponseValue200ApplicationJsonPropertyDataItem]:
         """List orders
 
@@ -142,17 +144,17 @@ class Orders:
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateOrderRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateOrderRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateOrderRequestApplicationJsonPropertyExtra] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateOrderRequestApplicationJsonPropertyExtra | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderResponseValue201ApplicationJson:
         """Create an order
 
@@ -215,7 +217,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "createOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -328,18 +330,16 @@ class Orders:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchOrdersRequestApplicationJsonPropertySortItem]] = None,
-        pagination: Optional[
-            SearchOrdersRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchOrdersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrdersRequestApplicationJsonPropertyPagination | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchOrdersResponseValue200ApplicationJsonPropertyDataItem]:
         """Search orders
 
@@ -396,7 +396,7 @@ class Orders:
             "idempotency_supported": False,
             "operation_id": "searchOrders",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -430,7 +430,7 @@ class Orders:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderResponseValue200ApplicationJson:
         """Retrieve an order
 
@@ -493,9 +493,9 @@ class Orders:
         self,
         order: int,
         *,
-        status: Union[SdkUpdateOrderStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateOrderStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateOrderStatusResponseValue200ApplicationJson:
         """Update order status
 
@@ -550,7 +550,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "updateOrderStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         if not isinstance(expected_status, NotGiven):
@@ -606,9 +606,9 @@ class Orders:
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderCheckoutResponseValue200ApplicationJson:
         """Create order checkout
 
@@ -663,7 +663,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "createOrderCheckout",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -715,8 +715,8 @@ class Orders:
         order: int,
         *,
         product_variants: CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderReplacementResponseValue200ApplicationJson:
         """Issue replacements
 
@@ -771,7 +771,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "createOrderReplacement",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_variants": product_variants.to_dict(),
         }
         _validate_model(
@@ -800,9 +800,9 @@ class Orders:
         self,
         order: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderRefundResponseValue200ApplicationJson:
         """Refund an order
 
@@ -857,7 +857,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "createOrderRefund",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
         _validate_model(
@@ -895,9 +895,9 @@ class Orders:
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderFulfillmentResponseValue200ApplicationJson:
         """Retry fulfillment
 
@@ -952,7 +952,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "retryOrderFulfillment",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         _validate_model(
@@ -992,8 +992,8 @@ class Orders:
         order: int,
         *,
         delivered_product_id: int,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson:
         """Retry dynamic delivery
 
@@ -1048,7 +1048,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "retryOrderDynamicDelivery",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "delivered_product_id": delivered_product_id,
         }
         _validate_model(
@@ -1083,10 +1083,10 @@ class Orders:
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendOrderFulfillmentNotificationsResponseValue200ApplicationJson:
         """Send fulfillment notifications
 
@@ -1142,7 +1142,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "sendOrderFulfillmentNotifications",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         if not isinstance(product_variant_ids, NotGiven):
@@ -1195,7 +1195,7 @@ class Orders:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListOrderDeliverablesResponseValue200ApplicationJson:
         """List order deliverables
 
@@ -1260,14 +1260,14 @@ class Orders:
         *,
         customer_email: str,
         product_variants: CreateWalletOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateWalletOrderRequestApplicationJsonPropertyExtra] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateWalletOrderRequestApplicationJsonPropertyExtra | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletOrderResponseValue201ApplicationJson:
         """Create and pay an order from a wallet
 
@@ -1327,7 +1327,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "createWalletOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -1388,9 +1388,9 @@ class Orders:
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPayOrderFromWalletResponseValue200ApplicationJson:
         """Pay an existing order from its customer wallet
 
@@ -1444,7 +1444,7 @@ class Orders:
             "idempotency_supported": True,
             "operation_id": "payOrderFromWallet",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -1502,12 +1502,12 @@ class AsyncOrders:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListOrdersResponseValue200ApplicationJsonPropertyDataItem]:
         """List orders
 
@@ -1585,17 +1585,17 @@ class AsyncOrders:
         self,
         *,
         customer_email: str,
-        payment_method: Union[SdkCreateOrderRequestApplicationJsonPaymentMethod, str],
+        payment_method: SdkCreateOrderRequestApplicationJsonPaymentMethod | str,
         product_variants: CreateOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateOrderRequestApplicationJsonPropertyExtra] = None,
-        custom_payment_method_id: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateOrderRequestApplicationJsonPropertyExtra | None = None,
+        custom_payment_method_id: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderResponseValue201ApplicationJson:
         """Create an order
 
@@ -1658,7 +1658,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "createOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -1771,18 +1771,16 @@ class AsyncOrders:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[List[SearchOrdersRequestApplicationJsonPropertySortItem]] = None,
-        pagination: Optional[
-            SearchOrdersRequestApplicationJsonPropertyPagination
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[SearchOrdersRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: builtins.list[SearchOrdersRequestApplicationJsonPropertySortItem]
+        | None = None,
+        pagination: SearchOrdersRequestApplicationJsonPropertyPagination | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchOrdersResponseValue200ApplicationJsonPropertyDataItem]:
         """Search orders
 
@@ -1839,7 +1837,7 @@ class AsyncOrders:
             "idempotency_supported": False,
             "operation_id": "searchOrders",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -1873,7 +1871,7 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetOrderResponseValue200ApplicationJson:
         """Retrieve an order
 
@@ -1936,9 +1934,9 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        status: Union[SdkUpdateOrderStatusRequestApplicationJsonStatus, str],
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        status: SdkUpdateOrderStatusRequestApplicationJsonStatus | str,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateOrderStatusResponseValue200ApplicationJson:
         """Update order status
 
@@ -1993,7 +1991,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "updateOrderStatus",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": enum_value(status),
         }
         if not isinstance(expected_status, NotGiven):
@@ -2049,9 +2047,9 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderCheckoutResponseValue200ApplicationJson:
         """Create order checkout
 
@@ -2106,7 +2104,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "createOrderCheckout",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None
@@ -2158,8 +2156,8 @@ class AsyncOrders:
         order: int,
         *,
         product_variants: CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderReplacementResponseValue200ApplicationJson:
         """Issue replacements
 
@@ -2214,7 +2212,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "createOrderReplacement",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "product_variants": product_variants.to_dict(),
         }
         _validate_model(
@@ -2243,9 +2241,9 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        amount: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        amount: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderRefundResponseValue200ApplicationJson:
         """Refund an order
 
@@ -2300,7 +2298,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "createOrderRefund",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
         _validate_model(
@@ -2338,9 +2336,9 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderFulfillmentResponseValue200ApplicationJson:
         """Retry fulfillment
 
@@ -2395,7 +2393,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "retryOrderFulfillment",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         _validate_model(
@@ -2435,8 +2433,8 @@ class AsyncOrders:
         order: int,
         *,
         delivered_product_id: int,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson:
         """Retry dynamic delivery
 
@@ -2491,7 +2489,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "retryOrderDynamicDelivery",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "delivered_product_id": delivered_product_id,
         }
         _validate_model(
@@ -2526,10 +2524,10 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        email: Union[str, None, NotGiven] = NOT_GIVEN,
-        product_variant_ids: Union[List[int], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        email: str | None | NotGiven = NOT_GIVEN,
+        product_variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkSendOrderFulfillmentNotificationsResponseValue200ApplicationJson:
         """Send fulfillment notifications
 
@@ -2585,7 +2583,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "sendOrderFulfillmentNotifications",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(email, NotGiven):
             body["email"] = email
         if not isinstance(product_variant_ids, NotGiven):
@@ -2638,7 +2636,7 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkListOrderDeliverablesResponseValue200ApplicationJson:
         """List order deliverables
 
@@ -2703,14 +2701,14 @@ class AsyncOrders:
         *,
         customer_email: str,
         product_variants: CreateWalletOrderRequestApplicationJsonPropertyProductVariants,
-        customer_ip: Union[str, None, NotGiven] = NOT_GIVEN,
-        coupon: Optional[str] = None,
-        vat_id: Optional[str] = None,
-        country: Optional[str] = None,
-        affiliate: Union[str, None, NotGiven] = NOT_GIVEN,
-        extra: Optional[CreateWalletOrderRequestApplicationJsonPropertyExtra] = None,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        customer_ip: str | None | NotGiven = NOT_GIVEN,
+        coupon: str | None = None,
+        vat_id: str | None = None,
+        country: str | None = None,
+        affiliate: str | None | NotGiven = NOT_GIVEN,
+        extra: CreateWalletOrderRequestApplicationJsonPropertyExtra | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCreateWalletOrderResponseValue201ApplicationJson:
         """Create and pay an order from a wallet
 
@@ -2770,7 +2768,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "createWalletOrder",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "customer_email": customer_email,
@@ -2831,9 +2829,9 @@ class AsyncOrders:
         self,
         order: int,
         *,
-        expected_status: Union[Union[ExpectedStatus, str], None, NotGiven] = NOT_GIVEN,
-        idempotency_key: Optional[str] = None,
-        request_options: Optional[RequestOptions] = None,
+        expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkPayOrderFromWalletResponseValue200ApplicationJson:
         """Pay an existing order from its customer wallet
 
@@ -2887,7 +2885,7 @@ class AsyncOrders:
             "idempotency_supported": True,
             "operation_id": "payOrderFromWallet",
         }
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if not isinstance(expected_status, NotGiven):
             body["expected_status"] = (
                 enum_value(expected_status) if expected_status is not None else None

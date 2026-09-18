@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, List, Literal, Optional, Union
+from typing import TYPE_CHECKING, Any, Literal
 
 from .._base_client import WithRawResponse
 
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
+
+import builtins
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
@@ -34,13 +36,13 @@ class Bookings:
     def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListAppointmentsResponseValue200ApplicationJson]:
         """List appointments
 
@@ -119,23 +121,24 @@ class Bookings:
     def search(
         self,
         *,
-        filters: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchAppointmentsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchAppointmentsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchAppointmentsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchAppointmentsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchAppointmentsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkSearchAppointmentsResponseValue200ApplicationJson]:
         """Search appointments
 
@@ -195,7 +198,7 @@ class Bookings:
             "idempotency_supported": False,
             "operation_id": "searchAppointments",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -234,7 +237,7 @@ class Bookings:
         self,
         booking: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAppointmentResponseValue200ApplicationJson:
         """Retrieve an appointment
 
@@ -298,8 +301,8 @@ class Bookings:
         booking: str,
         *,
         slot_start_at: str,
-        timezone: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        timezone: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAppointmentResponseValue200ApplicationJson:
         """Update an appointment
 
@@ -353,7 +356,7 @@ class Bookings:
             "idempotency_supported": False,
             "operation_id": "updateAppointment",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "slot_start_at": slot_start_at,
         }
         if not isinstance(timezone, NotGiven):
@@ -394,7 +397,7 @@ class Bookings:
         booking: str,
         *,
         status: Literal["cancelled"],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelAppointmentResponseValue200ApplicationJson:
         """Cancel an appointment
 
@@ -447,7 +450,7 @@ class Bookings:
             "idempotency_supported": False,
             "operation_id": "cancelAppointment",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": status,
         }
         _validate_model(
@@ -482,13 +485,13 @@ class AsyncBookings:
     async def list(
         self,
         *,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListAppointmentsResponseValue200ApplicationJson]:
         """List appointments
 
@@ -567,23 +570,24 @@ class AsyncBookings:
     async def search(
         self,
         *,
-        filters: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertyFiltersItem]
-        ] = None,
-        sort: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertySortItem]
-        ] = None,
-        search: Optional[SearchAppointmentsRequestApplicationJsonPropertySearch] = None,
-        includes: Optional[
-            List[SearchAppointmentsRequestApplicationJsonPropertyIncludesItem]
-        ] = None,
-        limit: Optional[int] = None,
-        before: Optional[str] = None,
-        after: Optional[str] = None,
-        order: Optional[str] = None,
-        page: Optional[int] = None,
-        pagination: Optional[bool] = None,
-        request_options: Optional[RequestOptions] = None,
+        filters: builtins.list[
+            SearchAppointmentsRequestApplicationJsonPropertyFiltersItem
+        ]
+        | None = None,
+        sort: builtins.list[SearchAppointmentsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchAppointmentsRequestApplicationJsonPropertySearch | None = None,
+        includes: builtins.list[
+            SearchAppointmentsRequestApplicationJsonPropertyIncludesItem
+        ]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkSearchAppointmentsResponseValue200ApplicationJson]:
         """Search appointments
 
@@ -643,7 +647,7 @@ class AsyncBookings:
             "idempotency_supported": False,
             "operation_id": "searchAppointments",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             k: v
             for k, v in {
                 "filters": [item.to_dict() for item in filters]
@@ -682,7 +686,7 @@ class AsyncBookings:
         self,
         booking: str,
         *,
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkGetAppointmentResponseValue200ApplicationJson:
         """Retrieve an appointment
 
@@ -746,8 +750,8 @@ class AsyncBookings:
         booking: str,
         *,
         slot_start_at: str,
-        timezone: Union[str, None, NotGiven] = NOT_GIVEN,
-        request_options: Optional[RequestOptions] = None,
+        timezone: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
     ) -> SdkUpdateAppointmentResponseValue200ApplicationJson:
         """Update an appointment
 
@@ -801,7 +805,7 @@ class AsyncBookings:
             "idempotency_supported": False,
             "operation_id": "updateAppointment",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "slot_start_at": slot_start_at,
         }
         if not isinstance(timezone, NotGiven):
@@ -842,7 +846,7 @@ class AsyncBookings:
         booking: str,
         *,
         status: Literal["cancelled"],
-        request_options: Optional[RequestOptions] = None,
+        request_options: RequestOptions | None = None,
     ) -> SdkCancelAppointmentResponseValue200ApplicationJson:
         """Cancel an appointment
 
@@ -895,7 +899,7 @@ class AsyncBookings:
             "idempotency_supported": False,
             "operation_id": "cancelAppointment",
         }
-        body: Dict[str, Any] = {
+        body: dict[str, Any] = {
             "status": status,
         }
         _validate_model(
