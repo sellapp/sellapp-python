@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "language": "python",
   "repository": "sellapp/sellapp-python",
-  "sourceSha": "386095979b8d8557a99aac7e025f11b1b9acc5e8",
+  "sourceSha": "784789070390439078829c058bfc2d2786edf52c",
   "specSha256": "02043ebfc36589e78743f00a0f4a2f3ac9ac14914b9cf2910f04fc34ad2d0924",
   "runId": "0",
   "runAttempt": "1",
-  "treeDigest": "3be54c32497028f0aae8cf1a65482785a7754aebcca7aec3d18356a06b4bf3aa",
-  "contentDigest": "e0871ab2391d98f06e68450402b6fb3265c1f4cc5c28d11e7be3dbf78438e623",
+  "treeDigest": "bc9d9a09226bcd591008f85df71fbdf31eda223638f07733f6da8b638bc55698",
+  "contentDigest": "295c1f4841623e86c5236f72f08a9427a8a85642e8f9c50d7e97f7fb78fe7725",
   "files": [
     {
       "path": ".github/scripts/native-ci.mjs",
@@ -20,9 +20,19 @@
       "sha256": "3c2585c1fda3c0b7ab5098a1d0d82d520ee66b83186844f4024e70a1179daec5"
     },
     {
+      "path": ".github/scripts/verify-python-publication.py",
+      "mode": "100644",
+      "sha256": "e94a629fb88f1c1ad71e1c931402a5d72ce6c1db0ecd5f1d679688d92f398a24"
+    },
+    {
       "path": ".github/workflows/ci.yml",
       "mode": "100644",
       "sha256": "4ffc342777a294882b04f7c772da16dbba7a1287c5d75d6864eb004c1d175ab8"
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "mode": "100644",
+      "sha256": "67d055b0d1bbbb8889e3b2e61dd4c964b24419e4a725c0cf5f027509d569c823"
     },
     {
       "path": ".node-version",
@@ -47,7 +57,7 @@
     {
       "path": "README.md",
       "mode": "100644",
-      "sha256": "15455c5056977d355e3c13c934fa601a068b7189e444cffbbac196e4e83f8d9d"
+      "sha256": "9f3b0ec2ce78f02ca871004677ee1e690e134eb7bec7d0b4233fcd5cd3451809"
     },
     {
       "path": "docs/methods.md",
@@ -492,7 +502,7 @@
     {
       "path": "generation-manifest.json",
       "mode": "100644",
-      "sha256": "94b87bd0892d22cceed7fb72227d9f55f3ebe903f805184909f860d93659e8b2"
+      "sha256": "1fe3f5109b82be1b5f619e304a2acb8b7d2425c8caeb2595dea649546980763f"
     },
     {
       "path": "pyproject.toml",

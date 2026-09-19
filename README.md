@@ -9,26 +9,22 @@ find out whether your store and your code are on speaking terms.
 Already building an integration? Jump to [configuration](https://github.com/sellapp/sellapp-python/blob/main/docs/usage.md#client-configuration),
 [async](#prefer-async), or the [method index](https://github.com/sellapp/sellapp-python/blob/main/docs/methods.md).
 
-## Availability and installation
-
-**Install from source for now.** This SDK is pre-release, and publication of
-`sellapp-sdk` on PyPI has not been verified.
+## Installation
 
 Requires Python 3.10 or newer. Use a currently supported Python release for new
-integrations.
-
-You'll need access to [this private repository](https://github.com/sellapp/sellapp-python). Open a terminal
-in your local copy, then create a virtual environment and install the SDK there.
-The virtual environment keeps this project's Python packages together:
+integrations. Create a virtual environment to keep this project's packages together:
 
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install .
+python -m pip install sellapp-sdk
 ```
 
 On Windows, activate with `.venv\Scripts\Activate.ps1`. The distribution name
 is `sellapp-sdk`; the import is `sellapp_sdk`.
+Find releases on [PyPI](https://pypi.org/project/sellapp-sdk/) and the
+[source repository](https://github.com/sellapp/sellapp-python). If you are working from an unpublished
+checkout, install that local copy with `python -m pip install .` instead.
 
 ## First request
 
