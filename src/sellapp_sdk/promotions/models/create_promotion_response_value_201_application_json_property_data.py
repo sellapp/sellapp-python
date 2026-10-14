@@ -15,6 +15,9 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.create_promotion_response_value_201_application_json_property_data_applies_to import (
+    CreatePromotionResponseValue201ApplicationJsonPropertyDataAppliesTo,
+)
 from sellapp_sdk.common.models.create_promotion_response_value_201_application_json_property_data_status import (
     CreatePromotionResponseValue201ApplicationJsonPropertyDataStatus,
 )
@@ -25,7 +28,19 @@ from .create_promotion_response_value_201_application_json_property_data_propert
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionResponseValue201ApplicationJsonPropertyData",
-    "required": ["id", "name", "status", "priority", "is_stackable", "phases"],
+    "required": [
+        "id",
+        "name",
+        "status",
+        "priority",
+        "is_stackable",
+        "applies_to",
+        "subscription_payments",
+        "store_wide",
+        "products",
+        "product_variants",
+        "phases",
+    ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
         "name": {"kind": "primitive", "type": "string"},
@@ -51,6 +66,20 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "integer",
                 "constraints": {"minimum": 1},
             },
+        },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "store_wide": {"kind": "primitive", "type": "boolean"},
+        "products": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variants": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
         },
         "phases": {"kind": "array", "items": {"kind": "any"}},
         "created_at": {
@@ -70,7 +99,19 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreatePromotionResponseValue201ApplicationJsonPropertyData",
-    "required": ["id", "name", "status", "priority", "is_stackable", "phases"],
+    "required": [
+        "id",
+        "name",
+        "status",
+        "priority",
+        "is_stackable",
+        "applies_to",
+        "subscription_payments",
+        "store_wide",
+        "products",
+        "product_variants",
+        "phases",
+    ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
         "name": {"kind": "primitive", "type": "string"},
@@ -96,6 +137,20 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "integer",
                 "constraints": {"minimum": 1},
             },
+        },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "store_wide": {"kind": "primitive", "type": "boolean"},
+        "products": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variants": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
         },
         "phases": {"kind": "array", "items": {"kind": "any"}},
         "created_at": {
@@ -124,6 +179,16 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyData:
     status: CreatePromotionResponseValue201ApplicationJsonPropertyDataStatus
     priority: int
     is_stackable: bool
+    applies_to: CreatePromotionResponseValue201ApplicationJsonPropertyDataAppliesTo
+    """`one_time` when the promotion discounts one-time purchases, or `subscriptions` when it discounts the first payments of a subscription plan."""
+    subscription_payments: int | None
+    """How many payments a `subscriptions` promotion discounts, counting the signup payment as the first. Null on a `one_time` promotion."""
+    store_wide: bool
+    """Whether the promotion reaches every product of its kind. A `one_time` promotion is always store-wide. A `subscriptions` promotion with `false` reaches only the products in `products`, limited to the plans in `product_variants`."""
+    products: list[int]
+    """Product IDs a narrowed subscription promotion reaches. Empty when the promotion is store-wide."""
+    product_variants: list[int]
+    """Subscription plan IDs the picked products are limited to. A picked product with none of its plans listed here takes every plan of that product, including plans added later. Empty when the promotion is store-wide."""
     phases: list[
         CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItem
     ]
@@ -160,6 +225,13 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyData:
                 ),
                 priority=data["priority"],
                 is_stackable=data["is_stackable"],
+                applies_to=CreatePromotionResponseValue201ApplicationJsonPropertyDataAppliesTo(
+                    data["applies_to"]
+                ),
+                subscription_payments=data["subscription_payments"],
+                store_wide=data["store_wide"],
+                products=data["products"],
+                product_variants=data["product_variants"],
                 phases=[
                     CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItem.from_dict(
                         cast(dict[str, Any], item)
@@ -193,6 +265,11 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyData:
                         "priority",
                         "is_stackable",
                         "max_redemptions",
+                        "applies_to",
+                        "subscription_payments",
+                        "store_wide",
+                        "products",
+                        "product_variants",
                         "phases",
                         "created_at",
                         "updated_at",
@@ -214,6 +291,11 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyData:
         _domain_data["status"] = self.status
         _domain_data["priority"] = self.priority
         _domain_data["is_stackable"] = self.is_stackable
+        _domain_data["applies_to"] = self.applies_to
+        _domain_data["subscription_payments"] = self.subscription_payments
+        _domain_data["store_wide"] = self.store_wide
+        _domain_data["products"] = self.products
+        _domain_data["product_variants"] = self.product_variants
         _domain_data["phases"] = self.phases
         _domain_data["starts_at"] = self.starts_at
         _domain_data["ends_at"] = self.ends_at
@@ -237,6 +319,18 @@ class CreatePromotionResponseValue201ApplicationJsonPropertyData:
         )
         result["priority"] = self.priority
         result["is_stackable"] = self.is_stackable
+        result["applies_to"] = (
+            self.applies_to.value
+            if isinstance(self.applies_to, Enum)
+            else self.applies_to
+        )
+        if self.subscription_payments is not None:
+            result["subscription_payments"] = self.subscription_payments
+        else:
+            result["subscription_payments"] = None
+        result["store_wide"] = self.store_wide
+        result["products"] = self.products
+        result["product_variants"] = self.product_variants
         result["phases"] = [item.to_dict() for item in self.phases]
         if self.starts_at is not None:
             result["starts_at"] = _format_datetime(self.starts_at)

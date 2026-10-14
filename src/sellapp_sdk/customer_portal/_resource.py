@@ -9,14 +9,29 @@ from .._base_client import WithRawResponse
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
-from sellapp_sdk.common.models.sdk_cancel_customer_subscription_at_period_end_response_value_200_application_json import (
-    SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson,
+from sellapp_sdk.common.models.sdk_confirm_customer_subscription_plan_change_request_application_json_effective_timing import (
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
+)
+from sellapp_sdk.common.models.sdk_confirm_customer_subscription_plan_change_request_application_json_proration_behavior import (
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
+)
+from sellapp_sdk.common.models.sdk_preview_customer_subscription_plan_change_request_application_json_effective_timing import (
+    SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
+)
+from sellapp_sdk.common.models.sdk_preview_customer_subscription_plan_change_request_application_json_proration_behavior import (
+    SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
 )
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata,
+    ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata,
     CustomerPortalOrder,
+    CustomerPortalSubscription,
+    PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata,
+    PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata,
+    SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson,
     SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson,
     SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
@@ -25,7 +40,6 @@ from .models import (
     SdkGetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJson,
     SdkGetCustomerPortalSubscriptionResponseValue200ApplicationJson,
     SdkListCustomerPortalEntitlementsResponseValue200ApplicationJson,
-    SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson,
     SdkPauseCustomerSubscriptionResponseValue200ApplicationJson,
     SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
@@ -350,14 +364,25 @@ class CustomerPortal:
     def list_customer_portal_subscriptions(
         self,
         *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
         request_options: RequestOptions | None = None,
-    ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
+    ) -> SyncPage[CustomerPortalSubscription]:
         """List customer subscriptions
 
-        List subscriptions belonging to the customer session.
+        List subscriptions belonging to the customer session, newest first, 15 per page. `trial_ends_at` is only set while a subscription is `TRIALING`.
+
+        Args:
+            limit: The limit.
+            before: The before.
+            after: The after.
+            order: The order.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson
+            SyncPage[CustomerPortalSubscription]
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -393,10 +418,21 @@ class CustomerPortal:
             "idempotency_supported": False,
             "operation_id": "listCustomerPortalSubscriptions",
         }
-        return self._client.request(
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+            }.items()
+            if v is not None
+        }
+        return self._client.request_page(
             method="get",
             path=("v2", "customer-portal", "subscriptions"),
-            model=SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson,
+            model=CustomerPortalSubscription,
+            params=params,
             request_options=request_options,
         )
 
@@ -466,7 +502,7 @@ class CustomerPortal:
     ) -> SdkGetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """Retrieve subscription capabilities
 
-        Read immediately before displaying lifecycle controls.
+        Read immediately before displaying lifecycle controls. Each of the nine actions (`pause`, `resume`, `cancel_at_period_end`, `cancel_immediately`, `keep_subscription`, `update_payment_method`, `change_plan`, `shift_billing_date`, and `set_auto_renew`) reports a status and the reason to show the customer when it is not available. While a Stripe, PayPal, or Razorpay subscription has a payment still owed, every action except `cancel_immediately` and, on Razorpay, `update_payment_method`, is `unsupported`. `resume` is `unsupported` on a subscription on hold for an unpaid renewal, which the customer pays and resumes on the store's customer portal page. The example is abbreviated to three of the actions.
 
         Args:
             subscription: The subscription identifier.
@@ -579,24 +615,16 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel at period end
 
-        Cancel at period end. Read capabilities first; state conflicts return 409.
+        Schedule the subscription to end when the current period ends. The customer keeps access until then. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -638,36 +666,23 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionAtPeriodEnd",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -696,24 +711,16 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel immediately
 
-        Cancel immediately. Read capabilities first; state conflicts return 409.
+        End the subscription now. A customer session cannot request a refund. It is the one action left on a Stripe or PayPal subscription with a payment still owed, and one of two left on a Razorpay one alongside a payment method update. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -755,36 +762,23 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionImmediately",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkCancelCustomerSubscriptionImmediatelyRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -813,24 +807,18 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
-        Pause a subscription. Read capabilities first; state conflicts return 409.
+        Pause billing, optionally until `resume_at`. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
+            resume_at: The resume at.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -872,36 +860,33 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "pauseCustomerSubscription",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(resume_at, NotGiven):
+            body["resume_at"] = resume_at
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkPauseCustomerSubscriptionRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
+                    "resume_at": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "date-time",
+                        },
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
                 },
                 "additionalProperties": True,
             },
@@ -930,25 +915,15 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
-        Resume a subscription. Read capabilities first; state conflicts return 409.
+        Resume a paused subscription. A subscription the store bills in house that is on hold for an unpaid renewal comes back only when the customer pays that renewal on the store's customer portal page, so it is refused. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -989,44 +964,6 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "resumeCustomerSubscription",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
-        _validate_model(
-            body,
-            {
-                "name": "SdkResumeCustomerSubscriptionRequestApplicationJson",
-                "required": [],
-                "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
-                },
-                "additionalProperties": True,
-            },
-            direction="request",
-            allow_unknown_enums=False,
-            allow_unknown_union_variants=False,
-            allow_unknown_fields=True,
-        )
         return self._client.request(
             method="post",
             path=(
@@ -1037,9 +974,7 @@ class CustomerPortal:
                 "actions",
                 "resume",
             ),
-            body=body,
             model=SdkResumeCustomerSubscriptionResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -1047,25 +982,17 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update payment method
 
-        Update payment method. Read capabilities first; state conflicts return 409.
+        Start a payment method update. Send the customer to `redirect_url` to finish it with the provider. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
             return_url: The return url.
-            reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1106,36 +1033,24 @@ class CustomerPortal:
             "idempotency_supported": True,
             "operation_id": "updateCustomerSubscriptionPaymentMethod",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(return_url, NotGiven):
+            body["return_url"] = return_url
         _validate_model(
             body,
             {
                 "name": "SdkUpdateCustomerSubscriptionPaymentMethodRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
                     "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 2000},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -1164,26 +1079,27 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        target_variant_id: int,
+        effective_timing: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a plan change
 
-        Preview a plan change. Read capabilities first; state conflicts return 409.
+        Preview a plan change before confirming it. On Stripe and in-house subscriptions, `preview.payment_required` says whether confirming charges `amount_due` today or leaves any amount to the next invoice, and `preview.renewal_date` says when the subscription renews next. A plan change during a trial never charges today. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
-            idempotency_key: Optional idempotency key for safe retries.
+            target_variant_id: The target variant id.
+            effective_timing: The effective timing.
+            proration_behavior: The proration behavior.
+            metadata: The metadata.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1220,17 +1136,20 @@ class CustomerPortal:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "previewCustomerSubscriptionPlanChange",
         }
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "target_variant_id": target_variant_id,
+                "effective_timing": enum_value(effective_timing)
+                if effective_timing is not None
+                else None,
+                "proration_behavior": enum_value(proration_behavior)
+                if proration_behavior is not None
+                else None,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
@@ -1238,21 +1157,23 @@ class CustomerPortal:
             body,
             {
                 "name": "SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJson",
-                "required": [],
+                "required": ["target_variant_id"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
+                    "target_variant_id": {"kind": "primitive", "type": "integer"},
+                    "effective_timing": {
+                        "kind": "enum",
+                        "values": ["immediate", "next_renewal"],
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "proration_behavior": {
+                        "kind": "enum",
+                        "values": [
+                            "invoice_now",
+                            "credit_next_invoice",
+                            "none",
+                            "provider_default",
+                        ],
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -1274,7 +1195,6 @@ class CustomerPortal:
             ),
             body=body,
             model=SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -1282,25 +1202,30 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        target_variant_id: int,
+        preview_token: str,
+        effective_timing: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a plan change
 
-        Confirm a plan change. Read capabilities first; state conflicts return 409.
+        Confirm a previewed plan change, sending back its `preview_token`. When the change still needs the customer to approve it with the provider or pay for it, the action is `pending` and `redirect_url` says where. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
+            target_variant_id: The target variant id.
+            preview_token: The preview token.
+            effective_timing: The effective timing.
+            proration_behavior: The proration behavior.
+            metadata: The metadata.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1344,11 +1269,15 @@ class CustomerPortal:
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "target_variant_id": target_variant_id,
+                "preview_token": preview_token,
+                "effective_timing": enum_value(effective_timing)
+                if effective_timing is not None
+                else None,
+                "proration_behavior": enum_value(proration_behavior)
+                if proration_behavior is not None
+                else None,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
@@ -1356,21 +1285,28 @@ class CustomerPortal:
             body,
             {
                 "name": "SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJson",
-                "required": [],
+                "required": ["target_variant_id", "preview_token"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
+                    "target_variant_id": {"kind": "primitive", "type": "integer"},
+                    "preview_token": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "constraints": {"maxLength": 128},
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "effective_timing": {
+                        "kind": "enum",
+                        "values": ["immediate", "next_renewal"],
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "proration_behavior": {
+                        "kind": "enum",
+                        "values": [
+                            "invoice_now",
+                            "credit_next_invoice",
+                            "none",
+                            "provider_default",
+                        ],
+                    },
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -1400,26 +1336,21 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        renewal_date: str,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a renewal-date change
 
-        Preview a renewal-date change. Read capabilities first; state conflicts return 409.
+        Preview moving the next renewal to `renewal_date`. `preview` is the provider's own preview, so its keys differ per provider. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
             renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
-            idempotency_key: Optional idempotency key for safe retries.
+            metadata: The metadata.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1456,39 +1387,39 @@ class CustomerPortal:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "previewCustomerSubscriptionRenewalDateChange",
         }
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
                 "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkPreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJson",
-                "required": [],
+                "required": ["renewal_date"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
                     "renewal_date": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "format": "date-time",
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -1510,7 +1441,6 @@ class CustomerPortal:
             ),
             body=body,
             model=SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -1518,25 +1448,24 @@ class CustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        renewal_date: str,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a renewal-date change
 
-        Confirm a renewal-date change. Read capabilities first; state conflicts return 409.
+        Confirm a renewal-date change, sending the `preview_token` when the plan requires a preview. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
             renewal_date: The renewal date.
-            return_url: The return url.
+            preview_token: The preview token.
             reason: The reason.
+            metadata: The metadata.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1580,33 +1509,43 @@ class CustomerPortal:
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
                 "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
+        if not isinstance(preview_token, NotGiven):
+            body["preview_token"] = preview_token
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJson",
-                "required": [],
+                "required": ["renewal_date"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
                     "renewal_date": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "format": "date-time",
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "preview_token": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 128},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    },
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -1947,14 +1886,25 @@ class AsyncCustomerPortal:
     async def list_customer_portal_subscriptions(
         self,
         *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
         request_options: RequestOptions | None = None,
-    ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
+    ) -> AsyncPage[CustomerPortalSubscription]:
         """List customer subscriptions
 
-        List subscriptions belonging to the customer session.
+        List subscriptions belonging to the customer session, newest first, 15 per page. `trial_ends_at` is only set while a subscription is `TRIALING`.
+
+        Args:
+            limit: The limit.
+            before: The before.
+            after: The after.
+            order: The order.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson
+            AsyncPage[CustomerPortalSubscription]
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -1990,10 +1940,21 @@ class AsyncCustomerPortal:
             "idempotency_supported": False,
             "operation_id": "listCustomerPortalSubscriptions",
         }
-        return await self._client.request(
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request_page(
             method="get",
             path=("v2", "customer-portal", "subscriptions"),
-            model=SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson,
+            model=CustomerPortalSubscription,
+            params=params,
             request_options=request_options,
         )
 
@@ -2063,7 +2024,7 @@ class AsyncCustomerPortal:
     ) -> SdkGetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """Retrieve subscription capabilities
 
-        Read immediately before displaying lifecycle controls.
+        Read immediately before displaying lifecycle controls. Each of the nine actions (`pause`, `resume`, `cancel_at_period_end`, `cancel_immediately`, `keep_subscription`, `update_payment_method`, `change_plan`, `shift_billing_date`, and `set_auto_renew`) reports a status and the reason to show the customer when it is not available. While a Stripe, PayPal, or Razorpay subscription has a payment still owed, every action except `cancel_immediately` and, on Razorpay, `update_payment_method`, is `unsupported`. `resume` is `unsupported` on a subscription on hold for an unpaid renewal, which the customer pays and resumes on the store's customer portal page. The example is abbreviated to three of the actions.
 
         Args:
             subscription: The subscription identifier.
@@ -2176,24 +2137,16 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel at period end
 
-        Cancel at period end. Read capabilities first; state conflicts return 409.
+        Schedule the subscription to end when the current period ends. The customer keeps access until then. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -2235,36 +2188,23 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionAtPeriodEnd",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -2293,24 +2233,16 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel immediately
 
-        Cancel immediately. Read capabilities first; state conflicts return 409.
+        End the subscription now. A customer session cannot request a refund. It is the one action left on a Stripe or PayPal subscription with a payment still owed, and one of two left on a Razorpay one alongside a payment method update. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -2352,36 +2284,23 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "cancelCustomerSubscriptionImmediately",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkCancelCustomerSubscriptionImmediatelyRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -2410,24 +2329,18 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
-        Pause a subscription. Read capabilities first; state conflicts return 409.
+        Pause billing, optionally until `resume_at`. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
+            resume_at: The resume at.
             reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -2469,36 +2382,33 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "pauseCustomerSubscription",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(resume_at, NotGiven):
+            body["resume_at"] = resume_at
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkPauseCustomerSubscriptionRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
+                    "resume_at": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "date-time",
+                        },
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
                 },
                 "additionalProperties": True,
             },
@@ -2527,25 +2437,15 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
-        Resume a subscription. Read capabilities first; state conflicts return 409.
+        Resume a paused subscription. A subscription the store bills in house that is on hold for an unpaid renewal comes back only when the customer pays that renewal on the store's customer portal page, so it is refused. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -2586,44 +2486,6 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "resumeCustomerSubscription",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
-        _validate_model(
-            body,
-            {
-                "name": "SdkResumeCustomerSubscriptionRequestApplicationJson",
-                "required": [],
-                "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
-                },
-                "additionalProperties": True,
-            },
-            direction="request",
-            allow_unknown_enums=False,
-            allow_unknown_union_variants=False,
-            allow_unknown_fields=True,
-        )
         return await self._client.request(
             method="post",
             path=(
@@ -2634,9 +2496,7 @@ class AsyncCustomerPortal:
                 "actions",
                 "resume",
             ),
-            body=body,
             model=SdkResumeCustomerSubscriptionResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -2644,25 +2504,17 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update payment method
 
-        Update payment method. Read capabilities first; state conflicts return 409.
+        Start a payment method update. Send the customer to `redirect_url` to finish it with the provider. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
             return_url: The return url.
-            reason: The reason.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -2703,36 +2555,24 @@ class AsyncCustomerPortal:
             "idempotency_supported": True,
             "operation_id": "updateCustomerSubscriptionPaymentMethod",
         }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
-            }.items()
-            if v is not None
-        }
+        body: dict[str, Any] = {}
+        if not isinstance(return_url, NotGiven):
+            body["return_url"] = return_url
         _validate_model(
             body,
             {
                 "name": "SdkUpdateCustomerSubscriptionPaymentMethodRequestApplicationJson",
                 "required": [],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
-                    },
                     "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
-                    },
-                    "reason": {"kind": "primitive", "type": "string"},
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 2000},
+                        },
+                    }
                 },
                 "additionalProperties": True,
             },
@@ -2761,26 +2601,27 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        target_variant_id: int,
+        effective_timing: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a plan change
 
-        Preview a plan change. Read capabilities first; state conflicts return 409.
+        Preview a plan change before confirming it. On Stripe and in-house subscriptions, `preview.payment_required` says whether confirming charges `amount_due` today or leaves any amount to the next invoice, and `preview.renewal_date` says when the subscription renews next. A plan change during a trial never charges today. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
-            idempotency_key: Optional idempotency key for safe retries.
+            target_variant_id: The target variant id.
+            effective_timing: The effective timing.
+            proration_behavior: The proration behavior.
+            metadata: The metadata.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -2817,17 +2658,20 @@ class AsyncCustomerPortal:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "previewCustomerSubscriptionPlanChange",
         }
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "target_variant_id": target_variant_id,
+                "effective_timing": enum_value(effective_timing)
+                if effective_timing is not None
+                else None,
+                "proration_behavior": enum_value(proration_behavior)
+                if proration_behavior is not None
+                else None,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
@@ -2835,21 +2679,23 @@ class AsyncCustomerPortal:
             body,
             {
                 "name": "SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJson",
-                "required": [],
+                "required": ["target_variant_id"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "date",
+                    "target_variant_id": {"kind": "primitive", "type": "integer"},
+                    "effective_timing": {
+                        "kind": "enum",
+                        "values": ["immediate", "next_renewal"],
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "proration_behavior": {
+                        "kind": "enum",
+                        "values": [
+                            "invoice_now",
+                            "credit_next_invoice",
+                            "none",
+                            "provider_default",
+                        ],
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -2871,7 +2717,6 @@ class AsyncCustomerPortal:
             ),
             body=body,
             model=SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -2879,25 +2724,30 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        target_variant_id: int,
+        preview_token: str,
+        effective_timing: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a plan change
 
-        Confirm a plan change. Read capabilities first; state conflicts return 409.
+        Confirm a previewed plan change, sending back its `preview_token`. When the change still needs the customer to approve it with the provider or pay for it, the action is `pending` and `redirect_url` says where. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
-            renewal_date: The renewal date.
-            return_url: The return url.
-            reason: The reason.
+            target_variant_id: The target variant id.
+            preview_token: The preview token.
+            effective_timing: The effective timing.
+            proration_behavior: The proration behavior.
+            metadata: The metadata.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -2941,11 +2791,15 @@ class AsyncCustomerPortal:
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
-                "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "target_variant_id": target_variant_id,
+                "preview_token": preview_token,
+                "effective_timing": enum_value(effective_timing)
+                if effective_timing is not None
+                else None,
+                "proration_behavior": enum_value(proration_behavior)
+                if proration_behavior is not None
+                else None,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
@@ -2953,21 +2807,28 @@ class AsyncCustomerPortal:
             body,
             {
                 "name": "SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJson",
-                "required": [],
+                "required": ["target_variant_id", "preview_token"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
-                    "renewal_date": {
+                    "target_variant_id": {"kind": "primitive", "type": "integer"},
+                    "preview_token": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "constraints": {"maxLength": 128},
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "effective_timing": {
+                        "kind": "enum",
+                        "values": ["immediate", "next_renewal"],
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "proration_behavior": {
+                        "kind": "enum",
+                        "values": [
+                            "invoice_now",
+                            "credit_next_invoice",
+                            "none",
+                            "provider_default",
+                        ],
+                    },
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -2997,26 +2858,21 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        renewal_date: str,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a renewal-date change
 
-        Preview a renewal-date change. Read capabilities first; state conflicts return 409.
+        Preview moving the next renewal to `renewal_date`. `preview` is the provider's own preview, so its keys differ per provider. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
             renewal_date: The renewal date.
-            return_url: The return url.
             reason: The reason.
-            idempotency_key: Optional idempotency key for safe retries.
+            metadata: The metadata.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -3053,39 +2909,39 @@ class AsyncCustomerPortal:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "previewCustomerSubscriptionRenewalDateChange",
         }
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
                 "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkPreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJson",
-                "required": [],
+                "required": ["renewal_date"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
                     "renewal_date": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "format": "date-time",
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },
@@ -3107,7 +2963,6 @@ class AsyncCustomerPortal:
             ),
             body=body,
             model=SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
-            idempotency_key=idempotency_key,
             request_options=request_options,
         )
 
@@ -3115,25 +2970,24 @@ class AsyncCustomerPortal:
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        renewal_date: str,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a renewal-date change
 
-        Confirm a renewal-date change. Read capabilities first; state conflicts return 409.
+        Confirm a renewal-date change, sending the `preview_token` when the plan requires a preview. Read capabilities first. A refusal returns 422 with the sentence to show the customer under `errors.subscription`.
 
         Args:
             product_subscription: The productSubscription identifier.
-            preview_id: The preview id.
-            product_variant_id: The product variant id.
             renewal_date: The renewal date.
-            return_url: The return url.
+            preview_token: The preview token.
             reason: The reason.
+            metadata: The metadata.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -3177,33 +3031,43 @@ class AsyncCustomerPortal:
         body: dict[str, Any] = {
             k: v
             for k, v in {
-                "preview_id": preview_id,
-                "product_variant_id": product_variant_id,
                 "renewal_date": renewal_date,
-                "return_url": return_url,
-                "reason": reason,
+                "metadata": metadata.to_dict() if metadata is not None else None,
             }.items()
             if v is not None
         }
+        if not isinstance(preview_token, NotGiven):
+            body["preview_token"] = preview_token
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
         _validate_model(
             body,
             {
                 "name": "SdkConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJson",
-                "required": [],
+                "required": ["renewal_date"],
                 "properties": {
-                    "preview_id": {"kind": "primitive", "type": "string"},
-                    "product_variant_id": {"kind": "primitive", "type": "integer"},
                     "renewal_date": {
                         "kind": "primitive",
                         "type": "string",
-                        "format": "date",
+                        "format": "date-time",
                     },
-                    "return_url": {
-                        "kind": "primitive",
-                        "type": "string",
-                        "format": "uri",
+                    "preview_token": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 128},
+                        },
                     },
-                    "reason": {"kind": "primitive", "type": "string"},
+                    "reason": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                    },
+                    "metadata": {"kind": "any"},
                 },
                 "additionalProperties": True,
             },

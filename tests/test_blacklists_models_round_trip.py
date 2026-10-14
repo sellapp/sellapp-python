@@ -418,6 +418,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -438,6 +440,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -458,6 +462,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -470,6 +476,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_list_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -488,6 +495,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -521,6 +530,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -567,6 +578,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -587,6 +600,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -607,6 +622,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -619,6 +636,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_create_coupon_response_value_201_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -637,6 +655,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -673,6 +693,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -712,6 +734,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -730,6 +754,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -750,6 +776,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -760,6 +788,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_get_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -778,6 +807,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -808,6 +839,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -849,6 +882,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -869,6 +904,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -889,6 +926,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -901,6 +940,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_replace_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -919,6 +959,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -955,6 +997,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -996,6 +1040,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1016,6 +1062,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -1036,6 +1084,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1048,6 +1098,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_update_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -1066,6 +1117,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -1102,6 +1155,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -1143,6 +1198,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1163,6 +1220,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -1183,6 +1242,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1195,6 +1256,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_delete_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -1213,6 +1275,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -1249,6 +1313,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -4930,6 +4996,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -4950,6 +5018,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -4970,6 +5040,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -4982,6 +5054,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_search_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -5000,6 +5073,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -5037,6 +5112,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -5101,6 +5178,7 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "subscription_payments": 1,
         }
         instance = (
             BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -5110,6 +5188,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert "products" not in serialized
         assert "product_variants" not in serialized
+        assert "applies_to" not in serialized
 
     def test_batch_create_coupons_request_application_json_property_resources_item_preserves_nullable_fields(
         self,
@@ -5124,6 +5203,8 @@ class TestModelRoundTrip:
             "limit": None,
             "expires_at": None,
             "minimum_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
         }
         instance = (
             BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -5134,6 +5215,7 @@ class TestModelRoundTrip:
         assert serialized["limit"] is None
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_create_coupons_request_application_json_property_resources_item_round_trips_unknown_enum_values(
         self,
@@ -5148,6 +5230,8 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
         }
         instance = (
             BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -5193,6 +5277,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5215,6 +5301,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -5235,6 +5323,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5249,6 +5339,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_create_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -5267,6 +5358,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -5310,6 +5403,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -5357,6 +5452,7 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "subscription_payments": 1,
         }
         instance = (
             BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
@@ -5370,6 +5466,7 @@ class TestModelRoundTrip:
         assert "store_wide" not in serialized
         assert "products" not in serialized
         assert "product_variants" not in serialized
+        assert "applies_to" not in serialized
 
     def test_batch_update_coupons_request_application_json_property_resources_map_value_preserves_nullable_fields(
         self,
@@ -5384,6 +5481,8 @@ class TestModelRoundTrip:
             "limit": None,
             "expires_at": None,
             "minimum_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
         }
         instance = (
             BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
@@ -5394,6 +5493,7 @@ class TestModelRoundTrip:
         assert serialized["limit"] is None
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_update_coupons_request_application_json_property_resources_map_value_round_trips_unknown_enum_values(
         self,
@@ -5408,6 +5508,8 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
         }
         instance = (
             BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
@@ -5453,6 +5555,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5475,6 +5579,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -5495,6 +5601,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5509,6 +5617,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_update_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -5527,6 +5636,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -5570,6 +5681,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -5616,6 +5729,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5638,6 +5753,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -5658,6 +5775,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5672,6 +5791,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_delete_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -5690,6 +5810,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -5733,6 +5855,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -6775,6 +6899,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -6795,6 +6921,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -6815,6 +6943,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -6827,6 +6957,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_list_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -6845,6 +6976,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -6882,6 +7015,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -6928,6 +7063,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -6948,6 +7085,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -6968,6 +7107,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -6980,6 +7121,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_create_coupon_response_value_201_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -6998,6 +7140,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7036,6 +7180,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -7238,6 +7384,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7260,6 +7408,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -7280,6 +7430,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7294,6 +7446,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_search_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -7312,6 +7465,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7355,6 +7510,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -7401,6 +7558,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7421,6 +7580,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -7441,6 +7602,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7453,6 +7616,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_get_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -7471,6 +7635,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7507,6 +7673,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -7548,6 +7716,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7568,6 +7738,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -7588,6 +7760,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7600,6 +7774,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_replace_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -7618,6 +7793,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7658,6 +7835,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -7699,6 +7878,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7719,6 +7900,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -7739,6 +7922,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7751,6 +7936,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_update_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -7769,6 +7955,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7807,6 +7995,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -7848,6 +8038,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7868,6 +8060,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -7888,6 +8082,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -7900,6 +8096,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_delete_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
@@ -7918,6 +8115,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -7956,6 +8155,8 @@ class TestModelRoundTrip:
                 "store_id": 1,
                 "deleted_at": "2023-01-01T00:00:00.000Z",
                 "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
                 "products": [1],
                 "product_variants": [1],
             }
@@ -8015,6 +8216,7 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "subscription_payments": 1,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8024,6 +8226,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert "products" not in serialized
         assert "product_variants" not in serialized
+        assert "applies_to" not in serialized
 
     def test_v_2_batch_create_coupons_request_application_json_property_resources_item_preserves_nullable_fields(
         self,
@@ -8038,6 +8241,8 @@ class TestModelRoundTrip:
             "limit": None,
             "expires_at": None,
             "minimum_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8048,6 +8253,7 @@ class TestModelRoundTrip:
         assert serialized["limit"] is None
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_create_coupons_request_application_json_property_resources_item_round_trips_unknown_enum_values(
         self,
@@ -8062,6 +8268,8 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8103,6 +8311,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8123,6 +8333,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -8143,6 +8355,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8155,6 +8369,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_create_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -8173,6 +8388,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -8216,6 +8433,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -8259,6 +8478,7 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "subscription_payments": 1,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -8270,6 +8490,7 @@ class TestModelRoundTrip:
         assert "store_wide" not in serialized
         assert "products" not in serialized
         assert "product_variants" not in serialized
+        assert "applies_to" not in serialized
 
     def test_v_2_batch_update_coupons_request_application_json_property_resources_map_value_preserves_nullable_fields(
         self,
@@ -8284,6 +8505,8 @@ class TestModelRoundTrip:
             "limit": None,
             "expires_at": None,
             "minimum_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -8292,6 +8515,7 @@ class TestModelRoundTrip:
         assert serialized["limit"] is None
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_update_coupons_request_application_json_property_resources_map_value_round_trips_unknown_enum_values(
         self,
@@ -8306,6 +8530,8 @@ class TestModelRoundTrip:
             "limit": 1,
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -8345,6 +8571,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8365,6 +8593,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -8385,6 +8615,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8397,6 +8629,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_update_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -8415,6 +8648,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -8458,6 +8693,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -8502,6 +8739,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8522,6 +8761,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -8542,6 +8783,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -8554,6 +8797,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_delete_coupons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -8572,6 +8816,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -8615,6 +8861,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }

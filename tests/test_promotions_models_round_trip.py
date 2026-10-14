@@ -208,6 +208,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -233,6 +238,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_create_promotion_response_value_201_application_json_property_data_preserves_nullable_fields(
@@ -247,6 +257,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -273,6 +288,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -289,6 +305,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -338,6 +359,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,
@@ -636,6 +662,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -661,6 +692,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_get_promotion_response_value_200_application_json_property_data_preserves_nullable_fields(
@@ -675,6 +711,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -701,6 +742,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -717,6 +759,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -764,6 +811,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,
@@ -959,6 +1011,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -984,6 +1041,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_replace_promotion_response_value_200_application_json_property_data_preserves_nullable_fields(
@@ -998,6 +1060,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1024,6 +1091,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -1040,6 +1108,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1089,6 +1162,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,
@@ -1282,6 +1360,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1307,6 +1390,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_update_promotion_response_value_200_application_json_property_data_preserves_nullable_fields(
@@ -1321,6 +1409,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1347,6 +1440,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -1363,6 +1457,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1412,6 +1511,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,
@@ -1545,6 +1649,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1570,6 +1679,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_delete_promotion_response_value_200_application_json_property_data_preserves_nullable_fields(
@@ -1584,6 +1698,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1610,6 +1729,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -1626,6 +1746,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1675,6 +1800,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,
@@ -1870,6 +2000,11 @@ class TestModelRoundTrip:
             "status": "active",
             "priority": 1,
             "is_stackable": True,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1895,6 +2030,11 @@ class TestModelRoundTrip:
         assert serialized["status"] == data["status"]
         assert serialized["priority"] == data["priority"]
         assert serialized["is_stackable"] == data["is_stackable"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
         assert serialized["phases"] == data["phases"]
 
     def test_restore_promotion_response_value_200_application_json_property_data_preserves_nullable_fields(
@@ -1909,6 +2049,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -1935,6 +2080,7 @@ class TestModelRoundTrip:
         assert serialized["starts_at"] is None
         assert serialized["ends_at"] is None
         assert serialized["max_redemptions"] is None
+        assert serialized["subscription_payments"] is None
         assert serialized["created_at"] is None
         assert serialized["updated_at"] is None
         assert serialized["deleted_at"] is None
@@ -1951,6 +2097,11 @@ class TestModelRoundTrip:
             "priority": 1,
             "is_stackable": True,
             "max_redemptions": 1,
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "store_wide": True,
+            "products": [1],
+            "product_variants": [1],
             "phases": [
                 {
                     "id": 1,
@@ -2000,6 +2151,11 @@ class TestModelRoundTrip:
                 "priority": 1,
                 "is_stackable": True,
                 "max_redemptions": 1,
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "store_wide": True,
+                "products": [1],
+                "product_variants": [1],
                 "phases": [
                     {
                         "id": 1,

@@ -36,7 +36,14 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "event_type": {"kind": "primitive", "type": "string"},
         "status": {
             "kind": "enum",
-            "values": ["pending", "delivering", "succeeded", "failed"],
+            "values": [
+                "pending",
+                "delivering",
+                "retrying",
+                "succeeded",
+                "failed",
+                "disabled",
+            ],
         },
         "destination_origin": {"kind": "primitive", "type": "string", "format": "uri"},
         "attempts": {"kind": "primitive", "type": "integer"},
@@ -75,7 +82,14 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "event_type": {"kind": "primitive", "type": "string"},
         "status": {
             "kind": "enum",
-            "values": ["pending", "delivering", "succeeded", "failed"],
+            "values": [
+                "pending",
+                "delivering",
+                "retrying",
+                "succeeded",
+                "failed",
+                "disabled",
+            ],
         },
         "destination_origin": {"kind": "primitive", "type": "string", "format": "uri"},
         "attempts": {"kind": "primitive", "type": "integer"},
@@ -104,6 +118,7 @@ class ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem:
     event_id: str
     event_type: str
     status: ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItemStatus
+    """A disabled channel retains new deliveries with zero attempts. Fix the endpoint and save the channel to re-enable automatic delivery. Retained deliveries require an explicit replay; saving does not send the backlog."""
     destination_origin: str
     attempts: int
     response_status: int | None = None

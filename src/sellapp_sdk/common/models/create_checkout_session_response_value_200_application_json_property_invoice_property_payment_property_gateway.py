@@ -21,7 +21,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "required": ["data", "type"],
     "properties": {
         "data": {"kind": "any"},
-        "type": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "nullable", "inner": {"kind": "primitive", "type": "string"}},
     },
     "additionalProperties": True,
 }
@@ -30,7 +30,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "required": ["data", "type"],
     "properties": {
         "data": {"kind": "any"},
-        "type": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "nullable", "inner": {"kind": "primitive", "type": "string"}},
     },
     "additionalProperties": True,
 }
@@ -41,7 +41,8 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
     """Create Checkout Session Response Value200Application Json Property Invoice Property Payment Property Gateway model."""
 
     data: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyGatewayPropertyData
-    type: str
+    type: str | None
+    """The payment method, or `null` for an invoice that costs nothing. A free trial sold through Stripe, PayPal, or Razorpay keeps its payment method, because that provider bills the plan once the trial ends."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -90,5 +91,8 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
         )
         result: dict[str, Any] = dict(self.additional_properties)
         result["data"] = self.data.to_dict()
-        result["type"] = self.type
+        if self.type is not None:
+            result["type"] = self.type
+        else:
+            result["type"] = None
         return result

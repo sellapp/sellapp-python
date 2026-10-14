@@ -2,11 +2,11 @@
 
 from typing import TypeAlias
 
-from .sdk_confirm_subscription_plan_change_request_application_json_effective_timing import (
-    SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
+from .sdk_confirm_customer_subscription_plan_change_request_application_json_effective_timing import (
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
 )
 
 SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming: TypeAlias = (
-    SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
 )
 __all__ = ["SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming"]

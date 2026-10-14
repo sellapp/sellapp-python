@@ -16,6 +16,9 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
+from .sdk_replace_coupon_request_application_json_applies_to import (
+    SdkReplaceCouponRequestApplicationJsonAppliesTo,
+)
 from .sdk_replace_coupon_request_application_json_type import (
     SdkReplaceCouponRequestApplicationJsonType,
 )
@@ -83,6 +86,15 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                         "constraints": {"minimum": 1, "maxLength": 255},
                     },
                 ],
+            },
+        },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 1, "maximum": 36},
             },
         },
     },
@@ -153,6 +165,15 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 ],
             },
         },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 1, "maximum": 36},
+            },
+        },
     },
     "additionalProperties": True,
 }
@@ -165,17 +186,21 @@ class SdkReplaceCouponRequestApplicationJson:
     code: str | None = None
     type: SdkReplaceCouponRequestApplicationJsonType | None = None
     discount: float | str | None = None
-    """A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit."""
+    """A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead."""
     store_wide: bool | None = None
     products: list[int] | None = None
-    """Product IDs the coupon applies to when store_wide is false."""
+    """Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`."""
     product_variants: list[int] | None = None
-    """Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products."""
+    """Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`."""
     limit: int | None = None
     expires_at: datetime | None = None
     """A future date and time, or null for no expiry."""
     minimum_amount: float | str | None = None
-    """A decimal minimum order amount in the store currency's major unit, or null for no minimum."""
+    """A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum."""
+    applies_to: SdkReplaceCouponRequestApplicationJsonAppliesTo | None = None
+    """What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind."""
+    subscription_payments: int | None = None
+    """How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -207,6 +232,12 @@ class SdkReplaceCouponRequestApplicationJson:
                 if (_v_expires_at := data.get("expires_at")) is not None
                 else None,
                 minimum_amount=data.get("minimum_amount"),
+                applies_to=SdkReplaceCouponRequestApplicationJsonAppliesTo(
+                    _v_applies_to
+                )
+                if (_v_applies_to := data.get("applies_to")) is not None
+                else None,
+                subscription_payments=data.get("subscription_payments"),
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -219,6 +250,8 @@ class SdkReplaceCouponRequestApplicationJson:
                         "limit",
                         "expires_at",
                         "minimum_amount",
+                        "applies_to",
+                        "subscription_payments",
                     ],
                 ),
                 _from_response=True,
@@ -244,6 +277,9 @@ class SdkReplaceCouponRequestApplicationJson:
         _domain_data["limit"] = self.limit
         _domain_data["expires_at"] = self.expires_at
         _domain_data["minimum_amount"] = self.minimum_amount
+        if self.applies_to is not None:
+            _domain_data["applies_to"] = self.applies_to
+        _domain_data["subscription_payments"] = self.subscription_payments
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -279,4 +315,14 @@ class SdkReplaceCouponRequestApplicationJson:
             result["minimum_amount"] = self.minimum_amount
         else:
             result["minimum_amount"] = None
+        if self.applies_to is not None:
+            result["applies_to"] = (
+                self.applies_to.value
+                if isinstance(self.applies_to, Enum)
+                else self.applies_to
+            )
+        if self.subscription_payments is not None:
+            result["subscription_payments"] = self.subscription_payments
+        else:
+            result["subscription_payments"] = None
         return result

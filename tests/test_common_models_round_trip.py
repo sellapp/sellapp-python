@@ -19,6 +19,9 @@ from sellapp_sdk.common.models import (
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricing,
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyProduct,
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     BatchCreateSectionsResponseValue201ApplicationJsonPropertyDataItem,
@@ -39,6 +42,7 @@ from sellapp_sdk.common.models import (
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPaymentPropertySubtotal,
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPaymentPropertySubtotalPropertyTotal,
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatus,
+    CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem,
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus,
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyWebhooksItem,
     CreateNotificationChannelRequestApplicationJsonPropertyChannelOneOfValue1,
@@ -222,13 +226,23 @@ class TestModelRoundTrip:
     def test_create_checkout_session_response_value_201_application_json_property_invoice_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_create_checkout_session_response_value_201_application_json_property_invoice_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_create_checkout_session_response_value_201_application_json_property_invoice_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -481,6 +495,38 @@ class TestModelRoundTrip:
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
 
+    def test_create_checkout_session_response_value_201_application_json_property_invoice_property_status_property_history_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_checkout_session_response_value_201_application_json_property_invoice_property_status_property_history_item.json"
+        )
+        instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_checkout_session_response_value_201_application_json_property_invoice_property_status_property_history_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "setAt": "2023-01-01T00:00:00.000Z",
+            "status": "test_status",
+            "updatedAt": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["setAt"] == data["setAt"]
+        assert serialized["status"] == data["status"]
+        assert serialized["updatedAt"] == data["updatedAt"]
+
     def test_create_checkout_session_response_value_201_application_json_property_invoice_property_status_property_status_round_trip(
         self,
     ):
@@ -533,7 +579,13 @@ class TestModelRoundTrip:
         self,
     ):
         data = {
-            "history": ["test_history"],
+            "history": [
+                {
+                    "setAt": "2023-01-01T00:00:00.000Z",
+                    "status": "test_status",
+                    "updatedAt": "2023-01-01T00:00:00.000Z",
+                }
+            ],
             "status": {
                 "setAt": "2023-01-01T00:00:00.000Z",
                 "status": "test_status",
@@ -768,7 +820,13 @@ class TestModelRoundTrip:
                 },
             },
             "status": {
-                "history": ["test_history"],
+                "history": [
+                    {
+                        "setAt": "2023-01-01T00:00:00.000Z",
+                        "status": "test_status",
+                        "updatedAt": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
                 "status": {
                     "setAt": "2023-01-01T00:00:00.000Z",
                     "status": "test_status",
@@ -866,7 +924,13 @@ class TestModelRoundTrip:
                 },
             },
             "status": {
-                "history": ["test_history"],
+                "history": [
+                    {
+                        "setAt": "2023-01-01T00:00:00.000Z",
+                        "status": "test_status",
+                        "updatedAt": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
                 "status": {
                     "setAt": "2023-01-01T00:00:00.000Z",
                     "status": "test_status",
@@ -974,7 +1038,13 @@ class TestModelRoundTrip:
                     },
                 },
                 "status": {
-                    "history": ["test_history"],
+                    "history": [
+                        {
+                            "setAt": "2023-01-01T00:00:00.000Z",
+                            "status": "test_status",
+                            "updatedAt": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
                     "status": {
                         "setAt": "2023-01-01T00:00:00.000Z",
                         "status": "test_status",
@@ -1066,7 +1136,13 @@ class TestModelRoundTrip:
                     },
                 },
                 "status": {
-                    "history": ["test_history"],
+                    "history": [
+                        {
+                            "setAt": "2023-01-01T00:00:00.000Z",
+                            "status": "test_status",
+                            "updatedAt": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
                     "status": {
                         "setAt": "2023-01-01T00:00:00.000Z",
                         "status": "test_status",
@@ -1142,6 +1218,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1164,6 +1242,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -1184,6 +1264,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -1198,6 +1280,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_batch_create_coupons_response_value_201_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -1216,6 +1299,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -1259,6 +1344,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }
@@ -1791,6 +1878,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -1824,6 +2027,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_batch_create_product_variants_response_value_201_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -1987,6 +2205,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -2056,6 +2279,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -2129,6 +2357,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,
@@ -5429,6 +5665,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5449,6 +5687,8 @@ class TestModelRoundTrip:
         assert serialized["store_id"] == data["store_id"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
         assert serialized["products"] == data["products"]
         assert serialized["product_variants"] == data["product_variants"]
 
@@ -5469,6 +5709,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": None,
             "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
             "products": [1],
             "product_variants": [1],
         }
@@ -5481,6 +5723,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["deleted_at"] is None
         assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
 
     def test_v_2_batch_create_coupons_response_value_201_application_json_property_data_item_round_trips_unknown_enum_values(
         self,
@@ -5499,6 +5742,8 @@ class TestModelRoundTrip:
             "store_id": 1,
             "deleted_at": "2023-01-01T00:00:00.000Z",
             "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
             "products": [1],
             "product_variants": [1],
         }
@@ -5542,6 +5787,8 @@ class TestModelRoundTrip:
                     "store_id": 1,
                     "deleted_at": "2023-01-01T00:00:00.000Z",
                     "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
                     "products": [1],
                     "product_variants": [1],
                 }

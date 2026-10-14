@@ -365,6 +365,7 @@ class SdkCreateChargeRequestApplicationJson:
     deliverable: CreateChargeRequestApplicationJsonPropertyDeliverable | None = None
     metadata: CreateChargeRequestApplicationJsonPropertyMetadata | None = None
     coupon_code: str | None = None
+    """Optional coupon code. A charge takes a store-wide coupon for one-time purchases only: a coupon whose `applies_to` is `subscriptions` returns `422` with `Coupon code {code} only applies to subscriptions.`"""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )

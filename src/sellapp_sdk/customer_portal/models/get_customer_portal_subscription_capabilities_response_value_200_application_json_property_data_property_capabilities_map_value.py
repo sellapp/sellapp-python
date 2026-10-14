@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
+from enum import Enum
 from typing import Any
 
 from sellapp_sdk._types import (
@@ -11,22 +12,59 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.get_customer_portal_subscription_capabilities_response_value_200_application_json_property_data_property_capabilities_map_value_status import (
+    GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus,
+)
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue",
-    "required": ["available"],
+    "required": ["status", "customer_reason", "seller_reason"],
     "properties": {
-        "available": {"kind": "primitive", "type": "boolean"},
-        "reason": {"kind": "primitive", "type": "string"},
+        "status": {
+            "kind": "enum",
+            "values": [
+                "available",
+                "requires_redirect",
+                "seller_only",
+                "customer_only",
+                "manual_proration",
+                "unsupported",
+            ],
+        },
+        "customer_reason": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "seller_reason": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
     },
     "additionalProperties": True,
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue",
-    "required": ["available"],
+    "required": ["status", "customer_reason", "seller_reason"],
     "properties": {
-        "available": {"kind": "primitive", "type": "boolean"},
-        "reason": {"kind": "primitive", "type": "string"},
+        "status": {
+            "kind": "enum",
+            "values": [
+                "available",
+                "requires_redirect",
+                "seller_only",
+                "customer_only",
+                "manual_proration",
+                "unsupported",
+            ],
+        },
+        "customer_reason": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "seller_reason": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
     },
     "additionalProperties": True,
 }
@@ -36,8 +74,9 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue:
     """Get Customer Portal Subscription Capabilities Response Value200Application Json Property Data Property Capabilities Map Value model."""
 
-    available: bool
-    reason: str | None = None
+    status: GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus
+    customer_reason: str | None
+    seller_reason: str | None
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -58,10 +97,13 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
                 allow_unknown_fields=True,
             )
             return cls(
-                available=data["available"],
-                reason=data.get("reason"),
+                status=GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValueStatus(
+                    data["status"]
+                ),
+                customer_reason=data["customer_reason"],
+                seller_reason=data["seller_reason"],
                 additional_properties=_preserve_unknown_fields(
-                    data, ["available", "reason"]
+                    data, ["status", "customer_reason", "seller_reason"]
                 ),
                 _from_response=True,
             )
@@ -74,9 +116,9 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
     def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
         _domain_data: dict[str, Any] = dict(self.additional_properties)
-        _domain_data["available"] = self.available
-        if self.reason is not None:
-            _domain_data["reason"] = self.reason
+        _domain_data["status"] = self.status
+        _domain_data["customer_reason"] = self.customer_reason
+        _domain_data["seller_reason"] = self.seller_reason
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -86,7 +128,15 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
             allow_unknown_fields=(self._from_response or True),
         )
         result: dict[str, Any] = dict(self.additional_properties)
-        result["available"] = self.available
-        if self.reason is not None:
-            result["reason"] = self.reason
+        result["status"] = (
+            self.status.value if isinstance(self.status, Enum) else self.status
+        )
+        if self.customer_reason is not None:
+            result["customer_reason"] = self.customer_reason
+        else:
+            result["customer_reason"] = None
+        if self.seller_reason is not None:
+            result["seller_reason"] = self.seller_reason
+        else:
+            result["seller_reason"] = None
         return result

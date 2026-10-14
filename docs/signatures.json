@@ -2517,7 +2517,7 @@
     "operationId": "createProductVariant",
     "resource": "product_variants",
     "method": "create",
-    "nativeSignature": "def create(\n        self,\n        product: int,\n        *,\n        title: str,\n        description: str,\n        deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable,\n        pricing: CreateProductVariantRequestApplicationJsonPropertyPricing,\n        payment_methods: builtins.list[\n            SdkCreateProductVariantRequestApplicationJsonPaymentMethods | str\n        ],\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreateProductVariantResponseValue201ApplicationJson:",
+    "nativeSignature": "def create(\n        self,\n        product: int,\n        *,\n        title: str,\n        description: str,\n        deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable,\n        pricing: CreateProductVariantRequestApplicationJsonPropertyPricing,\n        payment_methods: builtins.list[\n            SdkCreateProductVariantRequestApplicationJsonPaymentMethods | str\n        ],\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        custom_payment_method_ids: builtins.list[str] | None = None,\n        other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreateProductVariantResponseValue201ApplicationJson:",
     "signatures": [
       {
         "name": "create",
@@ -2573,6 +2573,12 @@
           {
             "name": "bulk_discount",
             "type": "builtins.list[\n            CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "custom_payment_method_ids",
+            "type": "builtins.list[str] | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -2651,7 +2657,7 @@
     "operationId": "replaceProductVariantWithPut",
     "resource": "product_variants",
     "method": "replace",
-    "nativeSignature": "def replace(\n        self,\n        product: int,\n        variant: int,\n        *,\n        title: str | None = None,\n        description: str | None = None,\n        deliverable: ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable\n        | None = None,\n        pricing: ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing\n        | None = None,\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        payment_methods: builtins.list[\n            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str\n        ]\n        | None = None,\n        other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:",
+    "nativeSignature": "def replace(\n        self,\n        product: int,\n        variant: int,\n        *,\n        title: str | None = None,\n        description: str | None = None,\n        deliverable: ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverable\n        | None = None,\n        pricing: ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing\n        | None = None,\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        payment_methods: builtins.list[\n            SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str\n        ]\n        | None = None,\n        custom_payment_method_ids: builtins.list[str] | None = None,\n        other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        stock: int | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "replace",
@@ -2717,6 +2723,12 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "custom_payment_method_ids",
+            "type": "builtins.list[str] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "other_settings",
             "type": "ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings\n        | None",
             "optional": true,
@@ -2725,6 +2737,12 @@
           {
             "name": "expected_updated_at",
             "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "stock",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -2745,7 +2763,7 @@
     "operationId": "updateProductVariant",
     "resource": "product_variants",
     "method": "update",
-    "nativeSignature": "def update(\n        self,\n        product: int,\n        variant: int,\n        *,\n        title: str | None = None,\n        description: str | None = None,\n        deliverable: UpdateProductVariantRequestApplicationJsonPropertyDeliverable\n        | None = None,\n        pricing: UpdateProductVariantRequestApplicationJsonPropertyPricing\n        | None = None,\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        payment_methods: builtins.list[\n            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str\n        ]\n        | None = None,\n        other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:",
+    "nativeSignature": "def update(\n        self,\n        product: int,\n        variant: int,\n        *,\n        title: str | None = None,\n        description: str | None = None,\n        deliverable: UpdateProductVariantRequestApplicationJsonPropertyDeliverable\n        | None = None,\n        pricing: UpdateProductVariantRequestApplicationJsonPropertyPricing\n        | None = None,\n        minimum_purchase_quantity: int | None = None,\n        maximum_purchase_quantity: int | None | NotGiven = NOT_GIVEN,\n        bulk_discount: builtins.list[\n            UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem\n        ]\n        | None = None,\n        payment_methods: builtins.list[\n            SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str\n        ]\n        | None = None,\n        custom_payment_method_ids: builtins.list[str] | None = None,\n        other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings\n        | None = None,\n        expected_updated_at: str | None = None,\n        stock: int | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "update",
@@ -2811,6 +2829,12 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "custom_payment_method_ids",
+            "type": "builtins.list[str] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "other_settings",
             "type": "UpdateProductVariantRequestApplicationJsonPropertyOtherSettings\n        | None",
             "optional": true,
@@ -2819,6 +2843,12 @@
           {
             "name": "expected_updated_at",
             "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "stock",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -2839,7 +2869,7 @@
     "operationId": "deleteProductVariant",
     "resource": "product_variants",
     "method": "delete",
-    "nativeSignature": "def delete(\n        self,\n        product: int,\n        variant: int,\n        *,\n        request_options: RequestOptions | None = None,\n    ) -> None:",
+    "nativeSignature": "def delete(\n        self,\n        product: int,\n        variant: int,\n        *,\n        expected_updated_at: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> None:",
     "signatures": [
       {
         "name": "delete",
@@ -2855,6 +2885,12 @@
             "type": "int",
             "optional": false,
             "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "expected_updated_at",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
           },
           {
             "name": "request_options",
@@ -3378,6 +3414,180 @@
     "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
   },
   {
+    "operationId": "listSubscriptions",
+    "resource": "subscriptions",
+    "method": "list_subscriptions",
+    "nativeSignature": "def list_subscriptions(\n        self,\n        *,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        page: int | None = None,\n        pagination: bool | None = None,\n        status: list[SubscriptionsStatus | str] | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:",
+    "signatures": [
+      {
+        "name": "list_subscriptions",
+        "params": [
+          {
+            "name": "limit",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "before",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "after",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "order",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "page",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "pagination",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "status",
+            "type": "list[SubscriptionsStatus | str] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
+  },
+  {
+    "operationId": "searchSubscriptions",
+    "resource": "subscriptions",
+    "method": "search_subscriptions",
+    "nativeSignature": "def search_subscriptions(\n        self,\n        *,\n        filters: list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]\n        | None = None,\n        sort: list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]\n        | None = None,\n        search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,\n        includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]\n        | None = None,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        page: int | None = None,\n        pagination: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:",
+    "signatures": [
+      {
+        "name": "search_subscriptions",
+        "params": [
+          {
+            "name": "filters",
+            "type": "list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "sort",
+            "type": "list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "search",
+            "type": "SearchSubscriptionsRequestApplicationJsonPropertySearch | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "includes",
+            "type": "list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "limit",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "before",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "after",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "order",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "page",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "pagination",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
+  },
+  {
+    "operationId": "getSubscription",
+    "resource": "subscriptions",
+    "method": "get_subscription",
+    "nativeSignature": "def get_subscription(\n        self,\n        product_subscription: int,\n        *,\n        request_options: RequestOptions | None = None,\n    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:",
+    "signatures": [
+      {
+        "name": "get_subscription",
+        "params": [
+          {
+            "name": "product_subscription",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SdkGetSubscriptionResponseValue200ApplicationJson",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
+  },
+  {
     "operationId": "getSubscriptionCapabilities",
     "resource": "subscriptions",
     "method": "get_capabilities",
@@ -3498,6 +3708,40 @@
     "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
   },
   {
+    "operationId": "keepSubscription",
+    "resource": "subscriptions",
+    "method": "keep",
+    "nativeSignature": "def keep(\n        self,\n        product_subscription: int,\n        *,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkKeepSubscriptionResponseValue200ApplicationJson:",
+    "signatures": [
+      {
+        "name": "keep",
+        "params": [
+          {
+            "name": "product_subscription",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "idempotency_key",
+            "type": "str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SdkKeepSubscriptionResponseValue200ApplicationJson",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
+  },
+  {
     "operationId": "pauseSubscription",
     "resource": "subscriptions",
     "method": "pause",
@@ -3581,7 +3825,7 @@
     "operationId": "updateSubscriptionPaymentMethod",
     "resource": "subscriptions",
     "method": "update_payment_method",
-    "nativeSignature": "def update_payment_method(\n        self,\n        product_subscription: int,\n        *,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> Any:",
+    "nativeSignature": "def update_payment_method(\n        self,\n        product_subscription: int,\n        *,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        return_url: str | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "update_payment_method",
@@ -3599,13 +3843,19 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "return_url",
+            "type": "str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "request_options",
             "type": "RequestOptions | None",
             "optional": true,
             "passingStyle": "keyword"
           }
         ],
-        "returnType": "Any",
+        "returnType": "SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson",
         "async": false
       }
     ],
@@ -3615,7 +3865,7 @@
     "operationId": "previewSubscriptionPlanChange",
     "resource": "subscriptions",
     "method": "preview_plan_change",
-    "nativeSignature": "def preview_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        effective_timing: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> Any:",
+    "nativeSignature": "def preview_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        effective_timing: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "preview_plan_change",
@@ -3663,7 +3913,7 @@
             "passingStyle": "keyword"
           }
         ],
-        "returnType": "Any",
+        "returnType": "SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson",
         "async": false
       }
     ],
@@ -3673,7 +3923,7 @@
     "operationId": "confirmSubscriptionPlanChange",
     "resource": "subscriptions",
     "method": "confirm_plan_change",
-    "nativeSignature": "def confirm_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        preview_token: str,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        effective_timing: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> Any:",
+    "nativeSignature": "def confirm_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        preview_token: str,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        effective_timing: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "confirm_plan_change",
@@ -3727,7 +3977,7 @@
             "passingStyle": "keyword"
           }
         ],
-        "returnType": "Any",
+        "returnType": "SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson",
         "async": false
       }
     ],
@@ -3844,120 +4094,86 @@
     "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
   },
   {
-    "operationId": "listSubscriptions",
-    "resource": "subscriptions",
-    "method": "list_subscriptions",
-    "nativeSignature": "def list_subscriptions(\n        self,\n        *,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:",
+    "operationId": "listSubscriptionActions",
+    "resource": "subscriptions_actions",
+    "method": "list",
+    "nativeSignature": "def list(\n        self,\n        product_subscription: int,\n        *,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        page: int | None = None,\n        pagination: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[SdkListSubscriptionActionsResponseValue200ApplicationJson]:",
     "signatures": [
       {
-        "name": "list_subscriptions",
-        "params": [
-          {
-            "name": "limit",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "before",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "after",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "order",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "request_options",
-            "type": "RequestOptions | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          }
-        ],
-        "returnType": "SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]",
-        "async": false
-      }
-    ],
-    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
-  },
-  {
-    "operationId": "searchSubscriptions",
-    "resource": "subscriptions",
-    "method": "search_subscriptions",
-    "nativeSignature": "def search_subscriptions(\n        self,\n        *,\n        search: str | None = None,\n        status: str | None = None,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:",
-    "signatures": [
-      {
-        "name": "search_subscriptions",
-        "params": [
-          {
-            "name": "search",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "status",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "limit",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "before",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "after",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "order",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "request_options",
-            "type": "RequestOptions | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          }
-        ],
-        "returnType": "SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]",
-        "async": false
-      }
-    ],
-    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
-  },
-  {
-    "operationId": "getSubscription",
-    "resource": "subscriptions",
-    "method": "get_subscription",
-    "nativeSignature": "def get_subscription(\n        self,\n        product_subscription: int,\n        *,\n        request_options: RequestOptions | None = None,\n    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:",
-    "signatures": [
-      {
-        "name": "get_subscription",
+        "name": "list",
         "params": [
           {
             "name": "product_subscription",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "limit",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "before",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "after",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "order",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "page",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "pagination",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SyncPage[SdkListSubscriptionActionsResponseValue200ApplicationJson]",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions_actions/_resource.py"
+  },
+  {
+    "operationId": "getSubscriptionAction",
+    "resource": "subscriptions_actions",
+    "method": "get",
+    "nativeSignature": "def get(\n        self,\n        product_subscription: int,\n        action: int,\n        *,\n        request_options: RequestOptions | None = None,\n    ) -> SdkGetSubscriptionActionResponseValue200ApplicationJson:",
+    "signatures": [
+      {
+        "name": "get",
+        "params": [
+          {
+            "name": "product_subscription",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "action",
             "type": "int",
             "optional": false,
             "passingStyle": "keyword_or_positional"
@@ -3969,11 +4185,57 @@
             "passingStyle": "keyword"
           }
         ],
-        "returnType": "SdkGetSubscriptionResponseValue200ApplicationJson",
+        "returnType": "SdkGetSubscriptionActionResponseValue200ApplicationJson",
         "async": false
       }
     ],
-    "sourceFile": "src/sellapp_sdk/subscriptions/_resource.py"
+    "sourceFile": "src/sellapp_sdk/subscriptions_actions/_resource.py"
+  },
+  {
+    "operationId": "dismissSubscriptionAction",
+    "resource": "subscriptions_actions",
+    "method": "dismiss",
+    "nativeSignature": "def dismiss(\n        self,\n        product_subscription: int,\n        action: int,\n        *,\n        note: str,\n        idempotency_key: str | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkDismissSubscriptionActionResponseValue200ApplicationJson:",
+    "signatures": [
+      {
+        "name": "dismiss",
+        "params": [
+          {
+            "name": "product_subscription",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "action",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword_or_positional"
+          },
+          {
+            "name": "note",
+            "type": "str",
+            "optional": false,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "idempotency_key",
+            "type": "str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "request_options",
+            "type": "RequestOptions | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          }
+        ],
+        "returnType": "SdkDismissSubscriptionActionResponseValue200ApplicationJson",
+        "async": false
+      }
+    ],
+    "sourceFile": "src/sellapp_sdk/subscriptions_actions/_resource.py"
   },
   {
     "operationId": "listAppointments",
@@ -4867,7 +5129,7 @@
     "operationId": "createPromotion",
     "resource": "promotions",
     "method": "create",
-    "nativeSignature": "def create(\n        self,\n        *,\n        name: str,\n        status: SdkCreatePromotionRequestApplicationJsonStatus | str,\n        priority: int,\n        is_stackable: bool,\n        phases: builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem],\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreatePromotionResponseValue201ApplicationJson:",
+    "nativeSignature": "def create(\n        self,\n        *,\n        name: str,\n        status: SdkCreatePromotionRequestApplicationJsonStatus | str,\n        priority: int,\n        is_stackable: bool,\n        phases: builtins.list[CreatePromotionRequestApplicationJsonPropertyPhasesItem],\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkCreatePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreatePromotionResponseValue201ApplicationJson:",
     "signatures": [
       {
         "name": "create",
@@ -4917,6 +5179,36 @@
           {
             "name": "max_redemptions",
             "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkCreatePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "store_wide",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "products",
+            "type": "builtins.list[int] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "product_variants",
+            "type": "builtins.list[int] | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -5047,7 +5339,7 @@
     "operationId": "replacePromotion",
     "resource": "promotions",
     "method": "replace",
-    "nativeSignature": "def replace(\n        self,\n        promotion: int,\n        *,\n        name: str | None = None,\n        status: SdkReplacePromotionRequestApplicationJsonStatus | str | None = None,\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        priority: int | None = None,\n        is_stackable: bool | None = None,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplacePromotionResponseValue200ApplicationJson:",
+    "nativeSignature": "def replace(\n        self,\n        promotion: int,\n        *,\n        name: str | None = None,\n        status: SdkReplacePromotionRequestApplicationJsonStatus | str | None = None,\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        priority: int | None = None,\n        is_stackable: bool | None = None,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkReplacePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplacePromotionResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "replace",
@@ -5101,6 +5393,36 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "applies_to",
+            "type": "SdkReplacePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "store_wide",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "products",
+            "type": "builtins.list[int] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "product_variants",
+            "type": "builtins.list[int] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "phases",
             "type": "builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]\n        | None",
             "optional": true,
@@ -5123,7 +5445,7 @@
     "operationId": "updatePromotion",
     "resource": "promotions",
     "method": "update",
-    "nativeSignature": "def update(\n        self,\n        promotion: int,\n        *,\n        name: str | None = None,\n        status: SdkUpdatePromotionRequestApplicationJsonStatus | str | None = None,\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        priority: int | None = None,\n        is_stackable: bool | None = None,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdatePromotionResponseValue200ApplicationJson:",
+    "nativeSignature": "def update(\n        self,\n        promotion: int,\n        *,\n        name: str | None = None,\n        status: SdkUpdatePromotionRequestApplicationJsonStatus | str | None = None,\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        priority: int | None = None,\n        is_stackable: bool | None = None,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkUpdatePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdatePromotionResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "update",
@@ -5173,6 +5495,36 @@
           {
             "name": "max_redemptions",
             "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkUpdatePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "store_wide",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "products",
+            "type": "builtins.list[int] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "product_variants",
+            "type": "builtins.list[int] | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -5227,7 +5579,7 @@
     "operationId": "restorePromotion",
     "resource": "promotions",
     "method": "restore",
-    "nativeSignature": "def restore(\n        self,\n        promotion: int,\n        *,\n        name: str,\n        status: SdkRestorePromotionRequestApplicationJsonStatus | str,\n        priority: int,\n        is_stackable: bool,\n        phases: builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem],\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkRestorePromotionResponseValue200ApplicationJson:",
+    "nativeSignature": "def restore(\n        self,\n        promotion: int,\n        *,\n        name: str,\n        status: SdkRestorePromotionRequestApplicationJsonStatus | str,\n        priority: int,\n        is_stackable: bool,\n        phases: builtins.list[RestorePromotionRequestApplicationJsonPropertyPhasesItem],\n        starts_at: str | None | NotGiven = NOT_GIVEN,\n        ends_at: str | None | NotGiven = NOT_GIVEN,\n        max_redemptions: int | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkRestorePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkRestorePromotionResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "restore",
@@ -5283,6 +5635,36 @@
           {
             "name": "max_redemptions",
             "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkRestorePromotionRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "store_wide",
+            "type": "bool | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "products",
+            "type": "builtins.list[int] | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "product_variants",
+            "type": "builtins.list[int] | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16017,11 +16399,35 @@
     "operationId": "listCustomerPortalSubscriptions",
     "resource": "customer_portal",
     "method": "list_customer_portal_subscriptions",
-    "nativeSignature": "def list_customer_portal_subscriptions(\n        self,\n        *,\n        request_options: RequestOptions | None = None,\n    ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:",
+    "nativeSignature": "def list_customer_portal_subscriptions(\n        self,\n        *,\n        limit: int | None = None,\n        before: str | None = None,\n        after: str | None = None,\n        order: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SyncPage[CustomerPortalSubscription]:",
     "signatures": [
       {
         "name": "list_customer_portal_subscriptions",
         "params": [
+          {
+            "name": "limit",
+            "type": "int | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "before",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "after",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "order",
+            "type": "str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
           {
             "name": "request_options",
             "type": "RequestOptions | None",
@@ -16029,7 +16435,7 @@
             "passingStyle": "keyword"
           }
         ],
-        "returnType": "SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson",
+        "returnType": "SyncPage[CustomerPortalSubscription]",
         "async": false
       }
     ],
@@ -16117,7 +16523,7 @@
     "operationId": "cancelCustomerSubscriptionAtPeriodEnd",
     "resource": "customer_portal",
     "method": "cancel_customer_subscription_at_period_end",
-    "nativeSignature": "def cancel_customer_subscription_at_period_end(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:",
+    "nativeSignature": "def cancel_customer_subscription_at_period_end(\n        self,\n        product_subscription: int,\n        *,\n        reason: str | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "cancel_customer_subscription_at_period_end",
@@ -16129,32 +16535,8 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
             "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16181,7 +16563,7 @@
     "operationId": "cancelCustomerSubscriptionImmediately",
     "resource": "customer_portal",
     "method": "cancel_customer_subscription_immediately",
-    "nativeSignature": "def cancel_customer_subscription_immediately(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:",
+    "nativeSignature": "def cancel_customer_subscription_immediately(\n        self,\n        product_subscription: int,\n        *,\n        reason: str | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "cancel_customer_subscription_immediately",
@@ -16193,32 +16575,8 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
             "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16245,7 +16603,7 @@
     "operationId": "pauseCustomerSubscription",
     "resource": "customer_portal",
     "method": "pause_customer_subscription",
-    "nativeSignature": "def pause_customer_subscription(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:",
+    "nativeSignature": "def pause_customer_subscription(\n        self,\n        product_subscription: int,\n        *,\n        resume_at: str | None | NotGiven = NOT_GIVEN,\n        reason: str | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "pause_customer_subscription",
@@ -16257,32 +16615,14 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
+            "name": "resume_at",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
             "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16309,7 +16649,7 @@
     "operationId": "resumeCustomerSubscription",
     "resource": "customer_portal",
     "method": "resume_customer_subscription",
-    "nativeSignature": "def resume_customer_subscription(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:",
+    "nativeSignature": "def resume_customer_subscription(\n        self,\n        product_subscription: int,\n        *,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "resume_customer_subscription",
@@ -16319,36 +16659,6 @@
             "type": "int",
             "optional": false,
             "passingStyle": "keyword_or_positional"
-          },
-          {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "reason",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
           },
           {
             "name": "idempotency_key",
@@ -16373,7 +16683,7 @@
     "operationId": "updateCustomerSubscriptionPaymentMethod",
     "resource": "customer_portal",
     "method": "update_customer_subscription_payment_method",
-    "nativeSignature": "def update_customer_subscription_payment_method(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:",
+    "nativeSignature": "def update_customer_subscription_payment_method(\n        self,\n        product_subscription: int,\n        *,\n        return_url: str | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "update_customer_subscription_payment_method",
@@ -16385,32 +16695,8 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
             "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16437,7 +16723,7 @@
     "operationId": "previewCustomerSubscriptionPlanChange",
     "resource": "customer_portal",
     "method": "preview_customer_subscription_plan_change",
-    "nativeSignature": "def preview_customer_subscription_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:",
+    "nativeSignature": "def preview_customer_subscription_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        effective_timing: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "preview_customer_subscription_plan_change",
@@ -16449,38 +16735,26 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
+            "name": "target_variant_id",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "effective_timing",
+            "type": "SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
-            "name": "product_variant_id",
-            "type": "int | None",
+            "name": "proration_behavior",
+            "type": "SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "reason",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "idempotency_key",
-            "type": "str | None",
+            "name": "metadata",
+            "type": "PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16501,7 +16775,7 @@
     "operationId": "confirmCustomerSubscriptionPlanChange",
     "resource": "customer_portal",
     "method": "confirm_customer_subscription_plan_change",
-    "nativeSignature": "def confirm_customer_subscription_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:",
+    "nativeSignature": "def confirm_customer_subscription_plan_change(\n        self,\n        product_subscription: int,\n        *,\n        target_variant_id: int,\n        preview_token: str,\n        effective_timing: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None = None,\n        proration_behavior: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None = None,\n        metadata: ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "confirm_customer_subscription_plan_change",
@@ -16513,32 +16787,32 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
+            "name": "target_variant_id",
+            "type": "int",
+            "optional": false,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "preview_token",
+            "type": "str",
+            "optional": false,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "effective_timing",
+            "type": "SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming\n        | str\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
-            "name": "product_variant_id",
-            "type": "int | None",
+            "name": "proration_behavior",
+            "type": "SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior\n        | str\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
-            "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "reason",
-            "type": "str | None",
+            "name": "metadata",
+            "type": "ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16565,7 +16839,7 @@
     "operationId": "previewCustomerSubscriptionRenewalDateChange",
     "resource": "customer_portal",
     "method": "preview_customer_subscription_renewal_date_change",
-    "nativeSignature": "def preview_customer_subscription_renewal_date_change(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:",
+    "nativeSignature": "def preview_customer_subscription_renewal_date_change(\n        self,\n        product_subscription: int,\n        *,\n        renewal_date: str,\n        reason: str | None | NotGiven = NOT_GIVEN,\n        metadata: PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "preview_customer_subscription_renewal_date_change",
@@ -16577,38 +16851,20 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
             "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "return_url",
-            "type": "str | None",
-            "optional": true,
+            "type": "str",
+            "optional": false,
             "passingStyle": "keyword"
           },
           {
             "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
-            "name": "idempotency_key",
-            "type": "str | None",
+            "name": "metadata",
+            "type": "PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -16629,7 +16885,7 @@
     "operationId": "confirmCustomerSubscriptionRenewalDateChange",
     "resource": "customer_portal",
     "method": "confirm_customer_subscription_renewal_date_change",
-    "nativeSignature": "def confirm_customer_subscription_renewal_date_change(\n        self,\n        product_subscription: int,\n        *,\n        preview_id: str | None = None,\n        product_variant_id: int | None = None,\n        renewal_date: str | None = None,\n        return_url: str | None = None,\n        reason: str | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:",
+    "nativeSignature": "def confirm_customer_subscription_renewal_date_change(\n        self,\n        product_subscription: int,\n        *,\n        renewal_date: str,\n        preview_token: str | None | NotGiven = NOT_GIVEN,\n        reason: str | None | NotGiven = NOT_GIVEN,\n        metadata: ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata\n        | None = None,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "confirm_customer_subscription_renewal_date_change",
@@ -16641,32 +16897,26 @@
             "passingStyle": "keyword_or_positional"
           },
           {
-            "name": "preview_id",
-            "type": "str | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
-            "name": "product_variant_id",
-            "type": "int | None",
-            "optional": true,
-            "passingStyle": "keyword"
-          },
-          {
             "name": "renewal_date",
-            "type": "str | None",
-            "optional": true,
+            "type": "str",
+            "optional": false,
             "passingStyle": "keyword"
           },
           {
-            "name": "return_url",
-            "type": "str | None",
+            "name": "preview_token",
+            "type": "str | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
           {
             "name": "reason",
-            "type": "str | None",
+            "type": "str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "metadata",
+            "type": "ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata\n        | None",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -17393,7 +17643,7 @@
     "operationId": "createCoupon",
     "resource": "coupons",
     "method": "create",
-    "nativeSignature": "def create(\n        self,\n        *,\n        code: str,\n        type: SdkCreateCouponRequestApplicationJsonType | str,\n        discount: float | str,\n        store_wide: bool,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreateCouponResponseValue201ApplicationJson:",
+    "nativeSignature": "def create(\n        self,\n        *,\n        code: str,\n        type: SdkCreateCouponRequestApplicationJsonType | str,\n        discount: float | str,\n        store_wide: bool,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkCreateCouponRequestApplicationJsonAppliesTo | str | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        request_options: RequestOptions | None = None,\n    ) -> SdkCreateCouponResponseValue201ApplicationJson:",
     "signatures": [
       {
         "name": "create",
@@ -17449,6 +17699,18 @@
           {
             "name": "minimum_amount",
             "type": "float | str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkCreateCouponRequestApplicationJsonAppliesTo | str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -17509,7 +17771,7 @@
     "operationId": "replaceCoupon",
     "resource": "coupons",
     "method": "replace",
-    "nativeSignature": "def replace(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkReplaceCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplaceCouponResponseValue200ApplicationJson:",
+    "nativeSignature": "def replace(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkReplaceCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkReplaceCouponRequestApplicationJsonAppliesTo | str | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkReplaceCouponResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "replace",
@@ -17575,6 +17837,18 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "applies_to",
+            "type": "SdkReplaceCouponRequestApplicationJsonAppliesTo | str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "with_trashed",
             "type": "bool | None",
             "optional": true,
@@ -17603,7 +17877,7 @@
     "operationId": "updateCoupon",
     "resource": "coupons",
     "method": "update",
-    "nativeSignature": "def update(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkUpdateCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateCouponResponseValue200ApplicationJson:",
+    "nativeSignature": "def update(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkUpdateCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkUpdateCouponRequestApplicationJsonAppliesTo | str | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkUpdateCouponResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "update",
@@ -17665,6 +17939,18 @@
           {
             "name": "minimum_amount",
             "type": "float | str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkUpdateCouponRequestApplicationJsonAppliesTo | str | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -19239,7 +19525,7 @@
     "operationId": "v2CreateCoupon",
     "resource": "coupons",
     "method": "v2_create_coupon",
-    "nativeSignature": "def v2_create_coupon(\n        self,\n        *,\n        code: str,\n        type: SdkV2CreateCouponRequestApplicationJsonType | str,\n        discount: float | str,\n        store_wide: bool,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2CreateCouponResponseValue201ApplicationJson:",
+    "nativeSignature": "def v2_create_coupon(\n        self,\n        *,\n        code: str,\n        type: SdkV2CreateCouponRequestApplicationJsonType | str,\n        discount: float | str,\n        store_wide: bool,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkV2CreateCouponRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        idempotency_key: str | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2CreateCouponResponseValue201ApplicationJson:",
     "signatures": [
       {
         "name": "v2_create_coupon",
@@ -19295,6 +19581,18 @@
           {
             "name": "minimum_amount",
             "type": "float | str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkV2CreateCouponRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },
@@ -19449,7 +19747,7 @@
     "operationId": "v2ReplaceCoupon",
     "resource": "coupons",
     "method": "v2_replace_coupon",
-    "nativeSignature": "def v2_replace_coupon(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkV2ReplaceCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2ReplaceCouponResponseValue200ApplicationJson:",
+    "nativeSignature": "def v2_replace_coupon(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkV2ReplaceCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkV2ReplaceCouponRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2ReplaceCouponResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "v2_replace_coupon",
@@ -19515,6 +19813,18 @@
             "passingStyle": "keyword"
           },
           {
+            "name": "applies_to",
+            "type": "SdkV2ReplaceCouponRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
             "name": "with_trashed",
             "type": "bool | None",
             "optional": true,
@@ -19543,7 +19853,7 @@
     "operationId": "v2UpdateCoupon",
     "resource": "coupons",
     "method": "v2_update_coupon",
-    "nativeSignature": "def v2_update_coupon(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkV2UpdateCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2UpdateCouponResponseValue200ApplicationJson:",
+    "nativeSignature": "def v2_update_coupon(\n        self,\n        coupon: int,\n        *,\n        code: str | None = None,\n        type: SdkV2UpdateCouponRequestApplicationJsonType | str | None = None,\n        discount: float | str | None = None,\n        store_wide: bool | None = None,\n        products: builtins.list[int] | None = None,\n        product_variants: builtins.list[int] | None = None,\n        limit: int | None | NotGiven = NOT_GIVEN,\n        expires_at: str | None | NotGiven = NOT_GIVEN,\n        minimum_amount: float | str | None | NotGiven = NOT_GIVEN,\n        applies_to: SdkV2UpdateCouponRequestApplicationJsonAppliesTo\n        | str\n        | None = None,\n        subscription_payments: int | None | NotGiven = NOT_GIVEN,\n        with_trashed: bool | None = None,\n        only_trashed: bool | None = None,\n        request_options: RequestOptions | None = None,\n    ) -> SdkV2UpdateCouponResponseValue200ApplicationJson:",
     "signatures": [
       {
         "name": "v2_update_coupon",
@@ -19605,6 +19915,18 @@
           {
             "name": "minimum_amount",
             "type": "float | str | None | NotGiven",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "applies_to",
+            "type": "SdkV2UpdateCouponRequestApplicationJsonAppliesTo\n        | str\n        | None",
+            "optional": true,
+            "passingStyle": "keyword"
+          },
+          {
+            "name": "subscription_payments",
+            "type": "int | None | NotGiven",
             "optional": true,
             "passingStyle": "keyword"
           },

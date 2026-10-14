@@ -21,6 +21,9 @@ from sellapp_sdk.product_variants.models import (
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItem,
@@ -31,6 +34,9 @@ from sellapp_sdk.product_variants.models import (
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     BatchUpdateProductVariantsRequestApplicationJsonPropertyResourcesMapValue,
@@ -51,6 +57,9 @@ from sellapp_sdk.product_variants.models import (
     BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     CreateBookingHoldResponseValue201ApplicationJsonPropertyData,
@@ -71,6 +80,9 @@ from sellapp_sdk.product_variants.models import (
     CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing,
     CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProduct,
     CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyData,
@@ -81,6 +93,9 @@ from sellapp_sdk.product_variants.models import (
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     GetProductVariantResponseValue200ApplicationJsonPropertyData,
@@ -91,6 +106,9 @@ from sellapp_sdk.product_variants.models import (
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     ListBookingAvailabilityResponseValue200ApplicationJsonPropertyDataItem,
@@ -102,6 +120,9 @@ from sellapp_sdk.product_variants.models import (
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem,
@@ -109,6 +130,9 @@ from sellapp_sdk.product_variants.models import (
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyFrequency,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice,
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial,
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength,
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyData,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyDeliverable,
@@ -117,6 +141,9 @@ from sellapp_sdk.product_variants.models import (
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     ReplaceProductVariantWithPutRequestApplicationJsonPropertyBulkDiscountItem,
@@ -136,6 +163,9 @@ from sellapp_sdk.product_variants.models import (
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     SdkBatchCreateProductVariantsResponseValue200ApplicationJson,
@@ -165,6 +195,9 @@ from sellapp_sdk.product_variants.models import (
     SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     UpdateProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem,
@@ -172,6 +205,9 @@ from sellapp_sdk.product_variants.models import (
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice,
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyFrequency,
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice,
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial,
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength,
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyData,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyDeliverable,
@@ -180,6 +216,9 @@ from sellapp_sdk.product_variants.models import (
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     UpdateProductVariantRequestApplicationJsonPropertyBulkDiscountItem,
@@ -199,6 +238,9 @@ from sellapp_sdk.product_variants.models import (
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
 )
@@ -347,6 +389,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -380,6 +538,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_list_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_list_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -542,6 +715,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -610,6 +788,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -678,6 +861,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,
@@ -1386,6 +1577,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_create_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -1419,6 +1726,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_create_product_variant_response_value_201_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_create_product_variant_response_value_201_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -1586,6 +1908,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -1657,6 +1984,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -1729,6 +2061,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -1906,6 +2243,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_get_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -1939,6 +2392,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_get_product_variant_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_get_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -2104,6 +2572,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -2173,6 +2646,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -2241,6 +2719,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -2936,6 +3419,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -2969,6 +3568,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_replace_product_variant_with_put_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -3132,6 +3746,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -3201,6 +3820,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -3275,6 +3899,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -3982,6 +4611,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_update_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -4015,6 +4760,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_update_product_variant_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_update_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -4182,6 +4942,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -4253,6 +5018,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -4325,6 +5095,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -4502,6 +5277,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_delete_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -4535,6 +5426,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_delete_product_variant_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_delete_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -4702,6 +5608,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -4773,6 +5684,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -4845,6 +5761,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -5210,6 +6131,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -5243,6 +6280,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_search_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_search_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -5405,6 +6457,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -5473,6 +6530,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -5543,6 +6605,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,
@@ -5698,6 +6768,138 @@ class TestModelRoundTrip:
         )
         assert instance.to_dict() == data
 
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length.json"
+        )
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_interval",
+        }
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price.json"
+        )
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": 1, "currency": "AUD"}
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "price": 1,
+            "currency": "unexpected_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_currency",
+        }
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_request_application_json_property_pricing_property_trial.json"
+        )
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "kind": "free",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": None,
+        }
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] is None
+
+    def test_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_replace_product_variant_pricing_request_application_json_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": 1, "currency": "AUD"},
+        }
+        instance = ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_replace_product_variant_pricing_request_application_json_property_pricing_round_trip(
         self,
     ):
@@ -5744,6 +6946,11 @@ class TestModelRoundTrip:
             "price": {"price": 1, "currency": "AUD"},
             "compare_at_price": {"price": 1, "currency": "AUD"},
             "humble": True,
+            "trial": {
+                "kind": "free",
+                "length": {"value": 1, "interval": "DAY"},
+                "price": {"price": 1, "currency": "AUD"},
+            },
         }
         instance = (
             ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
@@ -5762,6 +6969,7 @@ class TestModelRoundTrip:
             "compare_at_price": None,
             "humble": True,
             "frequency": {"value": 1, "interval": "DAY"},
+            "trial": None,
         }
         instance = (
             ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
@@ -5770,6 +6978,7 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["compare_at_price"] is None
+        assert serialized["trial"] is None
 
     def test_replace_product_variant_pricing_request_application_json_property_pricing_round_trips_unknown_enum_values(
         self,
@@ -5780,6 +6989,11 @@ class TestModelRoundTrip:
             "compare_at_price": {"price": 1, "currency": "AUD"},
             "humble": True,
             "frequency": {"value": 1, "interval": "DAY"},
+            "trial": {
+                "kind": "free",
+                "length": {"value": 1, "interval": "DAY"},
+                "price": {"price": 1, "currency": "AUD"},
+            },
         }
         instance = (
             ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
@@ -5959,6 +7173,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -5992,6 +7322,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_replace_product_variant_pricing_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -6155,6 +7500,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -6224,6 +7574,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -6298,6 +7653,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -6468,6 +7828,138 @@ class TestModelRoundTrip:
         )
         assert instance.to_dict() == data
 
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length.json"
+        )
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_length_interval",
+        }
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price.json"
+        )
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": 1, "currency": "AUD"}
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "price": 1,
+            "currency": "unexpected_update_product_variant_pricing_request_application_json_property_pricing_property_trial_value_property_price_currency",
+        }
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPrice.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_request_application_json_property_pricing_property_trial.json"
+        )
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "kind": "free",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": None,
+        }
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] is None
+
+    def test_update_product_variant_pricing_request_application_json_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_update_product_variant_pricing_request_application_json_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": 1, "currency": "AUD"},
+        }
+        instance = UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_update_product_variant_pricing_request_application_json_property_pricing_round_trip(
         self,
     ):
@@ -6502,7 +7994,14 @@ class TestModelRoundTrip:
     def test_update_product_variant_pricing_request_application_json_property_pricing_omits_absent_optional_non_nullable_fields(
         self,
     ):
-        data = {"compare_at_price": {"price": 1, "currency": "AUD"}}
+        data = {
+            "compare_at_price": {"price": 1, "currency": "AUD"},
+            "trial": {
+                "kind": "free",
+                "length": {"value": 1, "interval": "DAY"},
+                "price": {"price": 1, "currency": "AUD"},
+            },
+        }
         instance = (
             UpdateProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
                 data
@@ -6523,6 +8022,7 @@ class TestModelRoundTrip:
             "compare_at_price": None,
             "humble": True,
             "frequency": {"value": 1, "interval": "DAY"},
+            "trial": None,
         }
         instance = (
             UpdateProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
@@ -6531,6 +8031,7 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["compare_at_price"] is None
+        assert serialized["trial"] is None
 
     def test_update_product_variant_pricing_request_application_json_property_pricing_round_trips_unknown_enum_values(
         self,
@@ -6541,6 +8042,11 @@ class TestModelRoundTrip:
             "compare_at_price": {"price": 1, "currency": "AUD"},
             "humble": True,
             "frequency": {"value": 1, "interval": "DAY"},
+            "trial": {
+                "kind": "free",
+                "length": {"value": 1, "interval": "DAY"},
+                "price": {"price": 1, "currency": "AUD"},
+            },
         }
         instance = (
             UpdateProductVariantPricingRequestApplicationJsonPropertyPricing.from_dict(
@@ -6720,6 +8226,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -6753,6 +8375,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_update_product_variant_pricing_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -6916,6 +8553,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -6985,6 +8627,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -7059,6 +8706,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -8073,6 +9725,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert "minimum_purchase_quantity" not in serialized
         assert "bulk_discount" not in serialized
+        assert "custom_payment_method_ids" not in serialized
         assert "other_settings" not in serialized
         assert "expected_updated_at" not in serialized
 
@@ -8213,6 +9866,7 @@ class TestModelRoundTrip:
                 "SOL_USDT",
                 "SOL_USDC",
             ],
+            "custom_payment_method_ids": ["01ARZ3NDEKTSV4RRFFQ69G5FAV"],
             "other_settings": {"quantity_increments": 1},
             "expected_updated_at": "2023-01-01T00:00:00.000Z",
         }
@@ -8366,6 +10020,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -8399,6 +10169,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_batch_create_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -8562,6 +10347,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -8631,6 +10421,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -8704,6 +10499,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,
@@ -9280,7 +11083,7 @@ class TestModelRoundTrip:
     def test_batch_update_product_variants_request_application_json_property_resources_map_value_omits_absent_optional_non_nullable_fields(
         self,
     ):
-        data = {"maximum_purchase_quantity": 1}
+        data = {"maximum_purchase_quantity": 1, "stock": 1}
         instance = BatchUpdateProductVariantsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
         )
@@ -9292,6 +11095,7 @@ class TestModelRoundTrip:
         assert "minimum_purchase_quantity" not in serialized
         assert "bulk_discount" not in serialized
         assert "payment_methods" not in serialized
+        assert "custom_payment_method_ids" not in serialized
         assert "other_settings" not in serialized
         assert "expected_updated_at" not in serialized
 
@@ -9432,14 +11236,17 @@ class TestModelRoundTrip:
                 "SOL_USDT",
                 "SOL_USDC",
             ],
+            "custom_payment_method_ids": ["01ARZ3NDEKTSV4RRFFQ69G5FAV"],
             "other_settings": {"quantity_increments": 1},
             "expected_updated_at": "2023-01-01T00:00:00.000Z",
+            "stock": None,
         }
         instance = BatchUpdateProductVariantsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["maximum_purchase_quantity"] is None
+        assert serialized["stock"] is None
 
     def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data_round_trip(
         self,
@@ -9585,6 +11392,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -9618,6 +11541,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_batch_update_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -9781,6 +11719,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -9850,6 +11793,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -9923,6 +11871,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,
@@ -10101,6 +12057,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -10134,6 +12206,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -10297,6 +12384,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -10366,6 +12458,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": None,
@@ -10439,6 +12536,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,

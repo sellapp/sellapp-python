@@ -216,15 +216,23 @@ List customer subscriptions
 def list_customer_portal_subscriptions(
         self,
         *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
         request_options: RequestOptions | None = None,
-    ) -> SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
+    ) -> SyncPage[CustomerPortalSubscription]:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
-Returns: `SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson`.
+Returns: `SyncPage[CustomerPortalSubscription]`.
 
 ```py
 import os
@@ -405,11 +413,7 @@ def cancel_customer_subscription_at_period_end(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson:
@@ -418,11 +422,7 @@ def cancel_customer_subscription_at_period_end(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| reason | `str \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -436,8 +436,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.cancel_customer_subscription_at_period_end(
     product_subscription=42,
-    reason="Customer requested this change",
-    idempotency_key="example-mutation-001"
+    reason="Taking a break over the summer."
 )
 print(result)
 ```
@@ -469,11 +468,7 @@ def cancel_customer_subscription_immediately(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJson:
@@ -482,11 +477,7 @@ def cancel_customer_subscription_immediately(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| reason | `str \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -500,8 +491,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.cancel_customer_subscription_immediately(
     product_subscription=42,
-    reason="Customer requested this change",
-    idempotency_key="example-mutation-001"
+    reason="No longer needed."
 )
 print(result)
 ```
@@ -533,11 +523,8 @@ def pause_customer_subscription(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        resume_at: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPauseCustomerSubscriptionResponseValue200ApplicationJson:
@@ -546,11 +533,8 @@ def pause_customer_subscription(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| resume_at | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -564,8 +548,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.pause_customer_subscription(
     product_subscription=42,
-    reason="Customer requested this change",
-    idempotency_key="example-mutation-001"
+    resume_at="2026-11-01T00:00:00Z"
 )
 print(result)
 ```
@@ -597,11 +580,6 @@ def resume_customer_subscription(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkResumeCustomerSubscriptionResponseValue200ApplicationJson:
@@ -610,11 +588,6 @@ def resume_customer_subscription(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -626,11 +599,7 @@ from sellapp_sdk import SellAppClient
 
 client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_session=os.environ["SELLAPP_CUSTOMER_SESSION"], store="")
 
-result = client.customer_portal.resume_customer_subscription(
-    product_subscription=42,
-    reason="Customer requested this change",
-    idempotency_key="example-mutation-001"
-)
+result = client.customer_portal.resume_customer_subscription(product_subscription=42)
 print(result)
 ```
 
@@ -661,11 +630,7 @@ def update_customer_subscription_payment_method(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJson:
@@ -674,11 +639,7 @@ def update_customer_subscription_payment_method(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| return_url | `str \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -692,8 +653,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.update_customer_subscription_payment_method(
     product_subscription=42,
-    reason="Customer requested this change",
-    idempotency_key="example-mutation-001"
+    return_url="https://acme.sell.app/customer-portal/subscriptions/991"
 )
 print(result)
 ```
@@ -725,12 +685,15 @@ def preview_customer_subscription_plan_change(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        target_variant_id: int,
+        effective_timing: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
 ```
@@ -738,12 +701,15 @@ def preview_customer_subscription_plan_change(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
-| idempotency_key | `str \| None` | No |
+| target_variant_id | `int` | Yes |
+| effective_timing | `SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        \| str
+        \| None` | No |
+| proration_behavior | `SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        \| str
+        \| None` | No |
+| metadata | `PreviewCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPreviewCustomerSubscriptionPlanChangeResponseValue200ApplicationJson`.
@@ -756,8 +722,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.preview_customer_subscription_plan_change(
     product_subscription=42,
-    product_variant_id=84,
-    idempotency_key="example-mutation-001"
+    target_variant_id=97
 )
 print(result)
 ```
@@ -789,11 +754,16 @@ def confirm_customer_subscription_plan_change(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        target_variant_id: int,
+        preview_token: str,
+        effective_timing: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        | str
+        | None = None,
+        proration_behavior: SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        | str
+        | None = None,
+        metadata: ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJson:
@@ -802,11 +772,16 @@ def confirm_customer_subscription_plan_change(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| target_variant_id | `int` | Yes |
+| preview_token | `str` | Yes |
+| effective_timing | `SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming
+        \| str
+        \| None` | No |
+| proration_behavior | `SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+        \| str
+        \| None` | No |
+| metadata | `ConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -820,8 +795,8 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.confirm_customer_subscription_plan_change(
     product_subscription=42,
-    preview_id="preview_01K4",
-    idempotency_key="example-mutation-001"
+    target_variant_id=97,
+    preview_token="subprev_portal_991"
 )
 print(result)
 ```
@@ -853,12 +828,10 @@ def preview_customer_subscription_renewal_date_change(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
-        idempotency_key: str | None = None,
+        renewal_date: str,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
 ```
@@ -866,12 +839,10 @@ def preview_customer_subscription_renewal_date_change(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
-| idempotency_key | `str \| None` | No |
+| renewal_date | `str` | Yes |
+| reason | `str \| None \| NotGiven` | No |
+| metadata | `PreviewCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkPreviewCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson`.
@@ -884,8 +855,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.preview_customer_subscription_renewal_date_change(
     product_subscription=42,
-    renewal_date="2026-10-15",
-    idempotency_key="example-mutation-001"
+    renewal_date="2026-10-15T00:00:00Z"
 )
 print(result)
 ```
@@ -917,11 +887,11 @@ def confirm_customer_subscription_renewal_date_change(
         self,
         product_subscription: int,
         *,
-        preview_id: str | None = None,
-        product_variant_id: int | None = None,
-        renewal_date: str | None = None,
-        return_url: str | None = None,
-        reason: str | None = None,
+        renewal_date: str,
+        preview_token: str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        metadata: ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
@@ -930,11 +900,11 @@ def confirm_customer_subscription_renewal_date_change(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
-| preview_id | `str \| None` | No |
-| product_variant_id | `int \| None` | No |
-| renewal_date | `str \| None` | No |
-| return_url | `str \| None` | No |
-| reason | `str \| None` | No |
+| renewal_date | `str` | Yes |
+| preview_token | `str \| None \| NotGiven` | No |
+| reason | `str \| None \| NotGiven` | No |
+| metadata | `ConfirmCustomerSubscriptionRenewalDateChangeRequestApplicationJsonPropertyMetadata
+        \| None` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -948,8 +918,8 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], customer_ses
 
 result = client.customer_portal.confirm_customer_subscription_renewal_date_change(
     product_subscription=42,
-    preview_id="preview_01K4",
-    idempotency_key="example-mutation-001"
+    renewal_date="2026-10-15T00:00:00Z",
+    preview_token="subprev_portal_renewal_991"
 )
 print(result)
 ```

@@ -2,11 +2,11 @@
 
 from typing import TypeAlias
 
-from .sdk_confirm_subscription_plan_change_request_application_json_proration_behavior import (
-    SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
+from .sdk_confirm_customer_subscription_plan_change_request_application_json_proration_behavior import (
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
 )
 
 SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior: TypeAlias = (
-    SdkConfirmSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior
 )
 __all__ = ["SdkPreviewSubscriptionPlanChangeRequestApplicationJsonProrationBehavior"]

@@ -78,7 +78,7 @@ class SdkPauseSubscriptionRequestApplicationJson:
     idempotency_key: str | None = None
     """Optional idempotency key. You may also send this as the Idempotency-Key header."""
     resume_at: datetime | None = None
-    """Use a future date-time at execution time. Automatic resume dates are supported only for Stripe; the shown date is illustrative."""
+    """Use a future date-time at execution time. Automatic resume dates are supported by Stripe and by subscriptions the store bills in house; the shown date is illustrative."""
     reason: str | None = None
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False

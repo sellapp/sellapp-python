@@ -63,7 +63,7 @@ class ProductVariantsPricing:
     ) -> SdkReplaceProductVariantPricingResponseValue200ApplicationJson:
         """Replace product variant pricing
 
-        Replace a variant's pricing and payment-method selection. Omitted `compare_at_price` and `bulk_discount` values are cleared. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Replace a variant's pricing and payment-method selection. Omitted `compare_at_price` and `bulk_discount` values are cleared. An omitted `trial` is kept. A `trial` is accepted only on `SUBSCRIPTION` pricing and is dropped when the pricing becomes `SINGLE_PAYMENT`. Send `trial: null` to remove it. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Bundle products only support one-time pricing. A bundle variant whose resulting pricing type is `SUBSCRIPTION` is refused with a `422` carrying that sentence on `pricing.type`. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -188,7 +188,9 @@ class ProductVariantsPricing:
                         "items": {
                             "kind": "primitive",
                             "type": "string",
-                            "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
                         },
                         "constraints": {"uniqueItems": True},
                     },
@@ -235,7 +237,7 @@ class ProductVariantsPricing:
     ) -> SdkUpdateProductVariantPricingResponseValue200ApplicationJson:
         """Partially update product variant pricing
 
-        Update only the supplied pricing, subscription cadence, quantity pricing tier, or payment-method fields; omitted fields retain their current values. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update only the supplied pricing, subscription cadence, quantity pricing tier, or payment-method fields; omitted fields retain their current values. A `trial` is accepted only on `SUBSCRIPTION` pricing and is dropped when the pricing becomes `SINGLE_PAYMENT`. Send `trial: null` to remove it. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Bundle products only support one-time pricing. A bundle variant whose resulting pricing type is `SUBSCRIPTION` is refused with a `422` carrying that sentence on `pricing.type`. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -360,7 +362,9 @@ class ProductVariantsPricing:
                         "items": {
                             "kind": "primitive",
                             "type": "string",
-                            "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
                         },
                         "constraints": {"uniqueItems": True},
                     },
@@ -413,7 +417,7 @@ class AsyncProductVariantsPricing:
     ) -> SdkReplaceProductVariantPricingResponseValue200ApplicationJson:
         """Replace product variant pricing
 
-        Replace a variant's pricing and payment-method selection. Omitted `compare_at_price` and `bulk_discount` values are cleared. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Replace a variant's pricing and payment-method selection. Omitted `compare_at_price` and `bulk_discount` values are cleared. An omitted `trial` is kept. A `trial` is accepted only on `SUBSCRIPTION` pricing and is dropped when the pricing becomes `SINGLE_PAYMENT`. Send `trial: null` to remove it. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Bundle products only support one-time pricing. A bundle variant whose resulting pricing type is `SUBSCRIPTION` is refused with a `422` carrying that sentence on `pricing.type`. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -538,7 +542,9 @@ class AsyncProductVariantsPricing:
                         "items": {
                             "kind": "primitive",
                             "type": "string",
-                            "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
                         },
                         "constraints": {"uniqueItems": True},
                     },
@@ -585,7 +591,7 @@ class AsyncProductVariantsPricing:
     ) -> SdkUpdateProductVariantPricingResponseValue200ApplicationJson:
         """Partially update product variant pricing
 
-        Update only the supplied pricing, subscription cadence, quantity pricing tier, or payment-method fields; omitted fields retain their current values. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update only the supplied pricing, subscription cadence, quantity pricing tier, or payment-method fields; omitted fields retain their current values. A `trial` is accepted only on `SUBSCRIPTION` pricing and is dropped when the pricing becomes `SINGLE_PAYMENT`. Send `trial: null` to remove it. An empty payment-method array is accepted only when the resulting published variant is genuinely free, including having no paid credit-rate tiers. Bundle products only support one-time pricing. A bundle variant whose resulting pricing type is `SUBSCRIPTION` is refused with a `422` carrying that sentence on `pricing.type`. Requires the `listing` Sanctum ability. Relationship IDs are scoped to the current store. Use the ISO 8601 string `expected_updated_at` to reject stale writes. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -710,7 +716,9 @@ class AsyncProductVariantsPricing:
                         "items": {
                             "kind": "primitive",
                             "type": "string",
-                            "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
                         },
                         "constraints": {"uniqueItems": True},
                     },

@@ -31,9 +31,15 @@ class CreateWebhookChannelResponseValue201ApplicationJsonPropertyDataAllowedNoti
     PRODUCT_CREATED = "product.created"
     PRODUCT_TRASHED = "product.trashed"
     PRODUCT_UPDATED = "product.updated"
+    SUBSCRIPTION_ACTION = "subscription.action"
     SUBSCRIPTION_CANCELLED = "subscription.cancelled"
     SUBSCRIPTION_CREATED = "subscription.created"
+    SUBSCRIPTION_PLAN_CHANGE_NEEDS_ATTENTION = (
+        "subscription.plan_change_needs_attention"
+    )
+    SUBSCRIPTION_RENEWAL_NEEDS_ATTENTION = "subscription.renewal_needs_attention"
     SUBSCRIPTION_RENEWED = "subscription.renewed"
+    SUBSCRIPTION_SIGNUP_NEEDS_ATTENTION = "subscription.signup_needs_attention"
     TICKET_MESSAGE_CREATED = "ticket_message.created"
     VARIANT_CREATED = "variant.created"
     VARIANT_SOLD_OUT = "variant.sold_out"
@@ -73,9 +79,13 @@ CreateWebhookChannelResponseValue201ApplicationJsonPropertyDataAllowedNotificati
     "product.created",
     "product.trashed",
     "product.updated",
+    "subscription.action",
     "subscription.cancelled",
     "subscription.created",
+    "subscription.plan_change_needs_attention",
+    "subscription.renewal_needs_attention",
     "subscription.renewed",
+    "subscription.signup_needs_attention",
     "ticket_message.created",
     "variant.created",
     "variant.sold_out",

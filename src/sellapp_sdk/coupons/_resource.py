@@ -92,23 +92,41 @@ from sellapp_sdk.common.models.list_coupons_response_value_200_application_json_
 from sellapp_sdk.common.models.sdk_batch_create_coupons_response_value_200_application_json import (
     SdkBatchCreateCouponsResponseValue200ApplicationJson,
 )
+from sellapp_sdk.common.models.sdk_create_coupon_request_application_json_applies_to import (
+    SdkCreateCouponRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_create_coupon_request_application_json_type import (
     SdkCreateCouponRequestApplicationJsonType,
 )
 from sellapp_sdk.common.models.sdk_create_coupon_response_value_201_application_json import (
     SdkCreateCouponResponseValue201ApplicationJson,
 )
+from sellapp_sdk.common.models.sdk_replace_coupon_request_application_json_applies_to import (
+    SdkReplaceCouponRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_replace_coupon_request_application_json_type import (
     SdkReplaceCouponRequestApplicationJsonType,
+)
+from sellapp_sdk.common.models.sdk_update_coupon_request_application_json_applies_to import (
+    SdkUpdateCouponRequestApplicationJsonAppliesTo,
 )
 from sellapp_sdk.common.models.sdk_update_coupon_request_application_json_type import (
     SdkUpdateCouponRequestApplicationJsonType,
 )
+from sellapp_sdk.common.models.sdk_v_2_create_coupon_request_application_json_applies_to import (
+    SdkV2CreateCouponRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_v_2_create_coupon_request_application_json_type import (
     SdkV2CreateCouponRequestApplicationJsonType,
 )
+from sellapp_sdk.common.models.sdk_v_2_replace_coupon_request_application_json_applies_to import (
+    SdkV2ReplaceCouponRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_v_2_replace_coupon_request_application_json_type import (
     SdkV2ReplaceCouponRequestApplicationJsonType,
+)
+from sellapp_sdk.common.models.sdk_v_2_update_coupon_request_application_json_applies_to import (
+    SdkV2UpdateCouponRequestApplicationJsonAppliesTo,
 )
 from sellapp_sdk.common.models.sdk_v_2_update_coupon_request_application_json_type import (
     SdkV2UpdateCouponRequestApplicationJsonType,
@@ -223,6 +241,8 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
         """Create a coupon
@@ -232,13 +252,15 @@ class Coupons:
         Args:
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -289,6 +311,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -298,6 +323,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -367,6 +394,18 @@ class Coupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -472,6 +511,8 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplaceCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -484,13 +525,15 @@ class Coupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -544,6 +587,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -553,6 +599,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -624,6 +672,18 @@ class Coupons:
                             ],
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -662,6 +722,8 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -674,13 +736,15 @@ class Coupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -734,6 +798,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -743,6 +810,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -812,6 +881,18 @@ class Coupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -1380,6 +1461,10 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2CreateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
@@ -1390,13 +1475,15 @@ class Coupons:
         Args:
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1450,6 +1537,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -1459,6 +1549,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1528,6 +1620,18 @@ class Coupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -1751,6 +1855,10 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2ReplaceCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -1763,13 +1871,15 @@ class Coupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -1825,6 +1935,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -1834,6 +1947,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1905,6 +2020,18 @@ class Coupons:
                             ],
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -1943,6 +2070,10 @@ class Coupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2UpdateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -1955,13 +2086,15 @@ class Coupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -2017,6 +2150,9 @@ class Coupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -2026,6 +2162,8 @@ class Coupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -2095,6 +2233,18 @@ class Coupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -2571,6 +2721,8 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
         """Create a coupon
@@ -2580,13 +2732,15 @@ class AsyncCoupons:
         Args:
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -2637,6 +2791,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -2646,6 +2803,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -2715,6 +2874,18 @@ class AsyncCoupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -2820,6 +2991,8 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplaceCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -2832,13 +3005,15 @@ class AsyncCoupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -2892,6 +3067,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -2901,6 +3079,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -2972,6 +3152,18 @@ class AsyncCoupons:
                             ],
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -3010,6 +3202,8 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -3022,13 +3216,15 @@ class AsyncCoupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -3082,6 +3278,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -3091,6 +3290,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -3160,6 +3361,18 @@ class AsyncCoupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -3728,6 +3941,10 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2CreateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
@@ -3738,13 +3955,15 @@ class AsyncCoupons:
         Args:
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Every variant must belong to a selected product. Products without listed variants remain eligible on all variants. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -3798,6 +4017,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -3807,6 +4029,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -3876,6 +4100,18 @@ class AsyncCoupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },
@@ -4099,6 +4335,10 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2ReplaceCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -4111,13 +4351,15 @@ class AsyncCoupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -4173,6 +4415,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -4182,6 +4427,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -4253,6 +4500,18 @@ class AsyncCoupons:
                             ],
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -4291,6 +4550,10 @@ class AsyncCoupons:
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2UpdateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -4303,13 +4566,15 @@ class AsyncCoupons:
             coupon: The coupon path parameter.
             code: The code.
             type: The type.
-            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit.
+            discount: A decimal discount value of at least 1. Percentage discounts cannot exceed 100; amount discounts use the store currency's major unit. A `subscriptions` coupon cannot take 100% off: that returns `422` on `discount`, so offer a free trial instead.
             store_wide: The store wide.
-            products: Product IDs the coupon applies to when store_wide is false.
-            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products.
+            products: Product IDs the coupon applies to when store_wide is false. Each product you add must sell a variant of the coupon's kind: a subscription plan for a `subscriptions` coupon, or a one-time variant for a `one_time` one. Another product returns `422` on `products`.
+            product_variants: Optional variant restrictions. Omit to preserve existing restrictions or send an empty array to allow every variant of the selected products. Each variant you add must be of the coupon's kind, a subscription plan or a one-time variant; another returns `422` on `product_variants`.
             limit: The limit.
             expires_at: A future date and time, or null for no expiry.
-            minimum_amount: A decimal minimum order amount in the store currency's major unit, or null for no minimum.
+            minimum_amount: A decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null for no minimum.
+            applies_to: What the coupon discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new coupon defaults to `one_time`, and an update that leaves this out keeps the current kind. The coupon only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` coupon discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` coupon needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` coupon, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` coupon always stores null here.
             with_trashed: Include soft-deleted resources in the result. Defaults to `false`.
             only_trashed: Return only soft-deleted resources. Ignored when with_trashed is true. Defaults to `false`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -4365,6 +4630,9 @@ class AsyncCoupons:
                 "store_wide": store_wide,
                 "products": products,
                 "product_variants": product_variants,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -4374,6 +4642,8 @@ class AsyncCoupons:
             body["expires_at"] = expires_at
         if not isinstance(minimum_amount, NotGiven):
             body["minimum_amount"] = minimum_amount
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -4443,6 +4713,18 @@ class AsyncCoupons:
                                     "constraints": {"minimum": 1, "maxLength": 255},
                                 },
                             ],
+                        },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
                         },
                     },
                 },

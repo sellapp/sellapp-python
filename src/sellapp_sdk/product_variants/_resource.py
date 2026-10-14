@@ -178,6 +178,7 @@ class ProductVariants:
             CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
@@ -196,7 +197,8 @@ class ProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -255,6 +257,7 @@ class ProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -334,6 +337,16 @@ class ProductVariants:
                             ],
                         },
                         "constraints": {"minItems": 1},
+                    },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
                     },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
@@ -456,14 +469,16 @@ class ProductVariants:
             SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
         """Update a product variant with PUT
 
-        Update a product variant using the PUT compatibility method. Fields remain partial for backward compatibility. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a product variant using the PUT compatibility method. Fields remain partial for backward compatibility. Bundle products only support one-time pricing. Adding the bundle deliverable type to a subscription variant is refused with a `422` carrying that sentence on `deliverable.types`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -475,9 +490,11 @@ class ProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
+            stock: Set an existing variant's stock count while preserving delivery instructions and uploaded files. Send 0 for out of stock or null for unlimited stock. Omit deliverable for a stock-only change. TEXT variants manage stock through their serial inventory and reject this field.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -536,6 +553,7 @@ class ProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -545,6 +563,8 @@ class ProductVariants:
         }
         if not isinstance(maximum_purchase_quantity, NotGiven):
             body["maximum_purchase_quantity"] = maximum_purchase_quantity
+        if not isinstance(stock, NotGiven):
+            body["stock"] = stock
         _validate_model(
             body,
             {
@@ -610,11 +630,29 @@ class ProductVariants:
                         },
                         "constraints": {"minItems": 1},
                     },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
+                    },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
                         "kind": "primitive",
                         "type": "string",
                         "format": "date-time",
+                    },
+                    "stock": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0, "maximum": 2147483647},
+                        },
                     },
                 },
                 "additionalProperties": True,
@@ -653,14 +691,16 @@ class ProductVariants:
             SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
         """Update a product variant
 
-        Updates a product variant's details. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Updates a product variant's details. Bundle products only support one-time pricing. Adding the bundle deliverable type to a subscription variant is refused with a `422` carrying that sentence on `deliverable.types`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -672,9 +712,11 @@ class ProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
+            stock: Set an existing variant's stock count while preserving delivery instructions and uploaded files. Send 0 for out of stock or null for unlimited stock. Omit deliverable for a stock-only change. TEXT variants manage stock through their serial inventory and reject this field.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -733,6 +775,7 @@ class ProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -742,6 +785,8 @@ class ProductVariants:
         }
         if not isinstance(maximum_purchase_quantity, NotGiven):
             body["maximum_purchase_quantity"] = maximum_purchase_quantity
+        if not isinstance(stock, NotGiven):
+            body["stock"] = stock
         _validate_model(
             body,
             {
@@ -807,11 +852,29 @@ class ProductVariants:
                         },
                         "constraints": {"minItems": 1},
                     },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
+                    },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
                         "kind": "primitive",
                         "type": "string",
                         "format": "date-time",
+                    },
+                    "stock": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0, "maximum": 2147483647},
+                        },
                     },
                 },
                 "additionalProperties": True,
@@ -834,15 +897,17 @@ class ProductVariants:
         product: int,
         variant: int,
         *,
+        expected_updated_at: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product variant
 
-        Deletes a product variant. This will permanently delete the product variant and all of its details, including the sensitive deliverables, will no longer be retrievable. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Soft-delete a variant in the authenticated store. Variants referenced by non-terminal subscriptions cannot be deleted. Send expected_updated_at from the latest variant response to reject a stale deletion with 422. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
             variant: The variant path parameter.
+            expected_updated_at: Optional optimistic-concurrency snapshot. Send the exact `updated_at` value from the product you last retrieved; the mutation is rejected if the product has changed.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Raises:
@@ -884,9 +949,36 @@ class ProductVariants:
             "idempotency_supported": False,
             "operation_id": "deleteProductVariant",
         }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "expected_updated_at": expected_updated_at,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkDeleteProductVariantRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "expected_updated_at": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "format": "date-time",
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
         self._client.request(
             method="delete",
             path=("v2", "products", str(product), "variants", str(variant)),
+            body=body,
             request_options=request_options,
         )
 
@@ -1369,6 +1461,7 @@ class AsyncProductVariants:
             CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
@@ -1387,7 +1480,8 @@ class AsyncProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
@@ -1446,6 +1540,7 @@ class AsyncProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -1525,6 +1620,16 @@ class AsyncProductVariants:
                             ],
                         },
                         "constraints": {"minItems": 1},
+                    },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
                     },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
@@ -1647,14 +1752,16 @@ class AsyncProductVariants:
             SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
         """Update a product variant with PUT
 
-        Update a product variant using the PUT compatibility method. Fields remain partial for backward compatibility. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a product variant using the PUT compatibility method. Fields remain partial for backward compatibility. Bundle products only support one-time pricing. Adding the bundle deliverable type to a subscription variant is refused with a `422` carrying that sentence on `deliverable.types`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -1666,9 +1773,11 @@ class AsyncProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
+            stock: Set an existing variant's stock count while preserving delivery instructions and uploaded files. Send 0 for out of stock or null for unlimited stock. Omit deliverable for a stock-only change. TEXT variants manage stock through their serial inventory and reject this field.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1727,6 +1836,7 @@ class AsyncProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -1736,6 +1846,8 @@ class AsyncProductVariants:
         }
         if not isinstance(maximum_purchase_quantity, NotGiven):
             body["maximum_purchase_quantity"] = maximum_purchase_quantity
+        if not isinstance(stock, NotGiven):
+            body["stock"] = stock
         _validate_model(
             body,
             {
@@ -1801,11 +1913,29 @@ class AsyncProductVariants:
                         },
                         "constraints": {"minItems": 1},
                     },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
+                    },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
                         "kind": "primitive",
                         "type": "string",
                         "format": "date-time",
+                    },
+                    "stock": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0, "maximum": 2147483647},
+                        },
                     },
                 },
                 "additionalProperties": True,
@@ -1844,14 +1974,16 @@ class AsyncProductVariants:
             SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
         """Update a product variant
 
-        Updates a product variant's details. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Updates a product variant's details. Bundle products only support one-time pricing. Adding the bundle deliverable type to a subscription variant is refused with a `422` carrying that sentence on `deliverable.types`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -1863,9 +1995,11 @@ class AsyncProductVariants:
             minimum_purchase_quantity: The minimum purchase quantity.
             maximum_purchase_quantity: The maximum purchase quantity.
             bulk_discount: The bulk discount.
-            payment_methods: The payment methods.
+            payment_methods: Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry.
+            custom_payment_method_ids: Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected.
             other_settings: The other settings.
             expected_updated_at: Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response.
+            stock: Set an existing variant's stock count while preserving delivery instructions and uploaded files. Send 0 for out of stock or null for unlimited stock. Omit deliverable for a stock-only change. TEXT variants manage stock through their serial inventory and reject this field.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1924,6 +2058,7 @@ class AsyncProductVariants:
                 if bulk_discount is not None
                 else None,
                 "payment_methods": payment_methods,
+                "custom_payment_method_ids": custom_payment_method_ids,
                 "other_settings": other_settings.to_dict()
                 if other_settings is not None
                 else None,
@@ -1933,6 +2068,8 @@ class AsyncProductVariants:
         }
         if not isinstance(maximum_purchase_quantity, NotGiven):
             body["maximum_purchase_quantity"] = maximum_purchase_quantity
+        if not isinstance(stock, NotGiven):
+            body["stock"] = stock
         _validate_model(
             body,
             {
@@ -1998,11 +2135,29 @@ class AsyncProductVariants:
                         },
                         "constraints": {"minItems": 1},
                     },
+                    "custom_payment_method_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"
+                            },
+                        },
+                    },
                     "other_settings": {"kind": "any"},
                     "expected_updated_at": {
                         "kind": "primitive",
                         "type": "string",
                         "format": "date-time",
+                    },
+                    "stock": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0, "maximum": 2147483647},
+                        },
                     },
                 },
                 "additionalProperties": True,
@@ -2025,15 +2180,17 @@ class AsyncProductVariants:
         product: int,
         variant: int,
         *,
+        expected_updated_at: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> None:
         """Delete a product variant
 
-        Deletes a product variant. This will permanently delete the product variant and all of its details, including the sensitive deliverables, will no longer be retrievable. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Soft-delete a variant in the authenticated store. Variants referenced by non-terminal subscriptions cannot be deleted. Send expected_updated_at from the latest variant response to reject a stale deletion with 422. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
             variant: The variant path parameter.
+            expected_updated_at: Optional optimistic-concurrency snapshot. Send the exact `updated_at` value from the product you last retrieved; the mutation is rejected if the product has changed.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Raises:
@@ -2075,9 +2232,36 @@ class AsyncProductVariants:
             "idempotency_supported": False,
             "operation_id": "deleteProductVariant",
         }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "expected_updated_at": expected_updated_at,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkDeleteProductVariantRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "expected_updated_at": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "format": "date-time",
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
         await self._client.request(
             method="delete",
             path=("v2", "products", str(product), "variants", str(variant)),
+            body=body,
             request_options=request_options,
         )
 

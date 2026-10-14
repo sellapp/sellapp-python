@@ -2,8 +2,10 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.cancel_customer_subscription_at_period_end_response_value_200_application_json_property_data_property_customer_property_metadata import (
-    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata,
+from sellapp_sdk.common.models.create_customer_request_application_json_property_metadata import (
+    CreateCustomerRequestApplicationJsonPropertyMetadata,
 )
 
-UpdateCustomerRequestApplicationJsonPropertyMetadata: TypeAlias = CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata
+UpdateCustomerRequestApplicationJsonPropertyMetadata: TypeAlias = (
+    CreateCustomerRequestApplicationJsonPropertyMetadata
+)

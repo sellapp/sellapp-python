@@ -152,6 +152,7 @@ class ListOrdersResponseValue200ApplicationJsonPropertyDataItem:
     payment: ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyPayment
     totals: ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyTotals
     coupon_id: int | None
+    """The coupon this order was sold with, or null. A subscription's renewal and plan-change orders carry null, even while the subscription still bills a discounted price, so a coupon's `limit` counts a subscription once, at signup."""
     line_items: list[
         ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyLineItemsItem
     ]

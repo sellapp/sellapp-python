@@ -82,7 +82,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "items": {
                 "kind": "primitive",
                 "type": "string",
-                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
             },
             "constraints": {"uniqueItems": True},
         },
@@ -151,7 +151,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "items": {
                 "kind": "primitive",
                 "type": "string",
-                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"},
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
             },
             "constraints": {"uniqueItems": True},
         },

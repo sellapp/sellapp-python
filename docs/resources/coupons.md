@@ -82,6 +82,8 @@ def create(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateCouponResponseValue201ApplicationJson:
 ```
@@ -97,6 +99,8 @@ def create(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkCreateCouponRequestApplicationJsonAppliesTo \| str \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateCouponResponseValue201ApplicationJson`.
@@ -208,6 +212,8 @@ def replace(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplaceCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -226,6 +232,8 @@ def replace(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkReplaceCouponRequestApplicationJsonAppliesTo \| str \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -284,6 +292,8 @@ def update(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdateCouponRequestApplicationJsonAppliesTo | str | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -302,6 +312,8 @@ def update(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkUpdateCouponRequestApplicationJsonAppliesTo \| str \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -728,6 +740,10 @@ def v2_create_coupon(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2CreateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
@@ -744,6 +760,10 @@ def v2_create_coupon(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkV2CreateCouponRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -953,6 +973,10 @@ def v2_replace_coupon(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2ReplaceCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -971,6 +995,10 @@ def v2_replace_coupon(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkV2ReplaceCouponRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -1034,6 +1062,10 @@ def v2_update_coupon(
         limit: int | None | NotGiven = NOT_GIVEN,
         expires_at: str | None | NotGiven = NOT_GIVEN,
         minimum_amount: float | str | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkV2UpdateCouponRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -1052,6 +1084,10 @@ def v2_update_coupon(
 | limit | `int \| None \| NotGiven` | No |
 | expires_at | `str \| None \| NotGiven` | No |
 | minimum_amount | `float \| str \| None \| NotGiven` | No |
+| applies_to | `SdkV2UpdateCouponRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |

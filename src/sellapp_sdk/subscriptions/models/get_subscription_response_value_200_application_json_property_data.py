@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.list_subscriptions_response_value_200_application_json_property_data_item import (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
+from .cancel_subscription_response_value_200_application_json_property_data import (
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyData,
 )
 
 GetSubscriptionResponseValue200ApplicationJsonPropertyData: TypeAlias = (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyData
 )

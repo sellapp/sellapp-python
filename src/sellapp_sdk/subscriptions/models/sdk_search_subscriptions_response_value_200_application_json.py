@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .sdk_list_subscriptions_response_value_200_application_json import (
-    SdkListSubscriptionsResponseValue200ApplicationJson,
+from sellapp_sdk.common.models.sdk_list_add_on_s_parent_products_response_value_200_application_json import (
+    SdkListAddOnSParentProductsResponseValue200ApplicationJson,
 )
 
 SdkSearchSubscriptionsResponseValue200ApplicationJson: TypeAlias = (
-    SdkListSubscriptionsResponseValue200ApplicationJson
+    SdkListAddOnSParentProductsResponseValue200ApplicationJson
 )

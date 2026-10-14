@@ -11,14 +11,26 @@ if TYPE_CHECKING:
 
 import builtins
 
+from sellapp_sdk.common.models.sdk_create_promotion_request_application_json_applies_to import (
+    SdkCreatePromotionRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_create_promotion_request_application_json_status import (
     SdkCreatePromotionRequestApplicationJsonStatus,
+)
+from sellapp_sdk.common.models.sdk_replace_promotion_request_application_json_applies_to import (
+    SdkReplacePromotionRequestApplicationJsonAppliesTo,
 )
 from sellapp_sdk.common.models.sdk_replace_promotion_request_application_json_status import (
     SdkReplacePromotionRequestApplicationJsonStatus,
 )
+from sellapp_sdk.common.models.sdk_restore_promotion_request_application_json_applies_to import (
+    SdkRestorePromotionRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_restore_promotion_request_application_json_status import (
     SdkRestorePromotionRequestApplicationJsonStatus,
+)
+from sellapp_sdk.common.models.sdk_update_promotion_request_application_json_applies_to import (
+    SdkUpdatePromotionRequestApplicationJsonAppliesTo,
 )
 from sellapp_sdk.common.models.sdk_update_promotion_request_application_json_status import (
     SdkUpdatePromotionRequestApplicationJsonStatus,
@@ -148,11 +160,18 @@ class Promotions:
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
         """Create a promotion
 
-        Create a promotion and its initial ordered phase set. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a promotion and its initial ordered phase set. `applies_to` chooses whether it discounts one-time purchases or the first `subscription_payments` payments of a subscription plan, and a subscription promotion can be limited to picked products and plans with `store_wide`, `products`, and `product_variants`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             name: The name.
@@ -162,6 +181,11 @@ class Promotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -207,11 +231,21 @@ class Promotions:
             "operation_id": "createPromotion",
         }
         body: dict[str, Any] = {
-            "name": name,
-            "status": enum_value(status),
-            "priority": priority,
-            "is_stackable": is_stackable,
-            "phases": [item.to_dict() for item in phases],
+            k: v
+            for k, v in {
+                "name": name,
+                "status": enum_value(status),
+                "priority": priority,
+                "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
+                "phases": [item.to_dict() for item in phases],
+            }.items()
+            if v is not None
         }
         if not isinstance(starts_at, NotGiven):
             body["starts_at"] = starts_at
@@ -219,6 +253,8 @@ class Promotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -260,6 +296,27 @@ class Promotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",
@@ -471,6 +528,13 @@ class Promotions:
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplacePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -488,6 +552,11 @@ class Promotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -540,6 +609,12 @@ class Promotions:
                 "status": enum_value(status) if status is not None else None,
                 "priority": priority,
                 "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
                 "phases": [item.to_dict() for item in phases]
                 if phases is not None
                 else None,
@@ -552,6 +627,8 @@ class Promotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -594,6 +671,27 @@ class Promotions:
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
                     "phases": {
                         "kind": "array",
                         "items": {"kind": "any"},
@@ -626,6 +724,13 @@ class Promotions:
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -643,6 +748,11 @@ class Promotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -695,6 +805,12 @@ class Promotions:
                 "status": enum_value(status) if status is not None else None,
                 "priority": priority,
                 "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
                 "phases": [item.to_dict() for item in phases]
                 if phases is not None
                 else None,
@@ -707,6 +823,8 @@ class Promotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -748,6 +866,27 @@ class Promotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",
@@ -841,6 +980,13 @@ class Promotions:
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkRestorePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
         """Restore a promotion
@@ -856,6 +1002,11 @@ class Promotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -902,11 +1053,21 @@ class Promotions:
             "operation_id": "restorePromotion",
         }
         body: dict[str, Any] = {
-            "name": name,
-            "status": enum_value(status),
-            "priority": priority,
-            "is_stackable": is_stackable,
-            "phases": [item.to_dict() for item in phases],
+            k: v
+            for k, v in {
+                "name": name,
+                "status": enum_value(status),
+                "priority": priority,
+                "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
+                "phases": [item.to_dict() for item in phases],
+            }.items()
+            if v is not None
         }
         if not isinstance(starts_at, NotGiven):
             body["starts_at"] = starts_at
@@ -914,6 +1075,8 @@ class Promotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -955,6 +1118,27 @@ class Promotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",
@@ -1081,11 +1265,18 @@ class AsyncPromotions:
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
         """Create a promotion
 
-        Create a promotion and its initial ordered phase set. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a promotion and its initial ordered phase set. `applies_to` chooses whether it discounts one-time purchases or the first `subscription_payments` payments of a subscription plan, and a subscription promotion can be limited to picked products and plans with `store_wide`, `products`, and `product_variants`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             name: The name.
@@ -1095,6 +1286,11 @@ class AsyncPromotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1140,11 +1336,21 @@ class AsyncPromotions:
             "operation_id": "createPromotion",
         }
         body: dict[str, Any] = {
-            "name": name,
-            "status": enum_value(status),
-            "priority": priority,
-            "is_stackable": is_stackable,
-            "phases": [item.to_dict() for item in phases],
+            k: v
+            for k, v in {
+                "name": name,
+                "status": enum_value(status),
+                "priority": priority,
+                "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
+                "phases": [item.to_dict() for item in phases],
+            }.items()
+            if v is not None
         }
         if not isinstance(starts_at, NotGiven):
             body["starts_at"] = starts_at
@@ -1152,6 +1358,8 @@ class AsyncPromotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1193,6 +1401,27 @@ class AsyncPromotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",
@@ -1404,6 +1633,13 @@ class AsyncPromotions:
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplacePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -1421,6 +1657,11 @@ class AsyncPromotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1473,6 +1714,12 @@ class AsyncPromotions:
                 "status": enum_value(status) if status is not None else None,
                 "priority": priority,
                 "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
                 "phases": [item.to_dict() for item in phases]
                 if phases is not None
                 else None,
@@ -1485,6 +1732,8 @@ class AsyncPromotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1527,6 +1776,27 @@ class AsyncPromotions:
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
                     },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
                     "phases": {
                         "kind": "array",
                         "items": {"kind": "any"},
@@ -1559,6 +1829,13 @@ class AsyncPromotions:
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -1576,6 +1853,11 @@ class AsyncPromotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1628,6 +1910,12 @@ class AsyncPromotions:
                 "status": enum_value(status) if status is not None else None,
                 "priority": priority,
                 "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
                 "phases": [item.to_dict() for item in phases]
                 if phases is not None
                 else None,
@@ -1640,6 +1928,8 @@ class AsyncPromotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1681,6 +1971,27 @@ class AsyncPromotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",
@@ -1774,6 +2085,13 @@ class AsyncPromotions:
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkRestorePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
         """Restore a promotion
@@ -1789,6 +2107,11 @@ class AsyncPromotions:
             priority: The priority.
             is_stackable: The is stackable.
             max_redemptions: The max redemptions.
+            applies_to: What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind.
+            subscription_payments: How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here.
+            store_wide: Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`
+            products: Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out.
+            product_variants: Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked.
             phases: The complete ordered phase set. Array order becomes phase position.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1835,11 +2158,21 @@ class AsyncPromotions:
             "operation_id": "restorePromotion",
         }
         body: dict[str, Any] = {
-            "name": name,
-            "status": enum_value(status),
-            "priority": priority,
-            "is_stackable": is_stackable,
-            "phases": [item.to_dict() for item in phases],
+            k: v
+            for k, v in {
+                "name": name,
+                "status": enum_value(status),
+                "priority": priority,
+                "is_stackable": is_stackable,
+                "applies_to": enum_value(applies_to)
+                if applies_to is not None
+                else None,
+                "store_wide": store_wide,
+                "products": products,
+                "product_variants": product_variants,
+                "phases": [item.to_dict() for item in phases],
+            }.items()
+            if v is not None
         }
         if not isinstance(starts_at, NotGiven):
             body["starts_at"] = starts_at
@@ -1847,6 +2180,8 @@ class AsyncPromotions:
             body["ends_at"] = ends_at
         if not isinstance(max_redemptions, NotGiven):
             body["max_redemptions"] = max_redemptions
+        if not isinstance(subscription_payments, NotGiven):
+            body["subscription_payments"] = subscription_payments
         _validate_model(
             body,
             {
@@ -1888,6 +2223,27 @@ class AsyncPromotions:
                             "type": "integer",
                             "constraints": {"minimum": 1, "maximum": 4294967295},
                         },
+                    },
+                    "applies_to": {
+                        "kind": "enum",
+                        "values": ["one_time", "subscriptions"],
+                    },
+                    "subscription_payments": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 36},
+                        },
+                    },
+                    "store_wide": {"kind": "primitive", "type": "boolean"},
+                    "products": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "product_variants": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
                     },
                     "phases": {
                         "kind": "array",

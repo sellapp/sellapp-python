@@ -12,6 +12,9 @@ from sellapp_sdk.bundle_items.models import (
     GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricing,
     GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
     GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItem,
@@ -22,6 +25,9 @@ from sellapp_sdk.bundle_items.models import (
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     SdkAttachBundleItemsResponseValue200ApplicationJson,
@@ -162,6 +168,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_get_bundle_item_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_round_trip(
         self,
     ):
@@ -195,6 +317,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_get_bundle_item_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_get_bundle_item_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
         self,
@@ -358,6 +495,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": 1,
@@ -427,6 +569,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": 1,
@@ -489,6 +636,11 @@ class TestModelRoundTrip:
                     "frequency": {"value": 1, "interval": "test_interval"},
                     "type": "test_type",
                     "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
                 },
                 "minimum_purchase_quantity": 1,
                 "maximum_purchase_quantity": 1,
@@ -649,6 +801,122 @@ class TestModelRoundTrip:
         assert serialized["price"] == data["price"]
         assert serialized["currency"] == data["currency"]
 
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_round_trip(
         self,
     ):
@@ -682,6 +950,21 @@ class TestModelRoundTrip:
         assert serialized["frequency"] == data["frequency"]
         assert serialized["type"] == data["type"]
         assert serialized["price"] == data["price"]
+
+    def test_list_bundle_items_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
 
     def test_list_bundle_items_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
         self,
@@ -849,6 +1132,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": 1,
@@ -920,6 +1208,11 @@ class TestModelRoundTrip:
                 "frequency": {"value": 1, "interval": "test_interval"},
                 "type": "test_type",
                 "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
             },
             "minimum_purchase_quantity": 1,
             "maximum_purchase_quantity": 1,
@@ -987,6 +1280,14 @@ class TestModelRoundTrip:
                         "frequency": {"value": 1, "interval": "test_interval"},
                         "type": "test_type",
                         "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
                     },
                     "minimum_purchase_quantity": 1,
                     "maximum_purchase_quantity": 1,

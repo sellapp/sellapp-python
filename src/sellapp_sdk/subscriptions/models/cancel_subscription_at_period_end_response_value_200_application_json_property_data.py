@@ -39,9 +39,11 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 "resume",
                 "cancel_at_period_end",
                 "cancel_immediately",
+                "keep_subscription",
                 "update_payment_method",
                 "change_plan",
                 "shift_billing_date",
+                "set_auto_renew",
             ],
         },
         "status": {
@@ -56,6 +58,11 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             ],
         },
         "provider": {"kind": "primitive", "type": "string"},
+        "proration_order_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "error": {"kind": "nullable", "inner": {"kind": "primitive", "type": "string"}},
         "customer_message": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
@@ -90,9 +97,11 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 "resume",
                 "cancel_at_period_end",
                 "cancel_immediately",
+                "keep_subscription",
                 "update_payment_method",
                 "change_plan",
                 "shift_billing_date",
+                "set_auto_renew",
             ],
         },
         "status": {
@@ -107,6 +116,11 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             ],
         },
         "provider": {"kind": "primitive", "type": "string"},
+        "proration_order_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "error": {"kind": "nullable", "inner": {"kind": "primitive", "type": "string"}},
         "customer_message": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
@@ -141,8 +155,14 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
         CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataStatus
         | None
     ) = None
+    """`pending` while the provider or the customer still has to respond, then `confirmed`, `failed`, `expired`, `dismissed`, or `force_resolved`."""
     provider: str | None = None
+    proration_order_id: int | None = None
+    """The order a plan change's proration was billed on. Only a subscription the store bills in house bills a proration as an order of its own, so this is null for every other provider, including one that prorated the change itself."""
+    error: str | None = None
+    """The seller-facing failure message, truncated to 255 characters. A dismissed action carries its dismissal note here instead."""
     customer_message: str | None = None
+    """The sentence SellApp shows the customer about this action, such as why it failed or that the seller dismissed it. SellApp writes it; the customer never types it. `null` when there is nothing to tell them."""
     confirmed_at: datetime | None = None
     failed_at: datetime | None = None
     created_at: datetime | None = None
@@ -181,6 +201,8 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
                 if (_v_status := data.get("status")) is not None
                 else None,
                 provider=data.get("provider"),
+                proration_order_id=data.get("proration_order_id"),
+                error=data.get("error"),
                 customer_message=data.get("customer_message"),
                 confirmed_at=_parse_datetime(_v_confirmed_at)
                 if (_v_confirmed_at := data.get("confirmed_at")) is not None
@@ -203,6 +225,8 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
                         "action",
                         "status",
                         "provider",
+                        "proration_order_id",
+                        "error",
                         "customer_message",
                         "confirmed_at",
                         "failed_at",
@@ -232,6 +256,8 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
             _domain_data["status"] = self.status
         if self.provider is not None:
             _domain_data["provider"] = self.provider
+        _domain_data["proration_order_id"] = self.proration_order_id
+        _domain_data["error"] = self.error
         _domain_data["customer_message"] = self.customer_message
         _domain_data["confirmed_at"] = self.confirmed_at
         _domain_data["failed_at"] = self.failed_at
@@ -266,6 +292,14 @@ class CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData:
             )
         if self.provider is not None:
             result["provider"] = self.provider
+        if self.proration_order_id is not None:
+            result["proration_order_id"] = self.proration_order_id
+        else:
+            result["proration_order_id"] = None
+        if self.error is not None:
+            result["error"] = self.error
+        else:
+            result["error"] = None
         if self.customer_message is not None:
             result["customer_message"] = self.customer_message
         else:

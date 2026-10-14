@@ -68,6 +68,207 @@ Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API r
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## list_subscriptions
+
+List subscriptions
+
+[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
+
+```python
+def list_subscriptions(
+        self,
+        *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        status: list[SubscriptionsStatus | str] | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| status | `list[SubscriptionsStatus \| str] \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.subscriptions.list_subscriptions()
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## search_subscriptions
+
+Search subscriptions
+
+[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
+
+```python
+def search_subscriptions(
+        self,
+        *,
+        filters: list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
+        includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| filters | `list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]
+        \| None` | No |
+| sort | `list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]
+        \| None` | No |
+| search | `SearchSubscriptionsRequestApplicationJsonPropertySearch \| None` | No |
+| includes | `list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
+        \| None` | No |
+| limit | `int \| None` | No |
+| before | `str \| None` | No |
+| after | `str \| None` | No |
+| order | `str \| None` | No |
+| page | `int \| None` | No |
+| pagination | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.subscriptions.search_subscriptions(
+    filters=[{"field": "status", "operator": "=", "value": "ACTIVE"}],
+    search={"value": "maya.chen@example.com"}
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## get_subscription
+
+Retrieve a subscription
+
+[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
+
+```python
+def get_subscription(
+        self,
+        product_subscription: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product_subscription | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkGetSubscriptionResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.subscriptions.get_subscription(product_subscription=123)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
 ## get_capabilities
 
 View subscription capabilities
@@ -248,6 +449,62 @@ Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API r
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## keep
+
+Keep a subscription
+
+[API reference](https://sell.app/docs/api/subscriptions/keep-a-subscription) · Effect: **consequential**
+
+```python
+def keep(
+        self,
+        product_subscription: int,
+        *,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkKeepSubscriptionResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product_subscription | `int` | Yes |
+| idempotency_key | `str \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkKeepSubscriptionResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.subscriptions.keep(product_subscription=55)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
 ## pause
 
 Pause a subscription
@@ -380,17 +637,19 @@ def update_payment_method(
         product_subscription: int,
         *,
         idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
 | --- | --- | --- |
 | product_subscription | `int` | Yes |
 | idempotency_key | `str \| None \| NotGiven` | No |
+| return_url | `str \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
-Returns: `Any`.
+Returns: `SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson`.
 
 ```py
 import os
@@ -398,7 +657,10 @@ from sellapp_sdk import SellAppClient
 
 client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
 
-result = client.subscriptions.update_payment_method(product_subscription=1)
+result = client.subscriptions.update_payment_method(
+    product_subscription=55,
+    return_url="https://store.example.com/billing/updated"
+)
 print(result)
 ```
 
@@ -420,7 +682,7 @@ Supported credential alternatives (each object is one alternative):
 ]
 ```
 
-Documented HTTP responses: 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
@@ -446,7 +708,7 @@ def preview_plan_change(
         metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
@@ -464,7 +726,7 @@ def preview_plan_change(
         \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
-Returns: `Any`.
+Returns: `SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson`.
 
 ```py
 import os
@@ -499,7 +761,7 @@ Supported credential alternatives (each object is one alternative):
 ]
 ```
 
-Documented HTTP responses: 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
@@ -526,7 +788,7 @@ def confirm_plan_change(
         metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson:
 ```
 
 | Argument | Native type | Required |
@@ -545,7 +807,7 @@ def confirm_plan_change(
         \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
-Returns: `Any`.
+Returns: `SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson`.
 
 ```py
 import os
@@ -554,7 +816,7 @@ from sellapp_sdk import SellAppClient
 client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
 
 result = client.subscriptions.confirm_plan_change(
-    product_subscription=1,
+    product_subscription=55,
     target_variant_id=4321,
     preview_token="subprev_9c4b2f"
 )
@@ -579,7 +841,7 @@ Supported credential alternatives (each object is one alternative):
 ]
 ```
 
-Documented HTTP responses: 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
@@ -719,187 +981,6 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
-
-[Response access, transport controls, pagination, and typed errors](../usage.md)
-
-## list_subscriptions
-
-List subscriptions
-
-[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
-
-```python
-def list_subscriptions(
-        self,
-        *,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-```
-
-| Argument | Native type | Required |
-| --- | --- | --- |
-| limit | `int \| None` | No |
-| before | `str \| None` | No |
-| after | `str \| None` | No |
-| order | `str \| None` | No |
-| request_options | `RequestOptions \| None` | No |
-
-Returns: `SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]`.
-
-```py
-import os
-from sellapp_sdk import SellAppClient
-
-client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
-
-result = client.subscriptions.list_subscriptions()
-print(result)
-```
-
-### Authentication and errors
-
-Supported credential alternatives (each object is one alternative):
-
-```json
-[
-  {
-    "bearerAuth": []
-  },
-  {
-    "oauthAccessToken": [
-      "admin"
-    ],
-    "storeAuth": []
-  }
-]
-```
-
-Documented HTTP responses: 200, 400, 401, 403, 404, 409, 410, 422, 429, 500. See the API reference for field-level validation and consequences.
-
-[Response access, transport controls, pagination, and typed errors](../usage.md)
-
-## search_subscriptions
-
-Search subscriptions
-
-[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
-
-```python
-def search_subscriptions(
-        self,
-        *,
-        search: str | None = None,
-        status: str | None = None,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-```
-
-| Argument | Native type | Required |
-| --- | --- | --- |
-| search | `str \| None` | No |
-| status | `str \| None` | No |
-| limit | `int \| None` | No |
-| before | `str \| None` | No |
-| after | `str \| None` | No |
-| order | `str \| None` | No |
-| request_options | `RequestOptions \| None` | No |
-
-Returns: `SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]`.
-
-```py
-import os
-from sellapp_sdk import SellAppClient
-
-client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
-
-result = client.subscriptions.search_subscriptions(
-    search="maya.chen@example.com",
-    status="active"
-)
-print(result)
-```
-
-### Authentication and errors
-
-Supported credential alternatives (each object is one alternative):
-
-```json
-[
-  {
-    "bearerAuth": []
-  },
-  {
-    "oauthAccessToken": [
-      "admin"
-    ],
-    "storeAuth": []
-  }
-]
-```
-
-Documented HTTP responses: 200, 400, 401, 403, 404, 409, 410, 422, 429, 500. See the API reference for field-level validation and consequences.
-
-[Response access, transport controls, pagination, and typed errors](../usage.md)
-
-## get_subscription
-
-Retrieve a subscription
-
-[API reference](https://sell.app/docs/api/subscriptions/read-subscriptions) · Effect: **read**
-
-```python
-def get_subscription(
-        self,
-        product_subscription: int,
-        *,
-        request_options: RequestOptions | None = None,
-    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
-```
-
-| Argument | Native type | Required |
-| --- | --- | --- |
-| product_subscription | `int` | Yes |
-| request_options | `RequestOptions \| None` | No |
-
-Returns: `SdkGetSubscriptionResponseValue200ApplicationJson`.
-
-```py
-import os
-from sellapp_sdk import SellAppClient
-
-client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
-
-result = client.subscriptions.get_subscription(product_subscription=991)
-print(result)
-```
-
-### Authentication and errors
-
-Supported credential alternatives (each object is one alternative):
-
-```json
-[
-  {
-    "bearerAuth": []
-  },
-  {
-    "oauthAccessToken": [
-      "admin"
-    ],
-    "storeAuth": []
-  }
-]
-```
-
-Documented HTTP responses: 200, 400, 401, 403, 404, 409, 410, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

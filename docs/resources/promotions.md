@@ -84,6 +84,13 @@ def create(
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkCreatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCreatePromotionResponseValue201ApplicationJson:
 ```
@@ -98,6 +105,13 @@ def create(
 | starts_at | `str \| None \| NotGiven` | No |
 | ends_at | `str \| None \| NotGiven` | No |
 | max_redemptions | `int \| None \| NotGiven` | No |
+| applies_to | `SdkCreatePromotionRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreatePromotionResponseValue201ApplicationJson`.
@@ -319,6 +333,13 @@ def replace(
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkReplacePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -335,6 +356,13 @@ def replace(
 | priority | `int \| None` | No |
 | is_stackable | `bool \| None` | No |
 | max_redemptions | `int \| None \| NotGiven` | No |
+| applies_to | `SdkReplacePromotionRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
 | phases | `builtins.list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem]
         \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -395,6 +423,13 @@ def update(
         priority: int | None = None,
         is_stackable: bool | None = None,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkUpdatePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         phases: builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
         | None = None,
         request_options: RequestOptions | None = None,
@@ -411,6 +446,13 @@ def update(
 | priority | `int \| None` | No |
 | is_stackable | `bool \| None` | No |
 | max_redemptions | `int \| None \| NotGiven` | No |
+| applies_to | `SdkUpdatePromotionRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
 | phases | `builtins.list[UpdatePromotionRequestApplicationJsonPropertyPhasesItem]
         \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -526,6 +568,13 @@ def restore(
         starts_at: str | None | NotGiven = NOT_GIVEN,
         ends_at: str | None | NotGiven = NOT_GIVEN,
         max_redemptions: int | None | NotGiven = NOT_GIVEN,
+        applies_to: SdkRestorePromotionRequestApplicationJsonAppliesTo
+        | str
+        | None = None,
+        subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        store_wide: bool | None = None,
+        products: builtins.list[int] | None = None,
+        product_variants: builtins.list[int] | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkRestorePromotionResponseValue200ApplicationJson:
 ```
@@ -541,6 +590,13 @@ def restore(
 | starts_at | `str \| None \| NotGiven` | No |
 | ends_at | `str \| None \| NotGiven` | No |
 | max_redemptions | `int \| None \| NotGiven` | No |
+| applies_to | `SdkRestorePromotionRequestApplicationJsonAppliesTo
+        \| str
+        \| None` | No |
+| subscription_payments | `int \| None \| NotGiven` | No |
+| store_wide | `bool \| None` | No |
+| products | `builtins.list[int] \| None` | No |
+| product_variants | `builtins.list[int] \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkRestorePromotionResponseValue200ApplicationJson`.

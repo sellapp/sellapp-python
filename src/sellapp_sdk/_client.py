@@ -102,6 +102,10 @@ from .store_notification_channels._resource import (
 )
 from .store_settings._resource import AsyncStoreSettings, StoreSettings
 from .subscriptions._resource import AsyncSubscriptions, Subscriptions
+from .subscriptions_actions._resource import (
+    AsyncSubscriptionsActions,
+    SubscriptionsActions,
+)
 from .tickets._resource import AsyncTickets, Tickets
 from .tickets_messages._resource import AsyncTicketsMessages, TicketsMessages
 from .upsell_offers._resource import AsyncUpsellOffers, UpsellOffers
@@ -189,6 +193,11 @@ class SellAppClient(_SyncBase):
     def subscriptions(self) -> Subscriptions:
         """Subscriptions API resources."""
         return Subscriptions(self)
+
+    @functools.cached_property
+    def subscriptions_actions(self) -> SubscriptionsActions:
+        """Subscriptions Actions API resources."""
+        return SubscriptionsActions(self)
 
     @functools.cached_property
     def bookings(self) -> Bookings:
@@ -573,6 +582,11 @@ class AsyncSellAppClient(_AsyncBase):
     def subscriptions(self) -> AsyncSubscriptions:
         """Subscriptions API resources."""
         return AsyncSubscriptions(self)
+
+    @functools.cached_property
+    def subscriptions_actions(self) -> AsyncSubscriptionsActions:
+        """Subscriptions Actions API resources."""
+        return AsyncSubscriptionsActions(self)
 
     @functools.cached_property
     def bookings(self) -> AsyncBookings:

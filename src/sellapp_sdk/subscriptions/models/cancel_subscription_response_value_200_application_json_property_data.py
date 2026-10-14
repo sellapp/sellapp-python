@@ -5,7 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import field as dataclass_field
 from datetime import datetime
-from typing import Any
+from enum import Enum
+from typing import Any, cast
 
 from sellapp_sdk._types import (
     _format_datetime,
@@ -13,6 +14,13 @@ from sellapp_sdk._types import (
     _preserve_unknown_fields,
     _raise_deserialize_error,
     _validate_model,
+)
+from sellapp_sdk.common.models.cancel_subscription_response_value_200_application_json_property_data_status import (
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
+)
+
+from .cancel_subscription_response_value_200_application_json_property_data_property_customer import (
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
 )
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
@@ -23,6 +31,9 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "provider",
         "subscription_id",
         "customer_id",
+        "provider_subscription_id",
+        "provider_customer_id",
+        "customer",
         "customer_email",
         "status",
         "current_period_start",
@@ -40,25 +51,90 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "integer"},
         },
-        "provider": {"kind": "primitive", "type": "string"},
-        "subscription_id": {"kind": "primitive", "type": "string"},
-        "customer_id": {"kind": "primitive", "type": "string"},
-        "customer_email": {"kind": "primitive", "type": "string"},
-        "status": {"kind": "primitive", "type": "string"},
+        "provider": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "subscription_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "customer_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "provider_subscription_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "provider_customer_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "customer": {"kind": "nullable", "inner": {"kind": "any"}},
+        "customer_email": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "status": {
+            "kind": "enum",
+            "values": [
+                "ACTIVE",
+                "PAST_DUE",
+                "UNPAID",
+                "CANCELED",
+                "INCOMPLETE",
+                "INCOMPLETE_EXPIRED",
+                "TRIALING",
+            ],
+        },
         "current_period_start": {
-            "kind": "primitive",
-            "type": "string",
-            "format": "date-time",
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "current_period_end": {
-            "kind": "primitive",
-            "type": "string",
-            "format": "date-time",
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "trial_ends_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "cancel_at_period_end": {"kind": "primitive", "type": "boolean"},
         "cancellation_in_progress": {"kind": "primitive", "type": "boolean"},
-        "store_id": {"kind": "primitive", "type": "integer"},
-        "product_variant_id": {"kind": "primitive", "type": "integer"},
+        "store_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variant_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "current_plan_variant_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "auto_renew": {"kind": "primitive", "type": "boolean"},
+        "paused_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "pause_resumes_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "canceled_immediately_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "payment_method_updated_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "last_customer_action_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
         "created_at": {"kind": "primitive", "type": "string", "format": "date-time"},
         "updated_at": {"kind": "primitive", "type": "string", "format": "date-time"},
     },
@@ -72,6 +148,9 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "provider",
         "subscription_id",
         "customer_id",
+        "provider_subscription_id",
+        "provider_customer_id",
+        "customer",
         "customer_email",
         "status",
         "current_period_start",
@@ -89,25 +168,90 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "integer"},
         },
-        "provider": {"kind": "primitive", "type": "string"},
-        "subscription_id": {"kind": "primitive", "type": "string"},
-        "customer_id": {"kind": "primitive", "type": "string"},
-        "customer_email": {"kind": "primitive", "type": "string"},
-        "status": {"kind": "primitive", "type": "string"},
+        "provider": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "subscription_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "customer_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "provider_subscription_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "provider_customer_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "customer": {"kind": "nullable", "inner": {"kind": "any"}},
+        "customer_email": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "status": {
+            "kind": "enum",
+            "values": [
+                "ACTIVE",
+                "PAST_DUE",
+                "UNPAID",
+                "CANCELED",
+                "INCOMPLETE",
+                "INCOMPLETE_EXPIRED",
+                "TRIALING",
+            ],
+        },
         "current_period_start": {
-            "kind": "primitive",
-            "type": "string",
-            "format": "date-time",
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "current_period_end": {
-            "kind": "primitive",
-            "type": "string",
-            "format": "date-time",
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "trial_ends_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "cancel_at_period_end": {"kind": "primitive", "type": "boolean"},
         "cancellation_in_progress": {"kind": "primitive", "type": "boolean"},
-        "store_id": {"kind": "primitive", "type": "integer"},
-        "product_variant_id": {"kind": "primitive", "type": "integer"},
+        "store_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variant_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "current_plan_variant_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
+        "auto_renew": {"kind": "primitive", "type": "boolean"},
+        "paused_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "pause_resumes_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "canceled_immediately_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "payment_method_updated_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
+        "last_customer_action_at": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
+        },
         "created_at": {"kind": "primitive", "type": "string", "format": "date-time"},
         "updated_at": {"kind": "primitive", "type": "string", "format": "date-time"},
     },
@@ -121,19 +265,51 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
 
     id: int
     invoice_id: int | None
-    provider: str
-    subscription_id: str
-    customer_id: str
-    customer_email: str
-    status: str
-    current_period_start: datetime
-    current_period_end: datetime
+    """The original order linked to this subscription, resolved from its first invoice line."""
+    provider: str | None
+    """The billing provider, such as `stripe`, `paypal`, `razorpay`, or `internal` for a subscription the store bills in house."""
+    provider_subscription_id: str | None
+    """The provider subscription identifier, or null for a subscription the store bills in house."""
+    provider_customer_id: str | None
+    """The provider customer identifier, or null for a subscription the store bills in house."""
+    customer: (
+        CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer
+        | None
+    )
+    customer_email: str | None
+    status: CancelSubscriptionResponseValue200ApplicationJsonPropertyDataStatus
+    current_period_start: datetime | None
+    current_period_end: datetime | None
     cancel_at_period_end: bool
     cancellation_in_progress: bool
-    store_id: int
-    product_variant_id: int
+    store_id: int | None
+    product_variant_id: int | None
     created_at: datetime
     updated_at: datetime
+    subscription_id: str | None = None
+    """Deprecated alias of provider_subscription_id.
+
+    .. deprecated:: This field is deprecated."""
+    customer_id: str | None = None
+    """Deprecated alias of provider_customer_id.
+
+    .. deprecated:: This field is deprecated."""
+    trial_ends_at: datetime | None = None
+    """When the trial the subscription started with ends, or `null` when it started without one. It keeps its value after the trial is over."""
+    current_plan_variant_id: int | None = None
+    """The variant the current period bills on. Falls back to product_variant_id while the subscription still bills its original plan."""
+    auto_renew: bool | None = None
+    """Whether a subscription the store bills in house renews itself from the customer wallet."""
+    paused_at: datetime | None = None
+    """When the subscription was paused, or `null` when it is not paused."""
+    pause_resumes_at: datetime | None = None
+    """When a paused subscription resumes automatically, or `null` when no resume date was set."""
+    canceled_immediately_at: datetime | None = None
+    """When the subscription was cancelled immediately, or `null` when it was not."""
+    payment_method_updated_at: datetime | None = None
+    """When the customer last updated the payment method behind the subscription."""
+    last_customer_action_at: datetime | None = None
+    """When the customer last started a lifecycle action, from the customer portal or through a store integration acting for them on a plan change or payment method update. Seller and SellApp actions don't change it."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -157,18 +333,58 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
                 id=data["id"],
                 invoice_id=data["invoice_id"],
                 provider=data["provider"],
-                subscription_id=data["subscription_id"],
-                customer_id=data["customer_id"],
+                provider_subscription_id=data["provider_subscription_id"],
+                provider_customer_id=data["provider_customer_id"],
+                customer=CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+                    cast(dict[str, Any], _v_customer)
+                )
+                if (_v_customer := data["customer"]) is not None
+                else None,
                 customer_email=data["customer_email"],
-                status=data["status"],
-                current_period_start=_parse_datetime(data["current_period_start"]),
-                current_period_end=_parse_datetime(data["current_period_end"]),
+                status=CancelSubscriptionResponseValue200ApplicationJsonPropertyDataStatus(
+                    data["status"]
+                ),
+                current_period_start=_parse_datetime(_v_current_period_start)
+                if (_v_current_period_start := data["current_period_start"]) is not None
+                else None,
+                current_period_end=_parse_datetime(_v_current_period_end)
+                if (_v_current_period_end := data["current_period_end"]) is not None
+                else None,
                 cancel_at_period_end=data["cancel_at_period_end"],
                 cancellation_in_progress=data["cancellation_in_progress"],
                 store_id=data["store_id"],
                 product_variant_id=data["product_variant_id"],
                 created_at=_parse_datetime(data["created_at"]),
                 updated_at=_parse_datetime(data["updated_at"]),
+                subscription_id=data.get("subscription_id"),
+                customer_id=data.get("customer_id"),
+                trial_ends_at=_parse_datetime(_v_trial_ends_at)
+                if (_v_trial_ends_at := data.get("trial_ends_at")) is not None
+                else None,
+                current_plan_variant_id=data.get("current_plan_variant_id"),
+                auto_renew=data.get("auto_renew"),
+                paused_at=_parse_datetime(_v_paused_at)
+                if (_v_paused_at := data.get("paused_at")) is not None
+                else None,
+                pause_resumes_at=_parse_datetime(_v_pause_resumes_at)
+                if (_v_pause_resumes_at := data.get("pause_resumes_at")) is not None
+                else None,
+                canceled_immediately_at=_parse_datetime(_v_canceled_immediately_at)
+                if (_v_canceled_immediately_at := data.get("canceled_immediately_at"))
+                is not None
+                else None,
+                payment_method_updated_at=_parse_datetime(_v_payment_method_updated_at)
+                if (
+                    _v_payment_method_updated_at := data.get(
+                        "payment_method_updated_at"
+                    )
+                )
+                is not None
+                else None,
+                last_customer_action_at=_parse_datetime(_v_last_customer_action_at)
+                if (_v_last_customer_action_at := data.get("last_customer_action_at"))
+                is not None
+                else None,
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -177,14 +393,25 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
                         "provider",
                         "subscription_id",
                         "customer_id",
+                        "provider_subscription_id",
+                        "provider_customer_id",
+                        "customer",
                         "customer_email",
                         "status",
                         "current_period_start",
                         "current_period_end",
+                        "trial_ends_at",
                         "cancel_at_period_end",
                         "cancellation_in_progress",
                         "store_id",
                         "product_variant_id",
+                        "current_plan_variant_id",
+                        "auto_renew",
+                        "paused_at",
+                        "pause_resumes_at",
+                        "canceled_immediately_at",
+                        "payment_method_updated_at",
+                        "last_customer_action_at",
                         "created_at",
                         "updated_at",
                     ],
@@ -202,8 +429,9 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
         _domain_data["id"] = self.id
         _domain_data["invoice_id"] = self.invoice_id
         _domain_data["provider"] = self.provider
-        _domain_data["subscription_id"] = self.subscription_id
-        _domain_data["customer_id"] = self.customer_id
+        _domain_data["provider_subscription_id"] = self.provider_subscription_id
+        _domain_data["provider_customer_id"] = self.provider_customer_id
+        _domain_data["customer"] = self.customer
         _domain_data["customer_email"] = self.customer_email
         _domain_data["status"] = self.status
         _domain_data["current_period_start"] = self.current_period_start
@@ -214,6 +442,17 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
         _domain_data["product_variant_id"] = self.product_variant_id
         _domain_data["created_at"] = self.created_at
         _domain_data["updated_at"] = self.updated_at
+        _domain_data["subscription_id"] = self.subscription_id
+        _domain_data["customer_id"] = self.customer_id
+        _domain_data["trial_ends_at"] = self.trial_ends_at
+        _domain_data["current_plan_variant_id"] = self.current_plan_variant_id
+        if self.auto_renew is not None:
+            _domain_data["auto_renew"] = self.auto_renew
+        _domain_data["paused_at"] = self.paused_at
+        _domain_data["pause_resumes_at"] = self.pause_resumes_at
+        _domain_data["canceled_immediately_at"] = self.canceled_immediately_at
+        _domain_data["payment_method_updated_at"] = self.payment_method_updated_at
+        _domain_data["last_customer_action_at"] = self.last_customer_action_at
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -228,17 +467,91 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyData:
             result["invoice_id"] = self.invoice_id
         else:
             result["invoice_id"] = None
-        result["provider"] = self.provider
-        result["subscription_id"] = self.subscription_id
-        result["customer_id"] = self.customer_id
-        result["customer_email"] = self.customer_email
-        result["status"] = self.status
-        result["current_period_start"] = _format_datetime(self.current_period_start)
-        result["current_period_end"] = _format_datetime(self.current_period_end)
+        if self.provider is not None:
+            result["provider"] = self.provider
+        else:
+            result["provider"] = None
+        if self.provider_subscription_id is not None:
+            result["provider_subscription_id"] = self.provider_subscription_id
+        else:
+            result["provider_subscription_id"] = None
+        if self.provider_customer_id is not None:
+            result["provider_customer_id"] = self.provider_customer_id
+        else:
+            result["provider_customer_id"] = None
+        if self.customer is not None:
+            result["customer"] = self.customer.to_dict()
+        else:
+            result["customer"] = None
+        if self.customer_email is not None:
+            result["customer_email"] = self.customer_email
+        else:
+            result["customer_email"] = None
+        result["status"] = (
+            self.status.value if isinstance(self.status, Enum) else self.status
+        )
+        if self.current_period_start is not None:
+            result["current_period_start"] = _format_datetime(self.current_period_start)
+        else:
+            result["current_period_start"] = None
+        if self.current_period_end is not None:
+            result["current_period_end"] = _format_datetime(self.current_period_end)
+        else:
+            result["current_period_end"] = None
         result["cancel_at_period_end"] = self.cancel_at_period_end
         result["cancellation_in_progress"] = self.cancellation_in_progress
-        result["store_id"] = self.store_id
-        result["product_variant_id"] = self.product_variant_id
+        if self.store_id is not None:
+            result["store_id"] = self.store_id
+        else:
+            result["store_id"] = None
+        if self.product_variant_id is not None:
+            result["product_variant_id"] = self.product_variant_id
+        else:
+            result["product_variant_id"] = None
         result["created_at"] = _format_datetime(self.created_at)
         result["updated_at"] = _format_datetime(self.updated_at)
+        if self.subscription_id is not None:
+            result["subscription_id"] = self.subscription_id
+        else:
+            result["subscription_id"] = None
+        if self.customer_id is not None:
+            result["customer_id"] = self.customer_id
+        else:
+            result["customer_id"] = None
+        if self.trial_ends_at is not None:
+            result["trial_ends_at"] = _format_datetime(self.trial_ends_at)
+        else:
+            result["trial_ends_at"] = None
+        if self.current_plan_variant_id is not None:
+            result["current_plan_variant_id"] = self.current_plan_variant_id
+        else:
+            result["current_plan_variant_id"] = None
+        if self.auto_renew is not None:
+            result["auto_renew"] = self.auto_renew
+        if self.paused_at is not None:
+            result["paused_at"] = _format_datetime(self.paused_at)
+        else:
+            result["paused_at"] = None
+        if self.pause_resumes_at is not None:
+            result["pause_resumes_at"] = _format_datetime(self.pause_resumes_at)
+        else:
+            result["pause_resumes_at"] = None
+        if self.canceled_immediately_at is not None:
+            result["canceled_immediately_at"] = _format_datetime(
+                self.canceled_immediately_at
+            )
+        else:
+            result["canceled_immediately_at"] = None
+        if self.payment_method_updated_at is not None:
+            result["payment_method_updated_at"] = _format_datetime(
+                self.payment_method_updated_at
+            )
+        else:
+            result["payment_method_updated_at"] = None
+        if self.last_customer_action_at is not None:
+            result["last_customer_action_at"] = _format_datetime(
+                self.last_customer_action_at
+            )
+        else:
+            result["last_customer_action_at"] = None
         return result

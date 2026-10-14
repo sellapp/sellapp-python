@@ -18,6 +18,7 @@ from sellapp_sdk.invoices.models import (
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertySubtotalPropertyTotal,
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyProductVariantsItem,
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus,
+    CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem,
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus,
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyWebhooksItem,
     CreateDynamicDeliveryRetryResponseValue200ApplicationJsonPropertyData,
@@ -289,13 +290,23 @@ class TestModelRoundTrip:
     def test_list_invoices_response_value_200_application_json_property_data_item_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = ListInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_list_invoices_response_value_200_application_json_property_data_item_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = ListInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_list_invoices_response_value_200_application_json_property_data_item_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -1321,13 +1332,23 @@ class TestModelRoundTrip:
     def test_create_invoice_response_value_201_application_json_property_data_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_create_invoice_response_value_201_application_json_property_data_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_create_invoice_response_value_201_application_json_property_data_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -2246,13 +2267,23 @@ class TestModelRoundTrip:
     def test_search_invoices_response_value_200_application_json_property_data_item_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = SearchInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_search_invoices_response_value_200_application_json_property_data_item_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = SearchInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_search_invoices_response_value_200_application_json_property_data_item_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -3228,13 +3259,23 @@ class TestModelRoundTrip:
     def test_get_invoice_response_value_200_application_json_property_data_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = GetInvoiceResponseValue200ApplicationJsonPropertyDataPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_get_invoice_response_value_200_application_json_property_data_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = GetInvoiceResponseValue200ApplicationJsonPropertyDataPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_get_invoice_response_value_200_application_json_property_data_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -4182,13 +4223,23 @@ class TestModelRoundTrip:
     def test_create_checkout_session_response_value_200_application_json_property_invoice_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_create_checkout_session_response_value_200_application_json_property_invoice_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_create_checkout_session_response_value_200_application_json_property_invoice_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -4441,6 +4492,38 @@ class TestModelRoundTrip:
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
 
+    def test_create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_history_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_history_item.json"
+        )
+        instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_history_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "setAt": "2023-01-01T00:00:00.000Z",
+            "status": "test_status",
+            "updatedAt": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["setAt"] == data["setAt"]
+        assert serialized["status"] == data["status"]
+        assert serialized["updatedAt"] == data["updatedAt"]
+
     def test_create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_status_round_trip(
         self,
     ):
@@ -4493,7 +4576,13 @@ class TestModelRoundTrip:
         self,
     ):
         data = {
-            "history": ["test_history"],
+            "history": [
+                {
+                    "setAt": "2023-01-01T00:00:00.000Z",
+                    "status": "test_status",
+                    "updatedAt": "2023-01-01T00:00:00.000Z",
+                }
+            ],
             "status": {
                 "setAt": "2023-01-01T00:00:00.000Z",
                 "status": "test_status",
@@ -4762,7 +4851,13 @@ class TestModelRoundTrip:
                 },
             },
             "status": {
-                "history": ["test_history"],
+                "history": [
+                    {
+                        "setAt": "2023-01-01T00:00:00.000Z",
+                        "status": "test_status",
+                        "updatedAt": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
                 "status": {
                     "setAt": "2023-01-01T00:00:00.000Z",
                     "status": "test_status",
@@ -4864,7 +4959,13 @@ class TestModelRoundTrip:
                 },
             },
             "status": {
-                "history": ["test_history"],
+                "history": [
+                    {
+                        "setAt": "2023-01-01T00:00:00.000Z",
+                        "status": "test_status",
+                        "updatedAt": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
                 "status": {
                     "setAt": "2023-01-01T00:00:00.000Z",
                     "status": "test_status",
@@ -4975,7 +5076,13 @@ class TestModelRoundTrip:
                     },
                 },
                 "status": {
-                    "history": ["test_history"],
+                    "history": [
+                        {
+                            "setAt": "2023-01-01T00:00:00.000Z",
+                            "status": "test_status",
+                            "updatedAt": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
                     "status": {
                         "setAt": "2023-01-01T00:00:00.000Z",
                         "status": "test_status",
@@ -5070,7 +5177,13 @@ class TestModelRoundTrip:
                     },
                 },
                 "status": {
-                    "history": ["test_history"],
+                    "history": [
+                        {
+                            "setAt": "2023-01-01T00:00:00.000Z",
+                            "status": "test_status",
+                            "updatedAt": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
                     "status": {
                         "setAt": "2023-01-01T00:00:00.000Z",
                         "status": "test_status",
@@ -5442,13 +5555,23 @@ class TestModelRoundTrip:
     def test_mark_pending_invoice_completed_response_value_200_application_json_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = MarkPendingInvoiceCompletedResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_mark_pending_invoice_completed_response_value_200_application_json_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = MarkPendingInvoiceCompletedResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_mark_pending_invoice_completed_response_value_200_application_json_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -6307,13 +6430,23 @@ class TestModelRoundTrip:
     def test_mark_pending_invoice_voided_response_value_200_application_json_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = MarkPendingInvoiceVoidedResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_mark_pending_invoice_voided_response_value_200_application_json_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = MarkPendingInvoiceVoidedResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_mark_pending_invoice_voided_response_value_200_application_json_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -7164,13 +7297,23 @@ class TestModelRoundTrip:
     def test_issue_replacement_for_completed_invoice_response_value_200_application_json_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_issue_replacement_for_completed_invoice_response_value_200_application_json_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_issue_replacement_for_completed_invoice_response_value_200_application_json_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -8021,13 +8164,23 @@ class TestModelRoundTrip:
     def test_update_invoice_status_response_value_200_application_json_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = UpdateInvoiceStatusResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_update_invoice_status_response_value_200_application_json_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = UpdateInvoiceStatusResponseValue200ApplicationJsonPropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_update_invoice_status_response_value_200_application_json_property_payment_property_subtotal_property_total_round_trip(
         self,
@@ -8884,13 +9037,23 @@ class TestModelRoundTrip:
     def test_create_invoice_refund_response_value_200_application_json_property_data_property_invoice_property_payment_property_gateway_minimal_payload(
         self,
     ):
-        data = {"data": {}, "type": "test_type"}
+        data = {"data": {}, "type": None}
         instance = CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["type"] == data["type"]
+
+    def test_create_invoice_refund_response_value_200_application_json_property_data_property_invoice_property_payment_property_gateway_preserves_nullable_fields(
+        self,
+    ):
+        data = {"data": {}, "type": None}
+        instance = CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyInvoicePropertyPaymentPropertyGateway.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
 
     def test_create_invoice_refund_response_value_200_application_json_property_data_property_invoice_property_payment_property_subtotal_property_total_round_trip(
         self,

@@ -9,9 +9,8 @@ from .._base_client import WithRawResponse
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
-from sellapp_sdk.common.models.list_subscriptions_response_value_200_application_json_property_data_item import (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-)
+import warnings
+
 from sellapp_sdk.common.models.sdk_confirm_subscription_plan_change_request_application_json_effective_timing import (
     SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
 )
@@ -35,13 +34,23 @@ from .models import (
     SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson,
     SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson,
     SdkCancelSubscriptionResponseValue200ApplicationJson,
+    SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
     SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson,
     SdkGetSubscriptionResponseValue200ApplicationJson,
+    SdkKeepSubscriptionResponseValue200ApplicationJson,
+    SdkListSubscriptionsResponseValue200ApplicationJson,
     SdkPauseSubscriptionResponseValue200ApplicationJson,
+    SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
     SdkResumeSubscriptionResponseValue200ApplicationJson,
-    SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
+    SdkSearchSubscriptionsResponseValue200ApplicationJson,
+    SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson,
+    SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem,
+    SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem,
+    SearchSubscriptionsRequestApplicationJsonPropertySearch,
+    SearchSubscriptionsRequestApplicationJsonPropertySortItem,
+    SubscriptionsStatus,
 )
 
 
@@ -64,13 +73,13 @@ class Subscriptions:
     ) -> SdkCancelSubscriptionResponseValue200ApplicationJson:
         """Cancel a subscription
 
-        Cancel an active subscription now or at period end. cancel_at_period_end is required. Refund flags are valid only when it is false; period-end cancellation does not refund the last payment. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Cancel an active subscription now or at period end, or one with a payment still owed now: a past due one the store bills in house, or a past due or unpaid Stripe, PayPal, or Razorpay subscription. cancel_at_period_end is required. Refund flags are valid only when it is false; period-end cancellation does not refund the last payment. New integrations should use the cancel-at-period-end and cancel-immediately lifecycle actions instead. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, its current period was never paid for, so a pro-rated refund returns `422`; a full refund or no refund still works. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             subscription: The subscription path parameter.
             cancel_at_period_end: The cancel at period end.
             refund_last_payment: Request a real refund of the latest payment during immediate cancellation. Cancellation success does not prove refund success; verify provider/order refund records.
-            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled.
+            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled. Refused with `422` while a Stripe, PayPal, or Razorpay subscription is past due or unpaid.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -85,7 +94,13 @@ class Subscriptions:
             UnprocessableEntityError: If the request data is unprocessable (422).
             RateLimitExceededError: If rate limited (429).
             ServerError: If the server returns a 5xx error.
+
+        .. deprecated::
+            This operation is deprecated. See the migration guide for alternatives.
         """
+        warnings.warn(
+            "cancel_subscription is deprecated", DeprecationWarning, stacklevel=2
+        )
         request_options = {
             **(request_options or {}),
             "auth": {
@@ -160,6 +175,268 @@ class Subscriptions:
             request_options=request_options,
         )
 
+    def list_subscriptions(
+        self,
+        *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        status: list[SubscriptionsStatus | str] | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
+        """List subscriptions
+
+        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            limit: Number of items to return per page. Defaults to `15`.
+            before: The before.
+            after: The after.
+            order: The order.
+            page: Page number to return. Defaults to `1`.
+            pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
+            status: Filter by one or more subscription statuses. Repeat the parameter to select several; a single `status=ACTIVE` works too. A status outside the list is rejected with a validation error.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "listSubscriptions",
+        }
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+                "page": page,
+                "pagination": pagination,
+                "status[]": status,
+            }.items()
+            if v is not None
+        }
+        return self._client.request_page(
+            method="get",
+            path=("v2", "subscriptions"),
+            model=SdkListSubscriptionsResponseValue200ApplicationJson,
+            params=params,
+            request_options=request_options,
+        )
+
+    def search_subscriptions(
+        self,
+        *,
+        filters: list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
+        includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:
+        """Search subscriptions
+
+        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            filters: The filters.
+            sort: The sort.
+            search: The search.
+            includes: The includes.
+            limit: Number of items to return per page. Defaults to `15`.
+            before: The before.
+            after: The after.
+            order: The order.
+            page: Page number to return. Defaults to `1`.
+            pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "searchSubscriptions",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "filters": [item.to_dict() for item in filters]
+                if filters is not None
+                else None,
+                "sort": [item.to_dict() for item in sort] if sort is not None else None,
+                "search": search.to_dict() if search is not None else None,
+                "includes": [item.to_dict() for item in includes]
+                if includes is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+                "page": page,
+                "pagination": pagination,
+            }.items()
+            if v is not None
+        }
+        return self._client.request_page(
+            method="post",
+            path=("v2", "subscriptions", "search"),
+            model=SdkSearchSubscriptionsResponseValue200ApplicationJson,
+            body=body,
+            params=params,
+            request_options=request_options,
+        )
+
+    def get_subscription(
+        self,
+        product_subscription: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
+        """Retrieve a subscription
+
+        Retrieve one subscription by its SellApp subscription record identifier. Requires the `invoice` Sanctum ability. Foreign-store identifiers return not found. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_subscription: The productSubscription path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetSubscriptionResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getSubscription",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "subscriptions", str(product_subscription)),
+            model=SdkGetSubscriptionResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
     def get_capabilities(
         self,
         product_subscription: int,
@@ -168,7 +445,7 @@ class Subscriptions:
     ) -> SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """View subscription capabilities
 
-        Return the lifecycle actions currently supported for a subscription. Capability status controls whether an actor can pause, resume, cancel, update the payment method, change plan, or shift the billing date. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Return the lifecycle actions currently supported for a subscription, each with the reason the customer and the seller are shown. A `customer_only` status names who owns the action rather than who may call the API: a store token carries a plan change and a payment method update on the customer's behalf, while a `customer_only` auto-renewal switch stays with the customer portal. `set_auto_renew` has no API route at all. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, every action except `cancel_immediately` and, on Razorpay, `update_payment_method`, is `unsupported`, and a subscription the store bills in house that is on hold for an unpaid renewal reports `resume` as `customer_only`, because only the customer can pay to resume it. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -233,7 +510,7 @@ class Subscriptions:
     ) -> SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel a subscription at period end
 
-        Schedule cancellation at the end of the current billing period without requesting a refund. Inspect capabilities first. The response records the cancellation action; retrieve the subscription to observe its current state. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Schedule cancellation at the end of the current billing period without requesting a refund. Inspect capabilities first. PayPal has no cancellation at period end, so on a PayPal subscription this cancels it with PayPal straight away and keeps the customer's access until the period ends; it can't be kept afterwards. The response records the cancellation action; retrieve the subscription to observe its current state. Reuse an idempotency key only with identical action input and actor. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -344,14 +621,14 @@ class Subscriptions:
     ) -> SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel a subscription immediately
 
-        Request immediate subscription cancellation. Inspect capabilities for provider support. This ends future billing and can change customer access. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request immediate subscription cancellation. Inspect capabilities for provider support. This ends future billing and can change customer access. It is the one action left on a Stripe or PayPal subscription that is past due or unpaid, and one of two left on a Razorpay one alongside a payment method update. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, its current period was never paid for, so a pro-rated refund returns `422`; a full refund or no refund still works. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
             reason: The reason.
             refund_last_payment: Request a real refund of the latest payment during immediate cancellation. Cancellation success does not prove refund success; verify provider/order refund records.
-            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled.
+            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled. Refused with `422` while a Stripe, PayPal, or Razorpay subscription is past due or unpaid.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -454,6 +731,97 @@ class Subscriptions:
             request_options=request_options,
         )
 
+    def keep(
+        self,
+        product_subscription: int,
+        *,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkKeepSubscriptionResponseValue200ApplicationJson:
+        """Keep a subscription
+
+        Stop a scheduled cancellation so the subscription keeps renewing, which is the undo for cancelling at period end. The subscription has to still be active, still be scheduled to cancel, and its period must not have ended yet. Any of those, a provider that cannot undo its own schedule (a PayPal subscription or a Razorpay trial, both already cancelled with the provider), or a change already in progress returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_subscription: The productSubscription path parameter.
+            idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkKeepSubscriptionResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "keepSubscription",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(idempotency_key, NotGiven):
+            body["idempotency_key"] = idempotency_key
+        _validate_model(
+            body,
+            {
+                "name": "SdkKeepSubscriptionRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "idempotency_key": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 128},
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "subscriptions", str(product_subscription), "actions", "keep"),
+            body=body,
+            model=SdkKeepSubscriptionResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
     def pause(
         self,
         product_subscription: int,
@@ -465,12 +833,12 @@ class Subscriptions:
     ) -> SdkPauseSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
-        Pause a subscription after checking capabilities. Automatic resume dates are supported only by the current Stripe flow; use a future resume_at when supplied. Other provider pauses may need an explicit resume action. Customer-originated pauses are also subject to store pause policies. Reuse an idempotency key only with identical input and actor, and retrieve the subscription after the action. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Pause a subscription after checking capabilities. Automatic resume dates are supported by Stripe and by subscriptions the store bills in house; use a future resume_at when supplied. Other provider pauses may need an explicit resume action. Customer-originated pauses are also subject to store pause policies. Reuse an idempotency key only with identical input and actor, and retrieve the subscription after the action. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
-            resume_at: Use a future date-time at execution time. Automatic resume dates are supported only for Stripe; the shown date is illustrative.
+            resume_at: Use a future date-time at execution time. Automatic resume dates are supported by Stripe and by subscriptions the store bills in house; the shown date is illustrative.
             reason: The reason.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -578,7 +946,7 @@ class Subscriptions:
     ) -> SdkResumeSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
-        Resume a paused subscription and restore related entitlements where possible. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Resume a paused subscription and restore related entitlements where possible. A subscription that is not paused, a subscription the store bills in house that is on hold for an unpaid renewal (only the customer can resume it, by paying that renewal from the customer portal), a provider refusal, or a change already in progress returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -671,19 +1039,21 @@ class Subscriptions:
         product_subscription: int,
         *,
         idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update a subscription payment method
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request a subscription payment method update. A payment method belongs to the customer, and a store token requests the update on their behalf. The customer still enters the new card themselves, so the action stays `pending` and `redirect_url` is where they finish it: Stripe's hosted page for a Stripe subscription, or a SellApp page for a Razorpay one. `return_url` chooses where Stripe sends the customer afterwards; Razorpay ignores it. PayPal subscriptions and subscriptions the store bills in house don't support the update. Read `update_payment_method` in the capabilities response before calling: an unsupported payment method, or a state check such as a change already in progress, a subscription that is no longer active, or a Stripe subscription with a payment still owed, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            return_url: Where Stripe returns the customer once its hosted page finishes. Defaults to the store's customer portal page for this subscription. Razorpay subscriptions ignore it.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -727,6 +1097,8 @@ class Subscriptions:
         body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
+        if not isinstance(return_url, NotGiven):
+            body["return_url"] = return_url
         _validate_model(
             body,
             {
@@ -740,7 +1112,16 @@ class Subscriptions:
                             "type": "string",
                             "constraints": {"maxLength": 128},
                         },
-                    }
+                    },
+                    "return_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 2000},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -759,6 +1140,7 @@ class Subscriptions:
                 "update-payment-method",
             ),
             body=body,
+            model=SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -777,10 +1159,10 @@ class Subscriptions:
         metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a subscription plan change
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Preview a subscription plan change before confirming it. The preview stores the change it was taken for and returns a `preview_token` the confirmation must send back, alongside the provider's own pricing preview. On Stripe and in-house subscriptions, `preview_payload.payment_required` says whether confirming charges `amount_due` today or leaves any amount to the next invoice, and `preview_payload.renewal_date` says when the subscription renews next. A plan change belongs to the customer, and a store token previews it on their behalf; a provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -792,7 +1174,7 @@ class Subscriptions:
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -897,6 +1279,7 @@ class Subscriptions:
                 "preview",
             ),
             body=body,
+            model=SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -916,10 +1299,10 @@ class Subscriptions:
         metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a subscription plan change
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Confirm a previously previewed subscription plan change, sending back the `preview_token` for a preview of the same change. A plan change belongs to the customer, and a store token confirms it on their behalf; a provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. `approval_url` accompanies a `pending` action whenever the customer still has to approve the revision at the provider or pay the proration order `proration_order_id` names, and is left out entirely when the provider applied the change itself. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -932,7 +1315,7 @@ class Subscriptions:
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -1043,6 +1426,7 @@ class Subscriptions:
                 "confirm",
             ),
             body=body,
+            model=SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -1059,7 +1443,7 @@ class Subscriptions:
     ) -> SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a subscription renewal date change
 
-        Preview a new renewal date before confirmation when the subscription's billing-date policy requires a preview. The current Stripe and PayPal provider flows do not support renewal-date changes and return 422. Check shift_billing_date capabilities before sending a request. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Preview a new renewal date before confirmation when the subscription's billing-date policy requires one. No payment method supports renewal-date changes today: Stripe, PayPal, Razorpay, and subscriptions the store bills in house all report `shift_billing_date` as `unsupported`, so this returns `422` with the refusal sentence under `errors.subscription`. Read the capabilities response first. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -1188,7 +1572,7 @@ class Subscriptions:
     ) -> SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a subscription renewal date change
 
-        Confirm a subscription renewal date change. A preview token is required when the variant's billing-date policy requires previews. The current Stripe and PayPal provider flows do not support renewal-date changes and return 422. Check shift_billing_date capabilities before sending a request. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Confirm a subscription renewal date change, sending a `preview_token` when the variant's billing-date policy requires previews. No payment method supports renewal-date changes today: Stripe, PayPal, Razorpay, and subscriptions the store bills in house all report `shift_billing_date` as `unsupported`, so this returns `422` with the refusal sentence under `errors.subscription`. Read the capabilities response first. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -1314,245 +1698,6 @@ class Subscriptions:
             request_options=request_options,
         )
 
-    def list_subscriptions(
-        self,
-        *,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-        """List subscriptions
-
-        List page-based subscriptions with canonical customer and deprecated provider aliases. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            limit: The limit.
-            before: The before.
-            after: The after.
-            order: The order.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            SyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "listSubscriptions",
-        }
-        params = {
-            k: v
-            for k, v in {
-                "limit": limit,
-                "before": before,
-                "after": after,
-                "order": order,
-            }.items()
-            if v is not None
-        }
-        return self._client.request_page(
-            method="get",
-            path=("v2", "subscriptions"),
-            model=ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-            params=params,
-            request_options=request_options,
-        )
-
-    def search_subscriptions(
-        self,
-        *,
-        search: str | None = None,
-        status: str | None = None,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-        """Search subscriptions
-
-        Search while preserving page-based pagination. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            search: The search.
-            status: The status.
-            limit: The limit.
-            before: The before.
-            after: The after.
-            order: The order.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            SyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "searchSubscriptions",
-        }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "search": search,
-                "status": status,
-            }.items()
-            if v is not None
-        }
-        params = {
-            k: v
-            for k, v in {
-                "limit": limit,
-                "before": before,
-                "after": after,
-                "order": order,
-            }.items()
-            if v is not None
-        }
-        return self._client.request_page(
-            method="post",
-            path=("v2", "subscriptions", "search"),
-            model=SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-            body=body,
-            params=params,
-            request_options=request_options,
-        )
-
-    def get_subscription(
-        self,
-        product_subscription: int,
-        *,
-        request_options: RequestOptions | None = None,
-    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
-        """Retrieve a subscription
-
-        Retrieve by SellApp subscription record ID. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            product_subscription: The productSubscription identifier.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            SdkGetSubscriptionResponseValue200ApplicationJson
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "getSubscription",
-        }
-        return self._client.request(
-            method="get",
-            path=("v2", "subscriptions", str(product_subscription)),
-            model=SdkGetSubscriptionResponseValue200ApplicationJson,
-            request_options=request_options,
-        )
-
 
 class AsyncSubscriptions:
     """Subscriptions API resources (async)."""
@@ -1573,13 +1718,13 @@ class AsyncSubscriptions:
     ) -> SdkCancelSubscriptionResponseValue200ApplicationJson:
         """Cancel a subscription
 
-        Cancel an active subscription now or at period end. cancel_at_period_end is required. Refund flags are valid only when it is false; period-end cancellation does not refund the last payment. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Cancel an active subscription now or at period end, or one with a payment still owed now: a past due one the store bills in house, or a past due or unpaid Stripe, PayPal, or Razorpay subscription. cancel_at_period_end is required. Refund flags are valid only when it is false; period-end cancellation does not refund the last payment. New integrations should use the cancel-at-period-end and cancel-immediately lifecycle actions instead. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, its current period was never paid for, so a pro-rated refund returns `422`; a full refund or no refund still works. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             subscription: The subscription path parameter.
             cancel_at_period_end: The cancel at period end.
             refund_last_payment: Request a real refund of the latest payment during immediate cancellation. Cancellation success does not prove refund success; verify provider/order refund records.
-            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled.
+            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled. Refused with `422` while a Stripe, PayPal, or Razorpay subscription is past due or unpaid.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1594,7 +1739,13 @@ class AsyncSubscriptions:
             UnprocessableEntityError: If the request data is unprocessable (422).
             RateLimitExceededError: If rate limited (429).
             ServerError: If the server returns a 5xx error.
+
+        .. deprecated::
+            This operation is deprecated. See the migration guide for alternatives.
         """
+        warnings.warn(
+            "cancel_subscription is deprecated", DeprecationWarning, stacklevel=2
+        )
         request_options = {
             **(request_options or {}),
             "auth": {
@@ -1669,6 +1820,268 @@ class AsyncSubscriptions:
             request_options=request_options,
         )
 
+    async def list_subscriptions(
+        self,
+        *,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        status: list[SubscriptionsStatus | str] | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> AsyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
+        """List subscriptions
+
+        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            limit: Number of items to return per page. Defaults to `15`.
+            before: The before.
+            after: The after.
+            order: The order.
+            page: Page number to return. Defaults to `1`.
+            pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
+            status: Filter by one or more subscription statuses. Repeat the parameter to select several; a single `status=ACTIVE` works too. A status outside the list is rejected with a validation error.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            AsyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "listSubscriptions",
+        }
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+                "page": page,
+                "pagination": pagination,
+                "status[]": status,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request_page(
+            method="get",
+            path=("v2", "subscriptions"),
+            model=SdkListSubscriptionsResponseValue200ApplicationJson,
+            params=params,
+            request_options=request_options,
+        )
+
+    async def search_subscriptions(
+        self,
+        *,
+        filters: list[SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem]
+        | None = None,
+        sort: list[SearchSubscriptionsRequestApplicationJsonPropertySortItem]
+        | None = None,
+        search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
+        includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
+        | None = None,
+        limit: int | None = None,
+        before: str | None = None,
+        after: str | None = None,
+        order: str | None = None,
+        page: int | None = None,
+        pagination: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> AsyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:
+        """Search subscriptions
+
+        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            filters: The filters.
+            sort: The sort.
+            search: The search.
+            includes: The includes.
+            limit: Number of items to return per page. Defaults to `15`.
+            before: The before.
+            after: The after.
+            order: The order.
+            page: Page number to return. Defaults to `1`.
+            pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            AsyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "searchSubscriptions",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "filters": [item.to_dict() for item in filters]
+                if filters is not None
+                else None,
+                "sort": [item.to_dict() for item in sort] if sort is not None else None,
+                "search": search.to_dict() if search is not None else None,
+                "includes": [item.to_dict() for item in includes]
+                if includes is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        params = {
+            k: v
+            for k, v in {
+                "limit": limit,
+                "before": before,
+                "after": after,
+                "order": order,
+                "page": page,
+                "pagination": pagination,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request_page(
+            method="post",
+            path=("v2", "subscriptions", "search"),
+            model=SdkSearchSubscriptionsResponseValue200ApplicationJson,
+            body=body,
+            params=params,
+            request_options=request_options,
+        )
+
+    async def get_subscription(
+        self,
+        product_subscription: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
+        """Retrieve a subscription
+
+        Retrieve one subscription by its SellApp subscription record identifier. Requires the `invoice` Sanctum ability. Foreign-store identifiers return not found. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_subscription: The productSubscription path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetSubscriptionResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getSubscription",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "subscriptions", str(product_subscription)),
+            model=SdkGetSubscriptionResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
     async def get_capabilities(
         self,
         product_subscription: int,
@@ -1677,7 +2090,7 @@ class AsyncSubscriptions:
     ) -> SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson:
         """View subscription capabilities
 
-        Return the lifecycle actions currently supported for a subscription. Capability status controls whether an actor can pause, resume, cancel, update the payment method, change plan, or shift the billing date. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Return the lifecycle actions currently supported for a subscription, each with the reason the customer and the seller are shown. A `customer_only` status names who owns the action rather than who may call the API: a store token carries a plan change and a payment method update on the customer's behalf, while a `customer_only` auto-renewal switch stays with the customer portal. `set_auto_renew` has no API route at all. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, every action except `cancel_immediately` and, on Razorpay, `update_payment_method`, is `unsupported`, and a subscription the store bills in house that is on hold for an unpaid renewal reports `resume` as `customer_only`, because only the customer can pay to resume it. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -1742,7 +2155,7 @@ class AsyncSubscriptions:
     ) -> SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson:
         """Cancel a subscription at period end
 
-        Schedule cancellation at the end of the current billing period without requesting a refund. Inspect capabilities first. The response records the cancellation action; retrieve the subscription to observe its current state. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Schedule cancellation at the end of the current billing period without requesting a refund. Inspect capabilities first. PayPal has no cancellation at period end, so on a PayPal subscription this cancels it with PayPal straight away and keeps the customer's access until the period ends; it can't be kept afterwards. The response records the cancellation action; retrieve the subscription to observe its current state. Reuse an idempotency key only with identical action input and actor. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -1853,14 +2266,14 @@ class AsyncSubscriptions:
     ) -> SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson:
         """Cancel a subscription immediately
 
-        Request immediate subscription cancellation. Inspect capabilities for provider support. This ends future billing and can change customer access. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request immediate subscription cancellation. Inspect capabilities for provider support. This ends future billing and can change customer access. It is the one action left on a Stripe or PayPal subscription that is past due or unpaid, and one of two left on a Razorpay one alongside a payment method update. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. Refunds are off by default. refund_last_payment requests a real refund; pro_rated_refund requires refund_last_payment and defaults to false. While a Stripe, PayPal, or Razorpay subscription is past due or unpaid, its current period was never paid for, so a pro-rated refund returns `422`; a full refund or no refund still works. Cancellation can succeed even if the requested refund fails. A 200 response or confirmed cancellation does not prove a refund, and the action response does not expose the provider refund result. Check the order and payment-provider refund records before retrying; do not replay cancellation as a refund-recovery step. Reuse an idempotency key only with identical action input and actor. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
             reason: The reason.
             refund_last_payment: Request a real refund of the latest payment during immediate cancellation. Cancellation success does not prove refund success; verify provider/order refund records.
-            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled.
+            pro_rated_refund: Request a prorated refund. Requires refund_last_payment=true. False requests a full latest-payment refund when refund_last_payment is enabled. Refused with `422` while a Stripe, PayPal, or Razorpay subscription is past due or unpaid.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1963,6 +2376,97 @@ class AsyncSubscriptions:
             request_options=request_options,
         )
 
+    async def keep(
+        self,
+        product_subscription: int,
+        *,
+        idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkKeepSubscriptionResponseValue200ApplicationJson:
+        """Keep a subscription
+
+        Stop a scheduled cancellation so the subscription keeps renewing, which is the undo for cancelling at period end. The subscription has to still be active, still be scheduled to cancel, and its period must not have ended yet. Any of those, a provider that cannot undo its own schedule (a PayPal subscription or a Razorpay trial, both already cancelled with the provider), or a change already in progress returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_subscription: The productSubscription path parameter.
+            idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkKeepSubscriptionResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "keepSubscription",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(idempotency_key, NotGiven):
+            body["idempotency_key"] = idempotency_key
+        _validate_model(
+            body,
+            {
+                "name": "SdkKeepSubscriptionRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "idempotency_key": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 128},
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "subscriptions", str(product_subscription), "actions", "keep"),
+            body=body,
+            model=SdkKeepSubscriptionResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
     async def pause(
         self,
         product_subscription: int,
@@ -1974,12 +2478,12 @@ class AsyncSubscriptions:
     ) -> SdkPauseSubscriptionResponseValue200ApplicationJson:
         """Pause a subscription
 
-        Pause a subscription after checking capabilities. Automatic resume dates are supported only by the current Stripe flow; use a future resume_at when supplied. Other provider pauses may need an explicit resume action. Customer-originated pauses are also subject to store pause policies. Reuse an idempotency key only with identical input and actor, and retrieve the subscription after the action. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Pause a subscription after checking capabilities. Automatic resume dates are supported by Stripe and by subscriptions the store bills in house; use a future resume_at when supplied. Other provider pauses may need an explicit resume action. Customer-originated pauses are also subject to store pause policies. Reuse an idempotency key only with identical input and actor, and retrieve the subscription after the action. A provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
-            resume_at: Use a future date-time at execution time. Automatic resume dates are supported only for Stripe; the shown date is illustrative.
+            resume_at: Use a future date-time at execution time. Automatic resume dates are supported by Stripe and by subscriptions the store bills in house; the shown date is illustrative.
             reason: The reason.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -2087,7 +2591,7 @@ class AsyncSubscriptions:
     ) -> SdkResumeSubscriptionResponseValue200ApplicationJson:
         """Resume a subscription
 
-        Resume a paused subscription and restore related entitlements where possible. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Resume a paused subscription and restore related entitlements where possible. A subscription that is not paused, a subscription the store bills in house that is on hold for an unpaid renewal (only the customer can resume it, by paying that renewal from the customer portal), a provider refusal, or a change already in progress returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -2180,19 +2684,21 @@ class AsyncSubscriptions:
         product_subscription: int,
         *,
         idempotency_key: str | None | NotGiven = NOT_GIVEN,
+        return_url: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson:
         """Update a subscription payment method
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request a subscription payment method update. A payment method belongs to the customer, and a store token requests the update on their behalf. The customer still enters the new card themselves, so the action stays `pending` and `redirect_url` is where they finish it: Stripe's hosted page for a Stripe subscription, or a SellApp page for a Razorpay one. `return_url` chooses where Stripe sends the customer afterwards; Razorpay ignores it. PayPal subscriptions and subscriptions the store bills in house don't support the update. Read `update_payment_method` in the capabilities response before calling: an unsupported payment method, or a state check such as a change already in progress, a subscription that is no longer active, or a Stripe subscription with a payment still owed, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            return_url: Where Stripe returns the customer once its hosted page finishes. Defaults to the store's customer portal page for this subscription. Razorpay subscriptions ignore it.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -2236,6 +2742,8 @@ class AsyncSubscriptions:
         body: dict[str, Any] = {}
         if not isinstance(idempotency_key, NotGiven):
             body["idempotency_key"] = idempotency_key
+        if not isinstance(return_url, NotGiven):
+            body["return_url"] = return_url
         _validate_model(
             body,
             {
@@ -2249,7 +2757,16 @@ class AsyncSubscriptions:
                             "type": "string",
                             "constraints": {"maxLength": 128},
                         },
-                    }
+                    },
+                    "return_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 2000},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -2268,6 +2785,7 @@ class AsyncSubscriptions:
                 "update-payment-method",
             ),
             body=body,
+            model=SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -2286,10 +2804,10 @@ class AsyncSubscriptions:
         metadata: PreviewSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Preview a subscription plan change
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Preview a subscription plan change before confirming it. The preview stores the change it was taken for and returns a `preview_token` the confirmation must send back, alongside the provider's own pricing preview. On Stripe and in-house subscriptions, `preview_payload.payment_required` says whether confirming charges `amount_due` today or leaves any amount to the next invoice, and `preview_payload.renewal_date` says when the subscription renews next. A plan change belongs to the customer, and a store token previews it on their behalf; a provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -2301,7 +2819,7 @@ class AsyncSubscriptions:
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -2406,6 +2924,7 @@ class AsyncSubscriptions:
                 "preview",
             ),
             body=body,
+            model=SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -2425,10 +2944,10 @@ class AsyncSubscriptions:
         metadata: ConfirmSubscriptionPlanChangeRequestApplicationJsonPropertyMetadata
         | None = None,
         request_options: RequestOptions | None = None,
-    ) -> Any:
+    ) -> SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson:
         """Confirm a subscription plan change
 
-        This action belongs to the customer. Seller API requests return a 422 validation error. Check subscription capabilities and use the customer flow; never expose a seller API key to work around this restriction. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Confirm a previously previewed subscription plan change, sending back the `preview_token` for a preview of the same change. A plan change belongs to the customer, and a store token confirms it on their behalf; a provider refusal, or a state check such as a change already in progress or a subscription that is no longer active, returns `422` with the refusal sentence under `errors.subscription`. `approval_url` accompanies a `pending` action whenever the customer still has to approve the revision at the provider or pay the proration order `proration_order_id` names, and is left out entirely when the provider applied the change itself. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -2441,7 +2960,7 @@ class AsyncSubscriptions:
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
-            Any
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson
 
         Raises:
             BadRequestError: If the request is malformed (400).
@@ -2552,6 +3071,7 @@ class AsyncSubscriptions:
                 "confirm",
             ),
             body=body,
+            model=SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -2568,7 +3088,7 @@ class AsyncSubscriptions:
     ) -> SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Preview a subscription renewal date change
 
-        Preview a new renewal date before confirmation when the subscription's billing-date policy requires a preview. The current Stripe and PayPal provider flows do not support renewal-date changes and return 422. Check shift_billing_date capabilities before sending a request. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Preview a new renewal date before confirmation when the subscription's billing-date policy requires one. No payment method supports renewal-date changes today: Stripe, PayPal, Razorpay, and subscriptions the store bills in house all report `shift_billing_date` as `unsupported`, so this returns `422` with the refusal sentence under `errors.subscription`. Read the capabilities response first. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -2697,7 +3217,7 @@ class AsyncSubscriptions:
     ) -> SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson:
         """Confirm a subscription renewal date change
 
-        Confirm a subscription renewal date change. A preview token is required when the variant's billing-date policy requires previews. The current Stripe and PayPal provider flows do not support renewal-date changes and return 422. Check shift_billing_date capabilities before sending a request. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Confirm a subscription renewal date change, sending a `preview_token` when the variant's billing-date policy requires previews. No payment method supports renewal-date changes today: Stripe, PayPal, Razorpay, and subscriptions the store bills in house all report `shift_billing_date` as `unsupported`, so this returns `422` with the refusal sentence under `errors.subscription`. Read the capabilities response first. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
@@ -2820,244 +3340,5 @@ class AsyncSubscriptions:
             ),
             body=body,
             model=SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
-            request_options=request_options,
-        )
-
-    async def list_subscriptions(
-        self,
-        *,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> AsyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-        """List subscriptions
-
-        List page-based subscriptions with canonical customer and deprecated provider aliases. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            limit: The limit.
-            before: The before.
-            after: The after.
-            order: The order.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            AsyncPage[ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "listSubscriptions",
-        }
-        params = {
-            k: v
-            for k, v in {
-                "limit": limit,
-                "before": before,
-                "after": after,
-                "order": order,
-            }.items()
-            if v is not None
-        }
-        return await self._client.request_page(
-            method="get",
-            path=("v2", "subscriptions"),
-            model=ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-            params=params,
-            request_options=request_options,
-        )
-
-    async def search_subscriptions(
-        self,
-        *,
-        search: str | None = None,
-        status: str | None = None,
-        limit: int | None = None,
-        before: str | None = None,
-        after: str | None = None,
-        order: str | None = None,
-        request_options: RequestOptions | None = None,
-    ) -> AsyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]:
-        """Search subscriptions
-
-        Search while preserving page-based pagination. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            search: The search.
-            status: The status.
-            limit: The limit.
-            before: The before.
-            after: The after.
-            order: The order.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            AsyncPage[SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem]
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "searchSubscriptions",
-        }
-        body: dict[str, Any] = {
-            k: v
-            for k, v in {
-                "search": search,
-                "status": status,
-            }.items()
-            if v is not None
-        }
-        params = {
-            k: v
-            for k, v in {
-                "limit": limit,
-                "before": before,
-                "after": after,
-                "order": order,
-            }.items()
-            if v is not None
-        }
-        return await self._client.request_page(
-            method="post",
-            path=("v2", "subscriptions", "search"),
-            model=SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-            body=body,
-            params=params,
-            request_options=request_options,
-        )
-
-    async def get_subscription(
-        self,
-        product_subscription: int,
-        *,
-        request_options: RequestOptions | None = None,
-    ) -> SdkGetSubscriptionResponseValue200ApplicationJson:
-        """Retrieve a subscription
-
-        Retrieve by SellApp subscription record ID. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
-
-        Args:
-            product_subscription: The productSubscription identifier.
-            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
-
-        Returns:
-            SdkGetSubscriptionResponseValue200ApplicationJson
-
-        Raises:
-            BadRequestError: If the request is malformed (400).
-            AuthenticationError: If the API key is invalid (401).
-            AuthorizationError: If the request is forbidden (403).
-            NotFoundError: If the resource is not found (404).
-            ConflictError: If a conflict occurs (409).
-            UnprocessableEntityError: If the request data is unprocessable (422).
-            RateLimitExceededError: If rate limited (429).
-            ServerError: If the server returns a 5xx error.
-        """
-        request_options = {
-            **(request_options or {}),
-            "auth": {
-                "alternatives": [
-                    [{"schemeName": "bearerAuth", "scopes": []}],
-                    [
-                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
-                        {"schemeName": "storeAuth", "scopes": []},
-                    ],
-                ],
-                "anonymous": False,
-                "apiKey": True,
-                "accessToken": True,
-                "customerSession": False,
-                "browserSession": False,
-                "clientBasic": False,
-                "apiKeyRequiresStore": False,
-                "apiKeyUsesStore": True,
-                "accessTokenRequiresStore": True,
-            },
-            "server": None,
-            "encoding": "json",
-            "no_retry": False,
-            "text_response": False,
-        }
-        request_options = {
-            **(request_options or {}),
-            "idempotency_supported": False,
-            "operation_id": "getSubscription",
-        }
-        return await self._client.request(
-            method="get",
-            path=("v2", "subscriptions", str(product_subscription)),
-            model=SdkGetSubscriptionResponseValue200ApplicationJson,
             request_options=request_options,
         )

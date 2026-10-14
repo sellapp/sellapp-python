@@ -92,6 +92,14 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             },
             "constraints": {"minItems": 1},
         },
+        "custom_payment_method_ids": {
+            "kind": "array",
+            "items": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
+            },
+        },
         "other_settings": {"kind": "any"},
         "expected_updated_at": {
             "kind": "primitive",
@@ -161,6 +169,14 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             },
             "constraints": {"minItems": 1},
         },
+        "custom_payment_method_ids": {
+            "kind": "array",
+            "items": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
+            },
+        },
         "other_settings": {"kind": "any"},
         "expected_updated_at": {
             "kind": "primitive",
@@ -181,11 +197,14 @@ class SdkCreateProductVariantRequestApplicationJson:
     deliverable: CreateProductVariantRequestApplicationJsonPropertyDeliverable
     pricing: CreateProductVariantRequestApplicationJsonPropertyPricing
     payment_methods: list[SdkCreateProductVariantRequestApplicationJsonPaymentMethods]
+    """Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry."""
     minimum_purchase_quantity: int | None = None
     maximum_purchase_quantity: int | None = None
     bulk_discount: (
         list[CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem] | None
     ) = None
+    custom_payment_method_ids: list[str] | None = None
+    """Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected."""
     other_settings: (
         CreateProductVariantRequestApplicationJsonPropertyOtherSettings | None
     ) = None
@@ -233,6 +252,7 @@ class SdkCreateProductVariantRequestApplicationJson:
                 ]
                 if (_v_bulk_discount := data.get("bulk_discount")) is not None
                 else None,
+                custom_payment_method_ids=data.get("custom_payment_method_ids"),
                 other_settings=CreateProductVariantRequestApplicationJsonPropertyOtherSettings.from_dict(
                     cast(dict[str, Any], _v_other_settings)
                 )
@@ -253,6 +273,7 @@ class SdkCreateProductVariantRequestApplicationJson:
                         "maximum_purchase_quantity",
                         "bulk_discount",
                         "payment_methods",
+                        "custom_payment_method_ids",
                         "other_settings",
                         "expected_updated_at",
                     ],
@@ -275,6 +296,8 @@ class SdkCreateProductVariantRequestApplicationJson:
         _domain_data["maximum_purchase_quantity"] = self.maximum_purchase_quantity
         if self.bulk_discount is not None:
             _domain_data["bulk_discount"] = self.bulk_discount
+        if self.custom_payment_method_ids is not None:
+            _domain_data["custom_payment_method_ids"] = self.custom_payment_method_ids
         if self.other_settings is not None:
             _domain_data["other_settings"] = self.other_settings
         if self.expected_updated_at is not None:
@@ -304,6 +327,8 @@ class SdkCreateProductVariantRequestApplicationJson:
             result["maximum_purchase_quantity"] = None
         if self.bulk_discount is not None:
             result["bulk_discount"] = [item.to_dict() for item in self.bulk_discount]
+        if self.custom_payment_method_ids is not None:
+            result["custom_payment_method_ids"] = self.custom_payment_method_ids
         if self.other_settings is not None:
             result["other_settings"] = self.other_settings.to_dict()
         if self.expected_updated_at is not None:

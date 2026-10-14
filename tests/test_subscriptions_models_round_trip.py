@@ -6,34 +6,139 @@ from sellapp_sdk.subscriptions.models import (
     CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData,
     CancelSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyData,
     CancelSubscriptionResponseValue200ApplicationJsonPropertyData,
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
+    ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData,
     ConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData,
+    DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData,
+    GetSubscriptionActionResponseValue200ApplicationJsonPropertyData,
     GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData,
     GetSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilitiesMapValue,
     GetSubscriptionResponseValue200ApplicationJsonPropertyData,
     GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
+    KeepSubscriptionResponseValue200ApplicationJsonPropertyData,
     PauseSubscriptionResponseValue200ApplicationJsonPropertyData,
+    PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData,
     PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyData,
     ResumeSubscriptionResponseValue200ApplicationJsonPropertyData,
     SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson,
     SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson,
     SdkCancelSubscriptionResponseValue200ApplicationJson,
+    SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
+    SdkDismissSubscriptionActionResponseValue200ApplicationJson,
+    SdkGetSubscriptionActionResponseValue200ApplicationJson,
     SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson,
     SdkGetSubscriptionResponseValue200ApplicationJson,
-    SdkListSubscriptionsResponseValue200ApplicationJson,
+    SdkKeepSubscriptionResponseValue200ApplicationJson,
     SdkPauseSubscriptionResponseValue200ApplicationJson,
+    SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
     SdkResumeSubscriptionResponseValue200ApplicationJson,
-    SdkSearchSubscriptionsResponseValue200ApplicationJson,
-    SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-    SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
+    SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson,
+    SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem,
+    SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem,
+    SearchSubscriptionsRequestApplicationJsonPropertySearch,
+    SearchSubscriptionsRequestApplicationJsonPropertySortItem,
+    SubscriptionPlanChangePreviewPayload,
+    UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData,
 )
 from tests.generated_helpers import load_fixture
 
 
 class TestModelRoundTrip:
+    def test_subscription_plan_change_preview_payload_round_trip(self):
+        data = load_fixture("subscription_plan_change_preview_payload.json")
+        instance = SubscriptionPlanChangePreviewPayload.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SubscriptionPlanChangePreviewPayload.from_dict(serialized)
+        assert restored.to_dict() == serialized
+
+    def test_subscription_plan_change_preview_payload_minimal_payload(self):
+        data = {}
+        instance = SubscriptionPlanChangePreviewPayload.from_dict(data)
+        assert instance.to_dict() is not None
+
+    def test_subscription_plan_change_preview_payload_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"renewal_date": "2023-01-01T00:00:00.000Z"}
+        instance = SubscriptionPlanChangePreviewPayload.from_dict(data)
+        serialized = instance.to_dict()
+        assert "provider" not in serialized
+        assert "payment_required" not in serialized
+        assert "amount_due" not in serialized
+        assert "discount_warning" not in serialized
+
+    def test_subscription_plan_change_preview_payload_preserves_nullable_fields(self):
+        data = {
+            "provider": "provider_01234",
+            "payment_required": True,
+            "renewal_date": None,
+            "amount_due": 1,
+            "discount_warning": "test_discount_warning",
+        }
+        instance = SubscriptionPlanChangePreviewPayload.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["renewal_date"] is None
+
+    def test_cancel_subscription_response_value_200_application_json_property_data_property_customer_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "cancel_subscription_response_value_200_application_json_property_data_property_customer.json"
+        )
+        instance = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_cancel_subscription_response_value_200_application_json_property_data_property_customer_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "external_id": None,
+            "name": None,
+            "locale": None,
+            "metadata": {"key": {}},
+        }
+        instance = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["email"] == data["email"]
+        assert serialized["external_id"] == data["external_id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["locale"] == data["locale"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_cancel_subscription_response_value_200_application_json_property_data_property_customer_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "external_id": None,
+            "name": None,
+            "locale": None,
+            "metadata": {"key": {}},
+        }
+        instance = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["external_id"] is None
+        assert serialized["name"] is None
+        assert serialized["locale"] is None
+
     def test_cancel_subscription_response_value_200_application_json_property_data_round_trip(
         self,
     ):
@@ -60,17 +165,20 @@ class TestModelRoundTrip:
         data = {
             "id": 1,
             "invoice_id": None,
-            "provider": "provider_01234",
-            "subscription_id": "subscription_id_01234",
-            "customer_id": "customer_id_01234",
-            "customer_email": "test@example.com",
-            "status": "test_status",
-            "current_period_start": "2023-01-01T00:00:00.000Z",
-            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "provider": None,
+            "subscription_id": None,
+            "customer_id": None,
+            "provider_subscription_id": None,
+            "provider_customer_id": None,
+            "customer": None,
+            "customer_email": None,
+            "status": "ACTIVE",
+            "current_period_start": None,
+            "current_period_end": None,
             "cancel_at_period_end": True,
             "cancellation_in_progress": True,
-            "store_id": 1,
-            "product_variant_id": 1,
+            "store_id": None,
+            "product_variant_id": None,
             "created_at": "2023-01-01T00:00:00.000Z",
             "updated_at": "2023-01-01T00:00:00.000Z",
         }
@@ -85,6 +193,11 @@ class TestModelRoundTrip:
         assert serialized["provider"] == data["provider"]
         assert serialized["subscription_id"] == data["subscription_id"]
         assert serialized["customer_id"] == data["customer_id"]
+        assert (
+            serialized["provider_subscription_id"] == data["provider_subscription_id"]
+        )
+        assert serialized["provider_customer_id"] == data["provider_customer_id"]
+        assert serialized["customer"] == data["customer"]
         assert serialized["customer_email"] == data["customer_email"]
         assert serialized["status"] == data["status"]
         assert serialized["current_period_start"] == data["current_period_start"]
@@ -98,23 +211,79 @@ class TestModelRoundTrip:
         assert serialized["created_at"] == data["created_at"]
         assert serialized["updated_at"] == data["updated_at"]
 
+    def test_cancel_subscription_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": 1,
+            "provider": "provider_01234",
+            "subscription_id": "subscription_id_01234",
+            "customer_id": "customer_id_01234",
+            "provider_subscription_id": "provider_subscription_id_01234",
+            "provider_customer_id": "provider_customer_id_01234",
+            "customer": {
+                "id": 1,
+                "email": "test@example.com",
+                "external_id": "external_id_01234",
+                "name": "Test",
+                "locale": "en-GB",
+                "metadata": {"key": {}},
+            },
+            "customer_email": "test@example.com",
+            "status": "ACTIVE",
+            "current_period_start": "2023-01-01T00:00:00.000Z",
+            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "trial_ends_at": "2023-01-01T00:00:00.000Z",
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": 1,
+            "product_variant_id": 1,
+            "current_plan_variant_id": 1,
+            "paused_at": "2023-01-01T00:00:00.000Z",
+            "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+            "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+            "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+            "last_customer_action_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            CancelSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert "auto_renew" not in serialized
+
     def test_cancel_subscription_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
     ):
         data = {
             "id": 1,
             "invoice_id": None,
-            "provider": "provider_01234",
-            "subscription_id": "subscription_id_01234",
-            "customer_id": "customer_id_01234",
-            "customer_email": "test@example.com",
-            "status": "test_status",
-            "current_period_start": "2023-01-01T00:00:00.000Z",
-            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "provider": None,
+            "subscription_id": None,
+            "customer_id": None,
+            "provider_subscription_id": None,
+            "provider_customer_id": None,
+            "customer": None,
+            "customer_email": None,
+            "status": "ACTIVE",
+            "current_period_start": None,
+            "current_period_end": None,
+            "trial_ends_at": None,
             "cancel_at_period_end": True,
             "cancellation_in_progress": True,
-            "store_id": 1,
-            "product_variant_id": 1,
+            "store_id": None,
+            "product_variant_id": None,
+            "current_plan_variant_id": None,
+            "auto_renew": True,
+            "paused_at": None,
+            "pause_resumes_at": None,
+            "canceled_immediately_at": None,
+            "payment_method_updated_at": None,
+            "last_customer_action_at": None,
             "created_at": "2023-01-01T00:00:00.000Z",
             "updated_at": "2023-01-01T00:00:00.000Z",
         }
@@ -125,6 +294,69 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["invoice_id"] is None
+        assert serialized["provider"] is None
+        assert serialized["subscription_id"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["provider_subscription_id"] is None
+        assert serialized["provider_customer_id"] is None
+        assert serialized["customer"] is None
+        assert serialized["customer_email"] is None
+        assert serialized["current_period_start"] is None
+        assert serialized["current_period_end"] is None
+        assert serialized["trial_ends_at"] is None
+        assert serialized["store_id"] is None
+        assert serialized["product_variant_id"] is None
+        assert serialized["current_plan_variant_id"] is None
+        assert serialized["paused_at"] is None
+        assert serialized["pause_resumes_at"] is None
+        assert serialized["canceled_immediately_at"] is None
+        assert serialized["payment_method_updated_at"] is None
+        assert serialized["last_customer_action_at"] is None
+
+    def test_cancel_subscription_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": 1,
+            "provider": "provider_01234",
+            "subscription_id": "subscription_id_01234",
+            "customer_id": "customer_id_01234",
+            "provider_subscription_id": "provider_subscription_id_01234",
+            "provider_customer_id": "provider_customer_id_01234",
+            "customer": {
+                "id": 1,
+                "email": "test@example.com",
+                "external_id": "external_id_01234",
+                "name": "Test",
+                "locale": "en-GB",
+                "metadata": {"key": {}},
+            },
+            "customer_email": "test@example.com",
+            "status": "unexpected_cancel_subscription_response_value_200_application_json_property_data_status",
+            "current_period_start": "2023-01-01T00:00:00.000Z",
+            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "trial_ends_at": "2023-01-01T00:00:00.000Z",
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": 1,
+            "product_variant_id": 1,
+            "current_plan_variant_id": 1,
+            "auto_renew": True,
+            "paused_at": "2023-01-01T00:00:00.000Z",
+            "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+            "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+            "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+            "last_customer_action_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            CancelSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
 
     def test_sdk_cancel_subscription_response_value_200_application_json_round_trip(
         self,
@@ -150,14 +382,32 @@ class TestModelRoundTrip:
                 "provider": "provider_01234",
                 "subscription_id": "subscription_id_01234",
                 "customer_id": "customer_id_01234",
+                "provider_subscription_id": "provider_subscription_id_01234",
+                "provider_customer_id": "provider_customer_id_01234",
+                "customer": {
+                    "id": 1,
+                    "email": "test@example.com",
+                    "external_id": "external_id_01234",
+                    "name": "Test",
+                    "locale": "en-GB",
+                    "metadata": {"key": {}},
+                },
                 "customer_email": "test@example.com",
-                "status": "test_status",
+                "status": "ACTIVE",
                 "current_period_start": "2023-01-01T00:00:00.000Z",
                 "current_period_end": "2023-01-01T00:00:00.000Z",
+                "trial_ends_at": "2023-01-01T00:00:00.000Z",
                 "cancel_at_period_end": True,
                 "cancellation_in_progress": True,
                 "store_id": 1,
                 "product_variant_id": 1,
+                "current_plan_variant_id": 1,
+                "auto_renew": True,
+                "paused_at": "2023-01-01T00:00:00.000Z",
+                "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+                "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+                "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+                "last_customer_action_at": "2023-01-01T00:00:00.000Z",
                 "created_at": "2023-01-01T00:00:00.000Z",
                 "updated_at": "2023-01-01T00:00:00.000Z",
             },
@@ -167,6 +417,507 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["message"] == data["message"]
+
+    def test_search_subscriptions_request_application_json_property_filters_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_subscriptions_request_application_json_property_filters_item.json"
+        )
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_subscriptions_request_application_json_property_filters_item_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem.from_dict(data)
+        )
+        assert instance.to_dict() is not None
+
+    def test_search_subscriptions_request_application_json_property_filters_item_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {}
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert "field" not in serialized
+        assert "operator" not in serialized
+        assert "value" not in serialized
+        assert "type" not in serialized
+        assert "nested" not in serialized
+
+    def test_search_subscriptions_request_application_json_property_filters_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "field": "test_field",
+            "operator": "test_operator",
+            "value": {},
+            "type": "unexpected_search_subscriptions_request_application_json_property_filters_item_type",
+            "nested": [{}],
+        }
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyFiltersItem.from_dict(data)
+        )
+        assert instance.to_dict() == data
+
+    def test_search_subscriptions_request_application_json_property_sort_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_subscriptions_request_application_json_property_sort_item.json"
+        )
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySortItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchSubscriptionsRequestApplicationJsonPropertySortItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_subscriptions_request_application_json_property_sort_item_minimal_payload(
+        self,
+    ):
+        data = {"field": "test_field"}
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySortItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["field"] == data["field"]
+
+    def test_search_subscriptions_request_application_json_property_sort_item_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"field": "test_field"}
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySortItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "direction" not in serialized
+
+    def test_search_subscriptions_request_application_json_property_sort_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "field": "test_field",
+            "direction": "unexpected_search_subscriptions_request_application_json_property_sort_item_direction",
+        }
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySortItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_search_subscriptions_request_application_json_property_search_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_subscriptions_request_application_json_property_search.json"
+        )
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySearch.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchSubscriptionsRequestApplicationJsonPropertySearch.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_subscriptions_request_application_json_property_search_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySearch.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_search_subscriptions_request_application_json_property_search_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"value": "test_value"}
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySearch.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "case_sensitive" not in serialized
+
+    def test_search_subscriptions_request_application_json_property_search_preserves_nullable_fields(
+        self,
+    ):
+        data = {"value": None, "case_sensitive": True}
+        instance = SearchSubscriptionsRequestApplicationJsonPropertySearch.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] is None
+
+    def test_search_subscriptions_request_application_json_property_includes_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_subscriptions_request_application_json_property_includes_item.json"
+        )
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_subscriptions_request_application_json_property_includes_item_minimal_payload(
+        self,
+    ):
+        data = {"relation": "test_relation"}
+        instance = (
+            SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["relation"] == data["relation"]
+
+    def test_get_subscription_response_value_200_application_json_property_data_property_customer_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_subscription_response_value_200_application_json_property_data_property_customer.json"
+        )
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_subscription_response_value_200_application_json_property_data_property_customer_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "external_id": None,
+            "name": None,
+            "locale": None,
+            "metadata": {"key": {}},
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["email"] == data["email"]
+        assert serialized["external_id"] == data["external_id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["locale"] == data["locale"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_get_subscription_response_value_200_application_json_property_data_property_customer_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "external_id": None,
+            "name": None,
+            "locale": None,
+            "metadata": {"key": {}},
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["external_id"] is None
+        assert serialized["name"] is None
+        assert serialized["locale"] is None
+
+    def test_get_subscription_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_subscription_response_value_200_application_json_property_data.json"
+        )
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_subscription_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": None,
+            "provider": None,
+            "subscription_id": None,
+            "customer_id": None,
+            "provider_subscription_id": None,
+            "provider_customer_id": None,
+            "customer": None,
+            "customer_email": None,
+            "status": "ACTIVE",
+            "current_period_start": None,
+            "current_period_end": None,
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": None,
+            "product_variant_id": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["provider"] == data["provider"]
+        assert serialized["subscription_id"] == data["subscription_id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert (
+            serialized["provider_subscription_id"] == data["provider_subscription_id"]
+        )
+        assert serialized["provider_customer_id"] == data["provider_customer_id"]
+        assert serialized["customer"] == data["customer"]
+        assert serialized["customer_email"] == data["customer_email"]
+        assert serialized["status"] == data["status"]
+        assert serialized["current_period_start"] == data["current_period_start"]
+        assert serialized["current_period_end"] == data["current_period_end"]
+        assert serialized["cancel_at_period_end"] == data["cancel_at_period_end"]
+        assert (
+            serialized["cancellation_in_progress"] == data["cancellation_in_progress"]
+        )
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["product_variant_id"] == data["product_variant_id"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_get_subscription_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": 1,
+            "provider": "provider_01234",
+            "subscription_id": "subscription_id_01234",
+            "customer_id": "customer_id_01234",
+            "provider_subscription_id": "provider_subscription_id_01234",
+            "provider_customer_id": "provider_customer_id_01234",
+            "customer": {
+                "id": 1,
+                "email": "test@example.com",
+                "external_id": "external_id_01234",
+                "name": "Test",
+                "locale": "en-GB",
+                "metadata": {"key": {}},
+            },
+            "customer_email": "test@example.com",
+            "status": "ACTIVE",
+            "current_period_start": "2023-01-01T00:00:00.000Z",
+            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "trial_ends_at": "2023-01-01T00:00:00.000Z",
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": 1,
+            "product_variant_id": 1,
+            "current_plan_variant_id": 1,
+            "paused_at": "2023-01-01T00:00:00.000Z",
+            "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+            "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+            "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+            "last_customer_action_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "auto_renew" not in serialized
+
+    def test_get_subscription_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": None,
+            "provider": None,
+            "subscription_id": None,
+            "customer_id": None,
+            "provider_subscription_id": None,
+            "provider_customer_id": None,
+            "customer": None,
+            "customer_email": None,
+            "status": "ACTIVE",
+            "current_period_start": None,
+            "current_period_end": None,
+            "trial_ends_at": None,
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": None,
+            "product_variant_id": None,
+            "current_plan_variant_id": None,
+            "auto_renew": True,
+            "paused_at": None,
+            "pause_resumes_at": None,
+            "canceled_immediately_at": None,
+            "payment_method_updated_at": None,
+            "last_customer_action_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] is None
+        assert serialized["provider"] is None
+        assert serialized["subscription_id"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["provider_subscription_id"] is None
+        assert serialized["provider_customer_id"] is None
+        assert serialized["customer"] is None
+        assert serialized["customer_email"] is None
+        assert serialized["current_period_start"] is None
+        assert serialized["current_period_end"] is None
+        assert serialized["trial_ends_at"] is None
+        assert serialized["store_id"] is None
+        assert serialized["product_variant_id"] is None
+        assert serialized["current_plan_variant_id"] is None
+        assert serialized["paused_at"] is None
+        assert serialized["pause_resumes_at"] is None
+        assert serialized["canceled_immediately_at"] is None
+        assert serialized["payment_method_updated_at"] is None
+        assert serialized["last_customer_action_at"] is None
+
+    def test_get_subscription_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "invoice_id": 1,
+            "provider": "provider_01234",
+            "subscription_id": "subscription_id_01234",
+            "customer_id": "customer_id_01234",
+            "provider_subscription_id": "provider_subscription_id_01234",
+            "provider_customer_id": "provider_customer_id_01234",
+            "customer": {
+                "id": 1,
+                "email": "test@example.com",
+                "external_id": "external_id_01234",
+                "name": "Test",
+                "locale": "en-GB",
+                "metadata": {"key": {}},
+            },
+            "customer_email": "test@example.com",
+            "status": "unexpected_get_subscription_response_value_200_application_json_property_data_status",
+            "current_period_start": "2023-01-01T00:00:00.000Z",
+            "current_period_end": "2023-01-01T00:00:00.000Z",
+            "trial_ends_at": "2023-01-01T00:00:00.000Z",
+            "cancel_at_period_end": True,
+            "cancellation_in_progress": True,
+            "store_id": 1,
+            "product_variant_id": 1,
+            "current_plan_variant_id": 1,
+            "auto_renew": True,
+            "paused_at": "2023-01-01T00:00:00.000Z",
+            "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+            "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+            "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+            "last_customer_action_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_get_subscription_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_get_subscription_response_value_200_application_json.json"
+        )
+        instance = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_subscription_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "invoice_id": 1,
+                "provider": "provider_01234",
+                "subscription_id": "subscription_id_01234",
+                "customer_id": "customer_id_01234",
+                "provider_subscription_id": "provider_subscription_id_01234",
+                "provider_customer_id": "provider_customer_id_01234",
+                "customer": {
+                    "id": 1,
+                    "email": "test@example.com",
+                    "external_id": "external_id_01234",
+                    "name": "Test",
+                    "locale": "en-GB",
+                    "metadata": {"key": {}},
+                },
+                "customer_email": "test@example.com",
+                "status": "ACTIVE",
+                "current_period_start": "2023-01-01T00:00:00.000Z",
+                "current_period_end": "2023-01-01T00:00:00.000Z",
+                "trial_ends_at": "2023-01-01T00:00:00.000Z",
+                "cancel_at_period_end": True,
+                "cancellation_in_progress": True,
+                "store_id": 1,
+                "product_variant_id": 1,
+                "current_plan_variant_id": 1,
+                "auto_renew": True,
+                "paused_at": "2023-01-01T00:00:00.000Z",
+                "pause_resumes_at": "2023-01-01T00:00:00.000Z",
+                "canceled_immediately_at": "2023-01-01T00:00:00.000Z",
+                "payment_method_updated_at": "2023-01-01T00:00:00.000Z",
+                "last_customer_action_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
 
     def test_get_subscription_capabilities_response_value_200_application_json_property_data_property_capabilities_map_value_round_trip(
         self,
@@ -336,6 +1087,8 @@ class TestModelRoundTrip:
     ):
         data = {
             "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -362,6 +1115,8 @@ class TestModelRoundTrip:
             "action": "pause",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
             "customer_message": None,
             "confirmed_at": None,
             "failed_at": None,
@@ -373,6 +1128,8 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
         assert serialized["customer_message"] is None
         assert serialized["confirmed_at"] is None
         assert serialized["failed_at"] is None
@@ -387,6 +1144,8 @@ class TestModelRoundTrip:
             "action": "unexpected_cancel_subscription_at_period_end_response_value_200_application_json_property_data_action",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -429,6 +1188,8 @@ class TestModelRoundTrip:
                 "action": "pause",
                 "status": "pending",
                 "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
                 "customer_message": "test_customer_message",
                 "confirmed_at": "2023-01-01T00:00:00.000Z",
                 "failed_at": "2023-01-01T00:00:00.000Z",
@@ -476,6 +1237,8 @@ class TestModelRoundTrip:
     ):
         data = {
             "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -502,6 +1265,8 @@ class TestModelRoundTrip:
             "action": "pause",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
             "customer_message": None,
             "confirmed_at": None,
             "failed_at": None,
@@ -513,6 +1278,8 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
         assert serialized["customer_message"] is None
         assert serialized["confirmed_at"] is None
         assert serialized["failed_at"] is None
@@ -527,6 +1294,8 @@ class TestModelRoundTrip:
             "action": "unexpected_cancel_subscription_immediately_response_value_200_application_json_property_data_action",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -569,6 +1338,8 @@ class TestModelRoundTrip:
                 "action": "pause",
                 "status": "pending",
                 "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
                 "customer_message": "test_customer_message",
                 "confirmed_at": "2023-01-01T00:00:00.000Z",
                 "failed_at": "2023-01-01T00:00:00.000Z",
@@ -582,6 +1353,146 @@ class TestModelRoundTrip:
                 data
             )
         )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["message"] == data["message"]
+
+    def test_keep_subscription_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "keep_subscription_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_keep_subscription_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        assert instance.to_dict() is not None
+
+    def test_keep_subscription_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert "id" not in serialized
+        assert "product_subscription_id" not in serialized
+        assert "action" not in serialized
+        assert "status" not in serialized
+        assert "provider" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
+
+    def test_keep_subscription_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": None,
+            "action": "pause",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
+            "customer_message": None,
+            "confirmed_at": None,
+            "failed_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["confirmed_at"] is None
+        assert serialized["failed_at"] is None
+
+    def test_keep_subscription_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": "subscription_id_01234",
+            "action": "unexpected_keep_subscription_response_value_200_application_json_property_data_action",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            KeepSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_keep_subscription_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_keep_subscription_response_value_200_application_json.json"
+        )
+        instance = SdkKeepSubscriptionResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkKeepSubscriptionResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_keep_subscription_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+        }
+        instance = SdkKeepSubscriptionResponseValue200ApplicationJson.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["message"] == data["message"]
@@ -618,6 +1529,8 @@ class TestModelRoundTrip:
     ):
         data = {
             "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -644,6 +1557,8 @@ class TestModelRoundTrip:
             "action": "pause",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
             "customer_message": None,
             "confirmed_at": None,
             "failed_at": None,
@@ -655,6 +1570,8 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
         assert serialized["customer_message"] is None
         assert serialized["confirmed_at"] is None
         assert serialized["failed_at"] is None
@@ -669,6 +1586,8 @@ class TestModelRoundTrip:
             "action": "unexpected_pause_subscription_response_value_200_application_json_property_data_action",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -705,6 +1624,8 @@ class TestModelRoundTrip:
                 "action": "pause",
                 "status": "pending",
                 "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
                 "customer_message": "test_customer_message",
                 "confirmed_at": "2023-01-01T00:00:00.000Z",
                 "failed_at": "2023-01-01T00:00:00.000Z",
@@ -754,6 +1675,8 @@ class TestModelRoundTrip:
     ):
         data = {
             "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -782,6 +1705,8 @@ class TestModelRoundTrip:
             "action": "pause",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
             "customer_message": None,
             "confirmed_at": None,
             "failed_at": None,
@@ -795,6 +1720,8 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
         assert serialized["customer_message"] is None
         assert serialized["confirmed_at"] is None
         assert serialized["failed_at"] is None
@@ -809,6 +1736,8 @@ class TestModelRoundTrip:
             "action": "unexpected_resume_subscription_response_value_200_application_json_property_data_action",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -847,6 +1776,8 @@ class TestModelRoundTrip:
                 "action": "pause",
                 "status": "pending",
                 "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
                 "customer_message": "test_customer_message",
                 "confirmed_at": "2023-01-01T00:00:00.000Z",
                 "failed_at": "2023-01-01T00:00:00.000Z",
@@ -859,6 +1790,483 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
         assert serialized["message"] == data["message"]
+
+    def test_update_subscription_payment_method_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_subscription_payment_method_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_subscription_payment_method_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_update_subscription_payment_method_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "id" not in serialized
+        assert "product_subscription_id" not in serialized
+        assert "action" not in serialized
+        assert "status" not in serialized
+        assert "provider" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
+
+    def test_update_subscription_payment_method_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": None,
+            "action": "pause",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
+            "customer_message": None,
+            "confirmed_at": None,
+            "failed_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["confirmed_at"] is None
+        assert serialized["failed_at"] is None
+
+    def test_update_subscription_payment_method_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": "subscription_id_01234",
+            "action": "unexpected_update_subscription_payment_method_response_value_200_application_json_property_data_action",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_update_subscription_payment_method_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_subscription_payment_method_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_subscription_payment_method_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+            "redirect_url": None,
+        }
+        instance = (
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["message"] == data["message"]
+        assert serialized["redirect_url"] == data["redirect_url"]
+
+    def test_sdk_update_subscription_payment_method_response_value_200_application_json_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+            "redirect_url": None,
+        }
+        instance = (
+            SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["redirect_url"] is None
+
+    def test_preview_subscription_plan_change_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "preview_subscription_plan_change_response_value_200_application_json_property_data.json"
+        )
+        instance = PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_preview_subscription_plan_change_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_preview_subscription_plan_change_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "preview_token": "test_preview_token",
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "customer_message": "test_customer_message",
+            "seller_message": "test_seller_message",
+        }
+        instance = PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "preview_payload" not in serialized
+        assert "request_payload" not in serialized
+
+    def test_preview_subscription_plan_change_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "preview_token": None,
+            "expires_at": None,
+            "preview_payload": {
+                "provider": "provider_01234",
+                "payment_required": True,
+                "renewal_date": "2023-01-01T00:00:00.000Z",
+                "amount_due": 1,
+                "discount_warning": "test_discount_warning",
+            },
+            "request_payload": {},
+            "customer_message": None,
+            "seller_message": None,
+        }
+        instance = PreviewSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["preview_token"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["seller_message"] is None
+
+    def test_sdk_preview_subscription_plan_change_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_preview_subscription_plan_change_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_preview_subscription_plan_change_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "preview_token": "test_preview_token",
+                "expires_at": "2023-01-01T00:00:00.000Z",
+                "preview_payload": {
+                    "provider": "provider_01234",
+                    "payment_required": True,
+                    "renewal_date": "2023-01-01T00:00:00.000Z",
+                    "amount_due": 1,
+                    "discount_warning": "test_discount_warning",
+                },
+                "request_payload": {},
+                "customer_message": "test_customer_message",
+                "seller_message": "test_seller_message",
+            },
+            "message": "test_message",
+        }
+        instance = (
+            SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["message"] == data["message"]
+
+    def test_confirm_subscription_plan_change_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "confirm_subscription_plan_change_response_value_200_application_json_property_data.json"
+        )
+        instance = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_confirm_subscription_plan_change_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_confirm_subscription_plan_change_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "id" not in serialized
+        assert "product_subscription_id" not in serialized
+        assert "action" not in serialized
+        assert "status" not in serialized
+        assert "provider" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
+
+    def test_confirm_subscription_plan_change_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": None,
+            "action": "pause",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
+            "customer_message": None,
+            "confirmed_at": None,
+            "failed_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["confirmed_at"] is None
+        assert serialized["failed_at"] is None
+
+    def test_confirm_subscription_plan_change_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": "subscription_id_01234",
+            "action": "unexpected_confirm_subscription_plan_change_response_value_200_application_json_property_data_action",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_confirm_subscription_plan_change_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_confirm_subscription_plan_change_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_confirm_subscription_plan_change_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+        }
+        instance = (
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["message"] == data["message"]
+
+    def test_sdk_confirm_subscription_plan_change_response_value_200_application_json_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+        }
+        instance = (
+            SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert "approval_url" not in serialized
 
     def test_preview_subscription_renewal_date_change_response_value_200_application_json_property_data_round_trip(
         self,
@@ -988,6 +2396,8 @@ class TestModelRoundTrip:
     ):
         data = {
             "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -1014,6 +2424,8 @@ class TestModelRoundTrip:
             "action": "shift_billing_date",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
             "customer_message": None,
             "confirmed_at": None,
             "failed_at": None,
@@ -1025,6 +2437,8 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
         assert serialized["customer_message"] is None
         assert serialized["confirmed_at"] is None
         assert serialized["failed_at"] is None
@@ -1039,6 +2453,8 @@ class TestModelRoundTrip:
             "action": "unexpected_confirm_subscription_renewal_date_change_response_value_200_application_json_property_data_action",
             "status": "pending",
             "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
             "customer_message": "test_customer_message",
             "confirmed_at": "2023-01-01T00:00:00.000Z",
             "failed_at": "2023-01-01T00:00:00.000Z",
@@ -1077,6 +2493,8 @@ class TestModelRoundTrip:
                 "action": "shift_billing_date",
                 "status": "pending",
                 "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
                 "customer_message": "test_customer_message",
                 "confirmed_at": "2023-01-01T00:00:00.000Z",
                 "failed_at": "2023-01-01T00:00:00.000Z",
@@ -1092,650 +2510,302 @@ class TestModelRoundTrip:
         assert serialized["data"] == data["data"]
         assert serialized["message"] == data["message"]
 
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_property_customer_round_trip(
+    def test_get_subscription_action_response_value_200_application_json_property_data_round_trip(
         self,
     ):
         data = load_fixture(
-            "list_subscriptions_response_value_200_application_json_property_data_item_property_customer.json"
-        )
-        instance = ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_property_customer_minimal_payload(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["email"] == data["email"]
-        assert serialized["external_id"] == data["external_id"]
-        assert serialized["name"] == data["name"]
-        assert serialized["locale"] == data["locale"]
-        assert serialized["metadata"] == data["metadata"]
-
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_property_customer_preserves_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["external_id"] is None
-        assert serialized["name"] is None
-        assert serialized["locale"] is None
-
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "list_subscriptions_response_value_200_application_json_property_data_item.json"
+            "get_subscription_action_response_value_200_application_json_property_data.json"
         )
         instance = (
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
                 data
             )
         )
         serialized = instance.to_dict()
         assert serialized == data
         restored = (
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
                 serialized
             )
         )
         assert restored.to_dict() == serialized
 
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_minimal_payload(
+    def test_get_subscription_action_response_value_200_application_json_property_data_minimal_payload(
         self,
     ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-        }
+        data = {}
         instance = (
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
                 data
             )
         )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["status"] == data["status"]
-        assert (
-            serialized["provider_subscription_id"] == data["provider_subscription_id"]
-        )
-        assert serialized["provider_customer_id"] == data["provider_customer_id"]
-        assert serialized["customer"] == data["customer"]
+        assert instance.to_dict() is not None
 
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_omits_absent_optional_non_nullable_fields(
+    def test_get_subscription_action_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
         self,
     ):
         data = {
-            "id": 1,
-            "status": "test_status",
             "subscription_id": "subscription_id_01234",
-            "customer_id": "customer_id_01234",
-            "provider_subscription_id": "provider_subscription_id_01234",
-            "provider_customer_id": "provider_customer_id_01234",
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
         }
         instance = (
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
                 data
             )
         )
         serialized = instance.to_dict()
-        assert "product_variant_id" not in serialized
+        assert "id" not in serialized
+        assert "product_subscription_id" not in serialized
+        assert "action" not in serialized
+        assert "status" not in serialized
+        assert "provider" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
 
-    def test_list_subscriptions_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+    def test_get_subscription_action_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
     ):
         data = {
             "id": 1,
-            "status": "test_status",
+            "product_subscription_id": 1,
             "subscription_id": None,
-            "customer_id": None,
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-            "product_variant_id": 1,
+            "action": "pause",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
+            "customer_message": None,
+            "confirmed_at": None,
+            "failed_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
         }
         instance = (
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
                 data
             )
         )
         serialized = instance.to_dict()
         assert serialized["subscription_id"] is None
-        assert serialized["customer_id"] is None
-        assert serialized["provider_subscription_id"] is None
-        assert serialized["provider_customer_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["confirmed_at"] is None
+        assert serialized["failed_at"] is None
 
-    def test_sdk_list_subscriptions_response_value_200_application_json_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "sdk_list_subscriptions_response_value_200_application_json.json"
-        )
-        instance = SdkListSubscriptionsResponseValue200ApplicationJson.from_dict(data)
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = SdkListSubscriptionsResponseValue200ApplicationJson.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_sdk_list_subscriptions_response_value_200_application_json_minimal_payload(
-        self,
-    ):
-        data = {
-            "data": [
-                {
-                    "id": 1,
-                    "status": "test_status",
-                    "subscription_id": "subscription_id_01234",
-                    "customer_id": "customer_id_01234",
-                    "provider_subscription_id": "provider_subscription_id_01234",
-                    "provider_customer_id": "provider_customer_id_01234",
-                    "customer": {
-                        "id": 1,
-                        "email": "test@example.com",
-                        "external_id": "external_id_01234",
-                        "name": "Test",
-                        "locale": "en-GB",
-                        "metadata": {},
-                    },
-                    "product_variant_id": 1,
-                }
-            ],
-            "links": {
-                "first": "https://sell.app/api/v1/blacklists?page=1",
-                "last": "https://sell.app/api/v1/blacklists?page=4",
-                "prev": None,
-                "next": "https://sell.app/api/v1/blacklists?page=2",
-            },
-            "meta": {
-                "current_page": 1,
-                "from": 1,
-                "last_page": 4,
-                "links": [
-                    {
-                        "url": "https://example.com",
-                        "label": "test_label",
-                        "active": True,
-                    }
-                ],
-                "path": "https://sell.app/api/v1/blacklists",
-                "per_page": 15,
-                "to": 15,
-                "total": 57,
-            },
-        }
-        instance = SdkListSubscriptionsResponseValue200ApplicationJson.from_dict(data)
-        serialized = instance.to_dict()
-        assert serialized["data"] == data["data"]
-        assert serialized["links"] == data["links"]
-        assert serialized["meta"] == data["meta"]
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_property_customer_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "search_subscriptions_response_value_200_application_json_property_data_item_property_customer.json"
-        )
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_property_customer_minimal_payload(
+    def test_get_subscription_action_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
         self,
     ):
         data = {
             "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["email"] == data["email"]
-        assert serialized["external_id"] == data["external_id"]
-        assert serialized["name"] == data["name"]
-        assert serialized["locale"] == data["locale"]
-        assert serialized["metadata"] == data["metadata"]
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_property_customer_preserves_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["external_id"] is None
-        assert serialized["name"] is None
-        assert serialized["locale"] is None
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "search_subscriptions_response_value_200_application_json_property_data_item.json"
-        )
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_minimal_payload(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-        }
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["status"] == data["status"]
-        assert (
-            serialized["provider_subscription_id"] == data["provider_subscription_id"]
-        )
-        assert serialized["provider_customer_id"] == data["provider_customer_id"]
-        assert serialized["customer"] == data["customer"]
-
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_omits_absent_optional_non_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
+            "product_subscription_id": 1,
             "subscription_id": "subscription_id_01234",
-            "customer_id": "customer_id_01234",
-            "provider_subscription_id": "provider_subscription_id_01234",
-            "provider_customer_id": "provider_customer_id_01234",
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
+            "action": "unexpected_get_subscription_action_response_value_200_application_json_property_data_action",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
         }
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-            data
+        instance = (
+            GetSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
         )
-        serialized = instance.to_dict()
-        assert "product_variant_id" not in serialized
+        assert instance.to_dict() == data
 
-    def test_search_subscriptions_response_value_200_application_json_property_data_item_preserves_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "subscription_id": None,
-            "customer_id": None,
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-            "product_variant_id": 1,
-        }
-        instance = SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["subscription_id"] is None
-        assert serialized["customer_id"] is None
-        assert serialized["provider_subscription_id"] is None
-        assert serialized["provider_customer_id"] is None
-
-    def test_sdk_search_subscriptions_response_value_200_application_json_round_trip(
+    def test_sdk_get_subscription_action_response_value_200_application_json_round_trip(
         self,
     ):
         data = load_fixture(
-            "sdk_search_subscriptions_response_value_200_application_json.json"
+            "sdk_get_subscription_action_response_value_200_application_json.json"
         )
-        instance = SdkSearchSubscriptionsResponseValue200ApplicationJson.from_dict(data)
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = SdkSearchSubscriptionsResponseValue200ApplicationJson.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_sdk_search_subscriptions_response_value_200_application_json_minimal_payload(
-        self,
-    ):
-        data = {
-            "data": [
-                {
-                    "id": 1,
-                    "status": "test_status",
-                    "subscription_id": "subscription_id_01234",
-                    "customer_id": "customer_id_01234",
-                    "provider_subscription_id": "provider_subscription_id_01234",
-                    "provider_customer_id": "provider_customer_id_01234",
-                    "customer": {
-                        "id": 1,
-                        "email": "test@example.com",
-                        "external_id": "external_id_01234",
-                        "name": "Test",
-                        "locale": "en-GB",
-                        "metadata": {},
-                    },
-                    "product_variant_id": 1,
-                }
-            ],
-            "links": {
-                "first": "https://sell.app/api/v1/blacklists?page=1",
-                "last": "https://sell.app/api/v1/blacklists?page=4",
-                "prev": None,
-                "next": "https://sell.app/api/v1/blacklists?page=2",
-            },
-            "meta": {
-                "current_page": 1,
-                "from": 1,
-                "last_page": 4,
-                "links": [
-                    {
-                        "url": "https://example.com",
-                        "label": "test_label",
-                        "active": True,
-                    }
-                ],
-                "path": "https://sell.app/api/v1/blacklists",
-                "per_page": 15,
-                "to": 15,
-                "total": 57,
-            },
-        }
-        instance = SdkSearchSubscriptionsResponseValue200ApplicationJson.from_dict(data)
-        serialized = instance.to_dict()
-        assert serialized["data"] == data["data"]
-        assert serialized["links"] == data["links"]
-        assert serialized["meta"] == data["meta"]
-
-    def test_get_subscription_response_value_200_application_json_property_data_property_customer_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "get_subscription_response_value_200_application_json_property_data_property_customer.json"
-        )
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+        instance = SdkGetSubscriptionActionResponseValue200ApplicationJson.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized == data
-        restored = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+        restored = SdkGetSubscriptionActionResponseValue200ApplicationJson.from_dict(
             serialized
         )
         assert restored.to_dict() == serialized
 
-    def test_get_subscription_response_value_200_application_json_property_data_property_customer_minimal_payload(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["email"] == data["email"]
-        assert serialized["external_id"] == data["external_id"]
-        assert serialized["name"] == data["name"]
-        assert serialized["locale"] == data["locale"]
-        assert serialized["metadata"] == data["metadata"]
-
-    def test_get_subscription_response_value_200_application_json_property_data_property_customer_preserves_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "email": "test@example.com",
-            "external_id": None,
-            "name": None,
-            "locale": None,
-            "metadata": {},
-        }
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["external_id"] is None
-        assert serialized["name"] is None
-        assert serialized["locale"] is None
-
-    def test_get_subscription_response_value_200_application_json_property_data_round_trip(
-        self,
-    ):
-        data = load_fixture(
-            "get_subscription_response_value_200_application_json_property_data.json"
-        )
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_get_subscription_response_value_200_application_json_property_data_minimal_payload(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-        }
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["id"] == data["id"]
-        assert serialized["status"] == data["status"]
-        assert (
-            serialized["provider_subscription_id"] == data["provider_subscription_id"]
-        )
-        assert serialized["provider_customer_id"] == data["provider_customer_id"]
-        assert serialized["customer"] == data["customer"]
-
-    def test_get_subscription_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "subscription_id": "subscription_id_01234",
-            "customer_id": "customer_id_01234",
-            "provider_subscription_id": "provider_subscription_id_01234",
-            "provider_customer_id": "provider_customer_id_01234",
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-        }
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert "product_variant_id" not in serialized
-
-    def test_get_subscription_response_value_200_application_json_property_data_preserves_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "status": "test_status",
-            "subscription_id": None,
-            "customer_id": None,
-            "provider_subscription_id": None,
-            "provider_customer_id": None,
-            "customer": {
-                "id": 1,
-                "email": "test@example.com",
-                "external_id": "external_id_01234",
-                "name": "Test",
-                "locale": "en-GB",
-                "metadata": {},
-            },
-            "product_variant_id": 1,
-        }
-        instance = GetSubscriptionResponseValue200ApplicationJsonPropertyData.from_dict(
-            data
-        )
-        serialized = instance.to_dict()
-        assert serialized["subscription_id"] is None
-        assert serialized["customer_id"] is None
-        assert serialized["provider_subscription_id"] is None
-        assert serialized["provider_customer_id"] is None
-
-    def test_sdk_get_subscription_response_value_200_application_json_round_trip(self):
-        data = load_fixture(
-            "sdk_get_subscription_response_value_200_application_json.json"
-        )
-        instance = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(data)
-        serialized = instance.to_dict()
-        assert serialized == data
-        restored = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(
-            serialized
-        )
-        assert restored.to_dict() == serialized
-
-    def test_sdk_get_subscription_response_value_200_application_json_minimal_payload(
+    def test_sdk_get_subscription_action_response_value_200_application_json_minimal_payload(
         self,
     ):
         data = {
             "data": {
                 "id": 1,
-                "status": "test_status",
+                "product_subscription_id": 1,
                 "subscription_id": "subscription_id_01234",
-                "customer_id": "customer_id_01234",
-                "provider_subscription_id": "provider_subscription_id_01234",
-                "provider_customer_id": "provider_customer_id_01234",
-                "customer": {
-                    "id": 1,
-                    "email": "test@example.com",
-                    "external_id": "external_id_01234",
-                    "name": "Test",
-                    "locale": "en-GB",
-                    "metadata": {},
-                },
-                "product_variant_id": 1,
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
             }
         }
-        instance = SdkGetSubscriptionResponseValue200ApplicationJson.from_dict(data)
+        instance = SdkGetSubscriptionActionResponseValue200ApplicationJson.from_dict(
+            data
+        )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
+
+    def test_dismiss_subscription_action_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "dismiss_subscription_action_response_value_200_application_json_property_data.json"
+        )
+        instance = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_dismiss_subscription_action_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_dismiss_subscription_action_response_value_200_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "subscription_id": "subscription_id_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "id" not in serialized
+        assert "product_subscription_id" not in serialized
+        assert "action" not in serialized
+        assert "status" not in serialized
+        assert "provider" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
+
+    def test_dismiss_subscription_action_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": None,
+            "action": "pause",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": None,
+            "error": None,
+            "customer_message": None,
+            "confirmed_at": None,
+            "failed_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["subscription_id"] is None
+        assert serialized["proration_order_id"] is None
+        assert serialized["error"] is None
+        assert serialized["customer_message"] is None
+        assert serialized["confirmed_at"] is None
+        assert serialized["failed_at"] is None
+
+    def test_dismiss_subscription_action_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_subscription_id": 1,
+            "subscription_id": "subscription_id_01234",
+            "action": "unexpected_dismiss_subscription_action_response_value_200_application_json_property_data_action",
+            "status": "pending",
+            "provider": "provider_01234",
+            "proration_order_id": 1,
+            "error": "test_error",
+            "customer_message": "test_customer_message",
+            "confirmed_at": "2023-01-01T00:00:00.000Z",
+            "failed_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = DismissSubscriptionActionResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_dismiss_subscription_action_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_dismiss_subscription_action_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkDismissSubscriptionActionResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkDismissSubscriptionActionResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_dismiss_subscription_action_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_subscription_id": 1,
+                "subscription_id": "subscription_id_01234",
+                "action": "pause",
+                "status": "pending",
+                "provider": "provider_01234",
+                "proration_order_id": 1,
+                "error": "test_error",
+                "customer_message": "test_customer_message",
+                "confirmed_at": "2023-01-01T00:00:00.000Z",
+                "failed_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+            "message": "test_message",
+        }
+        instance = (
+            SdkDismissSubscriptionActionResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["message"] == data["message"]

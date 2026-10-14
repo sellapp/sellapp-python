@@ -18,18 +18,18 @@ from .get_customer_portal_subscription_capabilities_response_value_200_applicati
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData",
-    "required": ["subscription_id", "capabilities"],
+    "required": ["id", "capabilities"],
     "properties": {
-        "subscription_id": {"kind": "primitive", "type": "integer"},
+        "id": {"kind": "primitive", "type": "integer"},
         "capabilities": {"kind": "any"},
     },
     "additionalProperties": True,
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData",
-    "required": ["subscription_id", "capabilities"],
+    "required": ["id", "capabilities"],
     "properties": {
-        "subscription_id": {"kind": "primitive", "type": "integer"},
+        "id": {"kind": "primitive", "type": "integer"},
         "capabilities": {"kind": "any"},
     },
     "additionalProperties": True,
@@ -40,7 +40,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyData:
     """Get Customer Portal Subscription Capabilities Response Value200Application Json Property Data model."""
 
-    subscription_id: int
+    id: int
+    """The SellApp subscription ID."""
     capabilities: GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilities
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
@@ -62,12 +63,12 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
                 allow_unknown_fields=True,
             )
             return cls(
-                subscription_id=data["subscription_id"],
+                id=data["id"],
                 capabilities=GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPropertyDataPropertyCapabilities.from_dict(
                     cast(dict[str, Any], data["capabilities"])
                 ),
                 additional_properties=_preserve_unknown_fields(
-                    data, ["subscription_id", "capabilities"]
+                    data, ["id", "capabilities"]
                 ),
                 _from_response=True,
             )
@@ -80,7 +81,7 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
     def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
         _domain_data: dict[str, Any] = dict(self.additional_properties)
-        _domain_data["subscription_id"] = self.subscription_id
+        _domain_data["id"] = self.id
         _domain_data["capabilities"] = self.capabilities
         _validate_model(
             _domain_data,
@@ -91,6 +92,6 @@ class GetCustomerPortalSubscriptionCapabilitiesResponseValue200ApplicationJsonPr
             allow_unknown_fields=(self._from_response or True),
         )
         result: dict[str, Any] = dict(self.additional_properties)
-        result["subscription_id"] = self.subscription_id
+        result["id"] = self.id
         result["capabilities"] = self.capabilities.to_dict()
         return result

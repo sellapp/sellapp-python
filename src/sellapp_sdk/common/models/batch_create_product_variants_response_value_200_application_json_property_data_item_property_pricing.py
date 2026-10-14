@@ -18,6 +18,9 @@ from .batch_create_product_variants_response_value_200_application_json_property
 from .batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_price import (
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
 )
+from .batch_create_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+)
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing",
@@ -27,6 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "frequency": {"kind": "any"},
         "type": {"kind": "primitive", "type": "string"},
         "price": {"kind": "any"},
+        "trial": {"kind": "any"},
     },
     "additionalProperties": True,
 }
@@ -38,6 +42,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "frequency": {"kind": "any"},
         "type": {"kind": "primitive", "type": "string"},
         "price": {"kind": "any"},
+        "trial": {"kind": "any"},
     },
     "additionalProperties": True,
 }
@@ -51,6 +56,10 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
     frequency: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency
     type: str
     price: BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice
+    trial: (
+        BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial
+        | None
+    ) = None
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -79,8 +88,13 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
                 price=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice.from_dict(
                     cast(dict[str, Any], data["price"])
                 ),
+                trial=BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+                    cast(dict[str, Any], _v_trial)
+                )
+                if (_v_trial := data.get("trial")) is not None
+                else None,
                 additional_properties=_preserve_unknown_fields(
-                    data, ["humble", "frequency", "type", "price"]
+                    data, ["humble", "frequency", "type", "price", "trial"]
                 ),
                 _from_response=True,
             )
@@ -97,6 +111,8 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
         _domain_data["frequency"] = self.frequency
         _domain_data["type"] = self.type
         _domain_data["price"] = self.price
+        if self.trial is not None:
+            _domain_data["trial"] = self.trial
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -110,4 +126,6 @@ class BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemP
         result["frequency"] = self.frequency.to_dict()
         result["type"] = self.type
         result["price"] = self.price.to_dict()
+        if self.trial is not None:
+            result["trial"] = self.trial.to_dict()
         return result

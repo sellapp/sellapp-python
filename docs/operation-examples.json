@@ -530,6 +530,30 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "listSubscriptions",
+    "mountTarget": "Subscriptions",
+    "methodName": "list_subscriptions",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.list_subscriptions()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "searchSubscriptions",
+    "mountTarget": "Subscriptions",
+    "methodName": "search_subscriptions",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.search_subscriptions(\n    filters=[{\"field\": \"status\", \"operator\": \"=\", \"value\": \"ACTIVE\"}],\n    search={\"value\": \"maya.chen@example.com\"}\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSubscription",
+    "mountTarget": "Subscriptions",
+    "methodName": "get_subscription",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.get_subscription(product_subscription=123)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "getSubscriptionCapabilities",
     "mountTarget": "Subscriptions",
     "methodName": "get_capabilities",
@@ -554,6 +578,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "keepSubscription",
+    "mountTarget": "Subscriptions",
+    "methodName": "keep",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.keep(product_subscription=55)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "pauseSubscription",
     "mountTarget": "Subscriptions",
     "methodName": "pause",
@@ -573,7 +605,7 @@
     "operationId": "updateSubscriptionPaymentMethod",
     "mountTarget": "Subscriptions",
     "methodName": "update_payment_method",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.update_payment_method(product_subscription=1)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.update_payment_method(\n    product_subscription=55,\n    return_url=\"https://store.example.com/billing/updated\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -589,7 +621,7 @@
     "operationId": "confirmSubscriptionPlanChange",
     "mountTarget": "Subscriptions",
     "methodName": "confirm_plan_change",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.confirm_plan_change(\n    product_subscription=1,\n    target_variant_id=4321,\n    preview_token=\"subprev_9c4b2f\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.confirm_plan_change(\n    product_subscription=55,\n    target_variant_id=4321,\n    preview_token=\"subprev_9c4b2f\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -610,26 +642,26 @@
   {
     "language": "python",
     "fileExtension": "py",
-    "operationId": "listSubscriptions",
-    "mountTarget": "Subscriptions",
-    "methodName": "list_subscriptions",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.list_subscriptions()\nprint(result)\n"
+    "operationId": "listSubscriptionActions",
+    "mountTarget": "SubscriptionsActions",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions_actions.list(product_subscription=124)\nprint(result)\n"
   },
   {
     "language": "python",
     "fileExtension": "py",
-    "operationId": "searchSubscriptions",
-    "mountTarget": "Subscriptions",
-    "methodName": "search_subscriptions",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.search_subscriptions(\n    search=\"maya.chen@example.com\",\n    status=\"active\"\n)\nprint(result)\n"
+    "operationId": "getSubscriptionAction",
+    "mountTarget": "SubscriptionsActions",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions_actions.get(\n    product_subscription=124,\n    action=4192\n)\nprint(result)\n"
   },
   {
     "language": "python",
     "fileExtension": "py",
-    "operationId": "getSubscription",
-    "mountTarget": "Subscriptions",
-    "methodName": "get_subscription",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions.get_subscription(product_subscription=991)\nprint(result)\n"
+    "operationId": "dismissSubscriptionAction",
+    "mountTarget": "SubscriptionsActions",
+    "methodName": "dismiss",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.subscriptions_actions.dismiss(\n    product_subscription=124,\n    action=4207,\n    note=\"Confirmed with the customer that they no longer want the upgrade.\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2605,7 +2637,7 @@
     "operationId": "cancelCustomerSubscriptionAtPeriodEnd",
     "mountTarget": "CustomerPortal",
     "methodName": "cancel_customer_subscription_at_period_end",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.cancel_customer_subscription_at_period_end(\n    product_subscription=42,\n    reason=\"Customer requested this change\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.cancel_customer_subscription_at_period_end(\n    product_subscription=42,\n    reason=\"Taking a break over the summer.\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2613,7 +2645,7 @@
     "operationId": "cancelCustomerSubscriptionImmediately",
     "mountTarget": "CustomerPortal",
     "methodName": "cancel_customer_subscription_immediately",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.cancel_customer_subscription_immediately(\n    product_subscription=42,\n    reason=\"Customer requested this change\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.cancel_customer_subscription_immediately(\n    product_subscription=42,\n    reason=\"No longer needed.\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2621,7 +2653,7 @@
     "operationId": "pauseCustomerSubscription",
     "mountTarget": "CustomerPortal",
     "methodName": "pause_customer_subscription",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.pause_customer_subscription(\n    product_subscription=42,\n    reason=\"Customer requested this change\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.pause_customer_subscription(\n    product_subscription=42,\n    resume_at=\"2026-11-01T00:00:00Z\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2629,7 +2661,7 @@
     "operationId": "resumeCustomerSubscription",
     "mountTarget": "CustomerPortal",
     "methodName": "resume_customer_subscription",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.resume_customer_subscription(\n    product_subscription=42,\n    reason=\"Customer requested this change\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.resume_customer_subscription(product_subscription=42)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2637,7 +2669,7 @@
     "operationId": "updateCustomerSubscriptionPaymentMethod",
     "mountTarget": "CustomerPortal",
     "methodName": "update_customer_subscription_payment_method",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.update_customer_subscription_payment_method(\n    product_subscription=42,\n    reason=\"Customer requested this change\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.update_customer_subscription_payment_method(\n    product_subscription=42,\n    return_url=\"https://acme.sell.app/customer-portal/subscriptions/991\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2645,7 +2677,7 @@
     "operationId": "previewCustomerSubscriptionPlanChange",
     "mountTarget": "CustomerPortal",
     "methodName": "preview_customer_subscription_plan_change",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.preview_customer_subscription_plan_change(\n    product_subscription=42,\n    product_variant_id=84,\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.preview_customer_subscription_plan_change(\n    product_subscription=42,\n    target_variant_id=97\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2653,7 +2685,7 @@
     "operationId": "confirmCustomerSubscriptionPlanChange",
     "mountTarget": "CustomerPortal",
     "methodName": "confirm_customer_subscription_plan_change",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.confirm_customer_subscription_plan_change(\n    product_subscription=42,\n    preview_id=\"preview_01K4\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.confirm_customer_subscription_plan_change(\n    product_subscription=42,\n    target_variant_id=97,\n    preview_token=\"subprev_portal_991\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2661,7 +2693,7 @@
     "operationId": "previewCustomerSubscriptionRenewalDateChange",
     "mountTarget": "CustomerPortal",
     "methodName": "preview_customer_subscription_renewal_date_change",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.preview_customer_subscription_renewal_date_change(\n    product_subscription=42,\n    renewal_date=\"2026-10-15\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.preview_customer_subscription_renewal_date_change(\n    product_subscription=42,\n    renewal_date=\"2026-10-15T00:00:00Z\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2669,7 +2701,7 @@
     "operationId": "confirmCustomerSubscriptionRenewalDateChange",
     "mountTarget": "CustomerPortal",
     "methodName": "confirm_customer_subscription_renewal_date_change",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.confirm_customer_subscription_renewal_date_change(\n    product_subscription=42,\n    preview_id=\"preview_01K4\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], customer_session=os.environ[\"SELLAPP_CUSTOMER_SESSION\"], store=\"\")\n\nresult = client.customer_portal.confirm_customer_subscription_renewal_date_change(\n    product_subscription=42,\n    renewal_date=\"2026-10-15T00:00:00Z\",\n    preview_token=\"subprev_portal_renewal_991\"\n)\nprint(result)\n"
   },
   {
     "language": "python",

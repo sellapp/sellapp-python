@@ -11,6 +11,9 @@ if TYPE_CHECKING:
 
 import builtins
 
+from sellapp_sdk.common.models.create_customer_request_application_json_property_metadata import (
+    CreateCustomerRequestApplicationJsonPropertyMetadata,
+)
 from sellapp_sdk.common.models.sdk_create_customer_response_value_201_application_json import (
     SdkCreateCustomerResponseValue201ApplicationJson,
 )
@@ -21,7 +24,6 @@ from sellapp_sdk.common.models.search_customers_request_application_json_propert
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
 from .models import (
-    CreateCustomerRequestApplicationJsonPropertyMetadata,
     SdkGetCustomerResponseValue200ApplicationJson,
     SdkListCustomersResponseValue200ApplicationJson,
     SdkSearchCustomersResponseValue200ApplicationJson,

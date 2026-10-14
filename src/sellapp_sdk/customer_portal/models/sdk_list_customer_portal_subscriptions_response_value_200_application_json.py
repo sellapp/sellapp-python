@@ -11,21 +11,29 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.pagination_links import PaginationLinks
+from sellapp_sdk.common.models.pagination_meta import PaginationMeta
 
-from .list_customer_portal_subscriptions_response_value_200_application_json_property_data_item import (
-    ListCustomerPortalSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-)
+from .customer_portal_subscription import CustomerPortalSubscription
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson",
-    "required": ["data"],
-    "properties": {"data": {"kind": "array", "items": {"kind": "any"}}},
+    "required": ["data", "links", "meta"],
+    "properties": {
+        "data": {"kind": "array", "items": {"kind": "any"}},
+        "links": {"kind": "any"},
+        "meta": {"kind": "any"},
+    },
     "additionalProperties": True,
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson",
-    "required": ["data"],
-    "properties": {"data": {"kind": "array", "items": {"kind": "any"}}},
+    "required": ["data", "links", "meta"],
+    "properties": {
+        "data": {"kind": "array", "items": {"kind": "any"}},
+        "links": {"kind": "any"},
+        "meta": {"kind": "any"},
+    },
     "additionalProperties": True,
 }
 
@@ -34,9 +42,9 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
     """Sdk List Customer Portal Subscriptions Response Value200Application Json model."""
 
-    data: list[
-        ListCustomerPortalSubscriptionsResponseValue200ApplicationJsonPropertyDataItem
-    ]
+    data: list[CustomerPortalSubscription]
+    links: PaginationLinks
+    meta: PaginationMeta
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -58,12 +66,14 @@ class SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
             )
             return cls(
                 data=[
-                    ListCustomerPortalSubscriptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
-                        cast(dict[str, Any], item)
-                    )
+                    CustomerPortalSubscription.from_dict(cast(dict[str, Any], item))
                     for item in cast(list[Any], data["data"])
                 ],
-                additional_properties=_preserve_unknown_fields(data, ["data"]),
+                links=PaginationLinks.from_dict(cast(dict[str, Any], data["links"])),
+                meta=PaginationMeta.from_dict(cast(dict[str, Any], data["meta"])),
+                additional_properties=_preserve_unknown_fields(
+                    data, ["data", "links", "meta"]
+                ),
                 _from_response=True,
             )
         except (KeyError, ValueError) as e:
@@ -75,6 +85,8 @@ class SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
         """Serialize to a dictionary."""
         _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["data"] = self.data
+        _domain_data["links"] = self.links
+        _domain_data["meta"] = self.meta
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -85,4 +97,6 @@ class SdkListCustomerPortalSubscriptionsResponseValue200ApplicationJson:
         )
         result: dict[str, Any] = dict(self.additional_properties)
         result["data"] = [item.to_dict() for item in self.data]
+        result["links"] = self.links.to_dict()
+        result["meta"] = self.meta.to_dict()
         return result

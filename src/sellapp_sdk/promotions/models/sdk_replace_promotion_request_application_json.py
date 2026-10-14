@@ -15,6 +15,9 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.sdk_replace_promotion_request_application_json_applies_to import (
+    SdkReplacePromotionRequestApplicationJsonAppliesTo,
+)
 from sellapp_sdk.common.models.sdk_replace_promotion_request_application_json_status import (
     SdkReplacePromotionRequestApplicationJsonStatus,
 )
@@ -54,6 +57,24 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "integer",
                 "constraints": {"minimum": 1, "maximum": 4294967295},
             },
+        },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 1, "maximum": 36},
+            },
+        },
+        "store_wide": {"kind": "primitive", "type": "boolean"},
+        "products": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variants": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
         },
         "phases": {
             "kind": "array",
@@ -95,6 +116,24 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 "constraints": {"minimum": 1, "maximum": 4294967295},
             },
         },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 1, "maximum": 36},
+            },
+        },
+        "store_wide": {"kind": "primitive", "type": "boolean"},
+        "products": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
+        },
+        "product_variants": {
+            "kind": "array",
+            "items": {"kind": "primitive", "type": "integer"},
+        },
         "phases": {
             "kind": "array",
             "items": {"kind": "any"},
@@ -117,6 +156,16 @@ class SdkReplacePromotionRequestApplicationJson:
     priority: int | None = None
     is_stackable: bool | None = None
     max_redemptions: int | None = None
+    applies_to: SdkReplacePromotionRequestApplicationJsonAppliesTo | None = None
+    """What the promotion discounts: `one_time` for one-time purchases, or `subscriptions` for the first payments of a subscription plan. A new promotion defaults to `one_time`, and an update that leaves this out keeps the current kind. The promotion only discounts order lines of its kind."""
+    subscription_payments: int | None = None
+    """How many payments a `subscriptions` promotion discounts, counting the signup payment as the first, so `3` discounts the signup and the next two renewals. A `subscriptions` promotion needs one, and an update that leaves it out keeps the stored number. Missing on a `subscriptions` promotion, or outside 1 to 36, it returns `422` on `subscription_payments` with `The number of discounted payments must be between 1 and 36.` A `one_time` promotion always stores null here."""
+    store_wide: bool | None = None
+    """Send `false` with `products` to limit a `subscriptions` promotion to picked products and plans. Required whenever the request sends `products` or `product_variants`. A new promotion defaults to `true`, an update that leaves it out keeps the current scope, and switching a promotion to `one_time` makes it store-wide again. A `one_time` promotion with `false` returns `422` on `store_wide` with `A promotion for one-time purchases applies to the whole store.`"""
+    products: list[int] | None = None
+    """Product IDs a narrowed subscription promotion reaches. Each one must sell a subscription, or the request returns `422` on `products` with `Pick only products that sell a subscription.` A narrowed promotion left with no products returns `422` with `Pick at least one subscription product for this promotion.` An update replaces the picks with this list, or keeps them when it is left out."""
+    product_variants: list[int] | None = None
+    """Subscription plan IDs to limit the picked products to. Each one must be a subscription plan of a product in `products`, or the request returns `422` on `product_variants` with `Pick only subscription plans of the picked products.` A picked product with none of its plans listed takes every plan, including plans added later. An update that leaves this out keeps the listed plans of products that stay picked."""
     phases: list[ReplacePromotionRequestApplicationJsonPropertyPhasesItem] | None = None
     """The complete ordered phase set. Array order becomes phase position."""
     additional_properties: dict[str, Any] = dataclass_field(
@@ -152,6 +201,15 @@ class SdkReplacePromotionRequestApplicationJson:
                 priority=data.get("priority"),
                 is_stackable=data.get("is_stackable"),
                 max_redemptions=data.get("max_redemptions"),
+                applies_to=SdkReplacePromotionRequestApplicationJsonAppliesTo(
+                    _v_applies_to
+                )
+                if (_v_applies_to := data.get("applies_to")) is not None
+                else None,
+                subscription_payments=data.get("subscription_payments"),
+                store_wide=data.get("store_wide"),
+                products=data.get("products"),
+                product_variants=data.get("product_variants"),
                 phases=[
                     ReplacePromotionRequestApplicationJsonPropertyPhasesItem.from_dict(
                         cast(dict[str, Any], item)
@@ -170,6 +228,11 @@ class SdkReplacePromotionRequestApplicationJson:
                         "priority",
                         "is_stackable",
                         "max_redemptions",
+                        "applies_to",
+                        "subscription_payments",
+                        "store_wide",
+                        "products",
+                        "product_variants",
                         "phases",
                     ],
                 ),
@@ -192,6 +255,15 @@ class SdkReplacePromotionRequestApplicationJson:
         if self.is_stackable is not None:
             _domain_data["is_stackable"] = self.is_stackable
         _domain_data["max_redemptions"] = self.max_redemptions
+        if self.applies_to is not None:
+            _domain_data["applies_to"] = self.applies_to
+        _domain_data["subscription_payments"] = self.subscription_payments
+        if self.store_wide is not None:
+            _domain_data["store_wide"] = self.store_wide
+        if self.products is not None:
+            _domain_data["products"] = self.products
+        if self.product_variants is not None:
+            _domain_data["product_variants"] = self.product_variants
         if self.phases is not None:
             _domain_data["phases"] = self.phases
         _validate_model(
@@ -225,6 +297,22 @@ class SdkReplacePromotionRequestApplicationJson:
             result["max_redemptions"] = self.max_redemptions
         else:
             result["max_redemptions"] = None
+        if self.applies_to is not None:
+            result["applies_to"] = (
+                self.applies_to.value
+                if isinstance(self.applies_to, Enum)
+                else self.applies_to
+            )
+        if self.subscription_payments is not None:
+            result["subscription_payments"] = self.subscription_payments
+        else:
+            result["subscription_payments"] = None
+        if self.store_wide is not None:
+            result["store_wide"] = self.store_wide
+        if self.products is not None:
+            result["products"] = self.products
+        if self.product_variants is not None:
+            result["product_variants"] = self.product_variants
         if self.phases is not None:
             result["phases"] = [item.to_dict() for item in self.phases]
         return result

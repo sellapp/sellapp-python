@@ -12,6 +12,9 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
+from .create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_history_item import (
+    CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem,
+)
 from .create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_status import (
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus,
 )
@@ -20,7 +23,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus",
     "required": ["history", "status"],
     "properties": {
-        "history": {"kind": "array", "items": {"kind": "primitive", "type": "string"}},
+        "history": {"kind": "array", "items": {"kind": "any"}},
         "status": {"kind": "any"},
     },
     "additionalProperties": True,
@@ -29,7 +32,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus",
     "required": ["history", "status"],
     "properties": {
-        "history": {"kind": "array", "items": {"kind": "primitive", "type": "string"}},
+        "history": {"kind": "array", "items": {"kind": "any"}},
         "status": {"kind": "any"},
     },
     "additionalProperties": True,
@@ -40,7 +43,9 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus:
     """Create Checkout Session Response Value200Application Json Property Invoice Property Status model."""
 
-    history: list[str]
+    history: list[
+        CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem
+    ]
     status: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
@@ -62,7 +67,12 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                 allow_unknown_fields=True,
             )
             return cls(
-                history=data["history"],
+                history=[
+                    CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem.from_dict(
+                        cast(dict[str, Any], item)
+                    )
+                    for item in cast(list[Any], data["history"])
+                ],
                 status=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus.from_dict(
                     cast(dict[str, Any], data["status"])
                 ),
@@ -91,6 +101,6 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
             allow_unknown_fields=(self._from_response or True),
         )
         result: dict[str, Any] = dict(self.additional_properties)
-        result["history"] = self.history
+        result["history"] = [item.to_dict() for item in self.history]
         result["status"] = self.status.to_dict()
         return result

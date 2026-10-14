@@ -16,11 +16,14 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
     "required": [],
     "properties": {
-        "preview_id": {"kind": "primitive", "type": "string"},
-        "product_variant_id": {"kind": "primitive", "type": "integer"},
-        "renewal_date": {"kind": "primitive", "type": "string", "format": "date"},
-        "return_url": {"kind": "primitive", "type": "string", "format": "uri"},
-        "reason": {"kind": "primitive", "type": "string"},
+        "reason": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"maxLength": 500},
+            },
+        }
     },
     "additionalProperties": True,
 }
@@ -28,11 +31,14 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson",
     "required": [],
     "properties": {
-        "preview_id": {"kind": "primitive", "type": "string"},
-        "product_variant_id": {"kind": "primitive", "type": "integer"},
-        "renewal_date": {"kind": "primitive", "type": "string", "format": "date"},
-        "return_url": {"kind": "primitive", "type": "string", "format": "uri"},
-        "reason": {"kind": "primitive", "type": "string"},
+        "reason": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"maxLength": 500},
+            },
+        }
     },
     "additionalProperties": True,
 }
@@ -42,10 +48,6 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
     """Sdk Cancel Customer Subscription At Period End Request Application Json model."""
 
-    preview_id: str | None = None
-    product_variant_id: int | None = None
-    renewal_date: str | None = None
-    return_url: str | None = None
     reason: str | None = None
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
@@ -67,21 +69,8 @@ class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
                 allow_unknown_fields=True,
             )
             return cls(
-                preview_id=data.get("preview_id"),
-                product_variant_id=data.get("product_variant_id"),
-                renewal_date=data.get("renewal_date"),
-                return_url=data.get("return_url"),
                 reason=data.get("reason"),
-                additional_properties=_preserve_unknown_fields(
-                    data,
-                    [
-                        "preview_id",
-                        "product_variant_id",
-                        "renewal_date",
-                        "return_url",
-                        "reason",
-                    ],
-                ),
+                additional_properties=_preserve_unknown_fields(data, ["reason"]),
                 _from_response=True,
             )
         except (KeyError, ValueError) as e:
@@ -92,16 +81,7 @@ class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
     def to_dict(self) -> dict[str, Any]:
         """Serialize to a dictionary."""
         _domain_data: dict[str, Any] = dict(self.additional_properties)
-        if self.preview_id is not None:
-            _domain_data["preview_id"] = self.preview_id
-        if self.product_variant_id is not None:
-            _domain_data["product_variant_id"] = self.product_variant_id
-        if self.renewal_date is not None:
-            _domain_data["renewal_date"] = self.renewal_date
-        if self.return_url is not None:
-            _domain_data["return_url"] = self.return_url
-        if self.reason is not None:
-            _domain_data["reason"] = self.reason
+        _domain_data["reason"] = self.reason
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -111,14 +91,8 @@ class SdkCancelCustomerSubscriptionAtPeriodEndRequestApplicationJson:
             allow_unknown_fields=(self._from_response or True),
         )
         result: dict[str, Any] = dict(self.additional_properties)
-        if self.preview_id is not None:
-            result["preview_id"] = self.preview_id
-        if self.product_variant_id is not None:
-            result["product_variant_id"] = self.product_variant_id
-        if self.renewal_date is not None:
-            result["renewal_date"] = self.renewal_date
-        if self.return_url is not None:
-            result["return_url"] = self.return_url
         if self.reason is not None:
             result["reason"] = self.reason
+        else:
+            result["reason"] = None
         return result

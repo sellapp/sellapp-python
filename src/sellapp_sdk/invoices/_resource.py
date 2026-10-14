@@ -114,8 +114,8 @@ class Invoices:
             crypto_txid: Filter by crypto TXID.
             crypto_address: Filter by crypto payment address.
             coupon_code: Filter by coupon code.
-            status: Filter by one or more invoice statuses.
-            payment_methods: Filter by one or more payment methods.
+            status: Filter by one or more invoice statuses. Repeat the parameter to select several.
+            payment_methods: Filter by one or more payment methods. Repeat the parameter to select several.
             sort: Sort order for the result set.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -180,8 +180,8 @@ class Invoices:
                 "crypto_txid": crypto_txid,
                 "crypto_address": crypto_address,
                 "coupon_code": coupon_code,
-                "status": status,
-                "payment_methods": payment_methods,
+                "status[]": status,
+                "payment_methods[]": payment_methods,
                 "sort": enum_value(sort) if sort is not None else None,
             }.items()
             if v is not None
@@ -210,11 +210,11 @@ class Invoices:
     ) -> SdkCreateInvoiceResponseValue201ApplicationJson:
         """Create an invoice
 
-        Create an invoice for one or more product variants. Credit products are direct-only: send a credits variant by itself, use a quantity covered by its credit rate tiers, and respect the variant quantity increment rules. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create an invoice for one or more product variants. Credit products are direct-only: send a credits variant by itself, use a quantity covered by its credit rate tiers, and respect the variant quantity increment rules. A subscription plan that offers a trial is priced at the trial, nothing for a free trial and the trial price for a paid one, unless the customer already had a trial of that product; then it is priced at the plan price. Two requests racing for the same trial can be refused with a `422` on `invoice`. A cart carries at most one subscription plan and nothing else; a plan mixed with other products or with a second plan returns `422` on `product_variants.{variant_id}`, and a plan's `quantity` other than 1 returns `422` on `quantity`. A customer who already holds the plan, matched by `customer_email`, is refused with `422` on `invoice` while that subscription is active, trialing, past due, or unpaid, whichever payment method bills it. A subscription scheduled to end still blocks while it can be kept, and the message then tells the customer to keep it from the customer portal. One that can no longer be kept, such as a PayPal subscription cancelled at period end, does not block. For an in-house subscription on hold for an unpaid renewal, the message tells the customer to pay and resume it from the customer portal. A `coupon` discounts only the lines of its kind, set by the coupon's `applies_to`. A `subscriptions` coupon discounts the plan's first `subscription_payments` payments when the `payment_method` can carry the discount: Stripe, which carries more than one discounted payment only on a monthly or yearly plan, or a method the store bills in house. On PayPal, Razorpay, or a weekly or daily Stripe plan discounted for more than one payment, the plan sells at its full price and the coupon is left off the order without an error. A coupon for the other kind, a `subscriptions` coupon on a plan that starts with a trial, and a fixed amount that would make the plan free each return `422` on `coupon`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             customer_email: The customer email.
-            customer_ip: The customer ip.
+            customer_ip: The IP address the customer is buying from. Send it when you sell a plan with a trial: a trial of the same product taken from this address in the last 30 days counts as the customer's. Without it, only `customer_email` is checked, so a customer could take another trial with a new email address.
             payment_method: The payment method.
             coupon: The coupon.
             vat_id: The vat id.
@@ -570,7 +570,7 @@ class Invoices:
     ) -> SdkCreateCheckoutSessionResponseValue200ApplicationJson:
         """Create a checkout session
 
-        Create or reuse a payment session for a pending invoice. Create the invoice first, then send the customer to the returned top-level `payment_url`. A zero-priced checkout can return a paid invoice without a URL; delivery may still be queued. Check for a URL before redirecting and verify payment through signed events or a fresh read. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create or reuse a payment session for a pending invoice. Create the invoice first, then send the customer to the returned top-level `payment_url`. A new session answers `201`; if the invoice already has one, that session is returned with `200`. An invoice that costs nothing, or that the customer wallet covers in full, is marked as paid and answers `200` without a `payment_url`; delivery may still be queued. A free trial sold through Stripe, PayPal, or Razorpay is the exception: the customer still has to authorise the subscription with that provider, so it answers with a `payment_url` and the invoice stays pending until they do. An unpaid trial invoice stops being payable after 72 hours, or on those three providers once the trial it sold is about to end, and then answers `422` on `invoice.checkout`. Check for a URL before redirecting and verify payment through signed events or a fresh read. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             invoice: The invoice path parameter.
@@ -1527,8 +1527,8 @@ class AsyncInvoices:
             crypto_txid: Filter by crypto TXID.
             crypto_address: Filter by crypto payment address.
             coupon_code: Filter by coupon code.
-            status: Filter by one or more invoice statuses.
-            payment_methods: Filter by one or more payment methods.
+            status: Filter by one or more invoice statuses. Repeat the parameter to select several.
+            payment_methods: Filter by one or more payment methods. Repeat the parameter to select several.
             sort: Sort order for the result set.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1593,8 +1593,8 @@ class AsyncInvoices:
                 "crypto_txid": crypto_txid,
                 "crypto_address": crypto_address,
                 "coupon_code": coupon_code,
-                "status": status,
-                "payment_methods": payment_methods,
+                "status[]": status,
+                "payment_methods[]": payment_methods,
                 "sort": enum_value(sort) if sort is not None else None,
             }.items()
             if v is not None
@@ -1623,11 +1623,11 @@ class AsyncInvoices:
     ) -> SdkCreateInvoiceResponseValue201ApplicationJson:
         """Create an invoice
 
-        Create an invoice for one or more product variants. Credit products are direct-only: send a credits variant by itself, use a quantity covered by its credit rate tiers, and respect the variant quantity increment rules. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create an invoice for one or more product variants. Credit products are direct-only: send a credits variant by itself, use a quantity covered by its credit rate tiers, and respect the variant quantity increment rules. A subscription plan that offers a trial is priced at the trial, nothing for a free trial and the trial price for a paid one, unless the customer already had a trial of that product; then it is priced at the plan price. Two requests racing for the same trial can be refused with a `422` on `invoice`. A cart carries at most one subscription plan and nothing else; a plan mixed with other products or with a second plan returns `422` on `product_variants.{variant_id}`, and a plan's `quantity` other than 1 returns `422` on `quantity`. A customer who already holds the plan, matched by `customer_email`, is refused with `422` on `invoice` while that subscription is active, trialing, past due, or unpaid, whichever payment method bills it. A subscription scheduled to end still blocks while it can be kept, and the message then tells the customer to keep it from the customer portal. One that can no longer be kept, such as a PayPal subscription cancelled at period end, does not block. For an in-house subscription on hold for an unpaid renewal, the message tells the customer to pay and resume it from the customer portal. A `coupon` discounts only the lines of its kind, set by the coupon's `applies_to`. A `subscriptions` coupon discounts the plan's first `subscription_payments` payments when the `payment_method` can carry the discount: Stripe, which carries more than one discounted payment only on a monthly or yearly plan, or a method the store bills in house. On PayPal, Razorpay, or a weekly or daily Stripe plan discounted for more than one payment, the plan sells at its full price and the coupon is left off the order without an error. A coupon for the other kind, a `subscriptions` coupon on a plan that starts with a trial, and a fixed amount that would make the plan free each return `422` on `coupon`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             customer_email: The customer email.
-            customer_ip: The customer ip.
+            customer_ip: The IP address the customer is buying from. Send it when you sell a plan with a trial: a trial of the same product taken from this address in the last 30 days counts as the customer's. Without it, only `customer_email` is checked, so a customer could take another trial with a new email address.
             payment_method: The payment method.
             coupon: The coupon.
             vat_id: The vat id.
@@ -1983,7 +1983,7 @@ class AsyncInvoices:
     ) -> SdkCreateCheckoutSessionResponseValue200ApplicationJson:
         """Create a checkout session
 
-        Create or reuse a payment session for a pending invoice. Create the invoice first, then send the customer to the returned top-level `payment_url`. A zero-priced checkout can return a paid invoice without a URL; delivery may still be queued. Check for a URL before redirecting and verify payment through signed events or a fresh read. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create or reuse a payment session for a pending invoice. Create the invoice first, then send the customer to the returned top-level `payment_url`. A new session answers `201`; if the invoice already has one, that session is returned with `200`. An invoice that costs nothing, or that the customer wallet covers in full, is marked as paid and answers `200` without a `payment_url`; delivery may still be queued. A free trial sold through Stripe, PayPal, or Razorpay is the exception: the customer still has to authorise the subscription with that provider, so it answers with a `payment_url` and the invoice stays pending until they do. An unpaid trial invoice stops being payable after 72 hours, or on those three providers once the trial it sold is about to end, and then answers `422` on `invoice.checkout`. Check for a URL before redirecting and verify payment through signed events or a fresh read. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             invoice: The invoice path parameter.

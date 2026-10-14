@@ -13,8 +13,10 @@ class GetWebhookDeliveryResponseValue200ApplicationJsonPropertyDataStatus(str, E
 
     PENDING = "pending"
     DELIVERING = "delivering"
+    RETRYING = "retrying"
     SUCCEEDED = "succeeded"
     FAILED = "failed"
+    DISABLED = "disabled"
 
     @classmethod
     def _missing_(
@@ -29,5 +31,5 @@ class GetWebhookDeliveryResponseValue200ApplicationJsonPropertyDataStatus(str, E
 
 
 GetWebhookDeliveryResponseValue200ApplicationJsonPropertyDataStatusLiteral: TypeAlias = Literal[
-    "pending", "delivering", "succeeded", "failed"
+    "pending", "delivering", "retrying", "succeeded", "failed", "disabled"
 ]

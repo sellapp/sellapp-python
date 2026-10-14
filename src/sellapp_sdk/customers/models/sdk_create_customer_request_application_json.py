@@ -11,8 +11,7 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
-
-from .create_customer_request_application_json_property_metadata import (
+from sellapp_sdk.common.models.create_customer_request_application_json_property_metadata import (
     CreateCustomerRequestApplicationJsonPropertyMetadata,
 )
 

@@ -14,20 +14,20 @@ from sellapp_sdk._errors import (
     UnprocessableEntityError,
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
-from sellapp_sdk.common.models import (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-)
 from sellapp_sdk.subscriptions.models import (
     SdkCancelSubscriptionAtPeriodEndResponseValue200ApplicationJson,
     SdkCancelSubscriptionImmediatelyResponseValue200ApplicationJson,
     SdkCancelSubscriptionResponseValue200ApplicationJson,
+    SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
     SdkGetSubscriptionCapabilitiesResponseValue200ApplicationJson,
     SdkGetSubscriptionResponseValue200ApplicationJson,
+    SdkKeepSubscriptionResponseValue200ApplicationJson,
     SdkPauseSubscriptionResponseValue200ApplicationJson,
+    SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson,
     SdkPreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJson,
     SdkResumeSubscriptionResponseValue200ApplicationJson,
-    SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
+    SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
 
@@ -49,6 +49,60 @@ class TestSubscriptions:
         assert request.url.path.endswith("/v2/subscriptions/test_subscription/cancel")
         body = json.loads(request.content)
         assert body["cancel_at_period_end"] == True
+
+    def test_list_subscriptions(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        page = sellapp_sdk.subscriptions.list_subscriptions()
+        assert isinstance(page, SyncPage)
+
+    def test_list_subscriptions_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.subscriptions.list_subscriptions(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            pagination=True,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["pagination"] == "true"
+
+    def test_search_subscriptions(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        page = sellapp_sdk.subscriptions.search_subscriptions()
+        assert isinstance(page, SyncPage)
+
+    def test_search_subscriptions_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.subscriptions.search_subscriptions(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            pagination=True,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["pagination"] == "true"
+
+    def test_get_subscription(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_subscription_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.subscriptions.get_subscription("test_productSubscription")
+        assert isinstance(result, SdkGetSubscriptionResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/subscriptions/test_productSubscription")
 
     def test_get_capabilities(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -104,6 +158,21 @@ class TestSubscriptions:
             "/v2/subscriptions/test_productSubscription/actions/cancel-immediately"
         )
 
+    def test_keep(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_keep_subscription_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.subscriptions.keep("test_productSubscription")
+        assert isinstance(result, SdkKeepSubscriptionResponseValue200ApplicationJson)
+        assert result.message == "test_message"
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/subscriptions/test_productSubscription/actions/keep"
+        )
+
     def test_pause(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -135,8 +204,19 @@ class TestSubscriptions:
         )
 
     def test_update_payment_method(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        sellapp_sdk.subscriptions.update_payment_method("test_productSubscription")
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_subscription_payment_method_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.subscriptions.update_payment_method(
+            "test_productSubscription"
+        )
+        assert isinstance(
+            result, SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
+        assert result.redirect_url == "https://example.com"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
@@ -144,28 +224,50 @@ class TestSubscriptions:
         )
 
     def test_preview_plan_change(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        sellapp_sdk.subscriptions.preview_plan_change(
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_preview_subscription_plan_change_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.subscriptions.preview_plan_change(
             "test_productSubscription", target_variant_id=1
         )
+        assert isinstance(
+            result, SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
             "/v2/subscriptions/test_productSubscription/actions/change-plan/preview"
         )
+        body = json.loads(request.content)
+        assert body["target_variant_id"] == 1
 
     def test_confirm_plan_change(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        sellapp_sdk.subscriptions.confirm_plan_change(
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_confirm_subscription_plan_change_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.subscriptions.confirm_plan_change(
             "test_productSubscription",
             target_variant_id=1,
             preview_token="test_preview_token",
         )
+        assert isinstance(
+            result, SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
+        assert result.approval_url == "https://example.com"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
             "/v2/subscriptions/test_productSubscription/actions/change-plan/confirm"
         )
+        body = json.loads(request.content)
+        assert body["target_variant_id"] == 1
+        assert body["preview_token"] == "test_preview_token"
 
     def test_preview_renewal_date(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -210,58 +312,6 @@ class TestSubscriptions:
         )
         body = json.loads(request.content)
         assert body["renewal_date"] == "2023-01-01T00:00:00.000Z"
-
-    def test_list_subscriptions(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "list_list_subscriptions_response_value_200_application_json_property_data_item.json"
-            ),
-        )
-        page = sellapp_sdk.subscriptions.list_subscriptions()
-        assert isinstance(page, SyncPage)
-        assert len(page.data) == 1
-        assert isinstance(
-            page.data[0],
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-        )
-
-    def test_list_subscriptions_empty_page(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
-        page = sellapp_sdk.subscriptions.list_subscriptions()
-        assert isinstance(page, SyncPage)
-        assert page.data == []
-
-    def test_search_subscriptions(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "list_search_subscriptions_response_value_200_application_json_property_data_item.json"
-            ),
-        )
-        page = sellapp_sdk.subscriptions.search_subscriptions()
-        assert isinstance(page, SyncPage)
-        assert len(page.data) == 1
-        assert isinstance(
-            page.data[0],
-            SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-        )
-
-    def test_search_subscriptions_empty_page(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
-        page = sellapp_sdk.subscriptions.search_subscriptions()
-        assert isinstance(page, SyncPage)
-        assert page.data == []
-
-    def test_get_subscription(self, sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "sdk_get_subscription_response_value_200_application_json.json"
-            ),
-        )
-        result = sellapp_sdk.subscriptions.get_subscription("test_productSubscription")
-        assert isinstance(result, SdkGetSubscriptionResponseValue200ApplicationJson)
-        request = httpx_mock.get_request()
-        assert request.method == "GET"
-        assert request.url.path.endswith("/v2/subscriptions/test_productSubscription")
 
     def test_cancel_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -400,6 +450,71 @@ class TestAsyncSubscriptions:
         assert request.url.path.endswith("/v2/subscriptions/test_subscription/cancel")
 
     @pytest.mark.asyncio
+    async def test_list_subscriptions(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        page = await async_sellapp_sdk.subscriptions.list_subscriptions()
+        assert isinstance(page, AsyncPage)
+
+    @pytest.mark.asyncio
+    async def test_list_subscriptions_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.subscriptions.list_subscriptions(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            pagination=True,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["pagination"] == "true"
+
+    @pytest.mark.asyncio
+    async def test_search_subscriptions(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        page = await async_sellapp_sdk.subscriptions.search_subscriptions()
+        assert isinstance(page, AsyncPage)
+
+    @pytest.mark.asyncio
+    async def test_search_subscriptions_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.subscriptions.search_subscriptions(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            pagination=True,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["pagination"] == "true"
+
+    @pytest.mark.asyncio
+    async def test_get_subscription(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_subscription_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.subscriptions.get_subscription(
+            "test_productSubscription"
+        )
+        assert isinstance(result, SdkGetSubscriptionResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/subscriptions/test_productSubscription")
+
+    @pytest.mark.asyncio
     async def test_get_capabilities(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -459,6 +574,22 @@ class TestAsyncSubscriptions:
         )
 
     @pytest.mark.asyncio
+    async def test_keep(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_keep_subscription_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.subscriptions.keep("test_productSubscription")
+        assert isinstance(result, SdkKeepSubscriptionResponseValue200ApplicationJson)
+        assert result.message == "test_message"
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/subscriptions/test_productSubscription/actions/keep"
+        )
+
+    @pytest.mark.asyncio
     async def test_pause(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -494,10 +625,19 @@ class TestAsyncSubscriptions:
 
     @pytest.mark.asyncio
     async def test_update_payment_method(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        await async_sellapp_sdk.subscriptions.update_payment_method(
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_subscription_payment_method_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.subscriptions.update_payment_method(
             "test_productSubscription"
         )
+        assert isinstance(
+            result, SdkUpdateSubscriptionPaymentMethodResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
+        assert result.redirect_url == "https://example.com"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
@@ -506,10 +646,18 @@ class TestAsyncSubscriptions:
 
     @pytest.mark.asyncio
     async def test_preview_plan_change(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        await async_sellapp_sdk.subscriptions.preview_plan_change(
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_preview_subscription_plan_change_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.subscriptions.preview_plan_change(
             "test_productSubscription", target_variant_id=1
         )
+        assert isinstance(
+            result, SdkPreviewSubscriptionPlanChangeResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
@@ -518,12 +666,21 @@ class TestAsyncSubscriptions:
 
     @pytest.mark.asyncio
     async def test_confirm_plan_change(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={})
-        await async_sellapp_sdk.subscriptions.confirm_plan_change(
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_confirm_subscription_plan_change_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.subscriptions.confirm_plan_change(
             "test_productSubscription",
             target_variant_id=1,
             preview_token="test_preview_token",
         )
+        assert isinstance(
+            result, SdkConfirmSubscriptionPlanChangeResponseValue200ApplicationJson
+        )
+        assert result.message == "test_message"
+        assert result.approval_url == "https://example.com"
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith(
@@ -571,65 +728,6 @@ class TestAsyncSubscriptions:
         assert request.url.path.endswith(
             "/v2/subscriptions/test_productSubscription/actions/change-renewal-date/confirm"
         )
-
-    @pytest.mark.asyncio
-    async def test_list_subscriptions(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "list_list_subscriptions_response_value_200_application_json_property_data_item.json"
-            )
-        )
-        page = await async_sellapp_sdk.subscriptions.list_subscriptions()
-        assert isinstance(page, AsyncPage)
-        assert len(page.data) == 1
-        assert isinstance(
-            page.data[0],
-            ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-        )
-
-    @pytest.mark.asyncio
-    async def test_list_subscriptions_empty_page(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
-        page = await async_sellapp_sdk.subscriptions.list_subscriptions()
-        assert isinstance(page, AsyncPage)
-        assert page.data == []
-
-    @pytest.mark.asyncio
-    async def test_search_subscriptions(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "list_search_subscriptions_response_value_200_application_json_property_data_item.json"
-            )
-        )
-        page = await async_sellapp_sdk.subscriptions.search_subscriptions()
-        assert isinstance(page, AsyncPage)
-        assert len(page.data) == 1
-        assert isinstance(
-            page.data[0],
-            SearchSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-        )
-
-    @pytest.mark.asyncio
-    async def test_search_subscriptions_empty_page(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
-        page = await async_sellapp_sdk.subscriptions.search_subscriptions()
-        assert isinstance(page, AsyncPage)
-        assert page.data == []
-
-    @pytest.mark.asyncio
-    async def test_get_subscription(self, async_sellapp_sdk, httpx_mock):
-        httpx_mock.add_response(
-            json=load_fixture(
-                "sdk_get_subscription_response_value_200_application_json.json"
-            )
-        )
-        result = await async_sellapp_sdk.subscriptions.get_subscription(
-            "test_productSubscription"
-        )
-        assert isinstance(result, SdkGetSubscriptionResponseValue200ApplicationJson)
-        request = httpx_mock.get_request()
-        assert request.method == "GET"
-        assert request.url.path.endswith("/v2/subscriptions/test_productSubscription")
 
     @pytest.mark.asyncio
     async def test_cancel_with_request_options(self, async_sellapp_sdk, httpx_mock):

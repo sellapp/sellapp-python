@@ -104,6 +104,7 @@ class ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItem:
     id: str
     kind: ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemKind
     state: ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemState
+    """Whether the customer has this access now. For `subscription_access`: `active` while the subscription is active, trialing, or past due, because a past-due subscription keeps access while its payment is collected; `suspended` while it is unpaid, paused, or on hold for an unpaid renewal, until it is paid or resumed; `revoked` once cancelled; `pending` while incomplete; `expired` when its first payment expired."""
     customer_id: int
     subject: ListCustomerEntitlementsResponseValue200ApplicationJsonPropertyDataItemPropertySubject
     additional_properties: dict[str, Any] = dataclass_field(

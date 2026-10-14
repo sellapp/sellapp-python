@@ -79,6 +79,7 @@ class PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropert
     """Preview Subscription Renewal Date Change Response Value200Application Json Property Data model."""
 
     preview_token: str | None = None
+    """The token the matching confirmation must send back. Previews expire 30 minutes after they are created."""
     expires_at: datetime | None = None
     preview_payload: (
         PreviewSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataPropertyPreviewPayload

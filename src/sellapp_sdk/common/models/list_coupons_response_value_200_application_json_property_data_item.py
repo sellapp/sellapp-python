@@ -16,6 +16,9 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
+from .list_coupons_response_value_200_application_json_property_data_item_applies_to import (
+    ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
 from .list_coupons_response_value_200_application_json_property_data_item_type import (
     ListCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
@@ -36,6 +39,8 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "store_id",
         "deleted_at",
         "maximum_discount_amount",
+        "applies_to",
+        "subscription_payments",
         "products",
         "product_variants",
     ],
@@ -67,6 +72,11 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "maximum_discount_amount": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
+        },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
         },
         "products": {
             "kind": "array",
@@ -95,6 +105,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "store_id",
         "deleted_at",
         "maximum_discount_amount",
+        "applies_to",
+        "subscription_payments",
         "products",
         "product_variants",
     ],
@@ -127,6 +139,11 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
         },
+        "applies_to": {"kind": "enum", "values": ["one_time", "subscriptions"]},
+        "subscription_payments": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
         "products": {
             "kind": "array",
             "items": {"kind": "primitive", "type": "integer"},
@@ -151,7 +168,7 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
     limit: int | None
     store_wide: bool
     minimum_amount: str | None
-    """The decimal minimum order amount in the store currency's major unit, or null when no minimum applies."""
+    """The decimal minimum amount in the store currency's major unit that the order lines of the coupon's kind must reach, or null when no minimum applies."""
     expires_at: str | None
     """When the coupon stops applying, as a `Y-m-d H:i:s` timestamp in the store timezone, or null when it never expires. Unlike the other timestamps in this API, this is not an ISO 8601 instant."""
     created_at: datetime
@@ -160,6 +177,10 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
     deleted_at: datetime | None
     maximum_discount_amount: str | None
     """The maximum decimal discount in the store currency's major unit for percentage coupons. This field is managed from the dashboard and is read-only in the v1 Coupons API."""
+    applies_to: ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo
+    """`one_time` when the coupon discounts one-time purchases, or `subscriptions` when it discounts the first payments of a subscription plan."""
+    subscription_payments: int | None
+    """How many payments a `subscriptions` coupon discounts, counting the signup payment as the first. Null on a `one_time` coupon."""
     products: list[int]
     """Product IDs this coupon applies to. Store-wide coupons return an empty array."""
     product_variants: list[int]
@@ -201,6 +222,10 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
                 if (_v_deleted_at := data["deleted_at"]) is not None
                 else None,
                 maximum_discount_amount=data["maximum_discount_amount"],
+                applies_to=ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo(
+                    data["applies_to"]
+                ),
+                subscription_payments=data["subscription_payments"],
                 products=data["products"],
                 product_variants=data["product_variants"],
                 additional_properties=_preserve_unknown_fields(
@@ -219,6 +244,8 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
                         "store_id",
                         "deleted_at",
                         "maximum_discount_amount",
+                        "applies_to",
+                        "subscription_payments",
                         "products",
                         "product_variants",
                     ],
@@ -246,6 +273,8 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["store_id"] = self.store_id
         _domain_data["deleted_at"] = self.deleted_at
         _domain_data["maximum_discount_amount"] = self.maximum_discount_amount
+        _domain_data["applies_to"] = self.applies_to
+        _domain_data["subscription_payments"] = self.subscription_payments
         _domain_data["products"] = self.products
         _domain_data["product_variants"] = self.product_variants
         _validate_model(
@@ -285,6 +314,15 @@ class ListCouponsResponseValue200ApplicationJsonPropertyDataItem:
             result["maximum_discount_amount"] = self.maximum_discount_amount
         else:
             result["maximum_discount_amount"] = None
+        result["applies_to"] = (
+            self.applies_to.value
+            if isinstance(self.applies_to, Enum)
+            else self.applies_to
+        )
+        if self.subscription_payments is not None:
+            result["subscription_payments"] = self.subscription_payments
+        else:
+            result["subscription_payments"] = None
         result["products"] = self.products
         result["product_variants"] = self.product_variants
         return result

@@ -34,16 +34,25 @@ from .models import (
     BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem as BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem,
 )
 from .models import (
+    BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemAppliesTo as BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemAppliesTo,
+)
+from .models import (
     BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemType as BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemType,
 )
 from .models import (
     BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem as BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItem,
 )
 from .models import (
+    BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
+from .models import (
     BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemType as BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 from .models import (
     BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItem as BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItem,
+)
+from .models import (
+    BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemAppliesTo as BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemType as BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemType,
@@ -160,6 +169,21 @@ from .models import (
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
 )
 from .models import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
+)
+from .models import (
     BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct as BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
 )
 from .models import (
@@ -190,6 +214,21 @@ from .models import (
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
 )
 from .models import (
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
+)
+from .models import (
     BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyProduct as BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItemPropertyProduct,
 )
 from .models import (
@@ -217,10 +256,28 @@ from .models import (
     BatchCreateSectionsResponseValue201ApplicationJsonPropertyDataItemPropertyProductsItem as BatchCreateSectionsResponseValue201ApplicationJsonPropertyDataItemPropertyProductsItem,
 )
 from .models import (
+    BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
+from .models import (
     BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemType as BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 from .models import (
+    BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
+from .models import (
     BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemType as BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemType,
+)
+from .models import (
+    BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
 )
 from .models import Blacklist as Blacklist
 from .models import BlacklistCreateRequest as BlacklistCreateRequest
@@ -236,13 +293,16 @@ from .models import (
     CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus as CancelAppointmentResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
-    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData as CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyData,
+    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataAction as CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataAction,
 )
 from .models import (
-    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomer as CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
+    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataStatus as CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
-    CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata as CancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataPropertyCustomerPropertyMetadata,
+    CancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataAction as CancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    CancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataStatus as CancelCustomerSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
     CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataAction as CancelSubscriptionAtPeriodEndResponseValue200ApplicationJsonPropertyDataAction,
@@ -256,9 +316,30 @@ from .models import (
 from .models import (
     CancelSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataStatus as CancelSubscriptionImmediatelyResponseValue200ApplicationJsonPropertyDataStatus,
 )
+from .models import (
+    CancelSubscriptionResponseValue200ApplicationJsonPropertyDataStatus as CancelSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
+)
 from .models import CatalogVisibility as CatalogVisibility
 from .models import Category as Category
 from .models import CommunityConnectionsPlatform as CommunityConnectionsPlatform
+from .models import (
+    ConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataAction as ConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    ConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataStatus as ConfirmCustomerSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataStatus,
+)
+from .models import (
+    ConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataAction as ConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    ConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataStatus as ConfirmCustomerSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataStatus,
+)
+from .models import (
+    ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataAction as ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataStatus as ConfirmSubscriptionPlanChangeResponseValue200ApplicationJsonPropertyDataStatus,
+)
 from .models import (
     ConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataAction as ConfirmSubscriptionRenewalDateChangeResponseValue200ApplicationJsonPropertyDataAction,
 )
@@ -336,6 +417,9 @@ from .models import (
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus as CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatus,
 )
 from .models import (
+    CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem as CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem,
+)
+from .models import (
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus as CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus,
 )
 from .models import (
@@ -387,6 +471,9 @@ from .models import (
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatus as CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatus,
 )
 from .models import (
+    CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem as CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyHistoryItem,
+)
+from .models import (
     CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus as CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyStatusPropertyStatus,
 )
 from .models import (
@@ -394,6 +481,9 @@ from .models import (
 )
 from .models import (
     CreateCouponResponseValue201ApplicationJsonPropertyData as CreateCouponResponseValue201ApplicationJsonPropertyData,
+)
+from .models import (
+    CreateCouponResponseValue201ApplicationJsonPropertyDataAppliesTo as CreateCouponResponseValue201ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     CreateCouponResponseValue201ApplicationJsonPropertyDataType as CreateCouponResponseValue201ApplicationJsonPropertyDataType,
@@ -442,6 +532,12 @@ from .models import (
 )
 from .models import (
     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariantState as CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariantState,
+)
+from .models import (
+    CreateCustomerRequestApplicationJsonPropertyMetadata as CreateCustomerRequestApplicationJsonPropertyMetadata,
+)
+from .models import (
+    CreateCustomerRequestApplicationJsonPropertyMetadataMapValue as CreateCustomerRequestApplicationJsonPropertyMetadataMapValue,
 )
 from .models import (
     CreateCustomerResponseValue201ApplicationJsonPropertyData as CreateCustomerResponseValue201ApplicationJsonPropertyData,
@@ -636,7 +732,16 @@ from .models import (
     CreateProductVariantRequestApplicationJsonPropertyPricing as CreateProductVariantRequestApplicationJsonPropertyPricing,
 )
 from .models import (
+    CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as CreateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     CreatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType as CreatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType,
+)
+from .models import (
+    CreatePromotionResponseValue201ApplicationJsonPropertyDataAppliesTo as CreatePromotionResponseValue201ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as CreatePromotionResponseValue201ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
@@ -688,7 +793,11 @@ from .models import (
 )
 from .models import CursorExpiredError as CursorExpiredError
 from .models import CursorExpiredErrorFallback as CursorExpiredErrorFallback
+from .models import CustomerPortalSubscriptionStatus as CustomerPortalSubscriptionStatus
 from .models import DarkMode as DarkMode
+from .models import (
+    DeleteCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as DeleteCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
 from .models import (
     DeleteCouponResponseValue200ApplicationJsonPropertyDataType as DeleteCouponResponseValue200ApplicationJsonPropertyDataType,
 )
@@ -732,6 +841,15 @@ from .models import (
     DeleteNotificationChannelResponseValue200ApplicationJsonPropertyDataType as DeleteNotificationChannelResponseValue200ApplicationJsonPropertyDataType,
 )
 from .models import (
+    DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    DeletePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo as DeletePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     DeletePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as DeletePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
 )
 from .models import (
@@ -747,6 +865,12 @@ from .models import (
     DisconnectCustomDomainResponseValue200ApplicationJsonPropertyDataStatus as DisconnectCustomDomainResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import DiscountType as DiscountType
+from .models import (
+    DismissSubscriptionActionResponseValue200ApplicationJsonPropertyDataAction as DismissSubscriptionActionResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    DismissSubscriptionActionResponseValue200ApplicationJsonPropertyDataStatus as DismissSubscriptionActionResponseValue200ApplicationJsonPropertyDataStatus,
+)
 from .models import (
     EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataCategory as EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataCategory,
 )
@@ -805,6 +929,15 @@ from .models import (
 )
 from .models import (
     GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider as GetBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider,
+)
+from .models import (
+    GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as GetBundleItemResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    GetCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as GetCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     GetCouponResponseValue200ApplicationJsonPropertyDataType as GetCouponResponseValue200ApplicationJsonPropertyDataType,
@@ -906,6 +1039,15 @@ from .models import (
     GetPaymentMethodStatusResponseValue200ApplicationJsonPropertyDataStatus as GetPaymentMethodStatusResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
+    GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
+    GetPromotionResponseValue200ApplicationJsonPropertyDataAppliesTo as GetPromotionResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     GetPromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as GetPromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
 )
 from .models import (
@@ -943,6 +1085,15 @@ from .models import (
 )
 from .models import (
     GetRewardRuleResponseValue200ApplicationJsonPropertyDataTriggerType as GetRewardRuleResponseValue200ApplicationJsonPropertyDataTriggerType,
+)
+from .models import (
+    GetSubscriptionActionResponseValue200ApplicationJsonPropertyDataAction as GetSubscriptionActionResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    GetSubscriptionActionResponseValue200ApplicationJsonPropertyDataStatus as GetSubscriptionActionResponseValue200ApplicationJsonPropertyDataStatus,
+)
+from .models import (
+    GetSubscriptionResponseValue200ApplicationJsonPropertyDataStatus as GetSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
     GetTicketMessageResponseValue200ApplicationJsonPropertyData as GetTicketMessageResponseValue200ApplicationJsonPropertyData,
@@ -983,6 +1134,12 @@ from .models import (
 from .models import (
     IssueEligibleRewardGrantResponseValue201ApplicationJsonPropertyDataTriggerType as IssueEligibleRewardGrantResponseValue201ApplicationJsonPropertyDataTriggerType,
 )
+from .models import (
+    KeepSubscriptionResponseValue200ApplicationJsonPropertyDataAction as KeepSubscriptionResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    KeepSubscriptionResponseValue200ApplicationJsonPropertyDataStatus as KeepSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
+)
 from .models import LicenseLengthUnit as LicenseLengthUnit
 from .models import (
     ListAddOnsResponseValue200ApplicationJsonAnyOfValue1PropertyDataItem as ListAddOnsResponseValue200ApplicationJsonAnyOfValue1PropertyDataItem,
@@ -1012,10 +1169,19 @@ from .models import (
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemStatus as ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemStatus,
 )
 from .models import (
+    ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as ListBundleItemsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPlatform as ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPlatform,
 )
 from .models import (
     ListCouponsResponseValue200ApplicationJsonPropertyDataItem as ListCouponsResponseValue200ApplicationJsonPropertyDataItem,
+)
+from .models import (
+    ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     ListCouponsResponseValue200ApplicationJsonPropertyDataItemType as ListCouponsResponseValue200ApplicationJsonPropertyDataItemType,
@@ -1171,6 +1337,12 @@ from .models import (
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyVariantsItem as ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyVariantsItem,
 )
 from .models import (
+    ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     ListPromotionPhasesResponseValue200ApplicationJsonPropertyDataItemDiscountType as ListPromotionPhasesResponseValue200ApplicationJsonPropertyDataItemDiscountType,
 )
 from .models import (
@@ -1184,12 +1356,6 @@ from .models import (
 )
 from .models import (
     ListSectionsResponseValue200ApplicationJsonPropertyDataItemPropertyProductsItem as ListSectionsResponseValue200ApplicationJsonPropertyDataItemPropertyProductsItem,
-)
-from .models import (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem as ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItem,
-)
-from .models import (
-    ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer as ListSubscriptionsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
 )
 from .models import (
     ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem as ListTicketMessagesResponseValue200ApplicationJsonPropertyDataItem,
@@ -1219,6 +1385,12 @@ from .models import Method as Method
 from .models import PaginationLinks as PaginationLinks
 from .models import PaginationMeta as PaginationMeta
 from .models import PaginationMetaLink as PaginationMetaLink
+from .models import (
+    PauseCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataAction as PauseCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    PauseCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataStatus as PauseCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
+)
 from .models import (
     PauseSubscriptionResponseValue200ApplicationJsonPropertyDataAction as PauseSubscriptionResponseValue200ApplicationJsonPropertyDataAction,
 )
@@ -1335,6 +1507,9 @@ from .models import (
     ReplaceBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider as ReplaceBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider,
 )
 from .models import (
+    ReplaceCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as ReplaceCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     ReplaceCouponResponseValue200ApplicationJsonPropertyDataType as ReplaceCouponResponseValue200ApplicationJsonPropertyDataType,
 )
 from .models import (
@@ -1419,7 +1594,22 @@ from .models import (
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPriceCurrency as ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPriceCurrency,
 )
 from .models import (
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialKind as ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLengthInterval as ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLengthInterval,
+)
+from .models import (
+    ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPriceCurrency as ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPriceCurrency,
+)
+from .models import (
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType as ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingType,
+)
+from .models import (
+    ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
 )
 from .models import (
     ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverablePropertyDataParsingMode as ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverablePropertyDataParsingMode,
@@ -1437,6 +1627,12 @@ from .models import (
     ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverableTypes as ReplaceProductVariantWithPutRequestApplicationJsonPropertyDeliverableTypes,
 )
 from .models import (
+    ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItemDiscountType as ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItemDiscountType,
 )
 from .models import (
@@ -1444,6 +1640,9 @@ from .models import (
 )
 from .models import (
     ReplacePromotionRequestApplicationJsonPropertyPhasesItemDiscountType as ReplacePromotionRequestApplicationJsonPropertyPhasesItemDiscountType,
+)
+from .models import (
+    ReplacePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo as ReplacePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     ReplacePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as ReplacePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
@@ -1491,6 +1690,9 @@ from .models import (
     RestorePromotionRequestApplicationJsonPropertyPhasesItemDiscountType as RestorePromotionRequestApplicationJsonPropertyPhasesItemDiscountType,
 )
 from .models import (
+    RestorePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo as RestorePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     RestorePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as RestorePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
 )
 from .models import (
@@ -1498,6 +1700,12 @@ from .models import (
 )
 from .models import (
     RestoreWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind as RestoreWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind,
+)
+from .models import (
+    ResumeCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataAction as ResumeCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    ResumeCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataStatus as ResumeCustomerSubscriptionResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
     ResumeSubscriptionResponseValue200ApplicationJsonPropertyDataAction as ResumeSubscriptionResponseValue200ApplicationJsonPropertyDataAction,
@@ -1523,7 +1731,6 @@ from .models import (
 from .models import (
     RetryOrderFulfillmentResponseValue200ApplicationJsonPropertyDataStatus as RetryOrderFulfillmentResponseValue200ApplicationJsonPropertyDataStatus,
 )
-from .models import ScalarMetadataValue as ScalarMetadataValue
 from .models import (
     SdkActivateLicenseKeyResponseValue200ApplicationJson as SdkActivateLicenseKeyResponseValue200ApplicationJson,
 )
@@ -1576,7 +1783,10 @@ from .models import (
     SdkBatchDeleteCouponsRequestApplicationJson as SdkBatchDeleteCouponsRequestApplicationJson,
 )
 from .models import (
-    SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson as SdkCancelCustomerSubscriptionAtPeriodEndResponseValue200ApplicationJson,
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming as SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
+)
+from .models import (
+    SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior as SdkConfirmCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
 )
 from .models import (
     SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming as SdkConfirmSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
@@ -1601,6 +1811,9 @@ from .models import (
 )
 from .models import (
     SdkCreateCouponRequestApplicationJson as SdkCreateCouponRequestApplicationJson,
+)
+from .models import (
+    SdkCreateCouponRequestApplicationJsonAppliesTo as SdkCreateCouponRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkCreateCouponRequestApplicationJsonType as SdkCreateCouponRequestApplicationJsonType,
@@ -1661,6 +1874,9 @@ from .models import (
 )
 from .models import (
     SdkCreateProductVariantRequestApplicationJsonPaymentMethods as SdkCreateProductVariantRequestApplicationJsonPaymentMethods,
+)
+from .models import (
+    SdkCreatePromotionRequestApplicationJsonAppliesTo as SdkCreatePromotionRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkCreatePromotionRequestApplicationJsonStatus as SdkCreatePromotionRequestApplicationJsonStatus,
@@ -1729,6 +1945,12 @@ from .models import (
     SdkListTicketMessagesResponseValue200ApplicationJson as SdkListTicketMessagesResponseValue200ApplicationJson,
 )
 from .models import (
+    SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming as SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
+)
+from .models import (
+    SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior as SdkPreviewCustomerSubscriptionPlanChangeRequestApplicationJsonProrationBehavior,
+)
+from .models import (
     SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming as SdkPreviewSubscriptionPlanChangeRequestApplicationJsonEffectiveTiming,
 )
 from .models import (
@@ -1762,6 +1984,9 @@ from .models import (
     SdkReplaceCouponRequestApplicationJson as SdkReplaceCouponRequestApplicationJson,
 )
 from .models import (
+    SdkReplaceCouponRequestApplicationJsonAppliesTo as SdkReplaceCouponRequestApplicationJsonAppliesTo,
+)
+from .models import (
     SdkReplaceCouponRequestApplicationJsonType as SdkReplaceCouponRequestApplicationJsonType,
 )
 from .models import (
@@ -1784,6 +2009,9 @@ from .models import (
 )
 from .models import (
     SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods as SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods,
+)
+from .models import (
+    SdkReplacePromotionRequestApplicationJsonAppliesTo as SdkReplacePromotionRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkReplacePromotionRequestApplicationJsonStatus as SdkReplacePromotionRequestApplicationJsonStatus,
@@ -1817,6 +2045,9 @@ from .models import (
 )
 from .models import (
     SdkReplyToTicketRequestApplicationJson as SdkReplyToTicketRequestApplicationJson,
+)
+from .models import (
+    SdkRestorePromotionRequestApplicationJsonAppliesTo as SdkRestorePromotionRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkRestorePromotionRequestApplicationJsonStatus as SdkRestorePromotionRequestApplicationJsonStatus,
@@ -1864,6 +2095,9 @@ from .models import (
     SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider as SdkUpdateBookingConfigurationRequestApplicationJsonVideoProvider,
 )
 from .models import (
+    SdkUpdateCouponRequestApplicationJsonAppliesTo as SdkUpdateCouponRequestApplicationJsonAppliesTo,
+)
+from .models import (
     SdkUpdateCouponRequestApplicationJsonType as SdkUpdateCouponRequestApplicationJsonType,
 )
 from .models import (
@@ -1898,6 +2132,9 @@ from .models import (
 )
 from .models import (
     SdkUpdateProductVariantRequestApplicationJsonPaymentMethods as SdkUpdateProductVariantRequestApplicationJsonPaymentMethods,
+)
+from .models import (
+    SdkUpdatePromotionRequestApplicationJsonAppliesTo as SdkUpdatePromotionRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkUpdatePromotionRequestApplicationJsonStatus as SdkUpdatePromotionRequestApplicationJsonStatus,
@@ -1936,10 +2173,19 @@ from .models import (
     SdkV2BatchCreateSectionsResponseValue201ApplicationJson as SdkV2BatchCreateSectionsResponseValue201ApplicationJson,
 )
 from .models import (
+    SdkV2CreateCouponRequestApplicationJsonAppliesTo as SdkV2CreateCouponRequestApplicationJsonAppliesTo,
+)
+from .models import (
     SdkV2CreateCouponRequestApplicationJsonType as SdkV2CreateCouponRequestApplicationJsonType,
 )
 from .models import (
+    SdkV2ReplaceCouponRequestApplicationJsonAppliesTo as SdkV2ReplaceCouponRequestApplicationJsonAppliesTo,
+)
+from .models import (
     SdkV2ReplaceCouponRequestApplicationJsonType as SdkV2ReplaceCouponRequestApplicationJsonType,
+)
+from .models import (
+    SdkV2UpdateCouponRequestApplicationJsonAppliesTo as SdkV2UpdateCouponRequestApplicationJsonAppliesTo,
 )
 from .models import (
     SdkV2UpdateCouponRequestApplicationJsonType as SdkV2UpdateCouponRequestApplicationJsonType,
@@ -1988,6 +2234,9 @@ from .models import (
 )
 from .models import (
     SearchCouponsRequestApplicationJsonPropertySortItemDirection as SearchCouponsRequestApplicationJsonPropertySortItemDirection,
+)
+from .models import (
+    SearchCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as SearchCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     SearchCouponsResponseValue200ApplicationJsonPropertyDataItemType as SearchCouponsResponseValue200ApplicationJsonPropertyDataItemType,
@@ -2128,6 +2377,12 @@ from .models import (
     SearchProductVariantsRequestApplicationJsonPropertySortItemDirection as SearchProductVariantsRequestApplicationJsonPropertySortItemDirection,
 )
 from .models import (
+    SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind as SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval as SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     SearchPromotionsRequestApplicationJsonPropertyFiltersItemType as SearchPromotionsRequestApplicationJsonPropertyFiltersItemType,
 )
 from .models import (
@@ -2159,6 +2414,12 @@ from .models import (
 )
 from .models import (
     SearchSectionsRequestApplicationJsonPropertySortItemDirection as SearchSectionsRequestApplicationJsonPropertySortItemDirection,
+)
+from .models import (
+    SearchSubscriptionsRequestApplicationJsonPropertyFiltersItemType as SearchSubscriptionsRequestApplicationJsonPropertyFiltersItemType,
+)
+from .models import (
+    SearchSubscriptionsRequestApplicationJsonPropertySortItemDirection as SearchSubscriptionsRequestApplicationJsonPropertySortItemDirection,
 )
 from .models import (
     SearchTicketMessagesRequestApplicationJsonPropertyFiltersItemType as SearchTicketMessagesRequestApplicationJsonPropertyFiltersItemType,
@@ -2207,6 +2468,9 @@ from .models import (
 )
 from .models import Status as Status
 from .models import StoreVisibility as StoreVisibility
+from .models import (
+    SubscriptionPlanChangePreviewPayload as SubscriptionPlanChangePreviewPayload,
+)
 from .models import TypeModel as TypeModel
 from .models import (
     UpdateAffiliatePayoutStatusResponseValue200ApplicationJsonPropertyDataStatus as UpdateAffiliatePayoutStatusResponseValue200ApplicationJsonPropertyDataStatus,
@@ -2228,6 +2492,9 @@ from .models import (
 )
 from .models import (
     UpdateBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider as UpdateBookingConfigurationResponseValue200ApplicationJsonPropertyDataVideoProvider,
+)
+from .models import (
+    UpdateCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as UpdateCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     UpdateCouponResponseValue200ApplicationJsonPropertyDataType as UpdateCouponResponseValue200ApplicationJsonPropertyDataType,
@@ -2284,6 +2551,12 @@ from .models import (
     UpdateCustomerResponseValue200ApplicationJsonPropertyDataPropertyWalletStatus as UpdateCustomerResponseValue200ApplicationJsonPropertyDataPropertyWalletStatus,
 )
 from .models import (
+    UpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataAction as UpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    UpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataStatus as UpdateCustomerSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataStatus,
+)
+from .models import (
     UpdateCustomerWalletStatusResponseValue200ApplicationJsonPropertyDataStatus as UpdateCustomerWalletStatusResponseValue200ApplicationJsonPropertyDataStatus,
 )
 from .models import (
@@ -2323,7 +2596,22 @@ from .models import (
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPriceCurrency as UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPriceCurrency,
 )
 from .models import (
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialKind as UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLengthInterval as UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyLengthInterval,
+)
+from .models import (
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPriceCurrency as UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrialValuePropertyPriceCurrency,
+)
+from .models import (
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingType as UpdateProductVariantPricingRequestApplicationJsonPropertyPricingType,
+)
+from .models import (
+    UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
 )
 from .models import (
     UpdateProductVariantRequestApplicationJsonPropertyDeliverablePropertyDataParsingMode as UpdateProductVariantRequestApplicationJsonPropertyDeliverablePropertyDataParsingMode,
@@ -2341,7 +2629,16 @@ from .models import (
     UpdateProductVariantRequestApplicationJsonPropertyDeliverableTypes as UpdateProductVariantRequestApplicationJsonPropertyDeliverableTypes,
 )
 from .models import (
+    UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind as UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialKind,
+)
+from .models import (
+    UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval as UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLengthInterval,
+)
+from .models import (
     UpdatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType as UpdatePromotionRequestApplicationJsonPropertyPhasesItemDiscountType,
+)
+from .models import (
+    UpdatePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo as UpdatePromotionResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     UpdatePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType as UpdatePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItemDiscountType,
@@ -2374,6 +2671,12 @@ from .models import (
     UpdateRewardRuleResponseValue200ApplicationJsonPropertyDataTriggerType as UpdateRewardRuleResponseValue200ApplicationJsonPropertyDataTriggerType,
 )
 from .models import (
+    UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataAction as UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataAction,
+)
+from .models import (
+    UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataStatus as UpdateSubscriptionPaymentMethodResponseValue200ApplicationJsonPropertyDataStatus,
+)
+from .models import (
     UpdateWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind as UpdateWalletBonusTierResponseValue200ApplicationJsonPropertyDataBonusKind,
 )
 from .models import (
@@ -2404,13 +2707,22 @@ from .models import (
     UpsertCustomerResponseValue201ApplicationJsonPropertyDataPropertyWalletStatus as UpsertCustomerResponseValue201ApplicationJsonPropertyDataPropertyWalletStatus,
 )
 from .models import (
+    V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemAppliesTo as V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemAppliesTo,
+)
+from .models import (
     V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemType as V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItemType,
+)
+from .models import (
+    V2BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as V2BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     V2BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemType as V2BatchCreateCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 from .models import (
     V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItem as V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItem,
+)
+from .models import (
+    V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemAppliesTo as V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemType as V2BatchCreateCouponsResponseValue201ApplicationJsonPropertyDataItemType,
@@ -2425,16 +2737,31 @@ from .models import (
     V2BatchCreateSectionsResponseValue201ApplicationJsonPropertyDataItemPropertyProductsItem as V2BatchCreateSectionsResponseValue201ApplicationJsonPropertyDataItemPropertyProductsItem,
 )
 from .models import (
+    V2BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as V2BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
+from .models import (
     V2BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemType as V2BatchDeleteCouponsResponseValue200ApplicationJsonPropertyDataItemType,
+)
+from .models import (
+    V2BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as V2BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     V2BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemType as V2BatchUpdateCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 from .models import (
+    V2CreateCouponResponseValue201ApplicationJsonPropertyDataAppliesTo as V2CreateCouponResponseValue201ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     V2CreateCouponResponseValue201ApplicationJsonPropertyDataType as V2CreateCouponResponseValue201ApplicationJsonPropertyDataType,
 )
 from .models import (
+    V2DeleteCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as V2DeleteCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
+)
+from .models import (
     V2DeleteCouponResponseValue200ApplicationJsonPropertyDataType as V2DeleteCouponResponseValue200ApplicationJsonPropertyDataType,
+)
+from .models import (
+    V2GetCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as V2GetCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     V2GetCouponResponseValue200ApplicationJsonPropertyDataType as V2GetCouponResponseValue200ApplicationJsonPropertyDataType,
@@ -2443,10 +2770,16 @@ from .models import (
     V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment as V2GetFeedbackResponseValue200ApplicationJsonPropertyDataSentiment,
 )
 from .models import (
+    V2ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as V2ListCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
+)
+from .models import (
     V2ListCouponsResponseValue200ApplicationJsonPropertyDataItemType as V2ListCouponsResponseValue200ApplicationJsonPropertyDataItemType,
 )
 from .models import (
     V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemSentiment as V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItemSentiment,
+)
+from .models import (
+    V2ReplaceCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as V2ReplaceCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     V2ReplaceCouponResponseValue200ApplicationJsonPropertyDataType as V2ReplaceCouponResponseValue200ApplicationJsonPropertyDataType,
@@ -2462,6 +2795,9 @@ from .models import (
 )
 from .models import (
     V2SearchCouponsRequestApplicationJsonPropertySortItemDirection as V2SearchCouponsRequestApplicationJsonPropertySortItemDirection,
+)
+from .models import (
+    V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo as V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItemAppliesTo,
 )
 from .models import (
     V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItemType as V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItemType,
@@ -2492,6 +2828,9 @@ from .models import (
 )
 from .models import (
     V2SearchTicketsRequestApplicationJsonPropertySortItemDirection as V2SearchTicketsRequestApplicationJsonPropertySortItemDirection,
+)
+from .models import (
+    V2UpdateCouponResponseValue200ApplicationJsonPropertyDataAppliesTo as V2UpdateCouponResponseValue200ApplicationJsonPropertyDataAppliesTo,
 )
 from .models import (
     V2UpdateCouponResponseValue200ApplicationJsonPropertyDataType as V2UpdateCouponResponseValue200ApplicationJsonPropertyDataType,

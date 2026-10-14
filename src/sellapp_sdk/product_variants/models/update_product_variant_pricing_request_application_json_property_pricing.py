@@ -25,6 +25,9 @@ from .update_product_variant_pricing_request_application_json_property_pricing_p
 from .update_product_variant_pricing_request_application_json_property_pricing_property_price import (
     UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyPrice,
 )
+from .update_product_variant_pricing_request_application_json_property_pricing_property_trial import (
+    UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial,
+)
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "UpdateProductVariantPricingRequestApplicationJsonPropertyPricing",
@@ -35,6 +38,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "compare_at_price": {"kind": "nullable", "inner": {"kind": "any"}},
         "humble": {"kind": "primitive", "type": "boolean"},
         "frequency": {"kind": "any"},
+        "trial": {"kind": "nullable", "inner": {"kind": "any"}},
     },
     "additionalProperties": True,
 }
@@ -47,6 +51,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "compare_at_price": {"kind": "nullable", "inner": {"kind": "any"}},
         "humble": {"kind": "primitive", "type": "boolean"},
         "frequency": {"kind": "any"},
+        "trial": {"kind": "nullable", "inner": {"kind": "any"}},
     },
     "additionalProperties": True,
 }
@@ -70,6 +75,10 @@ class UpdateProductVariantPricingRequestApplicationJsonPropertyPricing:
     humble: bool | None = None
     frequency: (
         UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyFrequency
+        | None
+    ) = None
+    trial: (
+        UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial
         | None
     ) = None
     additional_properties: dict[str, Any] = dataclass_field(
@@ -113,8 +122,21 @@ class UpdateProductVariantPricingRequestApplicationJsonPropertyPricing:
                 )
                 if (_v_frequency := data.get("frequency")) is not None
                 else None,
+                trial=UpdateProductVariantPricingRequestApplicationJsonPropertyPricingPropertyTrial.from_dict(
+                    cast(dict[str, Any], _v_trial)
+                )
+                if (_v_trial := data.get("trial")) is not None
+                else None,
                 additional_properties=_preserve_unknown_fields(
-                    data, ["type", "price", "compare_at_price", "humble", "frequency"]
+                    data,
+                    [
+                        "type",
+                        "price",
+                        "compare_at_price",
+                        "humble",
+                        "frequency",
+                        "trial",
+                    ],
                 ),
                 _from_response=True,
             )
@@ -135,6 +157,7 @@ class UpdateProductVariantPricingRequestApplicationJsonPropertyPricing:
             _domain_data["humble"] = self.humble
         if self.frequency is not None:
             _domain_data["frequency"] = self.frequency
+        _domain_data["trial"] = self.trial
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -158,4 +181,8 @@ class UpdateProductVariantPricingRequestApplicationJsonPropertyPricing:
             result["humble"] = self.humble
         if self.frequency is not None:
             result["frequency"] = self.frequency.to_dict()
+        if self.trial is not None:
+            result["trial"] = self.trial.to_dict()
+        else:
+            result["trial"] = None
         return result

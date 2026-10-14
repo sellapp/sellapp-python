@@ -1440,6 +1440,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert "minimum_purchase_quantity" not in serialized
         assert "bulk_discount" not in serialized
+        assert "custom_payment_method_ids" not in serialized
         assert "other_settings" not in serialized
         assert "expected_updated_at" not in serialized
 
@@ -1580,6 +1581,7 @@ class TestModelRoundTrip:
                 "SOL_USDT",
                 "SOL_USDC",
             ],
+            "custom_payment_method_ids": ["01ARZ3NDEKTSV4RRFFQ69G5FAV"],
             "other_settings": {"quantity_increments": 1},
             "expected_updated_at": "2023-01-01T00:00:00.000Z",
         }

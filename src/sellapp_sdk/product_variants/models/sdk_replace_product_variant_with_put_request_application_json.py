@@ -92,11 +92,27 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             },
             "constraints": {"minItems": 1},
         },
+        "custom_payment_method_ids": {
+            "kind": "array",
+            "items": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
+            },
+        },
         "other_settings": {"kind": "any"},
         "expected_updated_at": {
             "kind": "primitive",
             "type": "string",
             "format": "date-time",
+        },
+        "stock": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 0, "maximum": 2147483647},
+            },
         },
     },
     "additionalProperties": True,
@@ -161,11 +177,27 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             },
             "constraints": {"minItems": 1},
         },
+        "custom_payment_method_ids": {
+            "kind": "array",
+            "items": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"pattern": "^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$"},
+            },
+        },
         "other_settings": {"kind": "any"},
         "expected_updated_at": {
             "kind": "primitive",
             "type": "string",
             "format": "date-time",
+        },
+        "stock": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 0, "maximum": 2147483647},
+            },
         },
     },
     "additionalProperties": True,
@@ -193,11 +225,16 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
     payment_methods: (
         list[SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods] | None
     ) = None
+    """Complete gateway selection for this variant. Selecting CUSTOM_PAYMENT_METHOD also requires at least one custom_payment_method_ids entry."""
+    custom_payment_method_ids: list[str] | None = None
+    """Enabled, usable custom payment method ULIDs belonging to the selected store. Supply at least one when payment_methods includes CUSTOM_PAYMENT_METHOD. Include CUSTOM_PAYMENT_METHOD in payment_methods whenever sending nonempty IDs. On updates, omitting both selections preserves the current methods. Nonempty IDs are rejected when custom payments are not selected."""
     other_settings: (
         ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings | None
     ) = None
     expected_updated_at: datetime | None = None
     """Optional optimistic-concurrency snapshot for updates. Use the variant's latest updated_at value; stale snapshots receive a 422 validation response."""
+    stock: int | None = None
+    """Set an existing variant's stock count while preserving delivery instructions and uploaded files. Send 0 for out of stock or null for unlimited stock. Omit deliverable for a stock-only change. TEXT variants manage stock through their serial inventory and reject this field."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -248,6 +285,7 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 ]
                 if (_v_payment_methods := data.get("payment_methods")) is not None
                 else None,
+                custom_payment_method_ids=data.get("custom_payment_method_ids"),
                 other_settings=ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings.from_dict(
                     cast(dict[str, Any], _v_other_settings)
                 )
@@ -257,6 +295,7 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 if (_v_expected_updated_at := data.get("expected_updated_at"))
                 is not None
                 else None,
+                stock=data.get("stock"),
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -268,8 +307,10 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                         "maximum_purchase_quantity",
                         "bulk_discount",
                         "payment_methods",
+                        "custom_payment_method_ids",
                         "other_settings",
                         "expected_updated_at",
+                        "stock",
                     ],
                 ),
                 _from_response=True,
@@ -297,10 +338,13 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
             _domain_data["bulk_discount"] = self.bulk_discount
         if self.payment_methods is not None:
             _domain_data["payment_methods"] = self.payment_methods
+        if self.custom_payment_method_ids is not None:
+            _domain_data["custom_payment_method_ids"] = self.custom_payment_method_ids
         if self.other_settings is not None:
             _domain_data["other_settings"] = self.other_settings
         if self.expected_updated_at is not None:
             _domain_data["expected_updated_at"] = self.expected_updated_at
+        _domain_data["stock"] = self.stock
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -331,8 +375,14 @@ class SdkReplaceProductVariantWithPutRequestApplicationJson:
                 item.value if isinstance(item, Enum) else item
                 for item in self.payment_methods
             ]
+        if self.custom_payment_method_ids is not None:
+            result["custom_payment_method_ids"] = self.custom_payment_method_ids
         if self.other_settings is not None:
             result["other_settings"] = self.other_settings.to_dict()
         if self.expected_updated_at is not None:
             result["expected_updated_at"] = _format_datetime(self.expected_updated_at)
+        if self.stock is not None:
+            result["stock"] = self.stock
+        else:
+            result["stock"] = None
         return result

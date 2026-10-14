@@ -38,7 +38,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 
 @dataclass(slots=True)
 class BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyPricing:
-    """Batch Create Product Variants Request Application Json Property Resources Item Property Pricing model."""
+    """These endpoints do not write a subscription trial. A `trial` object is refused with a `422` on `pricing.trial`; `trial: null` removes the stored trial, and leaving the key out keeps it. Set a trial through the [pricing endpoint](https://sell.app/docs/api/product-variants/update-product-variant-pricing)."""
 
     humble: bool
     price: BatchCreateProductVariantsRequestApplicationJsonPropertyResourcesItemPropertyPricingPropertyPrice

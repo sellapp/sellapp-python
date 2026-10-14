@@ -94,6 +94,7 @@ def create(
             CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: CreateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
@@ -117,6 +118,7 @@ def create(
             CreateProductVariantRequestApplicationJsonPropertyBulkDiscountItem
         ]
         \| None` | No |
+| custom_payment_method_ids | `builtins.list[str] \| None` | No |
 | other_settings | `CreateProductVariantRequestApplicationJsonPropertyOtherSettings
         \| None` | No |
 | expected_updated_at | `str \| None` | No |
@@ -257,9 +259,11 @@ def replace(
             SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceProductVariantWithPutResponseValue200ApplicationJson:
 ```
@@ -284,9 +288,11 @@ def replace(
             SdkReplaceProductVariantWithPutRequestApplicationJsonPaymentMethods \| str
         ]
         \| None` | No |
+| custom_payment_method_ids | `builtins.list[str] \| None` | No |
 | other_settings | `ReplaceProductVariantWithPutRequestApplicationJsonPropertyOtherSettings
         \| None` | No |
 | expected_updated_at | `str \| None` | No |
+| stock | `int \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceProductVariantWithPutResponseValue200ApplicationJson`.
@@ -356,9 +362,11 @@ def update(
             SdkUpdateProductVariantRequestApplicationJsonPaymentMethods | str
         ]
         | None = None,
+        custom_payment_method_ids: builtins.list[str] | None = None,
         other_settings: UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
         | None = None,
         expected_updated_at: str | None = None,
+        stock: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateProductVariantResponseValue200ApplicationJson:
 ```
@@ -383,9 +391,11 @@ def update(
             SdkUpdateProductVariantRequestApplicationJsonPaymentMethods \| str
         ]
         \| None` | No |
+| custom_payment_method_ids | `builtins.list[str] \| None` | No |
 | other_settings | `UpdateProductVariantRequestApplicationJsonPropertyOtherSettings
         \| None` | No |
 | expected_updated_at | `str \| None` | No |
+| stock | `int \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateProductVariantResponseValue200ApplicationJson`.
@@ -439,6 +449,7 @@ def delete(
         product: int,
         variant: int,
         *,
+        expected_updated_at: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> None:
 ```
@@ -447,6 +458,7 @@ def delete(
 | --- | --- | --- |
 | product | `int` | Yes |
 | variant | `int` | Yes |
+| expected_updated_at | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `None`.

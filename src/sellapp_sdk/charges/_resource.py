@@ -167,7 +167,7 @@ class Charges:
             use_all_payment_methods: The use all payment methods.
             deliverable: The deliverable.
             metadata: The metadata.
-            coupon_code: The coupon code.
+            coupon_code: Optional coupon code. A charge takes a store-wide coupon for one-time purchases only: a coupon whose `applies_to` is `subscriptions` returns `422` with `Coupon code {code} only applies to subscriptions.`
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -751,7 +751,7 @@ class AsyncCharges:
             use_all_payment_methods: The use all payment methods.
             deliverable: The deliverable.
             metadata: The metadata.
-            coupon_code: The coupon code.
+            coupon_code: Optional coupon code. A charge takes a store-wide coupon for one-time purchases only: a coupon whose `applies_to` is `subscriptions` returns `422` with `Coupon code {code} only applies to subscriptions.`
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
