@@ -200,12 +200,12 @@ class SubscriptionsActions:
     ) -> SdkDismissSubscriptionActionResponseValue200ApplicationJson:
         """Dismiss a subscription action
 
-        Dismiss a pending lifecycle action that the provider left unresolved, which frees the subscription for its next change. Only a pending action can be dismissed, and the required `note` is stored on the action as its `error` so the decision stays on the record. An action in any other state returns `422` with the refusal sentence under `errors.subscription`, while a missing or over-long `note` returns an ordinary field error. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Dismiss a pending lifecycle action that the provider left unresolved, which frees the subscription for its next change. Only a pending action can be dismissed, and the required `note` is stored on the action as its `error` so the decision stays on the record. An action in any other state returns `422` with the refusal sentence under `errors.subscription`, while a missing or over-long `note` returns an ordinary field error. This operation does not replay completed dismissals: idempotency keys are ignored. After a lost response, retrieve the action before repeating the request; an already-dismissed action returns `422`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             action: The action path parameter.
-            idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            idempotency_key: (deprecated) Accepted for compatibility but ignored by this operation. Retrieve the action after an uncertain response; repeating a completed dismissal returns 422.
             note: Why the action is being dismissed. The note is kept on the dismissed action as its error.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -248,7 +248,7 @@ class SubscriptionsActions:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "dismissSubscriptionAction",
         }
         body: dict[str, Any] = {
@@ -476,12 +476,12 @@ class AsyncSubscriptionsActions:
     ) -> SdkDismissSubscriptionActionResponseValue200ApplicationJson:
         """Dismiss a subscription action
 
-        Dismiss a pending lifecycle action that the provider left unresolved, which frees the subscription for its next change. Only a pending action can be dismissed, and the required `note` is stored on the action as its `error` so the decision stays on the record. An action in any other state returns `422` with the refusal sentence under `errors.subscription`, while a missing or over-long `note` returns an ordinary field error. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Dismiss a pending lifecycle action that the provider left unresolved, which frees the subscription for its next change. Only a pending action can be dismissed, and the required `note` is stored on the action as its `error` so the decision stays on the record. An action in any other state returns `422` with the refusal sentence under `errors.subscription`, while a missing or over-long `note` returns an ordinary field error. This operation does not replay completed dismissals: idempotency keys are ignored. After a lost response, retrieve the action before repeating the request; an already-dismissed action returns `422`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product_subscription: The productSubscription path parameter.
             action: The action path parameter.
-            idempotency_key: Optional idempotency key. You may also send this as the Idempotency-Key header.
+            idempotency_key: (deprecated) Accepted for compatibility but ignored by this operation. Retrieve the action after an uncertain response; repeating a completed dismissal returns 422.
             note: Why the action is being dismissed. The note is kept on the dismissed action as its error.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -524,7 +524,7 @@ class AsyncSubscriptionsActions:
         }
         request_options = {
             **(request_options or {}),
-            "idempotency_supported": True,
+            "idempotency_supported": False,
             "operation_id": "dismissSubscriptionAction",
         }
         body: dict[str, Any] = {

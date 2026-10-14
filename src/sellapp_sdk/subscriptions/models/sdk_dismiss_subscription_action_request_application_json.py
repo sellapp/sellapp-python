@@ -61,7 +61,9 @@ class SdkDismissSubscriptionActionRequestApplicationJson:
     note: str
     """Why the action is being dismissed. The note is kept on the dismissed action as its error."""
     idempotency_key: str | None = None
-    """Optional idempotency key. You may also send this as the Idempotency-Key header."""
+    """Accepted for compatibility but ignored by this operation. Retrieve the action after an uncertain response; repeating a completed dismissal returns 422.
+
+    .. deprecated:: This field is deprecated."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )

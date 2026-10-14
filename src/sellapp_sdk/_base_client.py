@@ -170,7 +170,7 @@ class _BaseSellAppClient:
 
     def _auth_headers(self, options: Mapping[str, Any]) -> dict[str, str]:
         policy = options.get("auth") or {"apiKey": True, "apiKeyRequiresStore": True}
-        headers = {"User-Agent": "SellApp python/0.2.0", "Accept": "application/json"}
+        headers = {"User-Agent": "SellApp python/0.2.1", "Accept": "application/json"}
         token = None
         needs_store = False
         if policy.get("customerSession"):

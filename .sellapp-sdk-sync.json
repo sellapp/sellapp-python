@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "language": "python",
   "repository": "sellapp/sellapp-python",
-  "sourceSha": "2a8fd1a82c3091e60f332257fe4460785b0c6e9a",
-  "specSha256": "aea767326d7193deffe5004a5751f7e8f59e40b037636c8fc29b936699dfff2e",
+  "sourceSha": "5bfb944881c821f7c8b0af0e254d6f9bd16c0806",
+  "specSha256": "22a0f17c1c7099fa036382e9f037daa5b7e273d57605163d22042e03f964f1c8",
   "runId": "0",
   "runAttempt": "1",
-  "treeDigest": "8f11c3a936524149a973a99ae42a68af80c597ce0e738a74b298cd6e91d902e7",
-  "contentDigest": "bf2f6c1295faeae77ecfeccaa949c4427125d2d9bfda8e0a8026c544ec20afd3",
+  "treeDigest": "6b63e996aa056442be42114c1925ec4d21b33ee882fbaf0853237ac00f142ad3",
+  "contentDigest": "d90f3aefaa8aceef7ab5d800e64e286e1e3061ef2f990ccf4d29552d3604cc8e",
   "files": [
     {
       "path": ".github/scripts/native-ci.mjs",
@@ -67,7 +67,7 @@
     {
       "path": "docs/migration.md",
       "mode": "100644",
-      "sha256": "d2152af699fb26ebea01160423ee170c0d2516d1100b8188a4e583956b20528d"
+      "sha256": "fc66a4951d15ce6a3455cd4aac9a310b3f8db00af0c07ef4567bdb83c3f54bea"
     },
     {
       "path": "docs/operation-examples.json",
@@ -507,22 +507,22 @@
     {
       "path": "generation-manifest.json",
       "mode": "100644",
-      "sha256": "0a14e3fddc8c1cc47e64c25f441a454eb27a182a27ba5c765796603f96d44362"
+      "sha256": "3476cac3aadedfaf46e9ef3eedaa285f38181e453f53fbfc80d6c7dc32a625d8"
     },
     {
       "path": "pyproject.toml",
       "mode": "100644",
-      "sha256": "4176bee67f419664a6b21aab9d071e1432eb1e8ca6b5d6b07184c4eac88922e4"
+      "sha256": "a371344e8068ff5791585b85824fefbcd601295e4357f1b41333d15902eaf146"
     },
     {
       "path": "src/sellapp_sdk/__init__.py",
       "mode": "100644",
-      "sha256": "5ae78674ef07769fe4d2b4f8f591bd0d79259c9673e6d9b5bc14fd48baa5ed99"
+      "sha256": "e54a8210dccd4f6b42d16c086ec027d64621b8815e7f93dfcfc925f4305530c0"
     },
     {
       "path": "src/sellapp_sdk/_base_client.py",
       "mode": "100644",
-      "sha256": "45a7c935d601f35415638922a7a43667cb6897acdf99e9439f3421d23da3c21b"
+      "sha256": "8d1fb79fe9b23328409dc4ebb415e516d3f9883c6448813987264155e418677c"
     },
     {
       "path": "src/sellapp_sdk/_client.py",
@@ -16657,7 +16657,7 @@
     {
       "path": "src/sellapp_sdk/subscriptions/models/sdk_dismiss_subscription_action_request_application_json.py",
       "mode": "100644",
-      "sha256": "5504f3688f384731d806e6b45634d101aed782a64b3de8de64a7e019791e9264"
+      "sha256": "2bac9baa0ea023a4b99c0f706befe83cbb454b1caa413891a0422fc2d810023b"
     },
     {
       "path": "src/sellapp_sdk/subscriptions/models/sdk_dismiss_subscription_action_response_value_200_application_json.py",
@@ -16802,7 +16802,7 @@
     {
       "path": "src/sellapp_sdk/subscriptions_actions/_resource.py",
       "mode": "100644",
-      "sha256": "24d524c6e87d42d206e812eeb8807eb486159026ceb0d056a016cd9278286ee7"
+      "sha256": "369f534c2416de53c464569a633762095511c4304c994c3739d91f1f5f28bf7c"
     },
     {
       "path": "src/sellapp_sdk/tickets/__init__.py",
