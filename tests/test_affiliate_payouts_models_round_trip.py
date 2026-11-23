@@ -6,9 +6,12 @@ from sellapp_sdk.affiliate_payouts.models import (
     CreateAffiliatePayoutResponseValue200ApplicationJsonPropertyData,
     GetAffiliatePayoutResponseValue200ApplicationJsonPropertyData,
     ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem,
+    MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem,
+    MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout,
     SdkCreateAffiliatePayoutResponseValue200ApplicationJson,
     SdkGetAffiliatePayoutResponseValue200ApplicationJson,
     SdkListAffiliatePayoutsResponseValue200ApplicationJson,
+    SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson,
     SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson,
     UpdateAffiliatePayoutStatusResponseValue200ApplicationJsonPropertyData,
 )
@@ -616,6 +619,225 @@ class TestModelRoundTrip:
             SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson.from_dict(
                 data
             )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout.json"
+        )
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "affiliate_id": 1,
+            "amount_usd_cents": 1,
+            "status": "due",
+            "payout_account": "test_payout_account",
+            "referrals_count": 1,
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert serialized["amount_usd_cents"] == data["amount_usd_cents"]
+        assert serialized["status"] == data["status"]
+        assert serialized["payout_account"] == data["payout_account"]
+        assert serialized["referrals_count"] == data["referrals_count"]
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "affiliate_id": 1,
+            "amount_usd_cents": 1,
+            "status": "due",
+            "payout_method": "test_payout_method",
+            "payout_account": "test_payout_account",
+            "referrals_count": 1,
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "affiliate_email" not in serialized
+        assert "created_at" not in serialized
+        assert "updated_at" not in serialized
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "affiliate_id": 1,
+            "affiliate_email": "test@example.com",
+            "amount_usd_cents": 1,
+            "status": "due",
+            "payout_method": None,
+            "payout_account": "test_payout_account",
+            "referrals_count": 1,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["payout_method"] is None
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "affiliate_id": 1,
+            "affiliate_email": "test@example.com",
+            "amount_usd_cents": 1,
+            "status": "unexpected_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_property_payout_status",
+            "payout_method": "test_payout_method",
+            "payout_account": "test_payout_account",
+            "referrals_count": 1,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItemPropertyPayout.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item.json"
+        )
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "payout_id": 1,
+            "outcome": "paid",
+            "message": "test_message",
+            "payout": None,
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["payout_id"] == data["payout_id"]
+        assert serialized["outcome"] == data["outcome"]
+        assert serialized["message"] == data["message"]
+        assert serialized["payout"] == data["payout"]
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "payout_id": 1,
+            "outcome": "paid",
+            "message": "test_message",
+            "payout": None,
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["payout"] is None
+
+    def test_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "payout_id": 1,
+            "outcome": "unexpected_mark_affiliate_payouts_paid_response_value_200_application_json_property_data_item_outcome",
+            "message": "test_message",
+            "payout": {
+                "id": 1,
+                "affiliate_id": 1,
+                "affiliate_email": "test@example.com",
+                "amount_usd_cents": 1,
+                "status": "due",
+                "payout_method": "test_payout_method",
+                "payout_account": "test_payout_account",
+                "referrals_count": 1,
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            },
+        }
+        instance = MarkAffiliatePayoutsPaidResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_mark_affiliate_payouts_paid_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_mark_affiliate_payouts_paid_response_value_200_application_json.json"
+        )
+        instance = SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_mark_affiliate_payouts_paid_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "payout_id": 1,
+                    "outcome": "paid",
+                    "message": "test_message",
+                    "payout": {
+                        "id": 1,
+                        "affiliate_id": 1,
+                        "affiliate_email": "test@example.com",
+                        "amount_usd_cents": 1,
+                        "status": "due",
+                        "payout_method": "test_payout_method",
+                        "payout_account": "test_payout_account",
+                        "referrals_count": 1,
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                        "updated_at": "2023-01-01T00:00:00.000Z",
+                    },
+                }
+            ]
+        }
+        instance = SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson.from_dict(
+            data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

@@ -12,6 +12,9 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.sdk_update_ticket_request_application_json_outcome import (
+    SdkUpdateTicketRequestApplicationJsonOutcome,
+)
 from sellapp_sdk.common.models.sdk_update_ticket_request_application_json_status import (
     SdkUpdateTicketRequestApplicationJsonStatus,
 )
@@ -22,6 +25,17 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "properties": {
         "status": {"kind": "enum", "values": ["OPEN", "CLOSED"]},
         "archived": {"kind": "primitive", "type": "boolean"},
+        "outcome": {
+            "kind": "enum",
+            "values": [
+                "refunded",
+                "refunded_partial",
+                "delivered",
+                "no_action",
+                "duplicate",
+                "other",
+            ],
+        },
     },
     "additionalProperties": True,
 }
@@ -31,6 +45,17 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "properties": {
         "status": {"kind": "enum", "values": ["OPEN", "CLOSED"]},
         "archived": {"kind": "primitive", "type": "boolean"},
+        "outcome": {
+            "kind": "enum",
+            "values": [
+                "refunded",
+                "refunded_partial",
+                "delivered",
+                "no_action",
+                "duplicate",
+                "other",
+            ],
+        },
     },
     "additionalProperties": True,
 }
@@ -42,6 +67,8 @@ class SdkUpdateTicketRequestApplicationJson:
 
     status: SdkUpdateTicketRequestApplicationJsonStatus | None = None
     archived: bool | None = None
+    outcome: SdkUpdateTicketRequestApplicationJsonOutcome | None = None
+    """Why the ticket was closed: `refunded`, `refunded_partial` (partly refunded), `delivered`, `no_action`, `duplicate` or `other`. Only with `status` `CLOSED`."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -64,8 +91,11 @@ class SdkUpdateTicketRequestApplicationJson:
                 if (_v_status := data.get("status")) is not None
                 else None,
                 archived=data.get("archived"),
+                outcome=SdkUpdateTicketRequestApplicationJsonOutcome(_v_outcome)
+                if (_v_outcome := data.get("outcome")) is not None
+                else None,
                 additional_properties=_preserve_unknown_fields(
-                    data, ["status", "archived"]
+                    data, ["status", "archived", "outcome"]
                 ),
                 _from_response=True,
             )
@@ -79,6 +109,8 @@ class SdkUpdateTicketRequestApplicationJson:
             _domain_data["status"] = self.status
         if self.archived is not None:
             _domain_data["archived"] = self.archived
+        if self.outcome is not None:
+            _domain_data["outcome"] = self.outcome
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -94,4 +126,8 @@ class SdkUpdateTicketRequestApplicationJson:
             )
         if self.archived is not None:
             result["archived"] = self.archived
+        if self.outcome is not None:
+            result["outcome"] = (
+                self.outcome.value if isinstance(self.outcome, Enum) else self.outcome
+            )
         return result

@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .get_course_response_value_200_application_json_property_data import (
-    GetCourseResponseValue200ApplicationJsonPropertyData,
+from .create_course_response_value_201_application_json_property_data import (
+    CreateCourseResponseValue201ApplicationJsonPropertyData,
 )
 
 ReorderCourseLessonsResponseValue200ApplicationJsonPropertyData: TypeAlias = (
-    GetCourseResponseValue200ApplicationJsonPropertyData
+    CreateCourseResponseValue201ApplicationJsonPropertyData
 )

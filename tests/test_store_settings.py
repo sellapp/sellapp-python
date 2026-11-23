@@ -16,13 +16,30 @@ from sellapp_sdk._errors import (
 from sellapp_sdk.common.models import CourseVisibility
 from sellapp_sdk.store_settings.models import (
     ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
+    SdkGetCheckoutSettingsResponseValue200ApplicationJson,
+    SdkGetCustomerEmailSettingsResponseValue200ApplicationJson,
+    SdkGetPersonalizationSettingsResponseValue200ApplicationJson,
+    SdkGetStoreAlertSettingsResponseValue200ApplicationJson,
     SdkGetStoreSettingsResponseValue200ApplicationJson,
+    SdkGetTaxSettingsResponseValue200ApplicationJson,
     SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkReplaceCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkReplaceMarketingSettingsResponseValue200ApplicationJson,
+    SdkReplacePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkReplaceTaxSettingsResponseValue200ApplicationJson,
     SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkUpdateCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkUpdateMarketingSettingsResponseValue200ApplicationJson,
+    SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkUpdateTaxSettingsResponseValue200ApplicationJson,
     UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
 )
 from tests.generated_helpers import load_fixture
@@ -150,6 +167,304 @@ class TestStoreSettings:
         assert request.url.path.endswith("/v2/store/settings/marketing")
         body = json.loads(request.content)
         assert "abandoned_cart" in body
+
+    def test_get_checkout(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_checkout_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.get_checkout()
+        assert isinstance(result, SdkGetCheckoutSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+
+    def test_replace_checkout(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_checkout_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_checkout(
+            shopping_cart_enabled=True,
+            customer_email_required=True,
+            allow_vpn_purchases=True,
+            blacklist_on_dispute=True,
+            minimum_spend="1",
+            billing_descriptor="test_billing_descrip",
+            attempts_per_customer=1,
+            attempts_per_ip=1,
+            attempts_per_email=1,
+            attempts_per_fingerprint=1,
+            rate_limit_window_seconds=60,
+        )
+        assert isinstance(
+            result, SdkReplaceCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+        body = json.loads(request.content)
+        assert body["shopping_cart_enabled"] == True
+        assert body["customer_email_required"] == True
+        assert body["allow_vpn_purchases"] == True
+        assert body["blacklist_on_dispute"] == True
+        assert "minimum_spend" in body
+        assert "billing_descriptor" in body
+        assert body["attempts_per_customer"] == 1
+        assert "attempts_per_ip" in body
+        assert "attempts_per_email" in body
+        assert "attempts_per_fingerprint" in body
+        assert body["rate_limit_window_seconds"] == 60
+
+    def test_update_checkout(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_checkout_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_checkout()
+        assert isinstance(
+            result, SdkUpdateCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+
+    def test_get_taxes(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_tax_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.get_taxes()
+        assert isinstance(result, SdkGetTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+
+    def test_replace_taxes(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_tax_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_taxes(
+            vat_enabled=True, vat_inclusive_pricing=True, collect_billing_details=True
+        )
+        assert isinstance(result, SdkReplaceTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+        body = json.loads(request.content)
+        assert body["vat_enabled"] == True
+        assert body["vat_inclusive_pricing"] == True
+        assert body["collect_billing_details"] == True
+
+    def test_update_taxes(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_tax_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_taxes()
+        assert isinstance(result, SdkUpdateTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+
+    def test_get_customer_emails(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_customer_email_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.get_customer_emails()
+        assert isinstance(
+            result, SdkGetCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+
+    def test_replace_customer_emails(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_customer_email_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_customer_emails(
+            send_delivery_email=True, send_payment_failure_email=True
+        )
+        assert isinstance(
+            result, SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+        body = json.loads(request.content)
+        assert body["send_delivery_email"] == True
+        assert body["send_payment_failure_email"] == True
+
+    def test_update_customer_emails(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_customer_email_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_customer_emails()
+        assert isinstance(
+            result, SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+
+    def test_get_store_alerts(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_store_alert_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.get_store_alerts()
+        assert isinstance(
+            result, SdkGetStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+
+    def test_replace_store_alerts(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_store_alert_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_store_alerts(
+            sale_emails_enabled=True
+        )
+        assert isinstance(
+            result, SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+        body = json.loads(request.content)
+        assert body["sale_emails_enabled"] == True
+
+    def test_update_store_alerts(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_store_alert_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_store_alerts()
+        assert isinstance(
+            result, SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+
+    def test_get_personalization(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_personalization_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.get_personalization()
+        assert isinstance(
+            result, SdkGetPersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+
+    def test_replace_personalization(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_personalization_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_personalization(
+            support_email="test_support_email",
+            trustpilot_email="test_trustpilot_email",
+            sender_name="test_sender_name",
+            store_address="test_store_address",
+            store_city="test_store_city",
+            store_state="test_store_state",
+            store_zip="test_store_zip",
+            store_country="test_store_country",
+            store_tax="test_store_tax",
+            back_link_label="test_back_link_label",
+            back_link_url="test_back_link_url",
+        )
+        assert isinstance(
+            result, SdkReplacePersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+        body = json.loads(request.content)
+        assert "support_email" in body
+        assert "trustpilot_email" in body
+        assert "sender_name" in body
+        assert "store_address" in body
+        assert "store_city" in body
+        assert "store_state" in body
+        assert "store_zip" in body
+        assert "store_country" in body
+        assert "store_tax" in body
+        assert "back_link_label" in body
+        assert "back_link_url" in body
+
+    def test_update_personalization(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_personalization_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_personalization()
+        assert isinstance(
+            result, SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+
+    def test_replace_crypto_checkout(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_crypto_checkout_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.replace_crypto_checkout(
+            underpaid_percentage=1, minimum_confirmations=1
+        )
+        assert isinstance(
+            result, SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/checkout/crypto")
+        body = json.loads(request.content)
+        assert body["underpaid_percentage"] == 1
+        assert body["minimum_confirmations"] == 1
+
+    def test_update_crypto_checkout(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_crypto_checkout_settings_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.store_settings.update_crypto_checkout()
+        assert isinstance(
+            result, SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/checkout/crypto")
 
     def test_get_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -376,6 +691,285 @@ class TestAsyncStoreSettings:
         request = httpx_mock.get_request()
         assert request.method == "PATCH"
         assert request.url.path.endswith("/v2/store/settings/marketing")
+
+    @pytest.mark.asyncio
+    async def test_get_checkout(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_checkout_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.get_checkout()
+        assert isinstance(result, SdkGetCheckoutSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+
+    @pytest.mark.asyncio
+    async def test_replace_checkout(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_checkout_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_checkout(
+            shopping_cart_enabled=True,
+            customer_email_required=True,
+            allow_vpn_purchases=True,
+            blacklist_on_dispute=True,
+            minimum_spend="1",
+            billing_descriptor="test_billing_descrip",
+            attempts_per_customer=1,
+            attempts_per_ip=1,
+            attempts_per_email=1,
+            attempts_per_fingerprint=1,
+            rate_limit_window_seconds=60,
+        )
+        assert isinstance(
+            result, SdkReplaceCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+
+    @pytest.mark.asyncio
+    async def test_update_checkout(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_checkout_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_checkout()
+        assert isinstance(
+            result, SdkUpdateCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/checkout")
+
+    @pytest.mark.asyncio
+    async def test_get_taxes(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_tax_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.get_taxes()
+        assert isinstance(result, SdkGetTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+
+    @pytest.mark.asyncio
+    async def test_replace_taxes(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_tax_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_taxes(
+            vat_enabled=True, vat_inclusive_pricing=True, collect_billing_details=True
+        )
+        assert isinstance(result, SdkReplaceTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+
+    @pytest.mark.asyncio
+    async def test_update_taxes(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_tax_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_taxes()
+        assert isinstance(result, SdkUpdateTaxSettingsResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/taxes")
+
+    @pytest.mark.asyncio
+    async def test_get_customer_emails(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_customer_email_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.get_customer_emails()
+        assert isinstance(
+            result, SdkGetCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+
+    @pytest.mark.asyncio
+    async def test_replace_customer_emails(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_customer_email_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_customer_emails(
+            send_delivery_email=True, send_payment_failure_email=True
+        )
+        assert isinstance(
+            result, SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+
+    @pytest.mark.asyncio
+    async def test_update_customer_emails(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_customer_email_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_customer_emails()
+        assert isinstance(
+            result, SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/customer-emails")
+
+    @pytest.mark.asyncio
+    async def test_get_store_alerts(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_store_alert_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.get_store_alerts()
+        assert isinstance(
+            result, SdkGetStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+
+    @pytest.mark.asyncio
+    async def test_replace_store_alerts(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_store_alert_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_store_alerts(
+            sale_emails_enabled=True
+        )
+        assert isinstance(
+            result, SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+
+    @pytest.mark.asyncio
+    async def test_update_store_alerts(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_store_alert_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_store_alerts()
+        assert isinstance(
+            result, SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/store-alerts")
+
+    @pytest.mark.asyncio
+    async def test_get_personalization(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_personalization_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.get_personalization()
+        assert isinstance(
+            result, SdkGetPersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+
+    @pytest.mark.asyncio
+    async def test_replace_personalization(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_personalization_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_personalization(
+            support_email="test_support_email",
+            trustpilot_email="test_trustpilot_email",
+            sender_name="test_sender_name",
+            store_address="test_store_address",
+            store_city="test_store_city",
+            store_state="test_store_state",
+            store_zip="test_store_zip",
+            store_country="test_store_country",
+            store_tax="test_store_tax",
+            back_link_label="test_back_link_label",
+            back_link_url="test_back_link_url",
+        )
+        assert isinstance(
+            result, SdkReplacePersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+
+    @pytest.mark.asyncio
+    async def test_update_personalization(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_personalization_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_personalization()
+        assert isinstance(
+            result, SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/personalization")
+
+    @pytest.mark.asyncio
+    async def test_replace_crypto_checkout(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_replace_crypto_checkout_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.replace_crypto_checkout(
+            underpaid_percentage=1, minimum_confirmations=1
+        )
+        assert isinstance(
+            result, SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/store/settings/checkout/crypto")
+
+    @pytest.mark.asyncio
+    async def test_update_crypto_checkout(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_update_crypto_checkout_settings_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.store_settings.update_crypto_checkout()
+        assert isinstance(
+            result, SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "PATCH"
+        assert request.url.path.endswith("/v2/store/settings/checkout/crypto")
 
     @pytest.mark.asyncio
     async def test_get_with_request_options(self, async_sellapp_sdk, httpx_mock):

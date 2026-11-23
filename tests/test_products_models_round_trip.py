@@ -52,19 +52,40 @@ from sellapp_sdk.products.models import (
     DeleteProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
     DeleteProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
     DeleteProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem,
+    DuplicateProductResponseValue201ApplicationJsonPropertyData,
+    DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem,
+    DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem,
+    DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
+    DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings,
+    DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem,
+    GetProductFeaturedVariantResponseValue200ApplicationJsonPropertyData,
     GetProductResponseValue200ApplicationJsonPropertyData,
     GetProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem,
     GetProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem,
     GetProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
     GetProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
     GetProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem,
+    ListProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem,
     ListProductsResponseValue200ApplicationJsonPropertyDataItem,
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyAdditionalInformationItem,
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyImagesItem,
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyImagesItemPropertyMetadata,
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings,
     ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyVariantsItem,
+    MoveProductResponseValue200ApplicationJsonPropertyData,
+    MoveProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem,
+    MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem,
+    MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
+    MoveProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
+    MoveProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem,
     ProductFaqInput,
+    PublishProductResponseValue200ApplicationJsonPropertyData,
+    PublishProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem,
+    PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem,
+    PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
+    PublishProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
+    PublishProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem,
+    ReplaceProductFeaturedVariantResponseValue200ApplicationJsonPropertyData,
     ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem,
     ReplaceProductRequestApplicationJsonPropertyOtherSettings,
     ReplaceProductResponseValue200ApplicationJsonPropertyData,
@@ -73,14 +94,22 @@ from sellapp_sdk.products.models import (
     ReplaceProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
     ReplaceProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
     ReplaceProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem,
+    ReplaceProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem,
     SdkBatchCreateProductsResponseValue200ApplicationJson,
     SdkBatchDeleteProductsResponseValue200ApplicationJson,
     SdkBatchUpdateProductsResponseValue200ApplicationJson,
     SdkCreateProductResponseValue201ApplicationJson,
     SdkDeleteProductResponseValue200ApplicationJson,
+    SdkDuplicateProductResponseValue201ApplicationJson,
+    SdkGetProductFeaturedVariantResponseValue200ApplicationJson,
     SdkGetProductResponseValue200ApplicationJson,
+    SdkListProductSimilarProductsResponseValue200ApplicationJson,
     SdkListProductsResponseValue200ApplicationJson,
+    SdkMoveProductResponseValue200ApplicationJson,
+    SdkPublishProductResponseValue200ApplicationJson,
+    SdkReplaceProductFeaturedVariantResponseValue200ApplicationJson,
     SdkReplaceProductResponseValue200ApplicationJson,
+    SdkReplaceProductSimilarProductsResponseValue200ApplicationJson,
     SdkSearchProductsResponseValue200ApplicationJson,
     SdkUpdateProductResponseValue200ApplicationJson,
     SearchProductsRequestApplicationJsonPropertyFiltersItem,
@@ -336,6 +365,10 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "price_range": None,
+            "stock": None,
+            "sales": 1,
+            "sold_out": True,
         }
         instance = (
             ListProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(data)
@@ -360,6 +393,10 @@ class TestModelRoundTrip:
         assert serialized["is_discoverable"] == data["is_discoverable"]
         assert serialized["variants"] == data["variants"]
         assert serialized["url"] == data["url"]
+        assert serialized["price_range"] == data["price_range"]
+        assert serialized["stock"] == data["stock"]
+        assert serialized["sales"] == data["sales"]
+        assert serialized["sold_out"] == data["sold_out"]
 
     def test_list_products_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -407,6 +444,10 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "price_range": None,
+            "stock": None,
+            "sales": 1,
+            "sold_out": True,
         }
         instance = (
             ListProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(data)
@@ -417,6 +458,8 @@ class TestModelRoundTrip:
         assert serialized["deleted_at"] is None
         assert serialized["section_id"] is None
         assert serialized["section_order"] is None
+        assert serialized["price_range"] is None
+        assert serialized["stock"] is None
 
     def test_sdk_list_products_response_value_200_application_json_round_trip(self):
         data = load_fixture(
@@ -476,6 +519,10 @@ class TestModelRoundTrip:
                     "is_discoverable": True,
                     "variants": [{"id": 1, "title": "test_title"}],
                     "url": "https://example.com",
+                    "price_range": "test_price_range",
+                    "stock": 1,
+                    "sales": 1,
+                    "sold_out": True,
                 }
             ],
             "links": {
@@ -3790,18 +3837,10 @@ class TestModelRoundTrip:
         instance = SearchProductsRequestApplicationJsonPropertySearch.from_dict(data)
         assert instance.to_dict() is not None
 
-    def test_search_products_request_application_json_property_search_omits_absent_optional_non_nullable_fields(
-        self,
-    ):
-        data = {"value": "test_value"}
-        instance = SearchProductsRequestApplicationJsonPropertySearch.from_dict(data)
-        serialized = instance.to_dict()
-        assert "case_sensitive" not in serialized
-
     def test_search_products_request_application_json_property_search_preserves_nullable_fields(
         self,
     ):
-        data = {"value": None, "case_sensitive": True}
+        data = {"value": None}
         instance = SearchProductsRequestApplicationJsonPropertySearch.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["value"] is None
@@ -3825,7 +3864,7 @@ class TestModelRoundTrip:
     def test_search_products_request_application_json_property_includes_item_minimal_payload(
         self,
     ):
-        data = {"relation": "test_relation"}
+        data = {"relation": "variants"}
         instance = SearchProductsRequestApplicationJsonPropertyIncludesItem.from_dict(
             data
         )
@@ -4039,7 +4078,7 @@ class TestModelRoundTrip:
             ],
             "order": None,
             "visibility": "test_visibility",
-            "delivery_text": "test_delivery_text",
+            "delivery_text": None,
             "additional_information": [
                 {
                     "required": True,
@@ -4064,6 +4103,10 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "price_range": None,
+            "stock": None,
+            "sales": 1,
+            "sold_out": True,
         }
         instance = (
             SearchProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
@@ -4090,6 +4133,10 @@ class TestModelRoundTrip:
         assert serialized["is_discoverable"] == data["is_discoverable"]
         assert serialized["variants"] == data["variants"]
         assert serialized["url"] == data["url"]
+        assert serialized["price_range"] == data["price_range"]
+        assert serialized["stock"] == data["stock"]
+        assert serialized["sales"] == data["sales"]
+        assert serialized["sold_out"] == data["sold_out"]
 
     def test_search_products_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -4112,7 +4159,7 @@ class TestModelRoundTrip:
             ],
             "order": None,
             "visibility": "test_visibility",
-            "delivery_text": "test_delivery_text",
+            "delivery_text": None,
             "additional_information": [
                 {
                     "required": True,
@@ -4137,6 +4184,10 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "price_range": None,
+            "stock": None,
+            "sales": 1,
+            "sold_out": True,
         }
         instance = (
             SearchProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
@@ -4145,9 +4196,12 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["order"] is None
+        assert serialized["delivery_text"] is None
         assert serialized["deleted_at"] is None
         assert serialized["section_id"] is None
         assert serialized["section_order"] is None
+        assert serialized["price_range"] is None
+        assert serialized["stock"] is None
 
     def test_sdk_search_products_response_value_200_application_json_round_trip(self):
         data = load_fixture(
@@ -4209,10 +4263,34 @@ class TestModelRoundTrip:
                     "is_discoverable": True,
                     "variants": [{"id": 1, "title": "test_title"}],
                     "url": "https://example.com",
+                    "price_range": "test_price_range",
+                    "stock": 1,
+                    "sales": 1,
+                    "sold_out": True,
                 }
             ],
-            "links": {},
-            "meta": {},
+            "links": {
+                "first": "https://sell.app/api/v1/blacklists?page=1",
+                "last": "https://sell.app/api/v1/blacklists?page=4",
+                "prev": None,
+                "next": "https://sell.app/api/v1/blacklists?page=2",
+            },
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 4,
+                "links": [
+                    {
+                        "url": "https://example.com",
+                        "label": "test_label",
+                        "active": True,
+                    }
+                ],
+                "path": "https://sell.app/api/v1/blacklists",
+                "per_page": 15,
+                "to": 15,
+                "total": 57,
+            },
         }
         instance = SdkSearchProductsResponseValue200ApplicationJson.from_dict(data)
         serialized = instance.to_dict()
@@ -5805,5 +5883,1448 @@ class TestModelRoundTrip:
             ]
         }
         instance = SdkBatchDeleteProductsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_publish_product_response_value_200_application_json_property_data_property_images_item_property_metadata_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data_property_images_item_property_metadata.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_property_images_item_property_metadata_minimal_payload(
+        self,
+    ):
+        data = {
+            "size": 1,
+            "filename": "Test",
+            "extension": "test_extension",
+            "mime_type": "test_mime_type",
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["size"] == data["size"]
+        assert serialized["filename"] == data["filename"]
+        assert serialized["extension"] == data["extension"]
+        assert serialized["mime_type"] == data["mime_type"]
+
+    def test_publish_product_response_value_200_application_json_property_data_property_images_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data_property_images_item.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_property_images_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "path": "test_path",
+            "metadata": {
+                "size": 1,
+                "filename": "Test",
+                "extension": "test_extension",
+                "mime_type": "test_mime_type",
+            },
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["path"] == data["path"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_publish_product_response_value_200_application_json_property_data_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data_property_additional_information_item.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_publish_product_response_value_200_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data_property_other_settings.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {
+            "faq": [{"question": "test_question", "answer": "test_answer"}],
+            "video_url": "video_url_01234",
+            "redirect_url": "https://example.com",
+            "product_title": "test_product_title",
+            "product_description": "test_product_description",
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["faq"] == data["faq"]
+        assert serialized["video_url"] == data["video_url"]
+        assert serialized["redirect_url"] == data["redirect_url"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["product_description"] == data["product_description"]
+
+    def test_publish_product_response_value_200_application_json_property_data_property_variants_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data_property_variants_item.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_property_variants_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "title": "test_title"}
+        instance = PublishProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+
+    def test_publish_product_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_response_value_200_application_json_property_data.json"
+        )
+        instance = PublishProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["slug"] == data["slug"]
+        assert serialized["description"] == data["description"]
+        assert serialized["images"] == data["images"]
+        assert serialized["order"] == data["order"]
+        assert serialized["visibility"] == data["visibility"]
+        assert serialized["delivery_text"] == data["delivery_text"]
+        assert serialized["additional_information"] == data["additional_information"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["section_id"] == data["section_id"]
+        assert serialized["section_order"] == data["section_order"]
+        assert serialized["is_discoverable"] == data["is_discoverable"]
+        assert serialized["variants"] == data["variants"]
+        assert serialized["url"] == data["url"]
+
+    def test_publish_product_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = PublishProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["order"] is None
+        assert serialized["delivery_text"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["section_id"] is None
+        assert serialized["section_order"] is None
+
+    def test_sdk_publish_product_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_publish_product_response_value_200_application_json.json"
+        )
+        instance = SdkPublishProductResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkPublishProductResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_publish_product_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "title": "test_title",
+                "slug": "test_slug",
+                "description": "test_description",
+                "images": [
+                    {
+                        "path": "test_path",
+                        "metadata": {
+                            "size": 1,
+                            "filename": "Test",
+                            "extension": "test_extension",
+                            "mime_type": "test_mime_type",
+                        },
+                    }
+                ],
+                "order": 1,
+                "visibility": "test_visibility",
+                "delivery_text": "test_delivery_text",
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ],
+                "other_settings": {
+                    "faq": [{"question": "test_question", "answer": "test_answer"}],
+                    "video_url": "video_url_01234",
+                    "redirect_url": "https://example.com",
+                    "product_title": "test_product_title",
+                    "product_description": "test_product_description",
+                },
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "section_id": 1,
+                "section_order": 1,
+                "is_discoverable": True,
+                "variants": [{"id": 1, "title": "test_title"}],
+                "url": "https://example.com",
+            }
+        }
+        instance = SdkPublishProductResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_images_item_property_metadata_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data_property_images_item_property_metadata.json"
+        )
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_images_item_property_metadata_minimal_payload(
+        self,
+    ):
+        data = {
+            "size": 1,
+            "filename": "Test",
+            "extension": "test_extension",
+            "mime_type": "test_mime_type",
+        }
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["size"] == data["size"]
+        assert serialized["filename"] == data["filename"]
+        assert serialized["extension"] == data["extension"]
+        assert serialized["mime_type"] == data["mime_type"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_images_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data_property_images_item.json"
+        )
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_images_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "path": "test_path",
+            "metadata": {
+                "size": 1,
+                "filename": "Test",
+                "extension": "test_extension",
+                "mime_type": "test_mime_type",
+            },
+        }
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["path"] == data["path"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data_property_additional_information_item.json"
+        )
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data_property_other_settings.json"
+        )
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {
+            "faq": [{"question": "test_question", "answer": "test_answer"}],
+            "video_url": "video_url_01234",
+            "redirect_url": "https://example.com",
+            "product_title": "test_product_title",
+            "product_description": "test_product_description",
+        }
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["faq"] == data["faq"]
+        assert serialized["video_url"] == data["video_url"]
+        assert serialized["redirect_url"] == data["redirect_url"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["product_description"] == data["product_description"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_variants_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data_property_variants_item.json"
+        )
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_property_variants_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "title": "test_title"}
+        instance = DuplicateProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_response_value_201_application_json_property_data.json"
+        )
+        instance = (
+            DuplicateProductResponseValue201ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            DuplicateProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = (
+            DuplicateProductResponseValue201ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["slug"] == data["slug"]
+        assert serialized["description"] == data["description"]
+        assert serialized["images"] == data["images"]
+        assert serialized["order"] == data["order"]
+        assert serialized["visibility"] == data["visibility"]
+        assert serialized["delivery_text"] == data["delivery_text"]
+        assert serialized["additional_information"] == data["additional_information"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["section_id"] == data["section_id"]
+        assert serialized["section_order"] == data["section_order"]
+        assert serialized["is_discoverable"] == data["is_discoverable"]
+        assert serialized["variants"] == data["variants"]
+        assert serialized["url"] == data["url"]
+
+    def test_duplicate_product_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = (
+            DuplicateProductResponseValue201ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["order"] is None
+        assert serialized["delivery_text"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["section_id"] is None
+        assert serialized["section_order"] is None
+
+    def test_sdk_duplicate_product_response_value_201_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_duplicate_product_response_value_201_application_json.json"
+        )
+        instance = SdkDuplicateProductResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkDuplicateProductResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_duplicate_product_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "title": "test_title",
+                "slug": "test_slug",
+                "description": "test_description",
+                "images": [
+                    {
+                        "path": "test_path",
+                        "metadata": {
+                            "size": 1,
+                            "filename": "Test",
+                            "extension": "test_extension",
+                            "mime_type": "test_mime_type",
+                        },
+                    }
+                ],
+                "order": 1,
+                "visibility": "test_visibility",
+                "delivery_text": "test_delivery_text",
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ],
+                "other_settings": {
+                    "faq": [{"question": "test_question", "answer": "test_answer"}],
+                    "video_url": "video_url_01234",
+                    "redirect_url": "https://example.com",
+                    "product_title": "test_product_title",
+                    "product_description": "test_product_description",
+                },
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "section_id": 1,
+                "section_order": 1,
+                "is_discoverable": True,
+                "variants": [{"id": 1, "title": "test_title"}],
+                "url": "https://example.com",
+            }
+        }
+        instance = SdkDuplicateProductResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_move_product_response_value_200_application_json_property_data_property_images_item_property_metadata_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data_property_images_item_property_metadata.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_property_images_item_property_metadata_minimal_payload(
+        self,
+    ):
+        data = {
+            "size": 1,
+            "filename": "Test",
+            "extension": "test_extension",
+            "mime_type": "test_mime_type",
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["size"] == data["size"]
+        assert serialized["filename"] == data["filename"]
+        assert serialized["extension"] == data["extension"]
+        assert serialized["mime_type"] == data["mime_type"]
+
+    def test_move_product_response_value_200_application_json_property_data_property_images_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data_property_images_item.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_property_images_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "path": "test_path",
+            "metadata": {
+                "size": 1,
+                "filename": "Test",
+                "extension": "test_extension",
+                "mime_type": "test_mime_type",
+            },
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["path"] == data["path"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_move_product_response_value_200_application_json_property_data_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data_property_additional_information_item.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_move_product_response_value_200_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data_property_other_settings.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {
+            "faq": [{"question": "test_question", "answer": "test_answer"}],
+            "video_url": "video_url_01234",
+            "redirect_url": "https://example.com",
+            "product_title": "test_product_title",
+            "product_description": "test_product_description",
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["faq"] == data["faq"]
+        assert serialized["video_url"] == data["video_url"]
+        assert serialized["redirect_url"] == data["redirect_url"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["product_description"] == data["product_description"]
+
+    def test_move_product_response_value_200_application_json_property_data_property_variants_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data_property_variants_item.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_property_variants_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "title": "test_title"}
+        instance = MoveProductResponseValue200ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+
+    def test_move_product_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "move_product_response_value_200_application_json_property_data.json"
+        )
+        instance = MoveProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = MoveProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_move_product_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["slug"] == data["slug"]
+        assert serialized["description"] == data["description"]
+        assert serialized["images"] == data["images"]
+        assert serialized["order"] == data["order"]
+        assert serialized["visibility"] == data["visibility"]
+        assert serialized["delivery_text"] == data["delivery_text"]
+        assert serialized["additional_information"] == data["additional_information"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["section_id"] == data["section_id"]
+        assert serialized["section_order"] == data["section_order"]
+        assert serialized["is_discoverable"] == data["is_discoverable"]
+        assert serialized["variants"] == data["variants"]
+        assert serialized["url"] == data["url"]
+
+    def test_move_product_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = MoveProductResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["order"] is None
+        assert serialized["delivery_text"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["section_id"] is None
+        assert serialized["section_order"] is None
+
+    def test_sdk_move_product_response_value_200_application_json_round_trip(self):
+        data = load_fixture("sdk_move_product_response_value_200_application_json.json")
+        instance = SdkMoveProductResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkMoveProductResponseValue200ApplicationJson.from_dict(serialized)
+        assert restored.to_dict() == serialized
+
+    def test_sdk_move_product_response_value_200_application_json_minimal_payload(self):
+        data = {
+            "data": {
+                "id": 1,
+                "title": "test_title",
+                "slug": "test_slug",
+                "description": "test_description",
+                "images": [
+                    {
+                        "path": "test_path",
+                        "metadata": {
+                            "size": 1,
+                            "filename": "Test",
+                            "extension": "test_extension",
+                            "mime_type": "test_mime_type",
+                        },
+                    }
+                ],
+                "order": 1,
+                "visibility": "test_visibility",
+                "delivery_text": "test_delivery_text",
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ],
+                "other_settings": {
+                    "faq": [{"question": "test_question", "answer": "test_answer"}],
+                    "video_url": "video_url_01234",
+                    "redirect_url": "https://example.com",
+                    "product_title": "test_product_title",
+                    "product_description": "test_product_description",
+                },
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "section_id": 1,
+                "section_order": 1,
+                "is_discoverable": True,
+                "variants": [{"id": 1, "title": "test_title"}],
+                "url": "https://example.com",
+            }
+        }
+        instance = SdkMoveProductResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_product_featured_variant_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_product_featured_variant_response_value_200_application_json_property_data.json"
+        )
+        instance = GetProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_product_featured_variant_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": None,
+            "variant_title": None,
+            "highlight_label": None,
+        }
+        instance = GetProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["highlight_label"] == data["highlight_label"]
+
+    def test_get_product_featured_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": None,
+            "variant_title": None,
+            "highlight_label": None,
+        }
+        instance = GetProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["variant_id"] is None
+        assert serialized["variant_title"] is None
+        assert serialized["highlight_label"] is None
+
+    def test_sdk_get_product_featured_variant_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_product_featured_variant_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkGetProductFeaturedVariantResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkGetProductFeaturedVariantResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_product_featured_variant_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "variant_id": 1,
+                "variant_title": "test_variant_title",
+                "highlight_label": "popular",
+            }
+        }
+        instance = (
+            SdkGetProductFeaturedVariantResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_product_featured_variant_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_featured_variant_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_featured_variant_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": None,
+            "variant_title": None,
+            "highlight_label": None,
+        }
+        instance = ReplaceProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["highlight_label"] == data["highlight_label"]
+
+    def test_replace_product_featured_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": None,
+            "variant_title": None,
+            "highlight_label": None,
+        }
+        instance = ReplaceProductFeaturedVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["variant_id"] is None
+        assert serialized["variant_title"] is None
+        assert serialized["highlight_label"] is None
+
+    def test_sdk_replace_product_featured_variant_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_product_featured_variant_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceProductFeaturedVariantResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceProductFeaturedVariantResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_product_featured_variant_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "variant_id": 1,
+                "variant_title": "test_variant_title",
+                "highlight_label": "popular",
+            }
+        }
+        instance = (
+            SdkReplaceProductFeaturedVariantResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_list_product_similar_products_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_product_similar_products_response_value_200_application_json_property_data_item.json"
+        )
+        instance = ListProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_product_similar_products_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "variant_id": 1,
+            "variant_title": "test_variant_title",
+            "product_id": 1,
+            "product_title": "test_product_title",
+        }
+        instance = ListProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+
+    def test_sdk_list_product_similar_products_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_list_product_similar_products_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkListProductSimilarProductsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkListProductSimilarProductsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_list_product_similar_products_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "variant_id": 1,
+                    "variant_title": "test_variant_title",
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                }
+            ]
+        }
+        instance = (
+            SdkListProductSimilarProductsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_product_similar_products_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_product_similar_products_response_value_200_application_json_property_data_item.json"
+        )
+        instance = ReplaceProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_product_similar_products_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "variant_id": 1,
+            "variant_title": "test_variant_title",
+            "product_id": 1,
+            "product_title": "test_product_title",
+        }
+        instance = ReplaceProductSimilarProductsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+
+    def test_sdk_replace_product_similar_products_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_product_similar_products_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceProductSimilarProductsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceProductSimilarProductsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_product_similar_products_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "variant_id": 1,
+                    "variant_title": "test_variant_title",
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                }
+            ]
+        }
+        instance = (
+            SdkReplaceProductSimilarProductsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

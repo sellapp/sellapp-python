@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .delete_course_section_response_value_200_application_json_property_data import (
-    DeleteCourseSectionResponseValue200ApplicationJsonPropertyData,
+from .create_course_response_value_201_application_json_property_data_property_sections_item import (
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem,
 )
 
 UpdateCourseSectionResponseValue200ApplicationJsonPropertyData: TypeAlias = (
-    DeleteCourseSectionResponseValue200ApplicationJsonPropertyData
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem
 )

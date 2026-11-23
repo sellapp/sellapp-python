@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from .._base_client import WithRawResponse
 
@@ -12,9 +12,12 @@ if TYPE_CHECKING:
 from sellapp_sdk.common.models.list_wallet_transactions_response_value_200_application_json_property_data_item import (
     ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem,
 )
+from sellapp_sdk.wallet_settings.models.sdk_reverse_wallet_transaction_response_value_201_application_json import (
+    SdkReverseWalletTransactionResponseValue201ApplicationJson,
+)
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions
+from .._types import RequestOptions, _validate_model
 
 
 class WalletTransactions:
@@ -23,6 +26,119 @@ class WalletTransactions:
     def __init__(self, client: SellAppClient) -> None:
         self._client = client
         self.with_raw_response = WithRawResponse(self)
+
+    def reverse(
+        self,
+        customer: int,
+        transaction: int,
+        *,
+        note: str,
+        expected_balance_cents: int | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReverseWalletTransactionResponseValue201ApplicationJson:
+        """Reverse a wallet transaction
+
+        Undo one top-up or manual adjustment in a customer's wallet. SellApp writes a `REVERSAL` entry for the opposite amount, in integer USD cents, and returns it with `201`. Reversing a `TOP_UP` also reverses its `TOP_UP_BONUS`, so the balance drops by the top-up plus its bonus; the returned entry reverses the top-up itself. Reversing a negative `MANUAL_ADJUSTMENT` gives the money back, except credit that the debit had spent and that has since been refunded: a clawback entry takes that part back. The customer is not emailed, and no payment is refunded: reversing a paid top-up does not return money to the customer's card. Requires the `wallet:write` API-key ability and the wallet permission in your team role. Only `TOP_UP` and `MANUAL_ADJUSTMENT` entries can be reversed, once each, and a reversal cannot itself be reversed. Every refusal returns `422` on `transaction` and writes nothing: the entry was already reversed, is a reversal, is an expired credit, or is a type only the system reverses (`TOP_UP_BONUS` goes with its top-up, `CASHBACK` and `REWARD` are reversed by the system, a `REFUND` on its support ticket, a `PURCHASE_DEBIT` through its order); wallets are turned off for the store; or the money is reserved by a checkout or already spent. A customer of another store, a customer without a wallet, or an entry from another customer's wallet returns `404`. Send `expected_balance_cents` with the balance you read to reverse only while the wallet still holds it; otherwise the request returns `422` on `expected_balance_cents` and nothing changes. Repeating the request never takes the money twice: without a key, the repeat returns `422` because the entry is already reversed. To get the original `201` response back instead, send an `Idempotency-Key` header and repeat the same key with the same body within 24 hours; the replay carries `Idempotent-Replayed: true`. The same key with a different body returns `409`. To put money back after a reversal, make a new manual adjustment. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            customer: The customer ID whose wallet holds the entry.
+            transaction: The ID of the wallet entry to reverse, as listed by `GET /v2/wallets/{customer}/transactions` or `GET /v2/wallet/transactions`.
+            note: Why the entry is reversed. It must contain more than spaces and is saved on the reversal entry.
+            expected_balance_cents: Optional. The wallet balance in integer USD cents that you read before deciding. If the balance is different now, nothing changes and the request returns `422` on `expected_balance_cents`.
+            idempotency_key: Optional idempotency key for safe retries.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReverseWalletTransactionResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "reverseWalletTransaction",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "note": note,
+                "expected_balance_cents": expected_balance_cents,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReverseWalletTransactionRequestApplicationJson",
+                "required": ["note"],
+                "properties": {
+                    "note": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "expected_balance_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 999999999999},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "wallets",
+                str(customer),
+                "transactions",
+                str(transaction),
+                "reverse",
+            ),
+            body=body,
+            model=SdkReverseWalletTransactionResponseValue201ApplicationJson,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
 
     def list(
         self,
@@ -118,6 +234,119 @@ class AsyncWalletTransactions:
     def __init__(self, client: AsyncSellAppClient) -> None:
         self._client = client
         self.with_raw_response = WithRawResponse(self)
+
+    async def reverse(
+        self,
+        customer: int,
+        transaction: int,
+        *,
+        note: str,
+        expected_balance_cents: int | None = None,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReverseWalletTransactionResponseValue201ApplicationJson:
+        """Reverse a wallet transaction
+
+        Undo one top-up or manual adjustment in a customer's wallet. SellApp writes a `REVERSAL` entry for the opposite amount, in integer USD cents, and returns it with `201`. Reversing a `TOP_UP` also reverses its `TOP_UP_BONUS`, so the balance drops by the top-up plus its bonus; the returned entry reverses the top-up itself. Reversing a negative `MANUAL_ADJUSTMENT` gives the money back, except credit that the debit had spent and that has since been refunded: a clawback entry takes that part back. The customer is not emailed, and no payment is refunded: reversing a paid top-up does not return money to the customer's card. Requires the `wallet:write` API-key ability and the wallet permission in your team role. Only `TOP_UP` and `MANUAL_ADJUSTMENT` entries can be reversed, once each, and a reversal cannot itself be reversed. Every refusal returns `422` on `transaction` and writes nothing: the entry was already reversed, is a reversal, is an expired credit, or is a type only the system reverses (`TOP_UP_BONUS` goes with its top-up, `CASHBACK` and `REWARD` are reversed by the system, a `REFUND` on its support ticket, a `PURCHASE_DEBIT` through its order); wallets are turned off for the store; or the money is reserved by a checkout or already spent. A customer of another store, a customer without a wallet, or an entry from another customer's wallet returns `404`. Send `expected_balance_cents` with the balance you read to reverse only while the wallet still holds it; otherwise the request returns `422` on `expected_balance_cents` and nothing changes. Repeating the request never takes the money twice: without a key, the repeat returns `422` because the entry is already reversed. To get the original `201` response back instead, send an `Idempotency-Key` header and repeat the same key with the same body within 24 hours; the replay carries `Idempotent-Replayed: true`. The same key with a different body returns `409`. To put money back after a reversal, make a new manual adjustment. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            customer: The customer ID whose wallet holds the entry.
+            transaction: The ID of the wallet entry to reverse, as listed by `GET /v2/wallets/{customer}/transactions` or `GET /v2/wallet/transactions`.
+            note: Why the entry is reversed. It must contain more than spaces and is saved on the reversal entry.
+            expected_balance_cents: Optional. The wallet balance in integer USD cents that you read before deciding. If the balance is different now, nothing changes and the request returns `422` on `expected_balance_cents`.
+            idempotency_key: Optional idempotency key for safe retries.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReverseWalletTransactionResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "reverseWalletTransaction",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "note": note,
+                "expected_balance_cents": expected_balance_cents,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReverseWalletTransactionRequestApplicationJson",
+                "required": ["note"],
+                "properties": {
+                    "note": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "expected_balance_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 999999999999},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "wallets",
+                str(customer),
+                "transactions",
+                str(transaction),
+                "reverse",
+            ),
+            body=body,
+            model=SdkReverseWalletTransactionResponseValue201ApplicationJson,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
 
     async def list(
         self,

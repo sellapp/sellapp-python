@@ -16,6 +16,12 @@ def list_refunds(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: RefundsStatus | str | None = None,
+        provider: RefundsProvider | str | None = None,
+        source: RefundsSource | str | None = None,
+        refundable_type: RefundsRefundableType | str | None = None,
+        refundable_id: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -26,6 +32,12 @@ def list_refunds(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
+| status | `RefundsStatus \| str \| None` | No |
+| provider | `RefundsProvider \| str \| None` | No |
+| source | `RefundsSource \| str \| None` | No |
+| refundable_type | `RefundsRefundableType \| str \| None` | No |
+| refundable_id | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]`.

@@ -24,6 +24,8 @@ from .affiliate_referral_sessions._resource import (
 )
 from .affiliate_referrals._resource import AffiliateReferrals, AsyncAffiliateReferrals
 from .affiliates._resource import Affiliates, AsyncAffiliates
+from .affiliates_coupon._resource import AffiliatesCoupon, AsyncAffiliatesCoupon
+from .affiliates_products._resource import AffiliatesProducts, AsyncAffiliatesProducts
 from .blacklists._resource import AsyncBlacklists, Blacklists
 from .bookings._resource import AsyncBookings, Bookings
 from .bookings_calendar_events._resource import (
@@ -33,9 +35,21 @@ from .bookings_calendar_events._resource import (
 from .bundle_items._resource import AsyncBundleItems, BundleItems
 from .cashback_rules._resource import AsyncCashbackRules, CashbackRules
 from .charges._resource import AsyncCharges, Charges
+from .checkout_field_templates._resource import (
+    AsyncCheckoutFieldTemplates,
+    CheckoutFieldTemplates,
+)
 from .community_connections._resource import (
     AsyncCommunityConnections,
     CommunityConnections,
+)
+from .community_connections_servers._resource import (
+    AsyncCommunityConnectionsServers,
+    CommunityConnectionsServers,
+)
+from .community_connections_slack._resource import (
+    AsyncCommunityConnectionsSlack,
+    CommunityConnectionsSlack,
 )
 from .coupons._resource import AsyncCoupons, Coupons
 from .courses._resource import AsyncCourses, Courses
@@ -65,6 +79,7 @@ from .license_instances._resource import AsyncLicenseInstances, LicenseInstances
 from .licenses._resource import AsyncLicenses, Licenses
 from .licenses_instances._resource import AsyncLicensesInstances, LicensesInstances
 from .line_items._resource import AsyncLineItems, LineItems
+from .notifications._resource import AsyncNotifications, Notifications
 from .oauth._resource import AsyncOAuth, OAuth
 from .oauth_management._resource import AsyncOAuthManagement, OAuthManagement
 from .orders._resource import AsyncOrders, Orders
@@ -74,17 +89,37 @@ from .payment_methods_custom._resource import (
     AsyncPaymentMethodsCustom,
     PaymentMethodsCustom,
 )
+from .payment_methods_modifier._resource import (
+    AsyncPaymentMethodsModifier,
+    PaymentMethodsModifier,
+)
 from .product_variants._resource import AsyncProductVariants, ProductVariants
 from .product_variants_booking._resource import (
     AsyncProductVariantsBooking,
     ProductVariantsBooking,
 )
+from .product_variants_community_access._resource import (
+    AsyncProductVariantsCommunityAccess,
+    ProductVariantsCommunityAccess,
+)
 from .product_variants_pricing._resource import (
     AsyncProductVariantsPricing,
     ProductVariantsPricing,
 )
+from .product_variants_subscription_settings._resource import (
+    AsyncProductVariantsSubscriptionSettings,
+    ProductVariantsSubscriptionSettings,
+)
 from .products._resource import AsyncProducts, Products
 from .products_addons._resource import AsyncProductsAddons, ProductsAddons
+from .products_featured_variant._resource import (
+    AsyncProductsFeaturedVariant,
+    ProductsFeaturedVariant,
+)
+from .products_similar_products._resource import (
+    AsyncProductsSimilarProducts,
+    ProductsSimilarProducts,
+)
 from .promotions._resource import AsyncPromotions, Promotions
 from .promotions_phases._resource import AsyncPromotionsPhases, PromotionsPhases
 from .refunds._resource import AsyncRefunds, Refunds
@@ -96,18 +131,38 @@ from .reward_grants._resource import AsyncRewardGrants, RewardGrants
 from .reward_rules._resource import AsyncRewardRules, RewardRules
 from .sections._resource import AsyncSections, Sections
 from .store_custom_domains._resource import AsyncStoreCustomDomains, StoreCustomDomains
+from .store_integrations._resource import AsyncStoreIntegrations, StoreIntegrations
 from .store_notification_channels._resource import (
     AsyncStoreNotificationChannels,
     StoreNotificationChannels,
 )
+from .store_sender_email._resource import AsyncStoreSenderEmail, StoreSenderEmail
 from .store_settings._resource import AsyncStoreSettings, StoreSettings
 from .subscriptions._resource import AsyncSubscriptions, Subscriptions
 from .subscriptions_actions._resource import (
     AsyncSubscriptionsActions,
     SubscriptionsActions,
 )
+from .support_automation_rules._resource import (
+    AsyncSupportAutomationRules,
+    SupportAutomationRules,
+)
+from .support_automation_settings._resource import (
+    AsyncSupportAutomationSettings,
+    SupportAutomationSettings,
+)
+from .support_reasons._resource import AsyncSupportReasons, SupportReasons
+from .support_reply_templates._resource import (
+    AsyncSupportReplyTemplates,
+    SupportReplyTemplates,
+)
 from .tickets._resource import AsyncTickets, Tickets
+from .tickets_analytics._resource import AsyncTicketsAnalytics, TicketsAnalytics
 from .tickets_messages._resource import AsyncTicketsMessages, TicketsMessages
+from .tickets_wallet_refunds._resource import (
+    AsyncTicketsWalletRefunds,
+    TicketsWalletRefunds,
+)
 from .upsell_offers._resource import AsyncUpsellOffers, UpsellOffers
 from .variant_deliverable_files._resource import (
     AsyncVariantDeliverableFiles,
@@ -124,6 +179,8 @@ from .variant_deliverables._resource import (
 from .variant_serials._resource import AsyncVariantSerials, VariantSerials
 from .wallet._resource import AsyncWallet, Wallet
 from .wallet_bonus_tiers._resource import AsyncWalletBonusTiers, WalletBonusTiers
+from .wallet_ledger._resource import AsyncWalletLedger, WalletLedger
+from .wallet_overview._resource import AsyncWalletOverview, WalletOverview
 from .wallet_settings._resource import AsyncWalletSettings, WalletSettings
 from .wallet_topups._resource import AsyncWalletTopups, WalletTopups
 from .wallet_transactions._resource import AsyncWalletTransactions, WalletTransactions
@@ -175,6 +232,16 @@ class SellAppClient(_SyncBase):
         return Products(self)
 
     @functools.cached_property
+    def products_featured_variant(self) -> ProductsFeaturedVariant:
+        """Products Featured Variant API resources."""
+        return ProductsFeaturedVariant(self)
+
+    @functools.cached_property
+    def products_similar_products(self) -> ProductsSimilarProducts:
+        """Products Similar Products API resources."""
+        return ProductsSimilarProducts(self)
+
+    @functools.cached_property
     def product_variants(self) -> ProductVariants:
         """Product Variants API resources."""
         return ProductVariants(self)
@@ -188,6 +255,18 @@ class SellAppClient(_SyncBase):
     def product_variants_booking(self) -> ProductVariantsBooking:
         """Product Variants Booking API resources."""
         return ProductVariantsBooking(self)
+
+    @functools.cached_property
+    def product_variants_subscription_settings(
+        self,
+    ) -> ProductVariantsSubscriptionSettings:
+        """Product Variants Subscription Settings API resources."""
+        return ProductVariantsSubscriptionSettings(self)
+
+    @functools.cached_property
+    def product_variants_community_access(self) -> ProductVariantsCommunityAccess:
+        """Product Variants Community Access API resources."""
+        return ProductVariantsCommunityAccess(self)
 
     @functools.cached_property
     def subscriptions(self) -> Subscriptions:
@@ -213,6 +292,11 @@ class SellAppClient(_SyncBase):
     def bundle_items(self) -> BundleItems:
         """Bundle Items API resources."""
         return BundleItems(self)
+
+    @functools.cached_property
+    def variant_deliverables(self) -> VariantDeliverables:
+        """Variant Deliverables API resources."""
+        return VariantDeliverables(self)
 
     @functools.cached_property
     def promotions(self) -> Promotions:
@@ -255,6 +339,26 @@ class SellAppClient(_SyncBase):
         return WebhookChannels(self)
 
     @functools.cached_property
+    def support_reply_templates(self) -> SupportReplyTemplates:
+        """Support Reply Templates API resources."""
+        return SupportReplyTemplates(self)
+
+    @functools.cached_property
+    def support_reasons(self) -> SupportReasons:
+        """Support Reasons API resources."""
+        return SupportReasons(self)
+
+    @functools.cached_property
+    def support_automation_rules(self) -> SupportAutomationRules:
+        """Support Automation Rules API resources."""
+        return SupportAutomationRules(self)
+
+    @functools.cached_property
+    def support_automation_settings(self) -> SupportAutomationSettings:
+        """Support Automation Settings API resources."""
+        return SupportAutomationSettings(self)
+
+    @functools.cached_property
     def customers(self) -> Customers:
         """Customers API resources."""
         return Customers(self)
@@ -273,11 +377,6 @@ class SellAppClient(_SyncBase):
     def orders_line_items(self) -> OrdersLineItems:
         """Orders Line Items API resources."""
         return OrdersLineItems(self)
-
-    @functools.cached_property
-    def variant_deliverables(self) -> VariantDeliverables:
-        """Variant Deliverables API resources."""
-        return VariantDeliverables(self)
 
     @functools.cached_property
     def variant_deliverable_files(self) -> VariantDeliverableFiles:
@@ -325,6 +424,16 @@ class SellAppClient(_SyncBase):
         return CommunityConnections(self)
 
     @functools.cached_property
+    def community_connections_servers(self) -> CommunityConnectionsServers:
+        """Community Connections Servers API resources."""
+        return CommunityConnectionsServers(self)
+
+    @functools.cached_property
+    def community_connections_slack(self) -> CommunityConnectionsSlack:
+        """Community Connections Slack API resources."""
+        return CommunityConnectionsSlack(self)
+
+    @functools.cached_property
     def wallet_settings(self) -> WalletSettings:
         """Wallet Settings API resources."""
         return WalletSettings(self)
@@ -338,6 +447,16 @@ class SellAppClient(_SyncBase):
     def wallet_transactions(self) -> WalletTransactions:
         """Wallet Transactions API resources."""
         return WalletTransactions(self)
+
+    @functools.cached_property
+    def wallet_ledger(self) -> WalletLedger:
+        """Wallet Ledger API resources."""
+        return WalletLedger(self)
+
+    @functools.cached_property
+    def wallet_overview(self) -> WalletOverview:
+        """Wallet Overview API resources."""
+        return WalletOverview(self)
 
     @functools.cached_property
     def wallet_topups(self) -> WalletTopups:
@@ -370,9 +489,19 @@ class SellAppClient(_SyncBase):
         return CoursesLessons(self)
 
     @functools.cached_property
+    def checkout_field_templates(self) -> CheckoutFieldTemplates:
+        """Checkout Field Templates API resources."""
+        return CheckoutFieldTemplates(self)
+
+    @functools.cached_property
     def payment_methods(self) -> PaymentMethods:
         """Payment Methods API resources."""
         return PaymentMethods(self)
+
+    @functools.cached_property
+    def payment_methods_modifier(self) -> PaymentMethodsModifier:
+        """Payment Methods Modifier API resources."""
+        return PaymentMethodsModifier(self)
 
     @functools.cached_property
     def payment_methods_custom(self) -> PaymentMethodsCustom:
@@ -385,6 +514,16 @@ class SellAppClient(_SyncBase):
         return StoreSettings(self)
 
     @functools.cached_property
+    def store_sender_email(self) -> StoreSenderEmail:
+        """Store Sender Email API resources."""
+        return StoreSenderEmail(self)
+
+    @functools.cached_property
+    def store_integrations(self) -> StoreIntegrations:
+        """Store Integrations API resources."""
+        return StoreIntegrations(self)
+
+    @functools.cached_property
     def store_notification_channels(self) -> StoreNotificationChannels:
         """Store Notification Channels API resources."""
         return StoreNotificationChannels(self)
@@ -393,6 +532,11 @@ class SellAppClient(_SyncBase):
     def store_custom_domains(self) -> StoreCustomDomains:
         """Store Custom Domains API resources."""
         return StoreCustomDomains(self)
+
+    @functools.cached_property
+    def notifications(self) -> Notifications:
+        """Notifications API resources."""
+        return Notifications(self)
 
     @functools.cached_property
     def credits_products(self) -> CreditsProducts:
@@ -418,6 +562,16 @@ class SellAppClient(_SyncBase):
     def affiliates(self) -> Affiliates:
         """Affiliates API resources."""
         return Affiliates(self)
+
+    @functools.cached_property
+    def affiliates_products(self) -> AffiliatesProducts:
+        """Affiliates Products API resources."""
+        return AffiliatesProducts(self)
+
+    @functools.cached_property
+    def affiliates_coupon(self) -> AffiliatesCoupon:
+        """Affiliates Coupon API resources."""
+        return AffiliatesCoupon(self)
 
     @functools.cached_property
     def affiliate_referrals(self) -> AffiliateReferrals:
@@ -515,6 +669,16 @@ class SellAppClient(_SyncBase):
         return TicketsMessages(self)
 
     @functools.cached_property
+    def tickets_wallet_refunds(self) -> TicketsWalletRefunds:
+        """Tickets Wallet Refunds API resources."""
+        return TicketsWalletRefunds(self)
+
+    @functools.cached_property
+    def tickets_analytics(self) -> TicketsAnalytics:
+        """Tickets Analytics API resources."""
+        return TicketsAnalytics(self)
+
+    @functools.cached_property
     def oauth(self) -> OAuth:
         """O Auth API resources."""
         return OAuth(self)
@@ -564,6 +728,16 @@ class AsyncSellAppClient(_AsyncBase):
         return AsyncProducts(self)
 
     @functools.cached_property
+    def products_featured_variant(self) -> AsyncProductsFeaturedVariant:
+        """Products Featured Variant API resources."""
+        return AsyncProductsFeaturedVariant(self)
+
+    @functools.cached_property
+    def products_similar_products(self) -> AsyncProductsSimilarProducts:
+        """Products Similar Products API resources."""
+        return AsyncProductsSimilarProducts(self)
+
+    @functools.cached_property
     def product_variants(self) -> AsyncProductVariants:
         """Product Variants API resources."""
         return AsyncProductVariants(self)
@@ -577,6 +751,18 @@ class AsyncSellAppClient(_AsyncBase):
     def product_variants_booking(self) -> AsyncProductVariantsBooking:
         """Product Variants Booking API resources."""
         return AsyncProductVariantsBooking(self)
+
+    @functools.cached_property
+    def product_variants_subscription_settings(
+        self,
+    ) -> AsyncProductVariantsSubscriptionSettings:
+        """Product Variants Subscription Settings API resources."""
+        return AsyncProductVariantsSubscriptionSettings(self)
+
+    @functools.cached_property
+    def product_variants_community_access(self) -> AsyncProductVariantsCommunityAccess:
+        """Product Variants Community Access API resources."""
+        return AsyncProductVariantsCommunityAccess(self)
 
     @functools.cached_property
     def subscriptions(self) -> AsyncSubscriptions:
@@ -602,6 +788,11 @@ class AsyncSellAppClient(_AsyncBase):
     def bundle_items(self) -> AsyncBundleItems:
         """Bundle Items API resources."""
         return AsyncBundleItems(self)
+
+    @functools.cached_property
+    def variant_deliverables(self) -> AsyncVariantDeliverables:
+        """Variant Deliverables API resources."""
+        return AsyncVariantDeliverables(self)
 
     @functools.cached_property
     def promotions(self) -> AsyncPromotions:
@@ -644,6 +835,26 @@ class AsyncSellAppClient(_AsyncBase):
         return AsyncWebhookChannels(self)
 
     @functools.cached_property
+    def support_reply_templates(self) -> AsyncSupportReplyTemplates:
+        """Support Reply Templates API resources."""
+        return AsyncSupportReplyTemplates(self)
+
+    @functools.cached_property
+    def support_reasons(self) -> AsyncSupportReasons:
+        """Support Reasons API resources."""
+        return AsyncSupportReasons(self)
+
+    @functools.cached_property
+    def support_automation_rules(self) -> AsyncSupportAutomationRules:
+        """Support Automation Rules API resources."""
+        return AsyncSupportAutomationRules(self)
+
+    @functools.cached_property
+    def support_automation_settings(self) -> AsyncSupportAutomationSettings:
+        """Support Automation Settings API resources."""
+        return AsyncSupportAutomationSettings(self)
+
+    @functools.cached_property
     def customers(self) -> AsyncCustomers:
         """Customers API resources."""
         return AsyncCustomers(self)
@@ -662,11 +873,6 @@ class AsyncSellAppClient(_AsyncBase):
     def orders_line_items(self) -> AsyncOrdersLineItems:
         """Orders Line Items API resources."""
         return AsyncOrdersLineItems(self)
-
-    @functools.cached_property
-    def variant_deliverables(self) -> AsyncVariantDeliverables:
-        """Variant Deliverables API resources."""
-        return AsyncVariantDeliverables(self)
 
     @functools.cached_property
     def variant_deliverable_files(self) -> AsyncVariantDeliverableFiles:
@@ -714,6 +920,16 @@ class AsyncSellAppClient(_AsyncBase):
         return AsyncCommunityConnections(self)
 
     @functools.cached_property
+    def community_connections_servers(self) -> AsyncCommunityConnectionsServers:
+        """Community Connections Servers API resources."""
+        return AsyncCommunityConnectionsServers(self)
+
+    @functools.cached_property
+    def community_connections_slack(self) -> AsyncCommunityConnectionsSlack:
+        """Community Connections Slack API resources."""
+        return AsyncCommunityConnectionsSlack(self)
+
+    @functools.cached_property
     def wallet_settings(self) -> AsyncWalletSettings:
         """Wallet Settings API resources."""
         return AsyncWalletSettings(self)
@@ -727,6 +943,16 @@ class AsyncSellAppClient(_AsyncBase):
     def wallet_transactions(self) -> AsyncWalletTransactions:
         """Wallet Transactions API resources."""
         return AsyncWalletTransactions(self)
+
+    @functools.cached_property
+    def wallet_ledger(self) -> AsyncWalletLedger:
+        """Wallet Ledger API resources."""
+        return AsyncWalletLedger(self)
+
+    @functools.cached_property
+    def wallet_overview(self) -> AsyncWalletOverview:
+        """Wallet Overview API resources."""
+        return AsyncWalletOverview(self)
 
     @functools.cached_property
     def wallet_topups(self) -> AsyncWalletTopups:
@@ -759,9 +985,19 @@ class AsyncSellAppClient(_AsyncBase):
         return AsyncCoursesLessons(self)
 
     @functools.cached_property
+    def checkout_field_templates(self) -> AsyncCheckoutFieldTemplates:
+        """Checkout Field Templates API resources."""
+        return AsyncCheckoutFieldTemplates(self)
+
+    @functools.cached_property
     def payment_methods(self) -> AsyncPaymentMethods:
         """Payment Methods API resources."""
         return AsyncPaymentMethods(self)
+
+    @functools.cached_property
+    def payment_methods_modifier(self) -> AsyncPaymentMethodsModifier:
+        """Payment Methods Modifier API resources."""
+        return AsyncPaymentMethodsModifier(self)
 
     @functools.cached_property
     def payment_methods_custom(self) -> AsyncPaymentMethodsCustom:
@@ -774,6 +1010,16 @@ class AsyncSellAppClient(_AsyncBase):
         return AsyncStoreSettings(self)
 
     @functools.cached_property
+    def store_sender_email(self) -> AsyncStoreSenderEmail:
+        """Store Sender Email API resources."""
+        return AsyncStoreSenderEmail(self)
+
+    @functools.cached_property
+    def store_integrations(self) -> AsyncStoreIntegrations:
+        """Store Integrations API resources."""
+        return AsyncStoreIntegrations(self)
+
+    @functools.cached_property
     def store_notification_channels(self) -> AsyncStoreNotificationChannels:
         """Store Notification Channels API resources."""
         return AsyncStoreNotificationChannels(self)
@@ -782,6 +1028,11 @@ class AsyncSellAppClient(_AsyncBase):
     def store_custom_domains(self) -> AsyncStoreCustomDomains:
         """Store Custom Domains API resources."""
         return AsyncStoreCustomDomains(self)
+
+    @functools.cached_property
+    def notifications(self) -> AsyncNotifications:
+        """Notifications API resources."""
+        return AsyncNotifications(self)
 
     @functools.cached_property
     def credits_products(self) -> AsyncCreditsProducts:
@@ -807,6 +1058,16 @@ class AsyncSellAppClient(_AsyncBase):
     def affiliates(self) -> AsyncAffiliates:
         """Affiliates API resources."""
         return AsyncAffiliates(self)
+
+    @functools.cached_property
+    def affiliates_products(self) -> AsyncAffiliatesProducts:
+        """Affiliates Products API resources."""
+        return AsyncAffiliatesProducts(self)
+
+    @functools.cached_property
+    def affiliates_coupon(self) -> AsyncAffiliatesCoupon:
+        """Affiliates Coupon API resources."""
+        return AsyncAffiliatesCoupon(self)
 
     @functools.cached_property
     def affiliate_referrals(self) -> AsyncAffiliateReferrals:
@@ -902,6 +1163,16 @@ class AsyncSellAppClient(_AsyncBase):
     def tickets_messages(self) -> AsyncTicketsMessages:
         """Tickets Messages API resources."""
         return AsyncTicketsMessages(self)
+
+    @functools.cached_property
+    def tickets_wallet_refunds(self) -> AsyncTicketsWalletRefunds:
+        """Tickets Wallet Refunds API resources."""
+        return AsyncTicketsWalletRefunds(self)
+
+    @functools.cached_property
+    def tickets_analytics(self) -> AsyncTicketsAnalytics:
+        """Tickets Analytics API resources."""
+        return AsyncTicketsAnalytics(self)
 
     @functools.cached_property
     def oauth(self) -> AsyncOAuth:

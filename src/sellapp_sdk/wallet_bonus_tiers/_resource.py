@@ -25,6 +25,7 @@ from sellapp_sdk.common.models.sdk_update_wallet_bonus_tier_request_application_
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
     SdkListWalletBonusTiersResponseValue200ApplicationJson,
+    SdkQuoteWalletBonusTierResponseValue200ApplicationJson,
     SdkReplaceWalletBonusTierResponseValue200ApplicationJson,
     SdkRestoreWalletBonusTierResponseValue200ApplicationJson,
     SdkUpdateWalletBonusTierResponseValue200ApplicationJson,
@@ -45,7 +46,7 @@ class WalletBonusTiers:
     ) -> SdkListWalletBonusTiersResponseValue200ApplicationJson:
         """List wallet bonus tiers
 
-        List current and archived store records. Requires the `wallet` or `wallet:write` API ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List current and archived store records. Requires the `wallet` or `wallet:write` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkListWalletBonusTiersResponseValue200ApplicationJson
@@ -109,7 +110,7 @@ class WalletBonusTiers:
     ) -> SdkCreateWalletBonusTierResponseValue201ApplicationJson:
         """Create a wallet bonus tier
 
-        Create a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             minimum_top_up_cents: The minimum top up cents.
@@ -252,7 +253,7 @@ class WalletBonusTiers:
     ) -> SdkReplaceWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
-        Update a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -399,7 +400,7 @@ class WalletBonusTiers:
     ) -> SdkUpdateWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
-        Update a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -538,7 +539,7 @@ class WalletBonusTiers:
     ) -> None:
         """Archive a wallet bonus tier
 
-        Archive a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Archive a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -597,7 +598,7 @@ class WalletBonusTiers:
     ) -> SdkRestoreWalletBonusTierResponseValue200ApplicationJson:
         """Restore a wallet bonus tier
 
-        Restore a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Restore a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -652,6 +653,72 @@ class WalletBonusTiers:
             request_options=request_options,
         )
 
+    def quote(
+        self,
+        *,
+        top_up_cents: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkQuoteWalletBonusTierResponseValue200ApplicationJson:
+        """Quote a wallet bonus tier
+
+        See which bonus tier a top-up of a given amount would earn right now, and how much bonus it would add, without creating anything. Amounts are integer USD cents: `top_up_cents=20000` asks about a $200.00 top-up. Requires the `wallet` or `wallet:write` API-key ability and the wallet permission in your team role. A missing amount, `0`, or an amount above 999999999999 returns `422` on `top_up_cents`. Only your store's active tiers are considered. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            top_up_cents: The top-up amount to quote, in integer USD cents.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkQuoteWalletBonusTierResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "quoteWalletBonusTier",
+        }
+        params: dict[str, Any] = {
+            "top_up_cents": top_up_cents,
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "wallet-bonus-tiers", "quote"),
+            params=params,
+            model=SdkQuoteWalletBonusTierResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncWalletBonusTiers:
     """Wallet Bonus Tiers API resources (async)."""
@@ -667,7 +734,7 @@ class AsyncWalletBonusTiers:
     ) -> SdkListWalletBonusTiersResponseValue200ApplicationJson:
         """List wallet bonus tiers
 
-        List current and archived store records. Requires the `wallet` or `wallet:write` API ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List current and archived store records. Requires the `wallet` or `wallet:write` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkListWalletBonusTiersResponseValue200ApplicationJson
@@ -731,7 +798,7 @@ class AsyncWalletBonusTiers:
     ) -> SdkCreateWalletBonusTierResponseValue201ApplicationJson:
         """Create a wallet bonus tier
 
-        Create a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             minimum_top_up_cents: The minimum top up cents.
@@ -874,7 +941,7 @@ class AsyncWalletBonusTiers:
     ) -> SdkReplaceWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
-        Update a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -1021,7 +1088,7 @@ class AsyncWalletBonusTiers:
     ) -> SdkUpdateWalletBonusTierResponseValue200ApplicationJson:
         """Update a wallet bonus tier
 
-        Update a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -1160,7 +1227,7 @@ class AsyncWalletBonusTiers:
     ) -> None:
         """Archive a wallet bonus tier
 
-        Archive a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Archive a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -1219,7 +1286,7 @@ class AsyncWalletBonusTiers:
     ) -> SdkRestoreWalletBonusTierResponseValue200ApplicationJson:
         """Restore a wallet bonus tier
 
-        Restore a wallet bonus tier. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Restore a wallet bonus tier. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             bonus_tier: The bonusTier path parameter.
@@ -1271,5 +1338,71 @@ class AsyncWalletBonusTiers:
             method="post",
             path=("v2", "wallet-bonus-tiers", str(bonus_tier), "restore"),
             model=SdkRestoreWalletBonusTierResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def quote(
+        self,
+        *,
+        top_up_cents: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkQuoteWalletBonusTierResponseValue200ApplicationJson:
+        """Quote a wallet bonus tier
+
+        See which bonus tier a top-up of a given amount would earn right now, and how much bonus it would add, without creating anything. Amounts are integer USD cents: `top_up_cents=20000` asks about a $200.00 top-up. Requires the `wallet` or `wallet:write` API-key ability and the wallet permission in your team role. A missing amount, `0`, or an amount above 999999999999 returns `422` on `top_up_cents`. Only your store's active tiers are considered. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            top_up_cents: The top-up amount to quote, in integer USD cents.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkQuoteWalletBonusTierResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "quoteWalletBonusTier",
+        }
+        params: dict[str, Any] = {
+            "top_up_cents": top_up_cents,
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "wallet-bonus-tiers", "quote"),
+            params=params,
+            model=SdkQuoteWalletBonusTierResponseValue200ApplicationJson,
             request_options=request_options,
         )

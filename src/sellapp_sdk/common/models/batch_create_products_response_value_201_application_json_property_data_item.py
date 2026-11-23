@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .list_products_response_value_200_application_json_property_data_item import (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
+from .batch_create_products_response_value_200_application_json_property_data_item import (
+    BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem,
 )
 
 BatchCreateProductsResponseValue201ApplicationJsonPropertyDataItem: TypeAlias = (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem
+    BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem
 )

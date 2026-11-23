@@ -13,6 +13,7 @@ from sellapp_sdk._errors import (
     UnprocessableEntityError,
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
+from sellapp_sdk.common.models import DisputesStatus
 from sellapp_sdk.disputes.models import (
     ListDisputesResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetDisputeResponseValue200ApplicationJson,
@@ -39,6 +40,28 @@ class TestDisputes:
         page = sellapp_sdk.disputes.list_disputes()
         assert isinstance(page, SyncPage)
         assert page.data == []
+
+    def test_list_disputes_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.disputes.list_disputes(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=DisputesStatus("open"),
+            provider="value provider/test",
+            opened_after="value opened_after/test",
+            opened_before="value opened_before/test",
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "open"
+        assert request.url.params["provider"] == "value provider/test"
+        assert request.url.params["opened_after"] == "value opened_after/test"
+        assert request.url.params["opened_before"] == "value opened_before/test"
 
     def test_get_dispute(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -174,6 +197,31 @@ class TestAsyncDisputes:
         page = await async_sellapp_sdk.disputes.list_disputes()
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_list_disputes_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.disputes.list_disputes(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=DisputesStatus("open"),
+            provider="value provider/test",
+            opened_after="value opened_after/test",
+            opened_before="value opened_before/test",
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "open"
+        assert request.url.params["provider"] == "value provider/test"
+        assert request.url.params["opened_after"] == "value opened_after/test"
+        assert request.url.params["opened_before"] == "value opened_before/test"
 
     @pytest.mark.asyncio
     async def test_get_dispute(self, async_sellapp_sdk, httpx_mock):

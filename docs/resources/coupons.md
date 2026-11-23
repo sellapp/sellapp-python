@@ -744,6 +744,7 @@ def v2_create_coupon(
         | str
         | None = None,
         subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: float | str | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkV2CreateCouponResponseValue201ApplicationJson:
@@ -764,6 +765,7 @@ def v2_create_coupon(
         \| str
         \| None` | No |
 | subscription_payments | `int \| None \| NotGiven` | No |
+| maximum_discount_amount | `float \| str \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -831,6 +833,7 @@ def v2_search_coupons(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         idempotency_key: str | None = None,
@@ -853,6 +856,7 @@ def v2_search_coupons(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | idempotency_key | `str \| None` | No |
@@ -977,6 +981,7 @@ def v2_replace_coupon(
         | str
         | None = None,
         subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: float | str | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -999,6 +1004,7 @@ def v2_replace_coupon(
         \| str
         \| None` | No |
 | subscription_payments | `int \| None \| NotGiven` | No |
+| maximum_discount_amount | `float \| str \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -1066,6 +1072,7 @@ def v2_update_coupon(
         | str
         | None = None,
         subscription_payments: int | None | NotGiven = NOT_GIVEN,
+        maximum_discount_amount: float | str | None | NotGiven = NOT_GIVEN,
         with_trashed: bool | None = None,
         only_trashed: bool | None = None,
         request_options: RequestOptions | None = None,
@@ -1088,6 +1095,7 @@ def v2_update_coupon(
         \| str
         \| None` | No |
 | subscription_payments | `int \| None \| NotGiven` | No |
+| maximum_discount_amount | `float \| str \| None \| NotGiven` | No |
 | with_trashed | `bool \| None` | No |
 | only_trashed | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
@@ -1377,6 +1385,60 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## v2_get_coupon_usage
+
+Retrieve coupon usage
+
+[API reference](https://sell.app/docs/api/coupons/retrieve-coupon-usage) · Effect: **read**
+
+```python
+def v2_get_coupon_usage(
+        self,
+        coupon: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkV2GetCouponUsageResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| coupon | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkV2GetCouponUsageResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.coupons.v2_get_coupon_usage(coupon=1)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

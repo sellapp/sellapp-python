@@ -19,8 +19,8 @@ from sellapp_sdk.common.models.get_variant_deliverable_configuration_response_va
     GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataTypes,
 )
 
-from .get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data import (
-    GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData,
+from .get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1 import (
+    GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1,
 )
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
@@ -43,7 +43,18 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 ],
             },
         },
-        "data": {"kind": "any"},
+        "data": {
+            "kind": "union",
+            "variants": [
+                {"kind": "any"},
+                {
+                    "kind": "array",
+                    "items": {"kind": "primitive", "type": "unknown"},
+                    "constraints": {"maxItems": 0},
+                },
+            ],
+            "composition": "anyOf",
+        },
         "webhook_configured": {"kind": "primitive", "type": "boolean"},
         "updated_at": {"kind": "primitive", "type": "string", "format": "date-time"},
     },
@@ -69,7 +80,18 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 ],
             },
         },
-        "data": {"kind": "any"},
+        "data": {
+            "kind": "union",
+            "variants": [
+                {"kind": "any"},
+                {
+                    "kind": "array",
+                    "items": {"kind": "primitive", "type": "unknown"},
+                    "constraints": {"maxItems": 0},
+                },
+            ],
+            "composition": "anyOf",
+        },
         "webhook_configured": {"kind": "primitive", "type": "boolean"},
         "updated_at": {"kind": "primitive", "type": "string", "format": "date-time"},
     },
@@ -84,7 +106,10 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
     types: list[
         GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataTypes
     ]
-    data: GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData
+    data: (
+        GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1
+        | list[Any]
+    )
     webhook_configured: bool
     """Whether a dynamic delivery endpoint is configured. The endpoint itself is never returned."""
     updated_at: datetime
@@ -115,7 +140,7 @@ class GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyD
                     )
                     for item in cast(list[Any], data["types"])
                 ],
-                data=GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyData.from_dict(
+                data=GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
                     cast(dict[str, Any], data["data"])
                 ),
                 webhook_configured=data["webhook_configured"],

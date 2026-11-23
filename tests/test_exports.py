@@ -46,6 +46,17 @@ class TestExports:
         assert isinstance(page, SyncPage)
         assert page.data == []
 
+    def test_list_exports_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.exports.list_exports(
+            limit=10, before="cursor before", after="cursor/after", page=7
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+
     def test_create_export(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -216,6 +227,20 @@ class TestAsyncExports:
         page = await async_sellapp_sdk.exports.list_exports()
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_list_exports_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.exports.list_exports(
+            limit=10, before="cursor before", after="cursor/after", page=7
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
 
     @pytest.mark.asyncio
     async def test_create_export(self, async_sellapp_sdk, httpx_mock):

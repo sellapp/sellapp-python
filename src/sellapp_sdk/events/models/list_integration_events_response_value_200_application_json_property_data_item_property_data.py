@@ -16,14 +16,44 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItemPropertyData",
     "required": [],
     "properties": {},
-    "additionalProperties": {"kind": "any"},
+    "additionalProperties": {
+        "kind": "nullable",
+        "inner": {
+            "kind": "union",
+            "variants": [
+                {
+                    "kind": "primitive",
+                    "type": "string",
+                    "constraints": {"maxLength": 500},
+                },
+                {"kind": "primitive", "type": "number"},
+                {"kind": "primitive", "type": "boolean"},
+            ],
+            "composition": "oneOf",
+        },
+    },
     "constraints": {"maxProperties": 100},
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListIntegrationEventsResponseValue200ApplicationJsonPropertyDataItemPropertyData",
     "required": [],
     "properties": {},
-    "additionalProperties": {"kind": "any"},
+    "additionalProperties": {
+        "kind": "nullable",
+        "inner": {
+            "kind": "union",
+            "variants": [
+                {
+                    "kind": "primitive",
+                    "type": "string",
+                    "constraints": {"maxLength": 500},
+                },
+                {"kind": "primitive", "type": "number"},
+                {"kind": "primitive", "type": "boolean"},
+            ],
+            "composition": "oneOf",
+        },
+    },
     "constraints": {"maxProperties": 100},
 }
 

@@ -40,6 +40,8 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "expires_at",
         "full_price",
         "original_amount",
+        "refund_currency",
+        "refunded_total_cents",
     ],
     "properties": {
         "fee": {"kind": "any"},
@@ -48,6 +50,15 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "expires_at": {"kind": "primitive", "type": "string", "format": "date-time"},
         "full_price": {"kind": "any"},
         "original_amount": {"kind": "any"},
+        "refund_currency": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "refunded_total_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0},
+        },
     },
     "additionalProperties": True,
 }
@@ -60,6 +71,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "expires_at",
         "full_price",
         "original_amount",
+        "refund_currency",
+        "refunded_total_cents",
     ],
     "properties": {
         "fee": {"kind": "any"},
@@ -68,6 +81,15 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "expires_at": {"kind": "primitive", "type": "string", "format": "date-time"},
         "full_price": {"kind": "any"},
         "original_amount": {"kind": "any"},
+        "refund_currency": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "refunded_total_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0},
+        },
     },
     "additionalProperties": True,
 }
@@ -83,6 +105,10 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
     expires_at: datetime
     full_price: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyFullPrice
     original_amount: CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyOriginalAmount
+    refund_currency: str | None
+    """The currency refunds on this invoice are made and counted in: the currency the payment was charged in, which can differ from the invoice currency. `null` when the payment method cannot be refunded through the API."""
+    refunded_total_cents: int
+    """The amount already refunded on this invoice, in integer minor units of `refund_currency`: `500` means $5.00 in USD. It is the exact figure a refund request compares `expected_refunded_total_cents` with, so send it back unchanged when you refund. `0` when nothing has been refunded."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -119,6 +145,8 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                 original_amount=CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPaymentPropertyOriginalAmount.from_dict(
                     cast(dict[str, Any], data["original_amount"])
                 ),
+                refund_currency=data["refund_currency"],
+                refunded_total_cents=data["refunded_total_cents"],
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -128,6 +156,8 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
                         "expires_at",
                         "full_price",
                         "original_amount",
+                        "refund_currency",
+                        "refunded_total_cents",
                     ],
                 ),
                 _from_response=True,
@@ -147,6 +177,8 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
         _domain_data["expires_at"] = self.expires_at
         _domain_data["full_price"] = self.full_price
         _domain_data["original_amount"] = self.original_amount
+        _domain_data["refund_currency"] = self.refund_currency
+        _domain_data["refunded_total_cents"] = self.refunded_total_cents
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -162,4 +194,9 @@ class CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropert
         result["expires_at"] = _format_datetime(self.expires_at)
         result["full_price"] = self.full_price.to_dict()
         result["original_amount"] = self.original_amount.to_dict()
+        if self.refund_currency is not None:
+            result["refund_currency"] = self.refund_currency
+        else:
+            result["refund_currency"] = None
+        result["refunded_total_cents"] = self.refunded_total_cents
         return result

@@ -185,11 +185,19 @@ class Subscriptions:
         page: int | None = None,
         pagination: bool | None = None,
         status: list[SubscriptionsStatus | str] | None = None,
+        order_id: int | None = None,
+        product_id: int | None = None,
+        renews_after: str | None = None,
+        renews_before: str | None = None,
+        cancelled_after: str | None = None,
+        cancelled_before: str | None = None,
+        scheduled_to_cancel: bool | None = None,
+        paused: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
         """List subscriptions
 
-        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about, and the other filters to find subscriptions by order, product, renewal date, cancellation date, or whether they are paused or set to cancel. Filters combine: a subscription must match all of them. Date filters read whole days in the store's time zone and include both ends. A filter value in the wrong shape, or a `*_before` date earlier than its `*_after` date, returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -199,6 +207,14 @@ class Subscriptions:
             page: Page number to return. Defaults to `1`.
             pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
             status: Filter by one or more subscription statuses. Repeat the parameter to select several; a single `status=ACTIVE` works too. A status outside the list is rejected with a validation error.
+            order_id: Keep subscriptions sold by this order.
+            product_id: Keep subscriptions whose plan is a variant of this product, including subscriptions moved to that plan after signup.
+            renews_after: Keep subscriptions that renew on or after this moment. Only `ACTIVE` and `TRIALING` subscriptions with a renewal date that are neither paused nor scheduled to cancel match a renewal filter. A date such as `2026-11-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            renews_before: Keep subscriptions that renew on or before this moment, with the same rules as `renews_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `renews_after`.
+            cancelled_after: Keep `CANCELED` subscriptions cancelled on or after this moment. The cancellation time is when an immediate cancellation happened; for a subscription that ran out at its period end it is approximate, the last time the subscription record changed. Dates are read like `renews_after`. Inclusive.
+            cancelled_before: Keep `CANCELED` subscriptions cancelled on or before this moment, with the same rules as `cancelled_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `cancelled_after`.
+            scheduled_to_cancel: `true` keeps `ACTIVE` and `TRIALING` subscriptions set to cancel at the end of their period; `false` keeps subscriptions that are not set to.
+            paused: `true` keeps paused subscriptions; `false` keeps subscriptions that are not paused.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -252,6 +268,14 @@ class Subscriptions:
                 "page": page,
                 "pagination": pagination,
                 "status[]": status,
+                "order_id": order_id,
+                "product_id": product_id,
+                "renews_after": renews_after,
+                "renews_before": renews_before,
+                "cancelled_after": cancelled_after,
+                "cancelled_before": cancelled_before,
+                "scheduled_to_cancel": scheduled_to_cancel,
+                "paused": paused,
             }.items()
             if v is not None
         }
@@ -273,6 +297,14 @@ class Subscriptions:
         search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
         includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
         | None = None,
+        order_id: int | None | NotGiven = NOT_GIVEN,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        renews_after: str | None | NotGiven = NOT_GIVEN,
+        renews_before: str | None | NotGiven = NOT_GIVEN,
+        cancelled_after: str | None | NotGiven = NOT_GIVEN,
+        cancelled_before: str | None | NotGiven = NOT_GIVEN,
+        scheduled_to_cancel: bool | None | NotGiven = NOT_GIVEN,
+        paused: bool | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -283,13 +315,21 @@ class Subscriptions:
     ) -> SyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:
         """Search subscriptions
 
-        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. The body also takes the list endpoint's filters as top-level fields: `order_id`, `product_id`, `renews_after`, `renews_before`, `cancelled_after`, `cancelled_before`, `scheduled_to_cancel`, and `paused`, with the same rules; date filters read whole days in the store's time zone and include both ends. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
+            order_id: Keep subscriptions sold by this order.
+            product_id: Keep subscriptions whose plan is a variant of this product, including subscriptions moved to that plan after signup.
+            renews_after: Keep subscriptions that renew on or after this moment. Only `ACTIVE` and `TRIALING` subscriptions with a renewal date that are neither paused nor scheduled to cancel match a renewal filter. A date such as `2026-11-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            renews_before: Keep subscriptions that renew on or before this moment, with the same rules as `renews_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `renews_after`.
+            cancelled_after: Keep `CANCELED` subscriptions cancelled on or after this moment. The cancellation time is when an immediate cancellation happened; for a subscription that ran out at its period end it is approximate, the last time the subscription record changed. Dates are read like `renews_after`. Inclusive.
+            cancelled_before: Keep `CANCELED` subscriptions cancelled on or before this moment, with the same rules as `cancelled_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `cancelled_after`.
+            scheduled_to_cancel: `true` keeps `ACTIVE` and `TRIALING` subscriptions set to cancel at the end of their period; `false` keeps subscriptions that are not set to.
+            paused: `true` keeps paused subscriptions; `false` keeps subscriptions that are not paused.
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
@@ -353,6 +393,22 @@ class Subscriptions:
             }.items()
             if v is not None
         }
+        if not isinstance(order_id, NotGiven):
+            body["order_id"] = order_id
+        if not isinstance(product_id, NotGiven):
+            body["product_id"] = product_id
+        if not isinstance(renews_after, NotGiven):
+            body["renews_after"] = renews_after
+        if not isinstance(renews_before, NotGiven):
+            body["renews_before"] = renews_before
+        if not isinstance(cancelled_after, NotGiven):
+            body["cancelled_after"] = cancelled_after
+        if not isinstance(cancelled_before, NotGiven):
+            body["cancelled_before"] = cancelled_before
+        if not isinstance(scheduled_to_cancel, NotGiven):
+            body["scheduled_to_cancel"] = scheduled_to_cancel
+        if not isinstance(paused, NotGiven):
+            body["paused"] = paused
         params = {
             k: v
             for k, v in {
@@ -1830,11 +1886,19 @@ class AsyncSubscriptions:
         page: int | None = None,
         pagination: bool | None = None,
         status: list[SubscriptionsStatus | str] | None = None,
+        order_id: int | None = None,
+        product_id: int | None = None,
+        renews_after: str | None = None,
+        renews_before: str | None = None,
+        cancelled_after: str | None = None,
+        cancelled_before: str | None = None,
+        scheduled_to_cancel: bool | None = None,
+        paused: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
         """List subscriptions
 
-        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List the subscriptions belonging to the authenticated store, ordered by identifier ascending. Requires the `invoice` Sanctum ability. Use `status[]` to keep only the states you care about, and the other filters to find subscriptions by order, product, renewal date, cancellation date, or whether they are paused or set to cancel. Filters combine: a subscription must match all of them. Date filters read whole days in the store's time zone and include both ends. A filter value in the wrong shape, or a `*_before` date earlier than its `*_after` date, returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -1844,6 +1908,14 @@ class AsyncSubscriptions:
             page: Page number to return. Defaults to `1`.
             pagination: Set to false to return at most 100 matching items in one data array without pagination links or metadata. Defaults to `true`.
             status: Filter by one or more subscription statuses. Repeat the parameter to select several; a single `status=ACTIVE` works too. A status outside the list is rejected with a validation error.
+            order_id: Keep subscriptions sold by this order.
+            product_id: Keep subscriptions whose plan is a variant of this product, including subscriptions moved to that plan after signup.
+            renews_after: Keep subscriptions that renew on or after this moment. Only `ACTIVE` and `TRIALING` subscriptions with a renewal date that are neither paused nor scheduled to cancel match a renewal filter. A date such as `2026-11-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            renews_before: Keep subscriptions that renew on or before this moment, with the same rules as `renews_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `renews_after`.
+            cancelled_after: Keep `CANCELED` subscriptions cancelled on or after this moment. The cancellation time is when an immediate cancellation happened; for a subscription that ran out at its period end it is approximate, the last time the subscription record changed. Dates are read like `renews_after`. Inclusive.
+            cancelled_before: Keep `CANCELED` subscriptions cancelled on or before this moment, with the same rules as `cancelled_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `cancelled_after`.
+            scheduled_to_cancel: `true` keeps `ACTIVE` and `TRIALING` subscriptions set to cancel at the end of their period; `false` keeps subscriptions that are not set to.
+            paused: `true` keeps paused subscriptions; `false` keeps subscriptions that are not paused.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1897,6 +1969,14 @@ class AsyncSubscriptions:
                 "page": page,
                 "pagination": pagination,
                 "status[]": status,
+                "order_id": order_id,
+                "product_id": product_id,
+                "renews_after": renews_after,
+                "renews_before": renews_before,
+                "cancelled_after": cancelled_after,
+                "cancelled_before": cancelled_before,
+                "scheduled_to_cancel": scheduled_to_cancel,
+                "paused": paused,
             }.items()
             if v is not None
         }
@@ -1918,6 +1998,14 @@ class AsyncSubscriptions:
         search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
         includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
         | None = None,
+        order_id: int | None | NotGiven = NOT_GIVEN,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        renews_after: str | None | NotGiven = NOT_GIVEN,
+        renews_before: str | None | NotGiven = NOT_GIVEN,
+        cancelled_after: str | None | NotGiven = NOT_GIVEN,
+        cancelled_before: str | None | NotGiven = NOT_GIVEN,
+        scheduled_to_cancel: bool | None | NotGiven = NOT_GIVEN,
+        paused: bool | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -1928,13 +2016,21 @@ class AsyncSubscriptions:
     ) -> AsyncPage[SdkSearchSubscriptionsResponseValue200ApplicationJson]:
         """Search subscriptions
 
-        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search the store's subscriptions, ordered by identifier ascending unless `sort` says otherwise. `search.value` matches the provider subscription ID, the provider customer ID, and the customer email. Filter on `id`, `customer_id` (the SellApp customer ID, as in `customer.id`), `provider`, `status`, or `product_variant_id`, and sort on `id`, `status`, `current_period_start`, `current_period_end`, `created_at`, or `updated_at`. The body also takes the list endpoint's filters as top-level fields: `order_id`, `product_id`, `renews_after`, `renews_before`, `cancelled_after`, `cancelled_before`, `scheduled_to_cancel`, and `paused`, with the same rules; date filters read whole days in the store's time zone and include both ends. Requires the `invoice` Sanctum ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
+            order_id: Keep subscriptions sold by this order.
+            product_id: Keep subscriptions whose plan is a variant of this product, including subscriptions moved to that plan after signup.
+            renews_after: Keep subscriptions that renew on or after this moment. Only `ACTIVE` and `TRIALING` subscriptions with a renewal date that are neither paused nor scheduled to cancel match a renewal filter. A date such as `2026-11-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            renews_before: Keep subscriptions that renew on or before this moment, with the same rules as `renews_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `renews_after`.
+            cancelled_after: Keep `CANCELED` subscriptions cancelled on or after this moment. The cancellation time is when an immediate cancellation happened; for a subscription that ran out at its period end it is approximate, the last time the subscription record changed. Dates are read like `renews_after`. Inclusive.
+            cancelled_before: Keep `CANCELED` subscriptions cancelled on or before this moment, with the same rules as `cancelled_after`. A date runs to the last second of that day in the store's time zone. Inclusive. Must not be earlier than `cancelled_after`.
+            scheduled_to_cancel: `true` keeps `ACTIVE` and `TRIALING` subscriptions set to cancel at the end of their period; `false` keeps subscriptions that are not set to.
+            paused: `true` keeps paused subscriptions; `false` keeps subscriptions that are not paused.
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
@@ -1998,6 +2094,22 @@ class AsyncSubscriptions:
             }.items()
             if v is not None
         }
+        if not isinstance(order_id, NotGiven):
+            body["order_id"] = order_id
+        if not isinstance(product_id, NotGiven):
+            body["product_id"] = product_id
+        if not isinstance(renews_after, NotGiven):
+            body["renews_after"] = renews_after
+        if not isinstance(renews_before, NotGiven):
+            body["renews_before"] = renews_before
+        if not isinstance(cancelled_after, NotGiven):
+            body["cancelled_after"] = cancelled_after
+        if not isinstance(cancelled_before, NotGiven):
+            body["cancelled_before"] = cancelled_before
+        if not isinstance(scheduled_to_cancel, NotGiven):
+            body["scheduled_to_cancel"] = scheduled_to_cancel
+        if not isinstance(paused, NotGiven):
+            body["paused"] = paused
         params = {
             k: v
             for k, v in {

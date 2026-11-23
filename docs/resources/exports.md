@@ -16,6 +16,7 @@ def list_exports(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -26,6 +27,7 @@ def list_exports(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]`.

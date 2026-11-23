@@ -20,6 +20,7 @@ from sellapp_sdk.common.models import (
 )
 from sellapp_sdk.wallet_bonus_tiers.models import (
     SdkListWalletBonusTiersResponseValue200ApplicationJson,
+    SdkQuoteWalletBonusTierResponseValue200ApplicationJson,
     SdkReplaceWalletBonusTierResponseValue200ApplicationJson,
     SdkRestoreWalletBonusTierResponseValue200ApplicationJson,
     SdkUpdateWalletBonusTierResponseValue200ApplicationJson,
@@ -146,6 +147,30 @@ class TestWalletBonusTiers:
         assert request.url.path.endswith(
             "/v2/wallet-bonus-tiers/test_bonusTier/restore"
         )
+
+    def test_quote(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_wallet_bonus_tier_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.wallet_bonus_tiers.quote(top_up_cents=1)
+        assert isinstance(
+            result, SdkQuoteWalletBonusTierResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/wallet-bonus-tiers/quote")
+
+    def test_quote_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_wallet_bonus_tier_response_value_200_application_json.json"
+            )
+        )
+        sellapp_sdk.wallet_bonus_tiers.quote(top_up_cents=7)
+        request = httpx_mock.get_request()
+        assert request.url.params["top_up_cents"] == "7"
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -357,6 +382,32 @@ class TestAsyncWalletBonusTiers:
         assert request.url.path.endswith(
             "/v2/wallet-bonus-tiers/test_bonusTier/restore"
         )
+
+    @pytest.mark.asyncio
+    async def test_quote(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_wallet_bonus_tier_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.wallet_bonus_tiers.quote(top_up_cents=1)
+        assert isinstance(
+            result, SdkQuoteWalletBonusTierResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/wallet-bonus-tiers/quote")
+
+    @pytest.mark.asyncio
+    async def test_quote_encodes_query_params(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_wallet_bonus_tier_response_value_200_application_json.json"
+            )
+        )
+        await async_sellapp_sdk.wallet_bonus_tiers.quote(top_up_cents=7)
+        request = httpx_mock.get_request()
+        assert request.url.params["top_up_cents"] == "7"
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

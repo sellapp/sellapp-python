@@ -857,6 +857,7 @@ def v2_search_sections(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
@@ -879,6 +880,7 @@ def v2_search_sections(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 

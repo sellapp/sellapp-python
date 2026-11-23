@@ -16,12 +16,14 @@ from sellapp_sdk.common.models.sdk_start_community_connection_request_applicatio
     SdkStartCommunityConnectionRequestApplicationJsonMode,
 )
 
-from .._types import RequestOptions, _validate_model, enum_value
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
     SdkCompleteCommunityConnectionResponseValue200ApplicationJson,
     SdkListCommunityConnectionsResponseValue200ApplicationJson,
+    SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson,
     SdkPollCommunityConnectionResponseValue200ApplicationJson,
     SdkStartCommunityConnectionResponseValue200ApplicationJson,
+    SdkSyncDiscordRolesResponseValue200ApplicationJson,
     SdkVerifyCommunityConnectionResponseValue200ApplicationJson,
 )
 
@@ -468,6 +470,151 @@ class CommunityConnections:
             request_options=request_options,
         )
 
+    def list_failed_grant_reasons(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson:
+        """List community failed grant reasons
+
+        List why community access grants failed across all platforms, with how many grants failed for each reason and what you can do about it, most frequent first. A grant is the access a purchase gives a customer, such as a Discord role or a place in a Telegram group. Only reasons that still need attention or are retried are counted; failures nobody can act on, such as a customer who left the server, are not. Only SellApp's records are read; no platform is contacted. An empty `data` array means no grant is failing. Requires the `community` API-key ability and the `community` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "listCommunityFailedGrantReasons",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "community-connections", "failed-grant-reasons"),
+            model=SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def sync_discord_roles(
+        self,
+        *,
+        server_id: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkSyncDiscordRolesResponseValue200ApplicationJson:
+        """Sync Discord roles
+
+        Read the role list of the store's Discord servers from Discord again and check the bot's role position, which tells whether the bot can give the roles your products sell. Syncs every connected server, or only `server_id`. A server Discord refuses is reported on its own row with `synced: false`, and the others still sync; `failed_count` counts those rows. Nothing is given to or taken from a member, so repeating the request is safe. `422` on `platform` when no Discord server is connected, and on `server_id` when that server is not connected to this store. Requires the `community` API-key ability and the `community` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            server_id: The Discord server to sync. Leave out or send `null` to sync every connected server.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkSyncDiscordRolesResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "syncDiscordRoles",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(server_id, NotGiven):
+            body["server_id"] = server_id
+        _validate_model(
+            body,
+            {
+                "name": "SdkSyncDiscordRolesRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "server_id": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 32},
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "community-connections", "discord", "sync-roles"),
+            body=body,
+            model=SdkSyncDiscordRolesResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncCommunityConnections:
     """Community Connections API resources (async)."""
@@ -908,5 +1055,150 @@ class AsyncCommunityConnections:
         await self._client.request(
             method="delete",
             path=("v2", "community-connections", str(enum_value(platform))),
+            request_options=request_options,
+        )
+
+    async def list_failed_grant_reasons(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson:
+        """List community failed grant reasons
+
+        List why community access grants failed across all platforms, with how many grants failed for each reason and what you can do about it, most frequent first. A grant is the access a purchase gives a customer, such as a Discord role or a place in a Telegram group. Only reasons that still need attention or are retried are counted; failures nobody can act on, such as a customer who left the server, are not. Only SellApp's records are read; no platform is contacted. An empty `data` array means no grant is failing. Requires the `community` API-key ability and the `community` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "listCommunityFailedGrantReasons",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "community-connections", "failed-grant-reasons"),
+            model=SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def sync_discord_roles(
+        self,
+        *,
+        server_id: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkSyncDiscordRolesResponseValue200ApplicationJson:
+        """Sync Discord roles
+
+        Read the role list of the store's Discord servers from Discord again and check the bot's role position, which tells whether the bot can give the roles your products sell. Syncs every connected server, or only `server_id`. A server Discord refuses is reported on its own row with `synced: false`, and the others still sync; `failed_count` counts those rows. Nothing is given to or taken from a member, so repeating the request is safe. `422` on `platform` when no Discord server is connected, and on `server_id` when that server is not connected to this store. Requires the `community` API-key ability and the `community` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            server_id: The Discord server to sync. Leave out or send `null` to sync every connected server.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkSyncDiscordRolesResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "syncDiscordRoles",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(server_id, NotGiven):
+            body["server_id"] = server_id
+        _validate_model(
+            body,
+            {
+                "name": "SdkSyncDiscordRolesRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "server_id": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 32},
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "community-connections", "discord", "sync-roles"),
+            body=body,
+            model=SdkSyncDiscordRolesResponseValue200ApplicationJson,
             request_options=request_options,
         )

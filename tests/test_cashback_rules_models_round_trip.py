@@ -6,11 +6,14 @@ from sellapp_sdk.cashback_rules.models import (
     ArchiveCashbackRuleResponseValue200ApplicationJsonPropertyData,
     CreateCashbackRuleResponseValue201ApplicationJsonPropertyData,
     ListCashbackRulesResponseValue200ApplicationJsonPropertyDataItem,
+    QuoteCashbackRuleResponseValue200ApplicationJsonPropertyData,
+    QuoteCashbackRuleResponseValue200ApplicationJsonPropertyDataPropertyMatchingRule,
     ReplaceCashbackRuleResponseValue200ApplicationJsonPropertyData,
     RestoreCashbackRuleResponseValue200ApplicationJsonPropertyData,
     SdkArchiveCashbackRuleResponseValue200ApplicationJson,
     SdkCreateCashbackRuleResponseValue201ApplicationJson,
     SdkListCashbackRulesResponseValue200ApplicationJson,
+    SdkQuoteCashbackRuleResponseValue200ApplicationJson,
     SdkReplaceCashbackRuleResponseValue200ApplicationJson,
     SdkRestoreCashbackRuleResponseValue200ApplicationJson,
     SdkUpdateCashbackRuleResponseValue200ApplicationJson,
@@ -613,5 +616,163 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkRestoreCashbackRuleResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_property_matching_rule_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "quote_cashback_rule_response_value_200_application_json_property_data_property_matching_rule.json"
+        )
+        instance = QuoteCashbackRuleResponseValue200ApplicationJsonPropertyDataPropertyMatchingRule.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = QuoteCashbackRuleResponseValue200ApplicationJsonPropertyDataPropertyMatchingRule.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_property_matching_rule_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "percent_basis": 1,
+            "maximum_cashback_cents": None,
+            "is_active": True,
+            "product_ids": [1],
+        }
+        instance = QuoteCashbackRuleResponseValue200ApplicationJsonPropertyDataPropertyMatchingRule.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["percent_basis"] == data["percent_basis"]
+        assert serialized["maximum_cashback_cents"] == data["maximum_cashback_cents"]
+        assert serialized["is_active"] == data["is_active"]
+        assert serialized["product_ids"] == data["product_ids"]
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_property_matching_rule_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "percent_basis": 1,
+            "maximum_cashback_cents": None,
+            "is_active": True,
+            "product_ids": [1],
+            "created_at": None,
+            "updated_at": None,
+            "deleted_at": None,
+        }
+        instance = QuoteCashbackRuleResponseValue200ApplicationJsonPropertyDataPropertyMatchingRule.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["maximum_cashback_cents"] is None
+        assert serialized["created_at"] is None
+        assert serialized["updated_at"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "quote_cashback_rule_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            QuoteCashbackRuleResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            QuoteCashbackRuleResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": None,
+            "purchase_cents": None,
+            "eligible": True,
+            "cashback_cents": None,
+            "reason": "test_reason",
+            "matching_rule": None,
+        }
+        instance = (
+            QuoteCashbackRuleResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["purchase_cents"] == data["purchase_cents"]
+        assert serialized["eligible"] == data["eligible"]
+        assert serialized["cashback_cents"] == data["cashback_cents"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["matching_rule"] == data["matching_rule"]
+
+    def test_quote_cashback_rule_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "product_id": None,
+            "purchase_cents": None,
+            "eligible": True,
+            "cashback_cents": None,
+            "reason": "test_reason",
+            "matching_rule": None,
+        }
+        instance = (
+            QuoteCashbackRuleResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] is None
+        assert serialized["purchase_cents"] is None
+        assert serialized["cashback_cents"] is None
+        assert serialized["matching_rule"] is None
+
+    def test_sdk_quote_cashback_rule_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_quote_cashback_rule_response_value_200_application_json.json"
+        )
+        instance = SdkQuoteCashbackRuleResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkQuoteCashbackRuleResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_quote_cashback_rule_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "purchase_cents": 1,
+                "eligible": True,
+                "cashback_cents": 1,
+                "reason": "test_reason",
+                "matching_rule": {
+                    "id": 1,
+                    "percent_basis": 1,
+                    "maximum_cashback_cents": 1,
+                    "is_active": True,
+                    "product_ids": [1],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                },
+            }
+        }
+        instance = SdkQuoteCashbackRuleResponseValue200ApplicationJson.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

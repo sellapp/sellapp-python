@@ -6,6 +6,13 @@ from sellapp_sdk.bookings.models import (
     CancelAppointmentResponseValue200ApplicationJsonPropertyData,
     CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     CancelAppointmentResponseValue200ApplicationJsonPropertyDataPropertyVariant,
+    CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyData,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings,
+    CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem,
     GetAppointmentResponseValue200ApplicationJsonPropertyData,
     GetAppointmentResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     GetAppointmentResponseValue200ApplicationJsonPropertyDataPropertyVariant,
@@ -15,6 +22,7 @@ from sellapp_sdk.bookings.models import (
     ReplaceBookingConfigurationResponseValue200ApplicationJsonPropertyData,
     ReplaceBookingConfigurationResponseValue200ApplicationJsonPropertyDataPropertyAvailabilityItem,
     SdkCancelAppointmentResponseValue200ApplicationJson,
+    SdkCreateBookingProductResponseValue201ApplicationJson,
     SdkGetAppointmentResponseValue200ApplicationJson,
     SdkGetBookingConfigurationResponseValue200ApplicationJson,
     SdkReplaceBookingConfigurationResponseValue200ApplicationJson,
@@ -1887,6 +1895,481 @@ class TestModelRoundTrip:
         }
         instance = (
             SdkSetBookingDateAvailabilityResponseValue201ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_create_booking_product_request_application_json_property_availability_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_request_application_json_property_availability_item.json"
+        )
+        instance = CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_request_application_json_property_availability_item_minimal_payload(
+        self,
+    ):
+        data = {"day": 1, "enabled": True, "start": "09:00", "end": "17:00"}
+        instance = CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["day"] == data["day"]
+        assert serialized["enabled"] == data["enabled"]
+        assert serialized["start"] == data["start"]
+        assert serialized["end"] == data["end"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_images_item_property_metadata_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data_property_images_item_property_metadata.json"
+        )
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_images_item_property_metadata_minimal_payload(
+        self,
+    ):
+        data = {
+            "size": 1,
+            "filename": "Test",
+            "extension": "test_extension",
+            "mime_type": "test_mime_type",
+        }
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItemPropertyMetadata.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["size"] == data["size"]
+        assert serialized["filename"] == data["filename"]
+        assert serialized["extension"] == data["extension"]
+        assert serialized["mime_type"] == data["mime_type"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_images_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data_property_images_item.json"
+        )
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_images_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "path": "test_path",
+            "metadata": {
+                "size": 1,
+                "filename": "Test",
+                "extension": "test_extension",
+                "mime_type": "test_mime_type",
+            },
+        }
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyImagesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["path"] == data["path"]
+        assert serialized["metadata"] == data["metadata"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data_property_additional_information_item.json"
+        )
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data_property_other_settings.json"
+        )
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {
+            "faq": [{"question": "test_question", "answer": "test_answer"}],
+            "video_url": "video_url_01234",
+            "redirect_url": "https://example.com",
+            "product_title": "test_product_title",
+            "product_description": "test_product_description",
+        }
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["faq"] == data["faq"]
+        assert serialized["video_url"] == data["video_url"]
+        assert serialized["redirect_url"] == data["redirect_url"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["product_description"] == data["product_description"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_variants_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data_property_variants_item.json"
+        )
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_property_variants_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "title": "test_title"}
+        instance = CreateBookingProductResponseValue201ApplicationJsonPropertyDataPropertyVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_booking_product_response_value_201_application_json_property_data.json"
+        )
+        instance = (
+            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = (
+            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["slug"] == data["slug"]
+        assert serialized["description"] == data["description"]
+        assert serialized["images"] == data["images"]
+        assert serialized["order"] == data["order"]
+        assert serialized["visibility"] == data["visibility"]
+        assert serialized["delivery_text"] == data["delivery_text"]
+        assert serialized["additional_information"] == data["additional_information"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["section_id"] == data["section_id"]
+        assert serialized["section_order"] == data["section_order"]
+        assert serialized["is_discoverable"] == data["is_discoverable"]
+        assert serialized["variants"] == data["variants"]
+        assert serialized["url"] == data["url"]
+
+    def test_create_booking_product_response_value_201_application_json_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": 1,
+            "visibility": "test_visibility",
+            "delivery_text": "test_delivery_text",
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": 1,
+            "section_order": 1,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+        }
+        instance = (
+            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert "type" not in serialized
+
+    def test_create_booking_product_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "images": [
+                {
+                    "path": "test_path",
+                    "metadata": {
+                        "size": 1,
+                        "filename": "Test",
+                        "extension": "test_extension",
+                        "mime_type": "test_mime_type",
+                    },
+                }
+            ],
+            "order": None,
+            "visibility": "test_visibility",
+            "delivery_text": None,
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ],
+            "other_settings": {
+                "faq": [{"question": "test_question", "answer": "test_answer"}],
+                "video_url": "video_url_01234",
+                "redirect_url": "https://example.com",
+                "product_title": "test_product_title",
+                "product_description": "test_product_description",
+            },
+            "deleted_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "section_id": None,
+            "section_order": None,
+            "is_discoverable": True,
+            "variants": [{"id": 1, "title": "test_title"}],
+            "url": "https://example.com",
+            "type": "test_type",
+        }
+        instance = (
+            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["order"] is None
+        assert serialized["delivery_text"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["section_id"] is None
+        assert serialized["section_order"] is None
+
+    def test_sdk_create_booking_product_response_value_201_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_create_booking_product_response_value_201_application_json.json"
+        )
+        instance = SdkCreateBookingProductResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkCreateBookingProductResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_create_booking_product_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "title": "test_title",
+                "slug": "test_slug",
+                "description": "test_description",
+                "images": [
+                    {
+                        "path": "test_path",
+                        "metadata": {
+                            "size": 1,
+                            "filename": "Test",
+                            "extension": "test_extension",
+                            "mime_type": "test_mime_type",
+                        },
+                    }
+                ],
+                "order": 1,
+                "visibility": "test_visibility",
+                "delivery_text": "test_delivery_text",
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ],
+                "other_settings": {
+                    "faq": [{"question": "test_question", "answer": "test_answer"}],
+                    "video_url": "video_url_01234",
+                    "redirect_url": "https://example.com",
+                    "product_title": "test_product_title",
+                    "product_description": "test_product_description",
+                },
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "section_id": 1,
+                "section_order": 1,
+                "is_discoverable": True,
+                "variants": [{"id": 1, "title": "test_title"}],
+                "url": "https://example.com",
+                "type": "test_type",
+            }
+        }
+        instance = SdkCreateBookingProductResponseValue201ApplicationJson.from_dict(
+            data
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

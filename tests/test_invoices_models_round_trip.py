@@ -547,6 +547,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = ListInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPayment.from_dict(
             data
@@ -558,6 +560,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_list_invoices_response_value_200_application_json_property_data_item_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = ListInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_list_invoices_response_value_200_application_json_property_data_item_property_status_property_history_item_round_trip(
         self,
@@ -918,6 +965,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -1026,6 +1075,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -1137,6 +1188,8 @@ class TestModelRoundTrip:
                                 "inclusive": "test_inclusive",
                             },
                         },
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "status": {
                         "history": [
@@ -1589,6 +1642,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPayment.from_dict(
             data
@@ -1600,6 +1655,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_create_invoice_response_value_201_application_json_property_data_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = CreateInvoiceResponseValue201ApplicationJsonPropertyDataPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_create_invoice_response_value_201_application_json_property_data_property_status_property_history_item_round_trip(
         self,
@@ -1924,6 +2024,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -2030,6 +2132,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -2139,6 +2243,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -2524,6 +2630,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = SearchInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPayment.from_dict(
             data
@@ -2535,6 +2643,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_search_invoices_response_value_200_application_json_property_data_item_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = SearchInvoicesResponseValue200ApplicationJsonPropertyDataItemPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_search_invoices_response_value_200_application_json_property_data_item_property_status_property_history_item_round_trip(
         self,
@@ -2897,6 +3050,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -3007,6 +3162,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -3122,6 +3279,8 @@ class TestModelRoundTrip:
                                 "inclusive": "test_inclusive",
                             },
                         },
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "status": {
                         "history": [
@@ -3516,6 +3675,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = GetInvoiceResponseValue200ApplicationJsonPropertyDataPropertyPayment.from_dict(
             data
@@ -3527,6 +3688,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_get_invoice_response_value_200_application_json_property_data_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = GetInvoiceResponseValue200ApplicationJsonPropertyDataPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_get_invoice_response_value_200_application_json_property_data_property_status_property_history_item_round_trip(
         self,
@@ -3883,6 +4089,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -3989,6 +4197,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -4093,6 +4303,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -4480,6 +4692,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment.from_dict(
             data
@@ -4491,6 +4705,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_create_checkout_session_response_value_200_application_json_property_invoice_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoicePropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_create_checkout_session_response_value_200_application_json_property_invoice_property_status_property_history_item_round_trip(
         self,
@@ -4849,6 +5108,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -4957,6 +5218,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -5074,6 +5337,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -5175,6 +5440,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -5812,6 +6079,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = MarkPendingInvoiceCompletedResponseValue200ApplicationJsonPropertyPayment.from_dict(
             data
@@ -5823,6 +6092,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_mark_pending_invoice_completed_response_value_200_application_json_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = MarkPendingInvoiceCompletedResponseValue200ApplicationJsonPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_mark_pending_invoice_completed_response_value_200_application_json_property_status_property_history_item_round_trip(
         self,
@@ -6185,6 +6499,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -6295,6 +6611,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -6687,6 +7005,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = MarkPendingInvoiceVoidedResponseValue200ApplicationJsonPropertyPayment.from_dict(
             data
@@ -6698,6 +7018,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_mark_pending_invoice_voided_response_value_200_application_json_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = MarkPendingInvoiceVoidedResponseValue200ApplicationJsonPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_mark_pending_invoice_voided_response_value_200_application_json_property_status_property_history_item_round_trip(
         self,
@@ -7056,6 +7421,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -7164,6 +7531,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -7554,6 +7923,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyPayment.from_dict(
             data
@@ -7565,6 +7936,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_issue_replacement_for_completed_invoice_response_value_200_application_json_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_issue_replacement_for_completed_invoice_response_value_200_application_json_property_status_property_history_item_round_trip(
         self,
@@ -7923,6 +8339,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -8031,6 +8449,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -8425,6 +8845,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = (
             UpdateInvoiceStatusResponseValue200ApplicationJsonPropertyPayment.from_dict(
@@ -8438,6 +8860,53 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_update_invoice_status_response_value_200_application_json_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = (
+            UpdateInvoiceStatusResponseValue200ApplicationJsonPropertyPayment.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_update_invoice_status_response_value_200_application_json_property_status_property_history_item_round_trip(
         self,
@@ -8800,6 +9269,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -8906,6 +9377,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -9294,6 +9767,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyInvoicePropertyPayment.from_dict(
             data
@@ -9305,6 +9780,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_create_invoice_refund_response_value_200_application_json_property_data_property_invoice_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = CreateInvoiceRefundResponseValue200ApplicationJsonPropertyDataPropertyInvoicePropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_create_invoice_refund_response_value_200_application_json_property_data_property_invoice_property_status_property_history_item_round_trip(
         self,
@@ -9663,6 +10183,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -9771,6 +10293,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -9961,6 +10485,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -10085,6 +10611,8 @@ class TestModelRoundTrip:
                                 "inclusive": "test_inclusive",
                             },
                         },
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "status": {
                         "history": [

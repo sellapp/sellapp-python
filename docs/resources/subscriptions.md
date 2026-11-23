@@ -85,6 +85,14 @@ def list_subscriptions(
         page: int | None = None,
         pagination: bool | None = None,
         status: list[SubscriptionsStatus | str] | None = None,
+        order_id: int | None = None,
+        product_id: int | None = None,
+        renews_after: str | None = None,
+        renews_before: str | None = None,
+        cancelled_after: str | None = None,
+        cancelled_before: str | None = None,
+        scheduled_to_cancel: bool | None = None,
+        paused: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]:
 ```
@@ -98,6 +106,14 @@ def list_subscriptions(
 | page | `int \| None` | No |
 | pagination | `bool \| None` | No |
 | status | `list[SubscriptionsStatus \| str] \| None` | No |
+| order_id | `int \| None` | No |
+| product_id | `int \| None` | No |
+| renews_after | `str \| None` | No |
+| renews_before | `str \| None` | No |
+| cancelled_after | `str \| None` | No |
+| cancelled_before | `str \| None` | No |
+| scheduled_to_cancel | `bool \| None` | No |
+| paused | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListSubscriptionsResponseValue200ApplicationJson]`.
@@ -151,6 +167,14 @@ def search_subscriptions(
         search: SearchSubscriptionsRequestApplicationJsonPropertySearch | None = None,
         includes: list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
         | None = None,
+        order_id: int | None | NotGiven = NOT_GIVEN,
+        product_id: int | None | NotGiven = NOT_GIVEN,
+        renews_after: str | None | NotGiven = NOT_GIVEN,
+        renews_before: str | None | NotGiven = NOT_GIVEN,
+        cancelled_after: str | None | NotGiven = NOT_GIVEN,
+        cancelled_before: str | None | NotGiven = NOT_GIVEN,
+        scheduled_to_cancel: bool | None | NotGiven = NOT_GIVEN,
+        paused: bool | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -170,6 +194,14 @@ def search_subscriptions(
 | search | `SearchSubscriptionsRequestApplicationJsonPropertySearch \| None` | No |
 | includes | `list[SearchSubscriptionsRequestApplicationJsonPropertyIncludesItem]
         \| None` | No |
+| order_id | `int \| None \| NotGiven` | No |
+| product_id | `int \| None \| NotGiven` | No |
+| renews_after | `str \| None \| NotGiven` | No |
+| renews_before | `str \| None \| NotGiven` | No |
+| cancelled_after | `str \| None \| NotGiven` | No |
+| cancelled_before | `str \| None \| NotGiven` | No |
+| scheduled_to_cancel | `bool \| None \| NotGiven` | No |
+| paused | `bool \| None \| NotGiven` | No |
 | limit | `int \| None` | No |
 | before | `str \| None` | No |
 | after | `str \| None` | No |

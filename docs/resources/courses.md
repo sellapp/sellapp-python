@@ -66,6 +66,105 @@ Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API refere
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## create
+
+Create a course
+
+[API reference](https://sell.app/docs/api/courses/create-a-course) · Effect: **write**
+
+```python
+def create(
+        self,
+        *,
+        title: str,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkCreateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkCreateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateCourseResponseValue201ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| title | `str` | Yes |
+| category | `Category \| str \| None \| NotGiven` | No |
+| level | `SdkCreateCourseRequestApplicationJsonLevel \| str \| None` | No |
+| language | `str \| None` | No |
+| subtitle | `str \| None \| NotGiven` | No |
+| author | `str \| None \| NotGiven` | No |
+| subcategory | `str \| None \| NotGiven` | No |
+| what_you_learn | `builtins.list[str] \| None` | No |
+| requirements | `builtins.list[str] \| None` | No |
+| certificate_enabled | `bool \| None` | No |
+| access_type | `SdkCreateCourseRequestApplicationJsonAccessType
+        \| str
+        \| None` | No |
+| access_duration_days | `int \| None \| NotGiven` | No |
+| enrollment_limit | `int \| None \| NotGiven` | No |
+| delivery_text | `str \| None \| NotGiven` | No |
+| slug | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkCreateCourseResponseValue201ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.courses.create(
+    category="design",
+    level="beginner",
+    language="English",
+    what_you_learn=["Sketch a logo concept.", "Choose a color palette."],
+    certificate_enabled=True,
+    delivery_text="Open your course from the link in your receipt.",
+    title="Brand identity basics",
+    description="<p>Design a logo, color palette, and type system for your next project.</p>"
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 201, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
 ## search
 
 Search courses
@@ -237,6 +336,9 @@ def replace(
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
 ```
@@ -261,6 +363,9 @@ def replace(
 | delivery_text | `str \| None \| NotGiven` | No |
 | visibility | `CatalogVisibility \| str \| None` | No |
 | expected_updated_at | `str \| None` | No |
+| title | `str \| None` | No |
+| slug | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkReplaceCourseResponseValue200ApplicationJson`.
@@ -329,6 +434,9 @@ def update(
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
 ```
@@ -353,6 +461,9 @@ def update(
 | delivery_text | `str \| None \| NotGiven` | No |
 | visibility | `CatalogVisibility \| str \| None` | No |
 | expected_updated_at | `str \| None` | No |
+| title | `str \| None` | No |
+| slug | `str \| None` | No |
+| description | `str \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateCourseResponseValue200ApplicationJson`.
@@ -390,6 +501,69 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## get_student_summary
+
+Retrieve a course student summary
+
+[API reference](https://sell.app/docs/api/courses/retrieve-course-student-summary) · Effect: **read**
+
+```python
+def get_student_summary(
+        self,
+        *,
+        start_date: str,
+        end_date: str,
+        course_id: int | None = None,
+        limit: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCourseStudentSummaryResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| start_date | `str` | Yes |
+| end_date | `str` | Yes |
+| course_id | `int \| None` | No |
+| limit | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkGetCourseStudentSummaryResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.courses.get_student_summary(
+    start_date="2026-08-01",
+    end_date="2026-08-31"
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

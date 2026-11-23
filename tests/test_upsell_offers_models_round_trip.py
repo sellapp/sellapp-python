@@ -16,6 +16,7 @@ from sellapp_sdk.upsell_offers.models import (
     DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetVariant,
     DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceProduct,
     DeleteUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceVariant,
+    GetUpsellOfferPerformanceResponseValue200ApplicationJsonPropertyData,
     GetUpsellOfferResponseValue200ApplicationJsonPropertyData,
     GetUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertyItemsItem,
     GetUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertyItemsItemPropertyTargetProduct,
@@ -31,6 +32,7 @@ from sellapp_sdk.upsell_offers.models import (
     ReplaceUpsellOfferResponseValue200ApplicationJsonPropertyDataPropertySourceVariant,
     SdkCreateUpsellOfferResponseValue201ApplicationJson,
     SdkDeleteUpsellOfferResponseValue200ApplicationJson,
+    SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson,
     SdkGetUpsellOfferResponseValue200ApplicationJson,
     SdkReplaceUpsellOfferResponseValue200ApplicationJson,
     SdkUpdateUpsellOfferResponseValue200ApplicationJson,
@@ -2407,5 +2409,77 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkDeleteUpsellOfferResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_upsell_offer_performance_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_upsell_offer_performance_response_value_200_application_json_property_data.json"
+        )
+        instance = GetUpsellOfferPerformanceResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetUpsellOfferPerformanceResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_upsell_offer_performance_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "upsell_offer_id": 1,
+            "impressions": 1,
+            "checkout_starts": 1,
+            "accepts": 1,
+            "revenue_usd_cents": 1,
+        }
+        instance = GetUpsellOfferPerformanceResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["upsell_offer_id"] == data["upsell_offer_id"]
+        assert serialized["impressions"] == data["impressions"]
+        assert serialized["checkout_starts"] == data["checkout_starts"]
+        assert serialized["accepts"] == data["accepts"]
+        assert serialized["revenue_usd_cents"] == data["revenue_usd_cents"]
+
+    def test_sdk_get_upsell_offer_performance_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_upsell_offer_performance_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_upsell_offer_performance_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "upsell_offer_id": 1,
+                "impressions": 1,
+                "checkout_starts": 1,
+                "accepts": 1,
+                "revenue_usd_cents": 1,
+            }
+        }
+        instance = (
+            SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson.from_dict(data)
+        )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

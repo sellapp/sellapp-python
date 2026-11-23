@@ -55,6 +55,8 @@ from sellapp_sdk.common.models import (
     CreateOrderCheckoutResponseValue201ApplicationJsonPropertyDataPropertyTotals,
     CursorExpiredError,
     CursorExpiredErrorFallback,
+    ErrorEnvelope,
+    ErrorEnvelopeFallback,
     IssueEligibleRewardGrantResponseValue201ApplicationJsonPropertyData,
     IssueEligibleRewardGrantResponseValue201ApplicationJsonPropertyDataPropertyCustomer,
     IssueEligibleRewardGrantResponseValue201ApplicationJsonPropertyDataPropertyOutputsItem,
@@ -107,6 +109,8 @@ from sellapp_sdk.common.models import (
     SearchCreditsProductsResponseValue200ApplicationJsonAnyOfValue2PropertyDataItemPropertyDefaultVariant,
     SearchCreditsProductsResponseValue200ApplicationJsonAnyOfValue2PropertyDataItemPropertyDefaultVariantValuePropertyRateTiersItem,
     SearchCreditsProductsResponseValue200ApplicationJsonAnyOfValue2PropertyDataItemPropertyVariantInvariant,
+    UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue1,
+    UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue2,
     UpdateWalletBonusTierResponseValue201ApplicationJsonPropertyData,
     UpsertCustomerResponseValue201ApplicationJsonPropertyData,
     UpsertCustomerResponseValue201ApplicationJsonPropertyDataPropertyInsights,
@@ -120,6 +124,60 @@ from tests.generated_helpers import load_fixture
 
 
 class TestModelRoundTrip:
+    def test_error_envelope_round_trip(self):
+        data = load_fixture("error_envelope.json")
+        instance = ErrorEnvelope.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ErrorEnvelope.from_dict(serialized)
+        assert restored.to_dict() == serialized
+
+    def test_error_envelope_minimal_payload(self):
+        data = {
+            "type": "test_type",
+            "code": "test_code",
+            "message": "test_message",
+            "status": 1,
+            "request_id": "00000000-0000-0000-0000-000000000000",
+        }
+        instance = ErrorEnvelope.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["code"] == data["code"]
+        assert serialized["message"] == data["message"]
+        assert serialized["status"] == data["status"]
+        assert serialized["request_id"] == data["request_id"]
+
+    def test_error_envelope_omits_absent_optional_non_nullable_fields(self):
+        data = {
+            "type": "test_type",
+            "code": "test_code",
+            "message": "test_message",
+            "status": 1,
+            "param": "test_param",
+            "request_id": "00000000-0000-0000-0000-000000000000",
+            "docs_url": "https://example.com",
+        }
+        instance = ErrorEnvelope.from_dict(data)
+        serialized = instance.to_dict()
+        assert "fallback" not in serialized
+
+    def test_error_envelope_preserves_nullable_fields(self):
+        data = {
+            "type": "test_type",
+            "code": "test_code",
+            "message": "test_message",
+            "status": 1,
+            "param": None,
+            "request_id": "00000000-0000-0000-0000-000000000000",
+            "docs_url": None,
+            "fallback": {"transport": "cursor_polling", "url": "https://example.com"},
+        }
+        instance = ErrorEnvelope.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["param"] is None
+        assert serialized["docs_url"] is None
+
     def test_cursor_expired_error_round_trip(self):
         data = load_fixture("cursor_expired_error.json")
         instance = CursorExpiredError.from_dict(data)
@@ -483,6 +541,8 @@ class TestModelRoundTrip:
                 "vat": 1,
                 "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
             },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPayment.from_dict(
             data
@@ -494,6 +554,51 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] == data["expires_at"]
         assert serialized["full_price"] == data["full_price"]
         assert serialized["original_amount"] == data["original_amount"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
+
+    def test_create_checkout_session_response_value_201_application_json_property_invoice_property_payment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "fee": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "gateway": {"data": {}, "type": "test_type"},
+            "subtotal": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "full_price": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "original_amount": {
+                "base": "test_base",
+                "currency": "test_currency",
+                "units": 1,
+                "vat": 1,
+                "total": {"exclusive": "test_exclusive", "inclusive": "test_inclusive"},
+            },
+            "refund_currency": None,
+            "refunded_total_cents": 1,
+        }
+        instance = CreateCheckoutSessionResponseValue201ApplicationJsonPropertyInvoicePropertyPayment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["refund_currency"] is None
 
     def test_create_checkout_session_response_value_201_application_json_property_invoice_property_status_property_history_item_round_trip(
         self,
@@ -818,6 +923,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -922,6 +1029,8 @@ class TestModelRoundTrip:
                         "inclusive": "test_inclusive",
                     },
                 },
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "status": {
                 "history": [
@@ -1036,6 +1145,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -1134,6 +1245,8 @@ class TestModelRoundTrip:
                             "inclusive": "test_inclusive",
                         },
                     },
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "status": {
                     "history": [
@@ -2230,6 +2343,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -2255,6 +2369,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_batch_create_product_variants_response_value_201_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -2304,6 +2419,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchCreateProductVariantsResponseValue201ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -2390,6 +2506,7 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ]
         }
@@ -2641,7 +2758,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2679,7 +2796,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2704,7 +2821,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_list_add_ons_response_value_200_application_json_any_of_value_1_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2772,7 +2889,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2810,7 +2927,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2835,7 +2952,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_list_add_ons_response_value_200_application_json_any_of_value_2_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2903,7 +3020,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2941,7 +3058,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -2966,7 +3083,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_search_add_ons_response_value_200_application_json_any_of_value_1_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3034,7 +3151,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3072,7 +3189,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3097,7 +3214,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_search_add_ons_response_value_200_application_json_any_of_value_2_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3165,7 +3282,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3203,7 +3320,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3228,7 +3345,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_list_product_s_add_ons_response_value_200_application_json_any_of_value_1_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3296,7 +3413,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3334,7 +3451,7 @@ class TestModelRoundTrip:
             "visibility": "PUBLIC",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -3359,7 +3476,7 @@ class TestModelRoundTrip:
             "visibility": "unexpected_list_product_s_add_ons_response_value_200_application_json_any_of_value_2_property_data_item_visibility",
             "type": "addon",
             "is_draft": True,
-            "is_discoverable": False,
+            "is_discoverable": True,
             "parent_product_ids": [120, 121],
             "variants": [{"id": 8801, "title": "Default", "is_draft": False}],
             "created_at": "2023-01-01T00:00:00.000Z",
@@ -5482,6 +5599,84 @@ class TestModelRoundTrip:
         )
         assert instance.to_dict() == data
 
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_1_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_1.json"
+        )
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue1.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_1_minimal_payload(
+        self,
+    ):
+        data = {"type": "percentage", "percentage": "test_percentage"}
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["percentage"] == data["percentage"]
+
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_1_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "type": "percentage",
+            "percentage": "test_percentage",
+            "amount_usd_cents": None,
+        }
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["amount_usd_cents"] is None
+
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_2_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_2.json"
+        )
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue2.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue2.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_2_minimal_payload(
+        self,
+    ):
+        data = {"type": "fixed", "amount_usd_cents": 1}
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue2.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["amount_usd_cents"] == data["amount_usd_cents"]
+
+    def test_update_affiliate_products_request_application_json_property_products_item_property_commission_any_of_value_1_one_of_value_2_preserves_nullable_fields(
+        self,
+    ):
+        data = {"type": "fixed", "percentage": None, "amount_usd_cents": 1}
+        instance = UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItemPropertyCommissionAnyOfValue1OneOfValue2.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["percentage"] is None
+
     def test_create_affiliate_payout_response_value_201_application_json_property_data_round_trip(
         self,
     ):
@@ -6427,6 +6622,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderCheckoutResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6440,6 +6637,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_order_checkout_response_value_201_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -6451,6 +6650,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderCheckoutResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6458,6 +6659,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_order_checkout_response_value_201_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -6617,6 +6819,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -6687,6 +6891,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -6750,6 +6956,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -6827,6 +7035,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -6957,6 +7167,21 @@ class TestModelRoundTrip:
     def test_cursor_expired_error_fallback_minimal_payload(self):
         data = {"transport": "cursor_polling", "url": "https://example.com"}
         instance = CursorExpiredErrorFallback.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["transport"] == data["transport"]
+        assert serialized["url"] == data["url"]
+
+    def test_error_envelope_fallback_round_trip(self):
+        data = load_fixture("error_envelope_fallback.json")
+        instance = ErrorEnvelopeFallback.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ErrorEnvelopeFallback.from_dict(serialized)
+        assert restored.to_dict() == serialized
+
+    def test_error_envelope_fallback_minimal_payload(self):
+        data = {"transport": "cursor_polling", "url": "https://example.com"}
+        instance = ErrorEnvelopeFallback.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["transport"] == data["transport"]
         assert serialized["url"] == data["url"]

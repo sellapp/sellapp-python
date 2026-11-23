@@ -15,6 +15,7 @@ from sellapp_sdk._errors import (
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.blacklists.models import (
+    FeedbackReplyState,
     ListFeedbackResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetFeedbackResponseValue200ApplicationJson,
     SdkReplyToFeedbackResponseValue200ApplicationJson,
@@ -126,13 +127,18 @@ class TestFeedback:
     def test_v2_list_feedback_encodes_query_params(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         sellapp_sdk.feedback.v2_list_feedback(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            reply_state=FeedbackReplyState("all"),
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["reply_state"] == "all"
 
     def test_v2_search_feedback(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -153,6 +159,17 @@ class TestFeedback:
         page = sellapp_sdk.feedback.v2_search_feedback()
         assert isinstance(page, SyncPage)
         assert page.data == []
+
+    def test_v2_search_feedback_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.feedback.v2_search_feedback(
+            limit=10, before="cursor before", after="cursor/after", page=7
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
 
     def test_v2_get_feedback(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -407,13 +424,18 @@ class TestAsyncFeedback:
     ):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         await async_sellapp_sdk.feedback.v2_list_feedback(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            reply_state=FeedbackReplyState("all"),
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["reply_state"] == "all"
 
     @pytest.mark.asyncio
     async def test_v2_search_feedback(self, async_sellapp_sdk, httpx_mock):
@@ -436,6 +458,20 @@ class TestAsyncFeedback:
         page = await async_sellapp_sdk.feedback.v2_search_feedback()
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_v2_search_feedback_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.feedback.v2_search_feedback(
+            limit=10, before="cursor before", after="cursor/after", page=7
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
 
     @pytest.mark.asyncio
     async def test_v2_get_feedback(self, async_sellapp_sdk, httpx_mock):

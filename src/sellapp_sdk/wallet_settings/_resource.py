@@ -30,7 +30,7 @@ class WalletSettings:
     ) -> SdkGetWalletSettingsResponseValue200ApplicationJson:
         """Retrieve wallet settings
 
-        Retrieve wallet settings for the authenticated store. Requires the `wallet` or `wallet:write` API ability. Payment methods are returned as their effective configurable values when no explicit restriction is stored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Retrieve wallet settings for the authenticated store. Requires the `wallet` or `wallet:write` API-key ability. Payment methods are returned as their effective configurable values when no explicit restriction is stored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkGetWalletSettingsResponseValue200ApplicationJson
@@ -92,7 +92,7 @@ class WalletSettings:
     ) -> SdkReplaceWalletSettingsResponseValue200ApplicationJson:
         """Update wallet settings
 
-        Update wallet settings. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update wallet settings. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             enabled: The enabled.
@@ -222,7 +222,7 @@ class AsyncWalletSettings:
     ) -> SdkGetWalletSettingsResponseValue200ApplicationJson:
         """Retrieve wallet settings
 
-        Retrieve wallet settings for the authenticated store. Requires the `wallet` or `wallet:write` API ability. Payment methods are returned as their effective configurable values when no explicit restriction is stored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Retrieve wallet settings for the authenticated store. Requires the `wallet` or `wallet:write` API-key ability. Payment methods are returned as their effective configurable values when no explicit restriction is stored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkGetWalletSettingsResponseValue200ApplicationJson
@@ -284,7 +284,7 @@ class AsyncWalletSettings:
     ) -> SdkReplaceWalletSettingsResponseValue200ApplicationJson:
         """Update wallet settings
 
-        Update wallet settings. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update wallet settings. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             enabled: The enabled.

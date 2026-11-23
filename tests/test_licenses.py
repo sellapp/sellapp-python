@@ -18,6 +18,7 @@ from sellapp_sdk.common.models import (
     SdkActivateLicenseKeyResponseValue200ApplicationJson,
 )
 from sellapp_sdk.licenses.models import (
+    LicensesValidity,
     SdkDeactivateLicenseResponseValue200ApplicationJson,
     SdkGetLicenseKeyResponseValue200ApplicationJson,
     SdkListLicenseKeysResponseValue200ApplicationJson,
@@ -81,13 +82,26 @@ class TestLicenses:
     def test_list_encodes_query_params(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         sellapp_sdk.licenses.list(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            key="value key/test",
+            customer_email="value customer_email/test",
+            product_id=7,
+            order_id=7,
+            validity=LicensesValidity("active"),
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["key"] == "value key/test"
+        assert request.url.params["customer_email"] == "value customer_email/test"
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["order_id"] == "7"
+        assert request.url.params["validity"] == "active"
 
     def test_get(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -305,13 +319,26 @@ class TestAsyncLicenses:
     async def test_list_encodes_query_params(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         await async_sellapp_sdk.licenses.list(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            key="value key/test",
+            customer_email="value customer_email/test",
+            product_id=7,
+            order_id=7,
+            validity=LicensesValidity("active"),
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["key"] == "value key/test"
+        assert request.url.params["customer_email"] == "value customer_email/test"
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["order_id"] == "7"
+        assert request.url.params["validity"] == "active"
 
     @pytest.mark.asyncio
     async def test_get(self, async_sellapp_sdk, httpx_mock):

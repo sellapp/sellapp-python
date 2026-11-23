@@ -12,8 +12,8 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-from .list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data import (
-    ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData,
+from .list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data_any_of_value_1 import (
+    ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1,
 )
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
@@ -21,7 +21,18 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "required": ["types", "data"],
     "properties": {
         "types": {"kind": "array", "items": {"kind": "primitive", "type": "string"}},
-        "data": {"kind": "any"},
+        "data": {
+            "kind": "union",
+            "variants": [
+                {"kind": "any"},
+                {
+                    "kind": "array",
+                    "items": {"kind": "primitive", "type": "unknown"},
+                    "constraints": {"maxItems": 0},
+                },
+            ],
+            "composition": "anyOf",
+        },
     },
     "additionalProperties": True,
 }
@@ -30,7 +41,18 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "required": ["types", "data"],
     "properties": {
         "types": {"kind": "array", "items": {"kind": "primitive", "type": "string"}},
-        "data": {"kind": "any"},
+        "data": {
+            "kind": "union",
+            "variants": [
+                {"kind": "any"},
+                {
+                    "kind": "array",
+                    "items": {"kind": "primitive", "type": "unknown"},
+                    "constraints": {"maxItems": 0},
+                },
+            ],
+            "composition": "anyOf",
+        },
     },
     "additionalProperties": True,
 }
@@ -41,7 +63,10 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemProper
     """List Order Deliverables Response Value200Application Json Property Data Item Property Deliverable model."""
 
     types: list[str]
-    data: ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData
+    data: (
+        ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1
+        | list[Any]
+    )
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -63,7 +88,7 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemProper
             )
             return cls(
                 types=data["types"],
-                data=ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+                data=ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1.from_dict(
                     cast(dict[str, Any], data["data"])
                 ),
                 additional_properties=_preserve_unknown_fields(data, ["types", "data"]),

@@ -125,7 +125,9 @@ class CreateAddOnDraftResponseValue201ApplicationJsonPropertyData:
     visibility: CatalogVisibility
     type: Literal["addon"]
     is_draft: bool
+    """`true` while the add-on is a draft. Drafts are hidden from the storefront and checkout."""
     is_discoverable: bool
+    """`true` for every add-on saved through the API or the dashboard, drafts included, so it stays listed in your dashboard. `false` only on an unsaved placeholder the dashboard creates while someone is filling in a new add-on; it is removed automatically if never saved. Use `is_draft` to control whether customers can see the add-on."""
     parent_product_ids: list[int]
     """Ordered IDs of products, courses, and bookings that offer this add-on."""
     variants: list[

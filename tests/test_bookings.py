@@ -16,6 +16,7 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.bookings.models import (
     SdkCancelAppointmentResponseValue200ApplicationJson,
+    SdkCreateBookingProductResponseValue201ApplicationJson,
     SdkGetAppointmentResponseValue200ApplicationJson,
     SdkUpdateAppointmentResponseValue200ApplicationJson,
 )
@@ -106,6 +107,23 @@ class TestBookings:
         assert request.url.path.endswith("/v2/bookings/test_booking/status")
         body = json.loads(request.content)
         assert body["status"] == "cancelled"
+
+    def test_create(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_create_booking_product_response_value_201_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.bookings.create(title="test_title", price_cents=1)
+        assert isinstance(
+            result, SdkCreateBookingProductResponseValue201ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/booking-products")
+        body = json.loads(request.content)
+        assert body["title"] == "test_title"
+        assert body["price_cents"] == 1
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -295,6 +313,23 @@ class TestAsyncBookings:
         request = httpx_mock.get_request()
         assert request.method == "PATCH"
         assert request.url.path.endswith("/v2/bookings/test_booking/status")
+
+    @pytest.mark.asyncio
+    async def test_create(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_create_booking_product_response_value_201_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.bookings.create(
+            title="test_title", price_cents=1
+        )
+        assert isinstance(
+            result, SdkCreateBookingProductResponseValue201ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/booking-products")
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

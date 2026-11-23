@@ -11,8 +11,17 @@ from typing import Literal, TypeAlias
 class TypeModel(str, Enum):
     """Known values for TypeModel."""
 
-    PRODUCT = "product"
-    ORDER = "order"
+    TOP_UP = "TOP_UP"
+    TOP_UP_BONUS = "TOP_UP_BONUS"
+    CASHBACK = "CASHBACK"
+    CASHBACK_CLAWBACK = "CASHBACK_CLAWBACK"
+    TOP_UP_CLAWBACK = "TOP_UP_CLAWBACK"
+    REWARD = "REWARD"
+    REFUND = "REFUND"
+    PURCHASE_DEBIT = "PURCHASE_DEBIT"
+    MANUAL_ADJUSTMENT = "MANUAL_ADJUSTMENT"
+    REVERSAL = "REVERSAL"
+    EXPIRATION = "EXPIRATION"
     NULL = "null"
 
     @classmethod
@@ -25,4 +34,17 @@ class TypeModel(str, Enum):
         return unknown
 
 
-TypeModelLiteral: TypeAlias = Literal["product", "order", "null"]
+TypeModelLiteral: TypeAlias = Literal[
+    "TOP_UP",
+    "TOP_UP_BONUS",
+    "CASHBACK",
+    "CASHBACK_CLAWBACK",
+    "TOP_UP_CLAWBACK",
+    "REWARD",
+    "REFUND",
+    "PURCHASE_DEBIT",
+    "MANUAL_ADJUSTMENT",
+    "REVERSAL",
+    "EXPIRATION",
+    "null",
+]

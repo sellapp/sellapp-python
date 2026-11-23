@@ -9,6 +9,11 @@ from .._base_client import WithRawResponse
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
+import builtins
+
+from sellapp_sdk.common.models.affiliate_payouts_payout_method import (
+    AffiliatePayoutsPayoutMethod,
+)
 from sellapp_sdk.common.models.affiliate_payouts_status import AffiliatePayoutsStatus
 from sellapp_sdk.common.models.list_affiliate_payouts_response_value_200_application_json_property_data_item import (
     ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem,
@@ -24,6 +29,7 @@ from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model, enum_value
 from .models import (
     SdkGetAffiliatePayoutResponseValue200ApplicationJson,
+    SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson,
     SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson,
 )
 
@@ -44,12 +50,14 @@ class AffiliatePayouts:
         order: str | None = None,
         affiliate_id: int | None = None,
         status: AffiliatePayoutsStatus | str | None = None,
+        payout_method: AffiliatePayoutsPayoutMethod | str | None = None,
+        search: str | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliate payouts
 
-        List merchant-managed affiliate payout records. These record commission payments arranged by the merchant; SellApp does not transfer or hold the funds. Requires the `affiliate` credential ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List merchant-managed affiliate payout records, newest first, 15 per page by default. These record commission payments arranged by the merchant; SellApp does not transfer or hold the funds. Requires the `affiliate` credential ability. A `status` or `payout_method` value the API does not know returns `422`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -58,6 +66,8 @@ class AffiliatePayouts:
             order: The order.
             affiliate_id: Filter by affiliate ID.
             status: Filter by payout status.
+            payout_method: List only payouts recorded for this payout method. Uppercase, as returned in `payout_method`; `paypal` returns `422`.
+            search: The start of the affiliate's email address, such as `alex` or `alex.morgan@`. It matches from the first character only, and `%` and `_` match themselves.
             page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -111,6 +121,10 @@ class AffiliatePayouts:
                 "order": order,
                 "affiliate_id": affiliate_id,
                 "status": enum_value(status) if status is not None else None,
+                "payout_method": enum_value(payout_method)
+                if payout_method is not None
+                else None,
+                "search": search,
                 "page": page,
             }.items()
             if v is not None
@@ -333,6 +347,107 @@ class AffiliatePayouts:
             request_options=request_options,
         )
 
+    def mark_paid(
+        self,
+        *,
+        payout_ids: builtins.list[int],
+        expected_total_usd_cents: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson:
+        """Mark affiliate payouts paid
+
+        Record up to 20 due affiliate payouts as paid in one request, after you have paid the affiliates yourself. No money moves: SellApp only records the payment. Each payout marked paid also marks its referrals paid and emails that affiliate that the payout was paid. Send the payout IDs and `expected_total_usd_cents`, the sum of their `amount_usd_cents` as you read them, in integer USD cents (`4250` means $42.50). Every payout is checked first, and nothing changes when one of them is unknown in your store, is not `due`, or has referrals that no longer add up to it or can no longer be paid (`422` on `payout_ids`, one message per payout), or when the amounts add up to another total (`422` on `expected_total_usd_cents`). Then each payout is marked in the order sent, and `data` reports one `outcome` per payout: `paid`, `skipped`, or `failed`. A payout that changes between the check and its turn is skipped or fails without affecting the others. Requires the `affiliate` and `affiliate:payout` API-key abilities, and the staff member who owns the key needs the affiliate and affiliate payout permissions. There is no idempotency key, but sending the same batch again is refused with `422` on `payout_ids`, because those payouts are no longer due, so nobody is emailed twice. After a lost response, list the payouts with `GET /v2/affiliate-payouts?status=due` and send only those still due, with their new total. The emails cannot be taken back; to reopen a payout recorded by mistake, set it back to `due` with `PATCH /v2/affiliate-payouts/{payout}/status`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            payout_ids: The due payouts to record as paid, at most 20, each once. They are marked in this order.
+            expected_total_usd_cents: The sum of the payouts' `amount_usd_cents`, in integer USD cents, as you read them. If they add up to anything else, nothing is marked.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "markAffiliatePayoutsPaid",
+        }
+        body: dict[str, Any] = {
+            "payout_ids": payout_ids,
+            "expected_total_usd_cents": expected_total_usd_cents,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkMarkAffiliatePayoutsPaidRequestApplicationJson",
+                "required": ["payout_ids", "expected_total_usd_cents"],
+                "properties": {
+                    "payout_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 20,
+                            "uniqueItems": True,
+                        },
+                    },
+                    "expected_total_usd_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "affiliate-payouts", "mark-paid"),
+            body=body,
+            model=SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncAffiliatePayouts:
     """Affiliate Payouts API resources (async)."""
@@ -350,12 +465,14 @@ class AsyncAffiliatePayouts:
         order: str | None = None,
         affiliate_id: int | None = None,
         status: AffiliatePayoutsStatus | str | None = None,
+        payout_method: AffiliatePayoutsPayoutMethod | str | None = None,
+        search: str | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliate payouts
 
-        List merchant-managed affiliate payout records. These record commission payments arranged by the merchant; SellApp does not transfer or hold the funds. Requires the `affiliate` credential ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List merchant-managed affiliate payout records, newest first, 15 per page by default. These record commission payments arranged by the merchant; SellApp does not transfer or hold the funds. Requires the `affiliate` credential ability. A `status` or `payout_method` value the API does not know returns `422`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -364,6 +481,8 @@ class AsyncAffiliatePayouts:
             order: The order.
             affiliate_id: Filter by affiliate ID.
             status: Filter by payout status.
+            payout_method: List only payouts recorded for this payout method. Uppercase, as returned in `payout_method`; `paypal` returns `422`.
+            search: The start of the affiliate's email address, such as `alex` or `alex.morgan@`. It matches from the first character only, and `%` and `_` match themselves.
             page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -417,6 +536,10 @@ class AsyncAffiliatePayouts:
                 "order": order,
                 "affiliate_id": affiliate_id,
                 "status": enum_value(status) if status is not None else None,
+                "payout_method": enum_value(payout_method)
+                if payout_method is not None
+                else None,
+                "search": search,
                 "page": page,
             }.items()
             if v is not None
@@ -636,5 +759,106 @@ class AsyncAffiliatePayouts:
             path=("v2", "affiliate-payouts", str(payout), "status"),
             body=body,
             model=SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def mark_paid(
+        self,
+        *,
+        payout_ids: builtins.list[int],
+        expected_total_usd_cents: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson:
+        """Mark affiliate payouts paid
+
+        Record up to 20 due affiliate payouts as paid in one request, after you have paid the affiliates yourself. No money moves: SellApp only records the payment. Each payout marked paid also marks its referrals paid and emails that affiliate that the payout was paid. Send the payout IDs and `expected_total_usd_cents`, the sum of their `amount_usd_cents` as you read them, in integer USD cents (`4250` means $42.50). Every payout is checked first, and nothing changes when one of them is unknown in your store, is not `due`, or has referrals that no longer add up to it or can no longer be paid (`422` on `payout_ids`, one message per payout), or when the amounts add up to another total (`422` on `expected_total_usd_cents`). Then each payout is marked in the order sent, and `data` reports one `outcome` per payout: `paid`, `skipped`, or `failed`. A payout that changes between the check and its turn is skipped or fails without affecting the others. Requires the `affiliate` and `affiliate:payout` API-key abilities, and the staff member who owns the key needs the affiliate and affiliate payout permissions. There is no idempotency key, but sending the same batch again is refused with `422` on `payout_ids`, because those payouts are no longer due, so nobody is emailed twice. After a lost response, list the payouts with `GET /v2/affiliate-payouts?status=due` and send only those still due, with their new total. The emails cannot be taken back; to reopen a payout recorded by mistake, set it back to `due` with `PATCH /v2/affiliate-payouts/{payout}/status`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            payout_ids: The due payouts to record as paid, at most 20, each once. They are marked in this order.
+            expected_total_usd_cents: The sum of the payouts' `amount_usd_cents`, in integer USD cents, as you read them. If they add up to anything else, nothing is marked.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "markAffiliatePayoutsPaid",
+        }
+        body: dict[str, Any] = {
+            "payout_ids": payout_ids,
+            "expected_total_usd_cents": expected_total_usd_cents,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkMarkAffiliatePayoutsPaidRequestApplicationJson",
+                "required": ["payout_ids", "expected_total_usd_cents"],
+                "properties": {
+                    "payout_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 20,
+                            "uniqueItems": True,
+                        },
+                    },
+                    "expected_total_usd_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "affiliate-payouts", "mark-paid"),
+            body=body,
+            model=SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson,
             request_options=request_options,
         )

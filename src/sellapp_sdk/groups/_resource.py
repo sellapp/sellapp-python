@@ -480,21 +480,23 @@ class Groups:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search groups
 
-        Search groups using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search groups using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -559,6 +561,7 @@ class Groups:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -1026,21 +1029,23 @@ class AsyncGroups:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[SearchGroupsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search groups
 
-        Search groups using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search groups using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1105,6 +1110,7 @@ class AsyncGroups:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

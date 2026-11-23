@@ -13,6 +13,12 @@ import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
 from sellapp_sdk.common.models.category import Category
+from sellapp_sdk.common.models.sdk_create_course_request_application_json_access_type import (
+    SdkCreateCourseRequestApplicationJsonAccessType,
+)
+from sellapp_sdk.common.models.sdk_create_course_request_application_json_level import (
+    SdkCreateCourseRequestApplicationJsonLevel,
+)
 from sellapp_sdk.common.models.sdk_replace_course_request_application_json_access_type import (
     SdkReplaceCourseRequestApplicationJsonAccessType,
 )
@@ -41,7 +47,9 @@ from sellapp_sdk.common.models.search_reward_rules_request_application_json_prop
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    SdkCreateCourseResponseValue201ApplicationJson,
     SdkGetCourseResponseValue200ApplicationJson,
+    SdkGetCourseStudentSummaryResponseValue200ApplicationJson,
     SdkListCoursesResponseValue200ApplicationJson,
     SdkReplaceCourseResponseValue200ApplicationJson,
     SdkSearchCoursesResponseValue200ApplicationJson,
@@ -138,6 +146,277 @@ class Courses:
             path=("v2", "courses"),
             model=SdkListCoursesResponseValue200ApplicationJson,
             params=params,
+            request_options=request_options,
+        )
+
+    def create(
+        self,
+        *,
+        title: str,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkCreateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkCreateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateCourseResponseValue201ApplicationJson:
+        """Create a course
+
+        Create a course as a draft that customers cannot buy yet, whatever `visibility` you send: `visibility`, `HIDDEN` by default, applies once the course is published. It starts with no sections and one draft option named `Default`, priced at 0 USD: set the price with the product variant endpoints, add sections and lessons, then publish it with `POST /v2/products/{product}/publish`, where `{product}` is the course `id`. Each successful call creates another course, so do not retry blindly after a lost response: search courses for the title first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            category: The category.
+            level: The level.
+            language: The language.
+            subtitle: The subtitle.
+            author: The author.
+            subcategory: The subcategory.
+            what_you_learn: The what you learn.
+            requirements: The requirements.
+            certificate_enabled: The certificate enabled.
+            access_type: The access type.
+            access_duration_days: Required when access_type is limited; cleared otherwise.
+            enrollment_limit: The enrollment limit.
+            delivery_text: The delivery text.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`. When you leave it out, SellApp makes one from the title.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. Leave it out, or send null, to start without one; a course needs a description before it is published.
+            visibility: The visibility.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkCreateCourseResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "createCourse",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "level": enum_value(level) if level is not None else None,
+                "language": language,
+                "what_you_learn": what_you_learn,
+                "requirements": requirements,
+                "certificate_enabled": certificate_enabled,
+                "access_type": enum_value(access_type)
+                if access_type is not None
+                else None,
+                "title": title,
+                "slug": slug,
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(category, NotGiven):
+            body["category"] = enum_value(category) if category is not None else None
+        if not isinstance(subtitle, NotGiven):
+            body["subtitle"] = subtitle
+        if not isinstance(author, NotGiven):
+            body["author"] = author
+        if not isinstance(subcategory, NotGiven):
+            body["subcategory"] = subcategory
+        if not isinstance(access_duration_days, NotGiven):
+            body["access_duration_days"] = access_duration_days
+        if not isinstance(enrollment_limit, NotGiven):
+            body["enrollment_limit"] = enrollment_limit
+        if not isinstance(delivery_text, NotGiven):
+            body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
+        _validate_model(
+            body,
+            {
+                "name": "SdkCreateCourseRequestApplicationJson",
+                "required": ["title"],
+                "properties": {
+                    "category": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "enum",
+                            "values": [
+                                "development",
+                                "business",
+                                "marketing",
+                                "design",
+                                "finance",
+                                "it-software",
+                                "personal-development",
+                                "productivity",
+                                "other",
+                                "null",
+                            ],
+                        },
+                    },
+                    "level": {
+                        "kind": "enum",
+                        "values": [
+                            "all_levels",
+                            "beginner",
+                            "intermediate",
+                            "advanced",
+                        ],
+                    },
+                    "language": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "subtitle": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 120},
+                        },
+                    },
+                    "author": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 120},
+                        },
+                    },
+                    "subcategory": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "what_you_learn": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                        "constraints": {"maxItems": 50},
+                    },
+                    "requirements": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                        "constraints": {"maxItems": 50},
+                    },
+                    "certificate_enabled": {"kind": "primitive", "type": "boolean"},
+                    "access_type": {"kind": "enum", "values": ["lifetime", "limited"]},
+                    "access_duration_days": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 3650},
+                        },
+                    },
+                    "enrollment_limit": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                    },
+                    "delivery_text": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 65535},
+                        },
+                    },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "courses"),
+            body=body,
+            model=SdkCreateCourseResponseValue201ApplicationJson,
             request_options=request_options,
         )
 
@@ -340,11 +619,14 @@ class Courses:
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
         """Update a course
 
-        Update course metadata, access configuration, delivery copy, or publication visibility. Public visibility requires a ready promotional video and at least one published lesson. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a course's title, URL slug, description, details, access rules, delivery message, or visibility. Only the fields you send change, and PUT behaves exactly like PATCH. Sending the course's current `visibility` changes nothing; a different `visibility` also publishes a draft course. `PUBLIC` first checks that the course has a ready promotional video and at least one published lesson, and otherwise returns `422` on `promo_video` or `curriculum` without changing anything. Every successful update moves `updated_at` forward, even one that changes nothing, so retrying with the same `expected_updated_at` after a success returns `422`: retrieve the course again first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             course: The course path parameter.
@@ -362,7 +644,10 @@ class Courses:
             enrollment_limit: The enrollment limit.
             delivery_text: The delivery text.
             visibility: The visibility.
-            expected_updated_at: The expected updated at.
+            expected_updated_at: The `updated_at` you last read. If the course changed since, the request returns `422` on `expected_updated_at` and changes nothing. It is checked even when the request changes nothing else.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. `null` keeps the current description. To clear the description of a draft course, send an empty element such as `<p></p>`; a published course must keep one, so clearing it returns `422` on `description`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -422,6 +707,8 @@ class Courses:
                 if visibility is not None
                 else None,
                 "expected_updated_at": expected_updated_at,
+                "title": title,
+                "slug": slug,
             }.items()
             if v is not None
         }
@@ -439,6 +726,8 @@ class Courses:
             body["enrollment_limit"] = enrollment_limit
         if not isinstance(delivery_text, NotGiven):
             body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
         _validate_model(
             body,
             {
@@ -554,6 +843,27 @@ class Courses:
                         "type": "string",
                         "format": "date-time",
                     },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -591,11 +901,14 @@ class Courses:
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
         """Update a course
 
-        Update course metadata, access configuration, delivery copy, or publication visibility. Public visibility requires a ready promotional video and at least one published lesson. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a course's title, URL slug, description, details, access rules, delivery message, or visibility. Only the fields you send change, and PUT behaves exactly like PATCH. Sending the course's current `visibility` changes nothing; a different `visibility` also publishes a draft course. `PUBLIC` first checks that the course has a ready promotional video and at least one published lesson, and otherwise returns `422` on `promo_video` or `curriculum` without changing anything. Every successful update moves `updated_at` forward, even one that changes nothing, so retrying with the same `expected_updated_at` after a success returns `422`: retrieve the course again first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             course: The course path parameter.
@@ -613,7 +926,10 @@ class Courses:
             enrollment_limit: The enrollment limit.
             delivery_text: The delivery text.
             visibility: The visibility.
-            expected_updated_at: The expected updated at.
+            expected_updated_at: The `updated_at` you last read. If the course changed since, the request returns `422` on `expected_updated_at` and changes nothing. It is checked even when the request changes nothing else.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. `null` keeps the current description. To clear the description of a draft course, send an empty element such as `<p></p>`; a published course must keep one, so clearing it returns `422` on `description`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -673,6 +989,8 @@ class Courses:
                 if visibility is not None
                 else None,
                 "expected_updated_at": expected_updated_at,
+                "title": title,
+                "slug": slug,
             }.items()
             if v is not None
         }
@@ -690,6 +1008,8 @@ class Courses:
             body["enrollment_limit"] = enrollment_limit
         if not isinstance(delivery_text, NotGiven):
             body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
         _validate_model(
             body,
             {
@@ -805,6 +1125,27 @@ class Courses:
                         "type": "string",
                         "format": "date-time",
                     },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -818,6 +1159,85 @@ class Courses:
             path=("v2", "courses", str(course)),
             body=body,
             model=SdkUpdateCourseResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_student_summary(
+        self,
+        *,
+        start_date: str,
+        end_date: str,
+        course_id: int | None = None,
+        limit: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCourseStudentSummaryResponseValue200ApplicationJson:
+        """Retrieve a course student summary
+
+        Summarize who bought your courses in a date range: totals for students, purchases, units, and orders, plus the top students and the top courses. A purchase counts when it is paid or completed and was made within the range; refunded and pending purchases do not count. A student is a customer, or the order email when a purchase has no customer record. The response contains customer email addresses, so handle it as personal data. Requires the `invoice` API-key ability and the invoice permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            start_date: The first day to include, as `YYYY-MM-DD` in the store's timezone.
+            end_date: The last day to include, as `YYYY-MM-DD` in the store's timezone. It must not be before `start_date`, and the range can cover at most 366 days; otherwise the request returns `422` on `end_date`.
+            course_id: Count one course only: the course `id` from `/v2/courses`. Another product, a deleted course, or another store's course returns `422` on `course_id`.
+            limit: How many rows `students` and `courses` each return: 10 by default, at most 20. A larger value returns `422` on `limit`. The `summary` totals always cover everything. Defaults to `10`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetCourseStudentSummaryResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCourseStudentSummary",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "start_date": start_date,
+                "end_date": end_date,
+                "course_id": course_id,
+                "limit": limit,
+            }.items()
+            if v is not None
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "course-students"),
+            params=params,
+            model=SdkGetCourseStudentSummaryResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -911,6 +1331,277 @@ class AsyncCourses:
             path=("v2", "courses"),
             model=SdkListCoursesResponseValue200ApplicationJson,
             params=params,
+            request_options=request_options,
+        )
+
+    async def create(
+        self,
+        *,
+        title: str,
+        category: Category | str | None | NotGiven = NOT_GIVEN,
+        level: SdkCreateCourseRequestApplicationJsonLevel | str | None = None,
+        language: str | None = None,
+        subtitle: str | None | NotGiven = NOT_GIVEN,
+        author: str | None | NotGiven = NOT_GIVEN,
+        subcategory: str | None | NotGiven = NOT_GIVEN,
+        what_you_learn: builtins.list[str] | None = None,
+        requirements: builtins.list[str] | None = None,
+        certificate_enabled: bool | None = None,
+        access_type: SdkCreateCourseRequestApplicationJsonAccessType
+        | str
+        | None = None,
+        access_duration_days: int | None | NotGiven = NOT_GIVEN,
+        enrollment_limit: int | None | NotGiven = NOT_GIVEN,
+        delivery_text: str | None | NotGiven = NOT_GIVEN,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateCourseResponseValue201ApplicationJson:
+        """Create a course
+
+        Create a course as a draft that customers cannot buy yet, whatever `visibility` you send: `visibility`, `HIDDEN` by default, applies once the course is published. It starts with no sections and one draft option named `Default`, priced at 0 USD: set the price with the product variant endpoints, add sections and lessons, then publish it with `POST /v2/products/{product}/publish`, where `{product}` is the course `id`. Each successful call creates another course, so do not retry blindly after a lost response: search courses for the title first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            category: The category.
+            level: The level.
+            language: The language.
+            subtitle: The subtitle.
+            author: The author.
+            subcategory: The subcategory.
+            what_you_learn: The what you learn.
+            requirements: The requirements.
+            certificate_enabled: The certificate enabled.
+            access_type: The access type.
+            access_duration_days: Required when access_type is limited; cleared otherwise.
+            enrollment_limit: The enrollment limit.
+            delivery_text: The delivery text.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`. When you leave it out, SellApp makes one from the title.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. Leave it out, or send null, to start without one; a course needs a description before it is published.
+            visibility: The visibility.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkCreateCourseResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "createCourse",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "level": enum_value(level) if level is not None else None,
+                "language": language,
+                "what_you_learn": what_you_learn,
+                "requirements": requirements,
+                "certificate_enabled": certificate_enabled,
+                "access_type": enum_value(access_type)
+                if access_type is not None
+                else None,
+                "title": title,
+                "slug": slug,
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(category, NotGiven):
+            body["category"] = enum_value(category) if category is not None else None
+        if not isinstance(subtitle, NotGiven):
+            body["subtitle"] = subtitle
+        if not isinstance(author, NotGiven):
+            body["author"] = author
+        if not isinstance(subcategory, NotGiven):
+            body["subcategory"] = subcategory
+        if not isinstance(access_duration_days, NotGiven):
+            body["access_duration_days"] = access_duration_days
+        if not isinstance(enrollment_limit, NotGiven):
+            body["enrollment_limit"] = enrollment_limit
+        if not isinstance(delivery_text, NotGiven):
+            body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
+        _validate_model(
+            body,
+            {
+                "name": "SdkCreateCourseRequestApplicationJson",
+                "required": ["title"],
+                "properties": {
+                    "category": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "enum",
+                            "values": [
+                                "development",
+                                "business",
+                                "marketing",
+                                "design",
+                                "finance",
+                                "it-software",
+                                "personal-development",
+                                "productivity",
+                                "other",
+                                "null",
+                            ],
+                        },
+                    },
+                    "level": {
+                        "kind": "enum",
+                        "values": [
+                            "all_levels",
+                            "beginner",
+                            "intermediate",
+                            "advanced",
+                        ],
+                    },
+                    "language": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "subtitle": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 120},
+                        },
+                    },
+                    "author": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 120},
+                        },
+                    },
+                    "subcategory": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "what_you_learn": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                        "constraints": {"maxItems": 50},
+                    },
+                    "requirements": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                        "constraints": {"maxItems": 50},
+                    },
+                    "certificate_enabled": {"kind": "primitive", "type": "boolean"},
+                    "access_type": {"kind": "enum", "values": ["lifetime", "limited"]},
+                    "access_duration_days": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 3650},
+                        },
+                    },
+                    "enrollment_limit": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                    },
+                    "delivery_text": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 65535},
+                        },
+                    },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "courses"),
+            body=body,
+            model=SdkCreateCourseResponseValue201ApplicationJson,
             request_options=request_options,
         )
 
@@ -1113,11 +1804,14 @@ class AsyncCourses:
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkReplaceCourseResponseValue200ApplicationJson:
         """Update a course
 
-        Update course metadata, access configuration, delivery copy, or publication visibility. Public visibility requires a ready promotional video and at least one published lesson. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a course's title, URL slug, description, details, access rules, delivery message, or visibility. Only the fields you send change, and PUT behaves exactly like PATCH. Sending the course's current `visibility` changes nothing; a different `visibility` also publishes a draft course. `PUBLIC` first checks that the course has a ready promotional video and at least one published lesson, and otherwise returns `422` on `promo_video` or `curriculum` without changing anything. Every successful update moves `updated_at` forward, even one that changes nothing, so retrying with the same `expected_updated_at` after a success returns `422`: retrieve the course again first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             course: The course path parameter.
@@ -1135,7 +1829,10 @@ class AsyncCourses:
             enrollment_limit: The enrollment limit.
             delivery_text: The delivery text.
             visibility: The visibility.
-            expected_updated_at: The expected updated at.
+            expected_updated_at: The `updated_at` you last read. If the course changed since, the request returns `422` on `expected_updated_at` and changes nothing. It is checked even when the request changes nothing else.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. `null` keeps the current description. To clear the description of a draft course, send an empty element such as `<p></p>`; a published course must keep one, so clearing it returns `422` on `description`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1195,6 +1892,8 @@ class AsyncCourses:
                 if visibility is not None
                 else None,
                 "expected_updated_at": expected_updated_at,
+                "title": title,
+                "slug": slug,
             }.items()
             if v is not None
         }
@@ -1212,6 +1911,8 @@ class AsyncCourses:
             body["enrollment_limit"] = enrollment_limit
         if not isinstance(delivery_text, NotGiven):
             body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
         _validate_model(
             body,
             {
@@ -1327,6 +2028,27 @@ class AsyncCourses:
                         "type": "string",
                         "format": "date-time",
                     },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -1364,11 +2086,14 @@ class AsyncCourses:
         delivery_text: str | None | NotGiven = NOT_GIVEN,
         visibility: CatalogVisibility | str | None = None,
         expected_updated_at: str | None = None,
+        title: str | None = None,
+        slug: str | None = None,
+        description: str | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateCourseResponseValue200ApplicationJson:
         """Update a course
 
-        Update course metadata, access configuration, delivery copy, or publication visibility. Public visibility requires a ready promotional video and at least one published lesson. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a course's title, URL slug, description, details, access rules, delivery message, or visibility. Only the fields you send change, and PUT behaves exactly like PATCH. Sending the course's current `visibility` changes nothing; a different `visibility` also publishes a draft course. `PUBLIC` first checks that the course has a ready promotional video and at least one published lesson, and otherwise returns `422` on `promo_video` or `curriculum` without changing anything. Every successful update moves `updated_at` forward, even one that changes nothing, so retrying with the same `expected_updated_at` after a success returns `422`: retrieve the course again first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             course: The course path parameter.
@@ -1386,7 +2111,10 @@ class AsyncCourses:
             enrollment_limit: The enrollment limit.
             delivery_text: The delivery text.
             visibility: The visibility.
-            expected_updated_at: The expected updated at.
+            expected_updated_at: The `updated_at` you last read. If the course changed since, the request returns `422` on `expected_updated_at` and changes nothing. It is checked even when the request changes nothing else.
+            title: The course name customers see.
+            slug: The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`.
+            description: The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. `null` keeps the current description. To clear the description of a draft course, send an empty element such as `<p></p>`; a published course must keep one, so clearing it returns `422` on `description`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1446,6 +2174,8 @@ class AsyncCourses:
                 if visibility is not None
                 else None,
                 "expected_updated_at": expected_updated_at,
+                "title": title,
+                "slug": slug,
             }.items()
             if v is not None
         }
@@ -1463,6 +2193,8 @@ class AsyncCourses:
             body["enrollment_limit"] = enrollment_limit
         if not isinstance(delivery_text, NotGiven):
             body["delivery_text"] = delivery_text
+        if not isinstance(description, NotGiven):
+            body["description"] = description
         _validate_model(
             body,
             {
@@ -1578,6 +2310,27 @@ class AsyncCourses:
                         "type": "string",
                         "format": "date-time",
                     },
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 1, "maxLength": 255},
+                    },
+                    "slug": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {
+                            "maxLength": 255,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                        },
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -1591,5 +2344,84 @@ class AsyncCourses:
             path=("v2", "courses", str(course)),
             body=body,
             model=SdkUpdateCourseResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_student_summary(
+        self,
+        *,
+        start_date: str,
+        end_date: str,
+        course_id: int | None = None,
+        limit: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCourseStudentSummaryResponseValue200ApplicationJson:
+        """Retrieve a course student summary
+
+        Summarize who bought your courses in a date range: totals for students, purchases, units, and orders, plus the top students and the top courses. A purchase counts when it is paid or completed and was made within the range; refunded and pending purchases do not count. A student is a customer, or the order email when a purchase has no customer record. The response contains customer email addresses, so handle it as personal data. Requires the `invoice` API-key ability and the invoice permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            start_date: The first day to include, as `YYYY-MM-DD` in the store's timezone.
+            end_date: The last day to include, as `YYYY-MM-DD` in the store's timezone. It must not be before `start_date`, and the range can cover at most 366 days; otherwise the request returns `422` on `end_date`.
+            course_id: Count one course only: the course `id` from `/v2/courses`. Another product, a deleted course, or another store's course returns `422` on `course_id`.
+            limit: How many rows `students` and `courses` each return: 10 by default, at most 20. A larger value returns `422` on `limit`. The `summary` totals always cover everything. Defaults to `10`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetCourseStudentSummaryResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCourseStudentSummary",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "start_date": start_date,
+                "end_date": end_date,
+                "course_id": course_id,
+                "limit": limit,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "course-students"),
+            params=params,
+            model=SdkGetCourseStudentSummaryResponseValue200ApplicationJson,
             request_options=request_options,
         )

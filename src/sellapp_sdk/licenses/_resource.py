@@ -14,8 +14,9 @@ from sellapp_sdk.common.models.sdk_activate_license_key_response_value_200_appli
 )
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    LicensesValidity,
     SdkDeactivateLicenseResponseValue200ApplicationJson,
     SdkGetLicenseKeyResponseValue200ApplicationJson,
     SdkListLicenseKeysResponseValue200ApplicationJson,
@@ -213,11 +214,16 @@ class Licenses:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        key: str | None = None,
+        customer_email: str | None = None,
+        product_id: int | None = None,
+        order_id: int | None = None,
+        validity: LicensesValidity | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
         """List all license keys
 
-        List your store's license keys. Use `limit` and `page` to read one page at a time. The response schema describes each license. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's license keys, one page at a time with `limit` and `page`. Filter by part of the key, the customer's email, the product, the order, or `validity`; several filters combine, and a key must match all of them. A filter value in the wrong shape returns `422` on that parameter. Requires the `license` API-key ability. The response schema describes each license. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -225,6 +231,11 @@ class Licenses:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            key: Keep keys that contain this text: letters, digits, and hyphens, up to 100 characters. A full key as the customer sees it, including the store's key prefix, also finds its key.
+            customer_email: Keep keys of the store customer with exactly this email address.
+            product_id: Keep keys issued for this product.
+            order_id: Keep keys issued by this order.
+            validity: Keep keys by whether they validate now, decided the way license validation decides it: `active` keys are switched on and not past their expiry, `inactive` keys are switched off but not expired, and `expired` keys are past `expires_at`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -276,6 +287,11 @@ class Licenses:
                 "after": after,
                 "order": order,
                 "page": page,
+                "key": key,
+                "customer_email": customer_email,
+                "product_id": product_id,
+                "order_id": order_id,
+                "validity": enum_value(validity) if validity is not None else None,
             }.items()
             if v is not None
         }
@@ -737,11 +753,16 @@ class AsyncLicenses:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        key: str | None = None,
+        customer_email: str | None = None,
+        product_id: int | None = None,
+        order_id: int | None = None,
+        validity: LicensesValidity | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
         """List all license keys
 
-        List your store's license keys. Use `limit` and `page` to read one page at a time. The response schema describes each license. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's license keys, one page at a time with `limit` and `page`. Filter by part of the key, the customer's email, the product, the order, or `validity`; several filters combine, and a key must match all of them. A filter value in the wrong shape returns `422` on that parameter. Requires the `license` API-key ability. The response schema describes each license. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -749,6 +770,11 @@ class AsyncLicenses:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            key: Keep keys that contain this text: letters, digits, and hyphens, up to 100 characters. A full key as the customer sees it, including the store's key prefix, also finds its key.
+            customer_email: Keep keys of the store customer with exactly this email address.
+            product_id: Keep keys issued for this product.
+            order_id: Keep keys issued by this order.
+            validity: Keep keys by whether they validate now, decided the way license validation decides it: `active` keys are switched on and not past their expiry, `inactive` keys are switched off but not expired, and `expired` keys are past `expires_at`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -800,6 +826,11 @@ class AsyncLicenses:
                 "after": after,
                 "order": order,
                 "page": page,
+                "key": key,
+                "customer_email": customer_email,
+                "product_id": product_id,
+                "order_id": order_id,
+                "validity": enum_value(validity) if validity is not None else None,
             }.items()
             if v is not None
         }

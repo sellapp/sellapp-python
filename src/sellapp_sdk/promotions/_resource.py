@@ -44,6 +44,7 @@ from .models import (
     RestorePromotionRequestApplicationJsonPropertyPhasesItem,
     SdkCreatePromotionResponseValue201ApplicationJson,
     SdkGetPromotionResponseValue200ApplicationJson,
+    SdkGetPromotionUsageResponseValue200ApplicationJson,
     SdkListPromotionsResponseValue200ApplicationJson,
     SdkReplacePromotionResponseValue200ApplicationJson,
     SdkRestorePromotionResponseValue200ApplicationJson,
@@ -1161,6 +1162,82 @@ class Promotions:
             request_options=request_options,
         )
 
+    def get_usage(
+        self,
+        promotion: int,
+        *,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetPromotionUsageResponseValue200ApplicationJson:
+        """Retrieve promotion usage
+
+        Count the completed orders that used a promotion, across all of its phases and its whole life, and list the newest of them. Only orders whose status is `COMPLETED` count; pending and refunded orders do not. A promotion from another store returns `404`, and so does a deleted one unless you send `with_trashed=true`. Requires the `promotion` API-key ability and the promotion permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            promotion: The promotion ID.
+            with_trashed: Set to `true` to also find a deleted promotion. Defaults to `false`.
+            only_trashed: Set to `true` to find only a deleted promotion. Ignored when `with_trashed` is `true`. Defaults to `false`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetPromotionUsageResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getPromotionUsage",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "with_trashed": with_trashed,
+                "only_trashed": only_trashed,
+            }.items()
+            if v is not None
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "promotions", str(promotion), "usage"),
+            params=params,
+            model=SdkGetPromotionUsageResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncPromotions:
     """Promotions API resources (async)."""
@@ -2263,5 +2340,81 @@ class AsyncPromotions:
             path=("v2", "promotions", str(promotion), "restore"),
             body=body,
             model=SdkRestorePromotionResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_usage(
+        self,
+        promotion: int,
+        *,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetPromotionUsageResponseValue200ApplicationJson:
+        """Retrieve promotion usage
+
+        Count the completed orders that used a promotion, across all of its phases and its whole life, and list the newest of them. Only orders whose status is `COMPLETED` count; pending and refunded orders do not. A promotion from another store returns `404`, and so does a deleted one unless you send `with_trashed=true`. Requires the `promotion` API-key ability and the promotion permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            promotion: The promotion ID.
+            with_trashed: Set to `true` to also find a deleted promotion. Defaults to `false`.
+            only_trashed: Set to `true` to find only a deleted promotion. Ignored when `with_trashed` is `true`. Defaults to `false`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetPromotionUsageResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getPromotionUsage",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "with_trashed": with_trashed,
+                "only_trashed": only_trashed,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "promotions", str(promotion), "usage"),
+            params=params,
+            model=SdkGetPromotionUsageResponseValue200ApplicationJson,
             request_options=request_options,
         )

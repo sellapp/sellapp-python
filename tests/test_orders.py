@@ -15,7 +15,6 @@ from sellapp_sdk._errors import (
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.common.models import (
-    CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
     SdkCreateOrderCheckoutResponseValue200ApplicationJson,
     SdkCreateOrderRequestApplicationJsonPaymentMethod,
     SdkUpdateOrderStatusRequestApplicationJsonStatus,
@@ -31,6 +30,7 @@ from sellapp_sdk.orders.models import (
     SdkGetOrderResponseValue200ApplicationJson,
     SdkListOrderDeliverablesResponseValue200ApplicationJson,
     SdkPayOrderFromWalletResponseValue200ApplicationJson,
+    SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson,
     SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson,
     SdkRetryOrderFulfillmentResponseValue200ApplicationJson,
     SdkSendOrderFulfillmentNotificationsResponseValue200ApplicationJson,
@@ -164,14 +164,7 @@ class TestOrders:
                 "sdk_create_order_replacement_response_value_200_application_json.json"
             ),
         )
-        result = sellapp_sdk.orders.create_replacement(
-            "test_order",
-            product_variants=CreateOrderReplacementRequestApplicationJsonPropertyProductVariants.from_dict(
-                load_fixture(
-                    "create_order_replacement_request_application_json_property_product_variants.json"
-                )
-            ),
-        )
+        result = sellapp_sdk.orders.create_replacement("test_order", product_variants=1)
         assert isinstance(
             result, SdkCreateOrderReplacementResponseValue200ApplicationJson
         )
@@ -242,6 +235,20 @@ class TestOrders:
         assert request.url.path.endswith(
             "/v2/orders/test_order/fulfillment-notifications"
         )
+
+    def test_regenerate_telegram_invite(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_regenerate_order_telegram_invite_response_value_201_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.orders.regenerate_telegram_invite("test_order")
+        assert isinstance(
+            result, SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/orders/test_order/telegram-invites")
 
     def test_list_deliverables(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -515,12 +522,7 @@ class TestAsyncOrders:
             )
         )
         result = await async_sellapp_sdk.orders.create_replacement(
-            "test_order",
-            product_variants=CreateOrderReplacementRequestApplicationJsonPropertyProductVariants.from_dict(
-                load_fixture(
-                    "create_order_replacement_request_application_json_property_product_variants.json"
-                )
-            ),
+            "test_order", product_variants=1
         )
         assert isinstance(
             result, SdkCreateOrderReplacementResponseValue200ApplicationJson
@@ -594,6 +596,21 @@ class TestAsyncOrders:
         assert request.url.path.endswith(
             "/v2/orders/test_order/fulfillment-notifications"
         )
+
+    @pytest.mark.asyncio
+    async def test_regenerate_telegram_invite(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_regenerate_order_telegram_invite_response_value_201_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.orders.regenerate_telegram_invite("test_order")
+        assert isinstance(
+            result, SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/orders/test_order/telegram-invites")
 
     @pytest.mark.asyncio
     async def test_list_deliverables(self, async_sellapp_sdk, httpx_mock):

@@ -21,6 +21,9 @@ from .get_promotion_response_value_200_application_json_property_data import (
 from .get_promotion_response_value_200_application_json_property_data_property_phases_item import (
     GetPromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItem as GetPromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItem,
 )
+from .get_promotion_usage_response_value_200_application_json_property_data import (
+    GetPromotionUsageResponseValue200ApplicationJsonPropertyData as GetPromotionUsageResponseValue200ApplicationJsonPropertyData,
+)
 from .list_promotion_phases_response_value_200_application_json_property_data_item import (
     ListPromotionPhasesResponseValue200ApplicationJsonPropertyDataItem as ListPromotionPhasesResponseValue200ApplicationJsonPropertyDataItem,
 )
@@ -59,6 +62,9 @@ from .sdk_delete_promotion_response_value_200_application_json import (
 )
 from .sdk_get_promotion_response_value_200_application_json import (
     SdkGetPromotionResponseValue200ApplicationJson as SdkGetPromotionResponseValue200ApplicationJson,
+)
+from .sdk_get_promotion_usage_response_value_200_application_json import (
+    SdkGetPromotionUsageResponseValue200ApplicationJson as SdkGetPromotionUsageResponseValue200ApplicationJson,
 )
 from .sdk_list_promotion_phases_response_value_200_application_json import (
     SdkListPromotionPhasesResponseValue200ApplicationJson as SdkListPromotionPhasesResponseValue200ApplicationJson,

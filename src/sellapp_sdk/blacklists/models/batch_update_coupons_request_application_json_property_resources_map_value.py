@@ -2,7 +2,7 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.sdk_replace_coupon_request_application_json import (
+from .sdk_replace_coupon_request_application_json import (
     SdkReplaceCouponRequestApplicationJson,
 )
 

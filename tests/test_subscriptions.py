@@ -63,6 +63,14 @@ class TestSubscriptions:
             after="cursor/after",
             page=7,
             pagination=True,
+            order_id=7,
+            product_id=7,
+            renews_after="value renews_after/test",
+            renews_before="value renews_before/test",
+            cancelled_after="value cancelled_after/test",
+            cancelled_before="value cancelled_before/test",
+            scheduled_to_cancel=True,
+            paused=True,
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
@@ -70,6 +78,14 @@ class TestSubscriptions:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
         assert request.url.params["pagination"] == "true"
+        assert request.url.params["order_id"] == "7"
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["renews_after"] == "value renews_after/test"
+        assert request.url.params["renews_before"] == "value renews_before/test"
+        assert request.url.params["cancelled_after"] == "value cancelled_after/test"
+        assert request.url.params["cancelled_before"] == "value cancelled_before/test"
+        assert request.url.params["scheduled_to_cancel"] == "true"
+        assert request.url.params["paused"] == "true"
 
     def test_search_subscriptions(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -466,6 +482,14 @@ class TestAsyncSubscriptions:
             after="cursor/after",
             page=7,
             pagination=True,
+            order_id=7,
+            product_id=7,
+            renews_after="value renews_after/test",
+            renews_before="value renews_before/test",
+            cancelled_after="value cancelled_after/test",
+            cancelled_before="value cancelled_before/test",
+            scheduled_to_cancel=True,
+            paused=True,
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
@@ -473,6 +497,14 @@ class TestAsyncSubscriptions:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
         assert request.url.params["pagination"] == "true"
+        assert request.url.params["order_id"] == "7"
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["renews_after"] == "value renews_after/test"
+        assert request.url.params["renews_before"] == "value renews_before/test"
+        assert request.url.params["cancelled_after"] == "value cancelled_after/test"
+        assert request.url.params["cancelled_before"] == "value cancelled_before/test"
+        assert request.url.params["scheduled_to_cancel"] == "true"
+        assert request.url.params["paused"] == "true"
 
     @pytest.mark.asyncio
     async def test_search_subscriptions(self, async_sellapp_sdk, httpx_mock):

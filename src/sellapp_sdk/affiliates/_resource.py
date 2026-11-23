@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Literal
 
 from .._base_client import WithRawResponse
 
@@ -17,6 +17,7 @@ from sellapp_sdk.common.models.sdk_update_affiliate_status_request_application_j
 from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model, enum_value
 from .models import (
+    AffiliatesPayoutMethod,
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetAffiliateResponseValue200ApplicationJson,
     SdkUpdateAffiliateStatusResponseValue200ApplicationJson,
@@ -39,12 +40,15 @@ class Affiliates:
         order: str | None = None,
         status: AffiliatesStatus | str | None = None,
         search: str | None = None,
+        custom_rates_only: bool | None = None,
+        payout_method: AffiliatesPayoutMethod | str | None = None,
+        sort: Literal["-earnings"] | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliates
 
-        List store affiliate memberships, approved profile details, referral counts, and integer USD-cent balances. Requires the `affiliate` ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List store affiliate memberships, approved profile details, referral counts, and integer USD-cent balances, newest first, 15 per page by default. Requires the `affiliate` ability. Filter by `status`, `search`, `custom_rates_only`, and `payout_method`, and send `sort=-earnings` to list the top earners first. A `status`, `custom_rates_only`, or `payout_method` value the API does not know returns `422`; an unknown `sort` value is ignored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -53,6 +57,9 @@ class Affiliates:
             order: The order.
             status: Filter by affiliate program status.
             search: Search affiliate email addresses and profile identifiers.
+            custom_rates_only: Send `true` to list only affiliates with custom per-product commission rates (see `GET /v2/affiliates/{affiliate}/products`). `false` lists everyone. Accepts `true`, `false`, `1`, or `0`.
+            payout_method: List only affiliates who chose this payout method. Uppercase, as returned in `payout_method`.
+            sort: Send `-earnings` to list the affiliates who earned the most first: available, pending, and paid balances added together, largest first. Without it, or with any other value, the newest affiliates come first.
             page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -106,6 +113,11 @@ class Affiliates:
                 "order": order,
                 "status": enum_value(status) if status is not None else None,
                 "search": search,
+                "custom_rates_only": custom_rates_only,
+                "payout_method": enum_value(payout_method)
+                if payout_method is not None
+                else None,
+                "sort": sort,
                 "page": page,
             }.items()
             if v is not None
@@ -285,12 +297,15 @@ class AsyncAffiliates:
         order: str | None = None,
         status: AffiliatesStatus | str | None = None,
         search: str | None = None,
+        custom_rates_only: bool | None = None,
+        payout_method: AffiliatesPayoutMethod | str | None = None,
+        sort: Literal["-earnings"] | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem]:
         """List affiliates
 
-        List store affiliate memberships, approved profile details, referral counts, and integer USD-cent balances. Requires the `affiliate` ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List store affiliate memberships, approved profile details, referral counts, and integer USD-cent balances, newest first, 15 per page by default. Requires the `affiliate` ability. Filter by `status`, `search`, `custom_rates_only`, and `payout_method`, and send `sort=-earnings` to list the top earners first. A `status`, `custom_rates_only`, or `payout_method` value the API does not know returns `422`; an unknown `sort` value is ignored. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -299,6 +314,9 @@ class AsyncAffiliates:
             order: The order.
             status: Filter by affiliate program status.
             search: Search affiliate email addresses and profile identifiers.
+            custom_rates_only: Send `true` to list only affiliates with custom per-product commission rates (see `GET /v2/affiliates/{affiliate}/products`). `false` lists everyone. Accepts `true`, `false`, `1`, or `0`.
+            payout_method: List only affiliates who chose this payout method. Uppercase, as returned in `payout_method`.
+            sort: Send `-earnings` to list the affiliates who earned the most first: available, pending, and paid balances added together, largest first. Without it, or with any other value, the newest affiliates come first.
             page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -352,6 +370,11 @@ class AsyncAffiliates:
                 "order": order,
                 "status": enum_value(status) if status is not None else None,
                 "search": search,
+                "custom_rates_only": custom_rates_only,
+                "payout_method": enum_value(payout_method)
+                if payout_method is not None
+                else None,
+                "sort": sort,
                 "page": page,
             }.items()
             if v is not None

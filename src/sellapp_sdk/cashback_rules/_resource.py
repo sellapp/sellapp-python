@@ -15,6 +15,7 @@ from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
 from .models import (
     SdkCreateCashbackRuleResponseValue201ApplicationJson,
     SdkListCashbackRulesResponseValue200ApplicationJson,
+    SdkQuoteCashbackRuleResponseValue200ApplicationJson,
     SdkReplaceCashbackRuleResponseValue200ApplicationJson,
     SdkRestoreCashbackRuleResponseValue200ApplicationJson,
     SdkUpdateCashbackRuleResponseValue200ApplicationJson,
@@ -35,7 +36,7 @@ class CashbackRules:
     ) -> SdkListCashbackRulesResponseValue200ApplicationJson:
         """List cashback rules
 
-        List current and archived store records. Requires the `wallet` or `wallet:write` API ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List current and archived store records. Requires the `wallet` or `wallet:write` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkListCashbackRulesResponseValue200ApplicationJson
@@ -96,7 +97,7 @@ class CashbackRules:
     ) -> SdkCreateCashbackRuleResponseValue201ApplicationJson:
         """Create a cashback rule
 
-        Create a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             percent_basis: The percent basis.
@@ -210,7 +211,7 @@ class CashbackRules:
     ) -> SdkReplaceCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
-        Update a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -326,7 +327,7 @@ class CashbackRules:
     ) -> SdkUpdateCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
-        Update a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -438,7 +439,7 @@ class CashbackRules:
     ) -> None:
         """Archive a cashback rule
 
-        Archive a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Archive a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -497,7 +498,7 @@ class CashbackRules:
     ) -> SdkRestoreCashbackRuleResponseValue200ApplicationJson:
         """Restore a cashback rule
 
-        Restore a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Restore a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -552,6 +553,79 @@ class CashbackRules:
             request_options=request_options,
         )
 
+    def quote(
+        self,
+        *,
+        product_id: int | None = None,
+        purchase_cents: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkQuoteCashbackRuleResponseValue200ApplicationJson:
+        """Quote a cashback rule
+
+        See which cashback rule a purchase would earn right now, and how much it would add to the customer's wallet, without creating anything. Send `product_id` to check one product (a rule naming the product wins over the store-wide rule); leave it out to check only the store-wide rule. Add `purchase_cents` to get the cashback amount. Amounts are integer USD cents: `purchase_cents=10000` asks about a $100.00 purchase. Requires the `wallet` or `wallet:write` API-key ability and the wallet permission in your team role. A product that is not in your store returns `422` on `product_id`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_id: The product to quote. Leave it out to quote the store-wide rule.
+            purchase_cents: The purchase amount to quote, in integer USD cents.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkQuoteCashbackRuleResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "quoteCashbackRule",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "product_id": product_id,
+                "purchase_cents": purchase_cents,
+            }.items()
+            if v is not None
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "cashback-rules", "quote"),
+            params=params,
+            model=SdkQuoteCashbackRuleResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncCashbackRules:
     """Cashback Rules API resources (async)."""
@@ -567,7 +641,7 @@ class AsyncCashbackRules:
     ) -> SdkListCashbackRulesResponseValue200ApplicationJson:
         """List cashback rules
 
-        List current and archived store records. Requires the `wallet` or `wallet:write` API ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List current and archived store records. Requires the `wallet` or `wallet:write` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Returns:
             SdkListCashbackRulesResponseValue200ApplicationJson
@@ -628,7 +702,7 @@ class AsyncCashbackRules:
     ) -> SdkCreateCashbackRuleResponseValue201ApplicationJson:
         """Create a cashback rule
 
-        Create a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             percent_basis: The percent basis.
@@ -742,7 +816,7 @@ class AsyncCashbackRules:
     ) -> SdkReplaceCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
-        Update a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -858,7 +932,7 @@ class AsyncCashbackRules:
     ) -> SdkUpdateCashbackRuleResponseValue200ApplicationJson:
         """Update a cashback rule
 
-        Update a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -970,7 +1044,7 @@ class AsyncCashbackRules:
     ) -> None:
         """Archive a cashback rule
 
-        Archive a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Archive a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -1029,7 +1103,7 @@ class AsyncCashbackRules:
     ) -> SdkRestoreCashbackRuleResponseValue200ApplicationJson:
         """Restore a cashback rule
 
-        Restore a cashback rule. Requires the `wallet:write` API ability and the store wallet permission. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Restore a cashback rule. Requires the `wallet:write` API-key ability and the wallet permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             cashback_rule: The cashbackRule path parameter.
@@ -1081,5 +1155,78 @@ class AsyncCashbackRules:
             method="post",
             path=("v2", "cashback-rules", str(cashback_rule), "restore"),
             model=SdkRestoreCashbackRuleResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def quote(
+        self,
+        *,
+        product_id: int | None = None,
+        purchase_cents: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkQuoteCashbackRuleResponseValue200ApplicationJson:
+        """Quote a cashback rule
+
+        See which cashback rule a purchase would earn right now, and how much it would add to the customer's wallet, without creating anything. Send `product_id` to check one product (a rule naming the product wins over the store-wide rule); leave it out to check only the store-wide rule. Add `purchase_cents` to get the cashback amount. Amounts are integer USD cents: `purchase_cents=10000` asks about a $100.00 purchase. Requires the `wallet` or `wallet:write` API-key ability and the wallet permission in your team role. A product that is not in your store returns `422` on `product_id`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product_id: The product to quote. Leave it out to quote the store-wide rule.
+            purchase_cents: The purchase amount to quote, in integer USD cents.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkQuoteCashbackRuleResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "quoteCashbackRule",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "product_id": product_id,
+                "purchase_cents": purchase_cents,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "cashback-rules", "quote"),
+            params=params,
+            model=SdkQuoteCashbackRuleResponseValue200ApplicationJson,
             request_options=request_options,
         )

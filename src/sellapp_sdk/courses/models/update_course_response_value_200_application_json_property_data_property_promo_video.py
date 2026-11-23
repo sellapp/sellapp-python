@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .get_course_response_value_200_application_json_property_data_property_promo_video import (
-    GetCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo,
+from .create_course_response_value_201_application_json_property_data_property_promo_video import (
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo,
 )
 
 UpdateCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo: TypeAlias = (
-    GetCourseResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo
 )

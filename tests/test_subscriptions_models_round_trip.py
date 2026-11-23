@@ -107,7 +107,7 @@ class TestModelRoundTrip:
             "external_id": None,
             "name": None,
             "locale": None,
-            "metadata": {"key": {}},
+            "metadata": {"key": "test_value"},
         }
         instance = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
             data
@@ -129,7 +129,7 @@ class TestModelRoundTrip:
             "external_id": None,
             "name": None,
             "locale": None,
-            "metadata": {"key": {}},
+            "metadata": {"key": "test_value"},
         }
         instance = CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
             data
@@ -228,7 +228,7 @@ class TestModelRoundTrip:
                 "external_id": "external_id_01234",
                 "name": "Test",
                 "locale": "en-GB",
-                "metadata": {"key": {}},
+                "metadata": {"key": "test_value"},
             },
             "customer_email": "test@example.com",
             "status": "ACTIVE",
@@ -330,7 +330,7 @@ class TestModelRoundTrip:
                 "external_id": "external_id_01234",
                 "name": "Test",
                 "locale": "en-GB",
-                "metadata": {"key": {}},
+                "metadata": {"key": "test_value"},
             },
             "customer_email": "test@example.com",
             "status": "unexpected_cancel_subscription_response_value_200_application_json_property_data_status",
@@ -390,7 +390,7 @@ class TestModelRoundTrip:
                     "external_id": "external_id_01234",
                     "name": "Test",
                     "locale": "en-GB",
-                    "metadata": {"key": {}},
+                    "metadata": {"key": "test_value"},
                 },
                 "customer_email": "test@example.com",
                 "status": "ACTIVE",
@@ -624,7 +624,7 @@ class TestModelRoundTrip:
             "external_id": None,
             "name": None,
             "locale": None,
-            "metadata": {"key": {}},
+            "metadata": {"key": "test_value"},
         }
         instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
             data
@@ -646,7 +646,7 @@ class TestModelRoundTrip:
             "external_id": None,
             "name": None,
             "locale": None,
-            "metadata": {"key": {}},
+            "metadata": {"key": "test_value"},
         }
         instance = GetSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
             data
@@ -739,7 +739,7 @@ class TestModelRoundTrip:
                 "external_id": "external_id_01234",
                 "name": "Test",
                 "locale": "en-GB",
-                "metadata": {"key": {}},
+                "metadata": {"key": "test_value"},
             },
             "customer_email": "test@example.com",
             "status": "ACTIVE",
@@ -837,7 +837,7 @@ class TestModelRoundTrip:
                 "external_id": "external_id_01234",
                 "name": "Test",
                 "locale": "en-GB",
-                "metadata": {"key": {}},
+                "metadata": {"key": "test_value"},
             },
             "customer_email": "test@example.com",
             "status": "unexpected_get_subscription_response_value_200_application_json_property_data_status",
@@ -893,7 +893,7 @@ class TestModelRoundTrip:
                     "external_id": "external_id_01234",
                     "name": "Test",
                     "locale": "en-GB",
-                    "metadata": {"key": {}},
+                    "metadata": {"key": "test_value"},
                 },
                 "customer_email": "test@example.com",
                 "status": "ACTIVE",

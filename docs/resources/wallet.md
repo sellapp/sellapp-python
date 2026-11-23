@@ -132,6 +132,7 @@ def adjust(
         amount_cents: int,
         idempotency_key: str,
         note: str,
+        expected_balance_cents: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkAdjustCustomerWalletResponseValue200ApplicationJson:
 ```
@@ -142,6 +143,7 @@ def adjust(
 | amount_cents | `int` | Yes |
 | idempotency_key | `str` | Yes |
 | note | `str` | Yes |
+| expected_balance_cents | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkAdjustCustomerWalletResponseValue200ApplicationJson`.
@@ -156,7 +158,8 @@ result = client.wallet.adjust(
     customer=1,
     amount_cents=2500,
     idempotency_key="wallet-adjustment-01992a65",
-    note="Launch-day account credit"
+    note="Launch-day account credit",
+    expected_balance_cents=0
 )
 print(result)
 ```

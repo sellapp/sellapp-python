@@ -4,15 +4,236 @@
 
 from sellapp_sdk.variant_deliverables.models import (
     GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData,
+    GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1,
+    NotifyVariantBuyersResponseValue202ApplicationJsonPropertyData,
+    PreviewVariantBuyerNotificationResponseValue200ApplicationJsonPropertyData,
     ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
     ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyData,
+    ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1,
     SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson,
+    SdkNotifyVariantBuyersResponseValue202ApplicationJson,
+    SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson,
     SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
 
 
 class TestModelRoundTrip:
+    def test_preview_variant_buyer_notification_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "preview_variant_buyer_notification_response_value_200_application_json_property_data.json"
+        )
+        instance = PreviewVariantBuyerNotificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PreviewVariantBuyerNotificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_preview_variant_buyer_notification_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": 1,
+            "file_count": 1,
+            "order_count": 1,
+            "email_count": 1,
+            "has_upload_in_progress": True,
+        }
+        instance = PreviewVariantBuyerNotificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["file_count"] == data["file_count"]
+        assert serialized["order_count"] == data["order_count"]
+        assert serialized["email_count"] == data["email_count"]
+        assert serialized["has_upload_in_progress"] == data["has_upload_in_progress"]
+
+    def test_sdk_preview_variant_buyer_notification_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_preview_variant_buyer_notification_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_preview_variant_buyer_notification_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "variant_id": 1,
+                "file_count": 1,
+                "order_count": 1,
+                "email_count": 1,
+                "has_upload_in_progress": True,
+            }
+        }
+        instance = (
+            SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_notify_variant_buyers_response_value_202_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "notify_variant_buyers_response_value_202_application_json_property_data.json"
+        )
+        instance = (
+            NotifyVariantBuyersResponseValue202ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            NotifyVariantBuyersResponseValue202ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_notify_variant_buyers_response_value_202_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "status": "queued",
+            "product_id": 1,
+            "variant_id": 1,
+            "order_count": 1,
+            "email_count": 1,
+        }
+        instance = (
+            NotifyVariantBuyersResponseValue202ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["status"] == data["status"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["order_count"] == data["order_count"]
+        assert serialized["email_count"] == data["email_count"]
+
+    def test_sdk_notify_variant_buyers_response_value_202_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_notify_variant_buyers_response_value_202_application_json.json"
+        )
+        instance = SdkNotifyVariantBuyersResponseValue202ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkNotifyVariantBuyersResponseValue202ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_notify_variant_buyers_response_value_202_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "status": "queued",
+                "product_id": 1,
+                "variant_id": 1,
+                "order_count": 1,
+                "email_count": 1,
+            }
+        }
+        instance = SdkNotifyVariantBuyersResponseValue202ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1.json"
+        )
+        instance = GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "comment": "test_comment",
+            "licenseLength": 1,
+            "licenseLengthUnit": "DAY",
+            "licenseLimit": 1,
+            "licensePrefix": "test_licensePrefix",
+        }
+        instance = GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "isLicenseLengthUnlimited" not in serialized
+        assert "isLicenseLimitUnlimited" not in serialized
+
+    def test_get_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "comment": None,
+            "licenseLength": None,
+            "licenseLengthUnit": None,
+            "isLicenseLengthUnlimited": True,
+            "licenseLimit": None,
+            "isLicenseLimitUnlimited": True,
+            "licensePrefix": None,
+        }
+        instance = GetVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["comment"] is None
+        assert serialized["licenseLength"] is None
+        assert serialized["licenseLengthUnit"] is None
+        assert serialized["licenseLimit"] is None
+        assert serialized["licensePrefix"] is None
+
     def test_get_variant_deliverable_configuration_response_value_200_application_json_property_data_round_trip(
         self,
     ):
@@ -43,7 +264,15 @@ class TestModelRoundTrip:
                 "BOOKING",
                 "CREDITS",
             ],
-            "data": {},
+            "data": {
+                "comment": "test_comment",
+                "licenseLength": 1,
+                "licenseLengthUnit": "DAY",
+                "isLicenseLengthUnlimited": True,
+                "licenseLimit": 1,
+                "isLicenseLimitUnlimited": True,
+                "licensePrefix": "test_licensePrefix",
+            },
             "webhook_configured": True,
             "updated_at": "2023-01-01T00:00:00.000Z",
         }
@@ -87,7 +316,15 @@ class TestModelRoundTrip:
                     "BOOKING",
                     "CREDITS",
                 ],
-                "data": {},
+                "data": {
+                    "comment": "test_comment",
+                    "licenseLength": 1,
+                    "licenseLengthUnit": "DAY",
+                    "isLicenseLengthUnlimited": True,
+                    "licenseLimit": 1,
+                    "isLicenseLimitUnlimited": True,
+                    "licensePrefix": "test_licensePrefix",
+                },
                 "webhook_configured": True,
                 "updated_at": "2023-01-01T00:00:00.000Z",
             }
@@ -165,6 +402,70 @@ class TestModelRoundTrip:
         assert serialized["licenseLimit"] is None
         assert serialized["licensePrefix"] is None
 
+    def test_replace_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1.json"
+        )
+        instance = ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_replace_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "comment": "test_comment",
+            "licenseLength": 1,
+            "licenseLengthUnit": "DAY",
+            "licenseLimit": 1,
+            "licensePrefix": "test_licensePrefix",
+        }
+        instance = ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "isLicenseLengthUnlimited" not in serialized
+        assert "isLicenseLimitUnlimited" not in serialized
+
+    def test_replace_variant_deliverable_configuration_response_value_200_application_json_property_data_property_data_any_of_value_1_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "comment": None,
+            "licenseLength": None,
+            "licenseLengthUnit": None,
+            "isLicenseLengthUnlimited": True,
+            "licenseLimit": None,
+            "isLicenseLimitUnlimited": True,
+            "licensePrefix": None,
+        }
+        instance = ReplaceVariantDeliverableConfigurationResponseValue200ApplicationJsonPropertyDataPropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["comment"] is None
+        assert serialized["licenseLength"] is None
+        assert serialized["licenseLengthUnit"] is None
+        assert serialized["licenseLimit"] is None
+        assert serialized["licensePrefix"] is None
+
     def test_replace_variant_deliverable_configuration_response_value_200_application_json_property_data_round_trip(
         self,
     ):
@@ -195,7 +496,15 @@ class TestModelRoundTrip:
                 "BOOKING",
                 "CREDITS",
             ],
-            "data": {},
+            "data": {
+                "comment": "test_comment",
+                "licenseLength": 1,
+                "licenseLengthUnit": "DAY",
+                "isLicenseLengthUnlimited": True,
+                "licenseLimit": 1,
+                "isLicenseLimitUnlimited": True,
+                "licensePrefix": "test_licensePrefix",
+            },
             "webhook_configured": True,
             "updated_at": "2023-01-01T00:00:00.000Z",
         }
@@ -239,7 +548,15 @@ class TestModelRoundTrip:
                     "BOOKING",
                     "CREDITS",
                 ],
-                "data": {},
+                "data": {
+                    "comment": "test_comment",
+                    "licenseLength": 1,
+                    "licenseLengthUnit": "DAY",
+                    "isLicenseLengthUnlimited": True,
+                    "licenseLimit": 1,
+                    "isLicenseLimitUnlimited": True,
+                    "licensePrefix": "test_licensePrefix",
+                },
                 "webhook_configured": True,
                 "updated_at": "2023-01-01T00:00:00.000Z",
             }

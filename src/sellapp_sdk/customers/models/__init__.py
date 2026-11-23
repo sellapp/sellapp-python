@@ -3,9 +3,6 @@
 from sellapp_sdk.common.models.create_customer_request_application_json_property_metadata import (
     CreateCustomerRequestApplicationJsonPropertyMetadata as CreateCustomerRequestApplicationJsonPropertyMetadata,
 )
-from sellapp_sdk.common.models.create_customer_request_application_json_property_metadata_map_value import (
-    CreateCustomerRequestApplicationJsonPropertyMetadataMapValue as CreateCustomerRequestApplicationJsonPropertyMetadataMapValue,
-)
 from sellapp_sdk.common.models.create_customer_response_value_201_application_json_property_data import (
     CreateCustomerResponseValue201ApplicationJsonPropertyData as CreateCustomerResponseValue201ApplicationJsonPropertyData,
 )
@@ -76,9 +73,6 @@ from .search_customers_request_application_json_property_sort_item import (
 from .update_customer_request_application_json_property_metadata import (
     UpdateCustomerRequestApplicationJsonPropertyMetadata as UpdateCustomerRequestApplicationJsonPropertyMetadata,
 )
-from .update_customer_request_application_json_property_metadata_map_value import (
-    UpdateCustomerRequestApplicationJsonPropertyMetadataMapValue as UpdateCustomerRequestApplicationJsonPropertyMetadataMapValue,
-)
 from .update_customer_response_value_200_application_json_property_data import (
     UpdateCustomerResponseValue200ApplicationJsonPropertyData as UpdateCustomerResponseValue200ApplicationJsonPropertyData,
 )
@@ -93,9 +87,6 @@ from .update_customer_response_value_200_application_json_property_data_property
 )
 from .upsert_customer_request_application_json_property_metadata import (
     UpsertCustomerRequestApplicationJsonPropertyMetadata as UpsertCustomerRequestApplicationJsonPropertyMetadata,
-)
-from .upsert_customer_request_application_json_property_metadata_map_value import (
-    UpsertCustomerRequestApplicationJsonPropertyMetadataMapValue as UpsertCustomerRequestApplicationJsonPropertyMetadataMapValue,
 )
 from .upsert_customer_response_value_200_application_json_property_data import (
     UpsertCustomerResponseValue200ApplicationJsonPropertyData as UpsertCustomerResponseValue200ApplicationJsonPropertyData,

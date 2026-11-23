@@ -13,6 +13,7 @@ from sellapp_sdk.payment_methods.models import (
     EnableOrDisablePaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem,
     GetCustomPaymentMethodResponseValue200ApplicationJsonPropertyData,
     GetCustomPaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyModifier,
+    GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData,
     GetPaymentMethodStatusResponseValue200ApplicationJsonPropertyData,
     GetPaymentMethodStatusResponseValue200ApplicationJsonPropertyDataPropertyRequiredInputItem,
     ListCustomPaymentMethodsResponseValue200ApplicationJsonPropertyDataItem,
@@ -22,15 +23,18 @@ from sellapp_sdk.payment_methods.models import (
     ReplaceCustomPaymentMethodRequestApplicationJsonPropertyModifier,
     ReplaceCustomPaymentMethodResponseValue200ApplicationJsonPropertyData,
     ReplaceCustomPaymentMethodResponseValue200ApplicationJsonPropertyDataPropertyModifier,
+    ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData,
     SdkCreateCustomPaymentMethodResponseValue201ApplicationJson,
     SdkCreatePaymentConnectionHandoffResponseValue200ApplicationJson,
     SdkDeleteCustomPaymentMethodResponseValue200ApplicationJson,
     SdkEnableOrDisablePaymentMethodResponseValue200ApplicationJson,
     SdkGetCustomPaymentMethodResponseValue200ApplicationJson,
+    SdkGetPaymentMethodModifierResponseValue200ApplicationJson,
     SdkGetPaymentMethodStatusResponseValue200ApplicationJson,
     SdkListCustomPaymentMethodsResponseValue200ApplicationJson,
     SdkListPaymentMethodsResponseValue200ApplicationJson,
     SdkReplaceCustomPaymentMethodResponseValue200ApplicationJson,
+    SdkReplacePaymentMethodModifierResponseValue200ApplicationJson,
     SdkUpdateCustomPaymentMethodResponseValue200ApplicationJson,
     SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson,
     UpdateCustomPaymentMethodRequestApplicationJsonPropertyModifier,
@@ -1032,6 +1036,230 @@ class TestModelRoundTrip:
         }
         instance = SdkValidateAndSavePaymentMethodConfigurationResponseValue200ApplicationJson.from_dict(
             data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_payment_method_modifier_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_payment_method_modifier_response_value_200_application_json_property_data.json"
+        )
+        instance = GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_payment_method_modifier_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "discount",
+            "percentage": None,
+            "fixed_amount": None,
+            "condition": None,
+            "threshold": None,
+        }
+        instance = GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["payment_method"] == data["payment_method"]
+        assert serialized["kind"] == data["kind"]
+        assert serialized["percentage"] == data["percentage"]
+        assert serialized["fixed_amount"] == data["fixed_amount"]
+        assert serialized["condition"] == data["condition"]
+        assert serialized["threshold"] == data["threshold"]
+
+    def test_get_payment_method_modifier_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "discount",
+            "percentage": None,
+            "fixed_amount": None,
+            "condition": None,
+            "threshold": None,
+        }
+        instance = GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["percentage"] is None
+        assert serialized["fixed_amount"] is None
+        assert serialized["condition"] is None
+        assert serialized["threshold"] is None
+
+    def test_get_payment_method_modifier_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "unexpected_get_payment_method_modifier_response_value_200_application_json_property_data_kind",
+            "percentage": "1",
+            "fixed_amount": "1",
+            "condition": "above",
+            "threshold": "1.25",
+        }
+        instance = GetPaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_get_payment_method_modifier_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_payment_method_modifier_response_value_200_application_json.json"
+        )
+        instance = SdkGetPaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetPaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_payment_method_modifier_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "payment_method": "test_payment_method",
+                "kind": "discount",
+                "percentage": "1",
+                "fixed_amount": "1",
+                "condition": "above",
+                "threshold": "1.25",
+            }
+        }
+        instance = SdkGetPaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_payment_method_modifier_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_payment_method_modifier_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_payment_method_modifier_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "discount",
+            "percentage": None,
+            "fixed_amount": None,
+            "condition": None,
+            "threshold": None,
+        }
+        instance = ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["payment_method"] == data["payment_method"]
+        assert serialized["kind"] == data["kind"]
+        assert serialized["percentage"] == data["percentage"]
+        assert serialized["fixed_amount"] == data["fixed_amount"]
+        assert serialized["condition"] == data["condition"]
+        assert serialized["threshold"] == data["threshold"]
+
+    def test_replace_payment_method_modifier_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "discount",
+            "percentage": None,
+            "fixed_amount": None,
+            "condition": None,
+            "threshold": None,
+        }
+        instance = ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["percentage"] is None
+        assert serialized["fixed_amount"] is None
+        assert serialized["condition"] is None
+        assert serialized["threshold"] is None
+
+    def test_replace_payment_method_modifier_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "payment_method": "test_payment_method",
+            "kind": "unexpected_replace_payment_method_modifier_response_value_200_application_json_property_data_kind",
+            "percentage": "1",
+            "fixed_amount": "1",
+            "condition": "above",
+            "threshold": "1.25",
+        }
+        instance = ReplacePaymentMethodModifierResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_replace_payment_method_modifier_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_payment_method_modifier_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplacePaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplacePaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_payment_method_modifier_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "payment_method": "test_payment_method",
+                "kind": "discount",
+                "percentage": "1",
+                "fixed_amount": "1",
+                "condition": "above",
+                "threshold": "1.25",
+            }
+        }
+        instance = (
+            SdkReplacePaymentMethodModifierResponseValue200ApplicationJson.from_dict(
+                data
+            )
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

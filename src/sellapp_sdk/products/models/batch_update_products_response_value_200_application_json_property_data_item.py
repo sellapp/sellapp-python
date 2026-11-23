@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.list_products_response_value_200_application_json_property_data_item import (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
+from sellapp_sdk.common.models.batch_create_products_response_value_200_application_json_property_data_item import (
+    BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem,
 )
 
 BatchUpdateProductsResponseValue200ApplicationJsonPropertyDataItem: TypeAlias = (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem
+    BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem
 )

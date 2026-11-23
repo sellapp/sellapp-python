@@ -14,11 +14,17 @@ import builtins
 from sellapp_sdk.blacklists.models.list_tickets_response_value_200_application_json_property_data_item import (
     ListTicketsResponseValue200ApplicationJsonPropertyDataItem,
 )
+from sellapp_sdk.blacklists.models.sdk_batch_update_tickets_response_value_200_application_json import (
+    SdkBatchUpdateTicketsResponseValue200ApplicationJson,
+)
 from sellapp_sdk.blacklists.models.sdk_get_ticket_response_value_200_application_json import (
     SdkGetTicketResponseValue200ApplicationJson,
 )
 from sellapp_sdk.blacklists.models.sdk_update_ticket_response_value_200_application_json import (
     SdkUpdateTicketResponseValue200ApplicationJson,
+)
+from sellapp_sdk.blacklists.models.sdk_v_2_get_ticket_context_response_value_200_application_json import (
+    SdkV2GetTicketContextResponseValue200ApplicationJson,
 )
 from sellapp_sdk.blacklists.models.sdk_v_2_get_ticket_response_value_200_application_json import (
     SdkV2GetTicketResponseValue200ApplicationJson,
@@ -38,6 +44,7 @@ from sellapp_sdk.blacklists.models.search_tickets_request_application_json_prope
 from sellapp_sdk.blacklists.models.search_tickets_response_value_200_application_json_property_data_item import (
     SearchTicketsResponseValue200ApplicationJsonPropertyDataItem,
 )
+from sellapp_sdk.blacklists.models.tickets_waiting_on import TicketsWaitingOn
 from sellapp_sdk.blacklists.models.v_2_list_tickets_response_value_200_application_json_property_data_item import (
     V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem,
 )
@@ -56,12 +63,22 @@ from sellapp_sdk.blacklists.models.v_2_search_tickets_request_application_json_p
 from sellapp_sdk.blacklists.models.v_2_search_tickets_response_value_200_application_json_property_data_item import (
     V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem,
 )
+from sellapp_sdk.common.models.sdk_batch_update_tickets_request_application_json_action import (
+    SdkBatchUpdateTicketsRequestApplicationJsonAction,
+)
+from sellapp_sdk.common.models.sdk_batch_update_tickets_request_application_json_outcome import (
+    SdkBatchUpdateTicketsRequestApplicationJsonOutcome,
+)
+from sellapp_sdk.common.models.sdk_update_ticket_request_application_json_outcome import (
+    SdkUpdateTicketRequestApplicationJsonOutcome,
+)
 from sellapp_sdk.common.models.sdk_update_ticket_request_application_json_status import (
     SdkUpdateTicketRequestApplicationJsonStatus,
 )
+from sellapp_sdk.common.models.waiting_on import WaitingOn
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions, _validate_model, enum_value
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 
 
 class Tickets:
@@ -323,11 +340,14 @@ class Tickets:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        waiting_on: TicketsWaitingOn | str | None = None,
+        reason: str | None = None,
+        customer_email: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
-        List your store's support tickets, 15 per page by default. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's support tickets, 15 per page by default. This v2 route is store-scoped. Narrow the results with `waiting_on`, `reason` and `customer_email`; they combine with each other and with any other filters. An unknown `waiting_on` or `reason`, or a `customer_email` longer than 255 characters, returns `422`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -335,6 +355,9 @@ class Tickets:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            waiting_on: `store`: the latest message is from the customer, so the ticket waits on you. `customer`: the latest message is yours. A ticket without messages matches neither.
+            reason: A ticket reason by its label (as tickets show it in `reason`), its key such as `platform:refund_request`, or its code; case does not matter. A reason the store does not have returns `422` on `reason`, listing the store's reasons.
+            customer_email: Part of the customer's email, case-insensitive. `%` and `_` match those characters literally.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -386,6 +409,11 @@ class Tickets:
                 "after": after,
                 "order": order,
                 "page": page,
+                "waiting_on": enum_value(waiting_on)
+                if waiting_on is not None
+                else None,
+                "reason": reason,
+                "customer_email": customer_email,
             }.items()
             if v is not None
         }
@@ -409,25 +437,33 @@ class Tickets:
             V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        waiting_on: WaitingOn | str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        customer_email: str | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
-        Search tickets using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search tickets using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Narrow the results with `waiting_on`, `reason` and `customer_email`; they combine with each other and with any other filters. An unknown `waiting_on` or `reason`, or a `customer_email` longer than 255 characters, returns `422`. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            waiting_on: `store`: the latest message is from the customer, so the ticket waits on you. `customer`: the latest message is yours. A ticket without messages matches neither.
+            reason: A ticket reason by its label (as tickets show it in `reason`), its key such as `platform:refund_request`, or its code; case does not matter. A reason the store does not have returns `422` on `reason`, listing the store's reasons.
+            customer_email: Part of the customer's email, case-insensitive. `%` and `_` match those characters literally.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -485,6 +521,14 @@ class Tickets:
             }.items()
             if v is not None
         }
+        if not isinstance(waiting_on, NotGiven):
+            body["waiting_on"] = (
+                enum_value(waiting_on) if waiting_on is not None else None
+            )
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
+        if not isinstance(customer_email, NotGiven):
+            body["customer_email"] = customer_email
         params = {
             k: v
             for k, v in {
@@ -492,6 +536,7 @@ class Tickets:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -573,16 +618,18 @@ class Tickets:
         *,
         status: SdkUpdateTicketRequestApplicationJsonStatus | str | None = None,
         archived: bool | None = None,
+        outcome: SdkUpdateTicketRequestApplicationJsonOutcome | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateTicketResponseValue200ApplicationJson:
         """Close, reopen, or archive a ticket
 
-        Change ticket status or archive state in the selected store. Requires the ticket API-key ability and store ticket permission. Send status OPEN to reopen or CLOSED to close; closing sends the existing customer notification only when the status changes. Send archived true to archive or false to restore. You may send both fields together; omitted fields stay unchanged. Use the same optional Idempotency-Key and identical body after a lost response. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Close, reopen, archive or restore a ticket in the selected store. Send `status` `CLOSED` to close or `OPEN` to reopen, and `archived` `true` to archive or `false` to restore; you may send both, and omitted fields stay unchanged. When you close a ticket you can record why with `outcome`, which is accepted only together with `status` `CLOSED`. Closing emails the customer that the ticket was closed, at most once an hour per ticket: reopening and closing again within the hour sends no second email. A closed ticket keeps its outcome. Sending the outcome it already has changes nothing; a different outcome, or an outcome for a ticket that was closed without one, returns `422` on `outcome` and nothing in the request is applied, so reopen the ticket first. Requires the `ticket` API-key ability and the ticket permission in your team role. Use the same optional Idempotency-Key and identical body after a lost response. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             ticket: The ticket.
             status: The status.
             archived: The archived.
+            outcome: Why the ticket was closed: `refunded`, `refunded_partial` (partly refunded), `delivered`, `no_action`, `duplicate` or `other`. Only with `status` `CLOSED`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -632,6 +679,7 @@ class Tickets:
             for k, v in {
                 "status": enum_value(status) if status is not None else None,
                 "archived": archived,
+                "outcome": enum_value(outcome) if outcome is not None else None,
             }.items()
             if v is not None
         }
@@ -643,6 +691,17 @@ class Tickets:
                 "properties": {
                     "status": {"kind": "enum", "values": ["OPEN", "CLOSED"]},
                     "archived": {"kind": "primitive", "type": "boolean"},
+                    "outcome": {
+                        "kind": "enum",
+                        "values": [
+                            "refunded",
+                            "refunded_partial",
+                            "delivered",
+                            "no_action",
+                            "duplicate",
+                            "other",
+                        ],
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -656,6 +715,195 @@ class Tickets:
             path=("v2", "tickets", str(ticket)),
             body=body,
             model=SdkUpdateTicketResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def batch_update(
+        self,
+        *,
+        action: SdkBatchUpdateTicketsRequestApplicationJsonAction | str,
+        resources: builtins.list[int],
+        outcome: SdkBatchUpdateTicketsRequestApplicationJsonOutcome | str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkBatchUpdateTicketsResponseValue200ApplicationJson:
+        """Update several tickets
+
+        Close, reopen, archive, restore or mark as unread up to 50 tickets in one request, and get one result per ticket in the order you sent them. Every ID must be a ticket of the selected store: one unknown ID returns `404` and changes nothing. Each ticket is then changed on its own, so one refusal does not undo the others. `close` needs an `outcome`, which is recorded on every ticket it closes, and emails each customer that the ticket was closed, at most once an hour per ticket. `mark_unread` marks the ticket unread for your store (`read_status.store` becomes `false`). Requires the `ticket` API-key ability and the ticket permission in your team role. Repeating the same request is safe: a ticket already in the requested state comes back as `skipped`. Send an optional `Idempotency-Key` with an identical body to get the original response back after a lost connection. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            action: What to do with every listed ticket. `restore` takes a ticket out of the archive.
+            outcome: Why the ticket was closed: `refunded`, `refunded_partial` (partly refunded), `delivered`, `no_action`, `duplicate` or `other`. Required for `close` and refused for every other action.
+            resources: Between 1 and 50 different ticket IDs.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkBatchUpdateTicketsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "batchUpdateTickets",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "action": enum_value(action),
+                "outcome": enum_value(outcome) if outcome is not None else None,
+                "resources": resources,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkBatchUpdateTicketsRequestApplicationJson",
+                "required": ["action", "resources"],
+                "properties": {
+                    "action": {
+                        "kind": "enum",
+                        "values": [
+                            "close",
+                            "reopen",
+                            "archive",
+                            "restore",
+                            "mark_unread",
+                        ],
+                    },
+                    "outcome": {
+                        "kind": "enum",
+                        "values": [
+                            "refunded",
+                            "refunded_partial",
+                            "delivered",
+                            "no_action",
+                            "duplicate",
+                            "other",
+                        ],
+                    },
+                    "resources": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 50,
+                            "uniqueItems": True,
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "tickets", "batch"),
+            body=body,
+            model=SdkBatchUpdateTicketsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_context(
+        self,
+        ticket: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkV2GetTicketContextResponseValue200ApplicationJson:
+        """Retrieve a ticket's customer and refund context
+
+        Read what you need beside a ticket's conversation in one call: the resolution, the customer's order history in this store, the linked order, what can still be refunded to the customer's wallet, and the latest 20 support activity entries, newest first. `refund_options` has the same items as the ticket's wallet refund options. The customer figures count the store's completed orders whose customer or order email is the ticket's email. Requires the `ticket` API-key ability and the ticket permission in your team role. The response includes the customer's email, order count and lifetime spend, so give a key with this ability only to people and tools that may see them. Amounts are integer USD cents: `1999` means $19.99. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            ticket: The ticket ID in the selected store.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkV2GetTicketContextResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "v2GetTicketContext",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "tickets", str(ticket), "context"),
+            model=SdkV2GetTicketContextResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -919,11 +1167,14 @@ class AsyncTickets:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        waiting_on: TicketsWaitingOn | str | None = None,
+        reason: str | None = None,
+        customer_email: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all tickets
 
-        List your store's support tickets, 15 per page by default. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's support tickets, 15 per page by default. This v2 route is store-scoped. Narrow the results with `waiting_on`, `reason` and `customer_email`; they combine with each other and with any other filters. An unknown `waiting_on` or `reason`, or a `customer_email` longer than 255 characters, returns `422`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -931,6 +1182,9 @@ class AsyncTickets:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            waiting_on: `store`: the latest message is from the customer, so the ticket waits on you. `customer`: the latest message is yours. A ticket without messages matches neither.
+            reason: A ticket reason by its label (as tickets show it in `reason`), its key such as `platform:refund_request`, or its code; case does not matter. A reason the store does not have returns `422` on `reason`, listing the store's reasons.
+            customer_email: Part of the customer's email, case-insensitive. `%` and `_` match those characters literally.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -982,6 +1236,11 @@ class AsyncTickets:
                 "after": after,
                 "order": order,
                 "page": page,
+                "waiting_on": enum_value(waiting_on)
+                if waiting_on is not None
+                else None,
+                "reason": reason,
+                "customer_email": customer_email,
             }.items()
             if v is not None
         }
@@ -1005,25 +1264,33 @@ class AsyncTickets:
             V2SearchTicketsRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        waiting_on: WaitingOn | str | None | NotGiven = NOT_GIVEN,
+        reason: str | None | NotGiven = NOT_GIVEN,
+        customer_email: str | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchTicketsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search tickets
 
-        Search tickets using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search tickets using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Narrow the results with `waiting_on`, `reason` and `customer_email`; they combine with each other and with any other filters. An unknown `waiting_on` or `reason`, or a `customer_email` longer than 255 characters, returns `422`. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            waiting_on: `store`: the latest message is from the customer, so the ticket waits on you. `customer`: the latest message is yours. A ticket without messages matches neither.
+            reason: A ticket reason by its label (as tickets show it in `reason`), its key such as `platform:refund_request`, or its code; case does not matter. A reason the store does not have returns `422` on `reason`, listing the store's reasons.
+            customer_email: Part of the customer's email, case-insensitive. `%` and `_` match those characters literally.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1081,6 +1348,14 @@ class AsyncTickets:
             }.items()
             if v is not None
         }
+        if not isinstance(waiting_on, NotGiven):
+            body["waiting_on"] = (
+                enum_value(waiting_on) if waiting_on is not None else None
+            )
+        if not isinstance(reason, NotGiven):
+            body["reason"] = reason
+        if not isinstance(customer_email, NotGiven):
+            body["customer_email"] = customer_email
         params = {
             k: v
             for k, v in {
@@ -1088,6 +1363,7 @@ class AsyncTickets:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -1169,16 +1445,18 @@ class AsyncTickets:
         *,
         status: SdkUpdateTicketRequestApplicationJsonStatus | str | None = None,
         archived: bool | None = None,
+        outcome: SdkUpdateTicketRequestApplicationJsonOutcome | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateTicketResponseValue200ApplicationJson:
         """Close, reopen, or archive a ticket
 
-        Change ticket status or archive state in the selected store. Requires the ticket API-key ability and store ticket permission. Send status OPEN to reopen or CLOSED to close; closing sends the existing customer notification only when the status changes. Send archived true to archive or false to restore. You may send both fields together; omitted fields stay unchanged. Use the same optional Idempotency-Key and identical body after a lost response. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Close, reopen, archive or restore a ticket in the selected store. Send `status` `CLOSED` to close or `OPEN` to reopen, and `archived` `true` to archive or `false` to restore; you may send both, and omitted fields stay unchanged. When you close a ticket you can record why with `outcome`, which is accepted only together with `status` `CLOSED`. Closing emails the customer that the ticket was closed, at most once an hour per ticket: reopening and closing again within the hour sends no second email. A closed ticket keeps its outcome. Sending the outcome it already has changes nothing; a different outcome, or an outcome for a ticket that was closed without one, returns `422` on `outcome` and nothing in the request is applied, so reopen the ticket first. Requires the `ticket` API-key ability and the ticket permission in your team role. Use the same optional Idempotency-Key and identical body after a lost response. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             ticket: The ticket.
             status: The status.
             archived: The archived.
+            outcome: Why the ticket was closed: `refunded`, `refunded_partial` (partly refunded), `delivered`, `no_action`, `duplicate` or `other`. Only with `status` `CLOSED`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1228,6 +1506,7 @@ class AsyncTickets:
             for k, v in {
                 "status": enum_value(status) if status is not None else None,
                 "archived": archived,
+                "outcome": enum_value(outcome) if outcome is not None else None,
             }.items()
             if v is not None
         }
@@ -1239,6 +1518,17 @@ class AsyncTickets:
                 "properties": {
                     "status": {"kind": "enum", "values": ["OPEN", "CLOSED"]},
                     "archived": {"kind": "primitive", "type": "boolean"},
+                    "outcome": {
+                        "kind": "enum",
+                        "values": [
+                            "refunded",
+                            "refunded_partial",
+                            "delivered",
+                            "no_action",
+                            "duplicate",
+                            "other",
+                        ],
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -1252,5 +1542,194 @@ class AsyncTickets:
             path=("v2", "tickets", str(ticket)),
             body=body,
             model=SdkUpdateTicketResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def batch_update(
+        self,
+        *,
+        action: SdkBatchUpdateTicketsRequestApplicationJsonAction | str,
+        resources: builtins.list[int],
+        outcome: SdkBatchUpdateTicketsRequestApplicationJsonOutcome | str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkBatchUpdateTicketsResponseValue200ApplicationJson:
+        """Update several tickets
+
+        Close, reopen, archive, restore or mark as unread up to 50 tickets in one request, and get one result per ticket in the order you sent them. Every ID must be a ticket of the selected store: one unknown ID returns `404` and changes nothing. Each ticket is then changed on its own, so one refusal does not undo the others. `close` needs an `outcome`, which is recorded on every ticket it closes, and emails each customer that the ticket was closed, at most once an hour per ticket. `mark_unread` marks the ticket unread for your store (`read_status.store` becomes `false`). Requires the `ticket` API-key ability and the ticket permission in your team role. Repeating the same request is safe: a ticket already in the requested state comes back as `skipped`. Send an optional `Idempotency-Key` with an identical body to get the original response back after a lost connection. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            action: What to do with every listed ticket. `restore` takes a ticket out of the archive.
+            outcome: Why the ticket was closed: `refunded`, `refunded_partial` (partly refunded), `delivered`, `no_action`, `duplicate` or `other`. Required for `close` and refused for every other action.
+            resources: Between 1 and 50 different ticket IDs.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkBatchUpdateTicketsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "batchUpdateTickets",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "action": enum_value(action),
+                "outcome": enum_value(outcome) if outcome is not None else None,
+                "resources": resources,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkBatchUpdateTicketsRequestApplicationJson",
+                "required": ["action", "resources"],
+                "properties": {
+                    "action": {
+                        "kind": "enum",
+                        "values": [
+                            "close",
+                            "reopen",
+                            "archive",
+                            "restore",
+                            "mark_unread",
+                        ],
+                    },
+                    "outcome": {
+                        "kind": "enum",
+                        "values": [
+                            "refunded",
+                            "refunded_partial",
+                            "delivered",
+                            "no_action",
+                            "duplicate",
+                            "other",
+                        ],
+                    },
+                    "resources": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 50,
+                            "uniqueItems": True,
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "tickets", "batch"),
+            body=body,
+            model=SdkBatchUpdateTicketsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_context(
+        self,
+        ticket: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkV2GetTicketContextResponseValue200ApplicationJson:
+        """Retrieve a ticket's customer and refund context
+
+        Read what you need beside a ticket's conversation in one call: the resolution, the customer's order history in this store, the linked order, what can still be refunded to the customer's wallet, and the latest 20 support activity entries, newest first. `refund_options` has the same items as the ticket's wallet refund options. The customer figures count the store's completed orders whose customer or order email is the ticket's email. Requires the `ticket` API-key ability and the ticket permission in your team role. The response includes the customer's email, order count and lifetime spend, so give a key with this ability only to people and tools that may see them. Amounts are integer USD cents: `1999` means $19.99. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            ticket: The ticket ID in the selected store.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkV2GetTicketContextResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "v2GetTicketContext",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "tickets", str(ticket), "context"),
+            model=SdkV2GetTicketContextResponseValue200ApplicationJson,
             request_options=request_options,
         )

@@ -6,13 +6,30 @@ from sellapp_sdk.store_settings.models import (
     ConnectCustomDomainResponseValue201ApplicationJsonPropertyData,
     CreateNotificationChannelResponseValue201ApplicationJsonPropertyData,
     DeleteNotificationChannelResponseValue200ApplicationJsonPropertyData,
+    DeleteSenderEmailResponseValue200ApplicationJsonPropertyData,
+    DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending,
     DisconnectCustomDomainResponseValue200ApplicationJsonPropertyData,
+    DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyData,
+    DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyCrisp,
+    DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar,
+    DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyMeta,
+    GetCheckoutSettingsResponseValue200ApplicationJsonPropertyData,
+    GetCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto,
     GetCustomDomainResponseValue200ApplicationJsonPropertyData,
+    GetCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData,
     GetNotificationChannelResponseValue200ApplicationJsonPropertyData,
+    GetPersonalizationSettingsResponseValue200ApplicationJsonPropertyData,
+    GetSenderEmailResponseValue200ApplicationJsonPropertyData,
+    GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending,
+    GetStoreAlertSettingsResponseValue200ApplicationJsonPropertyData,
+    GetStoreIntegrationsResponseValue200ApplicationJsonPropertyData,
+    GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyCrisp,
+    GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar,
     GetStoreSettingsResponseValue200ApplicationJsonPropertyData,
     GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics,
     GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
     GetStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyStatus,
+    GetTaxSettingsResponseValue200ApplicationJsonPropertyData,
     ListCustomDomainsResponseValue200ApplicationJsonPropertyDataItem,
     ListNotificationChannelsResponseValue200ApplicationJsonPropertyDataItem,
     RefreshCustomDomainStatusResponseValue200ApplicationJsonPropertyData,
@@ -20,6 +37,12 @@ from sellapp_sdk.store_settings.models import (
     ReplaceAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics,
     ReplaceAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
     ReplaceAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyStatus,
+    ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto,
+    ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyData,
+    ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto,
+    ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData,
+    ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto,
+    ReplaceCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData,
     ReplaceGeneralStoreSettingsResponseValue200ApplicationJsonPropertyData,
     ReplaceGeneralStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics,
     ReplaceGeneralStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
@@ -31,28 +54,64 @@ from sellapp_sdk.store_settings.models import (
     ReplaceMarketingSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
     ReplaceMarketingSettingsResponseValue200ApplicationJsonPropertyDataPropertyStatus,
     ReplaceNotificationChannelResponseValue200ApplicationJsonPropertyData,
+    ReplacePersonalizationSettingsResponseValue200ApplicationJsonPropertyData,
+    ReplaceStoreAlertSettingsResponseValue200ApplicationJsonPropertyData,
+    ReplaceTaxSettingsResponseValue200ApplicationJsonPropertyData,
     SdkConnectCustomDomainResponseValue201ApplicationJson,
     SdkCreateNotificationChannelResponseValue201ApplicationJson,
     SdkDeleteNotificationChannelResponseValue200ApplicationJson,
+    SdkDeleteSenderEmailResponseValue200ApplicationJson,
     SdkDisconnectCustomDomainResponseValue200ApplicationJson,
+    SdkDisconnectGoogleCalendarResponseValue200ApplicationJson,
+    SdkGetCheckoutSettingsResponseValue200ApplicationJson,
     SdkGetCustomDomainResponseValue200ApplicationJson,
+    SdkGetCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkGetNotificationChannelResponseValue200ApplicationJson,
+    SdkGetPersonalizationSettingsResponseValue200ApplicationJson,
+    SdkGetSenderEmailResponseValue200ApplicationJson,
+    SdkGetStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkGetStoreIntegrationsResponseValue200ApplicationJson,
     SdkGetStoreSettingsResponseValue200ApplicationJson,
+    SdkGetTaxSettingsResponseValue200ApplicationJson,
     SdkListCustomDomainsResponseValue200ApplicationJson,
     SdkListNotificationChannelsResponseValue200ApplicationJson,
     SdkRefreshCustomDomainStatusResponseValue200ApplicationJson,
     SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkReplaceCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkReplaceMarketingSettingsResponseValue200ApplicationJson,
     SdkReplaceNotificationChannelResponseValue200ApplicationJson,
+    SdkReplacePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkReplaceTaxSettingsResponseValue200ApplicationJson,
+    SdkSendSenderEmailVerificationResponseValue200ApplicationJson,
+    SdkSetSenderEmailResponseValue200ApplicationJson,
     SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkUpdateCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkUpdateMarketingSettingsResponseValue200ApplicationJson,
     SdkUpdateNotificationChannelResponseValue200ApplicationJson,
+    SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkUpdateTaxSettingsResponseValue200ApplicationJson,
+    SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyData,
+    SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending,
+    SetSenderEmailResponseValue200ApplicationJsonPropertyData,
+    SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending,
     UpdateAnalyticsSettingsResponseValue200ApplicationJsonPropertyData,
     UpdateAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics,
     UpdateAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
     UpdateAnalyticsSettingsResponseValue200ApplicationJsonPropertyDataPropertyStatus,
+    UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto,
+    UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyData,
+    UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto,
+    UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData,
+    UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto,
+    UpdateCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData,
     UpdateGeneralStoreSettingsResponseValue200ApplicationJsonPropertyData,
     UpdateGeneralStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyAnalytics,
     UpdateGeneralStoreSettingsResponseValue200ApplicationJsonPropertyDataPropertyMarketing,
@@ -65,6 +124,9 @@ from sellapp_sdk.store_settings.models import (
     UpdateMarketingSettingsResponseValue200ApplicationJsonPropertyDataPropertyStatus,
     UpdateNotificationChannelRequestApplicationJsonPropertyChannel,
     UpdateNotificationChannelResponseValue200ApplicationJsonPropertyData,
+    UpdatePersonalizationSettingsResponseValue200ApplicationJsonPropertyData,
+    UpdateStoreAlertSettingsResponseValue200ApplicationJsonPropertyData,
+    UpdateTaxSettingsResponseValue200ApplicationJsonPropertyData,
 )
 from tests.generated_helpers import load_fixture
 
@@ -2199,6 +2261,2712 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
+
+    def test_get_checkout_settings_response_value_200_application_json_property_data_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_checkout_settings_response_value_200_application_json_property_data_property_crypto.json"
+        )
+        instance = GetCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_checkout_settings_response_value_200_application_json_property_data_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = GetCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_get_checkout_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_checkout_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_checkout_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = (
+            GetCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["shopping_cart_enabled"] == data["shopping_cart_enabled"]
+        assert serialized["customer_email_required"] == data["customer_email_required"]
+        assert serialized["allow_vpn_purchases"] == data["allow_vpn_purchases"]
+        assert serialized["blacklist_on_dispute"] == data["blacklist_on_dispute"]
+        assert serialized["minimum_spend"] == data["minimum_spend"]
+        assert serialized["billing_descriptor"] == data["billing_descriptor"]
+        assert serialized["attempts_per_customer"] == data["attempts_per_customer"]
+        assert serialized["attempts_per_ip"] == data["attempts_per_ip"]
+        assert serialized["attempts_per_email"] == data["attempts_per_email"]
+        assert (
+            serialized["attempts_per_fingerprint"] == data["attempts_per_fingerprint"]
+        )
+        assert (
+            serialized["rate_limit_window_seconds"] == data["rate_limit_window_seconds"]
+        )
+        assert serialized["crypto"] == data["crypto"]
+
+    def test_get_checkout_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = (
+            GetCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_spend"] is None
+        assert serialized["billing_descriptor"] is None
+        assert serialized["attempts_per_ip"] is None
+        assert serialized["attempts_per_email"] is None
+        assert serialized["attempts_per_fingerprint"] is None
+        assert serialized["crypto"] is None
+
+    def test_sdk_get_checkout_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_checkout_settings_response_value_200_application_json.json"
+        )
+        instance = SdkGetCheckoutSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_checkout_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "shopping_cart_enabled": True,
+                "customer_email_required": True,
+                "allow_vpn_purchases": True,
+                "blacklist_on_dispute": True,
+                "minimum_spend": "1",
+                "billing_descriptor": "test_billing_descrip",
+                "attempts_per_customer": 1,
+                "attempts_per_ip": 1,
+                "attempts_per_email": 1,
+                "attempts_per_fingerprint": 1,
+                "rate_limit_window_seconds": 60,
+                "crypto": {"underpaid_percentage": 1, "minimum_confirmations": 1},
+            }
+        }
+        instance = SdkGetCheckoutSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_checkout_settings_request_application_json_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_checkout_settings_request_application_json_property_crypto.json"
+        )
+        instance = (
+            ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_checkout_settings_request_application_json_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = (
+            ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_replace_checkout_settings_response_value_200_application_json_property_data_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_checkout_settings_response_value_200_application_json_property_data_property_crypto.json"
+        )
+        instance = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_checkout_settings_response_value_200_application_json_property_data_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_replace_checkout_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_checkout_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_checkout_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["shopping_cart_enabled"] == data["shopping_cart_enabled"]
+        assert serialized["customer_email_required"] == data["customer_email_required"]
+        assert serialized["allow_vpn_purchases"] == data["allow_vpn_purchases"]
+        assert serialized["blacklist_on_dispute"] == data["blacklist_on_dispute"]
+        assert serialized["minimum_spend"] == data["minimum_spend"]
+        assert serialized["billing_descriptor"] == data["billing_descriptor"]
+        assert serialized["attempts_per_customer"] == data["attempts_per_customer"]
+        assert serialized["attempts_per_ip"] == data["attempts_per_ip"]
+        assert serialized["attempts_per_email"] == data["attempts_per_email"]
+        assert (
+            serialized["attempts_per_fingerprint"] == data["attempts_per_fingerprint"]
+        )
+        assert (
+            serialized["rate_limit_window_seconds"] == data["rate_limit_window_seconds"]
+        )
+        assert serialized["crypto"] == data["crypto"]
+
+    def test_replace_checkout_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = ReplaceCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_spend"] is None
+        assert serialized["billing_descriptor"] is None
+        assert serialized["attempts_per_ip"] is None
+        assert serialized["attempts_per_email"] is None
+        assert serialized["attempts_per_fingerprint"] is None
+        assert serialized["crypto"] is None
+
+    def test_sdk_replace_checkout_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_checkout_settings_response_value_200_application_json.json"
+        )
+        instance = SdkReplaceCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkReplaceCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_checkout_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "shopping_cart_enabled": True,
+                "customer_email_required": True,
+                "allow_vpn_purchases": True,
+                "blacklist_on_dispute": True,
+                "minimum_spend": "1",
+                "billing_descriptor": "test_billing_descrip",
+                "attempts_per_customer": 1,
+                "attempts_per_ip": 1,
+                "attempts_per_email": 1,
+                "attempts_per_fingerprint": 1,
+                "rate_limit_window_seconds": 60,
+                "crypto": {"underpaid_percentage": 1, "minimum_confirmations": 1},
+            }
+        }
+        instance = SdkReplaceCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_checkout_settings_request_application_json_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_checkout_settings_request_application_json_property_crypto.json"
+        )
+        instance = UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_checkout_settings_request_application_json_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_update_checkout_settings_response_value_200_application_json_property_data_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_checkout_settings_response_value_200_application_json_property_data_property_crypto.json"
+        )
+        instance = UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_checkout_settings_response_value_200_application_json_property_data_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_update_checkout_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_checkout_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_checkout_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = (
+            UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["shopping_cart_enabled"] == data["shopping_cart_enabled"]
+        assert serialized["customer_email_required"] == data["customer_email_required"]
+        assert serialized["allow_vpn_purchases"] == data["allow_vpn_purchases"]
+        assert serialized["blacklist_on_dispute"] == data["blacklist_on_dispute"]
+        assert serialized["minimum_spend"] == data["minimum_spend"]
+        assert serialized["billing_descriptor"] == data["billing_descriptor"]
+        assert serialized["attempts_per_customer"] == data["attempts_per_customer"]
+        assert serialized["attempts_per_ip"] == data["attempts_per_ip"]
+        assert serialized["attempts_per_email"] == data["attempts_per_email"]
+        assert (
+            serialized["attempts_per_fingerprint"] == data["attempts_per_fingerprint"]
+        )
+        assert (
+            serialized["rate_limit_window_seconds"] == data["rate_limit_window_seconds"]
+        )
+        assert serialized["crypto"] == data["crypto"]
+
+    def test_update_checkout_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = (
+            UpdateCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_spend"] is None
+        assert serialized["billing_descriptor"] is None
+        assert serialized["attempts_per_ip"] is None
+        assert serialized["attempts_per_email"] is None
+        assert serialized["attempts_per_fingerprint"] is None
+        assert serialized["crypto"] is None
+
+    def test_sdk_update_checkout_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_checkout_settings_response_value_200_application_json.json"
+        )
+        instance = SdkUpdateCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkUpdateCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_checkout_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "shopping_cart_enabled": True,
+                "customer_email_required": True,
+                "allow_vpn_purchases": True,
+                "blacklist_on_dispute": True,
+                "minimum_spend": "1",
+                "billing_descriptor": "test_billing_descrip",
+                "attempts_per_customer": 1,
+                "attempts_per_ip": 1,
+                "attempts_per_email": 1,
+                "attempts_per_fingerprint": 1,
+                "rate_limit_window_seconds": 60,
+                "crypto": {"underpaid_percentage": 1, "minimum_confirmations": 1},
+            }
+        }
+        instance = SdkUpdateCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_tax_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_tax_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = GetTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_tax_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "vat_enabled": True,
+            "vat_inclusive_pricing": True,
+            "collect_billing_details": True,
+        }
+        instance = GetTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["vat_enabled"] == data["vat_enabled"]
+        assert serialized["vat_inclusive_pricing"] == data["vat_inclusive_pricing"]
+        assert serialized["collect_billing_details"] == data["collect_billing_details"]
+
+    def test_sdk_get_tax_settings_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_get_tax_settings_response_value_200_application_json.json"
+        )
+        instance = SdkGetTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetTaxSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_tax_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "vat_enabled": True,
+                "vat_inclusive_pricing": True,
+                "collect_billing_details": True,
+            }
+        }
+        instance = SdkGetTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_tax_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_tax_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            ReplaceTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            ReplaceTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_tax_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "vat_enabled": True,
+            "vat_inclusive_pricing": True,
+            "collect_billing_details": True,
+        }
+        instance = (
+            ReplaceTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["vat_enabled"] == data["vat_enabled"]
+        assert serialized["vat_inclusive_pricing"] == data["vat_inclusive_pricing"]
+        assert serialized["collect_billing_details"] == data["collect_billing_details"]
+
+    def test_sdk_replace_tax_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_tax_settings_response_value_200_application_json.json"
+        )
+        instance = SdkReplaceTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkReplaceTaxSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_tax_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "vat_enabled": True,
+                "vat_inclusive_pricing": True,
+                "collect_billing_details": True,
+            }
+        }
+        instance = SdkReplaceTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_tax_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_tax_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            UpdateTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            UpdateTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_tax_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "vat_enabled": True,
+            "vat_inclusive_pricing": True,
+            "collect_billing_details": True,
+        }
+        instance = (
+            UpdateTaxSettingsResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["vat_enabled"] == data["vat_enabled"]
+        assert serialized["vat_inclusive_pricing"] == data["vat_inclusive_pricing"]
+        assert serialized["collect_billing_details"] == data["collect_billing_details"]
+
+    def test_sdk_update_tax_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_tax_settings_response_value_200_application_json.json"
+        )
+        instance = SdkUpdateTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkUpdateTaxSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_tax_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "vat_enabled": True,
+                "vat_inclusive_pricing": True,
+                "collect_billing_details": True,
+            }
+        }
+        instance = SdkUpdateTaxSettingsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_customer_email_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_customer_email_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = GetCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_customer_email_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"send_delivery_email": True, "send_payment_failure_email": True}
+        instance = GetCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["send_delivery_email"] == data["send_delivery_email"]
+        assert (
+            serialized["send_payment_failure_email"]
+            == data["send_payment_failure_email"]
+        )
+
+    def test_sdk_get_customer_email_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_customer_email_settings_response_value_200_application_json.json"
+        )
+        instance = SdkGetCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_customer_email_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {"send_delivery_email": True, "send_payment_failure_email": True}
+        }
+        instance = SdkGetCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_customer_email_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_customer_email_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_customer_email_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"send_delivery_email": True, "send_payment_failure_email": True}
+        instance = ReplaceCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["send_delivery_email"] == data["send_delivery_email"]
+        assert (
+            serialized["send_payment_failure_email"]
+            == data["send_payment_failure_email"]
+        )
+
+    def test_sdk_replace_customer_email_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_customer_email_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_customer_email_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {"send_delivery_email": True, "send_payment_failure_email": True}
+        }
+        instance = (
+            SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_customer_email_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_customer_email_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_customer_email_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"send_delivery_email": True, "send_payment_failure_email": True}
+        instance = UpdateCustomerEmailSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["send_delivery_email"] == data["send_delivery_email"]
+        assert (
+            serialized["send_payment_failure_email"]
+            == data["send_payment_failure_email"]
+        )
+
+    def test_sdk_update_customer_email_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_customer_email_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_customer_email_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {"send_delivery_email": True, "send_payment_failure_email": True}
+        }
+        instance = (
+            SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_store_alert_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_store_alert_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_store_alert_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"sale_emails_enabled": True}
+        instance = (
+            GetStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["sale_emails_enabled"] == data["sale_emails_enabled"]
+
+    def test_sdk_get_store_alert_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_store_alert_settings_response_value_200_application_json.json"
+        )
+        instance = SdkGetStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_store_alert_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"sale_emails_enabled": True}}
+        instance = SdkGetStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_store_alert_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_store_alert_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_store_alert_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"sale_emails_enabled": True}
+        instance = ReplaceStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["sale_emails_enabled"] == data["sale_emails_enabled"]
+
+    def test_sdk_replace_store_alert_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_store_alert_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_store_alert_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"sale_emails_enabled": True}}
+        instance = (
+            SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_store_alert_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_store_alert_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_store_alert_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"sale_emails_enabled": True}
+        instance = UpdateStoreAlertSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["sale_emails_enabled"] == data["sale_emails_enabled"]
+
+    def test_sdk_update_store_alert_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_store_alert_settings_response_value_200_application_json.json"
+        )
+        instance = SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_store_alert_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"sale_emails_enabled": True}}
+        instance = SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_personalization_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_personalization_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = GetPersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetPersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_personalization_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = GetPersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] == data["support_email"]
+        assert serialized["trustpilot_email"] == data["trustpilot_email"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["sender_email"] == data["sender_email"]
+        assert serialized["store_address"] == data["store_address"]
+        assert serialized["store_city"] == data["store_city"]
+        assert serialized["store_state"] == data["store_state"]
+        assert serialized["store_zip"] == data["store_zip"]
+        assert serialized["store_country"] == data["store_country"]
+        assert serialized["store_tax"] == data["store_tax"]
+        assert serialized["back_link_label"] == data["back_link_label"]
+        assert serialized["back_link_url"] == data["back_link_url"]
+
+    def test_get_personalization_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = GetPersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] is None
+        assert serialized["trustpilot_email"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["sender_email"] is None
+        assert serialized["store_address"] is None
+        assert serialized["store_city"] is None
+        assert serialized["store_state"] is None
+        assert serialized["store_zip"] is None
+        assert serialized["store_country"] is None
+        assert serialized["store_tax"] is None
+        assert serialized["back_link_label"] is None
+        assert serialized["back_link_url"] is None
+
+    def test_sdk_get_personalization_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_personalization_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkGetPersonalizationSettingsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkGetPersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_personalization_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "support_email": "test@example.com",
+                "trustpilot_email": "test@example.com",
+                "sender_name": "Test",
+                "sender_email": "test@example.com",
+                "store_address": "test_store_address",
+                "store_city": "test_store_city",
+                "store_state": "test_store_state",
+                "store_zip": "test_store_zip",
+                "store_country": "test_store_country",
+                "store_tax": "test_store_tax",
+                "back_link_label": "test_back_link_label",
+                "back_link_url": "https://example.com",
+            }
+        }
+        instance = (
+            SdkGetPersonalizationSettingsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_personalization_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_personalization_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplacePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplacePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_personalization_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = ReplacePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] == data["support_email"]
+        assert serialized["trustpilot_email"] == data["trustpilot_email"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["sender_email"] == data["sender_email"]
+        assert serialized["store_address"] == data["store_address"]
+        assert serialized["store_city"] == data["store_city"]
+        assert serialized["store_state"] == data["store_state"]
+        assert serialized["store_zip"] == data["store_zip"]
+        assert serialized["store_country"] == data["store_country"]
+        assert serialized["store_tax"] == data["store_tax"]
+        assert serialized["back_link_label"] == data["back_link_label"]
+        assert serialized["back_link_url"] == data["back_link_url"]
+
+    def test_replace_personalization_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = ReplacePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] is None
+        assert serialized["trustpilot_email"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["sender_email"] is None
+        assert serialized["store_address"] is None
+        assert serialized["store_city"] is None
+        assert serialized["store_state"] is None
+        assert serialized["store_zip"] is None
+        assert serialized["store_country"] is None
+        assert serialized["store_tax"] is None
+        assert serialized["back_link_label"] is None
+        assert serialized["back_link_url"] is None
+
+    def test_sdk_replace_personalization_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_personalization_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplacePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplacePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_personalization_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "support_email": "test@example.com",
+                "trustpilot_email": "test@example.com",
+                "sender_name": "Test",
+                "sender_email": "test@example.com",
+                "store_address": "test_store_address",
+                "store_city": "test_store_city",
+                "store_state": "test_store_state",
+                "store_zip": "test_store_zip",
+                "store_country": "test_store_country",
+                "store_tax": "test_store_tax",
+                "back_link_label": "test_back_link_label",
+                "back_link_url": "https://example.com",
+            }
+        }
+        instance = (
+            SdkReplacePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_personalization_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_personalization_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdatePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdatePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_personalization_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = UpdatePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] == data["support_email"]
+        assert serialized["trustpilot_email"] == data["trustpilot_email"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["sender_email"] == data["sender_email"]
+        assert serialized["store_address"] == data["store_address"]
+        assert serialized["store_city"] == data["store_city"]
+        assert serialized["store_state"] == data["store_state"]
+        assert serialized["store_zip"] == data["store_zip"]
+        assert serialized["store_country"] == data["store_country"]
+        assert serialized["store_tax"] == data["store_tax"]
+        assert serialized["back_link_label"] == data["back_link_label"]
+        assert serialized["back_link_url"] == data["back_link_url"]
+
+    def test_update_personalization_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "support_email": None,
+            "trustpilot_email": None,
+            "sender_name": None,
+            "sender_email": None,
+            "store_address": None,
+            "store_city": None,
+            "store_state": None,
+            "store_zip": None,
+            "store_country": None,
+            "store_tax": None,
+            "back_link_label": None,
+            "back_link_url": None,
+        }
+        instance = UpdatePersonalizationSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["support_email"] is None
+        assert serialized["trustpilot_email"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["sender_email"] is None
+        assert serialized["store_address"] is None
+        assert serialized["store_city"] is None
+        assert serialized["store_state"] is None
+        assert serialized["store_zip"] is None
+        assert serialized["store_country"] is None
+        assert serialized["store_tax"] is None
+        assert serialized["back_link_label"] is None
+        assert serialized["back_link_url"] is None
+
+    def test_sdk_update_personalization_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_personalization_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_personalization_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "support_email": "test@example.com",
+                "trustpilot_email": "test@example.com",
+                "sender_name": "Test",
+                "sender_email": "test@example.com",
+                "store_address": "test_store_address",
+                "store_city": "test_store_city",
+                "store_state": "test_store_state",
+                "store_zip": "test_store_zip",
+                "store_country": "test_store_country",
+                "store_tax": "test_store_tax",
+                "back_link_label": "test_back_link_label",
+                "back_link_url": "https://example.com",
+            }
+        }
+        instance = (
+            SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto.json"
+        )
+        instance = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_replace_crypto_checkout_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_crypto_checkout_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_crypto_checkout_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["shopping_cart_enabled"] == data["shopping_cart_enabled"]
+        assert serialized["customer_email_required"] == data["customer_email_required"]
+        assert serialized["allow_vpn_purchases"] == data["allow_vpn_purchases"]
+        assert serialized["blacklist_on_dispute"] == data["blacklist_on_dispute"]
+        assert serialized["minimum_spend"] == data["minimum_spend"]
+        assert serialized["billing_descriptor"] == data["billing_descriptor"]
+        assert serialized["attempts_per_customer"] == data["attempts_per_customer"]
+        assert serialized["attempts_per_ip"] == data["attempts_per_ip"]
+        assert serialized["attempts_per_email"] == data["attempts_per_email"]
+        assert (
+            serialized["attempts_per_fingerprint"] == data["attempts_per_fingerprint"]
+        )
+        assert (
+            serialized["rate_limit_window_seconds"] == data["rate_limit_window_seconds"]
+        )
+        assert serialized["crypto"] == data["crypto"]
+
+    def test_replace_crypto_checkout_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = ReplaceCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_spend"] is None
+        assert serialized["billing_descriptor"] is None
+        assert serialized["attempts_per_ip"] is None
+        assert serialized["attempts_per_email"] is None
+        assert serialized["attempts_per_fingerprint"] is None
+        assert serialized["crypto"] is None
+
+    def test_sdk_replace_crypto_checkout_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_crypto_checkout_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_crypto_checkout_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "shopping_cart_enabled": True,
+                "customer_email_required": True,
+                "allow_vpn_purchases": True,
+                "blacklist_on_dispute": True,
+                "minimum_spend": "1",
+                "billing_descriptor": "test_billing_descrip",
+                "attempts_per_customer": 1,
+                "attempts_per_ip": 1,
+                "attempts_per_email": 1,
+                "attempts_per_fingerprint": 1,
+                "rate_limit_window_seconds": 60,
+                "crypto": {"underpaid_percentage": 1, "minimum_confirmations": 1},
+            }
+        }
+        instance = (
+            SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto.json"
+        )
+        instance = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_crypto_checkout_settings_response_value_200_application_json_property_data_property_crypto_minimal_payload(
+        self,
+    ):
+        data = {"underpaid_percentage": 1, "minimum_confirmations": 1}
+        instance = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyDataPropertyCrypto.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["underpaid_percentage"] == data["underpaid_percentage"]
+        assert serialized["minimum_confirmations"] == data["minimum_confirmations"]
+
+    def test_update_crypto_checkout_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_crypto_checkout_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_crypto_checkout_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["shopping_cart_enabled"] == data["shopping_cart_enabled"]
+        assert serialized["customer_email_required"] == data["customer_email_required"]
+        assert serialized["allow_vpn_purchases"] == data["allow_vpn_purchases"]
+        assert serialized["blacklist_on_dispute"] == data["blacklist_on_dispute"]
+        assert serialized["minimum_spend"] == data["minimum_spend"]
+        assert serialized["billing_descriptor"] == data["billing_descriptor"]
+        assert serialized["attempts_per_customer"] == data["attempts_per_customer"]
+        assert serialized["attempts_per_ip"] == data["attempts_per_ip"]
+        assert serialized["attempts_per_email"] == data["attempts_per_email"]
+        assert (
+            serialized["attempts_per_fingerprint"] == data["attempts_per_fingerprint"]
+        )
+        assert (
+            serialized["rate_limit_window_seconds"] == data["rate_limit_window_seconds"]
+        )
+        assert serialized["crypto"] == data["crypto"]
+
+    def test_update_crypto_checkout_settings_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "shopping_cart_enabled": True,
+            "customer_email_required": True,
+            "allow_vpn_purchases": True,
+            "blacklist_on_dispute": True,
+            "minimum_spend": None,
+            "billing_descriptor": None,
+            "attempts_per_customer": 1,
+            "attempts_per_ip": None,
+            "attempts_per_email": None,
+            "attempts_per_fingerprint": None,
+            "rate_limit_window_seconds": 60,
+            "crypto": None,
+        }
+        instance = UpdateCryptoCheckoutSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_spend"] is None
+        assert serialized["billing_descriptor"] is None
+        assert serialized["attempts_per_ip"] is None
+        assert serialized["attempts_per_email"] is None
+        assert serialized["attempts_per_fingerprint"] is None
+        assert serialized["crypto"] is None
+
+    def test_sdk_update_crypto_checkout_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_crypto_checkout_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_crypto_checkout_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "shopping_cart_enabled": True,
+                "customer_email_required": True,
+                "allow_vpn_purchases": True,
+                "blacklist_on_dispute": True,
+                "minimum_spend": "1",
+                "billing_descriptor": "test_billing_descrip",
+                "attempts_per_customer": 1,
+                "attempts_per_ip": 1,
+                "attempts_per_email": 1,
+                "attempts_per_fingerprint": 1,
+                "rate_limit_window_seconds": 60,
+                "crypto": {"underpaid_percentage": 1, "minimum_confirmations": 1},
+            }
+        }
+        instance = (
+            SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_sender_email_response_value_200_application_json_property_data_property_pending_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_sender_email_response_value_200_application_json_property_data_property_pending.json"
+        )
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_sender_email_response_value_200_application_json_property_data_property_pending_minimal_payload(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": None}
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+
+    def test_get_sender_email_response_value_200_application_json_property_data_property_pending_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": True}
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "problem" not in serialized
+
+    def test_get_sender_email_response_value_200_application_json_property_data_property_pending_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": "test@example.com",
+            "verified": None,
+            "problem": "test_problem",
+        }
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["verified"] is None
+
+    def test_get_sender_email_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_sender_email_response_value_200_application_json_property_data.json"
+        )
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_sender_email_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["default_from"] == data["default_from"]
+        assert serialized["customer_emails_from"] == data["customer_emails_from"]
+        assert serialized["pending"] == data["pending"]
+
+    def test_get_sender_email_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = GetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+        assert serialized["verified"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["pending"] is None
+
+    def test_sdk_get_sender_email_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_get_sender_email_response_value_200_application_json.json"
+        )
+        instance = SdkGetSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetSenderEmailResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_sender_email_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "email": "test@example.com",
+                "verified": True,
+                "sender_name": "Test",
+                "default_from": "test_default_from",
+                "customer_emails_from": "test@example.com",
+                "pending": {
+                    "email": "test@example.com",
+                    "verified": True,
+                    "problem": "test_problem",
+                },
+            }
+        }
+        instance = SdkGetSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_set_sender_email_response_value_200_application_json_property_data_property_pending_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "set_sender_email_response_value_200_application_json_property_data_property_pending.json"
+        )
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_set_sender_email_response_value_200_application_json_property_data_property_pending_minimal_payload(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": None}
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+
+    def test_set_sender_email_response_value_200_application_json_property_data_property_pending_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": True}
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "problem" not in serialized
+
+    def test_set_sender_email_response_value_200_application_json_property_data_property_pending_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": "test@example.com",
+            "verified": None,
+            "problem": "test_problem",
+        }
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["verified"] is None
+
+    def test_set_sender_email_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "set_sender_email_response_value_200_application_json_property_data.json"
+        )
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_set_sender_email_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["default_from"] == data["default_from"]
+        assert serialized["customer_emails_from"] == data["customer_emails_from"]
+        assert serialized["pending"] == data["pending"]
+
+    def test_set_sender_email_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = SetSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+        assert serialized["verified"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["pending"] is None
+
+    def test_sdk_set_sender_email_response_value_200_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_set_sender_email_response_value_200_application_json.json"
+        )
+        instance = SdkSetSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkSetSenderEmailResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_set_sender_email_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "email": "test@example.com",
+                "verified": True,
+                "sender_name": "Test",
+                "default_from": "test_default_from",
+                "customer_emails_from": "test@example.com",
+                "pending": {
+                    "email": "test@example.com",
+                    "verified": True,
+                    "problem": "test_problem",
+                },
+            }
+        }
+        instance = SdkSetSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_property_pending_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "delete_sender_email_response_value_200_application_json_property_data_property_pending.json"
+        )
+        instance = DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_property_pending_minimal_payload(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": None}
+        instance = DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_property_pending_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": True}
+        instance = DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "problem" not in serialized
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_property_pending_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": "test@example.com",
+            "verified": None,
+            "problem": "test_problem",
+        }
+        instance = DeleteSenderEmailResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["verified"] is None
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "delete_sender_email_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            DeleteSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            DeleteSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = (
+            DeleteSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["default_from"] == data["default_from"]
+        assert serialized["customer_emails_from"] == data["customer_emails_from"]
+        assert serialized["pending"] == data["pending"]
+
+    def test_delete_sender_email_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = (
+            DeleteSenderEmailResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+        assert serialized["verified"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["pending"] is None
+
+    def test_sdk_delete_sender_email_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_delete_sender_email_response_value_200_application_json.json"
+        )
+        instance = SdkDeleteSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkDeleteSenderEmailResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_delete_sender_email_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "email": "test@example.com",
+                "verified": True,
+                "sender_name": "Test",
+                "default_from": "test_default_from",
+                "customer_emails_from": "test@example.com",
+                "pending": {
+                    "email": "test@example.com",
+                    "verified": True,
+                    "problem": "test_problem",
+                },
+            }
+        }
+        instance = SdkDeleteSenderEmailResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_property_pending_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "send_sender_email_verification_response_value_200_application_json_property_data_property_pending.json"
+        )
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_property_pending_minimal_payload(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": None}
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["verified"] == data["verified"]
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_property_pending_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"email": "test@example.com", "verified": True}
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "problem" not in serialized
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_property_pending_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": "test@example.com",
+            "verified": None,
+            "problem": "test_problem",
+        }
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyDataPropertyPending.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["verified"] is None
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "send_sender_email_verification_response_value_200_application_json_property_data.json"
+        )
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["verified"] == data["verified"]
+        assert serialized["sender_name"] == data["sender_name"]
+        assert serialized["default_from"] == data["default_from"]
+        assert serialized["customer_emails_from"] == data["customer_emails_from"]
+        assert serialized["pending"] == data["pending"]
+
+    def test_send_sender_email_verification_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": None,
+            "verified": None,
+            "sender_name": None,
+            "default_from": "test_default_from",
+            "customer_emails_from": "test@example.com",
+            "pending": None,
+        }
+        instance = SendSenderEmailVerificationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+        assert serialized["verified"] is None
+        assert serialized["sender_name"] is None
+        assert serialized["pending"] is None
+
+    def test_sdk_send_sender_email_verification_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_send_sender_email_verification_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkSendSenderEmailVerificationResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkSendSenderEmailVerificationResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_send_sender_email_verification_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "email": "test@example.com",
+                "verified": True,
+                "sender_name": "Test",
+                "default_from": "test_default_from",
+                "customer_emails_from": "test@example.com",
+                "pending": {
+                    "email": "test@example.com",
+                    "verified": True,
+                    "problem": "test_problem",
+                },
+            }
+        }
+        instance = (
+            SdkSendSenderEmailVerificationResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_property_google_calendar_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_store_integrations_response_value_200_application_json_property_data_property_google_calendar.json"
+        )
+        instance = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_property_google_calendar_minimal_payload(
+        self,
+    ):
+        data = {
+            "connected": True,
+            "available": True,
+            "connection_id": None,
+            "account": None,
+            "calendar": None,
+            "health": None,
+            "connected_at": None,
+        }
+        instance = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["connected"] == data["connected"]
+        assert serialized["available"] == data["available"]
+        assert serialized["connection_id"] == data["connection_id"]
+        assert serialized["account"] == data["account"]
+        assert serialized["calendar"] == data["calendar"]
+        assert serialized["health"] == data["health"]
+        assert serialized["connected_at"] == data["connected_at"]
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_property_google_calendar_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "connected": True,
+            "available": True,
+            "connection_id": None,
+            "account": None,
+            "calendar": None,
+            "health": None,
+            "connected_at": None,
+        }
+        instance = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["connection_id"] is None
+        assert serialized["account"] is None
+        assert serialized["calendar"] is None
+        assert serialized["health"] is None
+        assert serialized["connected_at"] is None
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_property_crisp_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_store_integrations_response_value_200_application_json_property_data_property_crisp.json"
+        )
+        instance = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_property_crisp_minimal_payload(
+        self,
+    ):
+        data = {"configured": True}
+        instance = GetStoreIntegrationsResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["configured"] == data["configured"]
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_store_integrations_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetStoreIntegrationsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetStoreIntegrationsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_store_integrations_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "google_calendar": {
+                "connected": True,
+                "available": True,
+                "connection_id": 1,
+                "account": "test_account",
+                "calendar": "test_calendar",
+                "health": "healthy",
+                "connected_at": "2023-01-01T00:00:00.000Z",
+            },
+            "crisp": {"configured": True},
+        }
+        instance = (
+            GetStoreIntegrationsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["google_calendar"] == data["google_calendar"]
+        assert serialized["crisp"] == data["crisp"]
+
+    def test_sdk_get_store_integrations_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_store_integrations_response_value_200_application_json.json"
+        )
+        instance = SdkGetStoreIntegrationsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetStoreIntegrationsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_store_integrations_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "google_calendar": {
+                    "connected": True,
+                    "available": True,
+                    "connection_id": 1,
+                    "account": "test_account",
+                    "calendar": "test_calendar",
+                    "health": "healthy",
+                    "connected_at": "2023-01-01T00:00:00.000Z",
+                },
+                "crisp": {"configured": True},
+            }
+        }
+        instance = SdkGetStoreIntegrationsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_property_google_calendar_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disconnect_google_calendar_response_value_200_application_json_property_data_property_google_calendar.json"
+        )
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_property_google_calendar_minimal_payload(
+        self,
+    ):
+        data = {
+            "connected": True,
+            "available": True,
+            "connection_id": None,
+            "account": None,
+            "calendar": None,
+            "health": None,
+            "connected_at": None,
+        }
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["connected"] == data["connected"]
+        assert serialized["available"] == data["available"]
+        assert serialized["connection_id"] == data["connection_id"]
+        assert serialized["account"] == data["account"]
+        assert serialized["calendar"] == data["calendar"]
+        assert serialized["health"] == data["health"]
+        assert serialized["connected_at"] == data["connected_at"]
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_property_google_calendar_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "connected": True,
+            "available": True,
+            "connection_id": None,
+            "account": None,
+            "calendar": None,
+            "health": None,
+            "connected_at": None,
+        }
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyGoogleCalendar.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["connection_id"] is None
+        assert serialized["account"] is None
+        assert serialized["calendar"] is None
+        assert serialized["health"] is None
+        assert serialized["connected_at"] is None
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_property_crisp_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disconnect_google_calendar_response_value_200_application_json_property_data_property_crisp.json"
+        )
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_property_crisp_minimal_payload(
+        self,
+    ):
+        data = {"configured": True}
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyDataPropertyCrisp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["configured"] == data["configured"]
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disconnect_google_calendar_response_value_200_application_json_property_data.json"
+        )
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "google_calendar": {
+                "connected": True,
+                "available": True,
+                "connection_id": 1,
+                "account": "test_account",
+                "calendar": "test_calendar",
+                "health": "healthy",
+                "connected_at": "2023-01-01T00:00:00.000Z",
+            },
+            "crisp": {"configured": True},
+        }
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["google_calendar"] == data["google_calendar"]
+        assert serialized["crisp"] == data["crisp"]
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_meta_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disconnect_google_calendar_response_value_200_application_json_property_meta.json"
+        )
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disconnect_google_calendar_response_value_200_application_json_property_meta_minimal_payload(
+        self,
+    ):
+        data = {"products_without_video_link": ["products_without_video_link_01234"]}
+        instance = DisconnectGoogleCalendarResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert (
+            serialized["products_without_video_link"]
+            == data["products_without_video_link"]
+        )
+
+    def test_sdk_disconnect_google_calendar_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_disconnect_google_calendar_response_value_200_application_json.json"
+        )
+        instance = SdkDisconnectGoogleCalendarResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkDisconnectGoogleCalendarResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_disconnect_google_calendar_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "google_calendar": {
+                    "connected": True,
+                    "available": True,
+                    "connection_id": 1,
+                    "account": "test_account",
+                    "calendar": "test_calendar",
+                    "health": "healthy",
+                    "connected_at": "2023-01-01T00:00:00.000Z",
+                },
+                "crisp": {"configured": True},
+            },
+            "meta": {
+                "products_without_video_link": ["products_without_video_link_01234"]
+            },
+        }
+        instance = SdkDisconnectGoogleCalendarResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["meta"] == data["meta"]
 
     def test_list_notification_channels_response_value_200_application_json_property_data_item_round_trip(
         self,

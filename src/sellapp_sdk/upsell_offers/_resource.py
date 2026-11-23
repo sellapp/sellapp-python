@@ -17,6 +17,7 @@ from .models import (
     CreateUpsellOfferRequestApplicationJsonPropertyItemsItem,
     ReplaceUpsellOfferRequestApplicationJsonPropertyItemsItem,
     SdkCreateUpsellOfferResponseValue201ApplicationJson,
+    SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson,
     SdkGetUpsellOfferResponseValue200ApplicationJson,
     SdkListUpsellOffersResponseValue200ApplicationJson,
     SdkReplaceUpsellOfferResponseValue200ApplicationJson,
@@ -50,7 +51,7 @@ class UpsellOffers:
     ) -> SyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]:
         """List upsell offers
 
-        List the authenticated store's ordered post-purchase offers. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List the authenticated store's ordered post-purchase offers. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -142,7 +143,7 @@ class UpsellOffers:
     ) -> SdkCreateUpsellOfferResponseValue201ApplicationJson:
         """Create an upsell offer
 
-        Create an ordered post-purchase offer. Every product and variant ID is checked against the selected store and expected parent product. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create an ordered post-purchase offer. Every product and variant ID is checked against the selected store and expected parent product. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             name: The name.
@@ -351,7 +352,7 @@ class UpsellOffers:
     ) -> SyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]:
         """Search upsell offers
 
-        Search offer names and descriptions and compose supported filters and sort instructions. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search offer names and descriptions and compose supported filters and sort instructions. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
@@ -450,7 +451,7 @@ class UpsellOffers:
     ) -> SdkGetUpsellOfferResponseValue200ApplicationJson:
         """Retrieve an upsell offer
 
-        Retrieve one store-scoped upsell offer and its ordered target items. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Retrieve one store-scoped upsell offer and its ordered target items. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -527,7 +528,7 @@ class UpsellOffers:
     ) -> SdkReplaceUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
-        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -738,7 +739,7 @@ class UpsellOffers:
     ) -> SdkUpdateUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
-        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -935,7 +936,7 @@ class UpsellOffers:
     ) -> None:
         """Delete an upsell offer
 
-        Soft-delete an upsell offer while preserving checkout and reporting attribution. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Soft-delete an upsell offer while preserving checkout and reporting attribution. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -986,6 +987,82 @@ class UpsellOffers:
             request_options=request_options,
         )
 
+    def get_performance(
+        self,
+        upsell_offer: int,
+        *,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson:
+        """Retrieve upsell offer performance
+
+        Report how an upsell offer has performed over its whole life: how often customers saw it, started its checkout, and bought it, and the revenue those purchases brought. An offer from another store returns `404`, and so does a deleted one unless you send `with_trashed=true`. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            upsell_offer: The upsell offer ID.
+            with_trashed: Set to `true` to also find a deleted upsell offer. Defaults to `false`.
+            only_trashed: Set to `true` to find only a deleted upsell offer. Ignored when `with_trashed` is `true`. Defaults to `false`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getUpsellOfferPerformance",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "with_trashed": with_trashed,
+                "only_trashed": only_trashed,
+            }.items()
+            if v is not None
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "upsell-offers", str(upsell_offer), "performance"),
+            params=params,
+            model=SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncUpsellOffers:
     """Upsell Offers API resources (async)."""
@@ -1007,7 +1084,7 @@ class AsyncUpsellOffers:
     ) -> AsyncPage[SdkListUpsellOffersResponseValue200ApplicationJson]:
         """List upsell offers
 
-        List the authenticated store's ordered post-purchase offers. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List the authenticated store's ordered post-purchase offers. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -1099,7 +1176,7 @@ class AsyncUpsellOffers:
     ) -> SdkCreateUpsellOfferResponseValue201ApplicationJson:
         """Create an upsell offer
 
-        Create an ordered post-purchase offer. Every product and variant ID is checked against the selected store and expected parent product. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create an ordered post-purchase offer. Every product and variant ID is checked against the selected store and expected parent product. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             name: The name.
@@ -1308,7 +1385,7 @@ class AsyncUpsellOffers:
     ) -> AsyncPage[SdkSearchUpsellOffersResponseValue200ApplicationJson]:
         """Search upsell offers
 
-        Search offer names and descriptions and compose supported filters and sort instructions. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search offer names and descriptions and compose supported filters and sort instructions. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
@@ -1407,7 +1484,7 @@ class AsyncUpsellOffers:
     ) -> SdkGetUpsellOfferResponseValue200ApplicationJson:
         """Retrieve an upsell offer
 
-        Retrieve one store-scoped upsell offer and its ordered target items. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Retrieve one store-scoped upsell offer and its ordered target items. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -1484,7 +1561,7 @@ class AsyncUpsellOffers:
     ) -> SdkReplaceUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
-        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -1695,7 +1772,7 @@ class AsyncUpsellOffers:
     ) -> SdkUpdateUpsellOfferResponseValue200ApplicationJson:
         """Update an upsell offer
 
-        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Update supplied fields. When items are supplied, they replace the complete ordered target-item set. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -1892,7 +1969,7 @@ class AsyncUpsellOffers:
     ) -> None:
         """Delete an upsell offer
 
-        Soft-delete an upsell offer while preserving checkout and reporting attribution. Requires a Sanctum token with the `upsell` ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Soft-delete an upsell offer while preserving checkout and reporting attribution. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             upsell_offer: The upsellOffer path parameter.
@@ -1940,5 +2017,81 @@ class AsyncUpsellOffers:
         await self._client.request(
             method="delete",
             path=("v2", "upsell-offers", str(upsell_offer)),
+            request_options=request_options,
+        )
+
+    async def get_performance(
+        self,
+        upsell_offer: int,
+        *,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson:
+        """Retrieve upsell offer performance
+
+        Report how an upsell offer has performed over its whole life: how often customers saw it, started its checkout, and bought it, and the revenue those purchases brought. An offer from another store returns `404`, and so does a deleted one unless you send `with_trashed=true`. Requires the `upsell` API-key ability and the Upsells role for the store selected by `X-STORE`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            upsell_offer: The upsell offer ID.
+            with_trashed: Set to `true` to also find a deleted upsell offer. Defaults to `false`.
+            only_trashed: Set to `true` to find only a deleted upsell offer. Ignored when `with_trashed` is `true`. Defaults to `false`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getUpsellOfferPerformance",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "with_trashed": with_trashed,
+                "only_trashed": only_trashed,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "upsell-offers", str(upsell_offer), "performance"),
+            params=params,
+            model=SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson,
             request_options=request_options,
         )

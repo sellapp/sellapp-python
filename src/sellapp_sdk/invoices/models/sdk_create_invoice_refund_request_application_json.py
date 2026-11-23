@@ -23,7 +23,15 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "string",
                 "constraints": {"maxLength": 32, "pattern": "^\\d+(\\.\\d+)?$"},
             },
-        }
+        },
+        "expected_refunded_total_cents": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 0},
+            },
+        },
     },
     "additionalProperties": True,
 }
@@ -38,7 +46,15 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "string",
                 "constraints": {"maxLength": 32, "pattern": "^\\d+(\\.\\d+)?$"},
             },
-        }
+        },
+        "expected_refunded_total_cents": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "integer",
+                "constraints": {"minimum": 0},
+            },
+        },
     },
     "additionalProperties": True,
 }
@@ -49,7 +65,9 @@ class SdkCreateInvoiceRefundRequestApplicationJson:
     """Sdk Create Invoice Refund Request Application Json model."""
 
     amount: str | None = None
-    """Optional partial refund amount in major currency units. Omit for the full remaining refundable amount."""
+    """Optional partial refund amount in major units of the invoice's `payment.refund_currency`. Omit for the full remaining refundable amount."""
+    expected_refunded_total_cents: int | None = None
+    """The refunded total you expect, in integer minor units of the invoice's `payment.refund_currency`, which can differ from the invoice currency: `500` means $5.00 in USD. Read it from `payment.refunded_total_cents` on the invoice and send it unchanged; it is `0` before the first refund. After a refund, `data.invoice.payment.refunded_total_cents` in the response is the value to send with the next one. With this field, the refund goes out only while the refunded total still equals it and no other refund on the order is pending. Omit it or send null to refund without the check."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -71,7 +89,10 @@ class SdkCreateInvoiceRefundRequestApplicationJson:
             )
             return cls(
                 amount=data.get("amount"),
-                additional_properties=_preserve_unknown_fields(data, ["amount"]),
+                expected_refunded_total_cents=data.get("expected_refunded_total_cents"),
+                additional_properties=_preserve_unknown_fields(
+                    data, ["amount", "expected_refunded_total_cents"]
+                ),
                 _from_response=True,
             )
         except (KeyError, ValueError) as e:
@@ -81,6 +102,9 @@ class SdkCreateInvoiceRefundRequestApplicationJson:
         """Serialize to a dictionary."""
         _domain_data: dict[str, Any] = dict(self.additional_properties)
         _domain_data["amount"] = self.amount
+        _domain_data["expected_refunded_total_cents"] = (
+            self.expected_refunded_total_cents
+        )
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -94,4 +118,8 @@ class SdkCreateInvoiceRefundRequestApplicationJson:
             result["amount"] = self.amount
         else:
             result["amount"] = None
+        if self.expected_refunded_total_cents is not None:
+            result["expected_refunded_total_cents"] = self.expected_refunded_total_cents
+        else:
+            result["expected_refunded_total_cents"] = None
         return result

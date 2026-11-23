@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 
 import builtins
 
+from sellapp_sdk.blacklists.models.feedback_reply_state import FeedbackReplyState
 from sellapp_sdk.blacklists.models.list_feedback_response_value_200_application_json_property_data_item import (
     ListFeedbackResponseValue200ApplicationJsonPropertyDataItem,
 )
@@ -62,9 +63,10 @@ from sellapp_sdk.blacklists.models.v_2_search_feedback_request_application_json_
 from sellapp_sdk.blacklists.models.v_2_search_feedback_response_value_200_application_json_property_data_item import (
     V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem,
 )
+from sellapp_sdk.common.models.reply_state import ReplyState
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions, _validate_model
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 
 
 class Feedback:
@@ -408,11 +410,12 @@ class Feedback:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        reply_state: FeedbackReplyState | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
-        List customer feedback for your store, 15 entries per page by default. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List customer feedback for your store, 15 entries per page by default. This v2 route is store-scoped. Use `reply_state` to list only feedback you have or have not replied to. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -420,6 +423,7 @@ class Feedback:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            reply_state: `replied`: feedback with a non-empty seller reply. `unreplied`: feedback without one. `all` (default): both. Any other value returns `422`. Defaults to `all`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -471,6 +475,9 @@ class Feedback:
                 "after": after,
                 "order": order,
                 "page": page,
+                "reply_state": enum_value(reply_state)
+                if reply_state is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -496,25 +503,29 @@ class Feedback:
             V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        reply_state: ReplyState | str | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
-        Search feedback using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search feedback using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Use `reply_state` to find only feedback you have or have not replied to. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            reply_state: `replied`: feedback with a non-empty seller reply. `unreplied`: feedback without one. `all` (default): both. Any other value returns `422`.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -572,6 +583,10 @@ class Feedback:
             }.items()
             if v is not None
         }
+        if not isinstance(reply_state, NotGiven):
+            body["reply_state"] = (
+                enum_value(reply_state) if reply_state is not None else None
+            )
         params = {
             k: v
             for k, v in {
@@ -579,6 +594,7 @@ class Feedback:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -1160,11 +1176,12 @@ class AsyncFeedback:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        reply_state: FeedbackReplyState | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """List all feedback
 
-        List customer feedback for your store, 15 entries per page by default. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List customer feedback for your store, 15 entries per page by default. This v2 route is store-scoped. Use `reply_state` to list only feedback you have or have not replied to. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -1172,6 +1189,7 @@ class AsyncFeedback:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            reply_state: `replied`: feedback with a non-empty seller reply. `unreplied`: feedback without one. `all` (default): both. Any other value returns `422`. Defaults to `all`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1223,6 +1241,9 @@ class AsyncFeedback:
                 "after": after,
                 "order": order,
                 "page": page,
+                "reply_state": enum_value(reply_state)
+                if reply_state is not None
+                else None,
             }.items()
             if v is not None
         }
@@ -1248,25 +1269,29 @@ class AsyncFeedback:
             V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        reply_state: ReplyState | str | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
         """Search feedback
 
-        Search feedback using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search feedback using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Use `reply_state` to find only feedback you have or have not replied to. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             filters: The filters.
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            reply_state: `replied`: feedback with a non-empty seller reply. `unreplied`: feedback without one. `all` (default): both. Any other value returns `422`.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1324,6 +1349,10 @@ class AsyncFeedback:
             }.items()
             if v is not None
         }
+        if not isinstance(reply_state, NotGiven):
+            body["reply_state"] = (
+                enum_value(reply_state) if reply_state is not None else None
+            )
         params = {
             k: v
             for k, v in {
@@ -1331,6 +1360,7 @@ class AsyncFeedback:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

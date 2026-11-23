@@ -15,6 +15,10 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.refunds.models import (
     ListRefundsResponseValue200ApplicationJsonPropertyDataItem,
+    RefundsProvider,
+    RefundsRefundableType,
+    RefundsSource,
+    RefundsStatus,
     SdkGetRefundResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
@@ -39,6 +43,30 @@ class TestRefunds:
         page = sellapp_sdk.refunds.list_refunds()
         assert isinstance(page, SyncPage)
         assert page.data == []
+
+    def test_list_refunds_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.refunds.list_refunds(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=RefundsStatus("pending"),
+            provider=RefundsProvider("manual"),
+            source=RefundsSource("manual"),
+            refundable_type=RefundsRefundableType("order"),
+            refundable_id=7,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "pending"
+        assert request.url.params["provider"] == "manual"
+        assert request.url.params["source"] == "manual"
+        assert request.url.params["refundable_type"] == "order"
+        assert request.url.params["refundable_id"] == "7"
 
     def test_get_refund(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -174,6 +202,33 @@ class TestAsyncRefunds:
         page = await async_sellapp_sdk.refunds.list_refunds()
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_list_refunds_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.refunds.list_refunds(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=RefundsStatus("pending"),
+            provider=RefundsProvider("manual"),
+            source=RefundsSource("manual"),
+            refundable_type=RefundsRefundableType("order"),
+            refundable_id=7,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "pending"
+        assert request.url.params["provider"] == "manual"
+        assert request.url.params["source"] == "manual"
+        assert request.url.params["refundable_type"] == "order"
+        assert request.url.params["refundable_id"] == "7"
 
     @pytest.mark.asyncio
     async def test_get_refund(self, async_sellapp_sdk, httpx_mock):

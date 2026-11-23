@@ -2,11 +2,9 @@
 
 from typing import TypeAlias
 
-from .get_dispute_response_value_200_application_json_property_data_status import (
-    GetDisputeResponseValue200ApplicationJsonPropertyDataStatus,
-)
+from .disputes_status import DisputesStatus
 
 ListDisputesResponseValue200ApplicationJsonPropertyDataItemStatus: TypeAlias = (
-    GetDisputeResponseValue200ApplicationJsonPropertyDataStatus
+    DisputesStatus
 )
 __all__ = ["ListDisputesResponseValue200ApplicationJsonPropertyDataItemStatus"]

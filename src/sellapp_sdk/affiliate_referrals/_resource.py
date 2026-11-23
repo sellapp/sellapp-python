@@ -39,6 +39,7 @@ class AffiliateReferrals:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        search: str | None = None,
         affiliate_id: int | None = None,
         order_id: int | None = None,
         status: AffiliateReferralsStatus | str | None = None,
@@ -49,13 +50,14 @@ class AffiliateReferrals:
     ]:
         """List affiliate referrals
 
-        List store referrals with their attributed order and purchase line item. Requires the `affiliate` credential ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List store referrals with their attributed order and purchase line item, newest first, 15 per page by default. Requires the `affiliate` credential ability. Use `search` to find referrals by affiliate email, product or variant title, or an exact referral or order ID. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            search: Text to look for in the affiliate's email address and the product and variant titles. A number also matches the referral ID or the order ID exactly. `%` and `_` match themselves.
             affiliate_id: Filter by store affiliate ID.
             order_id: Filter by attributed Order ID.
             status: Filter by referral status.
@@ -110,6 +112,7 @@ class AffiliateReferrals:
                 "before": before,
                 "after": after,
                 "order": order,
+                "search": search,
                 "affiliate_id": affiliate_id,
                 "order_id": order_id,
                 "status": enum_value(status) if status is not None else None,
@@ -290,6 +293,7 @@ class AsyncAffiliateReferrals:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        search: str | None = None,
         affiliate_id: int | None = None,
         order_id: int | None = None,
         status: AffiliateReferralsStatus | str | None = None,
@@ -300,13 +304,14 @@ class AsyncAffiliateReferrals:
     ]:
         """List affiliate referrals
 
-        List store referrals with their attributed order and purchase line item. Requires the `affiliate` credential ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List store referrals with their attributed order and purchase line item, newest first, 15 per page by default. Requires the `affiliate` credential ability. Use `search` to find referrals by affiliate email, product or variant title, or an exact referral or order ID. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            search: Text to look for in the affiliate's email address and the product and variant titles. A number also matches the referral ID or the order ID exactly. `%` and `_` match themselves.
             affiliate_id: Filter by store affiliate ID.
             order_id: Filter by attributed Order ID.
             status: Filter by referral status.
@@ -361,6 +366,7 @@ class AsyncAffiliateReferrals:
                 "before": before,
                 "after": after,
                 "order": order,
+                "search": search,
                 "affiliate_id": affiliate_id,
                 "order_id": order_id,
                 "status": enum_value(status) if status is not None else None,

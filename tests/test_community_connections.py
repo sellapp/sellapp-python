@@ -16,8 +16,10 @@ from sellapp_sdk._errors import (
 from sellapp_sdk.community_connections.models import (
     SdkCompleteCommunityConnectionResponseValue200ApplicationJson,
     SdkListCommunityConnectionsResponseValue200ApplicationJson,
+    SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson,
     SdkPollCommunityConnectionResponseValue200ApplicationJson,
     SdkStartCommunityConnectionResponseValue200ApplicationJson,
+    SdkSyncDiscordRolesResponseValue200ApplicationJson,
     SdkVerifyCommunityConnectionResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
@@ -130,6 +132,34 @@ class TestCommunityConnections:
         request = httpx_mock.get_request()
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/community-connections/test_platform")
+
+    def test_list_failed_grant_reasons(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_list_community_failed_grant_reasons_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.community_connections.list_failed_grant_reasons()
+        assert isinstance(
+            result, SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/community-connections/failed-grant-reasons"
+        )
+
+    def test_sync_discord_roles(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_sync_discord_roles_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.community_connections.sync_discord_roles()
+        assert isinstance(result, SdkSyncDiscordRolesResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/community-connections/discord/sync-roles")
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -349,6 +379,38 @@ class TestAsyncCommunityConnections:
         request = httpx_mock.get_request()
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/community-connections/test_platform")
+
+    @pytest.mark.asyncio
+    async def test_list_failed_grant_reasons(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_list_community_failed_grant_reasons_response_value_200_application_json.json"
+            )
+        )
+        result = (
+            await async_sellapp_sdk.community_connections.list_failed_grant_reasons()
+        )
+        assert isinstance(
+            result, SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/community-connections/failed-grant-reasons"
+        )
+
+    @pytest.mark.asyncio
+    async def test_sync_discord_roles(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_sync_discord_roles_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.community_connections.sync_discord_roles()
+        assert isinstance(result, SdkSyncDiscordRolesResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/community-connections/discord/sync-roles")
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

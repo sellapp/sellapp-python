@@ -15,6 +15,7 @@ from sellapp_sdk._errors import (
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.affiliates.models import (
+    AffiliatesPayoutMethod,
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetAffiliateResponseValue200ApplicationJson,
     SdkUpdateAffiliateStatusResponseValue200ApplicationJson,
@@ -54,6 +55,9 @@ class TestAffiliates:
             after="cursor/after",
             status=AffiliatesStatus("pending"),
             search="value search/test",
+            custom_rates_only=True,
+            payout_method=AffiliatesPayoutMethod("PAYPAL"),
+            sort="-earnings",
             page=7,
         )
         request = httpx_mock.get_request()
@@ -62,6 +66,9 @@ class TestAffiliates:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["status"] == "pending"
         assert request.url.params["search"] == "value search/test"
+        assert request.url.params["custom_rates_only"] == "true"
+        assert request.url.params["payout_method"] == "PAYPAL"
+        assert request.url.params["sort"] == "-earnings"
         assert request.url.params["page"] == "7"
 
     def test_get(self, sellapp_sdk, httpx_mock):
@@ -227,6 +234,9 @@ class TestAsyncAffiliates:
             after="cursor/after",
             status=AffiliatesStatus("pending"),
             search="value search/test",
+            custom_rates_only=True,
+            payout_method=AffiliatesPayoutMethod("PAYPAL"),
+            sort="-earnings",
             page=7,
         )
         request = httpx_mock.get_request()
@@ -235,6 +245,9 @@ class TestAsyncAffiliates:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["status"] == "pending"
         assert request.url.params["search"] == "value search/test"
+        assert request.url.params["custom_rates_only"] == "true"
+        assert request.url.params["payout_method"] == "PAYPAL"
+        assert request.url.params["sort"] == "-earnings"
         assert request.url.params["page"] == "7"
 
     @pytest.mark.asyncio

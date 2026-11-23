@@ -14,6 +14,8 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator(str, Enum):
     EQ = "eq"
     CONTAINS = "contains"
     IN = "in"
+    GTE = "gte"
+    LTE = "lte"
 
     @classmethod
     def _missing_(
@@ -28,5 +30,5 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator(str, Enum):
 
 
 SearchOrdersRequestApplicationJsonPropertyFiltersItemOperatorLiteral: TypeAlias = (
-    Literal["eq", "contains", "in"]
+    Literal["eq", "contains", "in", "gte", "lte"]
 )

@@ -17,6 +17,8 @@ from .._types import RequestOptions, _validate_model
 from .models import (
     ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
     SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson,
+    SdkNotifyVariantBuyersResponseValue202ApplicationJson,
+    SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson,
     SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson,
 )
 
@@ -27,6 +29,155 @@ class VariantDeliverables:
     def __init__(self, client: SellAppClient) -> None:
         self._client = client
         self.with_raw_response = WithRawResponse(self)
+
+    def preview(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson:
+        """Preview variant buyer notification
+
+        See who would be emailed if you told this variant's buyers about new downloadable files, without sending anything. Use it before `POST` on the same path to check the numbers. Works for any variant, drafts included. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "previewVariantBuyerNotification",
+        }
+        return self._client.request(
+            method="get",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "deliverable",
+                "buyer-notification",
+            ),
+            model=SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def notify(
+        self,
+        product: int,
+        variant: int,
+        *,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkNotifyVariantBuyersResponseValue202ApplicationJson:
+        """Notify variant buyers
+
+        Email your customers that this variant has new content: every completed order that delivered its downloadable files gets one email. The emails are queued, so `202` means they were queued, not delivered. It sends only for a published variant with at least one file, at least one such order, and no upload in progress. The buyers of one variant can be emailed this way at most once an hour, whichever API key or team member sends it, and each team member can send at most 3 times a minute per variant. Requires the `listing` API-key ability and the `listing` permission in your team role. Send an `Idempotency-Key` header; requests without one return `400`. A retry with the same key and an empty body returns the first response with `Idempotent-Replayed: true` and sends nothing new. Use a new key for every send you intend, including a new attempt after a `422`. The same key while the first request is still running returns `409`. Every refusal is `422` on `variant`: a draft variant, a variant without files, a variant nobody has bought, an upload still in progress, the hourly limit (the message says how many minutes are left), the per-minute limit, or another send for the same variant at the same moment. Check `GET` on the same path first to see the numbers. A variant of another product returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            idempotency_key: Optional idempotency key for safe retries.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkNotifyVariantBuyersResponseValue202ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "notifyVariantBuyers",
+        }
+        return self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "deliverable",
+                "buyer-notification",
+            ),
+            model=SdkNotifyVariantBuyersResponseValue202ApplicationJson,
+            request_options=request_options,
+        )
 
     def get(
         self,
@@ -234,6 +385,155 @@ class AsyncVariantDeliverables:
     def __init__(self, client: AsyncSellAppClient) -> None:
         self._client = client
         self.with_raw_response = WithRawResponse(self)
+
+    async def preview(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson:
+        """Preview variant buyer notification
+
+        See who would be emailed if you told this variant's buyers about new downloadable files, without sending anything. Use it before `POST` on the same path to check the numbers. Works for any variant, drafts included. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "previewVariantBuyerNotification",
+        }
+        return await self._client.request(
+            method="get",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "deliverable",
+                "buyer-notification",
+            ),
+            model=SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def notify(
+        self,
+        product: int,
+        variant: int,
+        *,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkNotifyVariantBuyersResponseValue202ApplicationJson:
+        """Notify variant buyers
+
+        Email your customers that this variant has new content: every completed order that delivered its downloadable files gets one email. The emails are queued, so `202` means they were queued, not delivered. It sends only for a published variant with at least one file, at least one such order, and no upload in progress. The buyers of one variant can be emailed this way at most once an hour, whichever API key or team member sends it, and each team member can send at most 3 times a minute per variant. Requires the `listing` API-key ability and the `listing` permission in your team role. Send an `Idempotency-Key` header; requests without one return `400`. A retry with the same key and an empty body returns the first response with `Idempotent-Replayed: true` and sends nothing new. Use a new key for every send you intend, including a new attempt after a `422`. The same key while the first request is still running returns `409`. Every refusal is `422` on `variant`: a draft variant, a variant without files, a variant nobody has bought, an upload still in progress, the hourly limit (the message says how many minutes are left), the per-minute limit, or another send for the same variant at the same moment. Check `GET` on the same path first to see the numbers. A variant of another product returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            idempotency_key: Optional idempotency key for safe retries.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkNotifyVariantBuyersResponseValue202ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            ConflictError: If a conflict occurs (409).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": True,
+            "operation_id": "notifyVariantBuyers",
+        }
+        return await self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "deliverable",
+                "buyer-notification",
+            ),
+            model=SdkNotifyVariantBuyersResponseValue202ApplicationJson,
+            request_options=request_options,
+        )
 
     async def get(
         self,

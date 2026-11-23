@@ -11,11 +11,12 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
-from sellapp_sdk.common.models.list_products_response_value_200_application_json_property_data_item import (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
-)
 from sellapp_sdk.common.models.pagination_links import PaginationLinks
 from sellapp_sdk.common.models.pagination_meta import PaginationMeta
+
+from .list_products_response_value_200_application_json_property_data_item import (
+    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
+)
 
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SdkListProductsResponseValue200ApplicationJson",

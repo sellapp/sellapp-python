@@ -40,17 +40,19 @@ class Exports:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
         """List exports
 
-        List permitted exports, 50 per page. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request. Sales, tax and customer reports require invoice store permission. Affiliate payout reports require affiliate and affiliate:payout permissions. The category selects the applicable permission checks; listing returns only authorized categories.
+        List permitted exports, newest first, 50 per page. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request. Sales, tax and customer reports require invoice store permission. Affiliate payout reports require affiliate and affiliate:payout permissions. The category selects the applicable permission checks; listing returns only authorized categories.
 
         Args:
             limit: The limit.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -103,6 +105,7 @@ class Exports:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -366,17 +369,19 @@ class AsyncExports:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListExportsResponseValue200ApplicationJsonPropertyDataItem]:
         """List exports
 
-        List permitted exports, 50 per page. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request. Sales, tax and customer reports require invoice store permission. Affiliate payout reports require affiliate and affiliate:payout permissions. The category selects the applicable permission checks; listing returns only authorized categories.
+        List permitted exports, newest first, 50 per page. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request. Sales, tax and customer reports require invoice store permission. Affiliate payout reports require affiliate and affiliate:payout permissions. The category selects the applicable permission checks; listing returns only authorized categories.
 
         Args:
             limit: The limit.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -429,6 +434,7 @@ class AsyncExports:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

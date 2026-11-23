@@ -31,6 +31,11 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "type": "string",
             "constraints": {"minLength": 1, "maxLength": 255, "pattern": "\\S"},
         },
+        "expected_balance_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0, "maximum": 999999999999},
+        },
     },
     "additionalProperties": True,
 }
@@ -53,6 +58,11 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "type": "string",
             "constraints": {"minLength": 1, "maxLength": 255, "pattern": "\\S"},
         },
+        "expected_balance_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0, "maximum": 999999999999},
+        },
     },
     "additionalProperties": True,
 }
@@ -63,10 +73,13 @@ class SdkAdjustCustomerWalletRequestApplicationJson:
     """Sdk Adjust Customer Wallet Request Application Json model."""
 
     amount_cents: int
-    """The signed adjustment amount in cents. Must not be zero."""
+    """The signed change in integer USD cents: positive adds money, negative takes it away. Must not be zero."""
     idempotency_key: str
-    """Required body key, at most 128 characters. Keep the customer, amount, staff actor and trimmed note unchanged when retrying this intended adjustment."""
+    """Your key for this one adjustment, in printable ASCII characters and unique across all stores. Reuse it only to retry the same customer, amount, and note as the same staff member."""
     note: str
+    """Why the balance changed, with at least one character that is not a space. Leading and trailing spaces are removed. Saved on the entry and shown in the wallet history."""
+    expected_balance_cents: int | None = None
+    """Optional. The wallet balance in integer USD cents that you read before deciding on this change. If the balance is different now, nothing is written and the request returns `422` on `expected_balance_cents`. Use `0` for a customer who has no wallet yet."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -90,8 +103,15 @@ class SdkAdjustCustomerWalletRequestApplicationJson:
                 amount_cents=data["amount_cents"],
                 idempotency_key=data["idempotency_key"],
                 note=data["note"],
+                expected_balance_cents=data.get("expected_balance_cents"),
                 additional_properties=_preserve_unknown_fields(
-                    data, ["amount_cents", "idempotency_key", "note"]
+                    data,
+                    [
+                        "amount_cents",
+                        "idempotency_key",
+                        "note",
+                        "expected_balance_cents",
+                    ],
                 ),
                 _from_response=True,
             )
@@ -104,6 +124,8 @@ class SdkAdjustCustomerWalletRequestApplicationJson:
         _domain_data["amount_cents"] = self.amount_cents
         _domain_data["idempotency_key"] = self.idempotency_key
         _domain_data["note"] = self.note
+        if self.expected_balance_cents is not None:
+            _domain_data["expected_balance_cents"] = self.expected_balance_cents
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -116,4 +138,6 @@ class SdkAdjustCustomerWalletRequestApplicationJson:
         result["amount_cents"] = self.amount_cents
         result["idempotency_key"] = self.idempotency_key
         result["note"] = self.note
+        if self.expected_balance_cents is not None:
+            result["expected_balance_cents"] = self.expected_balance_cents
         return result

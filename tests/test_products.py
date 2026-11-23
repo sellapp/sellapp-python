@@ -16,15 +16,19 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.common.models import (
     CatalogVisibility,
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
     SdkBatchCreateProductsResponseValue200ApplicationJson,
 )
 from sellapp_sdk.products.models import (
     BatchCreateProductsRequestApplicationJsonPropertyResourcesItem,
     BatchUpdateProductsRequestApplicationJsonPropertyResources,
+    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
+    ProductsStock,
     SdkBatchUpdateProductsResponseValue200ApplicationJson,
     SdkCreateProductResponseValue201ApplicationJson,
+    SdkDuplicateProductResponseValue201ApplicationJson,
     SdkGetProductResponseValue200ApplicationJson,
+    SdkMoveProductResponseValue200ApplicationJson,
+    SdkPublishProductResponseValue200ApplicationJson,
     SdkReplaceProductResponseValue200ApplicationJson,
     SdkUpdateProductResponseValue200ApplicationJson,
     SearchProductsResponseValue200ApplicationJsonPropertyDataItem,
@@ -61,6 +65,10 @@ class TestProducts:
             page=7,
             with_drafts=True,
             only_drafts=True,
+            min_price=7,
+            max_price=7,
+            stock=ProductsStock("in_stock"),
+            has_sales=True,
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
@@ -69,6 +77,10 @@ class TestProducts:
         assert request.url.params["page"] == "7"
         assert request.url.params["with_drafts"] == "true"
         assert request.url.params["only_drafts"] == "true"
+        assert request.url.params["min_price"] == "7"
+        assert request.url.params["max_price"] == "7"
+        assert request.url.params["stock"] == "in_stock"
+        assert request.url.params["has_sales"] == "true"
 
     def test_create(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -225,6 +237,44 @@ class TestProducts:
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/products/batch")
 
+    def test_publish(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_publish_product_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.products.publish("test_product")
+        assert isinstance(result, SdkPublishProductResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/products/test_product/publish")
+
+    def test_duplicate(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_duplicate_product_response_value_201_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.products.duplicate("test_product")
+        assert isinstance(result, SdkDuplicateProductResponseValue201ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/products/test_product/duplicate")
+
+    def test_move(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_move_product_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.products.move("test_product", position=1)
+        assert isinstance(result, SdkMoveProductResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/products/test_product/position")
+        body = json.loads(request.content)
+        assert body["position"] == 1
+
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         sellapp_sdk.products.list(request_options={"headers": {"X-Custom": "value"}})
@@ -356,6 +406,10 @@ class TestAsyncProducts:
             page=7,
             with_drafts=True,
             only_drafts=True,
+            min_price=7,
+            max_price=7,
+            stock=ProductsStock("in_stock"),
+            has_sales=True,
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
@@ -364,6 +418,10 @@ class TestAsyncProducts:
         assert request.url.params["page"] == "7"
         assert request.url.params["with_drafts"] == "true"
         assert request.url.params["only_drafts"] == "true"
+        assert request.url.params["min_price"] == "7"
+        assert request.url.params["max_price"] == "7"
+        assert request.url.params["stock"] == "in_stock"
+        assert request.url.params["has_sales"] == "true"
 
     @pytest.mark.asyncio
     async def test_create(self, async_sellapp_sdk, httpx_mock):
@@ -525,6 +583,45 @@ class TestAsyncProducts:
         request = httpx_mock.get_request()
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/products/batch")
+
+    @pytest.mark.asyncio
+    async def test_publish(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_publish_product_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.products.publish("test_product")
+        assert isinstance(result, SdkPublishProductResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/products/test_product/publish")
+
+    @pytest.mark.asyncio
+    async def test_duplicate(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_duplicate_product_response_value_201_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.products.duplicate("test_product")
+        assert isinstance(result, SdkDuplicateProductResponseValue201ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/products/test_product/duplicate")
+
+    @pytest.mark.asyncio
+    async def test_move(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_move_product_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.products.move("test_product", position=1)
+        assert isinstance(result, SdkMoveProductResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "PUT"
+        assert request.url.path.endswith("/v2/products/test_product/position")
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

@@ -74,7 +74,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "amount": 1,
             "currency": "test_currency",
@@ -96,7 +96,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "amount": 1,
             "currency": "test_currency",
@@ -114,7 +114,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "provider_dispute_id": "provider_dispute_id_01234",
             "amount": 1,
@@ -133,7 +133,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "provider_dispute_id": "provider_dispute_id_01234",
             "amount": 1,
@@ -163,7 +163,7 @@ class TestModelRoundTrip:
             "data": [
                 {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "source": {"type": "product", "id": 1},
+                    "source": {"type": "TOP_UP", "id": 1},
                     "provider": "provider_01234",
                     "provider_dispute_id": "provider_dispute_id_01234",
                     "amount": 1,
@@ -257,7 +257,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "amount": 1,
             "currency": "test_currency",
@@ -277,7 +277,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "amount": 1,
             "currency": "test_currency",
@@ -293,7 +293,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "provider_dispute_id": "provider_dispute_id_01234",
             "amount": 1,
@@ -310,7 +310,7 @@ class TestModelRoundTrip:
     ):
         data = {
             "id": "00000000-0000-0000-0000-000000000000",
-            "source": {"type": "product", "id": 1},
+            "source": {"type": "TOP_UP", "id": 1},
             "provider": "provider_01234",
             "provider_dispute_id": "provider_dispute_id_01234",
             "amount": 1,
@@ -333,7 +333,7 @@ class TestModelRoundTrip:
         data = {
             "data": {
                 "id": "00000000-0000-0000-0000-000000000000",
-                "source": {"type": "product", "id": 1},
+                "source": {"type": "TOP_UP", "id": 1},
                 "provider": "provider_01234",
                 "provider_dispute_id": "provider_dispute_id_01234",
                 "amount": 1,

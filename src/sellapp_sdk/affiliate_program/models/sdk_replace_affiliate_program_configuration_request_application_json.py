@@ -11,10 +11,10 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
-
-from .replace_affiliate_program_configuration_request_application_json_property_products_item import (
+from sellapp_sdk.common.models.replace_affiliate_program_configuration_request_application_json_property_products_item import (
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem,
 )
+
 from .replace_affiliate_program_configuration_request_application_json_property_settings import (
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
 )

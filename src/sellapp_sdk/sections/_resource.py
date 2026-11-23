@@ -1386,6 +1386,7 @@ class Sections:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
@@ -1398,10 +1399,11 @@ class Sections:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -1467,6 +1469,7 @@ class Sections:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -3568,6 +3571,7 @@ class AsyncSections:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[V2SearchSectionsResponseValue200ApplicationJsonPropertyDataItem]:
@@ -3580,10 +3584,11 @@ class AsyncSections:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             idempotency_key: Optional idempotency key for safe retries.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
@@ -3649,6 +3654,7 @@ class AsyncSections:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

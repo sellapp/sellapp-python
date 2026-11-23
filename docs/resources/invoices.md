@@ -560,7 +560,7 @@ def issue_replacement(
         self,
         invoice: int,
         *,
-        product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
+        product_variants: int | builtins.list[int],
         request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
 ```
@@ -568,7 +568,7 @@ def issue_replacement(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | invoice | `int` | Yes |
-| product_variants | `IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants` | Yes |
+| product_variants | `int \| builtins.list[int]` | Yes |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson`.
@@ -682,6 +682,7 @@ def create_refund(
         invoice: int,
         *,
         amount: str | None | NotGiven = NOT_GIVEN,
+        expected_refunded_total_cents: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
 ```
@@ -690,6 +691,7 @@ def create_refund(
 | --- | --- | --- |
 | invoice | `int` | Yes |
 | amount | `str \| None \| NotGiven` | No |
+| expected_refunded_total_cents | `int \| None \| NotGiven` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkCreateInvoiceRefundResponseValue200ApplicationJson`.
@@ -702,7 +704,8 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.e
 
 result = client.invoices.create_refund(
     invoice=1,
-    amount="12.50"
+    amount="12.50",
+    expected_refunded_total_cents=0
 )
 print(result)
 ```

@@ -79,7 +79,6 @@ from .preview_subscription_renewal_date_change_response_value_200_application_js
 from .resume_subscription_response_value_200_application_json_property_data import (
     ResumeSubscriptionResponseValue200ApplicationJsonPropertyData as ResumeSubscriptionResponseValue200ApplicationJsonPropertyData,
 )
-from .scalar_metadata_value import ScalarMetadataValue as ScalarMetadataValue
 from .sdk_cancel_subscription_at_period_end_request_application_json import (
     SdkCancelSubscriptionAtPeriodEndRequestApplicationJson as SdkCancelSubscriptionAtPeriodEndRequestApplicationJson,
 )

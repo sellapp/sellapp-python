@@ -18,6 +18,9 @@ def list(
         order: str | None = None,
         status: AffiliatesStatus | str | None = None,
         search: str | None = None,
+        custom_rates_only: bool | None = None,
+        payout_method: AffiliatesPayoutMethod | str | None = None,
+        sort: Literal["-earnings"] | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem]:
@@ -31,6 +34,9 @@ def list(
 | order | `str \| None` | No |
 | status | `AffiliatesStatus \| str \| None` | No |
 | search | `str \| None` | No |
+| custom_rates_only | `bool \| None` | No |
+| payout_method | `AffiliatesPayoutMethod \| str \| None` | No |
+| sort | `Literal["-earnings"] \| None` | No |
 | page | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 

@@ -19,6 +19,11 @@ from sellapp_sdk.blacklists.models import (
     BatchUpdateSectionsResponseValue200ApplicationJsonPropertyDataItem,
     BatchUpdateSectionsResponseValue200ApplicationJsonPropertyDataItemPropertyGroupsItem,
     BatchUpdateSectionsResponseValue200ApplicationJsonPropertyDataItemPropertyProductsItem,
+    BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem,
+    BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicket,
+    BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyCustomer,
+    BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReadStatus,
+    BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReference,
     Blacklist,
     BlacklistListResponse,
     BlacklistResponse,
@@ -36,6 +41,10 @@ from sellapp_sdk.blacklists.models import (
     GetSectionResponseValue200ApplicationJsonPropertyData,
     GetSectionResponseValue200ApplicationJsonPropertyDataPropertyGroupsItem,
     GetSectionResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
+    GetSupportAnalyticsResponseValue200ApplicationJsonPropertyData,
+    GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem,
+    GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRulesItem,
+    GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertySummary,
     GetTicketMessageResponseValue200ApplicationJsonPropertyData,
     GetTicketResponseValue200ApplicationJsonPropertyData,
     GetTicketResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
@@ -70,6 +79,7 @@ from sellapp_sdk.blacklists.models import (
     SdkBatchDeleteSectionsResponseValue200ApplicationJson,
     SdkBatchUpdateCouponsResponseValue200ApplicationJson,
     SdkBatchUpdateSectionsResponseValue200ApplicationJson,
+    SdkBatchUpdateTicketsResponseValue200ApplicationJson,
     SdkCreateCouponResponseValue201ApplicationJson,
     SdkCreateSectionResponseValue201ApplicationJson,
     SdkDeleteCouponResponseValue200ApplicationJson,
@@ -77,6 +87,7 @@ from sellapp_sdk.blacklists.models import (
     SdkGetCouponResponseValue200ApplicationJson,
     SdkGetFeedbackResponseValue200ApplicationJson,
     SdkGetSectionResponseValue200ApplicationJson,
+    SdkGetSupportAnalyticsResponseValue200ApplicationJson,
     SdkGetTicketMessageResponseValue200ApplicationJson,
     SdkGetTicketResponseValue200ApplicationJson,
     SdkListCouponsResponseValue200ApplicationJson,
@@ -110,8 +121,10 @@ from sellapp_sdk.blacklists.models import (
     SdkV2DeleteCouponResponseValue200ApplicationJson,
     SdkV2DeleteSectionResponseValue200ApplicationJson,
     SdkV2GetCouponResponseValue200ApplicationJson,
+    SdkV2GetCouponUsageResponseValue200ApplicationJson,
     SdkV2GetFeedbackResponseValue200ApplicationJson,
     SdkV2GetSectionResponseValue200ApplicationJson,
+    SdkV2GetTicketContextResponseValue200ApplicationJson,
     SdkV2GetTicketMessageResponseValue200ApplicationJson,
     SdkV2GetTicketResponseValue200ApplicationJson,
     SdkV2ListCouponsResponseValue200ApplicationJson,
@@ -119,6 +132,9 @@ from sellapp_sdk.blacklists.models import (
     SdkV2ListSectionsResponseValue200ApplicationJson,
     SdkV2ListTicketMessagesResponseValue200ApplicationJson,
     SdkV2ListTicketsResponseValue200ApplicationJson,
+    SdkV2ListTicketWalletRefundOptionsResponseValue200ApplicationJson,
+    SdkV2ListTicketWalletRefundsResponseValue200ApplicationJson,
+    SdkV2RefundTicketToWalletResponseValue201ApplicationJson,
     SdkV2ReplaceCouponResponseValue200ApplicationJson,
     SdkV2ReplaceFeedbackResponseValue200ApplicationJson,
     SdkV2ReplaceSectionGroupsResponseValue200ApplicationJson,
@@ -127,6 +143,7 @@ from sellapp_sdk.blacklists.models import (
     SdkV2ReplaceSectionResponseValue200ApplicationJson,
     SdkV2ReplyToFeedbackResponseValue200ApplicationJson,
     SdkV2ReplyToTicketResponseValue201ApplicationJson,
+    SdkV2ReverseTicketWalletRefundResponseValue200ApplicationJson,
     SdkV2SearchCouponsResponseValue200ApplicationJson,
     SdkV2SearchFeedbackResponseValue200ApplicationJson,
     SdkV2SearchSectionsResponseValue200ApplicationJson,
@@ -196,10 +213,19 @@ from sellapp_sdk.blacklists.models import (
     V2DeleteSectionResponseValue200ApplicationJsonPropertyDataPropertyGroupsItem,
     V2DeleteSectionResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
     V2GetCouponResponseValue200ApplicationJsonPropertyData,
+    V2GetCouponUsageResponseValue200ApplicationJsonPropertyData,
     V2GetFeedbackResponseValue200ApplicationJsonPropertyData,
     V2GetSectionResponseValue200ApplicationJsonPropertyData,
     V2GetSectionResponseValue200ApplicationJsonPropertyDataPropertyGroupsItem,
     V2GetSectionResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyData,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyRule,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyWalletEntry,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyLinkedOrder,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyRefundOptionsItem,
+    V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyResolution,
     V2GetTicketMessageResponseValue200ApplicationJsonPropertyData,
     V2GetTicketResponseValue200ApplicationJsonPropertyData,
     V2GetTicketResponseValue200ApplicationJsonPropertyDataPropertyCustomer,
@@ -215,6 +241,11 @@ from sellapp_sdk.blacklists.models import (
     V2ListTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
     V2ListTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyReadStatus,
     V2ListTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyReference,
+    V2ListTicketWalletRefundOptionsResponseValue200ApplicationJsonPropertyDataItem,
+    V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItem,
+    V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItemPropertyReversal,
+    V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyData,
+    V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyDataPropertyReversal,
     V2ReplaceCouponResponseValue200ApplicationJsonPropertyData,
     V2ReplaceFeedbackResponseValue200ApplicationJsonPropertyData,
     V2ReplaceSectionGroupsResponseValue200ApplicationJsonPropertyData,
@@ -231,6 +262,8 @@ from sellapp_sdk.blacklists.models import (
     V2ReplaceSectionResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
     V2ReplyToFeedbackResponseValue200ApplicationJsonPropertyData,
     V2ReplyToTicketResponseValue201ApplicationJsonPropertyData,
+    V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyData,
+    V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyDataPropertyReversal,
     V2SearchCouponsRequestApplicationJsonPropertyFiltersItem,
     V2SearchCouponsRequestApplicationJsonPropertyIncludesItem,
     V2SearchCouponsRequestApplicationJsonPropertySearch,
@@ -8217,6 +8250,7 @@ class TestModelRoundTrip:
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
             "subscription_payments": 1,
+            "maximum_discount_amount": 1,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8243,6 +8277,7 @@ class TestModelRoundTrip:
             "minimum_amount": None,
             "applies_to": "one_time",
             "subscription_payments": None,
+            "maximum_discount_amount": None,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8254,6 +8289,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
         assert serialized["subscription_payments"] is None
+        assert serialized["maximum_discount_amount"] is None
 
     def test_v_2_batch_create_coupons_request_application_json_property_resources_item_round_trips_unknown_enum_values(
         self,
@@ -8270,6 +8306,7 @@ class TestModelRoundTrip:
             "minimum_amount": 1,
             "applies_to": "one_time",
             "subscription_payments": 1,
+            "maximum_discount_amount": 1,
         }
         instance = (
             V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem.from_dict(
@@ -8479,6 +8516,7 @@ class TestModelRoundTrip:
             "expires_at": "2023-01-01T00:00:00.000Z",
             "minimum_amount": 1,
             "subscription_payments": 1,
+            "maximum_discount_amount": 1,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -8507,6 +8545,7 @@ class TestModelRoundTrip:
             "minimum_amount": None,
             "applies_to": "one_time",
             "subscription_payments": None,
+            "maximum_discount_amount": None,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -8516,6 +8555,7 @@ class TestModelRoundTrip:
         assert serialized["expires_at"] is None
         assert serialized["minimum_amount"] is None
         assert serialized["subscription_payments"] is None
+        assert serialized["maximum_discount_amount"] is None
 
     def test_v_2_batch_update_coupons_request_application_json_property_resources_map_value_round_trips_unknown_enum_values(
         self,
@@ -8532,6 +8572,7 @@ class TestModelRoundTrip:
             "minimum_amount": 1,
             "applies_to": "one_time",
             "subscription_payments": 1,
+            "maximum_discount_amount": 1,
         }
         instance = V2BatchUpdateCouponsRequestApplicationJsonPropertyResourcesMapValue.from_dict(
             data
@@ -12732,7 +12773,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -12768,7 +12809,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -12807,7 +12848,7 @@ class TestModelRoundTrip:
                     "title": "test_title",
                     "status": "test_status",
                     "customer": {"id": 1, "email": "test@example.com"},
-                    "reference": {"type": "product", "id": 1},
+                    "reference": {"type": "TOP_UP", "id": 1},
                     "created_at": "2023-01-01T00:00:00.000Z",
                     "updated_at": "2023-01-01T00:00:00.000Z",
                     "store_id": 1,
@@ -13114,7 +13155,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13152,7 +13193,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13197,7 +13238,7 @@ class TestModelRoundTrip:
                     "title": "test_title",
                     "status": "test_status",
                     "customer": {"id": 1, "email": "test@example.com"},
-                    "reference": {"type": "product", "id": 1},
+                    "reference": {"type": "TOP_UP", "id": 1},
                     "created_at": "2023-01-01T00:00:00.000Z",
                     "updated_at": "2023-01-01T00:00:00.000Z",
                     "store_id": 1,
@@ -13343,7 +13384,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13379,7 +13420,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13417,7 +13458,7 @@ class TestModelRoundTrip:
                 "title": "test_title",
                 "status": "test_status",
                 "customer": {"id": 1, "email": "test@example.com"},
-                "reference": {"type": "product", "id": 1},
+                "reference": {"type": "TOP_UP", "id": 1},
                 "created_at": "2023-01-01T00:00:00.000Z",
                 "updated_at": "2023-01-01T00:00:00.000Z",
                 "store_id": 1,
@@ -13558,7 +13599,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13594,7 +13635,7 @@ class TestModelRoundTrip:
             "title": "test_title",
             "status": "test_status",
             "customer": {"id": 1, "email": "test@example.com"},
-            "reference": {"type": "product", "id": 1},
+            "reference": {"type": "TOP_UP", "id": 1},
             "created_at": None,
             "updated_at": None,
             "store_id": 1,
@@ -13632,7 +13673,7 @@ class TestModelRoundTrip:
                 "title": "test_title",
                 "status": "test_status",
                 "customer": {"id": 1, "email": "test@example.com"},
-                "reference": {"type": "product", "id": 1},
+                "reference": {"type": "TOP_UP", "id": 1},
                 "created_at": "2023-01-01T00:00:00.000Z",
                 "updated_at": "2023-01-01T00:00:00.000Z",
                 "store_id": 1,
@@ -14223,5 +14264,1867 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkV2GetTicketMessageResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_get_coupon_usage_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_coupon_usage_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            V2GetCouponUsageResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            V2GetCouponUsageResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_coupon_usage_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"coupon_id": 1, "uses": 1}
+        instance = (
+            V2GetCouponUsageResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["coupon_id"] == data["coupon_id"]
+        assert serialized["uses"] == data["uses"]
+
+    def test_sdk_v_2_get_coupon_usage_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_get_coupon_usage_response_value_200_application_json.json"
+        )
+        instance = SdkV2GetCouponUsageResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkV2GetCouponUsageResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_get_coupon_usage_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"coupon_id": 1, "uses": 1}}
+        instance = SdkV2GetCouponUsageResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_customer_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_customer.json"
+        )
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyCustomer.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_customer_minimal_payload(
+        self,
+    ):
+        data = {"id": None, "email": "test@example.com"}
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["email"] == data["email"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_customer_preserves_nullable_fields(
+        self,
+    ):
+        data = {"id": None, "email": "test@example.com"}
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] is None
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_reference_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_reference.json"
+        )
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReference.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReference.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_reference_minimal_payload(
+        self,
+    ):
+        data = {"type": None, "id": None}
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReference.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["id"] == data["id"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_reference_preserves_nullable_fields(
+        self,
+    ):
+        data = {"type": None, "id": None}
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReference.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
+        assert serialized["id"] is None
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_read_status_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_read_status.json"
+        )
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReadStatus.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReadStatus.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_value_property_read_status_minimal_payload(
+        self,
+    ):
+        data = {"customer": True, "store": True}
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicketValuePropertyReadStatus.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["customer"] == data["customer"]
+        assert serialized["store"] == data["store"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket.json"
+        )
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicket.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicket.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "status": "test_status",
+            "customer": {"id": 1, "email": "test@example.com"},
+            "reference": {"type": "TOP_UP", "id": 1},
+            "created_at": None,
+            "updated_at": None,
+            "store_id": 1,
+            "archived": 1,
+            "read_status": {"customer": True, "store": True},
+            "order_id": None,
+            "reason": None,
+            "message_count": 1,
+        }
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicket.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["status"] == data["status"]
+        assert serialized["customer"] == data["customer"]
+        assert serialized["reference"] == data["reference"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["archived"] == data["archived"]
+        assert serialized["read_status"] == data["read_status"]
+        assert serialized["order_id"] == data["order_id"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["message_count"] == data["message_count"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_property_ticket_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "status": "test_status",
+            "customer": {"id": 1, "email": "test@example.com"},
+            "reference": {"type": "TOP_UP", "id": 1},
+            "created_at": None,
+            "updated_at": None,
+            "store_id": 1,
+            "archived": 1,
+            "read_status": {"customer": True, "store": True},
+            "order_id": None,
+            "reason": None,
+            "message_count": 1,
+        }
+        instance = BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItemPropertyTicket.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["created_at"] is None
+        assert serialized["updated_at"] is None
+        assert serialized["order_id"] is None
+        assert serialized["reason"] is None
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "batch_update_tickets_response_value_200_application_json_property_data_item.json"
+        )
+        instance = (
+            BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {"ticket_id": 1, "result": "changed", "message": None, "ticket": None}
+        instance = (
+            BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["result"] == data["result"]
+        assert serialized["message"] == data["message"]
+        assert serialized["ticket"] == data["ticket"]
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {"ticket_id": 1, "result": "changed", "message": None, "ticket": None}
+        instance = (
+            BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["message"] is None
+        assert serialized["ticket"] is None
+
+    def test_batch_update_tickets_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "ticket_id": 1,
+            "result": "unexpected_batch_update_tickets_response_value_200_application_json_property_data_item_result",
+            "message": "test_message",
+            "ticket": {
+                "id": 1,
+                "title": "test_title",
+                "status": "test_status",
+                "customer": {"id": 1, "email": "test@example.com"},
+                "reference": {"type": "TOP_UP", "id": 1},
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "archived": 1,
+                "read_status": {"customer": True, "store": True},
+                "order_id": 1,
+                "reason": "test_reason",
+                "message_count": 1,
+            },
+        }
+        instance = (
+            BatchUpdateTicketsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_batch_update_tickets_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_batch_update_tickets_response_value_200_application_json.json"
+        )
+        instance = SdkBatchUpdateTicketsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkBatchUpdateTicketsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_batch_update_tickets_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "ticket_id": 1,
+                    "result": "changed",
+                    "message": "test_message",
+                    "ticket": {
+                        "id": 1,
+                        "title": "test_title",
+                        "status": "test_status",
+                        "customer": {"id": 1, "email": "test@example.com"},
+                        "reference": {"type": "TOP_UP", "id": 1},
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                        "updated_at": "2023-01-01T00:00:00.000Z",
+                        "store_id": 1,
+                        "archived": 1,
+                        "read_status": {"customer": True, "store": True},
+                        "order_id": 1,
+                        "reason": "test_reason",
+                        "message_count": 1,
+                    },
+                }
+            ]
+        }
+        instance = SdkBatchUpdateTicketsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_resolution_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_resolution.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyResolution.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyResolution.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_resolution_minimal_payload(
+        self,
+    ):
+        data = {"outcome": None, "resolved_at": None, "resolved_by_rule_id": None}
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyResolution.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["outcome"] == data["outcome"]
+        assert serialized["resolved_at"] == data["resolved_at"]
+        assert serialized["resolved_by_rule_id"] == data["resolved_by_rule_id"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_resolution_preserves_nullable_fields(
+        self,
+    ):
+        data = {"outcome": None, "resolved_at": None, "resolved_by_rule_id": None}
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyResolution.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["outcome"] is None
+        assert serialized["resolved_at"] is None
+        assert serialized["resolved_by_rule_id"] is None
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_customer_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_customer.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_customer_minimal_payload(
+        self,
+    ):
+        data = {
+            "email": None,
+            "completed_orders": 1,
+            "lifetime_spend_usd_cents": 1,
+            "first_order_at": None,
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] == data["email"]
+        assert serialized["completed_orders"] == data["completed_orders"]
+        assert (
+            serialized["lifetime_spend_usd_cents"] == data["lifetime_spend_usd_cents"]
+        )
+        assert serialized["first_order_at"] == data["first_order_at"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_customer_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "email": None,
+            "completed_orders": 1,
+            "lifetime_spend_usd_cents": 1,
+            "first_order_at": None,
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+        assert serialized["first_order_at"] is None
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_linked_order_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_linked_order.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyLinkedOrder.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyLinkedOrder.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_linked_order_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_title": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyLinkedOrder.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_linked_order_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_title": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyLinkedOrder.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_title"] is None
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_refund_options_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_refund_options_item.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyRefundOptionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyRefundOptionsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_refund_options_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "invoice_id": 1,
+            "order_id": 1,
+            "product_id": None,
+            "product_title": None,
+            "currency": "USD",
+            "paid_cents": 1,
+            "active_support_refunds_cents": 1,
+            "refundable_cents": None,
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyRefundOptionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["order_id"] == data["order_id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["paid_cents"] == data["paid_cents"]
+        assert (
+            serialized["active_support_refunds_cents"]
+            == data["active_support_refunds_cents"]
+        )
+        assert serialized["refundable_cents"] == data["refundable_cents"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_refund_options_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "invoice_id": 1,
+            "order_id": 1,
+            "product_id": None,
+            "product_title": None,
+            "currency": "USD",
+            "paid_cents": 1,
+            "active_support_refunds_cents": 1,
+            "refundable_cents": None,
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyRefundOptionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] is None
+        assert serialized["product_title"] is None
+        assert serialized["refundable_cents"] is None
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_rule_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_rule.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyRule.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyRule.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_rule_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "name": "Test"}
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyRule.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_wallet_entry_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_wallet_entry.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyWalletEntry.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyWalletEntry.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_property_wallet_entry_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "amount_usd_cents": 1, "reversed": True}
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItemPropertyWalletEntry.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["amount_usd_cents"] == data["amount_usd_cents"]
+        assert serialized["reversed"] == data["reversed"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item.json"
+        )
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "event": "refund_issued",
+            "actor_type": "test_actor_type",
+            "rule": None,
+            "wallet_entry": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["event"] == data["event"]
+        assert serialized["actor_type"] == data["actor_type"]
+        assert serialized["rule"] == data["rule"]
+        assert serialized["wallet_entry"] == data["wallet_entry"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "event": "refund_issued",
+            "actor_type": "test_actor_type",
+            "rule": None,
+            "wallet_entry": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["rule"] is None
+        assert serialized["wallet_entry"] is None
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "event": "unexpected_v_2_get_ticket_context_response_value_200_application_json_property_data_property_activity_item_event",
+            "actor_type": "test_actor_type",
+            "rule": {"id": 1, "name": "Test"},
+            "wallet_entry": {"id": 1, "amount_usd_cents": 1, "reversed": True},
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2GetTicketContextResponseValue200ApplicationJsonPropertyDataPropertyActivityItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_get_ticket_context_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            V2GetTicketContextResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            V2GetTicketContextResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "ticket_id": 1,
+            "resolution": {
+                "outcome": "refunded",
+                "resolved_at": "2023-01-01T00:00:00.000Z",
+                "resolved_by_rule_id": 1,
+            },
+            "customer": {
+                "email": "test@example.com",
+                "completed_orders": 1,
+                "lifetime_spend_usd_cents": 1,
+                "first_order_at": "2023-01-01T00:00:00.000Z",
+            },
+            "linked_order": None,
+            "refund_options": [
+                {
+                    "invoice_id": 1,
+                    "order_id": 1,
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                    "currency": "USD",
+                    "paid_cents": 1,
+                    "active_support_refunds_cents": 1,
+                    "refundable_cents": 1,
+                }
+            ],
+            "activity": [
+                {
+                    "id": 1,
+                    "event": "refund_issued",
+                    "actor_type": "test_actor_type",
+                    "rule": {"id": 1, "name": "Test"},
+                    "wallet_entry": {"id": 1, "amount_usd_cents": 1, "reversed": True},
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = (
+            V2GetTicketContextResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["resolution"] == data["resolution"]
+        assert serialized["customer"] == data["customer"]
+        assert serialized["linked_order"] == data["linked_order"]
+        assert serialized["refund_options"] == data["refund_options"]
+        assert serialized["activity"] == data["activity"]
+
+    def test_v_2_get_ticket_context_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "ticket_id": 1,
+            "resolution": {
+                "outcome": "refunded",
+                "resolved_at": "2023-01-01T00:00:00.000Z",
+                "resolved_by_rule_id": 1,
+            },
+            "customer": {
+                "email": "test@example.com",
+                "completed_orders": 1,
+                "lifetime_spend_usd_cents": 1,
+                "first_order_at": "2023-01-01T00:00:00.000Z",
+            },
+            "linked_order": None,
+            "refund_options": [
+                {
+                    "invoice_id": 1,
+                    "order_id": 1,
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                    "currency": "USD",
+                    "paid_cents": 1,
+                    "active_support_refunds_cents": 1,
+                    "refundable_cents": 1,
+                }
+            ],
+            "activity": [
+                {
+                    "id": 1,
+                    "event": "refund_issued",
+                    "actor_type": "test_actor_type",
+                    "rule": {"id": 1, "name": "Test"},
+                    "wallet_entry": {"id": 1, "amount_usd_cents": 1, "reversed": True},
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = (
+            V2GetTicketContextResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["linked_order"] is None
+
+    def test_sdk_v_2_get_ticket_context_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_get_ticket_context_response_value_200_application_json.json"
+        )
+        instance = SdkV2GetTicketContextResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkV2GetTicketContextResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_get_ticket_context_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "ticket_id": 1,
+                "resolution": {
+                    "outcome": "refunded",
+                    "resolved_at": "2023-01-01T00:00:00.000Z",
+                    "resolved_by_rule_id": 1,
+                },
+                "customer": {
+                    "email": "test@example.com",
+                    "completed_orders": 1,
+                    "lifetime_spend_usd_cents": 1,
+                    "first_order_at": "2023-01-01T00:00:00.000Z",
+                },
+                "linked_order": {
+                    "id": 1,
+                    "product_title": "test_product_title",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                },
+                "refund_options": [
+                    {
+                        "invoice_id": 1,
+                        "order_id": 1,
+                        "product_id": 1,
+                        "product_title": "test_product_title",
+                        "currency": "USD",
+                        "paid_cents": 1,
+                        "active_support_refunds_cents": 1,
+                        "refundable_cents": 1,
+                    }
+                ],
+                "activity": [
+                    {
+                        "id": 1,
+                        "event": "refund_issued",
+                        "actor_type": "test_actor_type",
+                        "rule": {"id": 1, "name": "Test"},
+                        "wallet_entry": {
+                            "id": 1,
+                            "amount_usd_cents": 1,
+                            "reversed": True,
+                        },
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+            }
+        }
+        instance = SdkV2GetTicketContextResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_list_ticket_wallet_refund_options_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_list_ticket_wallet_refund_options_response_value_200_application_json_property_data_item.json"
+        )
+        instance = V2ListTicketWalletRefundOptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2ListTicketWalletRefundOptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_list_ticket_wallet_refund_options_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "invoice_id": 1,
+            "order_id": 1,
+            "product_id": None,
+            "product_title": None,
+            "currency": "USD",
+            "paid_cents": 1,
+            "active_support_refunds_cents": 1,
+            "refundable_cents": None,
+        }
+        instance = V2ListTicketWalletRefundOptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["order_id"] == data["order_id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["paid_cents"] == data["paid_cents"]
+        assert (
+            serialized["active_support_refunds_cents"]
+            == data["active_support_refunds_cents"]
+        )
+        assert serialized["refundable_cents"] == data["refundable_cents"]
+
+    def test_v_2_list_ticket_wallet_refund_options_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "invoice_id": 1,
+            "order_id": 1,
+            "product_id": None,
+            "product_title": None,
+            "currency": "USD",
+            "paid_cents": 1,
+            "active_support_refunds_cents": 1,
+            "refundable_cents": None,
+        }
+        instance = V2ListTicketWalletRefundOptionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] is None
+        assert serialized["product_title"] is None
+        assert serialized["refundable_cents"] is None
+
+    def test_sdk_v_2_list_ticket_wallet_refund_options_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_list_ticket_wallet_refund_options_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkV2ListTicketWalletRefundOptionsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkV2ListTicketWalletRefundOptionsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_list_ticket_wallet_refund_options_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "invoice_id": 1,
+                    "order_id": 1,
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                    "currency": "USD",
+                    "paid_cents": 1,
+                    "active_support_refunds_cents": 1,
+                    "refundable_cents": 1,
+                }
+            ]
+        }
+        instance = (
+            SdkV2ListTicketWalletRefundOptionsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_property_reversal_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_property_reversal.json"
+        )
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItemPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItemPropertyReversal.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_property_reversal_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItemPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_property_reversal_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItemPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["reason"] is None
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item.json"
+        )
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["customer_note"] == data["customer_note"]
+        assert serialized["automatic"] == data["automatic"]
+        assert serialized["reversed"] == data["reversed"]
+        assert serialized["reversal"] == data["reversal"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_list_ticket_wallet_refunds_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ListTicketWalletRefundsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["customer_note"] is None
+        assert serialized["reversal"] is None
+
+    def test_sdk_v_2_list_ticket_wallet_refunds_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_list_ticket_wallet_refunds_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkV2ListTicketWalletRefundsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkV2ListTicketWalletRefundsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_list_ticket_wallet_refunds_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "id": 1,
+                    "ticket_id": 1,
+                    "invoice_id": 1,
+                    "customer_id": 1,
+                    "amount_cents": 1,
+                    "currency": "USD",
+                    "balance_after_cents": 1,
+                    "customer_note": "test_customer_note",
+                    "automatic": True,
+                    "reversed": True,
+                    "reversal": {
+                        "id": 1,
+                        "amount_cents": 1,
+                        "balance_after_cents": 1,
+                        "reason": "test_reason",
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    },
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ]
+        }
+        instance = (
+            SdkV2ListTicketWalletRefundsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_property_reversal_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_property_reversal.json"
+        )
+        instance = V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_property_reversal_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_property_reversal_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["reason"] is None
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data.json"
+        )
+        instance = (
+            V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["customer_note"] == data["customer_note"]
+        assert serialized["automatic"] == data["automatic"]
+        assert serialized["reversed"] == data["reversed"]
+        assert serialized["reversal"] == data["reversal"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_refund_ticket_to_wallet_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            V2RefundTicketToWalletResponseValue201ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["customer_note"] is None
+        assert serialized["reversal"] is None
+
+    def test_sdk_v_2_refund_ticket_to_wallet_response_value_201_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_refund_ticket_to_wallet_response_value_201_application_json.json"
+        )
+        instance = SdkV2RefundTicketToWalletResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkV2RefundTicketToWalletResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_refund_ticket_to_wallet_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "ticket_id": 1,
+                "invoice_id": 1,
+                "customer_id": 1,
+                "amount_cents": 1,
+                "currency": "USD",
+                "balance_after_cents": 1,
+                "customer_note": "test_customer_note",
+                "automatic": True,
+                "reversed": True,
+                "reversal": {
+                    "id": 1,
+                    "amount_cents": 1,
+                    "balance_after_cents": 1,
+                    "reason": "test_reason",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                },
+                "created_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkV2RefundTicketToWalletResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_property_reversal_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_property_reversal.json"
+        )
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_property_reversal_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_property_reversal_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyDataPropertyReversal.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["reason"] is None
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data.json"
+        )
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["invoice_id"] == data["invoice_id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["customer_note"] == data["customer_note"]
+        assert serialized["automatic"] == data["automatic"]
+        assert serialized["reversed"] == data["reversed"]
+        assert serialized["reversal"] == data["reversal"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "ticket_id": 1,
+            "invoice_id": None,
+            "customer_id": None,
+            "amount_cents": 1,
+            "currency": "USD",
+            "balance_after_cents": 1,
+            "customer_note": None,
+            "automatic": True,
+            "reversed": True,
+            "reversal": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = V2ReverseTicketWalletRefundResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invoice_id"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["customer_note"] is None
+        assert serialized["reversal"] is None
+
+    def test_sdk_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_v_2_reverse_ticket_wallet_refund_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkV2ReverseTicketWalletRefundResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkV2ReverseTicketWalletRefundResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_v_2_reverse_ticket_wallet_refund_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "ticket_id": 1,
+                "invoice_id": 1,
+                "customer_id": 1,
+                "amount_cents": 1,
+                "currency": "USD",
+                "balance_after_cents": 1,
+                "customer_note": "test_customer_note",
+                "automatic": True,
+                "reversed": True,
+                "reversal": {
+                    "id": 1,
+                    "amount_cents": 1,
+                    "balance_after_cents": 1,
+                    "reason": "test_reason",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                },
+                "created_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = (
+            SdkV2ReverseTicketWalletRefundResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_summary_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_support_analytics_response_value_200_application_json_property_data_property_summary.json"
+        )
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_summary_minimal_payload(
+        self,
+    ):
+        data = {
+            "tickets_received": 1,
+            "tickets_resolved": 1,
+            "auto_closures": 1,
+            "manual_closures": 1,
+            "support_wallet_credit_cents": 1,
+            "auto_wallet_credit_cents": 1,
+            "warning_count": 1,
+        }
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["tickets_received"] == data["tickets_received"]
+        assert serialized["tickets_resolved"] == data["tickets_resolved"]
+        assert serialized["auto_closures"] == data["auto_closures"]
+        assert serialized["manual_closures"] == data["manual_closures"]
+        assert (
+            serialized["support_wallet_credit_cents"]
+            == data["support_wallet_credit_cents"]
+        )
+        assert (
+            serialized["auto_wallet_credit_cents"] == data["auto_wallet_credit_cents"]
+        )
+        assert serialized["warning_count"] == data["warning_count"]
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_rules_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_support_analytics_response_value_200_application_json_property_data_property_rules_item.json"
+        )
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRulesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRulesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_rules_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "rule_id": 1,
+            "rule_name": "Test",
+            "matches": 1,
+            "closures": 1,
+            "wallet_credit_cents": 1,
+            "warning_count": 1,
+        }
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRulesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["rule_id"] == data["rule_id"]
+        assert serialized["rule_name"] == data["rule_name"]
+        assert serialized["matches"] == data["matches"]
+        assert serialized["closures"] == data["closures"]
+        assert serialized["wallet_credit_cents"] == data["wallet_credit_cents"]
+        assert serialized["warning_count"] == data["warning_count"]
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_recent_activity_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_support_analytics_response_value_200_application_json_property_data_property_recent_activity_item.json"
+        )
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_recent_activity_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "event": "test_event",
+            "ticket_id": 1,
+            "rule_id": None,
+            "actor_type": "test_actor_type",
+            "wallet_credit_cents": None,
+            "wallet_credit_reversed": True,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["event"] == data["event"]
+        assert serialized["ticket_id"] == data["ticket_id"]
+        assert serialized["rule_id"] == data["rule_id"]
+        assert serialized["actor_type"] == data["actor_type"]
+        assert serialized["wallet_credit_cents"] == data["wallet_credit_cents"]
+        assert serialized["wallet_credit_reversed"] == data["wallet_credit_reversed"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_property_recent_activity_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "event": "test_event",
+            "ticket_id": 1,
+            "rule_id": None,
+            "actor_type": "test_actor_type",
+            "wallet_credit_cents": None,
+            "wallet_credit_reversed": True,
+            "reason": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetSupportAnalyticsResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["rule_id"] is None
+        assert serialized["wallet_credit_cents"] is None
+        assert serialized["reason"] is None
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_support_analytics_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetSupportAnalyticsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetSupportAnalyticsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "range": "7d",
+            "start_at": "2023-01-01T00:00:00.000Z",
+            "end_at": "2023-01-01T00:00:00.000Z",
+            "currency": "USD",
+            "summary": {
+                "tickets_received": 1,
+                "tickets_resolved": 1,
+                "auto_closures": 1,
+                "manual_closures": 1,
+                "support_wallet_credit_cents": 1,
+                "auto_wallet_credit_cents": 1,
+                "warning_count": 1,
+            },
+            "rules": [
+                {
+                    "rule_id": 1,
+                    "rule_name": "Test",
+                    "matches": 1,
+                    "closures": 1,
+                    "wallet_credit_cents": 1,
+                    "warning_count": 1,
+                }
+            ],
+            "recent_activity": [
+                {
+                    "id": 1,
+                    "event": "test_event",
+                    "ticket_id": 1,
+                    "rule_id": 1,
+                    "actor_type": "test_actor_type",
+                    "wallet_credit_cents": 1,
+                    "wallet_credit_reversed": True,
+                    "reason": "test_reason",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = (
+            GetSupportAnalyticsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["range"] == data["range"]
+        assert serialized["start_at"] == data["start_at"]
+        assert serialized["end_at"] == data["end_at"]
+        assert serialized["currency"] == data["currency"]
+        assert serialized["summary"] == data["summary"]
+        assert serialized["rules"] == data["rules"]
+        assert serialized["recent_activity"] == data["recent_activity"]
+
+    def test_get_support_analytics_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "range": "unexpected_get_support_analytics_response_value_200_application_json_property_data_range",
+            "start_at": "2023-01-01T00:00:00.000Z",
+            "end_at": "2023-01-01T00:00:00.000Z",
+            "currency": "USD",
+            "summary": {
+                "tickets_received": 1,
+                "tickets_resolved": 1,
+                "auto_closures": 1,
+                "manual_closures": 1,
+                "support_wallet_credit_cents": 1,
+                "auto_wallet_credit_cents": 1,
+                "warning_count": 1,
+            },
+            "rules": [
+                {
+                    "rule_id": 1,
+                    "rule_name": "Test",
+                    "matches": 1,
+                    "closures": 1,
+                    "wallet_credit_cents": 1,
+                    "warning_count": 1,
+                }
+            ],
+            "recent_activity": [
+                {
+                    "id": 1,
+                    "event": "test_event",
+                    "ticket_id": 1,
+                    "rule_id": 1,
+                    "actor_type": "test_actor_type",
+                    "wallet_credit_cents": 1,
+                    "wallet_credit_reversed": True,
+                    "reason": "test_reason",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = (
+            GetSupportAnalyticsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_get_support_analytics_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_support_analytics_response_value_200_application_json.json"
+        )
+        instance = SdkGetSupportAnalyticsResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetSupportAnalyticsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_support_analytics_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "range": "7d",
+                "start_at": "2023-01-01T00:00:00.000Z",
+                "end_at": "2023-01-01T00:00:00.000Z",
+                "currency": "USD",
+                "summary": {
+                    "tickets_received": 1,
+                    "tickets_resolved": 1,
+                    "auto_closures": 1,
+                    "manual_closures": 1,
+                    "support_wallet_credit_cents": 1,
+                    "auto_wallet_credit_cents": 1,
+                    "warning_count": 1,
+                },
+                "rules": [
+                    {
+                        "rule_id": 1,
+                        "rule_name": "Test",
+                        "matches": 1,
+                        "closures": 1,
+                        "wallet_credit_cents": 1,
+                        "warning_count": 1,
+                    }
+                ],
+                "recent_activity": [
+                    {
+                        "id": 1,
+                        "event": "test_event",
+                        "ticket_id": 1,
+                        "rule_id": 1,
+                        "actor_type": "test_actor_type",
+                        "wallet_credit_cents": 1,
+                        "wallet_credit_reversed": True,
+                        "reason": "test_reason",
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+            }
+        }
+        instance = SdkGetSupportAnalyticsResponseValue200ApplicationJson.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

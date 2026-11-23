@@ -17,6 +17,10 @@ def list(
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        status: ChargesStatus | str | None = None,
+        customer_email: str | None = None,
+        created_after: str | None = None,
+        created_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -28,6 +32,10 @@ def list(
 | after | `str \| None` | No |
 | order | `str \| None` | No |
 | page | `int \| None` | No |
+| status | `ChargesStatus \| str \| None` | No |
+| customer_email | `str \| None` | No |
+| created_after | `str \| None` | No |
+| created_before | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]`.
@@ -326,6 +334,64 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## get_summary
+
+Retrieve the charge summary
+
+[API reference](https://sell.app/docs/api/charges/retrieve-the-charge-summary) · Effect: **read**
+
+```python
+def get_summary(
+        self,
+        *,
+        preset: ChargesPreset | str | None = None,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetChargeSummaryResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| preset | `ChargesPreset \| str \| None` | No |
+| start_date | `str \| None` | No |
+| end_date | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkGetChargeSummaryResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.charges.get_summary()
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

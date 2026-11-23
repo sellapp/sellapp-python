@@ -404,6 +404,7 @@ def v2_search_ticket_messages(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[
         V2SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem
@@ -431,6 +432,7 @@ def v2_search_ticket_messages(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[

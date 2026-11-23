@@ -15,6 +15,7 @@ from sellapp_sdk.common.models.blacklist_type import BlacklistType
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model, enum_value
+from .models import BlacklistsType
 
 
 class Blacklists:
@@ -416,17 +417,23 @@ class Blacklists:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        type: BlacklistsType | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
         """List blacklist rules
 
-        List store-scoped blacklist rules. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's blacklist rules, oldest first, 15 per page by default. Narrow the list with `type` and with `search`, which matches part of the blocked value or of the description. An unknown `type`, a `search` longer than 255 characters or a `limit` over 100 returns `422`. An empty `data` array means no rule matches. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
+            search: Text to look for in the blocked value or the description, matched literally and anywhere in the text, up to 255 characters.
+            type: Return only rules of this type.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -479,6 +486,9 @@ class Blacklists:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "search": search,
+                "type": enum_value(type) if type is not None else None,
             }.items()
             if v is not None
         }
@@ -1311,17 +1321,23 @@ class AsyncBlacklists:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        type: BlacklistsType | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[Blacklist]:
         """List blacklist rules
 
-        List store-scoped blacklist rules. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's blacklist rules, oldest first, 15 per page by default. Narrow the list with `type` and with `search`, which matches part of the blocked value or of the description. An unknown `type`, a `search` longer than 255 characters or a `limit` over 100 returns `422`. An empty `data` array means no rule matches. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
+            search: Text to look for in the blocked value or the description, matched literally and anywhere in the text, up to 255 characters.
+            type: Return only rules of this type.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1374,6 +1390,9 @@ class AsyncBlacklists:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "search": search,
+                "type": enum_value(type) if type is not None else None,
             }.items()
             if v is not None
         }

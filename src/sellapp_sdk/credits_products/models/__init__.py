@@ -15,9 +15,6 @@ from sellapp_sdk.common.models.create_credits_product_response_value_201_applica
 from sellapp_sdk.common.models.create_credits_product_response_value_201_application_json_property_data_property_variant_invariant import (
     CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant as CreateCreditsProductResponseValue201ApplicationJsonPropertyDataPropertyVariantInvariant,
 )
-from sellapp_sdk.common.models.sdk_delete_credits_product_request_application_json import (
-    SdkDeleteCreditsProductRequestApplicationJson as SdkDeleteCreditsProductRequestApplicationJson,
-)
 
 from .delete_credits_product_response_value_200_application_json_property_data import (
     DeleteCreditsProductResponseValue200ApplicationJsonPropertyData as DeleteCreditsProductResponseValue200ApplicationJsonPropertyData,
@@ -87,6 +84,9 @@ from .sdk_create_credits_product_request_application_json import (
 )
 from .sdk_create_credits_product_response_value_201_application_json import (
     SdkCreateCreditsProductResponseValue201ApplicationJson as SdkCreateCreditsProductResponseValue201ApplicationJson,
+)
+from .sdk_delete_credits_product_request_application_json import (
+    SdkDeleteCreditsProductRequestApplicationJson as SdkDeleteCreditsProductRequestApplicationJson,
 )
 from .sdk_delete_credits_product_response_value_200_application_json import (
     SdkDeleteCreditsProductResponseValue200ApplicationJson as SdkDeleteCreditsProductResponseValue200ApplicationJson,

@@ -13,6 +13,7 @@ from .deactivate_license_response_value_200_application_json_property_data impor
 from .get_license_key_response_value_200_application_json_property_data import (
     GetLicenseKeyResponseValue200ApplicationJsonPropertyData as GetLicenseKeyResponseValue200ApplicationJsonPropertyData,
 )
+from .licenses_validity import LicensesValidity as LicensesValidity
 from .list_license_keys_response_value_200_application_json_property_data_item import (
     ListLicenseKeysResponseValue200ApplicationJsonPropertyDataItem as ListLicenseKeysResponseValue200ApplicationJsonPropertyDataItem,
 )

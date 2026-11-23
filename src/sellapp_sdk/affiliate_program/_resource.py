@@ -11,15 +11,19 @@ if TYPE_CHECKING:
 
 import builtins
 
+from sellapp_sdk.common.models.replace_affiliate_program_configuration_request_application_json_property_products_item import (
+    ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem,
+)
+
 from .._pagination import AsyncPage, SyncPage
 from .._types import RequestOptions, _validate_model
 from .models import (
     ListPendingAffiliateInvitationsResponseValue200ApplicationJsonPropertyDataItem,
-    ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem,
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
     SdkGetAffiliateProgramConfigurationResponseValue200ApplicationJson,
     SdkInviteAffiliateResponseValue201ApplicationJson,
     SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson,
+    SdkResendAffiliateInvitationResponseValue200ApplicationJson,
 )
 
 
@@ -99,7 +103,7 @@ class AffiliateProgram:
     ) -> SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Replace affiliate program configuration
 
-        Replace the complete affiliate-program configuration. The products array is authoritative: enabled entries replace existing store-level product restrictions, and every variant ID must belong to the authenticated store. Requires the `affiliate` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Replace the complete affiliate-program configuration. The products array is authoritative: enabled entries replace existing store-level product restrictions, and every variant ID must belong to the authenticated store. Requires the `affiliate` token ability, and the staff member who owns the key also needs the `store` permission, the same permission that changing the program in the dashboard requires. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             enabled: The enabled.
@@ -270,7 +274,7 @@ class AffiliateProgram:
     ) -> SdkInviteAffiliateResponseValue201ApplicationJson:
         """Invite an affiliate
 
-        Create a pending affiliate invitation and email a single-use onboarding link. Duplicate invitations are rejected and invites are rate limited per store. The affiliate program must be enabled. Requires the `affiliate` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a pending affiliate invitation and email a single-use onboarding link. Duplicate invitations are rejected and invites are rate limited per store. The affiliate program must be enabled. Requires the `affiliate` token ability, and the staff member who owns the key also needs the `store` permission, the same permission that inviting affiliates in the dashboard requires. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             email: The email.
@@ -345,6 +349,69 @@ class AffiliateProgram:
             path=("v2", "affiliate-invitations"),
             body=body,
             model=SdkInviteAffiliateResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    def resend(
+        self,
+        invitation: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkResendAffiliateInvitationResponseValue200ApplicationJson:
+        """Resend an affiliate invitation
+
+        Email a pending affiliate invitation again, with a new sign-in link that expires after 6 hours, to the address it was created for. The invitation itself does not change: `invited_at` keeps the original date. Send no body. Requires the `affiliate` API-key ability, and the staff member who owns the key needs the affiliate and `store` permissions, the same as inviting an affiliate. Every refusal returns `422` on `invitation` and sends nothing: the invitation was already answered or is no longer pending, the affiliate program is not configured or turned off, the same invitation was sent within the last minute, your store reached its limit of 10 invitation emails per hour (new invitations and resends count together; the message says how many seconds to wait), or the email could not be sent. An invitation from another store returns `404`. Not safe to retry blindly: each successful call sends another email. A repeat within a minute is refused, so a quick retry after a lost response cannot send twice; after that, check with the invitee or wait for them to answer before sending again. If sending failed, wait a minute and try again. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            invitation: The invitation ID, as returned by `GET /v2/affiliate-invitations` or `POST /v2/affiliate-invitations`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkResendAffiliateInvitationResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "resendAffiliateInvitation",
+        }
+        return self._client.request(
+            method="post",
+            path=("v2", "affiliate-invitations", str(invitation), "resend"),
+            model=SdkResendAffiliateInvitationResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -425,7 +492,7 @@ class AsyncAffiliateProgram:
     ) -> SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson:
         """Replace affiliate program configuration
 
-        Replace the complete affiliate-program configuration. The products array is authoritative: enabled entries replace existing store-level product restrictions, and every variant ID must belong to the authenticated store. Requires the `affiliate` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Replace the complete affiliate-program configuration. The products array is authoritative: enabled entries replace existing store-level product restrictions, and every variant ID must belong to the authenticated store. Requires the `affiliate` token ability, and the staff member who owns the key also needs the `store` permission, the same permission that changing the program in the dashboard requires. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             enabled: The enabled.
@@ -596,7 +663,7 @@ class AsyncAffiliateProgram:
     ) -> SdkInviteAffiliateResponseValue201ApplicationJson:
         """Invite an affiliate
 
-        Create a pending affiliate invitation and email a single-use onboarding link. Duplicate invitations are rejected and invites are rate limited per store. The affiliate program must be enabled. Requires the `affiliate` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a pending affiliate invitation and email a single-use onboarding link. Duplicate invitations are rejected and invites are rate limited per store. The affiliate program must be enabled. Requires the `affiliate` token ability, and the staff member who owns the key also needs the `store` permission, the same permission that inviting affiliates in the dashboard requires. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             email: The email.
@@ -671,5 +738,68 @@ class AsyncAffiliateProgram:
             path=("v2", "affiliate-invitations"),
             body=body,
             model=SdkInviteAffiliateResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def resend(
+        self,
+        invitation: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkResendAffiliateInvitationResponseValue200ApplicationJson:
+        """Resend an affiliate invitation
+
+        Email a pending affiliate invitation again, with a new sign-in link that expires after 6 hours, to the address it was created for. The invitation itself does not change: `invited_at` keeps the original date. Send no body. Requires the `affiliate` API-key ability, and the staff member who owns the key needs the affiliate and `store` permissions, the same as inviting an affiliate. Every refusal returns `422` on `invitation` and sends nothing: the invitation was already answered or is no longer pending, the affiliate program is not configured or turned off, the same invitation was sent within the last minute, your store reached its limit of 10 invitation emails per hour (new invitations and resends count together; the message says how many seconds to wait), or the email could not be sent. An invitation from another store returns `404`. Not safe to retry blindly: each successful call sends another email. A repeat within a minute is refused, so a quick retry after a lost response cannot send twice; after that, check with the invitee or wait for them to answer before sending again. If sending failed, wait a minute and try again. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            invitation: The invitation ID, as returned by `GET /v2/affiliate-invitations` or `POST /v2/affiliate-invitations`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkResendAffiliateInvitationResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "resendAffiliateInvitation",
+        }
+        return await self._client.request(
+            method="post",
+            path=("v2", "affiliate-invitations", str(invitation), "resend"),
+            model=SdkResendAffiliateInvitationResponseValue200ApplicationJson,
             request_options=request_options,
         )

@@ -360,3 +360,59 @@ Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API r
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## quote
+
+Quote a cashback rule
+
+[API reference](https://sell.app/docs/api/wallet/quote-cashback) · Effect: **read**
+
+```python
+def quote(
+        self,
+        *,
+        product_id: int | None = None,
+        purchase_cents: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkQuoteCashbackRuleResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product_id | `int \| None` | No |
+| purchase_cents | `int \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkQuoteCashbackRuleResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.cashback_rules.quote()
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+

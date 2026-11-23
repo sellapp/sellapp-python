@@ -53,6 +53,7 @@ class TestAffiliateReferrals:
             limit=10,
             before="cursor before",
             after="cursor/after",
+            search="value search/test",
             affiliate_id=7,
             order_id=7,
             status=AffiliateReferralsStatus("created"),
@@ -62,6 +63,7 @@ class TestAffiliateReferrals:
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["search"] == "value search/test"
         assert request.url.params["affiliate_id"] == "7"
         assert request.url.params["order_id"] == "7"
         assert request.url.params["status"] == "created"
@@ -233,6 +235,7 @@ class TestAsyncAffiliateReferrals:
             limit=10,
             before="cursor before",
             after="cursor/after",
+            search="value search/test",
             affiliate_id=7,
             order_id=7,
             status=AffiliateReferralsStatus("created"),
@@ -242,6 +245,7 @@ class TestAsyncAffiliateReferrals:
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["search"] == "value search/test"
         assert request.url.params["affiliate_id"] == "7"
         assert request.url.params["order_id"] == "7"
         assert request.url.params["status"] == "created"

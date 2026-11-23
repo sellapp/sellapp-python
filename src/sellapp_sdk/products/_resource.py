@@ -12,15 +12,16 @@ if TYPE_CHECKING:
 import builtins
 
 from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
-from sellapp_sdk.common.models.list_products_response_value_200_application_json_property_data_item import (
-    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
-)
 from sellapp_sdk.common.models.sdk_batch_create_products_response_value_200_application_json import (
     SdkBatchCreateProductsResponseValue200ApplicationJson,
 )
 from sellapp_sdk.common.models.sdk_create_product_request_application_json_type import (
     SdkCreateProductRequestApplicationJsonType,
 )
+from sellapp_sdk.common.models.sdk_search_products_request_application_json_visibility import (
+    SdkSearchProductsRequestApplicationJsonVisibility,
+)
+from sellapp_sdk.common.models.stock import Stock
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
@@ -31,11 +32,17 @@ from .models import (
     CreateProductRequestApplicationJsonPropertyBundleItemsItem,
     CreateProductRequestApplicationJsonPropertyOtherSettings,
     CreateProductRequestApplicationJsonPropertyVariantsItem,
+    ListProductsResponseValue200ApplicationJsonPropertyDataItem,
+    ProductsStock,
+    ProductsVisibility,
     ReplaceProductRequestApplicationJsonPropertyAdditionalInformationItem,
     ReplaceProductRequestApplicationJsonPropertyOtherSettings,
     SdkBatchUpdateProductsResponseValue200ApplicationJson,
     SdkCreateProductResponseValue201ApplicationJson,
+    SdkDuplicateProductResponseValue201ApplicationJson,
     SdkGetProductResponseValue200ApplicationJson,
+    SdkMoveProductResponseValue200ApplicationJson,
+    SdkPublishProductResponseValue200ApplicationJson,
     SdkReplaceProductResponseValue200ApplicationJson,
     SdkUpdateProductResponseValue200ApplicationJson,
     SearchProductsRequestApplicationJsonPropertyFiltersItem,
@@ -65,6 +72,11 @@ class Products:
         page: int | None = None,
         with_drafts: bool | None = None,
         only_drafts: bool | None = None,
+        min_price: int | None = None,
+        max_price: int | None = None,
+        stock: ProductsStock | str | None = None,
+        visibility: builtins.list[ProductsVisibility | str] | None = None,
+        has_sales: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all products
@@ -79,6 +91,11 @@ class Products:
             page: Page number to return. Defaults to `1`.
             with_drafts: Include draft products alongside published products.
             only_drafts: Return only draft products.
+            min_price: Only products whose every priced variant costs at least this much, in integer minor units of that variant's own currency: `999` means $9.99 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter. Must not be greater than `max_price`.
+            max_price: Only products whose every priced variant costs at most this much, in integer minor units of that variant's own currency: `2500` means $25.00 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter.
+            stock: Filter by stock, draft variants included. `in_stock`: at least one variant can be bought (unlimited stock, or at least its minimum purchase quantity left). `sold_out`: no variant can be bought. `any_variant_sold_out`: at least one variant with a stock count is sold out. `limited`: at least one variant has a stock count. `unlimited`: no variant has a stock count.
+            visibility: Only products with one of these visibilities. Repeat the parameter to select several. A single `visibility=HIDDEN` also works.
+            has_sales: `true` for products with at least one completed sale, `false` for products without one. Only purchase line items with status `COMPLETED` count, so pending or refunded ones do not.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -132,6 +149,11 @@ class Products:
                 "page": page,
                 "with_drafts": with_drafts,
                 "only_drafts": only_drafts,
+                "min_price": min_price,
+                "max_price": max_price,
+                "stock": enum_value(stock) if stock is not None else None,
+                "visibility[]": visibility,
+                "has_sales": has_sales,
             }.items()
             if v is not None
         }
@@ -760,6 +782,16 @@ class Products:
             SearchProductsRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        min_price: int | None | NotGiven = NOT_GIVEN,
+        max_price: int | None | NotGiven = NOT_GIVEN,
+        stock: Stock | str | None | NotGiven = NOT_GIVEN,
+        visibility: builtins.list[
+            SdkSearchProductsRequestApplicationJsonVisibility | str
+        ]
+        | None = None,
+        has_sales: bool | None | NotGiven = NOT_GIVEN,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -769,13 +801,20 @@ class Products:
     ) -> SyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search products
 
-        Search products using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search your store's products by title and narrow them by price, stock, visibility, or sales, 15 per page by default. Send the filters in the JSON body. Products support no `filters` or `sort` entries: any entry returns `422`. A filter value that is not valid, such as an unknown `stock` state or a `min_price` above `max_price`, returns `422` on that field. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            filters: The filters.
-            sort: The sort.
+            filters: Not supported for products: no field can be filtered this way, so any entry returns `422` on `filters`. Use the price, stock, visibility, and sales fields instead.
+            sort: Not supported for products: any entry returns `422` on `sort`.
             search: The search.
-            includes: The includes.
+            includes: Only `variants` is accepted, and variants are always included.
+            min_price: Only products whose every priced variant costs at least this much, in integer minor units of that variant's own currency: `999` means $9.99 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter. Must not be greater than `max_price`.
+            max_price: Only products whose every priced variant costs at most this much, in integer minor units of that variant's own currency: `2500` means $25.00 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter.
+            stock: Filter by stock, draft variants included. `in_stock`: at least one variant can be bought (unlimited stock, or at least its minimum purchase quantity left). `sold_out`: no variant can be bought. `any_variant_sold_out`: at least one variant with a stock count is sold out. `limited`: at least one variant has a stock count. `unlimited`: no variant has a stock count.
+            visibility: Only products with one of these visibilities. A single string such as `"HIDDEN"` is also accepted.
+            has_sales: `true` for products with at least one completed sale, `false` for products without one. Only purchase line items with status `COMPLETED` count, so pending or refunded ones do not.
+            with_drafts: Include draft products alongside published products.
+            only_drafts: Return only draft products.
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
@@ -835,9 +874,20 @@ class Products:
                 "includes": [item.to_dict() for item in includes]
                 if includes is not None
                 else None,
+                "visibility": visibility,
+                "with_drafts": with_drafts,
+                "only_drafts": only_drafts,
             }.items()
             if v is not None
         }
+        if not isinstance(min_price, NotGiven):
+            body["min_price"] = min_price
+        if not isinstance(max_price, NotGiven):
+            body["max_price"] = max_price
+        if not isinstance(stock, NotGiven):
+            body["stock"] = enum_value(stock) if stock is not None else None
+        if not isinstance(has_sales, NotGiven):
+            body["has_sales"] = has_sales
         params = {
             k: v
             for k, v in {
@@ -1101,6 +1151,274 @@ class Products:
             request_options=request_options,
         )
 
+    def publish(
+        self,
+        product: int,
+        *,
+        visibility: CatalogVisibility | str | None = None,
+        variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductResponseValue200ApplicationJson:
+        """Publish a product
+
+        Publish a draft product so customers can buy it. Works for normal products, bundles, add-ons, credits products, booking products, and courses. Each is checked as saved, the way its dashboard editor checks it before publishing, and nothing else about the product changes. A normal product needs a description and at least one published variant, and every variant that will be on sale needs a title, a description of at least 5 characters, a working delivery (for example an uploaded file for a download), a price, and payment methods enabled for the store that can take that currency. With exactly one variant, that variant is published with the product. With several, send the draft variants to publish with it in `variant_ids`; the others stay drafts. Publishing a subscription variant also creates its billing plans with the payment providers. A booking product publishes its one option with it; with several options, publish at least one with `POST /v2/products/{product}/variants/{variant}/publish` first, and the other options keep their own state. A bundle needs at least one product in it. A course is published with `visibility`, or with its saved visibility when you leave it out; `PUBLIC` also needs a ready promo video and at least one published lesson. A subscription-priced course cannot be published here. Publishing does not change a normal product's `visibility`: a product that is not `PUBLIC` is published but stays off the storefront listing. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: once the product is published, another call changes nothing and returns `422` with `The product is already published.` on `product`. Every refusal returns `422`. `visibility` is accepted only for a course and `variant_ids` only for a normal product; each is otherwise refused on that field, and `variant_ids.{i}` names an ID that is not a variant of this product. Everything else is on `product`, with one sentence per thing the product still needs. One `product` refusal comes after the product was published: when a payment provider refuses to create a subscription billing plan, the product and its variants are already published and the message is the provider's reason. Retrieve the product before trying again. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            visibility: The visibility.
+            variant_ids: Normal products only. IDs of this product's draft variants to publish with it. Needed when the product has several variants and none is published yet; a single variant is published anyway. Draft variants you leave out stay drafts.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPublishProductResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "publishProduct",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(variant_ids, NotGiven):
+            body["variant_ids"] = variant_ids
+        _validate_model(
+            body,
+            {
+                "name": "SdkPublishProductRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                    "variant_ids": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "array",
+                            "items": {"kind": "primitive", "type": "integer"},
+                            "constraints": {"uniqueItems": True},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "publish"),
+            body=body,
+            model=SdkPublishProductResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def duplicate(
+        self,
+        product: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductResponseValue201ApplicationJson:
+        """Duplicate a product
+
+        Copy a normal product, bundle, add-on, credits product, or booking product within the same store and return the copy. Courses cannot be duplicated. The copy is titled `(Copy)`, `(Copy 2)`, and so on, with a matching `-copy` slug, and keeps every other product setting, including its images, `visibility`, and draft state. A copy of a published product is therefore on sale straight away. It gets no place in the product order or in a section. A normal product's variants are copied with their settings and downloadable files, except subscription variants. A bundle's variant is copied with the products in it, an add-on's with its downloadable files and the products it is offered with, a credits product's with its rate tiers, and a booking product's options, except subscription options, with their schedules. Never copied: sales, reviews, appointments, serial codes, issued licence keys, and group membership. A copied variant that delivers serial codes gets a stock of `0`, so it shows as sold out until you add codes. Requires the `listing` API-key ability and the `listing` permission in your team role. Not safe to retry blindly: every call creates another copy. If a response is lost, list your products and look for the copy before trying again. A course, or a product with nothing to copy (only subscription variants), returns `422` on `product`. A product that changed while the copy was being made also returns `422` on `product`; nothing was copied. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkDuplicateProductResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "duplicateProduct",
+        }
+        return self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "duplicate"),
+            model=SdkDuplicateProductResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    def move(
+        self,
+        product: int,
+        *,
+        position: int,
+        expected_position: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMoveProductResponseValue200ApplicationJson:
+        """Move a product
+
+        Move a normal product to a position in your store's product order, shifting the products in between by one. Positions run from `1` to the number of normal products, drafts included; a product's position is its `order`. Gaps in the stored order are closed first. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: moving a product to the position it already has changes nothing. Send `expected_position` with the position you last read to refuse the move when someone else moved the product in the meantime. A position past the end returns `422` on `position` with the allowed range, a product that is no longer at `expected_position` returns `422` on `expected_position` with its current position, and a listing that is not a normal product returns `422` on `product`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            position: The new position, where `1` is first. At most the number of normal products in the store, drafts included.
+            expected_position: The position you last read for this product (its `order`). The move is refused when the product is no longer there.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkMoveProductResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "moveProduct",
+        }
+        body: dict[str, Any] = {
+            "position": position,
+        }
+        if not isinstance(expected_position, NotGiven):
+            body["expected_position"] = expected_position
+        _validate_model(
+            body,
+            {
+                "name": "SdkMoveProductRequestApplicationJson",
+                "required": ["position"],
+                "properties": {
+                    "position": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1},
+                    },
+                    "expected_position": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "products", str(product), "position"),
+            body=body,
+            model=SdkMoveProductResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncProducts:
     """Products API resources (async)."""
@@ -1119,6 +1437,11 @@ class AsyncProducts:
         page: int | None = None,
         with_drafts: bool | None = None,
         only_drafts: bool | None = None,
+        min_price: int | None = None,
+        max_price: int | None = None,
+        stock: ProductsStock | str | None = None,
+        visibility: builtins.list[ProductsVisibility | str] | None = None,
+        has_sales: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """List all products
@@ -1133,6 +1456,11 @@ class AsyncProducts:
             page: Page number to return. Defaults to `1`.
             with_drafts: Include draft products alongside published products.
             only_drafts: Return only draft products.
+            min_price: Only products whose every priced variant costs at least this much, in integer minor units of that variant's own currency: `999` means $9.99 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter. Must not be greater than `max_price`.
+            max_price: Only products whose every priced variant costs at most this much, in integer minor units of that variant's own currency: `2500` means $25.00 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter.
+            stock: Filter by stock, draft variants included. `in_stock`: at least one variant can be bought (unlimited stock, or at least its minimum purchase quantity left). `sold_out`: no variant can be bought. `any_variant_sold_out`: at least one variant with a stock count is sold out. `limited`: at least one variant has a stock count. `unlimited`: no variant has a stock count.
+            visibility: Only products with one of these visibilities. Repeat the parameter to select several. A single `visibility=HIDDEN` also works.
+            has_sales: `true` for products with at least one completed sale, `false` for products without one. Only purchase line items with status `COMPLETED` count, so pending or refunded ones do not.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1186,6 +1514,11 @@ class AsyncProducts:
                 "page": page,
                 "with_drafts": with_drafts,
                 "only_drafts": only_drafts,
+                "min_price": min_price,
+                "max_price": max_price,
+                "stock": enum_value(stock) if stock is not None else None,
+                "visibility[]": visibility,
+                "has_sales": has_sales,
             }.items()
             if v is not None
         }
@@ -1814,6 +2147,16 @@ class AsyncProducts:
             SearchProductsRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        min_price: int | None | NotGiven = NOT_GIVEN,
+        max_price: int | None | NotGiven = NOT_GIVEN,
+        stock: Stock | str | None | NotGiven = NOT_GIVEN,
+        visibility: builtins.list[
+            SdkSearchProductsRequestApplicationJsonVisibility | str
+        ]
+        | None = None,
+        has_sales: bool | None | NotGiven = NOT_GIVEN,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -1823,13 +2166,20 @@ class AsyncProducts:
     ) -> AsyncPage[SearchProductsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search products
 
-        Search products using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search your store's products by title and narrow them by price, stock, visibility, or sales, 15 per page by default. Send the filters in the JSON body. Products support no `filters` or `sort` entries: any entry returns `422`. A filter value that is not valid, such as an unknown `stock` state or a `min_price` above `max_price`, returns `422` on that field. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            filters: The filters.
-            sort: The sort.
+            filters: Not supported for products: no field can be filtered this way, so any entry returns `422` on `filters`. Use the price, stock, visibility, and sales fields instead.
+            sort: Not supported for products: any entry returns `422` on `sort`.
             search: The search.
-            includes: The includes.
+            includes: Only `variants` is accepted, and variants are always included.
+            min_price: Only products whose every priced variant costs at least this much, in integer minor units of that variant's own currency: `999` means $9.99 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter. Must not be greater than `max_price`.
+            max_price: Only products whose every priced variant costs at most this much, in integer minor units of that variant's own currency: `2500` means $25.00 for a USD variant. Draft variants count. A product without a priced variant never matches a price filter.
+            stock: Filter by stock, draft variants included. `in_stock`: at least one variant can be bought (unlimited stock, or at least its minimum purchase quantity left). `sold_out`: no variant can be bought. `any_variant_sold_out`: at least one variant with a stock count is sold out. `limited`: at least one variant has a stock count. `unlimited`: no variant has a stock count.
+            visibility: Only products with one of these visibilities. A single string such as `"HIDDEN"` is also accepted.
+            has_sales: `true` for products with at least one completed sale, `false` for products without one. Only purchase line items with status `COMPLETED` count, so pending or refunded ones do not.
+            with_drafts: Include draft products alongside published products.
+            only_drafts: Return only draft products.
             limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
@@ -1889,9 +2239,20 @@ class AsyncProducts:
                 "includes": [item.to_dict() for item in includes]
                 if includes is not None
                 else None,
+                "visibility": visibility,
+                "with_drafts": with_drafts,
+                "only_drafts": only_drafts,
             }.items()
             if v is not None
         }
+        if not isinstance(min_price, NotGiven):
+            body["min_price"] = min_price
+        if not isinstance(max_price, NotGiven):
+            body["max_price"] = max_price
+        if not isinstance(stock, NotGiven):
+            body["stock"] = enum_value(stock) if stock is not None else None
+        if not isinstance(has_sales, NotGiven):
+            body["has_sales"] = has_sales
         params = {
             k: v
             for k, v in {
@@ -2152,5 +2513,273 @@ class AsyncProducts:
             method="delete",
             path=("v2", "products", "batch"),
             body=body,
+            request_options=request_options,
+        )
+
+    async def publish(
+        self,
+        product: int,
+        *,
+        visibility: CatalogVisibility | str | None = None,
+        variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductResponseValue200ApplicationJson:
+        """Publish a product
+
+        Publish a draft product so customers can buy it. Works for normal products, bundles, add-ons, credits products, booking products, and courses. Each is checked as saved, the way its dashboard editor checks it before publishing, and nothing else about the product changes. A normal product needs a description and at least one published variant, and every variant that will be on sale needs a title, a description of at least 5 characters, a working delivery (for example an uploaded file for a download), a price, and payment methods enabled for the store that can take that currency. With exactly one variant, that variant is published with the product. With several, send the draft variants to publish with it in `variant_ids`; the others stay drafts. Publishing a subscription variant also creates its billing plans with the payment providers. A booking product publishes its one option with it; with several options, publish at least one with `POST /v2/products/{product}/variants/{variant}/publish` first, and the other options keep their own state. A bundle needs at least one product in it. A course is published with `visibility`, or with its saved visibility when you leave it out; `PUBLIC` also needs a ready promo video and at least one published lesson. A subscription-priced course cannot be published here. Publishing does not change a normal product's `visibility`: a product that is not `PUBLIC` is published but stays off the storefront listing. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: once the product is published, another call changes nothing and returns `422` with `The product is already published.` on `product`. Every refusal returns `422`. `visibility` is accepted only for a course and `variant_ids` only for a normal product; each is otherwise refused on that field, and `variant_ids.{i}` names an ID that is not a variant of this product. Everything else is on `product`, with one sentence per thing the product still needs. One `product` refusal comes after the product was published: when a payment provider refuses to create a subscription billing plan, the product and its variants are already published and the message is the provider's reason. Retrieve the product before trying again. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            visibility: The visibility.
+            variant_ids: Normal products only. IDs of this product's draft variants to publish with it. Needed when the product has several variants and none is published yet; a single variant is published anyway. Draft variants you leave out stay drafts.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPublishProductResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "publishProduct",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(variant_ids, NotGiven):
+            body["variant_ids"] = variant_ids
+        _validate_model(
+            body,
+            {
+                "name": "SdkPublishProductRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                    "variant_ids": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "array",
+                            "items": {"kind": "primitive", "type": "integer"},
+                            "constraints": {"uniqueItems": True},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "publish"),
+            body=body,
+            model=SdkPublishProductResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def duplicate(
+        self,
+        product: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductResponseValue201ApplicationJson:
+        """Duplicate a product
+
+        Copy a normal product, bundle, add-on, credits product, or booking product within the same store and return the copy. Courses cannot be duplicated. The copy is titled `(Copy)`, `(Copy 2)`, and so on, with a matching `-copy` slug, and keeps every other product setting, including its images, `visibility`, and draft state. A copy of a published product is therefore on sale straight away. It gets no place in the product order or in a section. A normal product's variants are copied with their settings and downloadable files, except subscription variants. A bundle's variant is copied with the products in it, an add-on's with its downloadable files and the products it is offered with, a credits product's with its rate tiers, and a booking product's options, except subscription options, with their schedules. Never copied: sales, reviews, appointments, serial codes, issued licence keys, and group membership. A copied variant that delivers serial codes gets a stock of `0`, so it shows as sold out until you add codes. Requires the `listing` API-key ability and the `listing` permission in your team role. Not safe to retry blindly: every call creates another copy. If a response is lost, list your products and look for the copy before trying again. A course, or a product with nothing to copy (only subscription variants), returns `422` on `product`. A product that changed while the copy was being made also returns `422` on `product`; nothing was copied. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkDuplicateProductResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "duplicateProduct",
+        }
+        return await self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "duplicate"),
+            model=SdkDuplicateProductResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def move(
+        self,
+        product: int,
+        *,
+        position: int,
+        expected_position: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMoveProductResponseValue200ApplicationJson:
+        """Move a product
+
+        Move a normal product to a position in your store's product order, shifting the products in between by one. Positions run from `1` to the number of normal products, drafts included; a product's position is its `order`. Gaps in the stored order are closed first. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: moving a product to the position it already has changes nothing. Send `expected_position` with the position you last read to refuse the move when someone else moved the product in the meantime. A position past the end returns `422` on `position` with the allowed range, a product that is no longer at `expected_position` returns `422` on `expected_position` with its current position, and a listing that is not a normal product returns `422` on `product`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            position: The new position, where `1` is first. At most the number of normal products in the store, drafts included.
+            expected_position: The position you last read for this product (its `order`). The move is refused when the product is no longer there.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkMoveProductResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "moveProduct",
+        }
+        body: dict[str, Any] = {
+            "position": position,
+        }
+        if not isinstance(expected_position, NotGiven):
+            body["expected_position"] = expected_position
+        _validate_model(
+            body,
+            {
+                "name": "SdkMoveProductRequestApplicationJson",
+                "required": ["position"],
+                "properties": {
+                    "position": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1},
+                    },
+                    "expected_position": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "products", str(product), "position"),
+            body=body,
+            model=SdkMoveProductResponseValue200ApplicationJson,
             request_options=request_options,
         )

@@ -17,6 +17,7 @@ from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.upsell_offers.models import (
     CreateUpsellOfferRequestApplicationJsonPropertyItemsItem,
     SdkCreateUpsellOfferResponseValue201ApplicationJson,
+    SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson,
     SdkGetUpsellOfferResponseValue200ApplicationJson,
     SdkReplaceUpsellOfferResponseValue200ApplicationJson,
     SdkUpdateUpsellOfferResponseValue200ApplicationJson,
@@ -146,6 +147,35 @@ class TestUpsellOffers:
         request = httpx_mock.get_request()
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/upsell-offers/test_upsellOffer")
+
+    def test_get_performance(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_upsell_offer_performance_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.upsell_offers.get_performance("test_upsellOffer")
+        assert isinstance(
+            result, SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/upsell-offers/test_upsellOffer/performance"
+        )
+
+    def test_get_performance_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_upsell_offer_performance_response_value_200_application_json.json"
+            )
+        )
+        sellapp_sdk.upsell_offers.get_performance(
+            "test_upsellOffer", with_trashed=True, only_trashed=True
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["with_trashed"] == "true"
+        assert request.url.params["only_trashed"] == "true"
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -370,6 +400,41 @@ class TestAsyncUpsellOffers:
         request = httpx_mock.get_request()
         assert request.method == "DELETE"
         assert request.url.path.endswith("/v2/upsell-offers/test_upsellOffer")
+
+    @pytest.mark.asyncio
+    async def test_get_performance(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_upsell_offer_performance_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.upsell_offers.get_performance(
+            "test_upsellOffer"
+        )
+        assert isinstance(
+            result, SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/upsell-offers/test_upsellOffer/performance"
+        )
+
+    @pytest.mark.asyncio
+    async def test_get_performance_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_upsell_offer_performance_response_value_200_application_json.json"
+            )
+        )
+        await async_sellapp_sdk.upsell_offers.get_performance(
+            "test_upsellOffer", with_trashed=True, only_trashed=True
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["with_trashed"] == "true"
+        assert request.url.params["only_trashed"] == "true"
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

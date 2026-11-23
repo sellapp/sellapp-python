@@ -115,7 +115,17 @@ class ConnectedWorkflowTests(unittest.TestCase):
                         return send(
                             200,
                             dict(
-                                data=[] if page == 2 else [fixture["product"]["data"]],
+                                data=[]
+                                if page == 2
+                                else [
+                                    dict(
+                                        fixture["product"]["data"],
+                                        price_range=None,
+                                        stock=0,
+                                        sales=0,
+                                        sold_out=True,
+                                    )
+                                ],
                                 meta=dict(current_page=page, last_page=3),
                                 links=dict(
                                     next=f"?page={page + 1}" if page < 3 else None

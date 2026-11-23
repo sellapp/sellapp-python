@@ -524,6 +524,9 @@ def search(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -546,6 +549,9 @@ def search(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]`.
@@ -752,6 +758,183 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.e
 result = client.product_variants.batch_delete(
     product=1,
     resources=[1, 2]
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## publish
+
+Publish a product variant
+
+[API reference](https://sell.app/docs/api/product-variants/publish-a-product-variant) · Effect: **consequential**
+
+```python
+def publish(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductVariantResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| variant | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkPublishProductVariantResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.product_variants.publish(
+    product=11,
+    variant=12
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## duplicate
+
+Duplicate a product variant
+
+[API reference](https://sell.app/docs/api/product-variants/duplicate-a-product-variant) · Effect: **write**
+
+```python
+def duplicate(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductVariantResponseValue201ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| variant | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkDuplicateProductVariantResponseValue201ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.product_variants.duplicate(
+    product=1,
+    variant=2
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 201, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## reorder
+
+Reorder product variants
+
+[API reference](https://sell.app/docs/api/product-variants/reorder-product-variants) · Effect: **consequential**
+
+```python
+def reorder(
+        self,
+        product: int,
+        *,
+        variant_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
+    ) -> SdkReorderProductVariantsResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| variant_ids | `builtins.list[int]` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkReorderProductVariantsResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.product_variants.reorder(
+    product=1,
+    variant_ids=[2, 1]
 )
 print(result)
 ```

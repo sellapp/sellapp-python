@@ -14,14 +14,33 @@ from sellapp_sdk.common.models.dark_mode import DarkMode
 
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto,
     ReplaceMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
+    SdkGetCheckoutSettingsResponseValue200ApplicationJson,
+    SdkGetCustomerEmailSettingsResponseValue200ApplicationJson,
+    SdkGetPersonalizationSettingsResponseValue200ApplicationJson,
+    SdkGetStoreAlertSettingsResponseValue200ApplicationJson,
     SdkGetStoreSettingsResponseValue200ApplicationJson,
+    SdkGetTaxSettingsResponseValue200ApplicationJson,
     SdkReplaceAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkReplaceCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkReplaceGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkReplaceMarketingSettingsResponseValue200ApplicationJson,
+    SdkReplacePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkReplaceTaxSettingsResponseValue200ApplicationJson,
     SdkUpdateAnalyticsSettingsResponseValue200ApplicationJson,
+    SdkUpdateCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson,
+    SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson,
     SdkUpdateGeneralStoreSettingsResponseValue200ApplicationJson,
     SdkUpdateMarketingSettingsResponseValue200ApplicationJson,
+    SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson,
+    SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson,
+    SdkUpdateTaxSettingsResponseValue200ApplicationJson,
+    UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto,
     UpdateMarketingSettingsRequestApplicationJsonPropertyAbandonedCart,
 )
 
@@ -780,6 +799,1826 @@ class StoreSettings:
             request_options=request_options,
         )
 
+    def get_checkout(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCheckoutSettingsResponseValue200ApplicationJson:
+        """Retrieve checkout settings
+
+        Get your store's checkout settings: the shopping cart, whether checkout asks for an email, fraud controls, the minimum order total, the billing descriptor, the checkout rate limits, and the crypto checkout values when the store takes crypto through SellApp's crypto processor. The response body can be sent back to `PUT /v2/store/settings/checkout` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCheckoutSettings",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "checkout"),
+            model=SdkGetCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_checkout(
+        self,
+        *,
+        shopping_cart_enabled: bool,
+        customer_email_required: bool,
+        allow_vpn_purchases: bool,
+        blacklist_on_dispute: bool,
+        minimum_spend: str | None,
+        billing_descriptor: str | None,
+        attempts_per_customer: int,
+        attempts_per_ip: int | None,
+        attempts_per_email: int | None,
+        attempts_per_fingerprint: int | None,
+        rate_limit_window_seconds: int,
+        crypto: ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCheckoutSettingsResponseValue200ApplicationJson:
+        """Update checkout settings
+
+        Replace all eleven checkout settings. Every field except `crypto` is required; send `null` to remove a nullable one. A missing field returns `422` and nothing is saved. The body of `GET /v2/store/settings/checkout`, including `crypto`, can be sent back unchanged. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            shopping_cart_enabled: Whether customers can add several products to a cart and buy them in one checkout. `false` turns the storefront cart off.
+            customer_email_required: Whether checkout asks customers for an email address. With `false`, checkout does not ask, and delivery and payment emails cannot reach a customer who left none.
+            allow_vpn_purchases: Whether customers who use a VPN or a proxy can buy.
+            blacklist_on_dispute: Whether a customer's email address and IP address are added to your blacklist when they open a payment dispute.
+            minimum_spend: The smallest order total, VAT included, that customers can check out with, as a decimal string in the order's currency: `"12.50"` on a USD order means $12.50. At least `1`; digits with an optional decimal part, no sign or exponent. Send `null` or `"0"` to remove the minimum; it then reads `null`.
+            billing_descriptor: The purchase name customers see while they check out, up to 20 characters. `null` uses the default, `SellApp Order`.
+            attempts_per_customer: How many checkout attempts one customer can make within the window, counted per IP address and email pair, or per checkout session fingerprint when checkout does not ask for an email. 1 to 100000; the default is `5`. This limit cannot be removed.
+            attempts_per_ip: How many checkout attempts can come from one IP address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_email: How many checkout attempts can use one customer email address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_fingerprint: How many checkout attempts can come from one checkout session fingerprint (a browser identifier) within the window. 1 to 100000; `null` turns this limit off.
+            rate_limit_window_seconds: How long each checkout limit counts attempts before allowing them again, in seconds: 60 (one minute) to 604800 (seven days). The default is `3600` (one hour). Attempts are counted per store.
+            crypto: The crypto.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            "shopping_cart_enabled": shopping_cart_enabled,
+            "customer_email_required": customer_email_required,
+            "allow_vpn_purchases": allow_vpn_purchases,
+            "blacklist_on_dispute": blacklist_on_dispute,
+            "minimum_spend": minimum_spend,
+            "billing_descriptor": billing_descriptor,
+            "attempts_per_customer": attempts_per_customer,
+            "attempts_per_ip": attempts_per_ip,
+            "attempts_per_email": attempts_per_email,
+            "attempts_per_fingerprint": attempts_per_fingerprint,
+            "rate_limit_window_seconds": rate_limit_window_seconds,
+        }
+        if not isinstance(crypto, NotGiven):
+            body["crypto"] = crypto.to_dict() if crypto is not None else None
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCheckoutSettingsRequestApplicationJson",
+                "required": [
+                    "shopping_cart_enabled",
+                    "customer_email_required",
+                    "allow_vpn_purchases",
+                    "blacklist_on_dispute",
+                    "minimum_spend",
+                    "billing_descriptor",
+                    "attempts_per_customer",
+                    "attempts_per_ip",
+                    "attempts_per_email",
+                    "attempts_per_fingerprint",
+                    "rate_limit_window_seconds",
+                ],
+                "properties": {
+                    "shopping_cart_enabled": {"kind": "primitive", "type": "boolean"},
+                    "customer_email_required": {"kind": "primitive", "type": "boolean"},
+                    "allow_vpn_purchases": {"kind": "primitive", "type": "boolean"},
+                    "blacklist_on_dispute": {"kind": "primitive", "type": "boolean"},
+                    "minimum_spend": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"pattern": "^\\d+(\\.\\d+)?$"},
+                        },
+                    },
+                    "billing_descriptor": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 20},
+                        },
+                    },
+                    "attempts_per_customer": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 100000},
+                    },
+                    "attempts_per_ip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_fingerprint": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "rate_limit_window_seconds": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 60, "maximum": 604800},
+                    },
+                    "crypto": {"kind": "nullable", "inner": {"kind": "any"}},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "checkout"),
+            body=body,
+            model=SdkReplaceCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_checkout(
+        self,
+        *,
+        shopping_cart_enabled: bool | None = None,
+        customer_email_required: bool | None = None,
+        allow_vpn_purchases: bool | None = None,
+        blacklist_on_dispute: bool | None = None,
+        minimum_spend: str | None | NotGiven = NOT_GIVEN,
+        billing_descriptor: str | None | NotGiven = NOT_GIVEN,
+        attempts_per_customer: int | None = None,
+        attempts_per_ip: int | None | NotGiven = NOT_GIVEN,
+        attempts_per_email: int | None | NotGiven = NOT_GIVEN,
+        attempts_per_fingerprint: int | None | NotGiven = NOT_GIVEN,
+        rate_limit_window_seconds: int | None = None,
+        crypto: UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCheckoutSettingsResponseValue200ApplicationJson:
+        """Update checkout settings
+
+        Change only the checkout settings you send and keep the others, including one someone else saved while your request was in flight. Send `null` to remove `minimum_spend`, `billing_descriptor`, `attempts_per_ip`, `attempts_per_email` or `attempts_per_fingerprint`. `crypto` is read-only here; change it with `PATCH /v2/store/settings/checkout/crypto`. A refused value returns `422` on the field name of this endpoint, such as `rate_limit_window_seconds`, and nothing is saved. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            shopping_cart_enabled: Whether customers can add several products to a cart and buy them in one checkout. `false` turns the storefront cart off.
+            customer_email_required: Whether checkout asks customers for an email address. With `false`, checkout does not ask, and delivery and payment emails cannot reach a customer who left none.
+            allow_vpn_purchases: Whether customers who use a VPN or a proxy can buy.
+            blacklist_on_dispute: Whether a customer's email address and IP address are added to your blacklist when they open a payment dispute.
+            minimum_spend: The smallest order total, VAT included, that customers can check out with, as a decimal string in the order's currency: `"12.50"` on a USD order means $12.50. At least `1`; digits with an optional decimal part, no sign or exponent. Send `null` or `"0"` to remove the minimum; it then reads `null`.
+            billing_descriptor: The purchase name customers see while they check out, up to 20 characters. `null` uses the default, `SellApp Order`.
+            attempts_per_customer: How many checkout attempts one customer can make within the window, counted per IP address and email pair, or per checkout session fingerprint when checkout does not ask for an email. 1 to 100000; the default is `5`. This limit cannot be removed.
+            attempts_per_ip: How many checkout attempts can come from one IP address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_email: How many checkout attempts can use one customer email address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_fingerprint: How many checkout attempts can come from one checkout session fingerprint (a browser identifier) within the window. 1 to 100000; `null` turns this limit off.
+            rate_limit_window_seconds: How long each checkout limit counts attempts before allowing them again, in seconds: 60 (one minute) to 604800 (seven days). The default is `3600` (one hour). Attempts are counted per store.
+            crypto: The crypto.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "shopping_cart_enabled": shopping_cart_enabled,
+                "customer_email_required": customer_email_required,
+                "allow_vpn_purchases": allow_vpn_purchases,
+                "blacklist_on_dispute": blacklist_on_dispute,
+                "attempts_per_customer": attempts_per_customer,
+                "rate_limit_window_seconds": rate_limit_window_seconds,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(minimum_spend, NotGiven):
+            body["minimum_spend"] = minimum_spend
+        if not isinstance(billing_descriptor, NotGiven):
+            body["billing_descriptor"] = billing_descriptor
+        if not isinstance(attempts_per_ip, NotGiven):
+            body["attempts_per_ip"] = attempts_per_ip
+        if not isinstance(attempts_per_email, NotGiven):
+            body["attempts_per_email"] = attempts_per_email
+        if not isinstance(attempts_per_fingerprint, NotGiven):
+            body["attempts_per_fingerprint"] = attempts_per_fingerprint
+        if not isinstance(crypto, NotGiven):
+            body["crypto"] = crypto.to_dict() if crypto is not None else None
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCheckoutSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "shopping_cart_enabled": {"kind": "primitive", "type": "boolean"},
+                    "customer_email_required": {"kind": "primitive", "type": "boolean"},
+                    "allow_vpn_purchases": {"kind": "primitive", "type": "boolean"},
+                    "blacklist_on_dispute": {"kind": "primitive", "type": "boolean"},
+                    "minimum_spend": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"pattern": "^\\d+(\\.\\d+)?$"},
+                        },
+                    },
+                    "billing_descriptor": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 20},
+                        },
+                    },
+                    "attempts_per_customer": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 100000},
+                    },
+                    "attempts_per_ip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_fingerprint": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "rate_limit_window_seconds": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 60, "maximum": 604800},
+                    },
+                    "crypto": {"kind": "nullable", "inner": {"kind": "any"}},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "checkout"),
+            body=body,
+            model=SdkUpdateCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_taxes(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetTaxSettingsResponseValue200ApplicationJson:
+        """Retrieve tax settings
+
+        Get whether checkout collects VAT, whether your prices include it, and whether checkout asks for billing details. The response body can be sent back to `PUT /v2/store/settings/taxes` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getTaxSettings",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "taxes"),
+            model=SdkGetTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_taxes(
+        self,
+        *,
+        vat_enabled: bool,
+        vat_inclusive_pricing: bool,
+        collect_billing_details: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceTaxSettingsResponseValue200ApplicationJson:
+        """Update tax settings
+
+        Replace all three tax settings; every field is required. A missing field returns `422` and nothing is saved. `vat_enabled: true` while Stripe Tax is on returns `422` on `vat_enabled` and saves nothing: turn Stripe Tax off in the dashboard first. When Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on also turns Stripe Tax off. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            vat_enabled: Whether checkout collects VAT from customers. VAT and Stripe Tax cannot both be on: turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` with `Disable Stripe Tax before enabling Sell VAT.` and saves nothing. Turn Stripe Tax off in **Settings > Taxes** in the dashboard first. If Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on succeeds and turns Stripe Tax off as well.
+            vat_inclusive_pricing: Whether your product prices already include VAT instead of VAT being added on top. Always `false` while VAT is off, and turning `vat_enabled` off turns it off too. `true` while VAT stays off returns `422` on `vat_inclusive_pricing`: send `"vat_enabled": true` in the same request.
+            collect_billing_details: Whether checkout asks customers for their billing details.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceTaxSettings",
+        }
+        body: dict[str, Any] = {
+            "vat_enabled": vat_enabled,
+            "vat_inclusive_pricing": vat_inclusive_pricing,
+            "collect_billing_details": collect_billing_details,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceTaxSettingsRequestApplicationJson",
+                "required": [
+                    "vat_enabled",
+                    "vat_inclusive_pricing",
+                    "collect_billing_details",
+                ],
+                "properties": {
+                    "vat_enabled": {"kind": "primitive", "type": "boolean"},
+                    "vat_inclusive_pricing": {"kind": "primitive", "type": "boolean"},
+                    "collect_billing_details": {"kind": "primitive", "type": "boolean"},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "taxes"),
+            body=body,
+            model=SdkReplaceTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_taxes(
+        self,
+        *,
+        vat_enabled: bool | None = None,
+        vat_inclusive_pricing: bool | None = None,
+        collect_billing_details: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateTaxSettingsResponseValue200ApplicationJson:
+        """Update tax settings
+
+        Change only the tax settings you send and keep the others. Turning VAT off also turns VAT-inclusive pricing off. Asking for VAT-inclusive pricing while VAT stays off returns `422` on `vat_inclusive_pricing` and saves nothing. Turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` and saves nothing: turn Stripe Tax off in the dashboard first. When Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on also turns Stripe Tax off. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            vat_enabled: Whether checkout collects VAT from customers. VAT and Stripe Tax cannot both be on: turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` with `Disable Stripe Tax before enabling Sell VAT.` and saves nothing. Turn Stripe Tax off in **Settings > Taxes** in the dashboard first. If Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on succeeds and turns Stripe Tax off as well.
+            vat_inclusive_pricing: Whether your product prices already include VAT instead of VAT being added on top. Always `false` while VAT is off, and turning `vat_enabled` off turns it off too. `true` while VAT stays off returns `422` on `vat_inclusive_pricing`: send `"vat_enabled": true` in the same request.
+            collect_billing_details: Whether checkout asks customers for their billing details.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateTaxSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "vat_enabled": vat_enabled,
+                "vat_inclusive_pricing": vat_inclusive_pricing,
+                "collect_billing_details": collect_billing_details,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateTaxSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "vat_enabled": {"kind": "primitive", "type": "boolean"},
+                    "vat_inclusive_pricing": {"kind": "primitive", "type": "boolean"},
+                    "collect_billing_details": {"kind": "primitive", "type": "boolean"},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "taxes"),
+            body=body,
+            model=SdkUpdateTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_customer_emails(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Retrieve customer email settings
+
+        Get which automatic emails your customers get: the delivery email after they pay, and the email asking them to pay when a subscription payment cannot be collected. The address these emails come from is managed with `/v2/store/settings/sender-email`. The response body can be sent back to `PUT /v2/store/settings/customer-emails` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCustomerEmailSettings",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "customer-emails"),
+            model=SdkGetCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_customer_emails(
+        self,
+        *,
+        send_delivery_email: bool,
+        send_payment_failure_email: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Update customer email settings
+
+        Set both customer emails; both fields are required. A missing field returns `422` and nothing is saved. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            send_delivery_email: Whether customers automatically get an email with what they bought after paying. Turn it off when you deliver to customers yourself.
+            send_payment_failure_email: Whether customers get an email with a way to pay when your payment processor cannot collect a subscription payment. Turn it off when your processor already emails them.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCustomerEmailSettings",
+        }
+        body: dict[str, Any] = {
+            "send_delivery_email": send_delivery_email,
+            "send_payment_failure_email": send_payment_failure_email,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCustomerEmailSettingsRequestApplicationJson",
+                "required": ["send_delivery_email", "send_payment_failure_email"],
+                "properties": {
+                    "send_delivery_email": {"kind": "primitive", "type": "boolean"},
+                    "send_payment_failure_email": {
+                        "kind": "primitive",
+                        "type": "boolean",
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "customer-emails"),
+            body=body,
+            model=SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_customer_emails(
+        self,
+        *,
+        send_delivery_email: bool | None = None,
+        send_payment_failure_email: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Update customer email settings
+
+        Turn the customer emails you send on or off and keep the other one. Takes effect for emails sent after the change. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            send_delivery_email: Whether customers automatically get an email with what they bought after paying. Turn it off when you deliver to customers yourself.
+            send_payment_failure_email: Whether customers get an email with a way to pay when your payment processor cannot collect a subscription payment. Turn it off when your processor already emails them.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCustomerEmailSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "send_delivery_email": send_delivery_email,
+                "send_payment_failure_email": send_payment_failure_email,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCustomerEmailSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "send_delivery_email": {"kind": "primitive", "type": "boolean"},
+                    "send_payment_failure_email": {
+                        "kind": "primitive",
+                        "type": "boolean",
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "customer-emails"),
+            body=body,
+            model=SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_store_alerts(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetStoreAlertSettingsResponseValue200ApplicationJson:
+        """Retrieve store alert settings
+
+        Get whether the store owner gets an email for each sale. Other alerts go to notification channels (`/v2/store/notification-channels`) and to the dashboard notifications (`/v2/notifications`). The response body can be sent back to `PUT /v2/store/settings/store-alerts` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getStoreAlertSettings",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "store-alerts"),
+            model=SdkGetStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_store_alerts(
+        self,
+        *,
+        sale_emails_enabled: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson:
+        """Update store alert settings
+
+        Set the sale emails to the store owner; `sale_emails_enabled` is required. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            sale_emails_enabled: Whether the store owner gets an email for each sale.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceStoreAlertSettings",
+        }
+        body: dict[str, Any] = {
+            "sale_emails_enabled": sale_emails_enabled,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceStoreAlertSettingsRequestApplicationJson",
+                "required": ["sale_emails_enabled"],
+                "properties": {
+                    "sale_emails_enabled": {"kind": "primitive", "type": "boolean"}
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "store-alerts"),
+            body=body,
+            model=SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_store_alerts(
+        self,
+        *,
+        sale_emails_enabled: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson:
+        """Update store alert settings
+
+        Turn the sale emails to the store owner on or off. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            sale_emails_enabled: Whether the store owner gets an email for each sale.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateStoreAlertSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "sale_emails_enabled": sale_emails_enabled,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateStoreAlertSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "sale_emails_enabled": {"kind": "primitive", "type": "boolean"}
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "store-alerts"),
+            body=body,
+            model=SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def get_personalization(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetPersonalizationSettingsResponseValue200ApplicationJson:
+        """Retrieve personalization settings
+
+        Get the details customers see from your store: the support and Trustpilot addresses, the sender name and custom sender email of customer emails, the business details printed on invoices, and the Back button link of product and checkout pages. The response body can be sent back to `PUT /v2/store/settings/personalization` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetPersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getPersonalizationSettings",
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "personalization"),
+            model=SdkGetPersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_personalization(
+        self,
+        *,
+        support_email: str | None,
+        trustpilot_email: str | None,
+        sender_name: str | None,
+        store_address: str | None,
+        store_city: str | None,
+        store_state: str | None,
+        store_zip: str | None,
+        store_country: str | None,
+        store_tax: str | None,
+        back_link_label: str | None,
+        back_link_url: str | None,
+        sender_email: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplacePersonalizationSettingsResponseValue200ApplicationJson:
+        """Update personalization settings
+
+        Replace every personalization setting. All fields except `sender_email` are required; send `null` to remove one. A missing field returns `422` and nothing is saved. The body of `GET /v2/store/settings/personalization`, including `sender_email`, can be sent back unchanged. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            support_email: The address customers can write to for support.
+            trustpilot_email: Your Trustpilot invitation address. It receives a blind copy of every delivery email, including the link to what the customer bought, so Trustpilot can invite the customer to leave a review.
+            sender_name: The name customer emails are sent from: letters, digits, spaces and `. - _ +`, up to 75 characters. It is used only while the store sends from its own verified sender email. A store without a custom sender email cannot keep one: sent with other changes it is ignored, and sent alone it returns `422` on `sender_name`.
+            sender_email: The store's custom sender email, or `null` when it has none. Read-only here: send it back unchanged or leave it out. A different value returns `422` on `sender_email`; set it up or remove it with `/v2/store/settings/sender-email`.
+            store_address: Street address printed on invoices.
+            store_city: City printed on invoices.
+            store_state: State or region printed on invoices.
+            store_zip: Postal code printed on invoices.
+            store_country: Country printed on invoices, as text.
+            store_tax: Tax or VAT details printed on invoices, such as `VAT GB123456789`.
+            back_link_label: Text of the Back button on product and checkout pages. A return link needs both a label and a URL: a change that leaves one of them empty returns `422` on the empty one. Send `null` for both to remove the link; the Back button then goes to the store's home page.
+            back_link_url: Where the Back button on product and checkout pages goes, as a full URL. Needs `back_link_label`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplacePersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replacePersonalizationSettings",
+        }
+        body: dict[str, Any] = {
+            "support_email": support_email,
+            "trustpilot_email": trustpilot_email,
+            "sender_name": sender_name,
+            "store_address": store_address,
+            "store_city": store_city,
+            "store_state": store_state,
+            "store_zip": store_zip,
+            "store_country": store_country,
+            "store_tax": store_tax,
+            "back_link_label": back_link_label,
+            "back_link_url": back_link_url,
+        }
+        if not isinstance(sender_email, NotGiven):
+            body["sender_email"] = sender_email
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplacePersonalizationSettingsRequestApplicationJson",
+                "required": [
+                    "support_email",
+                    "trustpilot_email",
+                    "sender_name",
+                    "store_address",
+                    "store_city",
+                    "store_state",
+                    "store_zip",
+                    "store_country",
+                    "store_tax",
+                    "back_link_label",
+                    "back_link_url",
+                ],
+                "properties": {
+                    "support_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "trustpilot_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "sender_name": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "maxLength": 75,
+                                "pattern": "^[a-zA-Z0-9 .\\-_+]*$",
+                            },
+                        },
+                    },
+                    "sender_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "store_address": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_city": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_state": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_zip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_country": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_tax": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_label": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "personalization"),
+            body=body,
+            model=SdkReplacePersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_personalization(
+        self,
+        *,
+        support_email: str | None | NotGiven = NOT_GIVEN,
+        trustpilot_email: str | None | NotGiven = NOT_GIVEN,
+        sender_name: str | None | NotGiven = NOT_GIVEN,
+        sender_email: str | None | NotGiven = NOT_GIVEN,
+        store_address: str | None | NotGiven = NOT_GIVEN,
+        store_city: str | None | NotGiven = NOT_GIVEN,
+        store_state: str | None | NotGiven = NOT_GIVEN,
+        store_zip: str | None | NotGiven = NOT_GIVEN,
+        store_country: str | None | NotGiven = NOT_GIVEN,
+        store_tax: str | None | NotGiven = NOT_GIVEN,
+        back_link_label: str | None | NotGiven = NOT_GIVEN,
+        back_link_url: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson:
+        """Update personalization settings
+
+        Change only the personalization settings you send and keep the others. Send `null` to remove one. A request with no field this endpoint knows returns `200` with the current settings and saves nothing. A return link needs both `back_link_label` and `back_link_url`: a change that leaves one empty returns `422` on that field. `sender_email` is read-only here. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            support_email: The address customers can write to for support.
+            trustpilot_email: Your Trustpilot invitation address. It receives a blind copy of every delivery email, including the link to what the customer bought, so Trustpilot can invite the customer to leave a review.
+            sender_name: The name customer emails are sent from: letters, digits, spaces and `. - _ +`, up to 75 characters. It is used only while the store sends from its own verified sender email. A store without a custom sender email cannot keep one: sent with other changes it is ignored, and sent alone it returns `422` on `sender_name`.
+            sender_email: The store's custom sender email, or `null` when it has none. Read-only here: send it back unchanged or leave it out. A different value returns `422` on `sender_email`; set it up or remove it with `/v2/store/settings/sender-email`.
+            store_address: Street address printed on invoices.
+            store_city: City printed on invoices.
+            store_state: State or region printed on invoices.
+            store_zip: Postal code printed on invoices.
+            store_country: Country printed on invoices, as text.
+            store_tax: Tax or VAT details printed on invoices, such as `VAT GB123456789`.
+            back_link_label: Text of the Back button on product and checkout pages. A return link needs both a label and a URL: a change that leaves one of them empty returns `422` on the empty one. Send `null` for both to remove the link; the Back button then goes to the store's home page.
+            back_link_url: Where the Back button on product and checkout pages goes, as a full URL. Needs `back_link_label`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updatePersonalizationSettings",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(support_email, NotGiven):
+            body["support_email"] = support_email
+        if not isinstance(trustpilot_email, NotGiven):
+            body["trustpilot_email"] = trustpilot_email
+        if not isinstance(sender_name, NotGiven):
+            body["sender_name"] = sender_name
+        if not isinstance(sender_email, NotGiven):
+            body["sender_email"] = sender_email
+        if not isinstance(store_address, NotGiven):
+            body["store_address"] = store_address
+        if not isinstance(store_city, NotGiven):
+            body["store_city"] = store_city
+        if not isinstance(store_state, NotGiven):
+            body["store_state"] = store_state
+        if not isinstance(store_zip, NotGiven):
+            body["store_zip"] = store_zip
+        if not isinstance(store_country, NotGiven):
+            body["store_country"] = store_country
+        if not isinstance(store_tax, NotGiven):
+            body["store_tax"] = store_tax
+        if not isinstance(back_link_label, NotGiven):
+            body["back_link_label"] = back_link_label
+        if not isinstance(back_link_url, NotGiven):
+            body["back_link_url"] = back_link_url
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdatePersonalizationSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "support_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "trustpilot_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "sender_name": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "maxLength": 75,
+                                "pattern": "^[a-zA-Z0-9 .\\-_+]*$",
+                            },
+                        },
+                    },
+                    "sender_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "store_address": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_city": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_state": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_zip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_country": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_tax": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_label": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "personalization"),
+            body=body,
+            model=SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def replace_crypto_checkout(
+        self,
+        *,
+        underpaid_percentage: int,
+        minimum_confirmations: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson:
+        """Update crypto checkout settings
+
+        Replace both crypto checkout values, for a store that takes crypto through SellApp's crypto processor; `underpaid_percentage` and `minimum_confirmations` are required. SellApp sends the changed values to the crypto processor and saves them only once it accepts them; an unchanged value is not sent. Returns the checkout settings with the new `crypto` values. `422` on `crypto` when the store does not take crypto through SellApp's crypto processor, or when the processor refuses the values; nothing is saved then. `422` on `underpaid_percentage` or `minimum_confirmations` for a value out of range. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            underpaid_percentage: How far short of the amount due, in percent, a crypto payment can be and still count as paid: `2` accepts a payment up to 2% short. 0 to 100.
+            minimum_confirmations: How many blockchain confirmations a crypto payment needs before the order is processed. 1 to 25.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCryptoCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            "underpaid_percentage": underpaid_percentage,
+            "minimum_confirmations": minimum_confirmations,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCryptoCheckoutSettingsRequestApplicationJson",
+                "required": ["underpaid_percentage", "minimum_confirmations"],
+                "properties": {
+                    "underpaid_percentage": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 100},
+                    },
+                    "minimum_confirmations": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 25},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "checkout", "crypto"),
+            body=body,
+            model=SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def update_crypto_checkout(
+        self,
+        *,
+        underpaid_percentage: int | None = None,
+        minimum_confirmations: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson:
+        """Update crypto checkout settings
+
+        Change the crypto checkout values you send, for a store that takes crypto through SellApp's crypto processor. SellApp sends the changed values to the crypto processor and saves them only once it accepts them; an unchanged value is not sent. Returns the checkout settings with the new `crypto` values. `422` on `crypto` when the store does not take crypto through SellApp's crypto processor, or when the processor refuses the values; nothing is saved then. `422` on `underpaid_percentage` or `minimum_confirmations` for a value out of range. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            underpaid_percentage: How far short of the amount due, in percent, a crypto payment can be and still count as paid: `2` accepts a payment up to 2% short. 0 to 100.
+            minimum_confirmations: How many blockchain confirmations a crypto payment needs before the order is processed. 1 to 25.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCryptoCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "underpaid_percentage": underpaid_percentage,
+                "minimum_confirmations": minimum_confirmations,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCryptoCheckoutSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "underpaid_percentage": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 100},
+                    },
+                    "minimum_confirmations": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 25},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "checkout", "crypto"),
+            body=body,
+            model=SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncStoreSettings:
     """Store Settings API resources (async)."""
@@ -1532,5 +3371,1825 @@ class AsyncStoreSettings:
             path=("v2", "store", "settings", "marketing"),
             body=body,
             model=SdkUpdateMarketingSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_checkout(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCheckoutSettingsResponseValue200ApplicationJson:
+        """Retrieve checkout settings
+
+        Get your store's checkout settings: the shopping cart, whether checkout asks for an email, fraud controls, the minimum order total, the billing descriptor, the checkout rate limits, and the crypto checkout values when the store takes crypto through SellApp's crypto processor. The response body can be sent back to `PUT /v2/store/settings/checkout` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCheckoutSettings",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "checkout"),
+            model=SdkGetCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_checkout(
+        self,
+        *,
+        shopping_cart_enabled: bool,
+        customer_email_required: bool,
+        allow_vpn_purchases: bool,
+        blacklist_on_dispute: bool,
+        minimum_spend: str | None,
+        billing_descriptor: str | None,
+        attempts_per_customer: int,
+        attempts_per_ip: int | None,
+        attempts_per_email: int | None,
+        attempts_per_fingerprint: int | None,
+        rate_limit_window_seconds: int,
+        crypto: ReplaceCheckoutSettingsRequestApplicationJsonPropertyCrypto
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCheckoutSettingsResponseValue200ApplicationJson:
+        """Update checkout settings
+
+        Replace all eleven checkout settings. Every field except `crypto` is required; send `null` to remove a nullable one. A missing field returns `422` and nothing is saved. The body of `GET /v2/store/settings/checkout`, including `crypto`, can be sent back unchanged. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            shopping_cart_enabled: Whether customers can add several products to a cart and buy them in one checkout. `false` turns the storefront cart off.
+            customer_email_required: Whether checkout asks customers for an email address. With `false`, checkout does not ask, and delivery and payment emails cannot reach a customer who left none.
+            allow_vpn_purchases: Whether customers who use a VPN or a proxy can buy.
+            blacklist_on_dispute: Whether a customer's email address and IP address are added to your blacklist when they open a payment dispute.
+            minimum_spend: The smallest order total, VAT included, that customers can check out with, as a decimal string in the order's currency: `"12.50"` on a USD order means $12.50. At least `1`; digits with an optional decimal part, no sign or exponent. Send `null` or `"0"` to remove the minimum; it then reads `null`.
+            billing_descriptor: The purchase name customers see while they check out, up to 20 characters. `null` uses the default, `SellApp Order`.
+            attempts_per_customer: How many checkout attempts one customer can make within the window, counted per IP address and email pair, or per checkout session fingerprint when checkout does not ask for an email. 1 to 100000; the default is `5`. This limit cannot be removed.
+            attempts_per_ip: How many checkout attempts can come from one IP address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_email: How many checkout attempts can use one customer email address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_fingerprint: How many checkout attempts can come from one checkout session fingerprint (a browser identifier) within the window. 1 to 100000; `null` turns this limit off.
+            rate_limit_window_seconds: How long each checkout limit counts attempts before allowing them again, in seconds: 60 (one minute) to 604800 (seven days). The default is `3600` (one hour). Attempts are counted per store.
+            crypto: The crypto.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            "shopping_cart_enabled": shopping_cart_enabled,
+            "customer_email_required": customer_email_required,
+            "allow_vpn_purchases": allow_vpn_purchases,
+            "blacklist_on_dispute": blacklist_on_dispute,
+            "minimum_spend": minimum_spend,
+            "billing_descriptor": billing_descriptor,
+            "attempts_per_customer": attempts_per_customer,
+            "attempts_per_ip": attempts_per_ip,
+            "attempts_per_email": attempts_per_email,
+            "attempts_per_fingerprint": attempts_per_fingerprint,
+            "rate_limit_window_seconds": rate_limit_window_seconds,
+        }
+        if not isinstance(crypto, NotGiven):
+            body["crypto"] = crypto.to_dict() if crypto is not None else None
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCheckoutSettingsRequestApplicationJson",
+                "required": [
+                    "shopping_cart_enabled",
+                    "customer_email_required",
+                    "allow_vpn_purchases",
+                    "blacklist_on_dispute",
+                    "minimum_spend",
+                    "billing_descriptor",
+                    "attempts_per_customer",
+                    "attempts_per_ip",
+                    "attempts_per_email",
+                    "attempts_per_fingerprint",
+                    "rate_limit_window_seconds",
+                ],
+                "properties": {
+                    "shopping_cart_enabled": {"kind": "primitive", "type": "boolean"},
+                    "customer_email_required": {"kind": "primitive", "type": "boolean"},
+                    "allow_vpn_purchases": {"kind": "primitive", "type": "boolean"},
+                    "blacklist_on_dispute": {"kind": "primitive", "type": "boolean"},
+                    "minimum_spend": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"pattern": "^\\d+(\\.\\d+)?$"},
+                        },
+                    },
+                    "billing_descriptor": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 20},
+                        },
+                    },
+                    "attempts_per_customer": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 100000},
+                    },
+                    "attempts_per_ip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_fingerprint": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "rate_limit_window_seconds": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 60, "maximum": 604800},
+                    },
+                    "crypto": {"kind": "nullable", "inner": {"kind": "any"}},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "checkout"),
+            body=body,
+            model=SdkReplaceCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_checkout(
+        self,
+        *,
+        shopping_cart_enabled: bool | None = None,
+        customer_email_required: bool | None = None,
+        allow_vpn_purchases: bool | None = None,
+        blacklist_on_dispute: bool | None = None,
+        minimum_spend: str | None | NotGiven = NOT_GIVEN,
+        billing_descriptor: str | None | NotGiven = NOT_GIVEN,
+        attempts_per_customer: int | None = None,
+        attempts_per_ip: int | None | NotGiven = NOT_GIVEN,
+        attempts_per_email: int | None | NotGiven = NOT_GIVEN,
+        attempts_per_fingerprint: int | None | NotGiven = NOT_GIVEN,
+        rate_limit_window_seconds: int | None = None,
+        crypto: UpdateCheckoutSettingsRequestApplicationJsonPropertyCrypto
+        | None
+        | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCheckoutSettingsResponseValue200ApplicationJson:
+        """Update checkout settings
+
+        Change only the checkout settings you send and keep the others, including one someone else saved while your request was in flight. Send `null` to remove `minimum_spend`, `billing_descriptor`, `attempts_per_ip`, `attempts_per_email` or `attempts_per_fingerprint`. `crypto` is read-only here; change it with `PATCH /v2/store/settings/checkout/crypto`. A refused value returns `422` on the field name of this endpoint, such as `rate_limit_window_seconds`, and nothing is saved. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            shopping_cart_enabled: Whether customers can add several products to a cart and buy them in one checkout. `false` turns the storefront cart off.
+            customer_email_required: Whether checkout asks customers for an email address. With `false`, checkout does not ask, and delivery and payment emails cannot reach a customer who left none.
+            allow_vpn_purchases: Whether customers who use a VPN or a proxy can buy.
+            blacklist_on_dispute: Whether a customer's email address and IP address are added to your blacklist when they open a payment dispute.
+            minimum_spend: The smallest order total, VAT included, that customers can check out with, as a decimal string in the order's currency: `"12.50"` on a USD order means $12.50. At least `1`; digits with an optional decimal part, no sign or exponent. Send `null` or `"0"` to remove the minimum; it then reads `null`.
+            billing_descriptor: The purchase name customers see while they check out, up to 20 characters. `null` uses the default, `SellApp Order`.
+            attempts_per_customer: How many checkout attempts one customer can make within the window, counted per IP address and email pair, or per checkout session fingerprint when checkout does not ask for an email. 1 to 100000; the default is `5`. This limit cannot be removed.
+            attempts_per_ip: How many checkout attempts can come from one IP address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_email: How many checkout attempts can use one customer email address within the window. 1 to 100000; `null` turns this limit off.
+            attempts_per_fingerprint: How many checkout attempts can come from one checkout session fingerprint (a browser identifier) within the window. 1 to 100000; `null` turns this limit off.
+            rate_limit_window_seconds: How long each checkout limit counts attempts before allowing them again, in seconds: 60 (one minute) to 604800 (seven days). The default is `3600` (one hour). Attempts are counted per store.
+            crypto: The crypto.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "shopping_cart_enabled": shopping_cart_enabled,
+                "customer_email_required": customer_email_required,
+                "allow_vpn_purchases": allow_vpn_purchases,
+                "blacklist_on_dispute": blacklist_on_dispute,
+                "attempts_per_customer": attempts_per_customer,
+                "rate_limit_window_seconds": rate_limit_window_seconds,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(minimum_spend, NotGiven):
+            body["minimum_spend"] = minimum_spend
+        if not isinstance(billing_descriptor, NotGiven):
+            body["billing_descriptor"] = billing_descriptor
+        if not isinstance(attempts_per_ip, NotGiven):
+            body["attempts_per_ip"] = attempts_per_ip
+        if not isinstance(attempts_per_email, NotGiven):
+            body["attempts_per_email"] = attempts_per_email
+        if not isinstance(attempts_per_fingerprint, NotGiven):
+            body["attempts_per_fingerprint"] = attempts_per_fingerprint
+        if not isinstance(crypto, NotGiven):
+            body["crypto"] = crypto.to_dict() if crypto is not None else None
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCheckoutSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "shopping_cart_enabled": {"kind": "primitive", "type": "boolean"},
+                    "customer_email_required": {"kind": "primitive", "type": "boolean"},
+                    "allow_vpn_purchases": {"kind": "primitive", "type": "boolean"},
+                    "blacklist_on_dispute": {"kind": "primitive", "type": "boolean"},
+                    "minimum_spend": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"pattern": "^\\d+(\\.\\d+)?$"},
+                        },
+                    },
+                    "billing_descriptor": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 20},
+                        },
+                    },
+                    "attempts_per_customer": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 100000},
+                    },
+                    "attempts_per_ip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "attempts_per_fingerprint": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1, "maximum": 100000},
+                        },
+                    },
+                    "rate_limit_window_seconds": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 60, "maximum": 604800},
+                    },
+                    "crypto": {"kind": "nullable", "inner": {"kind": "any"}},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "checkout"),
+            body=body,
+            model=SdkUpdateCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_taxes(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetTaxSettingsResponseValue200ApplicationJson:
+        """Retrieve tax settings
+
+        Get whether checkout collects VAT, whether your prices include it, and whether checkout asks for billing details. The response body can be sent back to `PUT /v2/store/settings/taxes` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getTaxSettings",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "taxes"),
+            model=SdkGetTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_taxes(
+        self,
+        *,
+        vat_enabled: bool,
+        vat_inclusive_pricing: bool,
+        collect_billing_details: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceTaxSettingsResponseValue200ApplicationJson:
+        """Update tax settings
+
+        Replace all three tax settings; every field is required. A missing field returns `422` and nothing is saved. `vat_enabled: true` while Stripe Tax is on returns `422` on `vat_enabled` and saves nothing: turn Stripe Tax off in the dashboard first. When Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on also turns Stripe Tax off. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            vat_enabled: Whether checkout collects VAT from customers. VAT and Stripe Tax cannot both be on: turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` with `Disable Stripe Tax before enabling Sell VAT.` and saves nothing. Turn Stripe Tax off in **Settings > Taxes** in the dashboard first. If Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on succeeds and turns Stripe Tax off as well.
+            vat_inclusive_pricing: Whether your product prices already include VAT instead of VAT being added on top. Always `false` while VAT is off, and turning `vat_enabled` off turns it off too. `true` while VAT stays off returns `422` on `vat_inclusive_pricing`: send `"vat_enabled": true` in the same request.
+            collect_billing_details: Whether checkout asks customers for their billing details.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceTaxSettings",
+        }
+        body: dict[str, Any] = {
+            "vat_enabled": vat_enabled,
+            "vat_inclusive_pricing": vat_inclusive_pricing,
+            "collect_billing_details": collect_billing_details,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceTaxSettingsRequestApplicationJson",
+                "required": [
+                    "vat_enabled",
+                    "vat_inclusive_pricing",
+                    "collect_billing_details",
+                ],
+                "properties": {
+                    "vat_enabled": {"kind": "primitive", "type": "boolean"},
+                    "vat_inclusive_pricing": {"kind": "primitive", "type": "boolean"},
+                    "collect_billing_details": {"kind": "primitive", "type": "boolean"},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "taxes"),
+            body=body,
+            model=SdkReplaceTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_taxes(
+        self,
+        *,
+        vat_enabled: bool | None = None,
+        vat_inclusive_pricing: bool | None = None,
+        collect_billing_details: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateTaxSettingsResponseValue200ApplicationJson:
+        """Update tax settings
+
+        Change only the tax settings you send and keep the others. Turning VAT off also turns VAT-inclusive pricing off. Asking for VAT-inclusive pricing while VAT stays off returns `422` on `vat_inclusive_pricing` and saves nothing. Turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` and saves nothing: turn Stripe Tax off in the dashboard first. When Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on also turns Stripe Tax off. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            vat_enabled: Whether checkout collects VAT from customers. VAT and Stripe Tax cannot both be on: turning VAT on while Stripe Tax is on returns `422` on `vat_enabled` with `Disable Stripe Tax before enabling Sell VAT.` and saves nothing. Turn Stripe Tax off in **Settings > Taxes** in the dashboard first. If Stripe Tax was turned on but Stripe is now turned off as a payment method, turning VAT on succeeds and turns Stripe Tax off as well.
+            vat_inclusive_pricing: Whether your product prices already include VAT instead of VAT being added on top. Always `false` while VAT is off, and turning `vat_enabled` off turns it off too. `true` while VAT stays off returns `422` on `vat_inclusive_pricing`: send `"vat_enabled": true` in the same request.
+            collect_billing_details: Whether checkout asks customers for their billing details.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateTaxSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateTaxSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "vat_enabled": vat_enabled,
+                "vat_inclusive_pricing": vat_inclusive_pricing,
+                "collect_billing_details": collect_billing_details,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateTaxSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "vat_enabled": {"kind": "primitive", "type": "boolean"},
+                    "vat_inclusive_pricing": {"kind": "primitive", "type": "boolean"},
+                    "collect_billing_details": {"kind": "primitive", "type": "boolean"},
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "taxes"),
+            body=body,
+            model=SdkUpdateTaxSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_customer_emails(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Retrieve customer email settings
+
+        Get which automatic emails your customers get: the delivery email after they pay, and the email asking them to pay when a subscription payment cannot be collected. The address these emails come from is managed with `/v2/store/settings/sender-email`. The response body can be sent back to `PUT /v2/store/settings/customer-emails` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getCustomerEmailSettings",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "customer-emails"),
+            model=SdkGetCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_customer_emails(
+        self,
+        *,
+        send_delivery_email: bool,
+        send_payment_failure_email: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Update customer email settings
+
+        Set both customer emails; both fields are required. A missing field returns `422` and nothing is saved. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            send_delivery_email: Whether customers automatically get an email with what they bought after paying. Turn it off when you deliver to customers yourself.
+            send_payment_failure_email: Whether customers get an email with a way to pay when your payment processor cannot collect a subscription payment. Turn it off when your processor already emails them.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCustomerEmailSettings",
+        }
+        body: dict[str, Any] = {
+            "send_delivery_email": send_delivery_email,
+            "send_payment_failure_email": send_payment_failure_email,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCustomerEmailSettingsRequestApplicationJson",
+                "required": ["send_delivery_email", "send_payment_failure_email"],
+                "properties": {
+                    "send_delivery_email": {"kind": "primitive", "type": "boolean"},
+                    "send_payment_failure_email": {
+                        "kind": "primitive",
+                        "type": "boolean",
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "customer-emails"),
+            body=body,
+            model=SdkReplaceCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_customer_emails(
+        self,
+        *,
+        send_delivery_email: bool | None = None,
+        send_payment_failure_email: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson:
+        """Update customer email settings
+
+        Turn the customer emails you send on or off and keep the other one. Takes effect for emails sent after the change. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            send_delivery_email: Whether customers automatically get an email with what they bought after paying. Turn it off when you deliver to customers yourself.
+            send_payment_failure_email: Whether customers get an email with a way to pay when your payment processor cannot collect a subscription payment. Turn it off when your processor already emails them.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCustomerEmailSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "send_delivery_email": send_delivery_email,
+                "send_payment_failure_email": send_payment_failure_email,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCustomerEmailSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "send_delivery_email": {"kind": "primitive", "type": "boolean"},
+                    "send_payment_failure_email": {
+                        "kind": "primitive",
+                        "type": "boolean",
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "customer-emails"),
+            body=body,
+            model=SdkUpdateCustomerEmailSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_store_alerts(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetStoreAlertSettingsResponseValue200ApplicationJson:
+        """Retrieve store alert settings
+
+        Get whether the store owner gets an email for each sale. Other alerts go to notification channels (`/v2/store/notification-channels`) and to the dashboard notifications (`/v2/notifications`). The response body can be sent back to `PUT /v2/store/settings/store-alerts` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getStoreAlertSettings",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "store-alerts"),
+            model=SdkGetStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_store_alerts(
+        self,
+        *,
+        sale_emails_enabled: bool,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson:
+        """Update store alert settings
+
+        Set the sale emails to the store owner; `sale_emails_enabled` is required. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            sale_emails_enabled: Whether the store owner gets an email for each sale.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceStoreAlertSettings",
+        }
+        body: dict[str, Any] = {
+            "sale_emails_enabled": sale_emails_enabled,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceStoreAlertSettingsRequestApplicationJson",
+                "required": ["sale_emails_enabled"],
+                "properties": {
+                    "sale_emails_enabled": {"kind": "primitive", "type": "boolean"}
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "store-alerts"),
+            body=body,
+            model=SdkReplaceStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_store_alerts(
+        self,
+        *,
+        sale_emails_enabled: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson:
+        """Update store alert settings
+
+        Turn the sale emails to the store owner on or off. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            sale_emails_enabled: Whether the store owner gets an email for each sale.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateStoreAlertSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "sale_emails_enabled": sale_emails_enabled,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateStoreAlertSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "sale_emails_enabled": {"kind": "primitive", "type": "boolean"}
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "store-alerts"),
+            body=body,
+            model=SdkUpdateStoreAlertSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_personalization(
+        self,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetPersonalizationSettingsResponseValue200ApplicationJson:
+        """Retrieve personalization settings
+
+        Get the details customers see from your store: the support and Trustpilot addresses, the sender name and custom sender email of customer emails, the business details printed on invoices, and the Back button link of product and checkout pages. The response body can be sent back to `PUT /v2/store/settings/personalization` unchanged. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Returns:
+            SdkGetPersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getPersonalizationSettings",
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "store", "settings", "personalization"),
+            model=SdkGetPersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_personalization(
+        self,
+        *,
+        support_email: str | None,
+        trustpilot_email: str | None,
+        sender_name: str | None,
+        store_address: str | None,
+        store_city: str | None,
+        store_state: str | None,
+        store_zip: str | None,
+        store_country: str | None,
+        store_tax: str | None,
+        back_link_label: str | None,
+        back_link_url: str | None,
+        sender_email: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplacePersonalizationSettingsResponseValue200ApplicationJson:
+        """Update personalization settings
+
+        Replace every personalization setting. All fields except `sender_email` are required; send `null` to remove one. A missing field returns `422` and nothing is saved. The body of `GET /v2/store/settings/personalization`, including `sender_email`, can be sent back unchanged. Sending the same body again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            support_email: The address customers can write to for support.
+            trustpilot_email: Your Trustpilot invitation address. It receives a blind copy of every delivery email, including the link to what the customer bought, so Trustpilot can invite the customer to leave a review.
+            sender_name: The name customer emails are sent from: letters, digits, spaces and `. - _ +`, up to 75 characters. It is used only while the store sends from its own verified sender email. A store without a custom sender email cannot keep one: sent with other changes it is ignored, and sent alone it returns `422` on `sender_name`.
+            sender_email: The store's custom sender email, or `null` when it has none. Read-only here: send it back unchanged or leave it out. A different value returns `422` on `sender_email`; set it up or remove it with `/v2/store/settings/sender-email`.
+            store_address: Street address printed on invoices.
+            store_city: City printed on invoices.
+            store_state: State or region printed on invoices.
+            store_zip: Postal code printed on invoices.
+            store_country: Country printed on invoices, as text.
+            store_tax: Tax or VAT details printed on invoices, such as `VAT GB123456789`.
+            back_link_label: Text of the Back button on product and checkout pages. A return link needs both a label and a URL: a change that leaves one of them empty returns `422` on the empty one. Send `null` for both to remove the link; the Back button then goes to the store's home page.
+            back_link_url: Where the Back button on product and checkout pages goes, as a full URL. Needs `back_link_label`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplacePersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replacePersonalizationSettings",
+        }
+        body: dict[str, Any] = {
+            "support_email": support_email,
+            "trustpilot_email": trustpilot_email,
+            "sender_name": sender_name,
+            "store_address": store_address,
+            "store_city": store_city,
+            "store_state": store_state,
+            "store_zip": store_zip,
+            "store_country": store_country,
+            "store_tax": store_tax,
+            "back_link_label": back_link_label,
+            "back_link_url": back_link_url,
+        }
+        if not isinstance(sender_email, NotGiven):
+            body["sender_email"] = sender_email
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplacePersonalizationSettingsRequestApplicationJson",
+                "required": [
+                    "support_email",
+                    "trustpilot_email",
+                    "sender_name",
+                    "store_address",
+                    "store_city",
+                    "store_state",
+                    "store_zip",
+                    "store_country",
+                    "store_tax",
+                    "back_link_label",
+                    "back_link_url",
+                ],
+                "properties": {
+                    "support_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "trustpilot_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "sender_name": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "maxLength": 75,
+                                "pattern": "^[a-zA-Z0-9 .\\-_+]*$",
+                            },
+                        },
+                    },
+                    "sender_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "store_address": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_city": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_state": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_zip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_country": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_tax": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_label": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "personalization"),
+            body=body,
+            model=SdkReplacePersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_personalization(
+        self,
+        *,
+        support_email: str | None | NotGiven = NOT_GIVEN,
+        trustpilot_email: str | None | NotGiven = NOT_GIVEN,
+        sender_name: str | None | NotGiven = NOT_GIVEN,
+        sender_email: str | None | NotGiven = NOT_GIVEN,
+        store_address: str | None | NotGiven = NOT_GIVEN,
+        store_city: str | None | NotGiven = NOT_GIVEN,
+        store_state: str | None | NotGiven = NOT_GIVEN,
+        store_zip: str | None | NotGiven = NOT_GIVEN,
+        store_country: str | None | NotGiven = NOT_GIVEN,
+        store_tax: str | None | NotGiven = NOT_GIVEN,
+        back_link_label: str | None | NotGiven = NOT_GIVEN,
+        back_link_url: str | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson:
+        """Update personalization settings
+
+        Change only the personalization settings you send and keep the others. Send `null` to remove one. A request with no field this endpoint knows returns `200` with the current settings and saves nothing. A return link needs both `back_link_label` and `back_link_url`: a change that leaves one empty returns `422` on that field. `sender_email` is read-only here. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            support_email: The address customers can write to for support.
+            trustpilot_email: Your Trustpilot invitation address. It receives a blind copy of every delivery email, including the link to what the customer bought, so Trustpilot can invite the customer to leave a review.
+            sender_name: The name customer emails are sent from: letters, digits, spaces and `. - _ +`, up to 75 characters. It is used only while the store sends from its own verified sender email. A store without a custom sender email cannot keep one: sent with other changes it is ignored, and sent alone it returns `422` on `sender_name`.
+            sender_email: The store's custom sender email, or `null` when it has none. Read-only here: send it back unchanged or leave it out. A different value returns `422` on `sender_email`; set it up or remove it with `/v2/store/settings/sender-email`.
+            store_address: Street address printed on invoices.
+            store_city: City printed on invoices.
+            store_state: State or region printed on invoices.
+            store_zip: Postal code printed on invoices.
+            store_country: Country printed on invoices, as text.
+            store_tax: Tax or VAT details printed on invoices, such as `VAT GB123456789`.
+            back_link_label: Text of the Back button on product and checkout pages. A return link needs both a label and a URL: a change that leaves one of them empty returns `422` on the empty one. Send `null` for both to remove the link; the Back button then goes to the store's home page.
+            back_link_url: Where the Back button on product and checkout pages goes, as a full URL. Needs `back_link_label`.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updatePersonalizationSettings",
+        }
+        body: dict[str, Any] = {}
+        if not isinstance(support_email, NotGiven):
+            body["support_email"] = support_email
+        if not isinstance(trustpilot_email, NotGiven):
+            body["trustpilot_email"] = trustpilot_email
+        if not isinstance(sender_name, NotGiven):
+            body["sender_name"] = sender_name
+        if not isinstance(sender_email, NotGiven):
+            body["sender_email"] = sender_email
+        if not isinstance(store_address, NotGiven):
+            body["store_address"] = store_address
+        if not isinstance(store_city, NotGiven):
+            body["store_city"] = store_city
+        if not isinstance(store_state, NotGiven):
+            body["store_state"] = store_state
+        if not isinstance(store_zip, NotGiven):
+            body["store_zip"] = store_zip
+        if not isinstance(store_country, NotGiven):
+            body["store_country"] = store_country
+        if not isinstance(store_tax, NotGiven):
+            body["store_tax"] = store_tax
+        if not isinstance(back_link_label, NotGiven):
+            body["back_link_label"] = back_link_label
+        if not isinstance(back_link_url, NotGiven):
+            body["back_link_url"] = back_link_url
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdatePersonalizationSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "support_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "trustpilot_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "sender_name": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {
+                                "maxLength": 75,
+                                "pattern": "^[a-zA-Z0-9 .\\-_+]*$",
+                            },
+                        },
+                    },
+                    "sender_email": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "email",
+                        },
+                    },
+                    "store_address": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_city": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_state": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_zip": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_country": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "store_tax": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_label": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                    "back_link_url": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "format": "uri",
+                            "constraints": {"maxLength": 255},
+                        },
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "personalization"),
+            body=body,
+            model=SdkUpdatePersonalizationSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def replace_crypto_checkout(
+        self,
+        *,
+        underpaid_percentage: int,
+        minimum_confirmations: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson:
+        """Update crypto checkout settings
+
+        Replace both crypto checkout values, for a store that takes crypto through SellApp's crypto processor; `underpaid_percentage` and `minimum_confirmations` are required. SellApp sends the changed values to the crypto processor and saves them only once it accepts them; an unchanged value is not sent. Returns the checkout settings with the new `crypto` values. `422` on `crypto` when the store does not take crypto through SellApp's crypto processor, or when the processor refuses the values; nothing is saved then. `422` on `underpaid_percentage` or `minimum_confirmations` for a value out of range. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            underpaid_percentage: How far short of the amount due, in percent, a crypto payment can be and still count as paid: `2` accepts a payment up to 2% short. 0 to 100.
+            minimum_confirmations: How many blockchain confirmations a crypto payment needs before the order is processed. 1 to 25.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "replaceCryptoCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            "underpaid_percentage": underpaid_percentage,
+            "minimum_confirmations": minimum_confirmations,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReplaceCryptoCheckoutSettingsRequestApplicationJson",
+                "required": ["underpaid_percentage", "minimum_confirmations"],
+                "properties": {
+                    "underpaid_percentage": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 100},
+                    },
+                    "minimum_confirmations": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 25},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "store", "settings", "checkout", "crypto"),
+            body=body,
+            model=SdkReplaceCryptoCheckoutSettingsResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def update_crypto_checkout(
+        self,
+        *,
+        underpaid_percentage: int | None = None,
+        minimum_confirmations: int | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson:
+        """Update crypto checkout settings
+
+        Change the crypto checkout values you send, for a store that takes crypto through SellApp's crypto processor. SellApp sends the changed values to the crypto processor and saves them only once it accepts them; an unchanged value is not sent. Returns the checkout settings with the new `crypto` values. `422` on `crypto` when the store does not take crypto through SellApp's crypto processor, or when the processor refuses the values; nothing is saved then. `422` on `underpaid_percentage` or `minimum_confirmations` for a value out of range. Sending the same change again is safe. Requires the `store` API-key ability and the `store` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            underpaid_percentage: How far short of the amount due, in percent, a crypto payment can be and still count as paid: `2` accepts a payment up to 2% short. 0 to 100.
+            minimum_confirmations: How many blockchain confirmations a crypto payment needs before the order is processed. 1 to 25.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "updateCryptoCheckoutSettings",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "underpaid_percentage": underpaid_percentage,
+                "minimum_confirmations": minimum_confirmations,
+            }.items()
+            if v is not None
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkUpdateCryptoCheckoutSettingsRequestApplicationJson",
+                "required": [],
+                "properties": {
+                    "underpaid_percentage": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 100},
+                    },
+                    "minimum_confirmations": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 25},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="patch",
+            path=("v2", "store", "settings", "checkout", "crypto"),
+            body=body,
+            model=SdkUpdateCryptoCheckoutSettingsResponseValue200ApplicationJson,
             request_options=request_options,
         )

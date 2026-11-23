@@ -12,6 +12,9 @@ from sellapp_sdk._types import (
     _raise_deserialize_error,
     _validate_model,
 )
+from sellapp_sdk.common.models.search_orders_request_application_json_property_filters_item_field import (
+    SearchOrdersRequestApplicationJsonPropertyFiltersItemField,
+)
 from sellapp_sdk.common.models.search_orders_request_application_json_property_filters_item_operator import (
     SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator,
 )
@@ -20,8 +23,29 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchOrdersRequestApplicationJsonPropertyFiltersItem",
     "required": ["field", "operator", "value"],
     "properties": {
-        "field": {"kind": "primitive", "type": "string"},
-        "operator": {"kind": "enum", "values": ["eq", "contains", "in"]},
+        "field": {
+            "kind": "enum",
+            "values": [
+                "id",
+                "customer_email",
+                "transaction_id",
+                "serial_code",
+                "additional_information",
+                "line_item_title",
+                "discord_user_id",
+                "discord_username",
+                "blockchain_txid",
+                "crypto_address",
+                "coupon_code",
+                "status",
+                "payment_method",
+                "product_id",
+                "currency",
+                "created_at",
+                "total",
+            ],
+        },
+        "operator": {"kind": "enum", "values": ["eq", "contains", "in", "gte", "lte"]},
         "value": {"kind": "primitive", "type": "unknown"},
     },
     "additionalProperties": False,
@@ -30,8 +54,29 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "SearchOrdersRequestApplicationJsonPropertyFiltersItem",
     "required": ["field", "operator", "value"],
     "properties": {
-        "field": {"kind": "primitive", "type": "string"},
-        "operator": {"kind": "enum", "values": ["eq", "contains", "in"]},
+        "field": {
+            "kind": "enum",
+            "values": [
+                "id",
+                "customer_email",
+                "transaction_id",
+                "serial_code",
+                "additional_information",
+                "line_item_title",
+                "discord_user_id",
+                "discord_username",
+                "blockchain_txid",
+                "crypto_address",
+                "coupon_code",
+                "status",
+                "payment_method",
+                "product_id",
+                "currency",
+                "created_at",
+                "total",
+            ],
+        },
+        "operator": {"kind": "enum", "values": ["eq", "contains", "in", "gte", "lte"]},
         "value": {"kind": "primitive", "type": "unknown"},
     },
     "additionalProperties": False,
@@ -42,9 +87,12 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
     """Search Orders Request Application Json Property Filters Item model."""
 
-    field: str
+    field: SearchOrdersRequestApplicationJsonPropertyFiltersItemField
+    """The order field to compare. `id` and `product_id` take positive integers with `eq` or `in`; `product_id` keeps orders with at least one line item for that product. `status`, `payment_method`, and `currency` take their enum values (`currency` is the order's ISO 4217 code, such as `USD`) with `eq` or `in`. `created_at` takes a date-time with a time zone, such as `2026-11-01T00:00:00Z` or `2026-11-01T01:00:00+01:00`, with `gte` or `lte`; it is compared in UTC to the second and both bounds are inclusive. `total` takes the order total in integer minor units of each order's own currency (`5000` means $50.00 in USD; the same number as `totals.total_cents`) with `eq`, `gte`, or `lte`; add a `currency` filter to compare orders in one currency. `additional_information` takes text with `contains`; the other text fields take text of up to 255 characters with `eq` or `contains`."""
     operator: SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator
+    """`eq` matches exactly, `contains` matches part of the text, `in` matches any value in an array of up to 100, `gte` keeps values greater than or equal to `value`, and `lte` keeps values less than or equal to `value`. Each field accepts only the operators listed for it in `field`."""
     value: Any
+    """A scalar for `eq`, `contains`, `gte`, and `lte`; a non-empty array for `in`."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -65,7 +113,9 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
                 allow_unknown_fields=True,
             )
             return cls(
-                field=data["field"],
+                field=SearchOrdersRequestApplicationJsonPropertyFiltersItemField(
+                    data["field"]
+                ),
                 operator=SearchOrdersRequestApplicationJsonPropertyFiltersItemOperator(
                     data["operator"]
                 ),
@@ -95,7 +145,9 @@ class SearchOrdersRequestApplicationJsonPropertyFiltersItem:
             allow_unknown_fields=(self._from_response or False),
         )
         result: dict[str, Any] = dict(self.additional_properties)
-        result["field"] = self.field
+        result["field"] = (
+            self.field.value if isinstance(self.field, Enum) else self.field
+        )
         result["operator"] = (
             self.operator.value if isinstance(self.operator, Enum) else self.operator
         )

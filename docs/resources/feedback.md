@@ -253,6 +253,7 @@ def v2_list_feedback(
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        reply_state: FeedbackReplyState | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -264,6 +265,7 @@ def v2_list_feedback(
 | after | `str \| None` | No |
 | order | `str \| None` | No |
 | page | `int \| None` | No |
+| reply_state | `FeedbackReplyState \| str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2ListFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.
@@ -321,10 +323,12 @@ def v2_search_feedback(
             V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        reply_state: ReplyState | str | None | NotGiven = NOT_GIVEN,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -342,10 +346,12 @@ def v2_search_feedback(
             V2SearchFeedbackRequestApplicationJsonPropertyIncludesItem
         ]
         \| None` | No |
+| reply_state | `ReplyState \| str \| None \| NotGiven` | No |
 | limit | `int \| None` | No |
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[V2SearchFeedbackResponseValue200ApplicationJsonPropertyDataItem]`.

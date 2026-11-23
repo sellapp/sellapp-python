@@ -188,6 +188,23 @@ class TestTicketsMessages:
         assert isinstance(page, SyncPage)
         assert page.data == []
 
+    def test_v2_search_ticket_messages_encodes_query_params(
+        self, sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.tickets_messages.v2_search_ticket_messages(
+            "test_ticket",
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+
     def test_v2_get_ticket_message(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -486,6 +503,24 @@ class TestAsyncTicketsMessages:
         )
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_v2_search_ticket_messages_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.tickets_messages.v2_search_ticket_messages(
+            "test_ticket",
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
 
     @pytest.mark.asyncio
     async def test_v2_get_ticket_message(self, async_sellapp_sdk, httpx_mock):

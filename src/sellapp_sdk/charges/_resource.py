@@ -21,11 +21,14 @@ from sellapp_sdk.common.models.sdk_create_charge_request_application_json_paymen
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    ChargesPreset,
+    ChargesStatus,
     CreateChargeRequestApplicationJsonPropertyDeliverable,
     CreateChargeRequestApplicationJsonPropertyMetadata,
     ListChargesResponseValue200ApplicationJsonPropertyDataItem,
     SdkCreateChargeResponseValue201ApplicationJson,
     SdkGetChargeResponseValue200ApplicationJson,
+    SdkGetChargeSummaryResponseValue200ApplicationJson,
     SdkMarkPendingChargeCompletedResponseValue200ApplicationJson,
     SdkMarkPendingChargeVoidedResponseValue200ApplicationJson,
 )
@@ -46,11 +49,15 @@ class Charges:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        status: ChargesStatus | str | None = None,
+        customer_email: str | None = None,
+        created_after: str | None = None,
+        created_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all charges
 
-        Retrieve a paginated list of charges for your store. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's charges, 15 per page by default. Failed charges are never listed. Filter by `status`, part of the customer email, or the day a charge was created; the date filters read whole days in the store's time zone and include both ends. An unknown filter value, `status=FAILED`, or a `created_before` earlier than `created_after` returns `422` on that parameter. Requires the `charge` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -58,6 +65,10 @@ class Charges:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            status: Keep charges in this status: `PENDING`, `REVERSED`, `PARTIAL`, `VOIDED`, `REFUNDED`, `PAID`, `COMPLETED`, `DISPUTING`, or `REVIEW`. `FAILED` is not accepted, because failed charges are never listed.
+            customer_email: Keep charges whose customer email contains this text.
+            created_after: Keep charges created on or after this moment. A date such as `2026-08-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            created_before: Keep charges created on or before this moment. A date such as `2026-08-31` runs to the last second of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -109,6 +120,10 @@ class Charges:
                 "after": after,
                 "order": order,
                 "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "customer_email": customer_email,
+                "created_after": created_after,
+                "created_before": created_before,
             }.items()
             if v is not None
         }
@@ -149,7 +164,7 @@ class Charges:
     ) -> SdkCreateChargeResponseValue201ApplicationJson:
         """Create a charge
 
-        Create a standalone charge for payment or a free claim. Requires the charge API ability and store permission. The total is an integer in the currency's minor units: 1999 USD means $19.99. Supplying currency requires total. For a positive paid charge, choose enabled payment_method/payment_methods or use_all_payment_methods; availability depends on the store and currency. CUSTOM_PAYMENT_METHOD is supported: preselection requires custom_payment_method_id. custom_payment_method_ids optionally restricts the available custom methods; omission snapshots the currently usable IDs for this store, without product assignments. Customer proof or confirmation changes custom charges to REVIEW, not COMPLETED. Creating a charge does not prove payment. A repeated create may create another charge; check the original result before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a standalone charge for payment or a free claim. Requires the charge API-key ability and store permission. The total is an integer in the currency's minor units: 1999 USD means $19.99. Supplying currency requires total. For a positive paid charge, choose enabled payment_method/payment_methods or use_all_payment_methods; availability depends on the store and currency. CUSTOM_PAYMENT_METHOD is supported: preselection requires custom_payment_method_id. custom_payment_method_ids optionally restricts the available custom methods; omission snapshots the currently usable IDs for this store, without product assignments. Customer proof or confirmation changes custom charges to REVIEW, not COMPLETED. Creating a charge does not prove payment. A repeated create may create another charge; check the original result before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             email: The email.
@@ -496,7 +511,7 @@ class Charges:
     ) -> SdkMarkPendingChargeCompletedResponseValue200ApplicationJson:
         """Mark pending charge completed
 
-        Manually complete a PENDING or VOIDED ordinary charge, or a custom-payment charge in REVIEW, after independently verifying receipt of funds. This does not collect, capture, or verify payment. Initialized custom-payment wallet top-ups may be approved from PENDING or REVIEW and credit the deposit plus any snapshotted bonus exactly once. Other wallet gateways cannot be completed manually, and voided custom top-ups cannot be revived. Completion emits charge.completed webhooks and store notifications and records applicable platform fees. Requires the charge API ability and update permission. A charge already completed returns 422; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Manually complete a PENDING or VOIDED ordinary charge, or a custom-payment charge in REVIEW, after independently verifying receipt of funds. This does not collect, capture, or verify payment. Initialized custom-payment wallet top-ups may be approved from PENDING or REVIEW and credit the deposit plus any snapshotted bonus exactly once. Other wallet gateways cannot be completed manually, and voided custom top-ups cannot be revived. Completion emits charge.completed webhooks and store notifications and records applicable platform fees. Requires the charge API-key ability and update permission. A charge already completed returns 422; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             charge_id: The charge id path parameter.
@@ -559,7 +574,7 @@ class Charges:
     ) -> SdkMarkPendingChargeVoidedResponseValue200ApplicationJson:
         """Mark pending charge voided
 
-        Void a PENDING charge or a custom-payment charge in REVIEW. This cancels the internal charge, releases an applicable redeemed reward coupon, and emits charge.voided; it does not refund a payment. Requires the charge API ability and update permission. Other states return 422, including a repeat after successful voiding; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Void a PENDING charge or a custom-payment charge in REVIEW. This cancels the internal charge, releases an applicable redeemed reward coupon, and emits charge.voided; it does not refund a payment. Requires the charge API-key ability and update permission. Other states return 422, including a repeat after successful voiding; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             charge_id: The charge id path parameter.
@@ -614,6 +629,82 @@ class Charges:
             request_options=request_options,
         )
 
+    def get_summary(
+        self,
+        *,
+        preset: ChargesPreset | str | None = None,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetChargeSummaryResponseValue200ApplicationJson:
+        """Retrieve the charge summary
+
+        Total your store's completed charges for a date range and compare them with the period of the same length just before it, as the charges analytics page does. Only `COMPLETED` charges count, dated by when they completed; pending, voided, and failed charges are left out. `revenue` is in integer minor units of the store currency, converted from each charge's USD total: `12450` means $124.50 in USD. Send `start_date` and `end_date` as `YYYY-MM-DD` days in the store's time zone, both included, or a `preset`; dates take precedence over `preset`, and without either the summary covers `last_30_days`. An unknown `preset` or a date not in `YYYY-MM-DD` form returns `422` on that parameter, and a range that ends before it starts returns `422` on `start_date` when you sent `start_date`, otherwise `end_date`. Requires the `charge` API-key ability and the charge permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            preset: A named range in the store's time zone: `today`, `yesterday`, `this_week`, `last_week`, `this_month`, `last_month`, `last_7_days`, `last_30_days` (the default), or `all_time`. `this_week`, `this_month`, and the `last_*_days` presets end today. `all_time` starts on the day the store was created or took its first order, whichever is earlier. Ignored when `start_date` or `end_date` is sent. Defaults to `last_30_days`.
+            start_date: First day of the range, `YYYY-MM-DD`, in the store's time zone. Inclusive. Sent without `end_date`, the range runs to the end of today.
+            end_date: Last day of the range, `YYYY-MM-DD`, in the store's time zone. Inclusive. Sent without `start_date`, the range starts on the day the store was created or took its first order, whichever is earlier.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetChargeSummaryResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getChargeSummary",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "preset": enum_value(preset) if preset is not None else None,
+                "start_date": start_date,
+                "end_date": end_date,
+            }.items()
+            if v is not None
+        }
+        return self._client.request(
+            method="get",
+            path=("v2", "charges", "summary"),
+            params=params,
+            model=SdkGetChargeSummaryResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncCharges:
     """Charges API resources (async)."""
@@ -630,11 +721,15 @@ class AsyncCharges:
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        status: ChargesStatus | str | None = None,
+        customer_email: str | None = None,
+        created_after: str | None = None,
+        created_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListChargesResponseValue200ApplicationJsonPropertyDataItem]:
         """List all charges
 
-        Retrieve a paginated list of charges for your store. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's charges, 15 per page by default. Failed charges are never listed. Filter by `status`, part of the customer email, or the day a charge was created; the date filters read whole days in the store's time zone and include both ends. An unknown filter value, `status=FAILED`, or a `created_before` earlier than `created_after` returns `422` on that parameter. Requires the `charge` API-key ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: Number of items to return per page. Defaults to `15`.
@@ -642,6 +737,10 @@ class AsyncCharges:
             after: The after.
             order: The order.
             page: Page number to return. Defaults to `1`.
+            status: Keep charges in this status: `PENDING`, `REVERSED`, `PARTIAL`, `VOIDED`, `REFUNDED`, `PAID`, `COMPLETED`, `DISPUTING`, or `REVIEW`. `FAILED` is not accepted, because failed charges are never listed.
+            customer_email: Keep charges whose customer email contains this text.
+            created_after: Keep charges created on or after this moment. A date such as `2026-08-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            created_before: Keep charges created on or before this moment. A date such as `2026-08-31` runs to the last second of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -693,6 +792,10 @@ class AsyncCharges:
                 "after": after,
                 "order": order,
                 "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "customer_email": customer_email,
+                "created_after": created_after,
+                "created_before": created_before,
             }.items()
             if v is not None
         }
@@ -733,7 +836,7 @@ class AsyncCharges:
     ) -> SdkCreateChargeResponseValue201ApplicationJson:
         """Create a charge
 
-        Create a standalone charge for payment or a free claim. Requires the charge API ability and store permission. The total is an integer in the currency's minor units: 1999 USD means $19.99. Supplying currency requires total. For a positive paid charge, choose enabled payment_method/payment_methods or use_all_payment_methods; availability depends on the store and currency. CUSTOM_PAYMENT_METHOD is supported: preselection requires custom_payment_method_id. custom_payment_method_ids optionally restricts the available custom methods; omission snapshots the currently usable IDs for this store, without product assignments. Customer proof or confirmation changes custom charges to REVIEW, not COMPLETED. Creating a charge does not prove payment. A repeated create may create another charge; check the original result before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Create a standalone charge for payment or a free claim. Requires the charge API-key ability and store permission. The total is an integer in the currency's minor units: 1999 USD means $19.99. Supplying currency requires total. For a positive paid charge, choose enabled payment_method/payment_methods or use_all_payment_methods; availability depends on the store and currency. CUSTOM_PAYMENT_METHOD is supported: preselection requires custom_payment_method_id. custom_payment_method_ids optionally restricts the available custom methods; omission snapshots the currently usable IDs for this store, without product assignments. Customer proof or confirmation changes custom charges to REVIEW, not COMPLETED. Creating a charge does not prove payment. A repeated create may create another charge; check the original result before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             email: The email.
@@ -1080,7 +1183,7 @@ class AsyncCharges:
     ) -> SdkMarkPendingChargeCompletedResponseValue200ApplicationJson:
         """Mark pending charge completed
 
-        Manually complete a PENDING or VOIDED ordinary charge, or a custom-payment charge in REVIEW, after independently verifying receipt of funds. This does not collect, capture, or verify payment. Initialized custom-payment wallet top-ups may be approved from PENDING or REVIEW and credit the deposit plus any snapshotted bonus exactly once. Other wallet gateways cannot be completed manually, and voided custom top-ups cannot be revived. Completion emits charge.completed webhooks and store notifications and records applicable platform fees. Requires the charge API ability and update permission. A charge already completed returns 422; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Manually complete a PENDING or VOIDED ordinary charge, or a custom-payment charge in REVIEW, after independently verifying receipt of funds. This does not collect, capture, or verify payment. Initialized custom-payment wallet top-ups may be approved from PENDING or REVIEW and credit the deposit plus any snapshotted bonus exactly once. Other wallet gateways cannot be completed manually, and voided custom top-ups cannot be revived. Completion emits charge.completed webhooks and store notifications and records applicable platform fees. Requires the charge API-key ability and update permission. A charge already completed returns 422; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             charge_id: The charge id path parameter.
@@ -1143,7 +1246,7 @@ class AsyncCharges:
     ) -> SdkMarkPendingChargeVoidedResponseValue200ApplicationJson:
         """Mark pending charge voided
 
-        Void a PENDING charge or a custom-payment charge in REVIEW. This cancels the internal charge, releases an applicable redeemed reward coupon, and emits charge.voided; it does not refund a payment. Requires the charge API ability and update permission. Other states return 422, including a repeat after successful voiding; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Void a PENDING charge or a custom-payment charge in REVIEW. This cancels the internal charge, releases an applicable redeemed reward coupon, and emits charge.voided; it does not refund a payment. Requires the charge API-key ability and update permission. Other states return 422, including a repeat after successful voiding; retrieve its state before retrying. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             charge_id: The charge id path parameter.
@@ -1195,5 +1298,81 @@ class AsyncCharges:
             method="put",
             path=("v2", "charges", str(charge_id), "voided"),
             model=SdkMarkPendingChargeVoidedResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def get_summary(
+        self,
+        *,
+        preset: ChargesPreset | str | None = None,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetChargeSummaryResponseValue200ApplicationJson:
+        """Retrieve the charge summary
+
+        Total your store's completed charges for a date range and compare them with the period of the same length just before it, as the charges analytics page does. Only `COMPLETED` charges count, dated by when they completed; pending, voided, and failed charges are left out. `revenue` is in integer minor units of the store currency, converted from each charge's USD total: `12450` means $124.50 in USD. Send `start_date` and `end_date` as `YYYY-MM-DD` days in the store's time zone, both included, or a `preset`; dates take precedence over `preset`, and without either the summary covers `last_30_days`. An unknown `preset` or a date not in `YYYY-MM-DD` form returns `422` on that parameter, and a range that ends before it starts returns `422` on `start_date` when you sent `start_date`, otherwise `end_date`. Requires the `charge` API-key ability and the charge permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            preset: A named range in the store's time zone: `today`, `yesterday`, `this_week`, `last_week`, `this_month`, `last_month`, `last_7_days`, `last_30_days` (the default), or `all_time`. `this_week`, `this_month`, and the `last_*_days` presets end today. `all_time` starts on the day the store was created or took its first order, whichever is earlier. Ignored when `start_date` or `end_date` is sent. Defaults to `last_30_days`.
+            start_date: First day of the range, `YYYY-MM-DD`, in the store's time zone. Inclusive. Sent without `end_date`, the range runs to the end of today.
+            end_date: Last day of the range, `YYYY-MM-DD`, in the store's time zone. Inclusive. Sent without `start_date`, the range starts on the day the store was created or took its first order, whichever is earlier.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkGetChargeSummaryResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "getChargeSummary",
+        }
+        params: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "preset": enum_value(preset) if preset is not None else None,
+                "start_date": start_date,
+                "end_date": end_date,
+            }.items()
+            if v is not None
+        }
+        return await self._client.request(
+            method="get",
+            path=("v2", "charges", "summary"),
+            params=params,
+            model=SdkGetChargeSummaryResponseValue200ApplicationJson,
             request_options=request_options,
         )

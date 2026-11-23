@@ -50,6 +50,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "updated_at",
         "deleted_at",
         "product",
+        "is_draft",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
@@ -83,6 +84,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "product": {"kind": "any"},
+        "is_draft": {"kind": "primitive", "type": "boolean"},
     },
     "additionalProperties": True,
 }
@@ -105,6 +107,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "updated_at",
         "deleted_at",
         "product",
+        "is_draft",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
@@ -138,6 +141,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "inner": {"kind": "primitive", "type": "string", "format": "date-time"},
         },
         "product": {"kind": "any"},
+        "is_draft": {"kind": "primitive", "type": "boolean"},
     },
     "additionalProperties": True,
 }
@@ -168,6 +172,8 @@ class ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
     updated_at: datetime
     deleted_at: datetime | None
     product: ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct
+    is_draft: bool
+    """`true` while the variant is a draft that customers cannot buy. Listing, searching, and retrieving variants leave drafts out unless you send `with_drafts` or `only_drafts`."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -221,6 +227,7 @@ class ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                 product=ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
                     cast(dict[str, Any], data["product"])
                 ),
+                is_draft=data["is_draft"],
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -240,6 +247,7 @@ class ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
                         "updated_at",
                         "deleted_at",
                         "product",
+                        "is_draft",
                     ],
                 ),
                 _from_response=True,
@@ -268,6 +276,7 @@ class ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["updated_at"] = self.updated_at
         _domain_data["deleted_at"] = self.deleted_at
         _domain_data["product"] = self.product
+        _domain_data["is_draft"] = self.is_draft
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -305,4 +314,5 @@ class ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem:
         else:
             result["deleted_at"] = None
         result["product"] = self.product.to_dict()
+        result["is_draft"] = self.is_draft
         return result

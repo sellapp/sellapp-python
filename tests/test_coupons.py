@@ -15,6 +15,7 @@ from sellapp_sdk._errors import (
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.blacklists.models import (
+    BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem,
     BatchUpdateCouponsRequestApplicationJsonPropertyResources,
     SdkBatchUpdateCouponsResponseValue200ApplicationJson,
     SdkGetCouponResponseValue200ApplicationJson,
@@ -24,6 +25,7 @@ from sellapp_sdk.blacklists.models import (
     SdkV2BatchUpdateCouponsResponseValue200ApplicationJson,
     SdkV2CreateCouponResponseValue201ApplicationJson,
     SdkV2GetCouponResponseValue200ApplicationJson,
+    SdkV2GetCouponUsageResponseValue200ApplicationJson,
     SdkV2ReplaceCouponResponseValue200ApplicationJson,
     SdkV2UpdateCouponResponseValue200ApplicationJson,
     SearchCouponsResponseValue200ApplicationJsonPropertyDataItem,
@@ -33,7 +35,6 @@ from sellapp_sdk.blacklists.models import (
     V2SearchCouponsResponseValue200ApplicationJsonPropertyDataItem,
 )
 from sellapp_sdk.common.models import (
-    BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem,
     ListCouponsResponseValue200ApplicationJsonPropertyDataItem,
     SdkBatchCreateCouponsResponseValue200ApplicationJson,
     SdkCreateCouponRequestApplicationJsonType,
@@ -382,6 +383,7 @@ class TestCoupons:
             limit=10,
             before="cursor before",
             after="cursor/after",
+            page=7,
             with_trashed=True,
             only_trashed=True,
         )
@@ -389,6 +391,7 @@ class TestCoupons:
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
         assert request.url.params["with_trashed"] == "true"
         assert request.url.params["only_trashed"] == "true"
 
@@ -569,6 +572,18 @@ class TestCoupons:
         request = httpx_mock.get_request()
         assert request.url.params["with_trashed"] == "true"
         assert request.url.params["only_trashed"] == "true"
+
+    def test_v2_get_coupon_usage(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_v_2_get_coupon_usage_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.coupons.v2_get_coupon_usage("test_coupon")
+        assert isinstance(result, SdkV2GetCouponUsageResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/coupons/test_coupon/usage")
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -1035,6 +1050,7 @@ class TestAsyncCoupons:
             limit=10,
             before="cursor before",
             after="cursor/after",
+            page=7,
             with_trashed=True,
             only_trashed=True,
         )
@@ -1042,6 +1058,7 @@ class TestAsyncCoupons:
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
         assert request.url.params["with_trashed"] == "true"
         assert request.url.params["only_trashed"] == "true"
 
@@ -1239,6 +1256,19 @@ class TestAsyncCoupons:
         request = httpx_mock.get_request()
         assert request.url.params["with_trashed"] == "true"
         assert request.url.params["only_trashed"] == "true"
+
+    @pytest.mark.asyncio
+    async def test_v2_get_coupon_usage(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_v_2_get_coupon_usage_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.coupons.v2_get_coupon_usage("test_coupon")
+        assert isinstance(result, SdkV2GetCouponUsageResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/coupons/test_coupon/usage")
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

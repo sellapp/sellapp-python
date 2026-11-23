@@ -30,6 +30,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "line_item_id",
         "type",
         "status",
+        "delivered_product_id",
         "product_variant_id",
         "quantity",
         "deliverable",
@@ -40,6 +41,10 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "line_item_id": {"kind": "primitive", "type": "integer"},
         "type": {"kind": "primitive", "type": "string"},
         "status": {"kind": "enum", "values": ["pending", "delivered"]},
+        "delivered_product_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
         "product_variant_id": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "integer"},
@@ -57,6 +62,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "line_item_id",
         "type",
         "status",
+        "delivered_product_id",
         "product_variant_id",
         "quantity",
         "deliverable",
@@ -67,6 +73,10 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "line_item_id": {"kind": "primitive", "type": "integer"},
         "type": {"kind": "primitive", "type": "string"},
         "status": {"kind": "enum", "values": ["pending", "delivered"]},
+        "delivered_product_id": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "integer"},
+        },
         "product_variant_id": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "integer"},
@@ -87,6 +97,8 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
     line_item_id: int
     type: str
     status: ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemStatus
+    delivered_product_id: int | None
+    """The delivery record for this item, or null while `status` is `pending`. Send it to `POST /v2/orders/{order}/dynamic-delivery-retries` to retry a dynamic delivery."""
     product_variant_id: int | None
     quantity: int
     deliverable: ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable
@@ -119,6 +131,7 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                 status=ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemStatus(
                     data["status"]
                 ),
+                delivered_product_id=data["delivered_product_id"],
                 product_variant_id=data["product_variant_id"],
                 quantity=data["quantity"],
                 deliverable=ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
@@ -137,6 +150,7 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
                         "line_item_id",
                         "type",
                         "status",
+                        "delivered_product_id",
                         "product_variant_id",
                         "quantity",
                         "deliverable",
@@ -158,6 +172,7 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["line_item_id"] = self.line_item_id
         _domain_data["type"] = self.type
         _domain_data["status"] = self.status
+        _domain_data["delivered_product_id"] = self.delivered_product_id
         _domain_data["product_variant_id"] = self.product_variant_id
         _domain_data["quantity"] = self.quantity
         _domain_data["deliverable"] = self.deliverable
@@ -177,6 +192,10 @@ class ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem:
         result["status"] = (
             self.status.value if isinstance(self.status, Enum) else self.status
         )
+        if self.delivered_product_id is not None:
+            result["delivered_product_id"] = self.delivered_product_id
+        else:
+            result["delivered_product_id"] = None
         if self.product_variant_id is not None:
             result["product_variant_id"] = self.product_variant_id
         else:

@@ -61,9 +61,6 @@ from sellapp_sdk.common.models.sdk_create_fulfillment_notifications_request_appl
 from sellapp_sdk.common.models.sdk_create_fulfillment_retry_request_application_json import (
     SdkCreateFulfillmentRetryRequestApplicationJson as SdkCreateFulfillmentRetryRequestApplicationJson,
 )
-from sellapp_sdk.common.models.sdk_update_invoice_status_request_application_json import (
-    SdkUpdateInvoiceStatusRequestApplicationJson as SdkUpdateInvoiceStatusRequestApplicationJson,
-)
 
 from .create_checkout_session_response_value_200_application_json_property_invoice import (
     CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice as CreateCheckoutSessionResponseValue200ApplicationJsonPropertyInvoice,
@@ -301,9 +298,6 @@ from .get_invoice_response_value_200_application_json_property_data_property_web
 )
 from .invoices_payment_methods import InvoicesPaymentMethods as InvoicesPaymentMethods
 from .invoices_status import InvoicesStatus as InvoicesStatus
-from .issue_replacement_for_completed_invoice_request_application_json_property_product_variants import (
-    IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants as IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
-)
 from .issue_replacement_for_completed_invoice_response_value_200_application_json_property_customer_information import (
     IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyCustomerInformation as IssueReplacementForCompletedInvoiceResponseValue200ApplicationJsonPropertyCustomerInformation,
 )
@@ -609,6 +603,9 @@ from .sdk_search_invoices_request_application_json import (
 )
 from .sdk_search_invoices_response_value_200_application_json import (
     SdkSearchInvoicesResponseValue200ApplicationJson as SdkSearchInvoicesResponseValue200ApplicationJson,
+)
+from .sdk_update_invoice_status_request_application_json import (
+    SdkUpdateInvoiceStatusRequestApplicationJson as SdkUpdateInvoiceStatusRequestApplicationJson,
 )
 from .sdk_update_invoice_status_response_value_200_application_json import (
     SdkUpdateInvoiceStatusResponseValue200ApplicationJson as SdkUpdateInvoiceStatusResponseValue200ApplicationJson,

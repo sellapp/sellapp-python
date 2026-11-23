@@ -98,6 +98,19 @@ from sellapp_sdk.product_variants.models import (
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     DeleteProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyData,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyBulkDiscountItem,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverable,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProduct,
+    DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     GetProductVariantResponseValue200ApplicationJsonPropertyData,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverable,
@@ -111,6 +124,11 @@ from sellapp_sdk.product_variants.models import (
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     GetProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
+    GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData,
+    GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy,
+    GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem,
+    GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy,
+    GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy,
     ListBookingAvailabilityResponseValue200ApplicationJsonPropertyDataItem,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem,
@@ -125,6 +143,32 @@ from sellapp_sdk.product_variants.models import (
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
     ListProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyData,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverable,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
+    PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItem,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct,
+    ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyBulkDiscountItem,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricing,
     ReplaceProductVariantPricingRequestApplicationJsonPropertyPricingPropertyCompareAtPrice,
@@ -168,21 +212,46 @@ from sellapp_sdk.product_variants.models import (
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
+    ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyData,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverable,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServers,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyDiscord,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertySlack,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyTelegram,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyWhatsapp,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricing,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProduct,
+    ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
     SdkBatchCreateProductVariantsResponseValue200ApplicationJson,
     SdkBatchDeleteProductVariantsResponseValue200ApplicationJson,
     SdkBatchUpdateProductVariantsResponseValue200ApplicationJson,
     SdkCreateBookingHoldResponseValue201ApplicationJson,
     SdkCreateProductVariantResponseValue201ApplicationJson,
     SdkDeleteProductVariantResponseValue200ApplicationJson,
+    SdkDuplicateProductVariantResponseValue201ApplicationJson,
     SdkGetProductVariantResponseValue200ApplicationJson,
+    SdkGetVariantSubscriptionSettingsResponseValue200ApplicationJson,
     SdkListBookingAvailabilityResponseValue200ApplicationJson,
     SdkListProductVariantsResponseValue200ApplicationJson,
+    SdkPublishProductVariantResponseValue200ApplicationJson,
     SdkReleaseBookingHoldResponseValue200ApplicationJson,
+    SdkReorderProductVariantsResponseValue200ApplicationJson,
     SdkReplaceProductVariantPricingResponseValue200ApplicationJson,
     SdkReplaceProductVariantWithPutResponseValue200ApplicationJson,
+    SdkReplaceVariantCommunityAccessResponseValue200ApplicationJson,
     SdkSearchProductVariantsResponseValue200ApplicationJson,
     SdkUpdateProductVariantPricingResponseValue200ApplicationJson,
     SdkUpdateProductVariantResponseValue200ApplicationJson,
+    SdkUpdateVariantSubscriptionSettingsResponseValue200ApplicationJson,
     SearchProductVariantsRequestApplicationJsonPropertyFiltersItem,
     SearchProductVariantsRequestApplicationJsonPropertyIncludesItem,
     SearchProductVariantsRequestApplicationJsonPropertySearch,
@@ -243,6 +312,14 @@ from sellapp_sdk.product_variants.models import (
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct,
     UpdateProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem,
+    UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy,
+    UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyPausePolicy,
+    UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyRenewalPolicy,
+    UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData,
+    UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy,
+    UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem,
+    UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy,
+    UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy,
 )
 from tests.generated_helpers import load_fixture
 
@@ -740,6 +817,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -765,6 +843,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_list_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -813,6 +892,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ListProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -894,6 +974,7 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ],
             "links": {},
@@ -1933,6 +2014,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             CreateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
@@ -1960,6 +2042,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_create_product_variant_response_value_201_application_json_property_data_preserves_nullable_fields(
         self,
@@ -2009,6 +2092,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             CreateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
@@ -2091,6 +2175,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = SdkCreateProductVariantResponseValue201ApplicationJson.from_dict(
@@ -2597,6 +2682,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             GetProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(data)
@@ -2622,6 +2708,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_get_product_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -2671,6 +2758,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             GetProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(data)
@@ -2749,6 +2837,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = SdkGetProductVariantResponseValue200ApplicationJson.from_dict(data)
@@ -3771,6 +3860,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -3796,6 +3886,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_replace_product_variant_with_put_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -3845,6 +3936,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ReplaceProductVariantWithPutResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -3929,6 +4021,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = (
@@ -4967,6 +5060,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             UpdateProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
@@ -4994,6 +5088,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_update_product_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -5043,6 +5138,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             UpdateProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
@@ -5125,6 +5221,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = SdkUpdateProductVariantResponseValue200ApplicationJson.from_dict(
@@ -5633,6 +5730,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             DeleteProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
@@ -5660,6 +5758,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_delete_product_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -5709,6 +5808,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = (
             DeleteProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
@@ -5791,6 +5891,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = SdkDeleteProductVariantResponseValue200ApplicationJson.from_dict(
@@ -6482,6 +6583,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -6507,6 +6609,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_search_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -6555,6 +6658,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -6638,6 +6742,7 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ],
             "links": {},
@@ -7525,6 +7630,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -7550,6 +7656,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_replace_product_variant_pricing_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -7599,6 +7706,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = ReplaceProductVariantPricingResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -7683,6 +7791,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = (
@@ -8578,6 +8687,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -8603,6 +8713,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_update_product_variant_pricing_response_value_200_application_json_property_data_preserves_nullable_fields(
         self,
@@ -8652,6 +8763,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = UpdateProductVariantPricingResponseValue200ApplicationJsonPropertyData.from_dict(
             data
@@ -8736,6 +8848,7 @@ class TestModelRoundTrip:
                         }
                     ]
                 },
+                "is_draft": True,
             }
         }
         instance = (
@@ -10372,6 +10485,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -10397,6 +10511,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_batch_create_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -10446,6 +10561,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchCreateProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -10532,6 +10648,7 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ]
         }
@@ -11744,6 +11861,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -11769,6 +11887,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_batch_update_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -11818,6 +11937,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchUpdateProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -11904,6 +12024,7 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ]
         }
@@ -12409,6 +12530,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -12434,6 +12556,7 @@ class TestModelRoundTrip:
         assert serialized["updated_at"] == data["updated_at"]
         assert serialized["deleted_at"] == data["deleted_at"]
         assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
 
     def test_batch_delete_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -12483,6 +12606,7 @@ class TestModelRoundTrip:
                     }
                 ]
             },
+            "is_draft": True,
         }
         instance = BatchDeleteProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -12569,11 +12693,3799 @@ class TestModelRoundTrip:
                             }
                         ]
                     },
+                    "is_draft": True,
                 }
             ]
         }
         instance = (
             SdkBatchDeleteProductVariantsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_deliverable_property_data.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_property_data_minimal_payload(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode"}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["removeDuplicate"] == data["removeDuplicate"]
+        assert serialized["parsingMode"] == data["parsingMode"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode", "stock": 1}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "comment" not in serialized
+        assert "serials" not in serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "removeDuplicate": True,
+            "parsingMode": "test_parsingMode",
+            "stock": None,
+            "comment": "test_comment",
+            "serials": ["test_serials"],
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["stock"] is None
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_deliverable.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_deliverable_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "removeDuplicate": True,
+                "parsingMode": "test_parsingMode",
+                "stock": 1,
+                "comment": "test_comment",
+                "serials": ["test_serials"],
+            },
+            "types": ["test_types"],
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["types"] == data["types"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_frequency_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_frequency.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_frequency_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "test_interval"}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_price.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_publish_product_variant_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_pricing.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_minimal_payload(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["humble"] == data["humble"]
+        assert serialized["frequency"] == data["frequency"]
+        assert serialized["type"] == data["type"]
+        assert serialized["price"] == data["price"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_bulk_discount_item_minimal_payload(
+        self,
+    ):
+        data = {"discount_percentage": 1, "minimum_purchase_amount": 1}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["discount_percentage"] == data["discount_percentage"]
+        assert serialized["minimum_purchase_amount"] == data["minimum_purchase_amount"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_other_settings.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {"quantity_increments": 1, "discord_data_required": True}
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["quantity_increments"] == data["quantity_increments"]
+        assert serialized["discord_data_required"] == data["discord_data_required"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_product_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_product_property_additional_information_item.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_product_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_product_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data_property_product.json"
+        )
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_property_product_minimal_payload(
+        self,
+    ):
+        data = {
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ]
+        }
+        instance = PublishProductVariantResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["additional_information"] == data["additional_information"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "publish_product_variant_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            PublishProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            PublishProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = (
+            PublishProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["description"] == data["description"]
+        assert serialized["deliverable"] == data["deliverable"]
+        assert serialized["pricing"] == data["pricing"]
+        assert (
+            serialized["minimum_purchase_quantity"] == data["minimum_purchase_quantity"]
+        )
+        assert (
+            serialized["maximum_purchase_quantity"] == data["maximum_purchase_quantity"]
+        )
+        assert serialized["bulk_discount"] == data["bulk_discount"]
+        assert serialized["payment_methods"] == data["payment_methods"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["order"] == data["order"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
+
+    def test_publish_product_variant_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = (
+            PublishProductVariantResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["maximum_purchase_quantity"] is None
+        assert serialized["bulk_discount"] is None
+        assert serialized["order"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_sdk_publish_product_variant_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_publish_product_variant_response_value_200_application_json.json"
+        )
+        instance = SdkPublishProductVariantResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkPublishProductVariantResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_publish_product_variant_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_id": 1,
+                "title": "test_title",
+                "description": "test_description",
+                "deliverable": {
+                    "data": {
+                        "removeDuplicate": True,
+                        "parsingMode": "test_parsingMode",
+                        "stock": 1,
+                        "comment": "test_comment",
+                        "serials": ["test_serials"],
+                    },
+                    "types": ["test_types"],
+                },
+                "pricing": {
+                    "humble": True,
+                    "frequency": {"value": 1, "interval": "test_interval"},
+                    "type": "test_type",
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
+                },
+                "minimum_purchase_quantity": 1,
+                "maximum_purchase_quantity": 1,
+                "bulk_discount": [
+                    {"discount_percentage": 1, "minimum_purchase_amount": 1}
+                ],
+                "payment_methods": ["test_payment_methods"],
+                "other_settings": {
+                    "quantity_increments": 1,
+                    "discord_data_required": True,
+                },
+                "order": 1,
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "product": {
+                    "additional_information": [
+                        {
+                            "required": True,
+                            "key": "test_key",
+                            "type": "test_type",
+                            "label": "test_label",
+                        }
+                    ]
+                },
+                "is_draft": True,
+            }
+        }
+        instance = SdkPublishProductVariantResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_property_data.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_property_data_minimal_payload(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode"}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["removeDuplicate"] == data["removeDuplicate"]
+        assert serialized["parsingMode"] == data["parsingMode"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode", "stock": 1}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "comment" not in serialized
+        assert "serials" not in serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "removeDuplicate": True,
+            "parsingMode": "test_parsingMode",
+            "stock": None,
+            "comment": "test_comment",
+            "serials": ["test_serials"],
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["stock"] is None
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_deliverable_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "removeDuplicate": True,
+                "parsingMode": "test_parsingMode",
+                "stock": 1,
+                "comment": "test_comment",
+                "serials": ["test_serials"],
+            },
+            "types": ["test_types"],
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["types"] == data["types"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_frequency_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_frequency.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_frequency_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "test_interval"}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_price.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_pricing.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_minimal_payload(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["humble"] == data["humble"]
+        assert serialized["frequency"] == data["frequency"]
+        assert serialized["type"] == data["type"]
+        assert serialized["price"] == data["price"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_bulk_discount_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_bulk_discount_item.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_bulk_discount_item_minimal_payload(
+        self,
+    ):
+        data = {"discount_percentage": 1, "minimum_purchase_amount": 1}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["discount_percentage"] == data["discount_percentage"]
+        assert serialized["minimum_purchase_amount"] == data["minimum_purchase_amount"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_other_settings.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {"quantity_increments": 1, "discord_data_required": True}
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["quantity_increments"] == data["quantity_increments"]
+        assert serialized["discord_data_required"] == data["discord_data_required"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_product_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_product_property_additional_information_item.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_product_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_product_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data_property_product.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_property_product_minimal_payload(
+        self,
+    ):
+        data = {
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ]
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["additional_information"] == data["additional_information"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "duplicate_product_variant_response_value_201_application_json_property_data.json"
+        )
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DuplicateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["description"] == data["description"]
+        assert serialized["deliverable"] == data["deliverable"]
+        assert serialized["pricing"] == data["pricing"]
+        assert (
+            serialized["minimum_purchase_quantity"] == data["minimum_purchase_quantity"]
+        )
+        assert (
+            serialized["maximum_purchase_quantity"] == data["maximum_purchase_quantity"]
+        )
+        assert serialized["bulk_discount"] == data["bulk_discount"]
+        assert serialized["payment_methods"] == data["payment_methods"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["order"] == data["order"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
+
+    def test_duplicate_product_variant_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = DuplicateProductVariantResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["maximum_purchase_quantity"] is None
+        assert serialized["bulk_discount"] is None
+        assert serialized["order"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_sdk_duplicate_product_variant_response_value_201_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_duplicate_product_variant_response_value_201_application_json.json"
+        )
+        instance = SdkDuplicateProductVariantResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkDuplicateProductVariantResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_duplicate_product_variant_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_id": 1,
+                "title": "test_title",
+                "description": "test_description",
+                "deliverable": {
+                    "data": {
+                        "removeDuplicate": True,
+                        "parsingMode": "test_parsingMode",
+                        "stock": 1,
+                        "comment": "test_comment",
+                        "serials": ["test_serials"],
+                    },
+                    "types": ["test_types"],
+                },
+                "pricing": {
+                    "humble": True,
+                    "frequency": {"value": 1, "interval": "test_interval"},
+                    "type": "test_type",
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
+                },
+                "minimum_purchase_quantity": 1,
+                "maximum_purchase_quantity": 1,
+                "bulk_discount": [
+                    {"discount_percentage": 1, "minimum_purchase_amount": 1}
+                ],
+                "payment_methods": ["test_payment_methods"],
+                "other_settings": {
+                    "quantity_increments": 1,
+                    "discord_data_required": True,
+                },
+                "order": 1,
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "product": {
+                    "additional_information": [
+                        {
+                            "required": True,
+                            "key": "test_key",
+                            "type": "test_type",
+                            "label": "test_label",
+                        }
+                    ]
+                },
+                "is_draft": True,
+            }
+        }
+        instance = SdkDuplicateProductVariantResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data_minimal_payload(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode"}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["removeDuplicate"] == data["removeDuplicate"]
+        assert serialized["parsingMode"] == data["parsingMode"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode", "stock": 1}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "comment" not in serialized
+        assert "serials" not in serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "removeDuplicate": True,
+            "parsingMode": "test_parsingMode",
+            "stock": None,
+            "comment": "test_comment",
+            "serials": ["test_serials"],
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["stock"] is None
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_deliverable_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "removeDuplicate": True,
+                "parsingMode": "test_parsingMode",
+                "stock": 1,
+                "comment": "test_comment",
+                "serials": ["test_serials"],
+            },
+            "types": ["test_types"],
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["types"] == data["types"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_frequency_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_frequency.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_frequency_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "test_interval"}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_price.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_minimal_payload(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["humble"] == data["humble"]
+        assert serialized["frequency"] == data["frequency"]
+        assert serialized["type"] == data["type"]
+        assert serialized["price"] == data["price"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_bulk_discount_item_minimal_payload(
+        self,
+    ):
+        data = {"discount_percentage": 1, "minimum_purchase_amount": 1}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["discount_percentage"] == data["discount_percentage"]
+        assert serialized["minimum_purchase_amount"] == data["minimum_purchase_amount"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_other_settings.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {"quantity_increments": 1, "discord_data_required": True}
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["quantity_increments"] == data["quantity_increments"]
+        assert serialized["discord_data_required"] == data["discord_data_required"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_product_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_product_property_additional_information_item.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_product_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_product_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item_property_product.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_property_product_minimal_payload(
+        self,
+    ):
+        data = {
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ]
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItemPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["additional_information"] == data["additional_information"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reorder_product_variants_response_value_200_application_json_property_data_item.json"
+        )
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["description"] == data["description"]
+        assert serialized["deliverable"] == data["deliverable"]
+        assert serialized["pricing"] == data["pricing"]
+        assert (
+            serialized["minimum_purchase_quantity"] == data["minimum_purchase_quantity"]
+        )
+        assert (
+            serialized["maximum_purchase_quantity"] == data["maximum_purchase_quantity"]
+        )
+        assert serialized["bulk_discount"] == data["bulk_discount"]
+        assert serialized["payment_methods"] == data["payment_methods"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["order"] == data["order"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
+
+    def test_reorder_product_variants_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {"quantity_increments": 1, "discord_data_required": True},
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = ReorderProductVariantsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["maximum_purchase_quantity"] is None
+        assert serialized["bulk_discount"] is None
+        assert serialized["order"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_sdk_reorder_product_variants_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_reorder_product_variants_response_value_200_application_json.json"
+        )
+        instance = SdkReorderProductVariantsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkReorderProductVariantsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_reorder_product_variants_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "id": 1,
+                    "product_id": 1,
+                    "title": "test_title",
+                    "description": "test_description",
+                    "deliverable": {
+                        "data": {
+                            "removeDuplicate": True,
+                            "parsingMode": "test_parsingMode",
+                            "stock": 1,
+                            "comment": "test_comment",
+                            "serials": ["test_serials"],
+                        },
+                        "types": ["test_types"],
+                    },
+                    "pricing": {
+                        "humble": True,
+                        "frequency": {"value": 1, "interval": "test_interval"},
+                        "type": "test_type",
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                        "trial": {
+                            "kind": "free",
+                            "length": {"value": 1, "interval": "DAY"},
+                            "price": {
+                                "price": "test_price",
+                                "currency": "test_currency",
+                            },
+                        },
+                    },
+                    "minimum_purchase_quantity": 1,
+                    "maximum_purchase_quantity": 1,
+                    "bulk_discount": [
+                        {"discount_percentage": 1, "minimum_purchase_amount": 1}
+                    ],
+                    "payment_methods": ["test_payment_methods"],
+                    "other_settings": {
+                        "quantity_increments": 1,
+                        "discord_data_required": True,
+                    },
+                    "order": 1,
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                    "product": {
+                        "additional_information": [
+                            {
+                                "required": True,
+                                "key": "test_key",
+                                "type": "test_type",
+                                "label": "test_label",
+                            }
+                        ]
+                    },
+                    "is_draft": True,
+                }
+            ]
+        }
+        instance = SdkReorderProductVariantsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy.json"
+        )
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy_minimal_payload(
+        self,
+    ):
+        data = {
+            "max_pause_days": 1,
+            "min_active_days_between_pauses": 1,
+            "max_pauses_per_period": 1,
+            "requires_resume_date": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["max_pause_days"] == data["max_pause_days"]
+        assert (
+            serialized["min_active_days_between_pauses"]
+            == data["min_active_days_between_pauses"]
+        )
+        assert serialized["max_pauses_per_period"] == data["max_pauses_per_period"]
+        assert serialized["requires_resume_date"] == data["requires_resume_date"]
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy.json"
+        )
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_minimal_payload(
+        self,
+    ):
+        data = {
+            "max_shift_days": 1,
+            "max_changes_per_period": 1,
+            "allowed_day_min": None,
+            "allowed_day_max": None,
+            "preview_required": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["max_shift_days"] == data["max_shift_days"]
+        assert serialized["max_changes_per_period"] == data["max_changes_per_period"]
+        assert serialized["allowed_day_min"] == data["allowed_day_min"]
+        assert serialized["allowed_day_max"] == data["allowed_day_max"]
+        assert serialized["preview_required"] == data["preview_required"]
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "max_shift_days": 1,
+            "max_changes_per_period": 1,
+            "allowed_day_min": None,
+            "allowed_day_max": None,
+            "preview_required": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["allowed_day_min"] is None
+        assert serialized["allowed_day_max"] is None
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy.json"
+        )
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy_minimal_payload(
+        self,
+    ):
+        data = {"redeliver_on_renewal": True}
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["redeliver_on_renewal"] == data["redeliver_on_renewal"]
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item.json"
+        )
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": None,
+            "effective_timing": "immediate",
+            "proration_behavior": "invoice_now",
+            "customer_label": None,
+            "is_active": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["target_variant_id"] == data["target_variant_id"]
+        assert serialized["target_title"] == data["target_title"]
+        assert serialized["effective_timing"] == data["effective_timing"]
+        assert serialized["proration_behavior"] == data["proration_behavior"]
+        assert serialized["customer_label"] == data["customer_label"]
+        assert serialized["is_active"] == data["is_active"]
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": None,
+            "effective_timing": "immediate",
+            "proration_behavior": "invoice_now",
+            "customer_label": None,
+            "is_active": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["target_title"] is None
+        assert serialized["customer_label"] is None
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": "test_target_title",
+            "effective_timing": "unexpected_get_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_effective_timing",
+            "proration_behavior": "invoice_now",
+            "customer_label": "test_customer_label",
+            "is_active": True,
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_variant_subscription_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_variant_subscription_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": 1,
+            "pause_policy": {
+                "max_pause_days": 1,
+                "min_active_days_between_pauses": 1,
+                "max_pauses_per_period": 1,
+                "requires_resume_date": True,
+            },
+            "billing_date_policy": {
+                "max_shift_days": 1,
+                "max_changes_per_period": 1,
+                "allowed_day_min": 1,
+                "allowed_day_max": 1,
+                "preview_required": True,
+            },
+            "renewal_policy": {"redeliver_on_renewal": True},
+            "change_paths": [
+                {
+                    "target_variant_id": 1,
+                    "target_title": "test_target_title",
+                    "effective_timing": "immediate",
+                    "proration_behavior": "invoice_now",
+                    "customer_label": "test_customer_label",
+                    "is_active": True,
+                }
+            ],
+            "state": "test_statexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        }
+        instance = GetVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["pause_policy"] == data["pause_policy"]
+        assert serialized["billing_date_policy"] == data["billing_date_policy"]
+        assert serialized["renewal_policy"] == data["renewal_policy"]
+        assert serialized["change_paths"] == data["change_paths"]
+        assert serialized["state"] == data["state"]
+
+    def test_sdk_get_variant_subscription_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_variant_subscription_settings_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkGetVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkGetVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_variant_subscription_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "variant_id": 1,
+                "pause_policy": {
+                    "max_pause_days": 1,
+                    "min_active_days_between_pauses": 1,
+                    "max_pauses_per_period": 1,
+                    "requires_resume_date": True,
+                },
+                "billing_date_policy": {
+                    "max_shift_days": 1,
+                    "max_changes_per_period": 1,
+                    "allowed_day_min": 1,
+                    "allowed_day_max": 1,
+                    "preview_required": True,
+                },
+                "renewal_policy": {"redeliver_on_renewal": True},
+                "change_paths": [
+                    {
+                        "target_variant_id": 1,
+                        "target_title": "test_target_title",
+                        "effective_timing": "immediate",
+                        "proration_behavior": "invoice_now",
+                        "customer_label": "test_customer_label",
+                        "is_active": True,
+                    }
+                ],
+                "state": "test_statexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            }
+        }
+        instance = (
+            SdkGetVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_variant_subscription_settings_request_application_json_property_pause_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_request_application_json_property_pause_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyPausePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_request_application_json_property_pause_policy_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyPausePolicy.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_update_variant_subscription_settings_request_application_json_property_pause_policy_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "max_pause_days" not in serialized
+        assert "min_active_days_between_pauses" not in serialized
+        assert "max_pauses_per_period" not in serialized
+        assert "requires_resume_date" not in serialized
+
+    def test_update_variant_subscription_settings_request_application_json_property_billing_date_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_request_application_json_property_billing_date_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_request_application_json_property_billing_date_policy_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_update_variant_subscription_settings_request_application_json_property_billing_date_policy_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"allowed_day_min": 1, "allowed_day_max": 1}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "max_shift_days" not in serialized
+        assert "max_changes_per_period" not in serialized
+        assert "preview_required" not in serialized
+
+    def test_update_variant_subscription_settings_request_application_json_property_billing_date_policy_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "max_shift_days": 1,
+            "max_changes_per_period": 1,
+            "allowed_day_min": None,
+            "allowed_day_max": None,
+            "preview_required": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["allowed_day_min"] is None
+        assert serialized["allowed_day_max"] is None
+
+    def test_update_variant_subscription_settings_request_application_json_property_renewal_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_request_application_json_property_renewal_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyRenewalPolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_request_application_json_property_renewal_policy_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyRenewalPolicy.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_update_variant_subscription_settings_request_application_json_property_renewal_policy_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {}
+        instance = UpdateVariantSubscriptionSettingsRequestApplicationJsonPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "redeliver_on_renewal" not in serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_pause_policy_minimal_payload(
+        self,
+    ):
+        data = {
+            "max_pause_days": 1,
+            "min_active_days_between_pauses": 1,
+            "max_pauses_per_period": 1,
+            "requires_resume_date": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyPausePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["max_pause_days"] == data["max_pause_days"]
+        assert (
+            serialized["min_active_days_between_pauses"]
+            == data["min_active_days_between_pauses"]
+        )
+        assert serialized["max_pauses_per_period"] == data["max_pauses_per_period"]
+        assert serialized["requires_resume_date"] == data["requires_resume_date"]
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_minimal_payload(
+        self,
+    ):
+        data = {
+            "max_shift_days": 1,
+            "max_changes_per_period": 1,
+            "allowed_day_min": None,
+            "allowed_day_max": None,
+            "preview_required": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["max_shift_days"] == data["max_shift_days"]
+        assert serialized["max_changes_per_period"] == data["max_changes_per_period"]
+        assert serialized["allowed_day_min"] == data["allowed_day_min"]
+        assert serialized["allowed_day_max"] == data["allowed_day_max"]
+        assert serialized["preview_required"] == data["preview_required"]
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_billing_date_policy_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "max_shift_days": 1,
+            "max_changes_per_period": 1,
+            "allowed_day_min": None,
+            "allowed_day_max": None,
+            "preview_required": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyBillingDatePolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["allowed_day_min"] is None
+        assert serialized["allowed_day_max"] is None
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_renewal_policy_minimal_payload(
+        self,
+    ):
+        data = {"redeliver_on_renewal": True}
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyRenewalPolicy.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["redeliver_on_renewal"] == data["redeliver_on_renewal"]
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": None,
+            "effective_timing": "immediate",
+            "proration_behavior": "invoice_now",
+            "customer_label": None,
+            "is_active": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["target_variant_id"] == data["target_variant_id"]
+        assert serialized["target_title"] == data["target_title"]
+        assert serialized["effective_timing"] == data["effective_timing"]
+        assert serialized["proration_behavior"] == data["proration_behavior"]
+        assert serialized["customer_label"] == data["customer_label"]
+        assert serialized["is_active"] == data["is_active"]
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": None,
+            "effective_timing": "immediate",
+            "proration_behavior": "invoice_now",
+            "customer_label": None,
+            "is_active": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["target_title"] is None
+        assert serialized["customer_label"] is None
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "target_variant_id": 1,
+            "target_title": "test_target_title",
+            "effective_timing": "unexpected_update_variant_subscription_settings_response_value_200_application_json_property_data_property_change_paths_item_effective_timing",
+            "proration_behavior": "invoice_now",
+            "customer_label": "test_customer_label",
+            "is_active": True,
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyDataPropertyChangePathsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_variant_subscription_settings_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_variant_subscription_settings_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "variant_id": 1,
+            "pause_policy": {
+                "max_pause_days": 1,
+                "min_active_days_between_pauses": 1,
+                "max_pauses_per_period": 1,
+                "requires_resume_date": True,
+            },
+            "billing_date_policy": {
+                "max_shift_days": 1,
+                "max_changes_per_period": 1,
+                "allowed_day_min": 1,
+                "allowed_day_max": 1,
+                "preview_required": True,
+            },
+            "renewal_policy": {"redeliver_on_renewal": True},
+            "change_paths": [
+                {
+                    "target_variant_id": 1,
+                    "target_title": "test_target_title",
+                    "effective_timing": "immediate",
+                    "proration_behavior": "invoice_now",
+                    "customer_label": "test_customer_label",
+                    "is_active": True,
+                }
+            ],
+            "state": "test_statexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        }
+        instance = UpdateVariantSubscriptionSettingsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["pause_policy"] == data["pause_policy"]
+        assert serialized["billing_date_policy"] == data["billing_date_policy"]
+        assert serialized["renewal_policy"] == data["renewal_policy"]
+        assert serialized["change_paths"] == data["change_paths"]
+        assert serialized["state"] == data["state"]
+
+    def test_sdk_update_variant_subscription_settings_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_variant_subscription_settings_response_value_200_application_json.json"
+        )
+        instance = SdkUpdateVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkUpdateVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_variant_subscription_settings_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "product_id": 1,
+                "variant_id": 1,
+                "pause_policy": {
+                    "max_pause_days": 1,
+                    "min_active_days_between_pauses": 1,
+                    "max_pauses_per_period": 1,
+                    "requires_resume_date": True,
+                },
+                "billing_date_policy": {
+                    "max_shift_days": 1,
+                    "max_changes_per_period": 1,
+                    "allowed_day_min": 1,
+                    "allowed_day_max": 1,
+                    "preview_required": True,
+                },
+                "renewal_policy": {"redeliver_on_renewal": True},
+                "change_paths": [
+                    {
+                        "target_variant_id": 1,
+                        "target_title": "test_target_title",
+                        "effective_timing": "immediate",
+                        "proration_behavior": "invoice_now",
+                        "customer_label": "test_customer_label",
+                        "is_active": True,
+                    }
+                ],
+                "state": "test_statexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            }
+        }
+        instance = SdkUpdateVariantSubscriptionSettingsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_variant_community_access_request_application_json_property_community_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_request_application_json_property_community.json"
+        )
+        instance = ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_request_application_json_property_community_minimal_payload(
+        self,
+    ):
+        data = {"platform": "discord", "server_id": "server_id_01234"}
+        instance = ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["platform"] == data["platform"]
+        assert serialized["server_id"] == data["server_id"]
+
+    def test_replace_variant_community_access_request_application_json_property_community_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"platform": "discord", "server_id": "server_id_01234"}
+        instance = ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "role_ids" not in serialized
+        assert "required" not in serialized
+        assert "remove_on_expire" not in serialized
+
+    def test_replace_variant_community_access_request_application_json_property_community_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "platform": "unexpected_replace_variant_community_access_request_application_json_property_community_platform",
+            "server_id": "server_id_01234",
+            "role_ids": ["role_ids_0_01234"],
+            "required": True,
+            "remove_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessRequestApplicationJsonPropertyCommunity.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_property_data.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_property_data_minimal_payload(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode"}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["removeDuplicate"] == data["removeDuplicate"]
+        assert serialized["parsingMode"] == data["parsingMode"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_property_data_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"removeDuplicate": True, "parsingMode": "test_parsingMode", "stock": 1}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "comment" not in serialized
+        assert "serials" not in serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "removeDuplicate": True,
+            "parsingMode": "test_parsingMode",
+            "stock": None,
+            "comment": "test_comment",
+            "serials": ["test_serials"],
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverablePropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["stock"] is None
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_deliverable_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "removeDuplicate": True,
+                "parsingMode": "test_parsingMode",
+                "stock": 1,
+                "comment": "test_comment",
+                "serials": ["test_serials"],
+            },
+            "types": ["test_types"],
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyDeliverable.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["types"] == data["types"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_frequency_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_frequency.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_frequency_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "test_interval"}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyFrequency.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_price.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_length.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_minimal_payload(
+        self,
+    ):
+        data = {"value": 1, "interval": "DAY"}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["value"] == data["value"]
+        assert serialized["interval"] == data["interval"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "value": 1,
+            "interval": "unexpected_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_length_interval",
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyLength.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_price.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_property_price_minimal_payload(
+        self,
+    ):
+        data = {"price": "test_price", "currency": "test_currency"}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrialPropertyPrice.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["price"] == data["price"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_minimal_payload(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["kind"] == data["kind"]
+        assert serialized["length"] == data["length"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"kind": "free", "length": {"value": 1, "interval": "DAY"}}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "price" not in serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "kind": "unexpected_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_property_trial_kind",
+            "length": {"value": 1, "interval": "DAY"},
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricingPropertyTrial.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_pricing.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_minimal_payload(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["humble"] == data["humble"]
+        assert serialized["frequency"] == data["frequency"]
+        assert serialized["type"] == data["type"]
+        assert serialized["price"] == data["price"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_pricing_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "humble": True,
+            "frequency": {"value": 1, "interval": "test_interval"},
+            "type": "test_type",
+            "price": {"price": "test_price", "currency": "test_currency"},
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyPricing.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "trial" not in serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_bulk_discount_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_bulk_discount_item.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_bulk_discount_item_minimal_payload(
+        self,
+    ):
+        data = {"discount_percentage": 1, "minimum_purchase_amount": 1}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyBulkDiscountItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["discount_percentage"] == data["discount_percentage"]
+        assert serialized["minimum_purchase_amount"] == data["minimum_purchase_amount"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_discord_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_discord.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyDiscord.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyDiscord.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_discord_minimal_payload(
+        self,
+    ):
+        data = {
+            "server_id": "server_id_01234",
+            "roles": ["test_roles"],
+            "required": True,
+            "remove_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyDiscord.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["server_id"] == data["server_id"]
+        assert serialized["roles"] == data["roles"]
+        assert serialized["required"] == data["required"]
+        assert serialized["remove_on_expire"] == data["remove_on_expire"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_telegram_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_telegram.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyTelegram.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyTelegram.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_telegram_minimal_payload(
+        self,
+    ):
+        data = {
+            "server_id": "server_id_01234",
+            "roles": ["test_roles"],
+            "required": True,
+            "remove_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyTelegram.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["server_id"] == data["server_id"]
+        assert serialized["roles"] == data["roles"]
+        assert serialized["required"] == data["required"]
+        assert serialized["remove_on_expire"] == data["remove_on_expire"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_slack_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_slack.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertySlack.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertySlack.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_slack_minimal_payload(
+        self,
+    ):
+        data = {
+            "server_id": "server_id_01234",
+            "roles": ["test_roles"],
+            "required": True,
+            "remove_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertySlack.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["server_id"] == data["server_id"]
+        assert serialized["roles"] == data["roles"]
+        assert serialized["required"] == data["required"]
+        assert serialized["remove_on_expire"] == data["remove_on_expire"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_whatsapp_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_whatsapp.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyWhatsapp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyWhatsapp.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_property_whatsapp_minimal_payload(
+        self,
+    ):
+        data = {
+            "server_id": "server_id_01234",
+            "roles": ["test_roles"],
+            "required": True,
+            "remove_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServersPropertyWhatsapp.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["server_id"] == data["server_id"]
+        assert serialized["roles"] == data["roles"]
+        assert serialized["required"] == data["required"]
+        assert serialized["remove_on_expire"] == data["remove_on_expire"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServers.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServers.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServers.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_property_community_servers_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettingsPropertyCommunityServers.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "discord" not in serialized
+        assert "telegram" not in serialized
+        assert "slack" not in serialized
+        assert "whatsapp" not in serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_minimal_payload(
+        self,
+    ):
+        data = {"quantity_increments": 1, "discord_data_required": True}
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["quantity_increments"] == data["quantity_increments"]
+        assert serialized["discord_data_required"] == data["discord_data_required"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {
+            "quantity_increments": 1,
+            "discord_data_required": True,
+            "discord_server": "test_discord_server",
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "community_servers" not in serialized
+        assert "discord_roles" not in serialized
+        assert "discord_kick_on_expire" not in serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_other_settings_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "quantity_increments": 1,
+            "discord_data_required": True,
+            "community_servers": {
+                "discord": {
+                    "server_id": "server_id_01234",
+                    "roles": ["test_roles"],
+                    "required": True,
+                    "remove_on_expire": True,
+                },
+                "telegram": {
+                    "server_id": "server_id_01234",
+                    "roles": ["test_roles"],
+                    "required": True,
+                    "remove_on_expire": True,
+                },
+                "slack": {
+                    "server_id": "server_id_01234",
+                    "roles": ["test_roles"],
+                    "required": True,
+                    "remove_on_expire": True,
+                },
+                "whatsapp": {
+                    "server_id": "server_id_01234",
+                    "roles": ["test_roles"],
+                    "required": True,
+                    "remove_on_expire": True,
+                },
+            },
+            "discord_server": None,
+            "discord_roles": ["test_discord_roles"],
+            "discord_kick_on_expire": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyOtherSettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["discord_server"] is None
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_product_property_additional_information_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_product_property_additional_information_item.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_product_property_additional_information_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "required": True,
+            "key": "test_key",
+            "type": "test_type",
+            "label": "test_label",
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProductPropertyAdditionalInformationItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["required"] == data["required"]
+        assert serialized["key"] == data["key"]
+        assert serialized["type"] == data["type"]
+        assert serialized["label"] == data["label"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_product_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data_property_product.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_property_product_minimal_payload(
+        self,
+    ):
+        data = {
+            "additional_information": [
+                {
+                    "required": True,
+                    "key": "test_key",
+                    "type": "test_type",
+                    "label": "test_label",
+                }
+            ]
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyDataPropertyProduct.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["additional_information"] == data["additional_information"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_variant_community_access_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {
+                "quantity_increments": 1,
+                "discord_data_required": True,
+                "community_servers": {
+                    "discord": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "telegram": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "slack": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "whatsapp": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                },
+                "discord_server": "test_discord_server",
+                "discord_roles": ["test_discord_roles"],
+                "discord_kick_on_expire": True,
+            },
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["description"] == data["description"]
+        assert serialized["deliverable"] == data["deliverable"]
+        assert serialized["pricing"] == data["pricing"]
+        assert (
+            serialized["minimum_purchase_quantity"] == data["minimum_purchase_quantity"]
+        )
+        assert (
+            serialized["maximum_purchase_quantity"] == data["maximum_purchase_quantity"]
+        )
+        assert serialized["bulk_discount"] == data["bulk_discount"]
+        assert serialized["payment_methods"] == data["payment_methods"]
+        assert serialized["other_settings"] == data["other_settings"]
+        assert serialized["order"] == data["order"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["product"] == data["product"]
+        assert serialized["is_draft"] == data["is_draft"]
+
+    def test_replace_variant_community_access_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "title": "test_title",
+            "description": "test_description",
+            "deliverable": {
+                "data": {
+                    "removeDuplicate": True,
+                    "parsingMode": "test_parsingMode",
+                    "stock": 1,
+                    "comment": "test_comment",
+                    "serials": ["test_serials"],
+                },
+                "types": ["test_types"],
+            },
+            "pricing": {
+                "humble": True,
+                "frequency": {"value": 1, "interval": "test_interval"},
+                "type": "test_type",
+                "price": {"price": "test_price", "currency": "test_currency"},
+                "trial": {
+                    "kind": "free",
+                    "length": {"value": 1, "interval": "DAY"},
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                },
+            },
+            "minimum_purchase_quantity": 1,
+            "maximum_purchase_quantity": None,
+            "bulk_discount": None,
+            "payment_methods": ["test_payment_methods"],
+            "other_settings": {
+                "quantity_increments": 1,
+                "discord_data_required": True,
+                "community_servers": {
+                    "discord": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "telegram": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "slack": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                    "whatsapp": {
+                        "server_id": "server_id_01234",
+                        "roles": ["test_roles"],
+                        "required": True,
+                        "remove_on_expire": True,
+                    },
+                },
+                "discord_server": "test_discord_server",
+                "discord_roles": ["test_discord_roles"],
+                "discord_kick_on_expire": True,
+            },
+            "order": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": None,
+            "product": {
+                "additional_information": [
+                    {
+                        "required": True,
+                        "key": "test_key",
+                        "type": "test_type",
+                        "label": "test_label",
+                    }
+                ]
+            },
+            "is_draft": True,
+        }
+        instance = ReplaceVariantCommunityAccessResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["maximum_purchase_quantity"] is None
+        assert serialized["bulk_discount"] is None
+        assert serialized["order"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_sdk_replace_variant_community_access_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_variant_community_access_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceVariantCommunityAccessResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceVariantCommunityAccessResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_variant_community_access_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "product_id": 1,
+                "title": "test_title",
+                "description": "test_description",
+                "deliverable": {
+                    "data": {
+                        "removeDuplicate": True,
+                        "parsingMode": "test_parsingMode",
+                        "stock": 1,
+                        "comment": "test_comment",
+                        "serials": ["test_serials"],
+                    },
+                    "types": ["test_types"],
+                },
+                "pricing": {
+                    "humble": True,
+                    "frequency": {"value": 1, "interval": "test_interval"},
+                    "type": "test_type",
+                    "price": {"price": "test_price", "currency": "test_currency"},
+                    "trial": {
+                        "kind": "free",
+                        "length": {"value": 1, "interval": "DAY"},
+                        "price": {"price": "test_price", "currency": "test_currency"},
+                    },
+                },
+                "minimum_purchase_quantity": 1,
+                "maximum_purchase_quantity": 1,
+                "bulk_discount": [
+                    {"discount_percentage": 1, "minimum_purchase_amount": 1}
+                ],
+                "payment_methods": ["test_payment_methods"],
+                "other_settings": {
+                    "quantity_increments": 1,
+                    "discord_data_required": True,
+                    "community_servers": {
+                        "discord": {
+                            "server_id": "server_id_01234",
+                            "roles": ["test_roles"],
+                            "required": True,
+                            "remove_on_expire": True,
+                        },
+                        "telegram": {
+                            "server_id": "server_id_01234",
+                            "roles": ["test_roles"],
+                            "required": True,
+                            "remove_on_expire": True,
+                        },
+                        "slack": {
+                            "server_id": "server_id_01234",
+                            "roles": ["test_roles"],
+                            "required": True,
+                            "remove_on_expire": True,
+                        },
+                        "whatsapp": {
+                            "server_id": "server_id_01234",
+                            "roles": ["test_roles"],
+                            "required": True,
+                            "remove_on_expire": True,
+                        },
+                    },
+                    "discord_server": "test_discord_server",
+                    "discord_roles": ["test_discord_roles"],
+                    "discord_kick_on_expire": True,
+                },
+                "order": 1,
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "product": {
+                    "additional_information": [
+                        {
+                            "required": True,
+                            "key": "test_key",
+                            "type": "test_type",
+                            "label": "test_label",
+                        }
+                    ]
+                },
+                "is_draft": True,
+            }
+        }
+        instance = (
+            SdkReplaceVariantCommunityAccessResponseValue200ApplicationJson.from_dict(
+                data
+            )
         )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

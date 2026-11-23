@@ -2,6 +2,127 @@
 
 [All resources](../methods.md)
 
+## preview
+
+Preview variant buyer notification
+
+[API reference](https://sell.app/docs/api/product-variants/notify-variant-buyers) · Effect: **read**
+
+```python
+def preview(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| variant | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.variant_deliverables.preview(
+    product=1,
+    variant=2
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## notify
+
+Notify variant buyers
+
+[API reference](https://sell.app/docs/api/product-variants/notify-variant-buyers) · Effect: **write**
+
+```python
+def notify(
+        self,
+        product: int,
+        variant: int,
+        *,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkNotifyVariantBuyersResponseValue202ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| variant | `int` | Yes |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkNotifyVariantBuyersResponseValue202ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.variant_deliverables.notify(
+    product=1,
+    variant=2,
+    idempotency_key="example-mutation-001"
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 202, 400, 401, 403, 404, 409, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
 ## get
 
 Retrieve variant deliverable configuration

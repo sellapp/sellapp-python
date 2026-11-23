@@ -42,7 +42,6 @@ from .models import (
     CreateInvoiceRequestApplicationJsonPropertyProductVariants,
     InvoicesPaymentMethods,
     InvoicesStatus,
-    IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
     ListInvoicesResponseValue200ApplicationJsonPropertyDataItem,
     SdkCreateCheckoutSessionResponseValue200ApplicationJson,
     SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson,
@@ -900,7 +899,7 @@ class Invoices:
         self,
         invoice: int,
         *,
-        product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
+        product_variants: int | builtins.list[int],
         request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
         """Issue replacement for completed invoice
@@ -955,14 +954,26 @@ class Invoices:
             "operation_id": "issueReplacementForCompletedInvoice",
         }
         body: dict[str, Any] = {
-            "product_variants": product_variants.to_dict(),
+            "product_variants": product_variants,
         }
         _validate_model(
             body,
             {
                 "name": "SdkIssueReplacementForCompletedInvoiceRequestApplicationJson",
                 "required": ["product_variants"],
-                "properties": {"product_variants": {"kind": "any"}},
+                "properties": {
+                    "product_variants": {
+                        "kind": "union",
+                        "variants": [
+                            {"kind": "primitive", "type": "integer"},
+                            {
+                                "kind": "array",
+                                "items": {"kind": "primitive", "type": "integer"},
+                            },
+                        ],
+                        "composition": "anyOf",
+                    }
+                },
                 "additionalProperties": True,
             },
             direction="request",
@@ -1095,15 +1106,17 @@ class Invoices:
         invoice: int,
         *,
         amount: str | None | NotGiven = NOT_GIVEN,
+        expected_refunded_total_cents: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
         """Create invoice refund
 
-        Request a full or partial provider refund using the same idempotent refund ledger as the dashboard. Amounts are decimal currency strings, never floating-point numbers. Requires the `invoice` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request a full or partial provider refund using the same idempotent refund ledger as the dashboard. This sends real money back to the customer. Amounts are decimal currency strings, never floating-point numbers. Send the invoice's `payment.refunded_total_cents` unchanged as `expected_refunded_total_cents` so that a repeated or concurrent request is refused instead of refunding twice: the refund goes out only while the refunded total is still the amount you sent. A changed total returns `422` on `expected_refunded_total_cents`; read the invoice again before deciding whether to refund. Other refusals return `422` on `refund`, including, when you send `expected_refunded_total_cents`, a refund still pending on the order. Requires the `invoice` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             invoice: The invoice path parameter.
-            amount: Optional partial refund amount in major currency units. Omit for the full remaining refundable amount.
+            amount: Optional partial refund amount in major units of the invoice's `payment.refund_currency`. Omit for the full remaining refundable amount.
+            expected_refunded_total_cents: The refunded total you expect, in integer minor units of the invoice's `payment.refund_currency`, which can differ from the invoice currency: `500` means $5.00 in USD. Read it from `payment.refunded_total_cents` on the invoice and send it unchanged; it is `0` before the first refund. After a refund, `data.invoice.payment.refunded_total_cents` in the response is the value to send with the next one. With this field, the refund goes out only while the refunded total still equals it and no other refund on the order is pending. Omit it or send null to refund without the check.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1151,6 +1164,8 @@ class Invoices:
         body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
+        if not isinstance(expected_refunded_total_cents, NotGiven):
+            body["expected_refunded_total_cents"] = expected_refunded_total_cents
         _validate_model(
             body,
             {
@@ -1167,7 +1182,15 @@ class Invoices:
                                 "pattern": "^\\d+(\\.\\d+)?$",
                             },
                         },
-                    }
+                    },
+                    "expected_refunded_total_cents": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },
@@ -2313,7 +2336,7 @@ class AsyncInvoices:
         self,
         invoice: int,
         *,
-        product_variants: IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
+        product_variants: int | builtins.list[int],
         request_options: RequestOptions | None = None,
     ) -> SdkIssueReplacementForCompletedInvoiceResponseValue200ApplicationJson:
         """Issue replacement for completed invoice
@@ -2368,14 +2391,26 @@ class AsyncInvoices:
             "operation_id": "issueReplacementForCompletedInvoice",
         }
         body: dict[str, Any] = {
-            "product_variants": product_variants.to_dict(),
+            "product_variants": product_variants,
         }
         _validate_model(
             body,
             {
                 "name": "SdkIssueReplacementForCompletedInvoiceRequestApplicationJson",
                 "required": ["product_variants"],
-                "properties": {"product_variants": {"kind": "any"}},
+                "properties": {
+                    "product_variants": {
+                        "kind": "union",
+                        "variants": [
+                            {"kind": "primitive", "type": "integer"},
+                            {
+                                "kind": "array",
+                                "items": {"kind": "primitive", "type": "integer"},
+                            },
+                        ],
+                        "composition": "anyOf",
+                    }
+                },
                 "additionalProperties": True,
             },
             direction="request",
@@ -2508,15 +2543,17 @@ class AsyncInvoices:
         invoice: int,
         *,
         amount: str | None | NotGiven = NOT_GIVEN,
+        expected_refunded_total_cents: int | None | NotGiven = NOT_GIVEN,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateInvoiceRefundResponseValue200ApplicationJson:
         """Create invoice refund
 
-        Request a full or partial provider refund using the same idempotent refund ledger as the dashboard. Amounts are decimal currency strings, never floating-point numbers. Requires the `invoice` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Request a full or partial provider refund using the same idempotent refund ledger as the dashboard. This sends real money back to the customer. Amounts are decimal currency strings, never floating-point numbers. Send the invoice's `payment.refunded_total_cents` unchanged as `expected_refunded_total_cents` so that a repeated or concurrent request is refused instead of refunding twice: the refund goes out only while the refunded total is still the amount you sent. A changed total returns `422` on `expected_refunded_total_cents`; read the invoice again before deciding whether to refund. Other refusals return `422` on `refund`, including, when you send `expected_refunded_total_cents`, a refund still pending on the order. Requires the `invoice` token ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             invoice: The invoice path parameter.
-            amount: Optional partial refund amount in major currency units. Omit for the full remaining refundable amount.
+            amount: Optional partial refund amount in major units of the invoice's `payment.refund_currency`. Omit for the full remaining refundable amount.
+            expected_refunded_total_cents: The refunded total you expect, in integer minor units of the invoice's `payment.refund_currency`, which can differ from the invoice currency: `500` means $5.00 in USD. Read it from `payment.refunded_total_cents` on the invoice and send it unchanged; it is `0` before the first refund. After a refund, `data.invoice.payment.refunded_total_cents` in the response is the value to send with the next one. With this field, the refund goes out only while the refunded total still equals it and no other refund on the order is pending. Omit it or send null to refund without the check.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -2564,6 +2601,8 @@ class AsyncInvoices:
         body: dict[str, Any] = {}
         if not isinstance(amount, NotGiven):
             body["amount"] = amount
+        if not isinstance(expected_refunded_total_cents, NotGiven):
+            body["expected_refunded_total_cents"] = expected_refunded_total_cents
         _validate_model(
             body,
             {
@@ -2580,7 +2619,15 @@ class AsyncInvoices:
                                 "pattern": "^\\d+(\\.\\d+)?$",
                             },
                         },
-                    }
+                    },
+                    "expected_refunded_total_cents": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 0},
+                        },
+                    },
                 },
                 "additionalProperties": True,
             },

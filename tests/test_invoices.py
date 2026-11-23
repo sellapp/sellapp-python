@@ -22,7 +22,6 @@ from sellapp_sdk.common.models import (
 )
 from sellapp_sdk.invoices.models import (
     CreateInvoiceRequestApplicationJsonPropertyProductVariants,
-    IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants,
     ListInvoicesResponseValue200ApplicationJsonPropertyDataItem,
     SdkCreateCheckoutSessionResponseValue200ApplicationJson,
     SdkCreateDynamicDeliveryRetryResponseValue200ApplicationJson,
@@ -229,12 +228,7 @@ class TestInvoices:
             ),
         )
         result = sellapp_sdk.invoices.issue_replacement(
-            "test_invoice",
-            product_variants=IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants.from_dict(
-                load_fixture(
-                    "issue_replacement_for_completed_invoice_request_application_json_property_product_variants.json"
-                )
-            ),
+            "test_invoice", product_variants=1
         )
         assert isinstance(
             result,
@@ -626,12 +620,7 @@ class TestAsyncInvoices:
             )
         )
         result = await async_sellapp_sdk.invoices.issue_replacement(
-            "test_invoice",
-            product_variants=IssueReplacementForCompletedInvoiceRequestApplicationJsonPropertyProductVariants.from_dict(
-                load_fixture(
-                    "issue_replacement_for_completed_invoice_request_application_json_property_product_variants.json"
-                )
-            ),
+            "test_invoice", product_variants=1
         )
         assert isinstance(
             result,

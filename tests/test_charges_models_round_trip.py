@@ -5,12 +5,18 @@
 from sellapp_sdk.charges.models import (
     CreateChargeResponseValue201ApplicationJsonPropertyData,
     GetChargeResponseValue200ApplicationJsonPropertyData,
+    GetChargeSummaryResponseValue200ApplicationJsonPropertyData,
+    GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyComparedWith,
+    GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyCompletedCharges,
+    GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod,
+    GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyRevenue,
     ListChargesResponseValue200ApplicationJsonPropertyDataItem,
     PaginationLinks,
     PaginationMeta,
     PaginationMetaLink,
     SdkCreateChargeResponseValue201ApplicationJson,
     SdkGetChargeResponseValue200ApplicationJson,
+    SdkGetChargeSummaryResponseValue200ApplicationJson,
     SdkListChargesResponseValue200ApplicationJson,
     SdkMarkPendingChargeCompletedResponseValue200ApplicationJson,
     SdkMarkPendingChargeVoidedResponseValue200ApplicationJson,
@@ -396,6 +402,246 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert serialized["message"] == data["message"]
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_period_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_charge_summary_response_value_200_application_json_property_data_property_period.json"
+        )
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_period_minimal_payload(
+        self,
+    ):
+        data = {
+            "preset": "test_preset",
+            "start_date": "2023-01-01",
+            "end_date": "2023-01-01",
+            "timezone": "test_timezone",
+            "currency": "test_currency",
+        }
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["preset"] == data["preset"]
+        assert serialized["start_date"] == data["start_date"]
+        assert serialized["end_date"] == data["end_date"]
+        assert serialized["timezone"] == data["timezone"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_compared_with_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_charge_summary_response_value_200_application_json_property_data_property_compared_with.json"
+        )
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyComparedWith.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyComparedWith.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_compared_with_minimal_payload(
+        self,
+    ):
+        data = {"start_date": "2023-01-01", "end_date": "2023-01-01"}
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyComparedWith.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["start_date"] == data["start_date"]
+        assert serialized["end_date"] == data["end_date"]
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_revenue_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_charge_summary_response_value_200_application_json_property_data_property_revenue.json"
+        )
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyRevenue.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyRevenue.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_revenue_minimal_payload(
+        self,
+    ):
+        data = {
+            "currency": "test_currency",
+            "total_cents": 1,
+            "previous_total_cents": 1,
+            "formatted": "test_formatted",
+            "previous_formatted": "test_previous_formatted",
+            "trend": "test_trend",
+            "trend_up": True,
+        }
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyRevenue.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["currency"] == data["currency"]
+        assert serialized["total_cents"] == data["total_cents"]
+        assert serialized["previous_total_cents"] == data["previous_total_cents"]
+        assert serialized["formatted"] == data["formatted"]
+        assert serialized["previous_formatted"] == data["previous_formatted"]
+        assert serialized["trend"] == data["trend"]
+        assert serialized["trend_up"] == data["trend_up"]
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_completed_charges_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_charge_summary_response_value_200_application_json_property_data_property_completed_charges.json"
+        )
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyCompletedCharges.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyCompletedCharges.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_property_completed_charges_minimal_payload(
+        self,
+    ):
+        data = {
+            "count": 1,
+            "previous_count": 1,
+            "trend": "test_trend",
+            "trend_up": True,
+        }
+        instance = GetChargeSummaryResponseValue200ApplicationJsonPropertyDataPropertyCompletedCharges.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["count"] == data["count"]
+        assert serialized["previous_count"] == data["previous_count"]
+        assert serialized["trend"] == data["trend"]
+        assert serialized["trend_up"] == data["trend_up"]
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_charge_summary_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetChargeSummaryResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetChargeSummaryResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_charge_summary_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "period": {
+                "preset": "test_preset",
+                "start_date": "2023-01-01",
+                "end_date": "2023-01-01",
+                "timezone": "test_timezone",
+                "currency": "test_currency",
+            },
+            "compared_with": {"start_date": "2023-01-01", "end_date": "2023-01-01"},
+            "revenue": {
+                "currency": "test_currency",
+                "total_cents": 1,
+                "previous_total_cents": 1,
+                "formatted": "test_formatted",
+                "previous_formatted": "test_previous_formatted",
+                "trend": "test_trend",
+                "trend_up": True,
+            },
+            "completed_charges": {
+                "count": 1,
+                "previous_count": 1,
+                "trend": "test_trend",
+                "trend_up": True,
+            },
+        }
+        instance = (
+            GetChargeSummaryResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["period"] == data["period"]
+        assert serialized["compared_with"] == data["compared_with"]
+        assert serialized["revenue"] == data["revenue"]
+        assert serialized["completed_charges"] == data["completed_charges"]
+
+    def test_sdk_get_charge_summary_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_charge_summary_response_value_200_application_json.json"
+        )
+        instance = SdkGetChargeSummaryResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetChargeSummaryResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_charge_summary_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "period": {
+                    "preset": "test_preset",
+                    "start_date": "2023-01-01",
+                    "end_date": "2023-01-01",
+                    "timezone": "test_timezone",
+                    "currency": "test_currency",
+                },
+                "compared_with": {"start_date": "2023-01-01", "end_date": "2023-01-01"},
+                "revenue": {
+                    "currency": "test_currency",
+                    "total_cents": 1,
+                    "previous_total_cents": 1,
+                    "formatted": "test_formatted",
+                    "previous_formatted": "test_previous_formatted",
+                    "trend": "test_trend",
+                    "trend_up": True,
+                },
+                "completed_charges": {
+                    "count": 1,
+                    "previous_count": 1,
+                    "trend": "test_trend",
+                    "trend_up": True,
+                },
+            }
+        }
+        instance = SdkGetChargeSummaryResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
 
     def test_pagination_meta_link_round_trip(self):
         data = load_fixture("pagination_meta_link.json")

@@ -189,7 +189,10 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.e
 
 result = client.orders.search(
     filters=[
-        {"field": "transaction_id", "operator": "contains", "value": "pi_3Example"},
+        {"field": "created_at", "operator": "gte", "value": "2026-07-01T00:00:00Z"},
+        {"field": "created_at", "operator": "lte", "value": "2026-07-31T23:59:59Z"},
+        {"field": "total", "operator": "gte", "value": 1000},
+        {"field": "currency", "operator": "eq", "value": "USD"},
         {"field": "status", "operator": "in", "value": ["COMPLETED"]}
     ],
     sort=[{"field": "created_at", "direction": "desc"}],
@@ -287,6 +290,7 @@ def update_status(
         *,
         status: SdkUpdateOrderStatusRequestApplicationJsonStatus | str,
         expected_status: ExpectedStatus | str | None | NotGiven = NOT_GIVEN,
+        payment_received: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkUpdateOrderStatusResponseValue200ApplicationJson:
 ```
@@ -296,6 +300,7 @@ def update_status(
 | order | `int` | Yes |
 | status | `SdkUpdateOrderStatusRequestApplicationJsonStatus \| str` | Yes |
 | expected_status | `ExpectedStatus \| str \| None \| NotGiven` | No |
+| payment_received | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SdkUpdateOrderStatusResponseValue200ApplicationJson`.
@@ -409,7 +414,9 @@ def create_replacement(
         self,
         order: int,
         *,
-        product_variants: CreateOrderReplacementRequestApplicationJsonPropertyProductVariants,
+        product_variants: int
+        | builtins.list[int]
+        | CreateOrderReplacementRequestApplicationJsonPropertyProductVariantsAnyOfValue3,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderReplacementResponseValue200ApplicationJson:
@@ -418,7 +425,9 @@ def create_replacement(
 | Argument | Native type | Required |
 | --- | --- | --- |
 | order | `int` | Yes |
-| product_variants | `CreateOrderReplacementRequestApplicationJsonPropertyProductVariants` | Yes |
+| product_variants | `int
+        \| builtins.list[int]
+        \| CreateOrderReplacementRequestApplicationJsonPropertyProductVariantsAnyOfValue3` | Yes |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -472,6 +481,7 @@ def create_refund(
         order: int,
         *,
         amount: str | None | NotGiven = NOT_GIVEN,
+        expected_refunded_total_cents: int | None | NotGiven = NOT_GIVEN,
         idempotency_key: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SdkCreateOrderRefundResponseValue200ApplicationJson:
@@ -481,6 +491,7 @@ def create_refund(
 | --- | --- | --- |
 | order | `int` | Yes |
 | amount | `str \| None \| NotGiven` | No |
+| expected_refunded_total_cents | `int \| None \| NotGiven` | No |
 | idempotency_key | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -495,6 +506,7 @@ client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.e
 result = client.orders.create_refund(
     order=9001,
     amount="5.00",
+    expected_refunded_total_cents=0,
     idempotency_key="example-mutation-001"
 )
 print(result)
@@ -708,6 +720,68 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 404, 409, 410, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## regenerate_telegram_invite
+
+Create a Telegram invite link
+
+[API reference](https://sell.app/docs/api/orders/create-a-telegram-invite-link) · Effect: **consequential**
+
+```python
+def regenerate_telegram_invite(
+        self,
+        order: int,
+        *,
+        variant_id: int | None | NotGiven = NOT_GIVEN,
+        idempotency_key: str | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| order | `int` | Yes |
+| variant_id | `int \| None \| NotGiven` | No |
+| idempotency_key | `str \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.orders.regenerate_telegram_invite(
+    order=9001,
+    variant_id=4321,
+    idempotency_key="example-mutation-001"
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 201, 400, 401, 403, 404, 409, 410, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

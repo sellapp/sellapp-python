@@ -18,6 +18,7 @@ from sellapp_sdk.webhook_platform.models import (
     SdkGetWebhookDeliveryResponseValue200ApplicationJson,
     SdkListWebhookEventTypesResponseValue200ApplicationJson,
     SdkReplayWebhookDeliveryResponseValue201ApplicationJson,
+    WebhookPlatformStatus,
 )
 from tests.generated_helpers import load_fixture
 
@@ -56,6 +57,26 @@ class TestWebhookPlatform:
         page = sellapp_sdk.webhook_platform.list_webhook_deliveries()
         assert isinstance(page, SyncPage)
         assert page.data == []
+
+    def test_list_webhook_deliveries_encodes_query_params(
+        self, sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        sellapp_sdk.webhook_platform.list_webhook_deliveries(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            event_type="value event_type/test",
+            status=WebhookPlatformStatus("pending"),
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["event_type"] == "value event_type/test"
+        assert request.url.params["status"] == "pending"
 
     def test_get_webhook_delivery(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -229,6 +250,27 @@ class TestAsyncWebhookPlatform:
         page = await async_sellapp_sdk.webhook_platform.list_webhook_deliveries()
         assert isinstance(page, AsyncPage)
         assert page.data == []
+
+    @pytest.mark.asyncio
+    async def test_list_webhook_deliveries_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(json={"data": [], "list_metadata": {}})
+        await async_sellapp_sdk.webhook_platform.list_webhook_deliveries(
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            event_type="value event_type/test",
+            status=WebhookPlatformStatus("pending"),
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["limit"] == "10"
+        assert request.url.params["before"] == "cursor before"
+        assert request.url.params["after"] == "cursor/after"
+        assert request.url.params["page"] == "7"
+        assert request.url.params["event_type"] == "value event_type/test"
+        assert request.url.params["status"] == "pending"
 
     @pytest.mark.asyncio
     async def test_get_webhook_delivery(self, async_sellapp_sdk, httpx_mock):

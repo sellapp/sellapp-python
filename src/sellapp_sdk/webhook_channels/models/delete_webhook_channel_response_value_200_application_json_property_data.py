@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .list_webhook_channels_response_value_200_application_json_property_data_item import (
-    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem,
+from .create_webhook_channel_response_value_201_application_json_property_data import (
+    CreateWebhookChannelResponseValue201ApplicationJsonPropertyData,
 )
 
 DeleteWebhookChannelResponseValue200ApplicationJsonPropertyData: TypeAlias = (
-    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem
+    CreateWebhookChannelResponseValue201ApplicationJsonPropertyData
 )

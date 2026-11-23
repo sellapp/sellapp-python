@@ -16,9 +16,11 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.affiliate_payouts.models import (
     SdkGetAffiliatePayoutResponseValue200ApplicationJson,
+    SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson,
     SdkUpdateAffiliatePayoutStatusResponseValue200ApplicationJson,
 )
 from sellapp_sdk.common.models import (
+    AffiliatePayoutsPayoutMethod,
     AffiliatePayoutsStatus,
     ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem,
     SdkCreateAffiliatePayoutResponseValue200ApplicationJson,
@@ -56,6 +58,8 @@ class TestAffiliatePayouts:
             after="cursor/after",
             affiliate_id=7,
             status=AffiliatePayoutsStatus("due"),
+            payout_method=AffiliatePayoutsPayoutMethod("PAYPAL"),
+            search="value search/test",
             page=7,
         )
         request = httpx_mock.get_request()
@@ -64,6 +68,8 @@ class TestAffiliatePayouts:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["affiliate_id"] == "7"
         assert request.url.params["status"] == "due"
+        assert request.url.params["payout_method"] == "PAYPAL"
+        assert request.url.params["search"] == "value search/test"
         assert request.url.params["page"] == "7"
 
     def test_get(self, sellapp_sdk, httpx_mock):
@@ -112,6 +118,25 @@ class TestAffiliatePayouts:
         assert body[
             "status"
         ] == SdkUpdateAffiliatePayoutStatusRequestApplicationJsonStatus("due")
+
+    def test_mark_paid(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_mark_affiliate_payouts_paid_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.affiliate_payouts.mark_paid(
+            payout_ids=[1], expected_total_usd_cents=1
+        )
+        assert isinstance(
+            result, SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/affiliate-payouts/mark-paid")
+        body = json.loads(request.content)
+        assert "payout_ids" in body
+        assert body["expected_total_usd_cents"] == 1
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -246,6 +271,8 @@ class TestAsyncAffiliatePayouts:
             after="cursor/after",
             affiliate_id=7,
             status=AffiliatePayoutsStatus("due"),
+            payout_method=AffiliatePayoutsPayoutMethod("PAYPAL"),
+            search="value search/test",
             page=7,
         )
         request = httpx_mock.get_request()
@@ -254,6 +281,8 @@ class TestAsyncAffiliatePayouts:
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["affiliate_id"] == "7"
         assert request.url.params["status"] == "due"
+        assert request.url.params["payout_method"] == "PAYPAL"
+        assert request.url.params["search"] == "value search/test"
         assert request.url.params["page"] == "7"
 
     @pytest.mark.asyncio
@@ -301,6 +330,23 @@ class TestAsyncAffiliatePayouts:
         request = httpx_mock.get_request()
         assert request.method == "PATCH"
         assert request.url.path.endswith("/v2/affiliate-payouts/test_payout/status")
+
+    @pytest.mark.asyncio
+    async def test_mark_paid(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_mark_affiliate_payouts_paid_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.affiliate_payouts.mark_paid(
+            payout_ids=[1], expected_total_usd_cents=1
+        )
+        assert isinstance(
+            result, SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith("/v2/affiliate-payouts/mark-paid")
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

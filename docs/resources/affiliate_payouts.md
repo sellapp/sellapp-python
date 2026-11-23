@@ -18,6 +18,8 @@ def list(
         order: str | None = None,
         affiliate_id: int | None = None,
         status: AffiliatePayoutsStatus | str | None = None,
+        payout_method: AffiliatePayoutsPayoutMethod | str | None = None,
+        search: str | None = None,
         page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListAffiliatePayoutsResponseValue200ApplicationJsonPropertyDataItem]:
@@ -31,6 +33,8 @@ def list(
 | order | `str \| None` | No |
 | affiliate_id | `int \| None` | No |
 | status | `AffiliatePayoutsStatus \| str \| None` | No |
+| payout_method | `AffiliatePayoutsPayoutMethod \| str \| None` | No |
+| search | `str \| None` | No |
 | page | `int \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
@@ -237,6 +241,65 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## mark_paid
+
+Mark affiliate payouts paid
+
+[API reference](https://sell.app/docs/api/affiliates/mark-payouts-paid) · Effect: **consequential**
+
+```python
+def mark_paid(
+        self,
+        *,
+        payout_ids: builtins.list[int],
+        expected_total_usd_cents: int,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| payout_ids | `builtins.list[int]` | Yes |
+| expected_total_usd_cents | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkMarkAffiliatePayoutsPaidResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.affiliate_payouts.mark_paid(
+    payout_ids=[91, 92],
+    expected_total_usd_cents=4250
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

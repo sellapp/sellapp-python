@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .sdk_get_course_response_value_200_application_json import (
-    SdkGetCourseResponseValue200ApplicationJson,
+from .sdk_create_course_response_value_201_application_json import (
+    SdkCreateCourseResponseValue201ApplicationJson,
 )
 
 SdkReorderCourseSectionsResponseValue200ApplicationJson: TypeAlias = (
-    SdkGetCourseResponseValue200ApplicationJson
+    SdkCreateCourseResponseValue201ApplicationJson
 )

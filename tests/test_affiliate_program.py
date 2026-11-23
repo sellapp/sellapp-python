@@ -16,11 +16,14 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.affiliate_program.models import (
     ListPendingAffiliateInvitationsResponseValue200ApplicationJsonPropertyDataItem,
-    ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem,
     ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertySettings,
     SdkGetAffiliateProgramConfigurationResponseValue200ApplicationJson,
     SdkInviteAffiliateResponseValue201ApplicationJson,
     SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson,
+    SdkResendAffiliateInvitationResponseValue200ApplicationJson,
+)
+from sellapp_sdk.common.models import (
+    ReplaceAffiliateProgramConfigurationRequestApplicationJsonPropertyProductsItem,
 )
 from tests.generated_helpers import load_fixture
 
@@ -117,6 +120,22 @@ class TestAffiliateProgram:
         assert request.url.path.endswith("/v2/affiliate-invitations")
         body = json.loads(request.content)
         assert body["email"] == "test_email"
+
+    def test_resend(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_resend_affiliate_invitation_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.affiliate_program.resend("test_invitation")
+        assert isinstance(
+            result, SdkResendAffiliateInvitationResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/affiliate-invitations/test_invitation/resend"
+        )
 
     def test_get_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -315,6 +334,23 @@ class TestAsyncAffiliateProgram:
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith("/v2/affiliate-invitations")
+
+    @pytest.mark.asyncio
+    async def test_resend(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_resend_affiliate_invitation_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.affiliate_program.resend("test_invitation")
+        assert isinstance(
+            result, SdkResendAffiliateInvitationResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/affiliate-invitations/test_invitation/resend"
+        )
 
     @pytest.mark.asyncio
     async def test_get_with_request_options(self, async_sellapp_sdk, httpx_mock):

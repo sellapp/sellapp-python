@@ -6,17 +6,37 @@ from sellapp_sdk.wallet_settings.models import (
     AdjustCustomerWalletResponseValue200ApplicationJsonPropertyData,
     CreateWalletTopUpResponseValue201ApplicationJsonPropertyData,
     GetCustomerWalletResponseValue200ApplicationJsonPropertyData,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyData,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActiveRules,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActivity,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyHealth,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyIncentiveSpend,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertySettings,
+    GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem,
     GetWalletSettingsResponseValue200ApplicationJsonPropertyData,
     ListCustomerWalletsResponseValue200ApplicationJsonPropertyDataItem,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMeta,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFilters,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFiltersPropertyCustomer,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertySummary,
+    ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaLink,
     ListWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem,
     ReplaceWalletSettingsResponseValue200ApplicationJsonPropertyData,
+    ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData,
     SdkAdjustCustomerWalletResponseValue200ApplicationJson,
     SdkCreateWalletTopUpResponseValue201ApplicationJson,
     SdkGetCustomerWalletResponseValue200ApplicationJson,
+    SdkGetWalletOverviewResponseValue200ApplicationJson,
     SdkGetWalletSettingsResponseValue200ApplicationJson,
     SdkListCustomerWalletsResponseValue200ApplicationJson,
+    SdkListStoreWalletTransactionsResponseValue200ApplicationJson,
     SdkListWalletTransactionsResponseValue200ApplicationJson,
     SdkReplaceWalletSettingsResponseValue200ApplicationJson,
+    SdkReverseWalletTransactionResponseValue201ApplicationJson,
     SdkUpdateCustomerWalletStatusResponseValue200ApplicationJson,
     UpdateCustomerWalletStatusResponseValue200ApplicationJsonPropertyData,
 )
@@ -760,6 +780,1324 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
 
+    def test_reverse_wallet_transaction_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "reverse_wallet_transaction_response_value_201_application_json_property_data.json"
+        )
+        instance = ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_reverse_wallet_transaction_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "TOP_UP",
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+        }
+        instance = ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["wallet_id"] == data["wallet_id"]
+        assert serialized["type"] == data["type"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+
+    def test_reverse_wallet_transaction_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "TOP_UP",
+            "amount_cents": 1,
+            "currency_at_source": None,
+            "exchange_rate_to_usd": None,
+            "order_id": None,
+            "charge_id": None,
+            "reverses_entry_id": None,
+            "expired_at": None,
+            "balance_after_cents": 1,
+            "note": None,
+            "idempotency_key": None,
+            "expires_at": None,
+            "created_by_user_id": None,
+            "created_at": None,
+        }
+        instance = ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["currency_at_source"] is None
+        assert serialized["exchange_rate_to_usd"] is None
+        assert serialized["order_id"] is None
+        assert serialized["charge_id"] is None
+        assert serialized["reverses_entry_id"] is None
+        assert serialized["expired_at"] is None
+        assert serialized["note"] is None
+        assert serialized["idempotency_key"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["created_by_user_id"] is None
+        assert serialized["created_at"] is None
+
+    def test_reverse_wallet_transaction_response_value_201_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "unexpected_reverse_wallet_transaction_response_value_201_application_json_property_data_type",
+            "amount_cents": 1,
+            "currency_at_source": "test_currency_at_source",
+            "exchange_rate_to_usd": "test_exchange_rate_to_usd",
+            "order_id": 1,
+            "charge_id": 1,
+            "reverses_entry_id": 1,
+            "expired_at": "2023-01-01T00:00:00.000Z",
+            "balance_after_cents": 1,
+            "note": "test_note",
+            "idempotency_key": "idempotency_key_01234",
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "created_by_user_id": 1,
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ReverseWalletTransactionResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_reverse_wallet_transaction_response_value_201_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_reverse_wallet_transaction_response_value_201_application_json.json"
+        )
+        instance = SdkReverseWalletTransactionResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkReverseWalletTransactionResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_reverse_wallet_transaction_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "wallet_id": 1,
+                "type": "TOP_UP",
+                "amount_cents": 1,
+                "currency_at_source": "test_currency_at_source",
+                "exchange_rate_to_usd": "test_exchange_rate_to_usd",
+                "order_id": 1,
+                "charge_id": 1,
+                "reverses_entry_id": 1,
+                "expired_at": "2023-01-01T00:00:00.000Z",
+                "balance_after_cents": 1,
+                "note": "test_note",
+                "idempotency_key": "idempotency_key_01234",
+                "expires_at": "2023-01-01T00:00:00.000Z",
+                "created_by_user_id": 1,
+                "created_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkReverseWalletTransactionResponseValue201ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_data_item.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "TOP_UP",
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "customer_id": None,
+            "customer_email": None,
+            "reversed_by_entry_id": None,
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["wallet_id"] == data["wallet_id"]
+        assert serialized["type"] == data["type"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["customer_email"] == data["customer_email"]
+        assert serialized["reversed_by_entry_id"] == data["reversed_by_entry_id"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_data_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "TOP_UP",
+            "amount_cents": 1,
+            "currency_at_source": None,
+            "exchange_rate_to_usd": None,
+            "order_id": None,
+            "charge_id": None,
+            "reverses_entry_id": None,
+            "expired_at": None,
+            "balance_after_cents": 1,
+            "note": None,
+            "idempotency_key": None,
+            "expires_at": None,
+            "created_by_user_id": None,
+            "created_at": None,
+            "customer_id": None,
+            "customer_email": None,
+            "reversed_by_entry_id": None,
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["currency_at_source"] is None
+        assert serialized["exchange_rate_to_usd"] is None
+        assert serialized["order_id"] is None
+        assert serialized["charge_id"] is None
+        assert serialized["reverses_entry_id"] is None
+        assert serialized["expired_at"] is None
+        assert serialized["note"] is None
+        assert serialized["idempotency_key"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["created_by_user_id"] is None
+        assert serialized["created_at"] is None
+        assert serialized["customer_id"] is None
+        assert serialized["customer_email"] is None
+        assert serialized["reversed_by_entry_id"] is None
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "type": "unexpected_list_store_wallet_transactions_response_value_200_application_json_property_data_item_type",
+            "amount_cents": 1,
+            "currency_at_source": "test_currency_at_source",
+            "exchange_rate_to_usd": "test_exchange_rate_to_usd",
+            "order_id": 1,
+            "charge_id": 1,
+            "reverses_entry_id": 1,
+            "expired_at": "2023-01-01T00:00:00.000Z",
+            "balance_after_cents": 1,
+            "note": "test_note",
+            "idempotency_key": "idempotency_key_01234",
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "created_by_user_id": 1,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "customer_id": 1,
+            "customer_email": "test@example.com",
+            "reversed_by_entry_id": 1,
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period_minimal_payload(
+        self,
+    ):
+        data = {
+            "range": "7d",
+            "label": "test_label",
+            "start_at": None,
+            "end_at": None,
+            "currency": "USD",
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["range"] == data["range"]
+        assert serialized["label"] == data["label"]
+        assert serialized["start_at"] == data["start_at"]
+        assert serialized["end_at"] == data["end_at"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "range": "7d",
+            "label": "test_label",
+            "start_at": None,
+            "end_at": None,
+            "currency": "USD",
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["start_at"] is None
+        assert serialized["end_at"] is None
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "range": "unexpected_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_period_range",
+            "label": "test_label",
+            "start_at": "2023-01-01T00:00:00.000Z",
+            "end_at": "2023-01-01T00:00:00.000Z",
+            "currency": "USD",
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyPeriod.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_property_customer_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_property_customer.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFiltersPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFiltersPropertyCustomer.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_property_customer_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "email": None}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFiltersPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["email"] == data["email"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_property_customer_preserves_nullable_fields(
+        self,
+    ):
+        data = {"id": 1, "email": None}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFiltersPropertyCustomer.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["email"] is None
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFilters.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFilters.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_minimal_payload(
+        self,
+    ):
+        data = {"type": None, "type_label": None, "customer": None, "wallet_id": None}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFilters.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["type_label"] == data["type_label"]
+        assert serialized["customer"] == data["customer"]
+        assert serialized["wallet_id"] == data["wallet_id"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_filters_preserves_nullable_fields(
+        self,
+    ):
+        data = {"type": None, "type_label": None, "customer": None, "wallet_id": None}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertyFilters.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
+        assert serialized["type_label"] is None
+        assert serialized["customer"] is None
+        assert serialized["wallet_id"] is None
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_summary_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_summary.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertySummary.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_all_of_value_2_property_summary_minimal_payload(
+        self,
+    ):
+        data = {
+            "entries_count": 1,
+            "net_amount_cents": 1,
+            "credits_cents": 1,
+            "debits_cents": 1,
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaAllOfValue2PropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["entries_count"] == data["entries_count"]
+        assert serialized["net_amount_cents"] == data["net_amount_cents"]
+        assert serialized["credits_cents"] == data["credits_cents"]
+        assert serialized["debits_cents"] == data["debits_cents"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_minimal_payload(
+        self,
+    ):
+        data = {
+            "current_page": 1,
+            "from": None,
+            "last_page": 4,
+            "links": [
+                {"url": "https://example.com", "label": "test_label", "active": True}
+            ],
+            "path": "https://sell.app/api/v1/blacklists",
+            "per_page": 15,
+            "to": None,
+            "total": 57,
+            "period": {
+                "range": "7d",
+                "label": "test_label",
+                "start_at": "2023-01-01T00:00:00.000Z",
+                "end_at": "2023-01-01T00:00:00.000Z",
+                "currency": "USD",
+            },
+            "filters": {
+                "type": "TOP_UP",
+                "type_label": "test_type_label",
+                "customer": {"id": 1, "email": "test@example.com"},
+                "wallet_id": 1,
+            },
+            "summary": {
+                "entries_count": 1,
+                "net_amount_cents": 1,
+                "credits_cents": 1,
+                "debits_cents": 1,
+            },
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["current_page"] == data["current_page"]
+        assert serialized["from"] == data["from"]
+        assert serialized["last_page"] == data["last_page"]
+        assert serialized["links"] == data["links"]
+        assert serialized["path"] == data["path"]
+        assert serialized["per_page"] == data["per_page"]
+        assert serialized["to"] == data["to"]
+        assert serialized["total"] == data["total"]
+        assert serialized["period"] == data["period"]
+        assert serialized["filters"] == data["filters"]
+        assert serialized["summary"] == data["summary"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "current_page": 1,
+            "from": None,
+            "last_page": 4,
+            "links": [
+                {"url": "https://example.com", "label": "test_label", "active": True}
+            ],
+            "path": "https://sell.app/api/v1/blacklists",
+            "per_page": 15,
+            "to": None,
+            "total": 57,
+            "period": {
+                "range": "7d",
+                "label": "test_label",
+                "start_at": "2023-01-01T00:00:00.000Z",
+                "end_at": "2023-01-01T00:00:00.000Z",
+                "currency": "USD",
+            },
+            "filters": {
+                "type": "TOP_UP",
+                "type_label": "test_type_label",
+                "customer": {"id": 1, "email": "test@example.com"},
+                "wallet_id": 1,
+            },
+            "summary": {
+                "entries_count": 1,
+                "net_amount_cents": 1,
+                "credits_cents": 1,
+                "debits_cents": 1,
+            },
+        }
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMeta.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["from"] is None
+        assert serialized["to"] is None
+
+    def test_sdk_list_store_wallet_transactions_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_list_store_wallet_transactions_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkListStoreWalletTransactionsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkListStoreWalletTransactionsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_list_store_wallet_transactions_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "id": 1,
+                    "wallet_id": 1,
+                    "type": "TOP_UP",
+                    "amount_cents": 1,
+                    "currency_at_source": "test_currency_at_source",
+                    "exchange_rate_to_usd": "test_exchange_rate_to_usd",
+                    "order_id": 1,
+                    "charge_id": 1,
+                    "reverses_entry_id": 1,
+                    "expired_at": "2023-01-01T00:00:00.000Z",
+                    "balance_after_cents": 1,
+                    "note": "test_note",
+                    "idempotency_key": "idempotency_key_01234",
+                    "expires_at": "2023-01-01T00:00:00.000Z",
+                    "created_by_user_id": 1,
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "customer_id": 1,
+                    "customer_email": "test@example.com",
+                    "reversed_by_entry_id": 1,
+                }
+            ],
+            "links": {
+                "first": "https://sell.app/api/v1/blacklists?page=1",
+                "last": "https://sell.app/api/v1/blacklists?page=4",
+                "prev": None,
+                "next": "https://sell.app/api/v1/blacklists?page=2",
+            },
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "last_page": 4,
+                "links": [
+                    {
+                        "url": "https://example.com",
+                        "label": "test_label",
+                        "active": True,
+                    }
+                ],
+                "path": "https://sell.app/api/v1/blacklists",
+                "per_page": 15,
+                "to": 15,
+                "total": 57,
+                "period": {
+                    "range": "7d",
+                    "label": "test_label",
+                    "start_at": "2023-01-01T00:00:00.000Z",
+                    "end_at": "2023-01-01T00:00:00.000Z",
+                    "currency": "USD",
+                },
+                "filters": {
+                    "type": "TOP_UP",
+                    "type_label": "test_type_label",
+                    "customer": {"id": 1, "email": "test@example.com"},
+                    "wallet_id": 1,
+                },
+                "summary": {
+                    "entries_count": 1,
+                    "net_amount_cents": 1,
+                    "credits_cents": 1,
+                    "debits_cents": 1,
+                },
+            },
+        }
+        instance = (
+            SdkListStoreWalletTransactionsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+        assert serialized["links"] == data["links"]
+        assert serialized["meta"] == data["meta"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_period_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_period.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_period_minimal_payload(
+        self,
+    ):
+        data = {
+            "range": "7d",
+            "label": "test_label",
+            "start_at": None,
+            "end_at": None,
+            "currency": "USD",
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["range"] == data["range"]
+        assert serialized["label"] == data["label"]
+        assert serialized["start_at"] == data["start_at"]
+        assert serialized["end_at"] == data["end_at"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_period_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "range": "7d",
+            "label": "test_label",
+            "start_at": None,
+            "end_at": None,
+            "currency": "USD",
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["start_at"] is None
+        assert serialized["end_at"] is None
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_period_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "range": "unexpected_get_wallet_overview_response_value_200_application_json_property_data_property_period_range",
+            "label": "test_label",
+            "start_at": "2023-01-01T00:00:00.000Z",
+            "end_at": "2023-01-01T00:00:00.000Z",
+            "currency": "USD",
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_settings_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_settings.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertySettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertySettings.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_settings_minimal_payload(
+        self,
+    ):
+        data = {
+            "wallet_enabled": True,
+            "expiration_days": None,
+            "min_topup_cents": None,
+            "max_topup_cents": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertySettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["wallet_enabled"] == data["wallet_enabled"]
+        assert serialized["expiration_days"] == data["expiration_days"]
+        assert serialized["min_topup_cents"] == data["min_topup_cents"]
+        assert serialized["max_topup_cents"] == data["max_topup_cents"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_settings_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "wallet_enabled": True,
+            "expiration_days": None,
+            "min_topup_cents": None,
+            "max_topup_cents": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertySettings.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["expiration_days"] is None
+        assert serialized["min_topup_cents"] is None
+        assert serialized["max_topup_cents"] is None
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_health_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_health.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyHealth.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_health_minimal_payload(
+        self,
+    ):
+        data = {
+            "liability_cents": 1,
+            "available_cents": 1,
+            "held_cents": 1,
+            "held_count": 1,
+            "wallets_with_balance": 1,
+            "total_wallets": 1,
+            "frozen_wallets": 1,
+            "expiring_soon_cents": 1,
+            "expiring_soon_days": 1,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["liability_cents"] == data["liability_cents"]
+        assert serialized["available_cents"] == data["available_cents"]
+        assert serialized["held_cents"] == data["held_cents"]
+        assert serialized["held_count"] == data["held_count"]
+        assert serialized["wallets_with_balance"] == data["wallets_with_balance"]
+        assert serialized["total_wallets"] == data["total_wallets"]
+        assert serialized["frozen_wallets"] == data["frozen_wallets"]
+        assert serialized["expiring_soon_cents"] == data["expiring_soon_cents"]
+        assert serialized["expiring_soon_days"] == data["expiring_soon_days"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_activity_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_activity.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActivity.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActivity.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_activity_minimal_payload(
+        self,
+    ):
+        data = {"topups_cents": 1, "customer_spend_cents": 1}
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActivity.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["topups_cents"] == data["topups_cents"]
+        assert serialized["customer_spend_cents"] == data["customer_spend_cents"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_incentive_spend_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_incentive_spend.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyIncentiveSpend.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyIncentiveSpend.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_incentive_spend_minimal_payload(
+        self,
+    ):
+        data = {
+            "period": "7d",
+            "total_cents": 1,
+            "bonus_cents": 1,
+            "cashback_cents": 1,
+            "reward_cents": 1,
+            "recovered_cents": 1,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyIncentiveSpend.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["period"] == data["period"]
+        assert serialized["total_cents"] == data["total_cents"]
+        assert serialized["bonus_cents"] == data["bonus_cents"]
+        assert serialized["cashback_cents"] == data["cashback_cents"]
+        assert serialized["reward_cents"] == data["reward_cents"]
+        assert serialized["recovered_cents"] == data["recovered_cents"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_incentive_spend_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "period": "unexpected_get_wallet_overview_response_value_200_application_json_property_data_property_incentive_spend_period",
+            "total_cents": 1,
+            "bonus_cents": 1,
+            "cashback_cents": 1,
+            "reward_cents": 1,
+            "recovered_cents": 1,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyIncentiveSpend.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_active_rules_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_active_rules.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActiveRules.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActiveRules.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_active_rules_minimal_payload(
+        self,
+    ):
+        data = {
+            "cashback_rules_count": 1,
+            "bonus_tiers_count": 1,
+            "wallet_credit_reward_rules_count": 1,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyActiveRules.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["cashback_rules_count"] == data["cashback_rules_count"]
+        assert serialized["bonus_tiers_count"] == data["bonus_tiers_count"]
+        assert (
+            serialized["wallet_credit_reward_rules_count"]
+            == data["wallet_credit_reward_rules_count"]
+        )
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "customer_id": 1,
+            "customer_email": None,
+            "status": "active",
+            "balance_cents": 1,
+            "available_cents": 1,
+            "held_cents": 1,
+            "last_activity_at": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["customer_email"] == data["customer_email"]
+        assert serialized["status"] == data["status"]
+        assert serialized["balance_cents"] == data["balance_cents"]
+        assert serialized["available_cents"] == data["available_cents"]
+        assert serialized["held_cents"] == data["held_cents"]
+        assert serialized["last_activity_at"] == data["last_activity_at"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "customer_id": 1,
+            "customer_email": None,
+            "status": "active",
+            "balance_cents": 1,
+            "available_cents": 1,
+            "held_cents": 1,
+            "last_activity_at": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["customer_email"] is None
+        assert serialized["last_activity_at"] is None
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "customer_id": 1,
+            "customer_email": "test@example.com",
+            "status": "unexpected_get_wallet_overview_response_value_200_application_json_property_data_property_top_wallets_item_status",
+            "balance_cents": 1,
+            "available_cents": 1,
+            "held_cents": 1,
+            "last_activity_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyTopWalletsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item.json"
+        )
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "customer_id": None,
+            "customer_email": None,
+            "type": "TOP_UP",
+            "type_label": "test_type_label",
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "currency_at_source": None,
+            "note": None,
+            "reverses_entry_id": None,
+            "reversed_by_entry_id": None,
+            "expires_at": None,
+            "expired_at": None,
+            "created_at": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["wallet_id"] == data["wallet_id"]
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["customer_email"] == data["customer_email"]
+        assert serialized["type"] == data["type"]
+        assert serialized["type_label"] == data["type_label"]
+        assert serialized["amount_cents"] == data["amount_cents"]
+        assert serialized["balance_after_cents"] == data["balance_after_cents"]
+        assert serialized["currency_at_source"] == data["currency_at_source"]
+        assert serialized["note"] == data["note"]
+        assert serialized["reverses_entry_id"] == data["reverses_entry_id"]
+        assert serialized["reversed_by_entry_id"] == data["reversed_by_entry_id"]
+        assert serialized["expires_at"] == data["expires_at"]
+        assert serialized["expired_at"] == data["expired_at"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "customer_id": None,
+            "customer_email": None,
+            "type": "TOP_UP",
+            "type_label": "test_type_label",
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "currency_at_source": None,
+            "note": None,
+            "reverses_entry_id": None,
+            "reversed_by_entry_id": None,
+            "expires_at": None,
+            "expired_at": None,
+            "created_at": None,
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["customer_id"] is None
+        assert serialized["customer_email"] is None
+        assert serialized["currency_at_source"] is None
+        assert serialized["note"] is None
+        assert serialized["reverses_entry_id"] is None
+        assert serialized["reversed_by_entry_id"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["expired_at"] is None
+        assert serialized["created_at"] is None
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "wallet_id": 1,
+            "customer_id": 1,
+            "customer_email": "test@example.com",
+            "type": "unexpected_get_wallet_overview_response_value_200_application_json_property_data_property_recent_activity_item_type",
+            "type_label": "test_type_label",
+            "amount_cents": 1,
+            "balance_after_cents": 1,
+            "currency_at_source": "test_currency_at_source",
+            "note": "test_note",
+            "reverses_entry_id": 1,
+            "reversed_by_entry_id": 1,
+            "expires_at": "2023-01-01T00:00:00.000Z",
+            "expired_at": "2023-01-01T00:00:00.000Z",
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = GetWalletOverviewResponseValue200ApplicationJsonPropertyDataPropertyRecentActivityItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_wallet_overview_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetWalletOverviewResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetWalletOverviewResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_wallet_overview_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "period": {
+                "range": "7d",
+                "label": "test_label",
+                "start_at": "2023-01-01T00:00:00.000Z",
+                "end_at": "2023-01-01T00:00:00.000Z",
+                "currency": "USD",
+            },
+            "settings": {
+                "wallet_enabled": True,
+                "expiration_days": 1,
+                "min_topup_cents": 1,
+                "max_topup_cents": 1,
+            },
+            "health": {
+                "liability_cents": 1,
+                "available_cents": 1,
+                "held_cents": 1,
+                "held_count": 1,
+                "wallets_with_balance": 1,
+                "total_wallets": 1,
+                "frozen_wallets": 1,
+                "expiring_soon_cents": 1,
+                "expiring_soon_days": 1,
+            },
+            "activity": {"topups_cents": 1, "customer_spend_cents": 1},
+            "incentive_spend": {
+                "period": "7d",
+                "total_cents": 1,
+                "bonus_cents": 1,
+                "cashback_cents": 1,
+                "reward_cents": 1,
+                "recovered_cents": 1,
+            },
+            "active_rules": {
+                "cashback_rules_count": 1,
+                "bonus_tiers_count": 1,
+                "wallet_credit_reward_rules_count": 1,
+            },
+            "top_wallets": [
+                {
+                    "id": 1,
+                    "customer_id": 1,
+                    "customer_email": "test@example.com",
+                    "status": "active",
+                    "balance_cents": 1,
+                    "available_cents": 1,
+                    "held_cents": 1,
+                    "last_activity_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "recent_activity": [
+                {
+                    "id": 1,
+                    "wallet_id": 1,
+                    "customer_id": 1,
+                    "customer_email": "test@example.com",
+                    "type": "TOP_UP",
+                    "type_label": "test_type_label",
+                    "amount_cents": 1,
+                    "balance_after_cents": 1,
+                    "currency_at_source": "test_currency_at_source",
+                    "note": "test_note",
+                    "reverses_entry_id": 1,
+                    "reversed_by_entry_id": 1,
+                    "expires_at": "2023-01-01T00:00:00.000Z",
+                    "expired_at": "2023-01-01T00:00:00.000Z",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = (
+            GetWalletOverviewResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["period"] == data["period"]
+        assert serialized["settings"] == data["settings"]
+        assert serialized["health"] == data["health"]
+        assert serialized["activity"] == data["activity"]
+        assert serialized["incentive_spend"] == data["incentive_spend"]
+        assert serialized["active_rules"] == data["active_rules"]
+        assert serialized["top_wallets"] == data["top_wallets"]
+        assert serialized["recent_activity"] == data["recent_activity"]
+
+    def test_sdk_get_wallet_overview_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_wallet_overview_response_value_200_application_json.json"
+        )
+        instance = SdkGetWalletOverviewResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetWalletOverviewResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_wallet_overview_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "period": {
+                    "range": "7d",
+                    "label": "test_label",
+                    "start_at": "2023-01-01T00:00:00.000Z",
+                    "end_at": "2023-01-01T00:00:00.000Z",
+                    "currency": "USD",
+                },
+                "settings": {
+                    "wallet_enabled": True,
+                    "expiration_days": 1,
+                    "min_topup_cents": 1,
+                    "max_topup_cents": 1,
+                },
+                "health": {
+                    "liability_cents": 1,
+                    "available_cents": 1,
+                    "held_cents": 1,
+                    "held_count": 1,
+                    "wallets_with_balance": 1,
+                    "total_wallets": 1,
+                    "frozen_wallets": 1,
+                    "expiring_soon_cents": 1,
+                    "expiring_soon_days": 1,
+                },
+                "activity": {"topups_cents": 1, "customer_spend_cents": 1},
+                "incentive_spend": {
+                    "period": "7d",
+                    "total_cents": 1,
+                    "bonus_cents": 1,
+                    "cashback_cents": 1,
+                    "reward_cents": 1,
+                    "recovered_cents": 1,
+                },
+                "active_rules": {
+                    "cashback_rules_count": 1,
+                    "bonus_tiers_count": 1,
+                    "wallet_credit_reward_rules_count": 1,
+                },
+                "top_wallets": [
+                    {
+                        "id": 1,
+                        "customer_id": 1,
+                        "customer_email": "test@example.com",
+                        "status": "active",
+                        "balance_cents": 1,
+                        "available_cents": 1,
+                        "held_cents": 1,
+                        "last_activity_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+                "recent_activity": [
+                    {
+                        "id": 1,
+                        "wallet_id": 1,
+                        "customer_id": 1,
+                        "customer_email": "test@example.com",
+                        "type": "TOP_UP",
+                        "type_label": "test_type_label",
+                        "amount_cents": 1,
+                        "balance_after_cents": 1,
+                        "currency_at_source": "test_currency_at_source",
+                        "note": "test_note",
+                        "reverses_entry_id": 1,
+                        "reversed_by_entry_id": 1,
+                        "expires_at": "2023-01-01T00:00:00.000Z",
+                        "expired_at": "2023-01-01T00:00:00.000Z",
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+            }
+        }
+        instance = SdkGetWalletOverviewResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
     def test_list_wallet_transactions_response_value_200_application_json_property_data_item_round_trip(
         self,
     ):
@@ -1035,3 +2373,41 @@ class TestModelRoundTrip:
         instance = SdkCreateWalletTopUpResponseValue201ApplicationJson.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_link_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_store_wallet_transactions_response_value_200_application_json_property_meta_link.json"
+        )
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaLink.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaLink.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_link_minimal_payload(
+        self,
+    ):
+        data = {"url": None, "label": "test_label", "active": True}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaLink.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["url"] == data["url"]
+        assert serialized["label"] == data["label"]
+        assert serialized["active"] == data["active"]
+
+    def test_list_store_wallet_transactions_response_value_200_application_json_property_meta_link_preserves_nullable_fields(
+        self,
+    ):
+        data = {"url": None, "label": "test_label", "active": True}
+        instance = ListStoreWalletTransactionsResponseValue200ApplicationJsonPropertyMetaLink.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["url"] is None

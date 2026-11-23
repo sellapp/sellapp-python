@@ -482,13 +482,14 @@ class GroupsProducts:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """Search products within group
 
-        Search the products in a group using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search the products in a group using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             group: The group path parameter.
@@ -496,10 +497,11 @@ class GroupsProducts:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -565,6 +567,7 @@ class GroupsProducts:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -1017,13 +1020,14 @@ class AsyncGroupsProducts:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         SearchProductsWithinGroupResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """Search products within group
 
-        Search the products in a group using JSON body filters, search terms, includes, and sort instructions. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search the products in a group using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             group: The group path parameter.
@@ -1031,10 +1035,11 @@ class AsyncGroupsProducts:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1100,6 +1105,7 @@ class AsyncGroupsProducts:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

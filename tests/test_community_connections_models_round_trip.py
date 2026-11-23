@@ -3,25 +3,43 @@
 """Model round-trip tests: from_dict(to_dict()) preserves data."""
 
 from sellapp_sdk.community_connections.models import (
+    AddSlackChannelResponseValue201ApplicationJsonPropertyData,
     CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyData,
     CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer,
     CompleteCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServerPropertyRolesItem,
     DisconnectCommunityPlatformResponseValue200ApplicationJsonPropertyData,
+    GetCommunityServerResponseValue200ApplicationJsonPropertyData,
+    GetCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAffectedVariantsItem,
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItem,
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyAccountsItem,
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyServersItem,
     ListCommunityConnectionsResponseValue200ApplicationJsonPropertyDataItemPropertyServersItemPropertyRolesItem,
+    ListCommunityFailedGrantReasonsResponseValue200ApplicationJsonPropertyDataItem,
+    ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyData,
+    ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyDataPropertyChannelsItem,
     PollCommunityConnectionResponseValue200ApplicationJsonPropertyData,
     PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyAvailableServersItem,
     PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServer,
     PollCommunityConnectionResponseValue200ApplicationJsonPropertyDataPropertyServerAnyOfValue1PropertyRolesItem,
+    RemoveCommunityServerResponseValue200ApplicationJsonPropertyData,
+    RemoveCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAccessRulesRemovedItem,
+    ReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJsonPropertyData,
+    SdkAddSlackChannelResponseValue201ApplicationJson,
     SdkCompleteCommunityConnectionResponseValue200ApplicationJson,
     SdkDisconnectCommunityPlatformResponseValue200ApplicationJson,
+    SdkGetCommunityServerResponseValue200ApplicationJson,
     SdkListCommunityConnectionsResponseValue200ApplicationJson,
+    SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson,
+    SdkListSlackAvailableChannelsResponseValue200ApplicationJson,
     SdkPollCommunityConnectionResponseValue200ApplicationJson,
+    SdkRemoveCommunityServerResponseValue200ApplicationJson,
+    SdkReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJson,
     SdkStartCommunityConnectionResponseValue200ApplicationJson,
+    SdkSyncDiscordRolesResponseValue200ApplicationJson,
     SdkVerifyCommunityConnectionResponseValue200ApplicationJson,
     StartCommunityConnectionResponseValue200ApplicationJsonPropertyData,
+    SyncDiscordRolesResponseValue200ApplicationJsonPropertyData,
+    SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem,
     VerifyCommunityConnectionResponseValue200ApplicationJsonPropertyData,
 )
 from tests.generated_helpers import load_fixture
@@ -1073,6 +1091,777 @@ class TestModelRoundTrip:
         data = {"data": {"platform": "discord", "disconnected": True}}
         instance = (
             SdkDisconnectCommunityPlatformResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_list_community_failed_grant_reasons_response_value_200_application_json_property_data_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_community_failed_grant_reasons_response_value_200_application_json_property_data_item.json"
+        )
+        instance = ListCommunityFailedGrantReasonsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListCommunityFailedGrantReasonsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_community_failed_grant_reasons_response_value_200_application_json_property_data_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "reason": "invalid_credentials",
+            "label": "test_label",
+            "count": 1,
+            "what_to_do": "test_what_to_do",
+        }
+        instance = ListCommunityFailedGrantReasonsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["reason"] == data["reason"]
+        assert serialized["label"] == data["label"]
+        assert serialized["count"] == data["count"]
+        assert serialized["what_to_do"] == data["what_to_do"]
+
+    def test_list_community_failed_grant_reasons_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "reason": "unexpected_list_community_failed_grant_reasons_response_value_200_application_json_property_data_item_reason",
+            "label": "test_label",
+            "count": 1,
+            "what_to_do": "test_what_to_do",
+        }
+        instance = ListCommunityFailedGrantReasonsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_list_community_failed_grant_reasons_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_list_community_failed_grant_reasons_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_list_community_failed_grant_reasons_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": [
+                {
+                    "reason": "invalid_credentials",
+                    "label": "test_label",
+                    "count": 1,
+                    "what_to_do": "test_what_to_do",
+                }
+            ]
+        }
+        instance = (
+            SdkListCommunityFailedGrantReasonsResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_community_server_response_value_200_application_json_property_data_property_affected_variants_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_community_server_response_value_200_application_json_property_data_property_affected_variants_item.json"
+        )
+        instance = GetCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAffectedVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAffectedVariantsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_community_server_response_value_200_application_json_property_data_property_affected_variants_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "product": "test_product",
+            "variant_id": 1,
+            "variant": "test_variant",
+        }
+        instance = GetCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAffectedVariantsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product"] == data["product"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant"] == data["variant"]
+
+    def test_get_community_server_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_community_server_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_community_server_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "platform": "discord",
+            "id": "01234",
+            "name": "Test",
+            "type": None,
+            "is_last": True,
+            "affected_variants": [
+                {
+                    "product_id": 1,
+                    "product": "test_product",
+                    "variant_id": 1,
+                    "variant": "test_variant",
+                }
+            ],
+        }
+        instance = (
+            GetCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["platform"] == data["platform"]
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["type"] == data["type"]
+        assert serialized["is_last"] == data["is_last"]
+        assert serialized["affected_variants"] == data["affected_variants"]
+
+    def test_get_community_server_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "platform": "discord",
+            "id": "01234",
+            "name": "Test",
+            "type": None,
+            "is_last": True,
+            "affected_variants": [
+                {
+                    "product_id": 1,
+                    "product": "test_product",
+                    "variant_id": 1,
+                    "variant": "test_variant",
+                }
+            ],
+        }
+        instance = (
+            GetCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] is None
+
+    def test_get_community_server_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "platform": "unexpected_get_community_server_response_value_200_application_json_property_data_platform",
+            "id": "01234",
+            "name": "Test",
+            "type": "test_type",
+            "is_last": True,
+            "affected_variants": [
+                {
+                    "product_id": 1,
+                    "product": "test_product",
+                    "variant_id": 1,
+                    "variant": "test_variant",
+                }
+            ],
+        }
+        instance = (
+            GetCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_get_community_server_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_community_server_response_value_200_application_json.json"
+        )
+        instance = SdkGetCommunityServerResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetCommunityServerResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_community_server_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "platform": "discord",
+                "id": "01234",
+                "name": "Test",
+                "type": "test_type",
+                "is_last": True,
+                "affected_variants": [
+                    {
+                        "product_id": 1,
+                        "product": "test_product",
+                        "variant_id": 1,
+                        "variant": "test_variant",
+                    }
+                ],
+            }
+        }
+        instance = SdkGetCommunityServerResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_remove_community_server_response_value_200_application_json_property_data_property_access_rules_removed_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "remove_community_server_response_value_200_application_json_property_data_property_access_rules_removed_item.json"
+        )
+        instance = RemoveCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAccessRulesRemovedItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = RemoveCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAccessRulesRemovedItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_remove_community_server_response_value_200_application_json_property_data_property_access_rules_removed_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "product_id": 1,
+            "product": "test_product",
+            "variant_id": 1,
+            "variant": "test_variant",
+        }
+        instance = RemoveCommunityServerResponseValue200ApplicationJsonPropertyDataPropertyAccessRulesRemovedItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product"] == data["product"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["variant"] == data["variant"]
+
+    def test_remove_community_server_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "remove_community_server_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            RemoveCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            RemoveCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_remove_community_server_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "platform": "discord",
+            "id": "01234",
+            "name": "Test",
+            "removed": True,
+            "access_rules_removed": [
+                {
+                    "product_id": 1,
+                    "product": "test_product",
+                    "variant_id": 1,
+                    "variant": "test_variant",
+                }
+            ],
+        }
+        instance = (
+            RemoveCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["platform"] == data["platform"]
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["removed"] == data["removed"]
+        assert serialized["access_rules_removed"] == data["access_rules_removed"]
+
+    def test_remove_community_server_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "platform": "unexpected_remove_community_server_response_value_200_application_json_property_data_platform",
+            "id": "01234",
+            "name": "Test",
+            "removed": True,
+            "access_rules_removed": [
+                {
+                    "product_id": 1,
+                    "product": "test_product",
+                    "variant_id": 1,
+                    "variant": "test_variant",
+                }
+            ],
+        }
+        instance = (
+            RemoveCommunityServerResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_remove_community_server_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_remove_community_server_response_value_200_application_json.json"
+        )
+        instance = SdkRemoveCommunityServerResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkRemoveCommunityServerResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_remove_community_server_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "platform": "discord",
+                "id": "01234",
+                "name": "Test",
+                "removed": True,
+                "access_rules_removed": [
+                    {
+                        "product_id": 1,
+                        "product": "test_product",
+                        "variant_id": 1,
+                        "variant": "test_variant",
+                    }
+                ],
+            }
+        }
+        instance = SdkRemoveCommunityServerResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item.json"
+        )
+        instance = SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item_minimal_payload(
+        self,
+    ):
+        data = {"id": "01234", "name": "Test", "synced": True}
+        instance = SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["synced"] == data["synced"]
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"id": "01234", "name": "Test", "synced": True}
+        instance = SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "roles_synced" not in serialized
+        assert "hierarchy" not in serialized
+        assert "bot_can_assign" not in serialized
+        assert "total_roles" not in serialized
+        assert "error" not in serialized
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": "01234",
+            "name": "Test",
+            "synced": True,
+            "roles_synced": 1,
+            "hierarchy": "unexpected_sync_discord_roles_response_value_200_application_json_property_data_property_synced_servers_item_hierarchy",
+            "bot_can_assign": 1,
+            "total_roles": 1,
+            "error": "test_error",
+        }
+        instance = SyncDiscordRolesResponseValue200ApplicationJsonPropertyDataPropertySyncedServersItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sync_discord_roles_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            SyncDiscordRolesResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SyncDiscordRolesResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sync_discord_roles_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "platform": "discord",
+            "synced_servers": [
+                {
+                    "id": "01234",
+                    "name": "Test",
+                    "synced": True,
+                    "roles_synced": 1,
+                    "hierarchy": "healthy",
+                    "bot_can_assign": 1,
+                    "total_roles": 1,
+                    "error": "test_error",
+                }
+            ],
+            "failed_count": 1,
+        }
+        instance = (
+            SyncDiscordRolesResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["platform"] == data["platform"]
+        assert serialized["synced_servers"] == data["synced_servers"]
+        assert serialized["failed_count"] == data["failed_count"]
+
+    def test_sdk_sync_discord_roles_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_sync_discord_roles_response_value_200_application_json.json"
+        )
+        instance = SdkSyncDiscordRolesResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkSyncDiscordRolesResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_sync_discord_roles_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "platform": "discord",
+                "synced_servers": [
+                    {
+                        "id": "01234",
+                        "name": "Test",
+                        "synced": True,
+                        "roles_synced": 1,
+                        "hierarchy": "healthy",
+                        "bot_can_assign": 1,
+                        "total_roles": 1,
+                        "error": "test_error",
+                    }
+                ],
+                "failed_count": 1,
+            }
+        }
+        instance = SdkSyncDiscordRolesResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_list_slack_available_channels_response_value_200_application_json_property_data_property_channels_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_slack_available_channels_response_value_200_application_json_property_data_property_channels_item.json"
+        )
+        instance = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyDataPropertyChannelsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyDataPropertyChannelsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_slack_available_channels_response_value_200_application_json_property_data_property_channels_item_minimal_payload(
+        self,
+    ):
+        data = {"id": "01234", "name": "Test", "is_private": True, "num_members": 1}
+        instance = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyDataPropertyChannelsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+        assert serialized["is_private"] == data["is_private"]
+        assert serialized["num_members"] == data["num_members"]
+
+    def test_list_slack_available_channels_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_slack_available_channels_response_value_200_application_json_property_data.json"
+        )
+        instance = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_slack_available_channels_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "channels": [
+                {"id": "01234", "name": "Test", "is_private": True, "num_members": 1}
+            ],
+            "registered_count": 1,
+        }
+        instance = ListSlackAvailableChannelsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["channels"] == data["channels"]
+        assert serialized["registered_count"] == data["registered_count"]
+
+    def test_sdk_list_slack_available_channels_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_list_slack_available_channels_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkListSlackAvailableChannelsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkListSlackAvailableChannelsResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_list_slack_available_channels_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "channels": [
+                    {
+                        "id": "01234",
+                        "name": "Test",
+                        "is_private": True,
+                        "num_members": 1,
+                    }
+                ],
+                "registered_count": 1,
+            }
+        }
+        instance = (
+            SdkListSlackAvailableChannelsResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_add_slack_channel_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "add_slack_channel_response_value_201_application_json_property_data.json"
+        )
+        instance = AddSlackChannelResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = AddSlackChannelResponseValue201ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_add_slack_channel_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"id": "01234", "name": "Test"}
+        instance = AddSlackChannelResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["name"] == data["name"]
+
+    def test_sdk_add_slack_channel_response_value_201_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_add_slack_channel_response_value_201_application_json.json"
+        )
+        instance = SdkAddSlackChannelResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkAddSlackChannelResponseValue201ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_add_slack_channel_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"id": "01234", "name": "Test"}}
+        instance = SdkAddSlackChannelResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_replace_slack_workspace_invite_link_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "replace_slack_workspace_invite_link_response_value_200_application_json_property_data.json"
+        )
+        instance = ReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_replace_slack_workspace_invite_link_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"workspace_invite_link": None}
+        instance = ReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["workspace_invite_link"] == data["workspace_invite_link"]
+
+    def test_replace_slack_workspace_invite_link_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {"workspace_invite_link": None}
+        instance = ReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["workspace_invite_link"] is None
+
+    def test_sdk_replace_slack_workspace_invite_link_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_replace_slack_workspace_invite_link_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_replace_slack_workspace_invite_link_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"workspace_invite_link": "test_workspace_invite_link"}}
+        instance = (
+            SdkReplaceSlackWorkspaceInviteLinkResponseValue200ApplicationJson.from_dict(
                 data
             )
         )

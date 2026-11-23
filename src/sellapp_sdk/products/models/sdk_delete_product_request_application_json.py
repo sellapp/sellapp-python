@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.sdk_delete_credits_product_request_application_json import (
-    SdkDeleteCreditsProductRequestApplicationJson,
+from sellapp_sdk.common.models.sdk_delete_checkout_field_template_request_application_json import (
+    SdkDeleteCheckoutFieldTemplateRequestApplicationJson,
 )
 
 SdkDeleteProductRequestApplicationJson: TypeAlias = (
-    SdkDeleteCreditsProductRequestApplicationJson
+    SdkDeleteCheckoutFieldTemplateRequestApplicationJson
 )

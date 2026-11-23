@@ -596,13 +596,14 @@ class TicketsMessages:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[
         V2SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """Search ticket messages
 
-        Search a ticket's messages using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search a ticket's messages using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             ticket: The ticket path parameter.
@@ -610,10 +611,11 @@ class TicketsMessages:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -679,6 +681,7 @@ class TicketsMessages:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }
@@ -1289,13 +1292,14 @@ class AsyncTicketsMessages:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         V2SearchTicketMessagesResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """Search ticket messages
 
-        Search a ticket's messages using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search a ticket's messages using JSON body filters, search terms, includes, and sort instructions. This v2 route is store-scoped. Page through results with `limit` (1 to 100, default 15; a larger value returns `422`) and `page`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             ticket: The ticket path parameter.
@@ -1303,10 +1307,11 @@ class AsyncTicketsMessages:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1372,6 +1377,7 @@ class AsyncTicketsMessages:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
             }.items()
             if v is not None
         }

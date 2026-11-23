@@ -2,11 +2,11 @@
 
 from typing import TypeAlias
 
-from .get_course_response_value_200_application_json_property_data_access_type import (
-    GetCourseResponseValue200ApplicationJsonPropertyDataAccessType,
+from .create_course_response_value_201_application_json_property_data_access_type import (
+    CreateCourseResponseValue201ApplicationJsonPropertyDataAccessType,
 )
 
 ReorderCourseLessonsResponseValue200ApplicationJsonPropertyDataAccessType: TypeAlias = (
-    GetCourseResponseValue200ApplicationJsonPropertyDataAccessType
+    CreateCourseResponseValue201ApplicationJsonPropertyDataAccessType
 )
 __all__ = ["ReorderCourseLessonsResponseValue200ApplicationJsonPropertyDataAccessType"]

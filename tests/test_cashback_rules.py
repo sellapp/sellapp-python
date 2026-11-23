@@ -16,6 +16,7 @@ from sellapp_sdk._errors import (
 from sellapp_sdk.cashback_rules.models import (
     SdkCreateCashbackRuleResponseValue201ApplicationJson,
     SdkListCashbackRulesResponseValue200ApplicationJson,
+    SdkQuoteCashbackRuleResponseValue200ApplicationJson,
     SdkReplaceCashbackRuleResponseValue200ApplicationJson,
     SdkRestoreCashbackRuleResponseValue200ApplicationJson,
     SdkUpdateCashbackRuleResponseValue200ApplicationJson,
@@ -109,6 +110,29 @@ class TestCashbackRules:
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith("/v2/cashback-rules/test_cashbackRule/restore")
+
+    def test_quote(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_cashback_rule_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.cashback_rules.quote()
+        assert isinstance(result, SdkQuoteCashbackRuleResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/cashback-rules/quote")
+
+    def test_quote_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_cashback_rule_response_value_200_application_json.json"
+            )
+        )
+        sellapp_sdk.cashback_rules.quote(product_id=7, purchase_cents=7)
+        request = httpx_mock.get_request()
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["purchase_cents"] == "7"
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -297,6 +321,31 @@ class TestAsyncCashbackRules:
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith("/v2/cashback-rules/test_cashbackRule/restore")
+
+    @pytest.mark.asyncio
+    async def test_quote(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_cashback_rule_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.cashback_rules.quote()
+        assert isinstance(result, SdkQuoteCashbackRuleResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/cashback-rules/quote")
+
+    @pytest.mark.asyncio
+    async def test_quote_encodes_query_params(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_quote_cashback_rule_response_value_200_application_json.json"
+            )
+        )
+        await async_sellapp_sdk.cashback_rules.quote(product_id=7, purchase_cents=7)
+        request = httpx_mock.get_request()
+        assert request.url.params["product_id"] == "7"
+        assert request.url.params["purchase_cents"] == "7"
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

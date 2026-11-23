@@ -9,8 +9,10 @@ from .._base_client import WithRawResponse
 if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
+from sellapp_sdk.common.models.disputes_status import DisputesStatus
+
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions
+from .._types import RequestOptions, enum_value
 from .models import (
     ListDisputesResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetDisputeResponseValue200ApplicationJson,
@@ -31,17 +33,27 @@ class Disputes:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: DisputesStatus | str | None = None,
+        provider: str | None = None,
+        opened_after: str | None = None,
+        opened_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]:
         """List disputes
 
-        Read-only, redacted, store-scoped disputes that may reference an Order or Charge. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's payment disputes, most recently opened first, 50 per page. Each dispute is read-only and redacted, and may reference an order or a standalone charge. Filter by `status`, `provider`, or the day a dispute was opened; filters combine, and the date filters read whole days in the store's time zone and include both ends. An unknown `status`, a date that cannot be read, or an `opened_before` earlier than `opened_after` returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: The limit.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            status: Keep disputes in this state: `open`, `under_review`, `won`, `lost`, or `closed`.
+            provider: Keep disputes raised through this payment provider, such as `stripe`. Any letter case works.
+            opened_after: Keep disputes opened on or after this moment. A date such as `2026-08-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            opened_before: Keep disputes opened on or before this moment. A date such as `2026-08-31` runs to the last second of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -94,6 +106,11 @@ class Disputes:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "provider": provider,
+                "opened_after": opened_after,
+                "opened_before": opened_before,
             }.items()
             if v is not None
         }
@@ -184,17 +201,27 @@ class AsyncDisputes:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: DisputesStatus | str | None = None,
+        provider: str | None = None,
+        opened_after: str | None = None,
+        opened_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]:
         """List disputes
 
-        Read-only, redacted, store-scoped disputes that may reference an Order or Charge. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's payment disputes, most recently opened first, 50 per page. Each dispute is read-only and redacted, and may reference an order or a standalone charge. Filter by `status`, `provider`, or the day a dispute was opened; filters combine, and the date filters read whole days in the store's time zone and include both ends. An unknown `status`, a date that cannot be read, or an `opened_before` earlier than `opened_after` returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             limit: The limit.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            status: Keep disputes in this state: `open`, `under_review`, `won`, `lost`, or `closed`.
+            provider: Keep disputes raised through this payment provider, such as `stripe`. Any letter case works.
+            opened_after: Keep disputes opened on or after this moment. A date such as `2026-08-01` starts at midnight of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
+            opened_before: Keep disputes opened on or before this moment. A date such as `2026-08-31` runs to the last second of that day in the store's time zone; a date-time without an offset is also read in the store's time zone. Inclusive.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -247,6 +274,11 @@ class AsyncDisputes:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "provider": provider,
+                "opened_after": opened_after,
+                "opened_before": opened_before,
             }.items()
             if v is not None
         }

@@ -3,15 +3,33 @@
 """Model round-trip tests: from_dict(to_dict()) preserves data."""
 
 from sellapp_sdk.affiliates.models import (
+    DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData,
+    DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon,
+    GetAffiliateCouponResponseValue200ApplicationJsonPropertyData,
+    GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon,
+    GetAffiliateProductsResponseValue200ApplicationJsonPropertyData,
+    GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
+    GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission,
     GetAffiliateResponseValue200ApplicationJsonPropertyData,
     GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyBalances,
     GetAffiliateResponseValue200ApplicationJsonPropertyDataPropertyProfile,
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItem,
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyBalances,
     ListAffiliatesResponseValue200ApplicationJsonPropertyDataItemPropertyProfile,
+    SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData,
+    SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon,
+    SdkDisableAffiliateCouponResponseValue200ApplicationJson,
+    SdkGetAffiliateCouponResponseValue200ApplicationJson,
+    SdkGetAffiliateProductsResponseValue200ApplicationJson,
     SdkGetAffiliateResponseValue200ApplicationJson,
     SdkListAffiliatesResponseValue200ApplicationJson,
+    SdkSaveAffiliateCouponResponseValue200ApplicationJson,
+    SdkUpdateAffiliateProductsResponseValue200ApplicationJson,
     SdkUpdateAffiliateStatusResponseValue200ApplicationJson,
+    UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItem,
+    UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyData,
+    UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem,
+    UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission,
     UpdateAffiliateStatusResponseValue200ApplicationJsonPropertyData,
     UpdateAffiliateStatusResponseValue200ApplicationJsonPropertyDataPropertyBalances,
     UpdateAffiliateStatusResponseValue200ApplicationJsonPropertyDataPropertyProfile,
@@ -939,6 +957,1174 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkUpdateAffiliateStatusResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission.json"
+        )
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_minimal_payload(
+        self,
+    ):
+        data = {"type": "percentage", "percentage": None, "amount_usd_cents": None}
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["percentage"] == data["percentage"]
+        assert serialized["amount_usd_cents"] == data["amount_usd_cents"]
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_preserves_nullable_fields(
+        self,
+    ):
+        data = {"type": "percentage", "percentage": None, "amount_usd_cents": None}
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["percentage"] is None
+        assert serialized["amount_usd_cents"] is None
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "type": "unexpected_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_type",
+            "percentage": "test_percentage",
+            "amount_usd_cents": 1,
+        }
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_affiliate_products_response_value_200_application_json_property_data_property_products_item.json"
+        )
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_property_products_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "product_title": "test_product_title",
+            "variant_title": "test_variant_title",
+            "enabled": True,
+            "commission": {
+                "type": "percentage",
+                "percentage": "test_percentage",
+                "amount_usd_cents": 1,
+            },
+        }
+        instance = GetAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["enabled"] == data["enabled"]
+        assert serialized["commission"] == data["commission"]
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_affiliate_products_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_affiliate_products_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "affiliate_id": 1,
+            "enable_specific_products": True,
+            "products": [
+                {
+                    "id": 1,
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                    "variant_title": "test_variant_title",
+                    "enabled": True,
+                    "commission": {
+                        "type": "percentage",
+                        "percentage": "test_percentage",
+                        "amount_usd_cents": 1,
+                    },
+                }
+            ],
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = (
+            GetAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert (
+            serialized["enable_specific_products"] == data["enable_specific_products"]
+        )
+        assert serialized["products"] == data["products"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_sdk_get_affiliate_products_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_affiliate_products_response_value_200_application_json.json"
+        )
+        instance = SdkGetAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_affiliate_products_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "affiliate_id": 1,
+                "enable_specific_products": True,
+                "products": [
+                    {
+                        "id": 1,
+                        "product_id": 1,
+                        "product_title": "test_product_title",
+                        "variant_title": "test_variant_title",
+                        "enabled": True,
+                        "commission": {
+                            "type": "percentage",
+                            "percentage": "test_percentage",
+                            "amount_usd_cents": 1,
+                        },
+                    }
+                ],
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkGetAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_update_affiliate_products_request_application_json_property_products_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_request_application_json_property_products_item.json"
+        )
+        instance = (
+            UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItem.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_request_application_json_property_products_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "enabled": True}
+        instance = (
+            UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["enabled"] == data["enabled"]
+
+    def test_update_affiliate_products_request_application_json_property_products_item_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {"id": 1, "enabled": True}
+        instance = (
+            UpdateAffiliateProductsRequestApplicationJsonPropertyProductsItem.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert "commission" not in serialized
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission.json"
+        )
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_minimal_payload(
+        self,
+    ):
+        data = {"type": "percentage", "percentage": None, "amount_usd_cents": None}
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["type"] == data["type"]
+        assert serialized["percentage"] == data["percentage"]
+        assert serialized["amount_usd_cents"] == data["amount_usd_cents"]
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_preserves_nullable_fields(
+        self,
+    ):
+        data = {"type": "percentage", "percentage": None, "amount_usd_cents": None}
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["percentage"] is None
+        assert serialized["amount_usd_cents"] is None
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "type": "unexpected_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_property_commission_type",
+            "percentage": "test_percentage",
+            "amount_usd_cents": 1,
+        }
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_response_value_200_application_json_property_data_property_products_item.json"
+        )
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_property_products_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "product_id": 1,
+            "product_title": "test_product_title",
+            "variant_title": "test_variant_title",
+            "enabled": True,
+            "commission": {
+                "type": "percentage",
+                "percentage": "test_percentage",
+                "amount_usd_cents": 1,
+            },
+        }
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyDataPropertyProductsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["product_id"] == data["product_id"]
+        assert serialized["product_title"] == data["product_title"]
+        assert serialized["variant_title"] == data["variant_title"]
+        assert serialized["enabled"] == data["enabled"]
+        assert serialized["commission"] == data["commission"]
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "update_affiliate_products_response_value_200_application_json_property_data.json"
+        )
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_update_affiliate_products_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "affiliate_id": 1,
+            "enable_specific_products": True,
+            "products": [
+                {
+                    "id": 1,
+                    "product_id": 1,
+                    "product_title": "test_product_title",
+                    "variant_title": "test_variant_title",
+                    "enabled": True,
+                    "commission": {
+                        "type": "percentage",
+                        "percentage": "test_percentage",
+                        "amount_usd_cents": 1,
+                    },
+                }
+            ],
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = UpdateAffiliateProductsResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert (
+            serialized["enable_specific_products"] == data["enable_specific_products"]
+        )
+        assert serialized["products"] == data["products"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_sdk_update_affiliate_products_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_update_affiliate_products_response_value_200_application_json.json"
+        )
+        instance = SdkUpdateAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkUpdateAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_update_affiliate_products_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "affiliate_id": 1,
+                "enable_specific_products": True,
+                "products": [
+                    {
+                        "id": 1,
+                        "product_id": 1,
+                        "product_title": "test_product_title",
+                        "variant_title": "test_variant_title",
+                        "enabled": True,
+                        "commission": {
+                            "type": "percentage",
+                            "percentage": "test_percentage",
+                            "amount_usd_cents": 1,
+                        },
+                    }
+                ],
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkUpdateAffiliateProductsResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon.json"
+        )
+        instance = GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["code"] == data["code"]
+        assert serialized["type"] == data["type"]
+        assert serialized["discount"] == data["discount"]
+        assert serialized["limit"] == data["limit"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["minimum_amount"] == data["minimum_amount"]
+        assert serialized["expires_at"] == data["expires_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["limit"] is None
+        assert serialized["minimum_amount"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "unexpected_get_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_type",
+            "discount": "test_discount",
+            "limit": 1,
+            "store_wide": True,
+            "minimum_amount": "test_minimum_amount",
+            "expires_at": "2026-07-03 12:15:00",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": "2023-01-01T00:00:00.000Z",
+            "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = GetAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_affiliate_coupon_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            GetAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert serialized["status"] == data["status"]
+        assert serialized["coupon"] == data["coupon"]
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            GetAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["coupon"] is None
+
+    def test_get_affiliate_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "affiliate_id": 1,
+            "status": "unexpected_get_affiliate_coupon_response_value_200_application_json_property_data_status",
+            "coupon": {
+                "id": 1,
+                "code": "test_code",
+                "type": "PERCENTAGE",
+                "discount": "test_discount",
+                "limit": 1,
+                "store_wide": True,
+                "minimum_amount": "test_minimum_amount",
+                "expires_at": "2026-07-03 12:15:00",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "products": [1],
+                "product_variants": [1],
+            },
+        }
+        instance = (
+            GetAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_get_affiliate_coupon_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_affiliate_coupon_response_value_200_application_json.json"
+        )
+        instance = SdkGetAffiliateCouponResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetAffiliateCouponResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_affiliate_coupon_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "affiliate_id": 1,
+                "status": "not_configured",
+                "coupon": {
+                    "id": 1,
+                    "code": "test_code",
+                    "type": "PERCENTAGE",
+                    "discount": "test_discount",
+                    "limit": 1,
+                    "store_wide": True,
+                    "minimum_amount": "test_minimum_amount",
+                    "expires_at": "2026-07-03 12:15:00",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "store_id": 1,
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                    "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
+                    "products": [1],
+                    "product_variants": [1],
+                },
+            }
+        }
+        instance = SdkGetAffiliateCouponResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon.json"
+        )
+        instance = SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["code"] == data["code"]
+        assert serialized["type"] == data["type"]
+        assert serialized["discount"] == data["discount"]
+        assert serialized["limit"] == data["limit"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["minimum_amount"] == data["minimum_amount"]
+        assert serialized["expires_at"] == data["expires_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["limit"] is None
+        assert serialized["minimum_amount"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "unexpected_save_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_type",
+            "discount": "test_discount",
+            "limit": 1,
+            "store_wide": True,
+            "minimum_amount": "test_minimum_amount",
+            "expires_at": "2026-07-03 12:15:00",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": "2023-01-01T00:00:00.000Z",
+            "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = SaveAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "save_affiliate_coupon_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert serialized["status"] == data["status"]
+        assert serialized["coupon"] == data["coupon"]
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["coupon"] is None
+
+    def test_save_affiliate_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "affiliate_id": 1,
+            "status": "unexpected_save_affiliate_coupon_response_value_200_application_json_property_data_status",
+            "coupon": {
+                "id": 1,
+                "code": "test_code",
+                "type": "PERCENTAGE",
+                "discount": "test_discount",
+                "limit": 1,
+                "store_wide": True,
+                "minimum_amount": "test_minimum_amount",
+                "expires_at": "2026-07-03 12:15:00",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "products": [1],
+                "product_variants": [1],
+            },
+        }
+        instance = (
+            SaveAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_save_affiliate_coupon_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_save_affiliate_coupon_response_value_200_application_json.json"
+        )
+        instance = SdkSaveAffiliateCouponResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkSaveAffiliateCouponResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_save_affiliate_coupon_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "affiliate_id": 1,
+                "status": "not_configured",
+                "coupon": {
+                    "id": 1,
+                    "code": "test_code",
+                    "type": "PERCENTAGE",
+                    "discount": "test_discount",
+                    "limit": 1,
+                    "store_wide": True,
+                    "minimum_amount": "test_minimum_amount",
+                    "expires_at": "2026-07-03 12:15:00",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "store_id": 1,
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                    "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
+                    "products": [1],
+                    "product_variants": [1],
+                },
+            }
+        }
+        instance = SdkSaveAffiliateCouponResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon.json"
+        )
+        instance = DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["code"] == data["code"]
+        assert serialized["type"] == data["type"]
+        assert serialized["discount"] == data["discount"]
+        assert serialized["limit"] == data["limit"]
+        assert serialized["store_wide"] == data["store_wide"]
+        assert serialized["minimum_amount"] == data["minimum_amount"]
+        assert serialized["expires_at"] == data["expires_at"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+        assert serialized["store_id"] == data["store_id"]
+        assert serialized["deleted_at"] == data["deleted_at"]
+        assert serialized["maximum_discount_amount"] == data["maximum_discount_amount"]
+        assert serialized["applies_to"] == data["applies_to"]
+        assert serialized["subscription_payments"] == data["subscription_payments"]
+        assert serialized["products"] == data["products"]
+        assert serialized["product_variants"] == data["product_variants"]
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "PERCENTAGE",
+            "discount": "test_discount",
+            "limit": None,
+            "store_wide": True,
+            "minimum_amount": None,
+            "expires_at": None,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": None,
+            "maximum_discount_amount": None,
+            "applies_to": "one_time",
+            "subscription_payments": None,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["limit"] is None
+        assert serialized["minimum_amount"] is None
+        assert serialized["expires_at"] is None
+        assert serialized["deleted_at"] is None
+        assert serialized["maximum_discount_amount"] is None
+        assert serialized["subscription_payments"] is None
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "code": "test_code",
+            "type": "unexpected_disable_affiliate_coupon_response_value_200_application_json_property_data_property_coupon_type",
+            "discount": "test_discount",
+            "limit": 1,
+            "store_wide": True,
+            "minimum_amount": "test_minimum_amount",
+            "expires_at": "2026-07-03 12:15:00",
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "store_id": 1,
+            "deleted_at": "2023-01-01T00:00:00.000Z",
+            "maximum_discount_amount": "test_maximum_discount_amount",
+            "applies_to": "one_time",
+            "subscription_payments": 1,
+            "products": [1],
+            "product_variants": [1],
+        }
+        instance = DisableAffiliateCouponResponseValue200ApplicationJsonPropertyDataPropertyCoupon.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "disable_affiliate_coupon_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["affiliate_id"] == data["affiliate_id"]
+        assert serialized["status"] == data["status"]
+        assert serialized["coupon"] == data["coupon"]
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {"affiliate_id": 1, "status": "not_configured", "coupon": None}
+        instance = (
+            DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["coupon"] is None
+
+    def test_disable_affiliate_coupon_response_value_200_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "affiliate_id": 1,
+            "status": "unexpected_disable_affiliate_coupon_response_value_200_application_json_property_data_status",
+            "coupon": {
+                "id": 1,
+                "code": "test_code",
+                "type": "PERCENTAGE",
+                "discount": "test_discount",
+                "limit": 1,
+                "store_wide": True,
+                "minimum_amount": "test_minimum_amount",
+                "expires_at": "2026-07-03 12:15:00",
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+                "store_id": 1,
+                "deleted_at": "2023-01-01T00:00:00.000Z",
+                "maximum_discount_amount": "test_maximum_discount_amount",
+                "applies_to": "one_time",
+                "subscription_payments": 1,
+                "products": [1],
+                "product_variants": [1],
+            },
+        }
+        instance = (
+            DisableAffiliateCouponResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_disable_affiliate_coupon_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_disable_affiliate_coupon_response_value_200_application_json.json"
+        )
+        instance = SdkDisableAffiliateCouponResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkDisableAffiliateCouponResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_disable_affiliate_coupon_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "affiliate_id": 1,
+                "status": "not_configured",
+                "coupon": {
+                    "id": 1,
+                    "code": "test_code",
+                    "type": "PERCENTAGE",
+                    "discount": "test_discount",
+                    "limit": 1,
+                    "store_wide": True,
+                    "minimum_amount": "test_minimum_amount",
+                    "expires_at": "2026-07-03 12:15:00",
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "store_id": 1,
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                    "maximum_discount_amount": "test_maximum_discount_amount",
+                    "applies_to": "one_time",
+                    "subscription_payments": 1,
+                    "products": [1],
+                    "product_variants": [1],
+                },
+            }
+        }
+        instance = SdkDisableAffiliateCouponResponseValue200ApplicationJson.from_dict(
             data
         )
         serialized = instance.to_dict()

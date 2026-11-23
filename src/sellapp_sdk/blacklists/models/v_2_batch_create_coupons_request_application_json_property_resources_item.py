@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from sellapp_sdk.common.models.sdk_create_coupon_request_application_json import (
-    SdkCreateCouponRequestApplicationJson,
+from .sdk_v_2_create_coupon_request_application_json import (
+    SdkV2CreateCouponRequestApplicationJson,
 )
 
 V2BatchCreateCouponsRequestApplicationJsonPropertyResourcesItem: TypeAlias = (
-    SdkCreateCouponRequestApplicationJson
+    SdkV2CreateCouponRequestApplicationJson
 )

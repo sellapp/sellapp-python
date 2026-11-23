@@ -6,11 +6,14 @@ from sellapp_sdk.wallet_bonus_tiers.models import (
     ArchiveWalletBonusTierResponseValue200ApplicationJsonPropertyData,
     CreateWalletBonusTierResponseValue201ApplicationJsonPropertyData,
     ListWalletBonusTiersResponseValue200ApplicationJsonPropertyDataItem,
+    QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyData,
+    QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier,
     ReplaceWalletBonusTierResponseValue200ApplicationJsonPropertyData,
     RestoreWalletBonusTierResponseValue200ApplicationJsonPropertyData,
     SdkArchiveWalletBonusTierResponseValue200ApplicationJson,
     SdkCreateWalletBonusTierResponseValue201ApplicationJson,
     SdkListWalletBonusTiersResponseValue200ApplicationJson,
+    SdkQuoteWalletBonusTierResponseValue200ApplicationJson,
     SdkReplaceWalletBonusTierResponseValue200ApplicationJson,
     SdkRestoreWalletBonusTierResponseValue200ApplicationJson,
     SdkUpdateWalletBonusTierResponseValue200ApplicationJson,
@@ -913,6 +916,227 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkRestoreWalletBonusTierResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier.json"
+        )
+        instance = QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "minimum_top_up_cents": 1,
+            "bonus_kind": "fixed",
+            "fixed_bonus_cents": None,
+            "percent_basis": None,
+            "maximum_bonus_cents": None,
+            "priority": 1,
+            "is_active": True,
+            "superseded_by_id": None,
+            "restorable": True,
+        }
+        instance = QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["minimum_top_up_cents"] == data["minimum_top_up_cents"]
+        assert serialized["bonus_kind"] == data["bonus_kind"]
+        assert serialized["fixed_bonus_cents"] == data["fixed_bonus_cents"]
+        assert serialized["percent_basis"] == data["percent_basis"]
+        assert serialized["maximum_bonus_cents"] == data["maximum_bonus_cents"]
+        assert serialized["priority"] == data["priority"]
+        assert serialized["is_active"] == data["is_active"]
+        assert serialized["superseded_by_id"] == data["superseded_by_id"]
+        assert serialized["restorable"] == data["restorable"]
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "minimum_top_up_cents": 1,
+            "bonus_kind": "fixed",
+            "fixed_bonus_cents": None,
+            "percent_basis": None,
+            "maximum_bonus_cents": None,
+            "priority": 1,
+            "is_active": True,
+            "superseded_by_id": None,
+            "restorable": True,
+            "created_at": None,
+            "updated_at": None,
+            "deleted_at": None,
+        }
+        instance = QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["fixed_bonus_cents"] is None
+        assert serialized["percent_basis"] is None
+        assert serialized["maximum_bonus_cents"] is None
+        assert serialized["superseded_by_id"] is None
+        assert serialized["created_at"] is None
+        assert serialized["updated_at"] is None
+        assert serialized["deleted_at"] is None
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "minimum_top_up_cents": 1,
+            "bonus_kind": "unexpected_quote_wallet_bonus_tier_response_value_200_application_json_property_data_property_matching_tier_bonus_kind",
+            "fixed_bonus_cents": 1,
+            "percent_basis": 1,
+            "maximum_bonus_cents": 1,
+            "priority": 1,
+            "is_active": True,
+            "superseded_by_id": 1,
+            "restorable": True,
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+            "deleted_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyDataPropertyMatchingTier.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "quote_wallet_bonus_tier_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "top_up_cents": 1,
+            "within_top_up_limits": True,
+            "eligible": True,
+            "bonus_cents": 1,
+            "reason": "test_reason",
+            "minimum_top_up_cents": None,
+            "maximum_top_up_cents": None,
+            "matching_tier": None,
+        }
+        instance = (
+            QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["top_up_cents"] == data["top_up_cents"]
+        assert serialized["within_top_up_limits"] == data["within_top_up_limits"]
+        assert serialized["eligible"] == data["eligible"]
+        assert serialized["bonus_cents"] == data["bonus_cents"]
+        assert serialized["reason"] == data["reason"]
+        assert serialized["minimum_top_up_cents"] == data["minimum_top_up_cents"]
+        assert serialized["maximum_top_up_cents"] == data["maximum_top_up_cents"]
+        assert serialized["matching_tier"] == data["matching_tier"]
+
+    def test_quote_wallet_bonus_tier_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "top_up_cents": 1,
+            "within_top_up_limits": True,
+            "eligible": True,
+            "bonus_cents": 1,
+            "reason": "test_reason",
+            "minimum_top_up_cents": None,
+            "maximum_top_up_cents": None,
+            "matching_tier": None,
+        }
+        instance = (
+            QuoteWalletBonusTierResponseValue200ApplicationJsonPropertyData.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["minimum_top_up_cents"] is None
+        assert serialized["maximum_top_up_cents"] is None
+        assert serialized["matching_tier"] is None
+
+    def test_sdk_quote_wallet_bonus_tier_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_quote_wallet_bonus_tier_response_value_200_application_json.json"
+        )
+        instance = SdkQuoteWalletBonusTierResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkQuoteWalletBonusTierResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_quote_wallet_bonus_tier_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "top_up_cents": 1,
+                "within_top_up_limits": True,
+                "eligible": True,
+                "bonus_cents": 1,
+                "reason": "test_reason",
+                "minimum_top_up_cents": 1,
+                "maximum_top_up_cents": 1,
+                "matching_tier": {
+                    "id": 1,
+                    "minimum_top_up_cents": 1,
+                    "bonus_kind": "fixed",
+                    "fixed_bonus_cents": 1,
+                    "percent_basis": 1,
+                    "maximum_bonus_cents": 1,
+                    "priority": 1,
+                    "is_active": True,
+                    "superseded_by_id": 1,
+                    "restorable": True,
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                    "deleted_at": "2023-01-01T00:00:00.000Z",
+                },
+            }
+        }
+        instance = SdkQuoteWalletBonusTierResponseValue200ApplicationJson.from_dict(
             data
         )
         serialized = instance.to_dict()

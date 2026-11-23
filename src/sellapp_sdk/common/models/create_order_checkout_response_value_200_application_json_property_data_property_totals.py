@@ -21,6 +21,8 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "total_cents",
         "total_exclusive_usd_cents",
         "total_usd_cents",
+        "refund_currency",
+        "refunded_total_cents",
     ],
     "properties": {
         "currency": {
@@ -58,6 +60,15 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "integer",
                 "constraints": {"minimum": 0},
             },
+        },
+        "refund_currency": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "refunded_total_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0},
         },
     },
     "additionalProperties": True,
@@ -71,6 +82,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "total_cents",
         "total_exclusive_usd_cents",
         "total_usd_cents",
+        "refund_currency",
+        "refunded_total_cents",
     ],
     "properties": {
         "currency": {
@@ -108,6 +121,15 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
                 "type": "integer",
                 "constraints": {"minimum": 0},
             },
+        },
+        "refund_currency": {
+            "kind": "nullable",
+            "inner": {"kind": "primitive", "type": "string"},
+        },
+        "refunded_total_cents": {
+            "kind": "primitive",
+            "type": "integer",
+            "constraints": {"minimum": 0},
         },
     },
     "additionalProperties": True,
@@ -124,6 +146,10 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTota
     total_cents: int
     total_exclusive_usd_cents: int | None
     total_usd_cents: int | None
+    refund_currency: str | None
+    """The currency refunds on this order are made and counted in: the currency the payment was charged in, which can differ from the order currency. `null` when the payment method cannot be refunded through the API."""
+    refunded_total_cents: int
+    """The amount already refunded on this order, in integer minor units of `refund_currency`: `500` means $5.00 in USD. It is the exact figure a refund request compares `expected_refunded_total_cents` with, so send it back unchanged when you refund. `0` when nothing has been refunded."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -150,6 +176,8 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTota
                 total_cents=data["total_cents"],
                 total_exclusive_usd_cents=data["total_exclusive_usd_cents"],
                 total_usd_cents=data["total_usd_cents"],
+                refund_currency=data["refund_currency"],
+                refunded_total_cents=data["refunded_total_cents"],
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -159,6 +187,8 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTota
                         "total_cents",
                         "total_exclusive_usd_cents",
                         "total_usd_cents",
+                        "refund_currency",
+                        "refunded_total_cents",
                     ],
                 ),
                 _from_response=True,
@@ -178,6 +208,8 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTota
         _domain_data["total_cents"] = self.total_cents
         _domain_data["total_exclusive_usd_cents"] = self.total_exclusive_usd_cents
         _domain_data["total_usd_cents"] = self.total_usd_cents
+        _domain_data["refund_currency"] = self.refund_currency
+        _domain_data["refunded_total_cents"] = self.refunded_total_cents
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -199,4 +231,9 @@ class CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTota
             result["total_usd_cents"] = self.total_usd_cents
         else:
             result["total_usd_cents"] = None
+        if self.refund_currency is not None:
+            result["refund_currency"] = self.refund_currency
+        else:
+            result["refund_currency"] = None
+        result["refunded_total_cents"] = self.refunded_total_cents
         return result

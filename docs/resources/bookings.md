@@ -336,3 +336,136 @@ Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API r
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## create
+
+Create a booking product
+
+[API reference](https://sell.app/docs/api/bookings/create-a-booking-product) · Effect: **consequential**
+
+```python
+def create(
+        self,
+        *,
+        title: str,
+        price_cents: int,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        variant_title: str | None = None,
+        variant_description: str | None = None,
+        compare_at_price_cents: int | None | NotGiven = NOT_GIVEN,
+        currency: SdkCreateBookingProductRequestApplicationJsonCurrency
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateBookingProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        provider_connection_ids: builtins.list[int] | None = None,
+        video_provider: SdkCreateBookingProductRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkCreateBookingProductRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        availability: builtins.list[
+            CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateBookingProductResponseValue201ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| title | `str` | Yes |
+| price_cents | `int` | Yes |
+| description | `str \| None \| NotGiven` | No |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| variant_title | `str \| None` | No |
+| variant_description | `str \| None` | No |
+| compare_at_price_cents | `int \| None \| NotGiven` | No |
+| currency | `SdkCreateBookingProductRequestApplicationJsonCurrency
+        \| str
+        \| None` | No |
+| payment_methods | `builtins.list[
+            SdkCreateBookingProductRequestApplicationJsonPaymentMethods \| str
+        ]
+        \| None` | No |
+| timezone | `str \| None` | No |
+| duration_minutes | `int \| None` | No |
+| min_notice_minutes | `int \| None` | No |
+| max_advance_days | `int \| None` | No |
+| buffer_before_minutes | `int \| None` | No |
+| buffer_after_minutes | `int \| None` | No |
+| provider_connection_ids | `builtins.list[int] \| None` | No |
+| video_provider | `SdkCreateBookingProductRequestApplicationJsonVideoProvider
+        \| str
+        \| None` | No |
+| video_provider_connection_id | `int \| None \| NotGiven` | No |
+| reminders_enabled | `bool \| None` | No |
+| reminder_offset_value | `int \| None` | No |
+| reminder_offset_unit | `SdkCreateBookingProductRequestApplicationJsonReminderOffsetUnit
+        \| str
+        \| None` | No |
+| availability | `builtins.list[
+            CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkCreateBookingProductResponseValue201ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.bookings.create(
+    title="Strategy consultation",
+    description="<p>A private strategy session for your next launch.</p>",
+    variant_title="60 minute session",
+    price_cents=2500,
+    currency="USD",
+    payment_methods=["STRIPE"],
+    timezone="Europe/London",
+    duration_minutes=60,
+    availability=[
+        {"day": 1, "enabled": True, "start": "09:00", "end": "12:00"},
+        {"day": 3, "enabled": True, "start": "13:00", "end": "17:00"}
+    ]
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 201, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+

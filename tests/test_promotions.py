@@ -23,6 +23,7 @@ from sellapp_sdk.promotions.models import (
     RestorePromotionRequestApplicationJsonPropertyPhasesItem,
     SdkCreatePromotionResponseValue201ApplicationJson,
     SdkGetPromotionResponseValue200ApplicationJson,
+    SdkGetPromotionUsageResponseValue200ApplicationJson,
     SdkReplacePromotionResponseValue200ApplicationJson,
     SdkRestorePromotionResponseValue200ApplicationJson,
     SdkUpdatePromotionResponseValue200ApplicationJson,
@@ -181,6 +182,31 @@ class TestPromotions:
         assert body["priority"] == 1
         assert body["is_stackable"] == True
         assert "phases" in body
+
+    def test_get_usage(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_promotion_usage_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.promotions.get_usage("test_promotion")
+        assert isinstance(result, SdkGetPromotionUsageResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/promotions/test_promotion/usage")
+
+    def test_get_usage_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_promotion_usage_response_value_200_application_json.json"
+            )
+        )
+        sellapp_sdk.promotions.get_usage(
+            "test_promotion", with_trashed=True, only_trashed=True
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["with_trashed"] == "true"
+        assert request.url.params["only_trashed"] == "true"
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -426,6 +452,33 @@ class TestAsyncPromotions:
         request = httpx_mock.get_request()
         assert request.method == "POST"
         assert request.url.path.endswith("/v2/promotions/test_promotion/restore")
+
+    @pytest.mark.asyncio
+    async def test_get_usage(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_promotion_usage_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.promotions.get_usage("test_promotion")
+        assert isinstance(result, SdkGetPromotionUsageResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/promotions/test_promotion/usage")
+
+    @pytest.mark.asyncio
+    async def test_get_usage_encodes_query_params(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_promotion_usage_response_value_200_application_json.json"
+            )
+        )
+        await async_sellapp_sdk.promotions.get_usage(
+            "test_promotion", with_trashed=True, only_trashed=True
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["with_trashed"] == "true"
+        assert request.url.params["only_trashed"] == "true"
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

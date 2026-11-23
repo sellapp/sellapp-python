@@ -536,3 +536,61 @@ Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API r
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 
+## get_performance
+
+Retrieve upsell offer performance
+
+[API reference](https://sell.app/docs/api/products/retrieve-upsell-offer-performance) · Effect: **read**
+
+```python
+def get_performance(
+        self,
+        upsell_offer: int,
+        *,
+        with_trashed: bool | None = None,
+        only_trashed: bool | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| upsell_offer | `int` | Yes |
+| with_trashed | `bool \| None` | No |
+| only_trashed | `bool \| None` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkGetUpsellOfferPerformanceResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.upsell_offers.get_performance(upsell_offer=71)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+

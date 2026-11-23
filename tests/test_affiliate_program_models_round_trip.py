@@ -18,10 +18,12 @@ from sellapp_sdk.affiliate_program.models import (
     ReplaceAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertyProductsItemPropertyCommission,
     ReplaceAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettings,
     ReplaceAffiliateProgramConfigurationResponseValue200ApplicationJsonPropertyDataPropertySettingsPropertyCommission,
+    ResendAffiliateInvitationResponseValue200ApplicationJsonPropertyData,
     SdkGetAffiliateProgramConfigurationResponseValue200ApplicationJson,
     SdkInviteAffiliateResponseValue201ApplicationJson,
     SdkListPendingAffiliateInvitationsResponseValue200ApplicationJson,
     SdkReplaceAffiliateProgramConfigurationResponseValue200ApplicationJson,
+    SdkResendAffiliateInvitationResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
 
@@ -1423,5 +1425,101 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkInviteAffiliateResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_resend_affiliate_invitation_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "resend_affiliate_invitation_response_value_200_application_json_property_data.json"
+        )
+        instance = ResendAffiliateInvitationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ResendAffiliateInvitationResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_resend_affiliate_invitation_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "status": "pending",
+            "invited_at": None,
+            "application_submitted_at": None,
+            "created_at": None,
+        }
+        instance = ResendAffiliateInvitationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["email"] == data["email"]
+        assert serialized["status"] == data["status"]
+        assert serialized["invited_at"] == data["invited_at"]
+        assert (
+            serialized["application_submitted_at"] == data["application_submitted_at"]
+        )
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_resend_affiliate_invitation_response_value_200_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "email": "test@example.com",
+            "status": "pending",
+            "invited_at": None,
+            "application_submitted_at": None,
+            "created_at": None,
+        }
+        instance = ResendAffiliateInvitationResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["invited_at"] is None
+        assert serialized["application_submitted_at"] is None
+        assert serialized["created_at"] is None
+
+    def test_sdk_resend_affiliate_invitation_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_resend_affiliate_invitation_response_value_200_application_json.json"
+        )
+        instance = (
+            SdkResendAffiliateInvitationResponseValue200ApplicationJson.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkResendAffiliateInvitationResponseValue200ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_resend_affiliate_invitation_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "email": "test@example.com",
+                "status": "pending",
+                "invited_at": "2023-01-01T00:00:00.000Z",
+                "application_submitted_at": "2023-01-01T00:00:00.000Z",
+                "created_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = (
+            SdkResendAffiliateInvitationResponseValue200ApplicationJson.from_dict(data)
+        )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]

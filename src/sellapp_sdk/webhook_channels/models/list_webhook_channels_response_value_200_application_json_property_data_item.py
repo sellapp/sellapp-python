@@ -16,6 +16,13 @@ from sellapp_sdk.common.models.list_webhook_channels_response_value_200_applicat
     ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemAllowedNotifications,
 )
 
+from .list_webhook_channels_response_value_200_application_json_property_data_item_property_health import (
+    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth,
+)
+from .list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery import (
+    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery,
+)
+
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem",
     "required": [
@@ -24,6 +31,8 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "url",
         "allowed_notifications",
         "signing_secret_configured",
+        "health",
+        "last_delivery",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "string", "format": "uuid"},
@@ -68,6 +77,8 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "constraints": {"uniqueItems": True},
         },
         "signing_secret_configured": {"kind": "primitive", "type": "boolean"},
+        "health": {"kind": "any"},
+        "last_delivery": {"kind": "nullable", "inner": {"kind": "any"}},
     },
     "additionalProperties": True,
 }
@@ -79,6 +90,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "url",
         "allowed_notifications",
         "signing_secret_configured",
+        "health",
+        "last_delivery",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "string", "format": "uuid"},
@@ -123,6 +136,8 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "constraints": {"uniqueItems": True},
         },
         "signing_secret_configured": {"kind": "primitive", "type": "boolean"},
+        "health": {"kind": "any"},
+        "last_delivery": {"kind": "nullable", "inner": {"kind": "any"}},
     },
     "additionalProperties": True,
 }
@@ -130,7 +145,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
 
 @dataclass(slots=True)
 class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
-    """A seller-configured outbound webhook destination. IDs are stable UUIDs and are not reused when another channel is deleted."""
+    """A seller-configured outbound webhook destination. IDs are stable UUIDs and are not reused when another channel is deleted. List and search results also report how deliveries to the destination are going."""
 
     id: str
     """Stable identifier for this webhook channel."""
@@ -144,6 +159,13 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
     """Complete set of public webhook event names enabled for this destination. Updating this field replaces the previous filter."""
     signing_secret_configured: bool
     """Whether the store has an outbound webhook signing secret. The stored secret is never returned."""
+    health: (
+        ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth
+    )
+    last_delivery: (
+        ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery
+        | None
+    )
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -174,6 +196,14 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
                     for item in cast(list[Any], data["allowed_notifications"])
                 ],
                 signing_secret_configured=data["signing_secret_configured"],
+                health=ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+                    cast(dict[str, Any], data["health"])
+                ),
+                last_delivery=ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+                    cast(dict[str, Any], _v_last_delivery)
+                )
+                if (_v_last_delivery := data["last_delivery"]) is not None
+                else None,
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -182,6 +212,8 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
                         "url",
                         "allowed_notifications",
                         "signing_secret_configured",
+                        "health",
+                        "last_delivery",
                     ],
                 ),
                 _from_response=True,
@@ -199,6 +231,8 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["url"] = self.url
         _domain_data["allowed_notifications"] = self.allowed_notifications
         _domain_data["signing_secret_configured"] = self.signing_secret_configured
+        _domain_data["health"] = self.health
+        _domain_data["last_delivery"] = self.last_delivery
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -219,4 +253,9 @@ class ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem:
             for item in self.allowed_notifications
         ]
         result["signing_secret_configured"] = self.signing_secret_configured
+        result["health"] = self.health.to_dict()
+        if self.last_delivery is not None:
+            result["last_delivery"] = self.last_delivery.to_dict()
+        else:
+            result["last_delivery"] = None
         return result

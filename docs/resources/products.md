@@ -19,6 +19,11 @@ def list(
         page: int | None = None,
         with_drafts: bool | None = None,
         only_drafts: bool | None = None,
+        min_price: int | None = None,
+        max_price: int | None = None,
+        stock: ProductsStock | str | None = None,
+        visibility: builtins.list[ProductsVisibility | str] | None = None,
+        has_sales: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -32,6 +37,11 @@ def list(
 | page | `int \| None` | No |
 | with_drafts | `bool \| None` | No |
 | only_drafts | `bool \| None` | No |
+| min_price | `int \| None` | No |
+| max_price | `int \| None` | No |
+| stock | `ProductsStock \| str \| None` | No |
+| visibility | `builtins.list[ProductsVisibility \| str] \| None` | No |
+| has_sales | `bool \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListProductsResponseValue200ApplicationJsonPropertyDataItem]`.
@@ -464,6 +474,16 @@ def search(
             SearchProductsRequestApplicationJsonPropertyIncludesItem
         ]
         | None = None,
+        min_price: int | None | NotGiven = NOT_GIVEN,
+        max_price: int | None | NotGiven = NOT_GIVEN,
+        stock: Stock | str | None | NotGiven = NOT_GIVEN,
+        visibility: builtins.list[
+            SdkSearchProductsRequestApplicationJsonVisibility | str
+        ]
+        | None = None,
+        has_sales: bool | None | NotGiven = NOT_GIVEN,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         limit: int | None = None,
         before: str | None = None,
         after: str | None = None,
@@ -484,6 +504,16 @@ def search(
             SearchProductsRequestApplicationJsonPropertyIncludesItem
         ]
         \| None` | No |
+| min_price | `int \| None \| NotGiven` | No |
+| max_price | `int \| None \| NotGiven` | No |
+| stock | `Stock \| str \| None \| NotGiven` | No |
+| visibility | `builtins.list[
+            SdkSearchProductsRequestApplicationJsonVisibility \| str
+        ]
+        \| None` | No |
+| has_sales | `bool \| None \| NotGiven` | No |
+| with_drafts | `bool \| None` | No |
+| only_drafts | `bool \| None` | No |
 | limit | `int \| None` | No |
 | before | `str \| None` | No |
 | after | `str \| None` | No |
@@ -500,8 +530,11 @@ from sellapp_sdk import SellAppClient
 client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
 
 result = client.products.search(
-    filters=[{"field": "id", "operator": "=", "value": 1}],
-    sort=[{"field": "created_at", "direction": "desc"}]
+    search={"value": "launch"},
+    max_price=2500,
+    stock="in_stock",
+    visibility=["PUBLIC"],
+    has_sales=True
 )
 print(result)
 ```
@@ -700,6 +733,183 @@ Supported credential alternatives (each object is one alternative):
 ```
 
 Documented HTTP responses: 200, 400, 401, 403, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## publish
+
+Publish a product
+
+[API reference](https://sell.app/docs/api/products/publish-a-product) · Effect: **consequential**
+
+```python
+def publish(
+        self,
+        product: int,
+        *,
+        visibility: CatalogVisibility | str | None = None,
+        variant_ids: builtins.list[int] | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| visibility | `CatalogVisibility \| str \| None` | No |
+| variant_ids | `builtins.list[int] \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkPublishProductResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.products.publish(
+    product=1,
+    variant_ids=[2]
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## duplicate
+
+Duplicate a product
+
+[API reference](https://sell.app/docs/api/products/duplicate-a-product) · Effect: **write**
+
+```python
+def duplicate(
+        self,
+        product: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductResponseValue201ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkDuplicateProductResponseValue201ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.products.duplicate(product=1)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 201, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
+
+[Response access, transport controls, pagination, and typed errors](../usage.md)
+
+## move
+
+Move a product
+
+[API reference](https://sell.app/docs/api/products/move-a-product) · Effect: **write**
+
+```python
+def move(
+        self,
+        product: int,
+        *,
+        position: int,
+        expected_position: int | None | NotGiven = NOT_GIVEN,
+        request_options: RequestOptions | None = None,
+    ) -> SdkMoveProductResponseValue200ApplicationJson:
+```
+
+| Argument | Native type | Required |
+| --- | --- | --- |
+| product | `int` | Yes |
+| position | `int` | Yes |
+| expected_position | `int \| None \| NotGiven` | No |
+| request_options | `RequestOptions \| None` | No |
+
+Returns: `SdkMoveProductResponseValue200ApplicationJson`.
+
+```py
+import os
+from sellapp_sdk import SellAppClient
+
+client = SellAppClient(base_url=os.environ["SELLAPP_API_BASE_URL"], api_key=os.environ["SELLAPP_API_KEY"], store=os.environ["SELLAPP_STORE"])
+
+result = client.products.move(
+    product=1,
+    position=1,
+    expected_position=3
+)
+print(result)
+```
+
+### Authentication and errors
+
+Supported credential alternatives (each object is one alternative):
+
+```json
+[
+  {
+    "bearerAuth": []
+  },
+  {
+    "oauthAccessToken": [
+      "admin"
+    ],
+    "storeAuth": []
+  }
+]
+```
+
+Documented HTTP responses: 200, 400, 401, 403, 404, 422, 429, 500. See the API reference for field-level validation and consequences.
 
 [Response access, transport controls, pagination, and typed errors](../usage.md)
 

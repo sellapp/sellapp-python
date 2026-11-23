@@ -11,10 +11,26 @@ if TYPE_CHECKING:
 
 import builtins
 
+from sellapp_sdk.common.models.catalog_visibility import CatalogVisibility
+from sellapp_sdk.common.models.sdk_create_booking_product_request_application_json_currency import (
+    SdkCreateBookingProductRequestApplicationJsonCurrency,
+)
+from sellapp_sdk.common.models.sdk_create_booking_product_request_application_json_payment_methods import (
+    SdkCreateBookingProductRequestApplicationJsonPaymentMethods,
+)
+from sellapp_sdk.common.models.sdk_create_booking_product_request_application_json_reminder_offset_unit import (
+    SdkCreateBookingProductRequestApplicationJsonReminderOffsetUnit,
+)
+from sellapp_sdk.common.models.sdk_create_booking_product_request_application_json_video_provider import (
+    SdkCreateBookingProductRequestApplicationJsonVideoProvider,
+)
+
 from .._pagination import AsyncPage, SyncPage
-from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model
+from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
+    CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem,
     SdkCancelAppointmentResponseValue200ApplicationJson,
+    SdkCreateBookingProductResponseValue201ApplicationJson,
     SdkGetAppointmentResponseValue200ApplicationJson,
     SdkListAppointmentsResponseValue200ApplicationJson,
     SdkSearchAppointmentsResponseValue200ApplicationJson,
@@ -474,6 +490,353 @@ class Bookings:
             request_options=request_options,
         )
 
+    def create(
+        self,
+        *,
+        title: str,
+        price_cents: int,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        variant_title: str | None = None,
+        variant_description: str | None = None,
+        compare_at_price_cents: int | None | NotGiven = NOT_GIVEN,
+        currency: SdkCreateBookingProductRequestApplicationJsonCurrency
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateBookingProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        provider_connection_ids: builtins.list[int] | None = None,
+        video_provider: SdkCreateBookingProductRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkCreateBookingProductRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        availability: builtins.list[
+            CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateBookingProductResponseValue201ApplicationJson:
+        """Create a booking product
+
+        Create a draft booking product with one draft option that customers book as a timed appointment, one per purchase and one customer per time slot. Nothing can be booked until you publish it, whatever `visibility` you send: `visibility`, `PRIVATE` by default, applies once the product is published. Publish it with `POST /v2/products/{product}/publish`. Schedule fields you leave out take their defaults; read the result with `GET /v2/products/{product}/variants/{variant}/booking`. Each successful call creates another product, so do not retry blindly after a lost response: list your products first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            title: The product name customers see. The URL slug is made from it.
+            description: The product description as HTML, 5 to 5000 characters. Leave it out to start without one.
+            visibility: The visibility.
+            variant_title: The name of the bookable option.
+            variant_description: The option's description. Defaults to the product description, or to `Book an appointment for` and the title when there is none.
+            price_cents: The price of one appointment in the smallest unit of `currency`: `2500` means $25.00 in USD, and `0` makes it free. A paid price outside the currency's limits, such as below 0.50 in USD, returns `422` on `price_cents`.
+            compare_at_price_cents: An optional crossed-out price shown next to the real one, in the same unit. It must be higher than `price_cents` and within the currency's limits; otherwise the request returns `422` on `compare_at_price_cents`.
+            currency: The currency of both prices.
+            payment_methods: How customers can pay. Each must be enabled for the store, or the request returns `422` on `payment_methods`. Leave it out to use the store's default payment methods for the currency; a paid booking with none available returns `422` on `payment_methods`.
+            timezone: The IANA timezone the weekly availability is read in. Defaults to the store's timezone.
+            duration_minutes: The duration minutes.
+            min_notice_minutes: The min notice minutes.
+            max_advance_days: The max advance days.
+            buffer_before_minutes: The buffer before minutes.
+            buffer_after_minutes: The buffer after minutes.
+            provider_connection_ids: The provider connection ids.
+            video_provider: The video provider.
+            video_provider_connection_id: The video provider connection id.
+            reminders_enabled: The reminders enabled.
+            reminder_offset_value: The reminder offset value.
+            reminder_offset_unit: The reminder offset unit.
+            availability: Weekly opening hours, one entry per day from `1` to `7`, in 30-minute steps. Days you leave out are closed. Leave the whole list out to open days `1` to `5` from 09:00 to 17:00.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkCreateBookingProductResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "createBookingProduct",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "title": title,
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+                "variant_title": variant_title,
+                "variant_description": variant_description,
+                "price_cents": price_cents,
+                "currency": enum_value(currency) if currency is not None else None,
+                "payment_methods": payment_methods,
+                "timezone": timezone,
+                "duration_minutes": duration_minutes,
+                "min_notice_minutes": min_notice_minutes,
+                "max_advance_days": max_advance_days,
+                "buffer_before_minutes": buffer_before_minutes,
+                "buffer_after_minutes": buffer_after_minutes,
+                "provider_connection_ids": provider_connection_ids,
+                "video_provider": enum_value(video_provider)
+                if video_provider is not None
+                else None,
+                "reminders_enabled": reminders_enabled,
+                "reminder_offset_value": reminder_offset_value,
+                "reminder_offset_unit": enum_value(reminder_offset_unit)
+                if reminder_offset_unit is not None
+                else None,
+                "availability": [item.to_dict() for item in availability]
+                if availability is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(description, NotGiven):
+            body["description"] = description
+        if not isinstance(compare_at_price_cents, NotGiven):
+            body["compare_at_price_cents"] = compare_at_price_cents
+        if not isinstance(video_provider_connection_id, NotGiven):
+            body["video_provider_connection_id"] = video_provider_connection_id
+        _validate_model(
+            body,
+            {
+                "name": "SdkCreateBookingProductRequestApplicationJson",
+                "required": ["title", "price_cents"],
+                "properties": {
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5, "maxLength": 5000},
+                        },
+                    },
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                    "variant_title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "variant_description": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 5, "maxLength": 5000},
+                    },
+                    "price_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0},
+                    },
+                    "compare_at_price_cents": {
+                        "kind": "nullable",
+                        "inner": {"kind": "primitive", "type": "integer"},
+                    },
+                    "currency": {
+                        "kind": "enum",
+                        "values": [
+                            "AUD",
+                            "BRL",
+                            "CAD",
+                            "CNY",
+                            "CZK",
+                            "DKK",
+                            "EUR",
+                            "GHS",
+                            "HKD",
+                            "HUF",
+                            "ILS",
+                            "INR",
+                            "JPY",
+                            "MYR",
+                            "MXN",
+                            "NGN",
+                            "TWD",
+                            "NZD",
+                            "NOK",
+                            "PHP",
+                            "PLN",
+                            "GBP",
+                            "RUB",
+                            "SGD",
+                            "SEK",
+                            "CHF",
+                            "THB",
+                            "USD",
+                            "ZAR",
+                        ],
+                    },
+                    "payment_methods": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "enum",
+                            "values": [
+                                "AUTHNET",
+                                "BTCPAY",
+                                "CASHAPP",
+                                "COINBASE",
+                                "PADDLE",
+                                "PAYDASH",
+                                "PAYPAL",
+                                "PAYSTACK",
+                                "SQUARE",
+                                "STRIPE",
+                                "VENMO",
+                                "NMI",
+                                "MERCADO_PAGO",
+                                "MOLLIE",
+                                "RAZORPAY",
+                                "CUSTOM_PAYMENT_METHOD",
+                                "LIFI",
+                                "BTC",
+                                "LTC",
+                                "ETH",
+                                "XMR",
+                                "SOL",
+                                "ADA",
+                                "BNB",
+                                "TRX",
+                                "MATIC",
+                                "ETH_USDT",
+                                "ETH_USDC",
+                                "ETH_UNI",
+                                "ETH_SHIB",
+                                "ETH_DAI",
+                                "BNB_USDT",
+                                "BNB_USDC",
+                                "TRX_USDT",
+                                "TRX_USDC",
+                                "SOL_USDT",
+                                "SOL_USDC",
+                            ],
+                        },
+                        "constraints": {"uniqueItems": True},
+                    },
+                    "timezone": {"kind": "primitive", "type": "string"},
+                    "duration_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 30, "multipleOf": 30},
+                    },
+                    "min_notice_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 525600},
+                    },
+                    "max_advance_days": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 730},
+                    },
+                    "buffer_before_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {
+                            "minimum": 0,
+                            "maximum": 1440,
+                            "multipleOf": 30,
+                        },
+                    },
+                    "buffer_after_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {
+                            "minimum": 0,
+                            "maximum": 1440,
+                            "multipleOf": 30,
+                        },
+                    },
+                    "provider_connection_ids": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "video_provider": {
+                        "kind": "enum",
+                        "values": ["none", "google_meet", "zoom"],
+                    },
+                    "video_provider_connection_id": {
+                        "kind": "nullable",
+                        "inner": {"kind": "primitive", "type": "integer"},
+                    },
+                    "reminders_enabled": {"kind": "primitive", "type": "boolean"},
+                    "reminder_offset_value": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 10080},
+                    },
+                    "reminder_offset_unit": {
+                        "kind": "enum",
+                        "values": ["minutes", "hours", "days", "weeks"],
+                    },
+                    "availability": {
+                        "kind": "array",
+                        "items": {"kind": "any"},
+                        "constraints": {"minItems": 0, "maxItems": 7},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="post",
+            path=("v2", "booking-products"),
+            body=body,
+            model=SdkCreateBookingProductResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
 
 class AsyncBookings:
     """Bookings API resources (async)."""
@@ -920,5 +1283,352 @@ class AsyncBookings:
             path=("v2", "bookings", str(booking), "status"),
             body=body,
             model=SdkCancelAppointmentResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def create(
+        self,
+        *,
+        title: str,
+        price_cents: int,
+        description: str | None | NotGiven = NOT_GIVEN,
+        visibility: CatalogVisibility | str | None = None,
+        variant_title: str | None = None,
+        variant_description: str | None = None,
+        compare_at_price_cents: int | None | NotGiven = NOT_GIVEN,
+        currency: SdkCreateBookingProductRequestApplicationJsonCurrency
+        | str
+        | None = None,
+        payment_methods: builtins.list[
+            SdkCreateBookingProductRequestApplicationJsonPaymentMethods | str
+        ]
+        | None = None,
+        timezone: str | None = None,
+        duration_minutes: int | None = None,
+        min_notice_minutes: int | None = None,
+        max_advance_days: int | None = None,
+        buffer_before_minutes: int | None = None,
+        buffer_after_minutes: int | None = None,
+        provider_connection_ids: builtins.list[int] | None = None,
+        video_provider: SdkCreateBookingProductRequestApplicationJsonVideoProvider
+        | str
+        | None = None,
+        video_provider_connection_id: int | None | NotGiven = NOT_GIVEN,
+        reminders_enabled: bool | None = None,
+        reminder_offset_value: int | None = None,
+        reminder_offset_unit: SdkCreateBookingProductRequestApplicationJsonReminderOffsetUnit
+        | str
+        | None = None,
+        availability: builtins.list[
+            CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem
+        ]
+        | None = None,
+        request_options: RequestOptions | None = None,
+    ) -> SdkCreateBookingProductResponseValue201ApplicationJson:
+        """Create a booking product
+
+        Create a draft booking product with one draft option that customers book as a timed appointment, one per purchase and one customer per time slot. Nothing can be booked until you publish it, whatever `visibility` you send: `visibility`, `PRIVATE` by default, applies once the product is published. Publish it with `POST /v2/products/{product}/publish`. Schedule fields you leave out take their defaults; read the result with `GET /v2/products/{product}/variants/{variant}/booking`. Each successful call creates another product, so do not retry blindly after a lost response: list your products first. Requires the `listing` API-key ability and the `listing` permission in your team role. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            title: The product name customers see. The URL slug is made from it.
+            description: The product description as HTML, 5 to 5000 characters. Leave it out to start without one.
+            visibility: The visibility.
+            variant_title: The name of the bookable option.
+            variant_description: The option's description. Defaults to the product description, or to `Book an appointment for` and the title when there is none.
+            price_cents: The price of one appointment in the smallest unit of `currency`: `2500` means $25.00 in USD, and `0` makes it free. A paid price outside the currency's limits, such as below 0.50 in USD, returns `422` on `price_cents`.
+            compare_at_price_cents: An optional crossed-out price shown next to the real one, in the same unit. It must be higher than `price_cents` and within the currency's limits; otherwise the request returns `422` on `compare_at_price_cents`.
+            currency: The currency of both prices.
+            payment_methods: How customers can pay. Each must be enabled for the store, or the request returns `422` on `payment_methods`. Leave it out to use the store's default payment methods for the currency; a paid booking with none available returns `422` on `payment_methods`.
+            timezone: The IANA timezone the weekly availability is read in. Defaults to the store's timezone.
+            duration_minutes: The duration minutes.
+            min_notice_minutes: The min notice minutes.
+            max_advance_days: The max advance days.
+            buffer_before_minutes: The buffer before minutes.
+            buffer_after_minutes: The buffer after minutes.
+            provider_connection_ids: The provider connection ids.
+            video_provider: The video provider.
+            video_provider_connection_id: The video provider connection id.
+            reminders_enabled: The reminders enabled.
+            reminder_offset_value: The reminder offset value.
+            reminder_offset_unit: The reminder offset unit.
+            availability: Weekly opening hours, one entry per day from `1` to `7`, in 30-minute steps. Days you leave out are closed. Leave the whole list out to open days `1` to `5` from 09:00 to 17:00.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkCreateBookingProductResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "createBookingProduct",
+        }
+        body: dict[str, Any] = {
+            k: v
+            for k, v in {
+                "title": title,
+                "visibility": enum_value(visibility)
+                if visibility is not None
+                else None,
+                "variant_title": variant_title,
+                "variant_description": variant_description,
+                "price_cents": price_cents,
+                "currency": enum_value(currency) if currency is not None else None,
+                "payment_methods": payment_methods,
+                "timezone": timezone,
+                "duration_minutes": duration_minutes,
+                "min_notice_minutes": min_notice_minutes,
+                "max_advance_days": max_advance_days,
+                "buffer_before_minutes": buffer_before_minutes,
+                "buffer_after_minutes": buffer_after_minutes,
+                "provider_connection_ids": provider_connection_ids,
+                "video_provider": enum_value(video_provider)
+                if video_provider is not None
+                else None,
+                "reminders_enabled": reminders_enabled,
+                "reminder_offset_value": reminder_offset_value,
+                "reminder_offset_unit": enum_value(reminder_offset_unit)
+                if reminder_offset_unit is not None
+                else None,
+                "availability": [item.to_dict() for item in availability]
+                if availability is not None
+                else None,
+            }.items()
+            if v is not None
+        }
+        if not isinstance(description, NotGiven):
+            body["description"] = description
+        if not isinstance(compare_at_price_cents, NotGiven):
+            body["compare_at_price_cents"] = compare_at_price_cents
+        if not isinstance(video_provider_connection_id, NotGiven):
+            body["video_provider_connection_id"] = video_provider_connection_id
+        _validate_model(
+            body,
+            {
+                "name": "SdkCreateBookingProductRequestApplicationJson",
+                "required": ["title", "price_cents"],
+                "properties": {
+                    "title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "description": {
+                        "kind": "nullable",
+                        "inner": {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"minLength": 5, "maxLength": 5000},
+                        },
+                    },
+                    "visibility": {
+                        "kind": "enum",
+                        "values": ["PUBLIC", "ON_HOLD", "HIDDEN", "PRIVATE"],
+                    },
+                    "variant_title": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"maxLength": 255},
+                    },
+                    "variant_description": {
+                        "kind": "primitive",
+                        "type": "string",
+                        "constraints": {"minLength": 5, "maxLength": 5000},
+                    },
+                    "price_cents": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0},
+                    },
+                    "compare_at_price_cents": {
+                        "kind": "nullable",
+                        "inner": {"kind": "primitive", "type": "integer"},
+                    },
+                    "currency": {
+                        "kind": "enum",
+                        "values": [
+                            "AUD",
+                            "BRL",
+                            "CAD",
+                            "CNY",
+                            "CZK",
+                            "DKK",
+                            "EUR",
+                            "GHS",
+                            "HKD",
+                            "HUF",
+                            "ILS",
+                            "INR",
+                            "JPY",
+                            "MYR",
+                            "MXN",
+                            "NGN",
+                            "TWD",
+                            "NZD",
+                            "NOK",
+                            "PHP",
+                            "PLN",
+                            "GBP",
+                            "RUB",
+                            "SGD",
+                            "SEK",
+                            "CHF",
+                            "THB",
+                            "USD",
+                            "ZAR",
+                        ],
+                    },
+                    "payment_methods": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "enum",
+                            "values": [
+                                "AUTHNET",
+                                "BTCPAY",
+                                "CASHAPP",
+                                "COINBASE",
+                                "PADDLE",
+                                "PAYDASH",
+                                "PAYPAL",
+                                "PAYSTACK",
+                                "SQUARE",
+                                "STRIPE",
+                                "VENMO",
+                                "NMI",
+                                "MERCADO_PAGO",
+                                "MOLLIE",
+                                "RAZORPAY",
+                                "CUSTOM_PAYMENT_METHOD",
+                                "LIFI",
+                                "BTC",
+                                "LTC",
+                                "ETH",
+                                "XMR",
+                                "SOL",
+                                "ADA",
+                                "BNB",
+                                "TRX",
+                                "MATIC",
+                                "ETH_USDT",
+                                "ETH_USDC",
+                                "ETH_UNI",
+                                "ETH_SHIB",
+                                "ETH_DAI",
+                                "BNB_USDT",
+                                "BNB_USDC",
+                                "TRX_USDT",
+                                "TRX_USDC",
+                                "SOL_USDT",
+                                "SOL_USDC",
+                            ],
+                        },
+                        "constraints": {"uniqueItems": True},
+                    },
+                    "timezone": {"kind": "primitive", "type": "string"},
+                    "duration_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 30, "multipleOf": 30},
+                    },
+                    "min_notice_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 0, "maximum": 525600},
+                    },
+                    "max_advance_days": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 730},
+                    },
+                    "buffer_before_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {
+                            "minimum": 0,
+                            "maximum": 1440,
+                            "multipleOf": 30,
+                        },
+                    },
+                    "buffer_after_minutes": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {
+                            "minimum": 0,
+                            "maximum": 1440,
+                            "multipleOf": 30,
+                        },
+                    },
+                    "provider_connection_ids": {
+                        "kind": "array",
+                        "items": {"kind": "primitive", "type": "integer"},
+                    },
+                    "video_provider": {
+                        "kind": "enum",
+                        "values": ["none", "google_meet", "zoom"],
+                    },
+                    "video_provider_connection_id": {
+                        "kind": "nullable",
+                        "inner": {"kind": "primitive", "type": "integer"},
+                    },
+                    "reminders_enabled": {"kind": "primitive", "type": "boolean"},
+                    "reminder_offset_value": {
+                        "kind": "primitive",
+                        "type": "integer",
+                        "constraints": {"minimum": 1, "maximum": 10080},
+                    },
+                    "reminder_offset_unit": {
+                        "kind": "enum",
+                        "values": ["minutes", "hours", "days", "weeks"],
+                    },
+                    "availability": {
+                        "kind": "array",
+                        "items": {"kind": "any"},
+                        "constraints": {"minItems": 0, "maxItems": 7},
+                    },
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="post",
+            path=("v2", "booking-products"),
+            body=body,
+            model=SdkCreateBookingProductResponseValue201ApplicationJson,
             request_options=request_options,
         )

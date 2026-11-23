@@ -48,7 +48,10 @@ from .models import (
     ReplaceProductVariantWithPutRequestApplicationJsonPropertyPricing,
     SdkBatchUpdateProductVariantsResponseValue200ApplicationJson,
     SdkCreateProductVariantResponseValue201ApplicationJson,
+    SdkDuplicateProductVariantResponseValue201ApplicationJson,
     SdkGetProductVariantResponseValue200ApplicationJson,
+    SdkPublishProductVariantResponseValue200ApplicationJson,
+    SdkReorderProductVariantsResponseValue200ApplicationJson,
     SdkReplaceProductVariantWithPutResponseValue200ApplicationJson,
     SdkUpdateProductVariantResponseValue200ApplicationJson,
     SearchProductVariantsRequestApplicationJsonPropertyFiltersItem,
@@ -1001,11 +1004,14 @@ class ProductVariants:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem]:
         """Search product variants
 
-        Search a product's variants using JSON body filters, search terms, includes, and sort instructions. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search a product's variants using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. Draft variants are left out unless you send `with_drafts` or `only_drafts`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -1013,10 +1019,13 @@ class ProductVariants:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
+            with_drafts: Include draft variants alongside published variants.
+            only_drafts: Return only draft variants.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -1082,6 +1091,9 @@ class ProductVariants:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "with_drafts": with_drafts,
+                "only_drafts": only_drafts,
             }.items()
             if v is not None
         }
@@ -1342,6 +1354,239 @@ class ProductVariants:
             method="delete",
             path=("v2", "products", str(product), "variants", "batch"),
             body=body,
+            request_options=request_options,
+        )
+
+    def publish(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductVariantResponseValue200ApplicationJson:
+        """Publish a product variant
+
+        Publish one draft option of a booking product so customers can book it. It is checked the way the booking editor checks it: a title, a description of at least 5 characters, finished booking settings, a price, and payment methods enabled for the store that can take its currency. On a published booking product the option can be booked straight away; a draft booking product still needs `POST /v2/products/{product}/publish`, which needs at least one published option when the product has several. Only booking options are published one at a time. A variant of any other kind of product returns `422` on `variant`: its variants are published with the product through `POST /v2/products/{product}/publish`. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: once the option is published, another call changes nothing and returns `422` with `This booking option is already published.` on `variant`. Every other refusal is also `422` on `variant`, with one sentence per thing the option still needs. A variant of another product, or a product of another store, returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPublishProductVariantResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "publishProductVariant",
+        }
+        return self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "variants", str(variant), "publish"),
+            model=SdkPublishProductVariantResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    def duplicate(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductVariantResponseValue201ApplicationJson:
+        """Duplicate a product variant
+
+        Copy a variant of a normal product onto the same product and return the copy. The copy keeps every setting, the title, and the draft state, so a copy of a published variant is on sale straight away. Downloadable files and their folders are copied too. Serial codes and issued licence keys are not copied: a copy that delivers serial codes gets a stock of `0`, so it shows as sold out until you add codes. Subscription variants cannot be duplicated. Requires the `listing` API-key ability and the `listing` permission in your team role. Not safe to retry blindly: every call creates another variant. If a response is lost, list the product's variants, with `with_drafts=true` for a draft, before trying again. A variant of a bundle, add-on, credits product, booking product, or course returns `422` on `product`. A subscription variant returns `422` on `variant`. A variant of another product returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkDuplicateProductVariantResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "duplicateProductVariant",
+        }
+        return self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "duplicate",
+            ),
+            model=SdkDuplicateProductVariantResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    def reorder(
+        self,
+        product: int,
+        *,
+        variant_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
+    ) -> SdkReorderProductVariantsResponseValue200ApplicationJson:
+        """Reorder product variants
+
+        Set the order buyers see a normal product's published variants in, first to last. Send every published variant ID exactly once; draft variants are not part of the order and are refused. The response lists the product's published variants in their new order, without pagination. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: the same list gives the same order. A list that leaves out a published variant, or names a draft or a variant of another product, returns `422` on `variant_ids`; read the variants again and send the full list. An ID sent twice returns `422` on `variant_ids.{i}`. A listing that is not a normal product returns `422` on `product`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant_ids: Every published variant ID of the product, first to last.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReorderProductVariantsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "reorderProductVariants",
+        }
+        body: dict[str, Any] = {
+            "variant_ids": variant_ids,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReorderProductVariantsRequestApplicationJson",
+                "required": ["variant_ids"],
+                "properties": {
+                    "variant_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 500,
+                            "uniqueItems": True,
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return self._client.request(
+            method="put",
+            path=("v2", "products", str(product), "variants", "order"),
+            body=body,
+            model=SdkReorderProductVariantsResponseValue200ApplicationJson,
             request_options=request_options,
         )
 
@@ -2284,13 +2529,16 @@ class AsyncProductVariants:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        with_drafts: bool | None = None,
+        only_drafts: bool | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         SearchProductVariantsResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """Search product variants
 
-        Search a product's variants using JSON body filters, search terms, includes, and sort instructions. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        Search a product's variants using JSON body filters, search terms, includes, and sort instructions, 15 per page by default. Draft variants are left out unless you send `with_drafts` or `only_drafts`. Requires a token with the listing ability. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
             product: The product path parameter.
@@ -2298,10 +2546,13 @@ class AsyncProductVariants:
             sort: The sort.
             search: The search.
             includes: The includes.
-            limit: The limit.
+            limit: Number of items to return per page. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number to return. Defaults to `1`.
+            with_drafts: Include draft variants alongside published variants.
+            only_drafts: Return only draft variants.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -2367,6 +2618,9 @@ class AsyncProductVariants:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "with_drafts": with_drafts,
+                "only_drafts": only_drafts,
             }.items()
             if v is not None
         }
@@ -2627,5 +2881,238 @@ class AsyncProductVariants:
             method="delete",
             path=("v2", "products", str(product), "variants", "batch"),
             body=body,
+            request_options=request_options,
+        )
+
+    async def publish(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkPublishProductVariantResponseValue200ApplicationJson:
+        """Publish a product variant
+
+        Publish one draft option of a booking product so customers can book it. It is checked the way the booking editor checks it: a title, a description of at least 5 characters, finished booking settings, a price, and payment methods enabled for the store that can take its currency. On a published booking product the option can be booked straight away; a draft booking product still needs `POST /v2/products/{product}/publish`, which needs at least one published option when the product has several. Only booking options are published one at a time. A variant of any other kind of product returns `422` on `variant`: its variants are published with the product through `POST /v2/products/{product}/publish`. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: once the option is published, another call changes nothing and returns `422` with `This booking option is already published.` on `variant`. Every other refusal is also `422` on `variant`, with one sentence per thing the option still needs. A variant of another product, or a product of another store, returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkPublishProductVariantResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "publishProductVariant",
+        }
+        return await self._client.request(
+            method="post",
+            path=("v2", "products", str(product), "variants", str(variant), "publish"),
+            model=SdkPublishProductVariantResponseValue200ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def duplicate(
+        self,
+        product: int,
+        variant: int,
+        *,
+        request_options: RequestOptions | None = None,
+    ) -> SdkDuplicateProductVariantResponseValue201ApplicationJson:
+        """Duplicate a product variant
+
+        Copy a variant of a normal product onto the same product and return the copy. The copy keeps every setting, the title, and the draft state, so a copy of a published variant is on sale straight away. Downloadable files and their folders are copied too. Serial codes and issued licence keys are not copied: a copy that delivers serial codes gets a stock of `0`, so it shows as sold out until you add codes. Subscription variants cannot be duplicated. Requires the `listing` API-key ability and the `listing` permission in your team role. Not safe to retry blindly: every call creates another variant. If a response is lost, list the product's variants, with `with_drafts=true` for a draft, before trying again. A variant of a bundle, add-on, credits product, booking product, or course returns `422` on `product`. A subscription variant returns `422` on `variant`. A variant of another product returns `404`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant: The variant path parameter.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkDuplicateProductVariantResponseValue201ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "duplicateProductVariant",
+        }
+        return await self._client.request(
+            method="post",
+            path=(
+                "v2",
+                "products",
+                str(product),
+                "variants",
+                str(variant),
+                "duplicate",
+            ),
+            model=SdkDuplicateProductVariantResponseValue201ApplicationJson,
+            request_options=request_options,
+        )
+
+    async def reorder(
+        self,
+        product: int,
+        *,
+        variant_ids: builtins.list[int],
+        request_options: RequestOptions | None = None,
+    ) -> SdkReorderProductVariantsResponseValue200ApplicationJson:
+        """Reorder product variants
+
+        Set the order buyers see a normal product's published variants in, first to last. Send every published variant ID exactly once; draft variants are not part of the order and are refused. The response lists the product's published variants in their new order, without pagination. Requires the `listing` API-key ability and the `listing` permission in your team role. Safe to repeat: the same list gives the same order. A list that leaves out a published variant, or names a draft or a variant of another product, returns `422` on `variant_ids`; read the variants again and send the full list. An ID sent twice returns `422` on `variant_ids.{i}`. A listing that is not a normal product returns `422` on `product`. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+
+        Args:
+            product: The product path parameter.
+            variant_ids: Every published variant ID of the product, first to last.
+            request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
+
+        Returns:
+            SdkReorderProductVariantsResponseValue200ApplicationJson
+
+        Raises:
+            BadRequestError: If the request is malformed (400).
+            AuthenticationError: If the API key is invalid (401).
+            AuthorizationError: If the request is forbidden (403).
+            NotFoundError: If the resource is not found (404).
+            UnprocessableEntityError: If the request data is unprocessable (422).
+            RateLimitExceededError: If rate limited (429).
+            ServerError: If the server returns a 5xx error.
+        """
+        request_options = {
+            **(request_options or {}),
+            "auth": {
+                "alternatives": [
+                    [{"schemeName": "bearerAuth", "scopes": []}],
+                    [
+                        {"schemeName": "oauthAccessToken", "scopes": ["admin"]},
+                        {"schemeName": "storeAuth", "scopes": []},
+                    ],
+                ],
+                "anonymous": False,
+                "apiKey": True,
+                "accessToken": True,
+                "customerSession": False,
+                "browserSession": False,
+                "clientBasic": False,
+                "apiKeyRequiresStore": False,
+                "apiKeyUsesStore": True,
+                "accessTokenRequiresStore": True,
+            },
+            "server": None,
+            "encoding": "json",
+            "no_retry": False,
+            "text_response": False,
+        }
+        request_options = {
+            **(request_options or {}),
+            "idempotency_supported": False,
+            "operation_id": "reorderProductVariants",
+        }
+        body: dict[str, Any] = {
+            "variant_ids": variant_ids,
+        }
+        _validate_model(
+            body,
+            {
+                "name": "SdkReorderProductVariantsRequestApplicationJson",
+                "required": ["variant_ids"],
+                "properties": {
+                    "variant_ids": {
+                        "kind": "array",
+                        "items": {
+                            "kind": "primitive",
+                            "type": "integer",
+                            "constraints": {"minimum": 1},
+                        },
+                        "constraints": {
+                            "minItems": 1,
+                            "maxItems": 500,
+                            "uniqueItems": True,
+                        },
+                    }
+                },
+                "additionalProperties": True,
+            },
+            direction="request",
+            allow_unknown_enums=False,
+            allow_unknown_union_variants=False,
+            allow_unknown_fields=True,
+        )
+        return await self._client.request(
+            method="put",
+            path=("v2", "products", str(product), "variants", "order"),
+            body=body,
+            model=SdkReorderProductVariantsResponseValue200ApplicationJson,
             request_options=request_options,
         )

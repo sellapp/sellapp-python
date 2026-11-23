@@ -10,9 +10,13 @@ if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions
+from .._types import RequestOptions, enum_value
 from .models import (
     ListRefundsResponseValue200ApplicationJsonPropertyDataItem,
+    RefundsProvider,
+    RefundsRefundableType,
+    RefundsSource,
+    RefundsStatus,
     SdkGetRefundResponseValue200ApplicationJson,
 )
 
@@ -31,17 +35,29 @@ class Refunds:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: RefundsStatus | str | None = None,
+        provider: RefundsProvider | str | None = None,
+        source: RefundsSource | str | None = None,
+        refundable_type: RefundsRefundableType | str | None = None,
+        refundable_id: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]:
         """List refunds
 
-        List refunds for orders and standalone charges in the selected store, one page at a time. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List refunds for orders and standalone charges in the selected store, newest first, 15 per page by default. Filter by `status`, `provider`, `source`, or the order or charge refunded; filters combine. To see every refund of one order, send `refundable_type=order` and `refundable_id` set to the order ID. A value outside a parameter's accepted values, a `limit` above 100, or a query parameter the endpoint does not take returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Refunds per page, from 1 to 100. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            status: Keep refunds in this state: `pending`, `effective`, `failed`, or `cancelled`.
+            provider: Keep refunds made through this payment provider: `manual`, `mercado_pago`, `nmi`, `mollie`, `paypal`, `razorpay`, `square`, or `stripe`.
+            source: Keep refunds by how they were recorded: `manual`, `provider_webhook`, `provider_api`, or `system`. For example, `provider_api` is a refund SellApp requested from the provider and `provider_webhook` one the provider reported.
+            refundable_type: Keep refunds of orders (`order`) or of standalone charges (`charge`).
+            refundable_id: Keep refunds of the order or charge with this ID. Send `refundable_type` with it, because an order and a charge can share an ID.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -94,6 +110,14 @@ class Refunds:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "provider": enum_value(provider) if provider is not None else None,
+                "source": enum_value(source) if source is not None else None,
+                "refundable_type": enum_value(refundable_type)
+                if refundable_type is not None
+                else None,
+                "refundable_id": refundable_id,
             }.items()
             if v is not None
         }
@@ -184,17 +208,29 @@ class AsyncRefunds:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: RefundsStatus | str | None = None,
+        provider: RefundsProvider | str | None = None,
+        source: RefundsSource | str | None = None,
+        refundable_type: RefundsRefundableType | str | None = None,
+        refundable_id: int | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[ListRefundsResponseValue200ApplicationJsonPropertyDataItem]:
         """List refunds
 
-        List refunds for orders and standalone charges in the selected store, one page at a time. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List refunds for orders and standalone charges in the selected store, newest first, 15 per page by default. Filter by `status`, `provider`, `source`, or the order or charge refunded; filters combine. To see every refund of one order, send `refundable_type=order` and `refundable_id` set to the order ID. A value outside a parameter's accepted values, a `limit` above 100, or a query parameter the endpoint does not take returns `422` on that parameter. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Refunds per page, from 1 to 100. Defaults to `15`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            status: Keep refunds in this state: `pending`, `effective`, `failed`, or `cancelled`.
+            provider: Keep refunds made through this payment provider: `manual`, `mercado_pago`, `nmi`, `mollie`, `paypal`, `razorpay`, `square`, or `stripe`.
+            source: Keep refunds by how they were recorded: `manual`, `provider_webhook`, `provider_api`, or `system`. For example, `provider_api` is a refund SellApp requested from the provider and `provider_webhook` one the provider reported.
+            refundable_type: Keep refunds of orders (`order`) or of standalone charges (`charge`).
+            refundable_id: Keep refunds of the order or charge with this ID. Send `refundable_type` with it, because an order and a charge can share an ID.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -247,6 +283,14 @@ class AsyncRefunds:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "status": enum_value(status) if status is not None else None,
+                "provider": enum_value(provider) if provider is not None else None,
+                "source": enum_value(source) if source is not None else None,
+                "refundable_type": enum_value(refundable_type)
+                if refundable_type is not None
+                else None,
+                "refundable_id": refundable_id,
             }.items()
             if v is not None
         }

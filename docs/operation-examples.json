@@ -42,6 +42,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "getChargeSummary",
+    "mountTarget": "Charges",
+    "methodName": "get_summary",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.charges.get_summary()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listGroups",
     "mountTarget": "Groups",
     "methodName": "list",
@@ -221,7 +229,7 @@
     "operationId": "createInvoiceRefund",
     "mountTarget": "Invoices",
     "methodName": "create_refund",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.invoices.create_refund(\n    invoice=1,\n    amount=\"12.50\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.invoices.create_refund(\n    invoice=1,\n    amount=\"12.50\",\n    expected_refunded_total_cents=0\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -373,7 +381,7 @@
     "operationId": "searchProducts",
     "mountTarget": "Products",
     "methodName": "search",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.search(\n    filters=[{\"field\": \"id\", \"operator\": \"=\", \"value\": 1}],\n    sort=[{\"field\": \"created_at\", \"direction\": \"desc\"}]\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.search(\n    search={\"value\": \"launch\"},\n    max_price=2500,\n    stock=\"in_stock\",\n    visibility=[\"PUBLIC\"],\n    has_sales=True\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -398,6 +406,62 @@
     "mountTarget": "Products",
     "methodName": "batch_delete",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.batch_delete(resources=[1, 2])\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "publishProduct",
+    "mountTarget": "Products",
+    "methodName": "publish",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.publish(\n    product=1,\n    variant_ids=[2]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "duplicateProduct",
+    "mountTarget": "Products",
+    "methodName": "duplicate",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.duplicate(product=1)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "moveProduct",
+    "mountTarget": "Products",
+    "methodName": "move",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products.move(\n    product=1,\n    position=1,\n    expected_position=3\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getProductFeaturedVariant",
+    "mountTarget": "ProductsFeaturedVariant",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products_featured_variant.get(product=1)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceProductFeaturedVariant",
+    "mountTarget": "ProductsFeaturedVariant",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products_featured_variant.replace(\n    product=1,\n    variant_id=2,\n    highlight_label=\"best_value\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listProductSimilarProducts",
+    "mountTarget": "ProductsSimilarProducts",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products_similar_products.list(product=30)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceProductSimilarProducts",
+    "mountTarget": "ProductsSimilarProducts",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.products_similar_products.replace(\n    product=30,\n    variant_ids=[31, 41]\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -518,6 +582,54 @@
     "mountTarget": "ProductVariants",
     "methodName": "batch_delete",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants.batch_delete(\n    product=1,\n    resources=[1, 2]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "publishProductVariant",
+    "mountTarget": "ProductVariants",
+    "methodName": "publish",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants.publish(\n    product=11,\n    variant=12\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "duplicateProductVariant",
+    "mountTarget": "ProductVariants",
+    "methodName": "duplicate",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants.duplicate(\n    product=1,\n    variant=2\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "reorderProductVariants",
+    "mountTarget": "ProductVariants",
+    "methodName": "reorder",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants.reorder(\n    product=1,\n    variant_ids=[2, 1]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getVariantSubscriptionSettings",
+    "mountTarget": "ProductVariantsSubscriptionSettings",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants_subscription_settings.get(\n    product=1,\n    variant=4\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateVariantSubscriptionSettings",
+    "mountTarget": "ProductVariantsSubscriptionSettings",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants_subscription_settings.update(\n    product=1,\n    variant=4,\n    pause_policy={\"max_pause_days\": 30},\n    renewal_policy={\"redeliver_on_renewal\": False},\n    expected_state=\"3f9a1c0e7b2d4a6f8e1c5b9d0a7f3e2c4b6d8a0f1e3c5a7b9d2f4e6a8c0b1d3e\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceVariantCommunityAccess",
+    "mountTarget": "ProductVariantsCommunityAccess",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.product_variants_community_access.replace(\n    product=1,\n    variant=2,\n    community={\n        \"platform\": \"discord\",\n        \"server_id\": \"1187040134912155648\",\n        \"role_ids\": [\"1187040299781210112\"],\n        \"required\": True,\n        \"remove_on_expire\": True\n    },\n    expected_updated_at=\"2024-01-10T18:47:22.000000Z\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -746,6 +858,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "createBookingProduct",
+    "mountTarget": "Bookings",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.bookings.create(\n    title=\"Strategy consultation\",\n    description=\"<p>A private strategy session for your next launch.</p>\",\n    variant_title=\"60 minute session\",\n    price_cents=2500,\n    currency=\"USD\",\n    payment_methods=[\"STRIPE\"],\n    timezone=\"Europe/London\",\n    duration_minutes=60,\n    availability=[\n        {\"day\": 1, \"enabled\": True, \"start\": \"09:00\", \"end\": \"12:00\"},\n        {\"day\": 3, \"enabled\": True, \"start\": \"13:00\", \"end\": \"17:00\"}\n    ]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "getBundleItem",
     "mountTarget": "BundleItems",
     "methodName": "get",
@@ -774,6 +894,38 @@
     "mountTarget": "BundleItems",
     "methodName": "detach",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.bundle_items.detach(\n    bundle=1,\n    resources=[1]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "previewVariantBuyerNotification",
+    "mountTarget": "VariantDeliverables",
+    "methodName": "preview",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.preview(\n    product=1,\n    variant=2\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "notifyVariantBuyers",
+    "mountTarget": "VariantDeliverables",
+    "methodName": "notify",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.notify(\n    product=1,\n    variant=2,\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getVariantDeliverableConfiguration",
+    "mountTarget": "VariantDeliverables",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.get(\n    product=\"string_example\",\n    variant=1\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceVariantDeliverableConfiguration",
+    "mountTarget": "VariantDeliverables",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.replace(\n    product=\"string_example\",\n    variant=1,\n    types=[\"MANUAL\"],\n    data={\"comment\": \"Delivery is arranged by Launch Lab.\"}\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -854,6 +1006,14 @@
     "mountTarget": "PromotionsPhases",
     "methodName": "replace",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.promotions_phases.replace(\n    promotion=1,\n    phases=[\n        {\n            \"discount_type\": \"percentage\",\n            \"discount_value\": \"20\",\n            \"ends_at\": \"2026-08-04T00:00:00Z\",\n            \"max_redemptions\": 200,\n            \"minimum_amount\": \"10\"\n        },\n        {\n            \"discount_type\": \"fixed\",\n            \"discount_value\": \"5\",\n            \"ends_at\": None,\n            \"max_redemptions\": None,\n            \"minimum_amount\": \"25\"\n        }\n    ]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getPromotionUsage",
+    "mountTarget": "Promotions",
+    "methodName": "get_usage",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.promotions.get_usage(promotion=30)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1138,6 +1298,222 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "listSupportReplyTemplates",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "createSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.create(\n    label=\"Refund credited\",\n    body=\"Hi {customer_email}, we credited {refund_amount} to your {store_name} wallet for {product_title}. Your wallet balance is now {wallet_balance}.\",\n    supports_auto_respond=True\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.get(support_reply_template=32)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.replace(\n    support_reply_template=31,\n    is_active=False,\n    expected_updated_at=\"2026-07-03T09:12:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.update(\n    support_reply_template=31,\n    is_active=False,\n    expected_updated_at=\"2026-07-03T09:12:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "deleteSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "delete",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.delete(support_reply_template=33)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "renderSupportReplyTemplate",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "render",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.render(\n    support_reply_template=1,\n    ticket_id=4821,\n    invoice_id=7001,\n    refund_amount_cents=999\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "reorderSupportReplyTemplates",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "reorder",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.reorder(ordered_template_ids=[32, 31])\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportReplyTemplateOptions",
+    "mountTarget": "SupportReplyTemplates",
+    "methodName": "get_options",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reply_templates.get_options()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listSupportReasons",
+    "mountTarget": "SupportReasons",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "createSupportReason",
+    "mountTarget": "SupportReasons",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.create(\n    label=\"Download link expired\",\n    description=\"The download link in the order email no longer works.\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportReason",
+    "mountTarget": "SupportReasons",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.get(support_reason=14)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceSupportReason",
+    "mountTarget": "SupportReasons",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.replace(\n    support_reason=14,\n    description=\"The download link in the order email no longer opens.\",\n    expected_updated_at=\"2026-07-03T09:10:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateSupportReason",
+    "mountTarget": "SupportReasons",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.update(\n    support_reason=14,\n    description=\"The download link in the order email no longer opens.\",\n    expected_updated_at=\"2026-07-03T09:10:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "deleteSupportReason",
+    "mountTarget": "SupportReasons",
+    "methodName": "delete",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.delete(support_reason=15)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportReasonOptions",
+    "mountTarget": "SupportReasons",
+    "methodName": "get_options",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_reasons.get_options()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listSupportAutomationRules",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "createSupportAutomationRule",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.create(\n    name=\"Expired download links\",\n    match_reason_source=\"store\",\n    match_reason_code=\"download-link-expired\",\n    match_product_ids=[120],\n    match_max_order_total_cents=5000,\n    max_prior_support_refund_count=0,\n    response_template_id=32,\n    action_refund_kind=\"partial\",\n    action_refund_percent_basis=5000,\n    action_refund_cap_cents=1000,\n    action_close_outcome=\"refunded_partial\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportAutomationRule",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.get(support_automation_rule=7)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceSupportAutomationRule",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.replace(\n    support_automation_rule=7,\n    name=\"Expired download links, first refund only\",\n    clear=[\"match_max_order_total_cents\"],\n    expected_updated_at=\"2026-07-03T09:20:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateSupportAutomationRule",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.update(\n    support_automation_rule=7,\n    name=\"Expired download links, first refund only\",\n    clear=[\"match_max_order_total_cents\"],\n    expected_updated_at=\"2026-07-03T09:20:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateSupportAutomationRuleState",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "update_state",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.update_state(\n    support_automation_rule=1,\n    state=\"active\",\n    expected_updated_at=\"2026-07-03T09:20:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "reorderSupportAutomationRules",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "reorder",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.reorder(ordered_rule_ids=[7])\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "dryRunSupportAutomationRules",
+    "mountTarget": "SupportAutomationRules",
+    "methodName": "dry_run",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_rules.dry_run(ticket_id=4821)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportAutomationSettings",
+    "mountTarget": "SupportAutomationSettings",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_settings.get()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceSupportAutomationSettings",
+    "mountTarget": "SupportAutomationSettings",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_settings.replace(\n    automation_enabled=True,\n    daily_refund_cap_cents=5000,\n    expected_automation_enabled=False,\n    expected_daily_refund_cap_cents=None\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateSupportAutomationSettings",
+    "mountTarget": "SupportAutomationSettings",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.support_automation_settings.update(\n    automation_enabled=True,\n    daily_refund_cap_cents=5000,\n    expected_automation_enabled=False,\n    expected_daily_refund_cap_cents=None\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listCustomers",
     "mountTarget": "Customers",
     "methodName": "list",
@@ -1221,7 +1597,7 @@
     "operationId": "searchOrders",
     "mountTarget": "Orders",
     "methodName": "search",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.search(\n    filters=[\n        {\"field\": \"transaction_id\", \"operator\": \"contains\", \"value\": \"pi_3Example\"},\n        {\"field\": \"status\", \"operator\": \"in\", \"value\": [\"COMPLETED\"]}\n    ],\n    sort=[{\"field\": \"created_at\", \"direction\": \"desc\"}],\n    pagination={\"page\": 1, \"limit\": 25}\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.search(\n    filters=[\n        {\"field\": \"created_at\", \"operator\": \"gte\", \"value\": \"2026-07-01T00:00:00Z\"},\n        {\"field\": \"created_at\", \"operator\": \"lte\", \"value\": \"2026-07-31T23:59:59Z\"},\n        {\"field\": \"total\", \"operator\": \"gte\", \"value\": 1000},\n        {\"field\": \"currency\", \"operator\": \"eq\", \"value\": \"USD\"},\n        {\"field\": \"status\", \"operator\": \"in\", \"value\": [\"COMPLETED\"]}\n    ],\n    sort=[{\"field\": \"created_at\", \"direction\": \"desc\"}],\n    pagination={\"page\": 1, \"limit\": 25}\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1261,7 +1637,7 @@
     "operationId": "createOrderRefund",
     "mountTarget": "Orders",
     "methodName": "create_refund",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.create_refund(\n    order=9001,\n    amount=\"5.00\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.create_refund(\n    order=9001,\n    amount=\"5.00\",\n    expected_refunded_total_cents=0,\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1286,6 +1662,14 @@
     "mountTarget": "Orders",
     "methodName": "send_fulfillment_notifications",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.send_fulfillment_notifications(\n    order=9001,\n    email=\"maya@example.com\",\n    product_variant_ids=[4321],\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "regenerateOrderTelegramInvite",
+    "mountTarget": "Orders",
+    "methodName": "regenerate_telegram_invite",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders.regenerate_telegram_invite(\n    order=9001,\n    variant_id=4321,\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1358,22 +1742,6 @@
     "mountTarget": "OrdersLineItems",
     "methodName": "get",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.orders_line_items.get(\n    order=4001,\n    line_item=9001\n)\nprint(result)\n"
-  },
-  {
-    "language": "python",
-    "fileExtension": "py",
-    "operationId": "getVariantDeliverableConfiguration",
-    "mountTarget": "VariantDeliverables",
-    "methodName": "get",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.get(\n    product=\"string_example\",\n    variant=1\n)\nprint(result)\n"
-  },
-  {
-    "language": "python",
-    "fileExtension": "py",
-    "operationId": "replaceVariantDeliverableConfiguration",
-    "mountTarget": "VariantDeliverables",
-    "methodName": "replace",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.variant_deliverables.replace(\n    product=\"string_example\",\n    variant=1,\n    types=[\"MANUAL\"],\n    data={\"comment\": \"Delivery is arranged by Launch Lab.\"}\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1542,6 +1910,14 @@
     "mountTarget": "AffiliateProgram",
     "methodName": "invite",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliate_program.invite(email=\"alex.morgan@example.com\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "resendAffiliateInvitation",
+    "mountTarget": "AffiliateProgram",
+    "methodName": "resend",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliate_program.resend(invitation=77)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1730,6 +2106,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "getUpsellOfferPerformance",
+    "mountTarget": "UpsellOffers",
+    "methodName": "get_performance",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.upsell_offers.get_performance(upsell_offer=71)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listCommunityConnections",
     "mountTarget": "CommunityConnections",
     "methodName": "list",
@@ -1778,6 +2162,62 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "listCommunityFailedGrantReasons",
+    "mountTarget": "CommunityConnections",
+    "methodName": "list_failed_grant_reasons",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections.list_failed_grant_reasons()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getCommunityServer",
+    "mountTarget": "CommunityConnectionsServers",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections_servers.get(\n    platform=\"discord\",\n    server=\"server_ship_room\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "removeCommunityServer",
+    "mountTarget": "CommunityConnectionsServers",
+    "methodName": "remove",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections_servers.remove(\n    platform=\"discord\",\n    server=\"server_ship_room\",\n    affected_variant_ids=[902]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "syncDiscordRoles",
+    "mountTarget": "CommunityConnections",
+    "methodName": "sync_discord_roles",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections.sync_discord_roles()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listSlackAvailableChannels",
+    "mountTarget": "CommunityConnectionsSlack",
+    "methodName": "list_channels",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections_slack.list_channels()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "addSlackChannel",
+    "mountTarget": "CommunityConnectionsSlack",
+    "methodName": "add_channel",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections_slack.add_channel(channel_id=\"C07LAUNCHVIP\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceSlackWorkspaceInviteLink",
+    "mountTarget": "CommunityConnectionsSlack",
+    "methodName": "replace_invite_link",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.community_connections_slack.replace_invite_link(invite_link=\"https://join.slack.com/t/launch-lab/shared_invite/zt-2abc123\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "getWalletSettings",
     "mountTarget": "WalletSettings",
     "methodName": "get",
@@ -1813,7 +2253,7 @@
     "operationId": "adjustCustomerWallet",
     "mountTarget": "Wallet",
     "methodName": "adjust",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet.adjust(\n    customer=1,\n    amount_cents=2500,\n    idempotency_key=\"wallet-adjustment-01992a65\",\n    note=\"Launch-day account credit\"\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet.adjust(\n    customer=1,\n    amount_cents=2500,\n    idempotency_key=\"wallet-adjustment-01992a65\",\n    note=\"Launch-day account credit\",\n    expected_balance_cents=0\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1822,6 +2262,30 @@
     "mountTarget": "Wallet",
     "methodName": "update_status",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet.update_status(\n    customer=1,\n    status=\"frozen\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "reverseWalletTransaction",
+    "mountTarget": "WalletTransactions",
+    "methodName": "reverse",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet_transactions.reverse(\n    customer=42,\n    transaction=501,\n    note=\"Credit went to the wrong customer\",\n    expected_balance_cents=2500\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listStoreWalletTransactions",
+    "mountTarget": "WalletLedger",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet_ledger.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getWalletOverview",
+    "mountTarget": "WalletOverview",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet_overview.get()\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1890,6 +2354,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "quoteCashbackRule",
+    "mountTarget": "CashbackRules",
+    "methodName": "quote",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.cashback_rules.quote()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listWalletBonusTiers",
     "mountTarget": "WalletBonusTiers",
     "methodName": "list",
@@ -1938,10 +2410,26 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "quoteWalletBonusTier",
+    "mountTarget": "WalletBonusTiers",
+    "methodName": "quote",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.wallet_bonus_tiers.quote(top_up_cents=20000)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listCourses",
     "mountTarget": "Courses",
     "methodName": "list",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.courses.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "createCourse",
+    "mountTarget": "Courses",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.courses.create(\n    category=\"design\",\n    level=\"beginner\",\n    language=\"English\",\n    what_you_learn=[\"Sketch a logo concept.\", \"Choose a color palette.\"],\n    certificate_enabled=True,\n    delivery_text=\"Open your course from the link in your receipt.\",\n    title=\"Brand identity basics\",\n    description=\"<p>Design a logo, color palette, and type system for your next project.</p>\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -1974,6 +2462,14 @@
     "mountTarget": "Courses",
     "methodName": "update",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.courses.update(\n    course=\"string_example\",\n    level=\"beginner\",\n    visibility=\"HIDDEN\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getCourseStudentSummary",
+    "mountTarget": "Courses",
+    "methodName": "get_student_summary",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.courses.get_student_summary(\n    start_date=\"2026-08-01\",\n    end_date=\"2026-08-31\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2058,6 +2554,62 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "listCheckoutFieldTemplates",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "createCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.create(\n    name=\"Discord access\",\n    fields=[\n        {\n            \"type\": \"text\",\n            \"label\": \"Discord username\",\n            \"key\": \"discord_username\",\n            \"required\": True,\n            \"placeholder\": \"name#0001\",\n            \"description\": \"We add this account to the community after purchase.\"\n        },\n        {\n            \"type\": \"radio\",\n            \"label\": \"Experience level\",\n            \"key\": \"experience_level\",\n            \"required\": False,\n            \"options\": [\"Beginner\", \"Intermediate\", \"Advanced\"],\n            \"variant\": \"cards\",\n            \"variant_options\": {\"vertical\": True, \"indicator\": True}\n        }\n    ]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.get(checkout_field_template=14)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.replace(\n    checkout_field_template=14,\n    name=\"Discord onboarding\",\n    expected_updated_at=\"2026-09-04T09:00:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.update(\n    checkout_field_template=14,\n    name=\"Discord onboarding\",\n    expected_updated_at=\"2026-09-04T09:00:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "deleteCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "delete",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.delete(\n    checkout_field_template=14,\n    expected_updated_at=\"2026-09-04T09:00:00.000000Z\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "duplicateCheckoutFieldTemplate",
+    "mountTarget": "CheckoutFieldTemplates",
+    "methodName": "duplicate",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.checkout_field_templates.duplicate(\n    checkout_field_template=14,\n    name=\"Discord access for courses\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listPaymentMethods",
     "mountTarget": "PaymentMethods",
     "methodName": "list",
@@ -2094,6 +2646,22 @@
     "mountTarget": "PaymentMethods",
     "methodName": "validate",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.payment_methods.validate(\n    payment_method=\"NMI\",\n    body={\n        \"merchant_secure_key\": \"replace-with-nmi-secure-key\",\n        \"merchant_tokenization_key\": \"replace-with-nmi-tokenization-key\",\n        \"signing_key\": \"replace-with-nmi-signing-key\",\n        \"currencies\": [\"USD\"]\n    }\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getPaymentMethodModifier",
+    "mountTarget": "PaymentMethodsModifier",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.payment_methods_modifier.get(payment_method=\"STRIPE\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replacePaymentMethodModifier",
+    "mountTarget": "PaymentMethodsModifier",
+    "methodName": "replace",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.payment_methods_modifier.replace(\n    payment_method=\"STRIPE\",\n    kind=\"fee\",\n    percentage=\"3.00\",\n    fixed_amount=\"0.30\",\n    condition=\"below\",\n    threshold=\"20.00\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2202,6 +2770,190 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "getCheckoutSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "get_checkout",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.get_checkout()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceCheckoutSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_checkout",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_checkout(\n    shopping_cart_enabled=True,\n    customer_email_required=True,\n    allow_vpn_purchases=True,\n    blacklist_on_dispute=True,\n    minimum_spend=\"5.00\",\n    billing_descriptor=\"LAUNCH LAB\",\n    attempts_per_customer=5,\n    attempts_per_ip=20,\n    attempts_per_email=None,\n    attempts_per_fingerprint=None,\n    rate_limit_window_seconds=3600,\n    crypto={\"underpaid_percentage\": 2, \"minimum_confirmations\": 2}\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateCheckoutSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_checkout",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_checkout(\n    minimum_spend=\"10.00\",\n    attempts_per_email=10\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getTaxSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "get_taxes",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.get_taxes()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceTaxSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_taxes",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_taxes(\n    vat_enabled=True,\n    vat_inclusive_pricing=True,\n    collect_billing_details=False\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateTaxSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_taxes",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_taxes(vat_inclusive_pricing=True)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getCustomerEmailSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "get_customer_emails",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.get_customer_emails()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceCustomerEmailSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_customer_emails",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_customer_emails(\n    send_delivery_email=True,\n    send_payment_failure_email=False\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateCustomerEmailSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_customer_emails",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_customer_emails(send_payment_failure_email=False)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getStoreAlertSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "get_store_alerts",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.get_store_alerts()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceStoreAlertSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_store_alerts",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_store_alerts(sale_emails_enabled=False)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateStoreAlertSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_store_alerts",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_store_alerts(sale_emails_enabled=False)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getPersonalizationSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "get_personalization",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.get_personalization()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replacePersonalizationSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_personalization",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_personalization(\n    support_email=\"support@launch-lab.example.com\",\n    trustpilot_email=None,\n    sender_name=\"Launch Lab\",\n    sender_email=\"orders@launch-lab.example.com\",\n    store_address=\"651 N Broad St, Suite 206\",\n    store_city=\"Middletown\",\n    store_state=\"Delaware\",\n    store_zip=\"19709\",\n    store_country=\"United States\",\n    store_tax=\"EIN 98-7654321\",\n    back_link_label=\"Back to Launch Lab\",\n    back_link_url=\"https://launch-lab.example.com\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updatePersonalizationSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_personalization",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_personalization(\n    back_link_label=\"Return to the shop\",\n    back_link_url=\"https://launch-lab.example.com/shop\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "replaceCryptoCheckoutSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "replace_crypto_checkout",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.replace_crypto_checkout(\n    underpaid_percentage=1,\n    minimum_confirmations=3\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateCryptoCheckoutSettings",
+    "mountTarget": "StoreSettings",
+    "methodName": "update_crypto_checkout",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_settings.update_crypto_checkout(minimum_confirmations=3)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSenderEmail",
+    "mountTarget": "StoreSenderEmail",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_sender_email.get()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "setSenderEmail",
+    "mountTarget": "StoreSenderEmail",
+    "methodName": "set",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_sender_email.set(email=\"orders@launch-lab.example.com\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "deleteSenderEmail",
+    "mountTarget": "StoreSenderEmail",
+    "methodName": "delete",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_sender_email.delete()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "sendSenderEmailVerification",
+    "mountTarget": "StoreSenderEmail",
+    "methodName": "send_verification",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_sender_email.send_verification(email=\"orders@launch-lab.example.com\")\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getStoreIntegrations",
+    "mountTarget": "StoreIntegrations",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_integrations.get()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "disconnectGoogleCalendar",
+    "mountTarget": "StoreIntegrations",
+    "methodName": "disconnect_google_calendar",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_integrations.disconnect_google_calendar(connection_id=7)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listNotificationChannels",
     "mountTarget": "StoreNotificationChannels",
     "methodName": "list",
@@ -2286,6 +3038,22 @@
     "mountTarget": "StoreCustomDomains",
     "methodName": "refresh",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.store_custom_domains.refresh(custom_domain=1)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "listNotifications",
+    "mountTarget": "Notifications",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.notifications.list()\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "markNotificationsSeen",
+    "mountTarget": "Notifications",
+    "methodName": "mark",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.notifications.mark(notification_ids=[9182])\nprint(result)\n"
   },
   {
     "language": "python",
@@ -2402,6 +3170,46 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "getAffiliateProducts",
+    "mountTarget": "AffiliatesProducts",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliates_products.get(affiliate=88)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "updateAffiliateProducts",
+    "mountTarget": "AffiliatesProducts",
+    "methodName": "update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliates_products.update(\n    affiliate=88,\n    enable_specific_products=True,\n    products=[\n        {\n            \"id\": 42,\n            \"enabled\": True,\n            \"commission\": {\"type\": \"percentage\", \"percentage\": \"25\"}\n        },\n        {\n            \"id\": 43,\n            \"enabled\": True,\n            \"commission\": {\"type\": \"fixed\", \"amount_usd_cents\": 550}\n        }\n    ],\n    replace_products=True\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getAffiliateCoupon",
+    "mountTarget": "AffiliatesCoupon",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliates_coupon.get(affiliate=88)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "saveAffiliateCoupon",
+    "mountTarget": "AffiliatesCoupon",
+    "methodName": "save",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliates_coupon.save(\n    affiliate=88,\n    code=\"ALEX15\",\n    type=\"PERCENTAGE\",\n    discount=\"15\",\n    store_wide=True,\n    maximum_discount_amount=\"20\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "disableAffiliateCoupon",
+    "mountTarget": "AffiliatesCoupon",
+    "methodName": "disable",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliates_coupon.disable(affiliate=88)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "listAffiliateReferrals",
     "mountTarget": "AffiliateReferrals",
     "methodName": "list",
@@ -2470,6 +3278,14 @@
     "mountTarget": "AffiliatePayouts",
     "methodName": "update",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliate_payouts.update(\n    payout=1,\n    status=\"paid\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "markAffiliatePayoutsPaid",
+    "mountTarget": "AffiliatePayouts",
+    "methodName": "mark_paid",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.affiliate_payouts.mark_paid(\n    payout_ids=[91, 92],\n    expected_total_usd_cents=4250\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -3250,6 +4066,14 @@
   {
     "language": "python",
     "fileExtension": "py",
+    "operationId": "v2GetCouponUsage",
+    "mountTarget": "Coupons",
+    "methodName": "v2_get_coupon_usage",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.coupons.v2_get_coupon_usage(coupon=1)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
     "operationId": "v2ListFeedback",
     "mountTarget": "Feedback",
     "methodName": "v2_list_feedback",
@@ -3421,7 +4245,7 @@
     "operationId": "updateTicket",
     "mountTarget": "Tickets",
     "methodName": "update",
-    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets.update(\n    ticket=42,\n    status=\"CLOSED\",\n    archived=True\n)\nprint(result)\n"
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets.update(\n    ticket=42,\n    status=\"CLOSED\",\n    archived=True,\n    outcome=\"delivered\"\n)\nprint(result)\n"
   },
   {
     "language": "python",
@@ -3454,6 +4278,62 @@
     "mountTarget": "TicketsMessages",
     "methodName": "v2_get_ticket_message",
     "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_messages.v2_get_ticket_message(\n    ticket=1,\n    message=2\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "batchUpdateTickets",
+    "mountTarget": "Tickets",
+    "methodName": "batch_update",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets.batch_update(\n    action=\"close\",\n    outcome=\"delivered\",\n    resources=[311, 313]\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "v2GetTicketContext",
+    "mountTarget": "Tickets",
+    "methodName": "get_context",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets.get_context(ticket=312)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "v2ListTicketWalletRefundOptions",
+    "mountTarget": "TicketsWalletRefunds",
+    "methodName": "list_options",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_wallet_refunds.list_options(ticket=312)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "v2ListTicketWalletRefunds",
+    "mountTarget": "TicketsWalletRefunds",
+    "methodName": "list",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_wallet_refunds.list(ticket=312)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "v2RefundTicketToWallet",
+    "mountTarget": "TicketsWalletRefunds",
+    "methodName": "create",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_wallet_refunds.create(\n    ticket=312,\n    invoice_id=5120,\n    amount_cents=500,\n    expected_refundable_cents=1999,\n    customer_note=\"We added $5.00 to your store wallet for the trouble with your download link.\",\n    idempotency_key=\"example-mutation-001\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "v2ReverseTicketWalletRefund",
+    "mountTarget": "TicketsWalletRefunds",
+    "methodName": "reverse",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_wallet_refunds.reverse(\n    ticket=312,\n    wallet_refund=7001,\n    reason=\"Issued on the wrong ticket.\"\n)\nprint(result)\n"
+  },
+  {
+    "language": "python",
+    "fileExtension": "py",
+    "operationId": "getSupportAnalytics",
+    "mountTarget": "TicketsAnalytics",
+    "methodName": "get",
+    "content": "import os\nfrom sellapp_sdk import SellAppClient\n\nclient = SellAppClient(base_url=os.environ[\"SELLAPP_API_BASE_URL\"], api_key=os.environ[\"SELLAPP_API_KEY\"], store=os.environ[\"SELLAPP_STORE\"])\n\nresult = client.tickets_analytics.get()\nprint(result)\n"
   },
   {
     "language": "python",

@@ -132,6 +132,11 @@ def list(
         after: str | None = None,
         order: str | None = None,
         page: int | None = None,
+        key: str | None = None,
+        customer_email: str | None = None,
+        product_id: int | None = None,
+        order_id: int | None = None,
+        validity: LicensesValidity | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]:
 ```
@@ -143,6 +148,11 @@ def list(
 | after | `str \| None` | No |
 | order | `str \| None` | No |
 | page | `int \| None` | No |
+| key | `str \| None` | No |
+| customer_email | `str \| None` | No |
+| product_id | `int \| None` | No |
+| order_id | `int \| None` | No |
+| validity | `LicensesValidity \| str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[SdkListLicenseKeysResponseValue200ApplicationJson]`.

@@ -15,6 +15,17 @@ from sellapp_sdk.courses.models import (
     CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyQuestionsItem,
     CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyQuestionsItemPropertyAnswersItem,
     CreateCourseLessonResponseValue201ApplicationJsonPropertyDataPropertyVideo,
+    CreateCourseResponseValue201ApplicationJsonPropertyData,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignment,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAttachmentsItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem,
+    CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo,
     CreateCourseSectionResponseValue201ApplicationJsonPropertyData,
     CreateCourseSectionResponseValue201ApplicationJsonPropertyDataPropertyLessonsItem,
     CreateCourseSectionResponseValue201ApplicationJsonPropertyDataPropertyLessonsItemPropertyAssignment,
@@ -52,6 +63,12 @@ from sellapp_sdk.courses.models import (
     GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem,
     GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem,
     GetCourseResponseValue200ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyData,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyCoursesItem,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItem,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItemPropertyCoursesItem,
+    GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertySummary,
     ReorderCourseLessonsRequestApplicationJsonPropertyResourcesItem,
     ReorderCourseLessonsResponseValue200ApplicationJsonPropertyData,
     ReorderCourseLessonsResponseValue200ApplicationJsonPropertyDataPropertyPromoVideo,
@@ -108,10 +125,12 @@ from sellapp_sdk.courses.models import (
     ReplaceCourseSectionResponseValue200ApplicationJsonPropertyDataPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem,
     ReplaceCourseSectionResponseValue200ApplicationJsonPropertyDataPropertyLessonsItemPropertyVideo,
     SdkCreateCourseLessonResponseValue201ApplicationJson,
+    SdkCreateCourseResponseValue201ApplicationJson,
     SdkCreateCourseSectionResponseValue201ApplicationJson,
     SdkDeleteCourseLessonResponseValue200ApplicationJson,
     SdkDeleteCourseSectionResponseValue200ApplicationJson,
     SdkGetCourseResponseValue200ApplicationJson,
+    SdkGetCourseStudentSummaryResponseValue200ApplicationJson,
     SdkReorderCourseLessonsResponseValue200ApplicationJson,
     SdkReorderCourseSectionsResponseValue200ApplicationJson,
     SdkReplaceCourseLessonResponseValue200ApplicationJson,
@@ -157,6 +176,1417 @@ from tests.generated_helpers import load_fixture
 
 
 class TestModelRoundTrip:
+    def test_create_course_response_value_201_application_json_property_data_property_promo_video_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_promo_video.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_promo_video_minimal_payload(
+        self,
+    ):
+        data = {"mux_playback_id": None, "mux_status": None, "duration_seconds": None}
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["mux_playback_id"] == data["mux_playback_id"]
+        assert serialized["mux_status"] == data["mux_status"]
+        assert serialized["duration_seconds"] == data["duration_seconds"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_promo_video_preserves_nullable_fields(
+        self,
+    ):
+        data = {"mux_playback_id": None, "mux_status": None, "duration_seconds": None}
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertyPromoVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["mux_playback_id"] is None
+        assert serialized["mux_status"] is None
+        assert serialized["duration_seconds"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video_minimal_payload(
+        self,
+    ):
+        data = {
+            "source": "mux",
+            "external_url": None,
+            "mux_playback_id": None,
+            "mux_status": None,
+            "duration_seconds": None,
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["source"] == data["source"]
+        assert serialized["external_url"] == data["external_url"]
+        assert serialized["mux_playback_id"] == data["mux_playback_id"]
+        assert serialized["mux_status"] == data["mux_status"]
+        assert serialized["duration_seconds"] == data["duration_seconds"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "source": "mux",
+            "external_url": None,
+            "mux_playback_id": None,
+            "mux_status": None,
+            "duration_seconds": None,
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["external_url"] is None
+        assert serialized["mux_playback_id"] is None
+        assert serialized["mux_status"] is None
+        assert serialized["duration_seconds"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "source": "unexpected_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_video_source",
+            "external_url": "https://example.com",
+            "mux_playback_id": "mux_playback_id_01234",
+            "mux_status": "test_mux_status",
+            "duration_seconds": 1,
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyVideo.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_attachments_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_attachments_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAttachmentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAttachmentsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_attachments_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "mime_type": None,
+            "size_bytes": None,
+            "sort_order": 1,
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAttachmentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["mime_type"] == data["mime_type"]
+        assert serialized["size_bytes"] == data["size_bytes"]
+        assert serialized["sort_order"] == data["sort_order"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_attachments_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "mime_type": None,
+            "size_bytes": None,
+            "sort_order": 1,
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAttachmentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["mime_type"] is None
+        assert serialized["size_bytes"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_property_answers_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_property_answers_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_property_answers_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItemPropertyAnswersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["answer"] == data["answer"]
+        assert serialized["is_correct"] == data["is_correct"]
+        assert serialized["sort_order"] == data["sort_order"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "text",
+            "solution": None,
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["prompt"] == data["prompt"]
+        assert serialized["question_type"] == data["question_type"]
+        assert serialized["solution"] == data["solution"]
+        assert serialized["sort_order"] == data["sort_order"]
+        assert serialized["answers"] == data["answers"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "text",
+            "solution": None,
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["solution"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "unexpected_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_value_property_questions_item_question_type",
+            "solution": "test_solution",
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignmentValuePropertyQuestionsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignment.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_minimal_payload(
+        self,
+    ):
+        data = {
+            "estimated_duration_minutes": None,
+            "instructions": None,
+            "questions": [
+                {
+                    "id": 1,
+                    "prompt": "test_prompt",
+                    "question_type": "text",
+                    "solution": "test_solution",
+                    "sort_order": 1,
+                    "answers": [
+                        {
+                            "id": 1,
+                            "answer": "test_answer",
+                            "is_correct": True,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert (
+            serialized["estimated_duration_minutes"]
+            == data["estimated_duration_minutes"]
+        )
+        assert serialized["instructions"] == data["instructions"]
+        assert serialized["questions"] == data["questions"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_assignment_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "estimated_duration_minutes": None,
+            "instructions": None,
+            "questions": [
+                {
+                    "id": 1,
+                    "prompt": "test_prompt",
+                    "question_type": "text",
+                    "solution": "test_solution",
+                    "sort_order": 1,
+                    "answers": [
+                        {
+                            "id": 1,
+                            "answer": "test_answer",
+                            "is_correct": True,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyAssignment.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["estimated_duration_minutes"] is None
+        assert serialized["instructions"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_property_answers_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_property_answers_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_property_answers_item_minimal_payload(
+        self,
+    ):
+        data = {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItemPropertyAnswersItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["answer"] == data["answer"]
+        assert serialized["is_correct"] == data["is_correct"]
+        assert serialized["sort_order"] == data["sort_order"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "text",
+            "solution": None,
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["prompt"] == data["prompt"]
+        assert serialized["question_type"] == data["question_type"]
+        assert serialized["solution"] == data["solution"]
+        assert serialized["sort_order"] == data["sort_order"]
+        assert serialized["answers"] == data["answers"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "text",
+            "solution": None,
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["solution"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "prompt": "test_prompt",
+            "question_type": "unexpected_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_property_questions_item_question_type",
+            "solution": "test_solution",
+            "sort_order": 1,
+            "answers": [
+                {"id": 1, "answer": "test_answer", "is_correct": True, "sort_order": 1}
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItemPropertyQuestionsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "section_id": 1,
+            "title": "test_title",
+            "content": None,
+            "type": "lecture",
+            "is_preview": True,
+            "is_published": True,
+            "sort_order": 1,
+            "video": None,
+            "attachments": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "mime_type": "test_mime_type",
+                    "size_bytes": 1,
+                    "sort_order": 1,
+                }
+            ],
+            "assignment": None,
+            "questions": [
+                {
+                    "id": 1,
+                    "prompt": "test_prompt",
+                    "question_type": "text",
+                    "solution": "test_solution",
+                    "sort_order": 1,
+                    "answers": [
+                        {
+                            "id": 1,
+                            "answer": "test_answer",
+                            "is_correct": True,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["section_id"] == data["section_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["content"] == data["content"]
+        assert serialized["type"] == data["type"]
+        assert serialized["is_preview"] == data["is_preview"]
+        assert serialized["is_published"] == data["is_published"]
+        assert serialized["sort_order"] == data["sort_order"]
+        assert serialized["video"] == data["video"]
+        assert serialized["attachments"] == data["attachments"]
+        assert serialized["assignment"] == data["assignment"]
+        assert serialized["questions"] == data["questions"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "section_id": 1,
+            "title": "test_title",
+            "content": None,
+            "type": "lecture",
+            "is_preview": True,
+            "is_published": True,
+            "sort_order": 1,
+            "video": None,
+            "attachments": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "mime_type": "test_mime_type",
+                    "size_bytes": 1,
+                    "sort_order": 1,
+                }
+            ],
+            "assignment": None,
+            "questions": [
+                {
+                    "id": 1,
+                    "prompt": "test_prompt",
+                    "question_type": "text",
+                    "solution": "test_solution",
+                    "sort_order": 1,
+                    "answers": [
+                        {
+                            "id": 1,
+                            "answer": "test_answer",
+                            "is_correct": True,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["content"] is None
+        assert serialized["video"] is None
+        assert serialized["assignment"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "section_id": 1,
+            "title": "test_title",
+            "content": "test_content",
+            "type": "unexpected_create_course_response_value_201_application_json_property_data_property_sections_item_property_lessons_item_type",
+            "is_preview": True,
+            "is_published": True,
+            "sort_order": 1,
+            "video": {
+                "source": "mux",
+                "external_url": "https://example.com",
+                "mux_playback_id": "mux_playback_id_01234",
+                "mux_status": "test_mux_status",
+                "duration_seconds": 1,
+            },
+            "attachments": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "mime_type": "test_mime_type",
+                    "size_bytes": 1,
+                    "sort_order": 1,
+                }
+            ],
+            "assignment": {
+                "estimated_duration_minutes": 1,
+                "instructions": "test_instructions",
+                "questions": [
+                    {
+                        "id": 1,
+                        "prompt": "test_prompt",
+                        "question_type": "text",
+                        "solution": "test_solution",
+                        "sort_order": 1,
+                        "answers": [
+                            {
+                                "id": 1,
+                                "answer": "test_answer",
+                                "is_correct": True,
+                                "sort_order": 1,
+                            }
+                        ],
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                        "updated_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+            },
+            "questions": [
+                {
+                    "id": 1,
+                    "prompt": "test_prompt",
+                    "question_type": "text",
+                    "solution": "test_solution",
+                    "sort_order": 1,
+                    "answers": [
+                        {
+                            "id": 1,
+                            "answer": "test_answer",
+                            "is_correct": True,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItemPropertyLessonsItem.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data_property_sections_item.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "description": None,
+            "sort_order": 1,
+            "lessons": [
+                {
+                    "id": 1,
+                    "section_id": 1,
+                    "title": "test_title",
+                    "content": "test_content",
+                    "type": "lecture",
+                    "is_preview": True,
+                    "is_published": True,
+                    "sort_order": 1,
+                    "video": {
+                        "source": "mux",
+                        "external_url": "https://example.com",
+                        "mux_playback_id": "mux_playback_id_01234",
+                        "mux_status": "test_mux_status",
+                        "duration_seconds": 1,
+                    },
+                    "attachments": [
+                        {
+                            "id": 1,
+                            "title": "test_title",
+                            "mime_type": "test_mime_type",
+                            "size_bytes": 1,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "assignment": {
+                        "estimated_duration_minutes": 1,
+                        "instructions": "test_instructions",
+                        "questions": [
+                            {
+                                "id": 1,
+                                "prompt": "test_prompt",
+                                "question_type": "text",
+                                "solution": "test_solution",
+                                "sort_order": 1,
+                                "answers": [
+                                    {
+                                        "id": 1,
+                                        "answer": "test_answer",
+                                        "is_correct": True,
+                                        "sort_order": 1,
+                                    }
+                                ],
+                                "created_at": "2023-01-01T00:00:00.000Z",
+                                "updated_at": "2023-01-01T00:00:00.000Z",
+                            }
+                        ],
+                    },
+                    "questions": [
+                        {
+                            "id": 1,
+                            "prompt": "test_prompt",
+                            "question_type": "text",
+                            "solution": "test_solution",
+                            "sort_order": 1,
+                            "answers": [
+                                {
+                                    "id": 1,
+                                    "answer": "test_answer",
+                                    "is_correct": True,
+                                    "sort_order": 1,
+                                }
+                            ],
+                            "created_at": "2023-01-01T00:00:00.000Z",
+                            "updated_at": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["description"] == data["description"]
+        assert serialized["sort_order"] == data["sort_order"]
+        assert serialized["lessons"] == data["lessons"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_create_course_response_value_201_application_json_property_data_property_sections_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "description": None,
+            "sort_order": 1,
+            "lessons": [
+                {
+                    "id": 1,
+                    "section_id": 1,
+                    "title": "test_title",
+                    "content": "test_content",
+                    "type": "lecture",
+                    "is_preview": True,
+                    "is_published": True,
+                    "sort_order": 1,
+                    "video": {
+                        "source": "mux",
+                        "external_url": "https://example.com",
+                        "mux_playback_id": "mux_playback_id_01234",
+                        "mux_status": "test_mux_status",
+                        "duration_seconds": 1,
+                    },
+                    "attachments": [
+                        {
+                            "id": 1,
+                            "title": "test_title",
+                            "mime_type": "test_mime_type",
+                            "size_bytes": 1,
+                            "sort_order": 1,
+                        }
+                    ],
+                    "assignment": {
+                        "estimated_duration_minutes": 1,
+                        "instructions": "test_instructions",
+                        "questions": [
+                            {
+                                "id": 1,
+                                "prompt": "test_prompt",
+                                "question_type": "text",
+                                "solution": "test_solution",
+                                "sort_order": 1,
+                                "answers": [
+                                    {
+                                        "id": 1,
+                                        "answer": "test_answer",
+                                        "is_correct": True,
+                                        "sort_order": 1,
+                                    }
+                                ],
+                                "created_at": "2023-01-01T00:00:00.000Z",
+                                "updated_at": "2023-01-01T00:00:00.000Z",
+                            }
+                        ],
+                    },
+                    "questions": [
+                        {
+                            "id": 1,
+                            "prompt": "test_prompt",
+                            "question_type": "text",
+                            "solution": "test_solution",
+                            "sort_order": 1,
+                            "answers": [
+                                {
+                                    "id": 1,
+                                    "answer": "test_answer",
+                                    "is_correct": True,
+                                    "sort_order": 1,
+                                }
+                            ],
+                            "created_at": "2023-01-01T00:00:00.000Z",
+                            "updated_at": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyDataPropertySectionsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["description"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "create_course_response_value_201_application_json_property_data.json"
+        )
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = CreateCourseResponseValue201ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_create_course_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": None,
+            "visibility": "PUBLIC",
+            "is_draft": True,
+            "delivery_text": None,
+            "category": None,
+            "level": "all_levels",
+            "language": "test_language",
+            "subtitle": None,
+            "author": None,
+            "subcategory": None,
+            "what_you_learn": ["test_what_you_learn"],
+            "requirements": ["test_requirements"],
+            "certificate_enabled": True,
+            "access_type": "lifetime",
+            "access_duration_days": None,
+            "enrollment_limit": None,
+            "promo_video": None,
+            "sections": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "description": "test_description",
+                    "sort_order": 1,
+                    "lessons": [
+                        {
+                            "id": 1,
+                            "section_id": 1,
+                            "title": "test_title",
+                            "content": "test_content",
+                            "type": "lecture",
+                            "is_preview": True,
+                            "is_published": True,
+                            "sort_order": 1,
+                            "video": {
+                                "source": "mux",
+                                "external_url": "https://example.com",
+                                "mux_playback_id": "mux_playback_id_01234",
+                                "mux_status": "test_mux_status",
+                                "duration_seconds": 1,
+                            },
+                            "attachments": [
+                                {
+                                    "id": 1,
+                                    "title": "test_title",
+                                    "mime_type": "test_mime_type",
+                                    "size_bytes": 1,
+                                    "sort_order": 1,
+                                }
+                            ],
+                            "assignment": {
+                                "estimated_duration_minutes": 1,
+                                "instructions": "test_instructions",
+                                "questions": [
+                                    {
+                                        "id": 1,
+                                        "prompt": "test_prompt",
+                                        "question_type": "text",
+                                        "solution": "test_solution",
+                                        "sort_order": 1,
+                                        "answers": [
+                                            {
+                                                "id": 1,
+                                                "answer": "test_answer",
+                                                "is_correct": True,
+                                                "sort_order": 1,
+                                            }
+                                        ],
+                                        "created_at": "2023-01-01T00:00:00.000Z",
+                                        "updated_at": "2023-01-01T00:00:00.000Z",
+                                    }
+                                ],
+                            },
+                            "questions": [
+                                {
+                                    "id": 1,
+                                    "prompt": "test_prompt",
+                                    "question_type": "text",
+                                    "solution": "test_solution",
+                                    "sort_order": 1,
+                                    "answers": [
+                                        {
+                                            "id": 1,
+                                            "answer": "test_answer",
+                                            "is_correct": True,
+                                            "sort_order": 1,
+                                        }
+                                    ],
+                                    "created_at": "2023-01-01T00:00:00.000Z",
+                                    "updated_at": "2023-01-01T00:00:00.000Z",
+                                }
+                            ],
+                            "created_at": "2023-01-01T00:00:00.000Z",
+                            "updated_at": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["slug"] == data["slug"]
+        assert serialized["description"] == data["description"]
+        assert serialized["visibility"] == data["visibility"]
+        assert serialized["is_draft"] == data["is_draft"]
+        assert serialized["delivery_text"] == data["delivery_text"]
+        assert serialized["category"] == data["category"]
+        assert serialized["level"] == data["level"]
+        assert serialized["language"] == data["language"]
+        assert serialized["subtitle"] == data["subtitle"]
+        assert serialized["author"] == data["author"]
+        assert serialized["subcategory"] == data["subcategory"]
+        assert serialized["what_you_learn"] == data["what_you_learn"]
+        assert serialized["requirements"] == data["requirements"]
+        assert serialized["certificate_enabled"] == data["certificate_enabled"]
+        assert serialized["access_type"] == data["access_type"]
+        assert serialized["access_duration_days"] == data["access_duration_days"]
+        assert serialized["enrollment_limit"] == data["enrollment_limit"]
+        assert serialized["promo_video"] == data["promo_video"]
+        assert serialized["sections"] == data["sections"]
+        assert serialized["created_at"] == data["created_at"]
+        assert serialized["updated_at"] == data["updated_at"]
+
+    def test_create_course_response_value_201_application_json_property_data_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": None,
+            "visibility": "PUBLIC",
+            "is_draft": True,
+            "delivery_text": None,
+            "category": None,
+            "level": "all_levels",
+            "language": "test_language",
+            "subtitle": None,
+            "author": None,
+            "subcategory": None,
+            "what_you_learn": ["test_what_you_learn"],
+            "requirements": ["test_requirements"],
+            "certificate_enabled": True,
+            "access_type": "lifetime",
+            "access_duration_days": None,
+            "enrollment_limit": None,
+            "promo_video": None,
+            "sections": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "description": "test_description",
+                    "sort_order": 1,
+                    "lessons": [
+                        {
+                            "id": 1,
+                            "section_id": 1,
+                            "title": "test_title",
+                            "content": "test_content",
+                            "type": "lecture",
+                            "is_preview": True,
+                            "is_published": True,
+                            "sort_order": 1,
+                            "video": {
+                                "source": "mux",
+                                "external_url": "https://example.com",
+                                "mux_playback_id": "mux_playback_id_01234",
+                                "mux_status": "test_mux_status",
+                                "duration_seconds": 1,
+                            },
+                            "attachments": [
+                                {
+                                    "id": 1,
+                                    "title": "test_title",
+                                    "mime_type": "test_mime_type",
+                                    "size_bytes": 1,
+                                    "sort_order": 1,
+                                }
+                            ],
+                            "assignment": {
+                                "estimated_duration_minutes": 1,
+                                "instructions": "test_instructions",
+                                "questions": [
+                                    {
+                                        "id": 1,
+                                        "prompt": "test_prompt",
+                                        "question_type": "text",
+                                        "solution": "test_solution",
+                                        "sort_order": 1,
+                                        "answers": [
+                                            {
+                                                "id": 1,
+                                                "answer": "test_answer",
+                                                "is_correct": True,
+                                                "sort_order": 1,
+                                            }
+                                        ],
+                                        "created_at": "2023-01-01T00:00:00.000Z",
+                                        "updated_at": "2023-01-01T00:00:00.000Z",
+                                    }
+                                ],
+                            },
+                            "questions": [
+                                {
+                                    "id": 1,
+                                    "prompt": "test_prompt",
+                                    "question_type": "text",
+                                    "solution": "test_solution",
+                                    "sort_order": 1,
+                                    "answers": [
+                                        {
+                                            "id": 1,
+                                            "answer": "test_answer",
+                                            "is_correct": True,
+                                            "sort_order": 1,
+                                        }
+                                    ],
+                                    "created_at": "2023-01-01T00:00:00.000Z",
+                                    "updated_at": "2023-01-01T00:00:00.000Z",
+                                }
+                            ],
+                            "created_at": "2023-01-01T00:00:00.000Z",
+                            "updated_at": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["description"] is None
+        assert serialized["delivery_text"] is None
+        assert serialized["category"] is None
+        assert serialized["subtitle"] is None
+        assert serialized["author"] is None
+        assert serialized["subcategory"] is None
+        assert serialized["access_duration_days"] is None
+        assert serialized["enrollment_limit"] is None
+        assert serialized["promo_video"] is None
+
+    def test_create_course_response_value_201_application_json_property_data_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": 1,
+            "title": "test_title",
+            "slug": "test_slug",
+            "description": "test_description",
+            "visibility": "unexpected_create_course_response_value_201_application_json_property_data_visibility",
+            "is_draft": True,
+            "delivery_text": "test_delivery_text",
+            "category": "development",
+            "level": "all_levels",
+            "language": "test_language",
+            "subtitle": "test_subtitle",
+            "author": "test_author",
+            "subcategory": "test_subcategory",
+            "what_you_learn": ["test_what_you_learn"],
+            "requirements": ["test_requirements"],
+            "certificate_enabled": True,
+            "access_type": "lifetime",
+            "access_duration_days": 1,
+            "enrollment_limit": 1,
+            "promo_video": {
+                "mux_playback_id": "mux_playback_id_01234",
+                "mux_status": "test_mux_status",
+                "duration_seconds": 1,
+            },
+            "sections": [
+                {
+                    "id": 1,
+                    "title": "test_title",
+                    "description": "test_description",
+                    "sort_order": 1,
+                    "lessons": [
+                        {
+                            "id": 1,
+                            "section_id": 1,
+                            "title": "test_title",
+                            "content": "test_content",
+                            "type": "lecture",
+                            "is_preview": True,
+                            "is_published": True,
+                            "sort_order": 1,
+                            "video": {
+                                "source": "mux",
+                                "external_url": "https://example.com",
+                                "mux_playback_id": "mux_playback_id_01234",
+                                "mux_status": "test_mux_status",
+                                "duration_seconds": 1,
+                            },
+                            "attachments": [
+                                {
+                                    "id": 1,
+                                    "title": "test_title",
+                                    "mime_type": "test_mime_type",
+                                    "size_bytes": 1,
+                                    "sort_order": 1,
+                                }
+                            ],
+                            "assignment": {
+                                "estimated_duration_minutes": 1,
+                                "instructions": "test_instructions",
+                                "questions": [
+                                    {
+                                        "id": 1,
+                                        "prompt": "test_prompt",
+                                        "question_type": "text",
+                                        "solution": "test_solution",
+                                        "sort_order": 1,
+                                        "answers": [
+                                            {
+                                                "id": 1,
+                                                "answer": "test_answer",
+                                                "is_correct": True,
+                                                "sort_order": 1,
+                                            }
+                                        ],
+                                        "created_at": "2023-01-01T00:00:00.000Z",
+                                        "updated_at": "2023-01-01T00:00:00.000Z",
+                                    }
+                                ],
+                            },
+                            "questions": [
+                                {
+                                    "id": 1,
+                                    "prompt": "test_prompt",
+                                    "question_type": "text",
+                                    "solution": "test_solution",
+                                    "sort_order": 1,
+                                    "answers": [
+                                        {
+                                            "id": 1,
+                                            "answer": "test_answer",
+                                            "is_correct": True,
+                                            "sort_order": 1,
+                                        }
+                                    ],
+                                    "created_at": "2023-01-01T00:00:00.000Z",
+                                    "updated_at": "2023-01-01T00:00:00.000Z",
+                                }
+                            ],
+                            "created_at": "2023-01-01T00:00:00.000Z",
+                            "updated_at": "2023-01-01T00:00:00.000Z",
+                        }
+                    ],
+                    "created_at": "2023-01-01T00:00:00.000Z",
+                    "updated_at": "2023-01-01T00:00:00.000Z",
+                }
+            ],
+            "created_at": "2023-01-01T00:00:00.000Z",
+            "updated_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = CreateCourseResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_sdk_create_course_response_value_201_application_json_round_trip(self):
+        data = load_fixture(
+            "sdk_create_course_response_value_201_application_json.json"
+        )
+        instance = SdkCreateCourseResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkCreateCourseResponseValue201ApplicationJson.from_dict(serialized)
+        assert restored.to_dict() == serialized
+
+    def test_sdk_create_course_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "id": 1,
+                "title": "test_title",
+                "slug": "test_slug",
+                "description": "test_description",
+                "visibility": "PUBLIC",
+                "is_draft": True,
+                "delivery_text": "test_delivery_text",
+                "category": "development",
+                "level": "all_levels",
+                "language": "test_language",
+                "subtitle": "test_subtitle",
+                "author": "test_author",
+                "subcategory": "test_subcategory",
+                "what_you_learn": ["test_what_you_learn"],
+                "requirements": ["test_requirements"],
+                "certificate_enabled": True,
+                "access_type": "lifetime",
+                "access_duration_days": 1,
+                "enrollment_limit": 1,
+                "promo_video": {
+                    "mux_playback_id": "mux_playback_id_01234",
+                    "mux_status": "test_mux_status",
+                    "duration_seconds": 1,
+                },
+                "sections": [
+                    {
+                        "id": 1,
+                        "title": "test_title",
+                        "description": "test_description",
+                        "sort_order": 1,
+                        "lessons": [
+                            {
+                                "id": 1,
+                                "section_id": 1,
+                                "title": "test_title",
+                                "content": "test_content",
+                                "type": "lecture",
+                                "is_preview": True,
+                                "is_published": True,
+                                "sort_order": 1,
+                                "video": {
+                                    "source": "mux",
+                                    "external_url": "https://example.com",
+                                    "mux_playback_id": "mux_playback_id_01234",
+                                    "mux_status": "test_mux_status",
+                                    "duration_seconds": 1,
+                                },
+                                "attachments": [
+                                    {
+                                        "id": 1,
+                                        "title": "test_title",
+                                        "mime_type": "test_mime_type",
+                                        "size_bytes": 1,
+                                        "sort_order": 1,
+                                    }
+                                ],
+                                "assignment": {
+                                    "estimated_duration_minutes": 1,
+                                    "instructions": "test_instructions",
+                                    "questions": [
+                                        {
+                                            "id": 1,
+                                            "prompt": "test_prompt",
+                                            "question_type": "text",
+                                            "solution": "test_solution",
+                                            "sort_order": 1,
+                                            "answers": [
+                                                {
+                                                    "id": 1,
+                                                    "answer": "test_answer",
+                                                    "is_correct": True,
+                                                    "sort_order": 1,
+                                                }
+                                            ],
+                                            "created_at": "2023-01-01T00:00:00.000Z",
+                                            "updated_at": "2023-01-01T00:00:00.000Z",
+                                        }
+                                    ],
+                                },
+                                "questions": [
+                                    {
+                                        "id": 1,
+                                        "prompt": "test_prompt",
+                                        "question_type": "text",
+                                        "solution": "test_solution",
+                                        "sort_order": 1,
+                                        "answers": [
+                                            {
+                                                "id": 1,
+                                                "answer": "test_answer",
+                                                "is_correct": True,
+                                                "sort_order": 1,
+                                            }
+                                        ],
+                                        "created_at": "2023-01-01T00:00:00.000Z",
+                                        "updated_at": "2023-01-01T00:00:00.000Z",
+                                    }
+                                ],
+                                "created_at": "2023-01-01T00:00:00.000Z",
+                                "updated_at": "2023-01-01T00:00:00.000Z",
+                            }
+                        ],
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                        "updated_at": "2023-01-01T00:00:00.000Z",
+                    }
+                ],
+                "created_at": "2023-01-01T00:00:00.000Z",
+                "updated_at": "2023-01-01T00:00:00.000Z",
+            }
+        }
+        instance = SdkCreateCourseResponseValue201ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
     def test_get_course_response_value_200_application_json_property_data_property_promo_video_round_trip(
         self,
     ):
@@ -4375,6 +5805,367 @@ class TestModelRoundTrip:
             }
         }
         instance = SdkUpdateCourseResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_period_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data_property_period.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_period_minimal_payload(
+        self,
+    ):
+        data = {
+            "start_date": "2023-01-01",
+            "end_date": "2023-01-01",
+            "timezone": "test_timezone",
+            "currency": "test_currency",
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyPeriod.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["start_date"] == data["start_date"]
+        assert serialized["end_date"] == data["end_date"]
+        assert serialized["timezone"] == data["timezone"]
+        assert serialized["currency"] == data["currency"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_summary_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data_property_summary.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_summary_minimal_payload(
+        self,
+    ):
+        data = {
+            "students_count": 1,
+            "multi_course_students_count": None,
+            "course_purchases_count": 1,
+            "course_units_count": 1,
+            "course_orders_count": 1,
+            "courses_sold_count": None,
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["students_count"] == data["students_count"]
+        assert (
+            serialized["multi_course_students_count"]
+            == data["multi_course_students_count"]
+        )
+        assert serialized["course_purchases_count"] == data["course_purchases_count"]
+        assert serialized["course_units_count"] == data["course_units_count"]
+        assert serialized["course_orders_count"] == data["course_orders_count"]
+        assert serialized["courses_sold_count"] == data["courses_sold_count"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_summary_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "students_count": 1,
+            "multi_course_students_count": None,
+            "course_purchases_count": 1,
+            "course_units_count": 1,
+            "course_orders_count": 1,
+            "courses_sold_count": None,
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertySummary.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["multi_course_students_count"] is None
+        assert serialized["courses_sold_count"] is None
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_students_item_property_courses_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data_property_students_item_property_courses_item.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItemPropertyCoursesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItemPropertyCoursesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_students_item_property_courses_item_minimal_payload(
+        self,
+    ):
+        data = {"course_id": 1, "title": "test_title", "purchases_count": 1}
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItemPropertyCoursesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["course_id"] == data["course_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["purchases_count"] == data["purchases_count"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_students_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data_property_students_item.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_students_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "customer_id": None,
+            "email": None,
+            "courses_count": 1,
+            "course_purchases_count": 1,
+            "course_units_count": 1,
+            "orders_count": 1,
+            "latest_purchase_at": None,
+            "courses": [{"course_id": 1, "title": "test_title", "purchases_count": 1}],
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["customer_id"] == data["customer_id"]
+        assert serialized["email"] == data["email"]
+        assert serialized["courses_count"] == data["courses_count"]
+        assert serialized["course_purchases_count"] == data["course_purchases_count"]
+        assert serialized["course_units_count"] == data["course_units_count"]
+        assert serialized["orders_count"] == data["orders_count"]
+        assert serialized["latest_purchase_at"] == data["latest_purchase_at"]
+        assert serialized["courses"] == data["courses"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_students_item_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "customer_id": None,
+            "email": None,
+            "courses_count": 1,
+            "course_purchases_count": 1,
+            "course_units_count": 1,
+            "orders_count": 1,
+            "latest_purchase_at": None,
+            "courses": [{"course_id": 1, "title": "test_title", "purchases_count": 1}],
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyStudentsItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["customer_id"] is None
+        assert serialized["email"] is None
+        assert serialized["latest_purchase_at"] is None
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_courses_item_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data_property_courses_item.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyCoursesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyCoursesItem.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_property_courses_item_minimal_payload(
+        self,
+    ):
+        data = {
+            "course_id": 1,
+            "title": "test_title",
+            "students_count": 1,
+            "course_purchases_count": 1,
+            "course_units_count": 1,
+            "orders_count": 1,
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyDataPropertyCoursesItem.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["course_id"] == data["course_id"]
+        assert serialized["title"] == data["title"]
+        assert serialized["students_count"] == data["students_count"]
+        assert serialized["course_purchases_count"] == data["course_purchases_count"]
+        assert serialized["course_units_count"] == data["course_units_count"]
+        assert serialized["orders_count"] == data["orders_count"]
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_course_student_summary_response_value_200_application_json_property_data.json"
+        )
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_course_student_summary_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {
+            "period": {
+                "start_date": "2023-01-01",
+                "end_date": "2023-01-01",
+                "timezone": "test_timezone",
+                "currency": "test_currency",
+            },
+            "summary": {
+                "students_count": 1,
+                "multi_course_students_count": 1,
+                "course_purchases_count": 1,
+                "course_units_count": 1,
+                "course_orders_count": 1,
+                "courses_sold_count": 1,
+            },
+            "students": [
+                {
+                    "customer_id": 1,
+                    "email": "test@example.com",
+                    "courses_count": 1,
+                    "course_purchases_count": 1,
+                    "course_units_count": 1,
+                    "orders_count": 1,
+                    "latest_purchase_at": "2023-01-01T00:00:00.000Z",
+                    "courses": [
+                        {"course_id": 1, "title": "test_title", "purchases_count": 1}
+                    ],
+                }
+            ],
+            "courses": [
+                {
+                    "course_id": 1,
+                    "title": "test_title",
+                    "students_count": 1,
+                    "course_purchases_count": 1,
+                    "course_units_count": 1,
+                    "orders_count": 1,
+                }
+            ],
+        }
+        instance = GetCourseStudentSummaryResponseValue200ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["period"] == data["period"]
+        assert serialized["summary"] == data["summary"]
+        assert serialized["students"] == data["students"]
+        assert serialized["courses"] == data["courses"]
+
+    def test_sdk_get_course_student_summary_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_course_student_summary_response_value_200_application_json.json"
+        )
+        instance = SdkGetCourseStudentSummaryResponseValue200ApplicationJson.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetCourseStudentSummaryResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_course_student_summary_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {
+                "period": {
+                    "start_date": "2023-01-01",
+                    "end_date": "2023-01-01",
+                    "timezone": "test_timezone",
+                    "currency": "test_currency",
+                },
+                "summary": {
+                    "students_count": 1,
+                    "multi_course_students_count": 1,
+                    "course_purchases_count": 1,
+                    "course_units_count": 1,
+                    "course_orders_count": 1,
+                    "courses_sold_count": 1,
+                },
+                "students": [
+                    {
+                        "customer_id": 1,
+                        "email": "test@example.com",
+                        "courses_count": 1,
+                        "course_purchases_count": 1,
+                        "course_units_count": 1,
+                        "orders_count": 1,
+                        "latest_purchase_at": "2023-01-01T00:00:00.000Z",
+                        "courses": [
+                            {
+                                "course_id": 1,
+                                "title": "test_title",
+                                "purchases_count": 1,
+                            }
+                        ],
+                    }
+                ],
+                "courses": [
+                    {
+                        "course_id": 1,
+                        "title": "test_title",
+                        "students_count": 1,
+                        "course_purchases_count": 1,
+                        "course_units_count": 1,
+                        "orders_count": 1,
+                    }
+                ],
+            }
+        }
+        instance = SdkGetCourseStudentSummaryResponseValue200ApplicationJson.from_dict(
+            data
+        )
         serialized = instance.to_dict()
         assert serialized["data"] == data["data"]
 

@@ -47,6 +47,7 @@ from sellapp_sdk.orders.models import (
     GetOrderResponseValue200ApplicationJsonPropertyDataPropertyTotals,
     ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem,
     ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable,
+    ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1,
     ListOrdersResponseValue200ApplicationJsonPropertyDataItem,
     ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyCustomer,
     ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyLineItemsItem,
@@ -59,6 +60,7 @@ from sellapp_sdk.orders.models import (
     PayOrderFromWalletResponseValue200ApplicationJsonPropertyDataPropertyPayment,
     PayOrderFromWalletResponseValue200ApplicationJsonPropertyDataPropertyTimelineItem,
     PayOrderFromWalletResponseValue200ApplicationJsonPropertyDataPropertyTotals,
+    RegenerateOrderTelegramInviteResponseValue201ApplicationJsonPropertyData,
     RetryOrderDynamicDeliveryResponseValue202ApplicationJsonPropertyData,
     RetryOrderDynamicDeliveryResponseValue202ApplicationJsonPropertyDataPropertyCustomer,
     RetryOrderDynamicDeliveryResponseValue202ApplicationJsonPropertyDataPropertyLineItemsItem,
@@ -82,6 +84,7 @@ from sellapp_sdk.orders.models import (
     SdkListOrderDeliverablesResponseValue200ApplicationJson,
     SdkListOrdersResponseValue200ApplicationJson,
     SdkPayOrderFromWalletResponseValue200ApplicationJson,
+    SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson,
     SdkRetryOrderDynamicDeliveryResponseValue202ApplicationJson,
     SdkRetryOrderFulfillmentResponseValue200ApplicationJson,
     SdkSearchOrdersResponseValue200ApplicationJson,
@@ -298,6 +301,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyTotals.from_dict(
             data
@@ -311,6 +316,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_list_orders_response_value_200_application_json_property_data_item_property_totals_preserves_nullable_fields(
         self,
@@ -322,6 +329,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = ListOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyTotals.from_dict(
             data
@@ -329,6 +338,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_list_orders_response_value_200_application_json_property_data_item_property_line_items_item_round_trip(
         self,
@@ -483,6 +493,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -550,6 +562,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -610,6 +624,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -677,6 +693,8 @@ class TestModelRoundTrip:
                         "total_cents": 1,
                         "total_exclusive_usd_cents": 1,
                         "total_usd_cents": 1,
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "coupon_id": 1,
                     "line_items": [
@@ -977,6 +995,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -990,6 +1010,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_order_response_value_201_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -1001,6 +1023,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -1008,6 +1032,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_order_response_value_201_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -1163,6 +1188,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -1231,6 +1258,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -1292,6 +1321,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -1359,6 +1390,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -1403,7 +1436,7 @@ class TestModelRoundTrip:
     def test_search_orders_request_application_json_property_filters_item_minimal_payload(
         self,
     ):
-        data = {"field": "test_field", "operator": "eq", "value": {}}
+        data = {"field": "id", "operator": "eq", "value": {}}
         instance = SearchOrdersRequestApplicationJsonPropertyFiltersItem.from_dict(data)
         serialized = instance.to_dict()
         assert serialized["field"] == data["field"]
@@ -1414,8 +1447,8 @@ class TestModelRoundTrip:
         self,
     ):
         data = {
-            "field": "test_field",
-            "operator": "unexpected_search_orders_request_application_json_property_filters_item_operator",
+            "field": "unexpected_search_orders_request_application_json_property_filters_item_field",
+            "operator": "eq",
             "value": {},
         }
         instance = SearchOrdersRequestApplicationJsonPropertyFiltersItem.from_dict(data)
@@ -1666,6 +1699,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = SearchOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyTotals.from_dict(
             data
@@ -1679,6 +1714,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_search_orders_response_value_200_application_json_property_data_item_property_totals_preserves_nullable_fields(
         self,
@@ -1690,6 +1727,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = SearchOrdersResponseValue200ApplicationJsonPropertyDataItemPropertyTotals.from_dict(
             data
@@ -1697,6 +1736,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_search_orders_response_value_200_application_json_property_data_item_property_line_items_item_round_trip(
         self,
@@ -1853,6 +1893,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -1920,6 +1962,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -1980,6 +2024,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -2051,6 +2097,8 @@ class TestModelRoundTrip:
                         "total_cents": 1,
                         "total_exclusive_usd_cents": 1,
                         "total_usd_cents": 1,
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "coupon_id": 1,
                     "line_items": [
@@ -2291,6 +2339,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = (
             GetOrderResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
@@ -2306,6 +2356,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_get_order_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -2317,6 +2369,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = (
             GetOrderResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
@@ -2326,6 +2380,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_get_order_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -2478,6 +2533,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -2543,6 +2600,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -2601,6 +2660,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -2665,6 +2726,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -2876,6 +2939,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = UpdateOrderStatusResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -2889,6 +2954,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_update_order_status_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -2900,6 +2967,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = UpdateOrderStatusResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -2907,6 +2976,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_update_order_status_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -3063,6 +3133,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -3130,6 +3202,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -3190,6 +3264,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -3264,6 +3340,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -3479,6 +3557,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -3492,6 +3572,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_order_checkout_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -3503,6 +3585,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderCheckoutResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -3510,6 +3594,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_order_checkout_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -3669,6 +3754,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -3739,6 +3826,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -3802,6 +3891,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -3879,6 +3970,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -4092,6 +4185,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderReplacementResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -4105,6 +4200,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_order_replacement_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -4116,6 +4213,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderReplacementResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -4123,6 +4222,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_order_replacement_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -4281,6 +4381,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -4350,6 +4452,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -4412,6 +4516,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -4490,6 +4596,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -4703,6 +4811,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyOrderPropertyTotals.from_dict(
             data
@@ -4716,6 +4826,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_order_refund_response_value_200_application_json_property_data_property_order_property_totals_preserves_nullable_fields(
         self,
@@ -4727,6 +4839,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateOrderRefundResponseValue200ApplicationJsonPropertyDataPropertyOrderPropertyTotals.from_dict(
             data
@@ -4734,6 +4848,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_order_refund_response_value_200_application_json_property_data_property_order_property_line_items_item_round_trip(
         self,
@@ -4888,6 +5003,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -4955,6 +5072,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -5015,6 +5134,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -5163,6 +5284,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -5248,6 +5371,8 @@ class TestModelRoundTrip:
                         "total_cents": 1,
                         "total_exclusive_usd_cents": 1,
                         "total_usd_cents": 1,
+                        "refund_currency": "test_refund_currency",
+                        "refunded_total_cents": 1,
                     },
                     "coupon_id": 1,
                     "line_items": [
@@ -5467,6 +5592,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = RetryOrderFulfillmentResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -5480,6 +5607,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_retry_order_fulfillment_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -5491,6 +5620,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = RetryOrderFulfillmentResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -5498,6 +5629,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_retry_order_fulfillment_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -5656,6 +5788,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -5725,6 +5859,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -5787,6 +5923,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -5897,6 +6035,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -6112,6 +6252,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = RetryOrderDynamicDeliveryResponseValue202ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6125,6 +6267,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_retry_order_dynamic_delivery_response_value_202_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -6136,6 +6280,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = RetryOrderDynamicDeliveryResponseValue202ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6143,6 +6289,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_retry_order_dynamic_delivery_response_value_202_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -6297,6 +6444,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -6364,6 +6513,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -6424,6 +6575,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -6528,6 +6681,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -6743,6 +6898,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = SendOrderFulfillmentNotificationsResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6756,6 +6913,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_send_order_fulfillment_notifications_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -6767,6 +6926,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = SendOrderFulfillmentNotificationsResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -6774,6 +6935,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_send_order_fulfillment_notifications_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -6928,6 +7090,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -6995,6 +7159,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -7055,6 +7221,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -7157,6 +7325,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -7188,6 +7358,108 @@ class TestModelRoundTrip:
         assert serialized["data"] == data["data"]
         assert serialized["meta"] == data["meta"]
 
+    def test_regenerate_order_telegram_invite_response_value_201_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "regenerate_order_telegram_invite_response_value_201_application_json_property_data.json"
+        )
+        instance = RegenerateOrderTelegramInviteResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = RegenerateOrderTelegramInviteResponseValue201ApplicationJsonPropertyData.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_regenerate_order_telegram_invite_response_value_201_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"order_id": 1, "variant_id": 1, "invite_link": "test_invite_link"}
+        instance = RegenerateOrderTelegramInviteResponseValue201ApplicationJsonPropertyData.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["order_id"] == data["order_id"]
+        assert serialized["variant_id"] == data["variant_id"]
+        assert serialized["invite_link"] == data["invite_link"]
+
+    def test_sdk_regenerate_order_telegram_invite_response_value_201_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_regenerate_order_telegram_invite_response_value_201_application_json.json"
+        )
+        instance = (
+            SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_regenerate_order_telegram_invite_response_value_201_application_json_minimal_payload(
+        self,
+    ):
+        data = {
+            "data": {"order_id": 1, "variant_id": 1, "invite_link": "test_invite_link"}
+        }
+        instance = (
+            SdkRegenerateOrderTelegramInviteResponseValue201ApplicationJson.from_dict(
+                data
+            )
+        )
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]
+
+    def test_list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data_any_of_value_1_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data_any_of_value_1.json"
+        )
+        instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data_any_of_value_1_minimal_payload(
+        self,
+    ):
+        data = {}
+        instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        assert instance.to_dict() is not None
+
+    def test_list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_property_data_any_of_value_1_omits_absent_optional_non_nullable_fields(
+        self,
+    ):
+        data = {}
+        instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverablePropertyDataAnyOfValue1.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert "serials" not in serialized
+        assert "delivered_files" not in serialized
+        assert "dynamic" not in serialized
+        assert "manual" not in serialized
+        assert "license_keys" not in serialized
+        assert "credits_granted" not in serialized
+
     def test_list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_round_trip(
         self,
     ):
@@ -7207,7 +7479,17 @@ class TestModelRoundTrip:
     def test_list_order_deliverables_response_value_200_application_json_property_data_item_property_deliverable_minimal_payload(
         self,
     ):
-        data = {"types": ["test_types"], "data": {}}
+        data = {
+            "types": ["test_types"],
+            "data": {
+                "serials": ["test_serials"],
+                "delivered_files": ["test_delivered_files"],
+                "dynamic": "test_dynamic",
+                "manual": "test_manual",
+                "license_keys": ["test_license_keys"],
+                "credits_granted": 1,
+            },
+        }
         instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItemPropertyDeliverable.from_dict(
             data
         )
@@ -7239,9 +7521,20 @@ class TestModelRoundTrip:
             "line_item_id": 1,
             "type": "test_type",
             "status": "pending",
+            "delivered_product_id": None,
             "product_variant_id": None,
             "quantity": 1,
-            "deliverable": {"types": ["test_types"], "data": {}},
+            "deliverable": {
+                "types": ["test_types"],
+                "data": {
+                    "serials": ["test_serials"],
+                    "delivered_files": ["test_delivered_files"],
+                    "dynamic": "test_dynamic",
+                    "manual": "test_manual",
+                    "license_keys": ["test_license_keys"],
+                    "credits_granted": 1,
+                },
+            },
             "additional_information": [{}],
         }
         instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem.from_dict(
@@ -7252,6 +7545,7 @@ class TestModelRoundTrip:
         assert serialized["line_item_id"] == data["line_item_id"]
         assert serialized["type"] == data["type"]
         assert serialized["status"] == data["status"]
+        assert serialized["delivered_product_id"] == data["delivered_product_id"]
         assert serialized["product_variant_id"] == data["product_variant_id"]
         assert serialized["quantity"] == data["quantity"]
         assert serialized["deliverable"] == data["deliverable"]
@@ -7265,15 +7559,27 @@ class TestModelRoundTrip:
             "line_item_id": 1,
             "type": "test_type",
             "status": "pending",
+            "delivered_product_id": None,
             "product_variant_id": None,
             "quantity": 1,
-            "deliverable": {"types": ["test_types"], "data": {}},
+            "deliverable": {
+                "types": ["test_types"],
+                "data": {
+                    "serials": ["test_serials"],
+                    "delivered_files": ["test_delivered_files"],
+                    "dynamic": "test_dynamic",
+                    "manual": "test_manual",
+                    "license_keys": ["test_license_keys"],
+                    "credits_granted": 1,
+                },
+            },
             "additional_information": [{}],
         }
         instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
         )
         serialized = instance.to_dict()
+        assert serialized["delivered_product_id"] is None
         assert serialized["product_variant_id"] is None
 
     def test_list_order_deliverables_response_value_200_application_json_property_data_item_round_trips_unknown_enum_values(
@@ -7284,9 +7590,20 @@ class TestModelRoundTrip:
             "line_item_id": 1,
             "type": "test_type",
             "status": "unexpected_list_order_deliverables_response_value_200_application_json_property_data_item_status",
+            "delivered_product_id": 1,
             "product_variant_id": 1,
             "quantity": 1,
-            "deliverable": {"types": ["test_types"], "data": {}},
+            "deliverable": {
+                "types": ["test_types"],
+                "data": {
+                    "serials": ["test_serials"],
+                    "delivered_files": ["test_delivered_files"],
+                    "dynamic": "test_dynamic",
+                    "manual": "test_manual",
+                    "license_keys": ["test_license_keys"],
+                    "credits_granted": 1,
+                },
+            },
             "additional_information": [{}],
         }
         instance = ListOrderDeliverablesResponseValue200ApplicationJsonPropertyDataItem.from_dict(
@@ -7320,9 +7637,20 @@ class TestModelRoundTrip:
                     "line_item_id": 1,
                     "type": "test_type",
                     "status": "pending",
+                    "delivered_product_id": 1,
                     "product_variant_id": 1,
                     "quantity": 1,
-                    "deliverable": {"types": ["test_types"], "data": {}},
+                    "deliverable": {
+                        "types": ["test_types"],
+                        "data": {
+                            "serials": ["test_serials"],
+                            "delivered_files": ["test_delivered_files"],
+                            "dynamic": "test_dynamic",
+                            "manual": "test_manual",
+                            "license_keys": ["test_license_keys"],
+                            "credits_granted": 1,
+                        },
+                    },
                     "additional_information": [{}],
                 }
             ]
@@ -7581,6 +7909,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateWalletOrderResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -7594,6 +7924,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_create_wallet_order_response_value_201_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -7605,6 +7937,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = CreateWalletOrderResponseValue201ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -7612,6 +7946,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_create_wallet_order_response_value_201_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -7769,6 +8104,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -7837,6 +8174,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -7898,6 +8237,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -7973,6 +8314,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [
@@ -8184,6 +8527,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = PayOrderFromWalletResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -8197,6 +8542,8 @@ class TestModelRoundTrip:
             serialized["total_exclusive_usd_cents"] == data["total_exclusive_usd_cents"]
         )
         assert serialized["total_usd_cents"] == data["total_usd_cents"]
+        assert serialized["refund_currency"] == data["refund_currency"]
+        assert serialized["refunded_total_cents"] == data["refunded_total_cents"]
 
     def test_pay_order_from_wallet_response_value_200_application_json_property_data_property_totals_preserves_nullable_fields(
         self,
@@ -8208,6 +8555,8 @@ class TestModelRoundTrip:
             "total_cents": 1,
             "total_exclusive_usd_cents": None,
             "total_usd_cents": None,
+            "refund_currency": None,
+            "refunded_total_cents": 1,
         }
         instance = PayOrderFromWalletResponseValue200ApplicationJsonPropertyDataPropertyTotals.from_dict(
             data
@@ -8215,6 +8564,7 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["total_exclusive_usd_cents"] is None
         assert serialized["total_usd_cents"] is None
+        assert serialized["refund_currency"] is None
 
     def test_pay_order_from_wallet_response_value_200_application_json_property_data_property_line_items_item_round_trip(
         self,
@@ -8373,6 +8723,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -8442,6 +8794,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": None,
             "line_items": [
@@ -8504,6 +8858,8 @@ class TestModelRoundTrip:
                 "total_cents": 1,
                 "total_exclusive_usd_cents": 1,
                 "total_usd_cents": 1,
+                "refund_currency": "test_refund_currency",
+                "refunded_total_cents": 1,
             },
             "coupon_id": 1,
             "line_items": [
@@ -8580,6 +8936,8 @@ class TestModelRoundTrip:
                     "total_cents": 1,
                     "total_exclusive_usd_cents": 1,
                     "total_usd_cents": 1,
+                    "refund_currency": "test_refund_currency",
+                    "refunded_total_cents": 1,
                 },
                 "coupon_id": 1,
                 "line_items": [

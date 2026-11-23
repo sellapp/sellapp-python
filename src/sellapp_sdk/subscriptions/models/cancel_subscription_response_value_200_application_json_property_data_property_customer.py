@@ -12,8 +12,6 @@ from sellapp_sdk._types import (
     _validate_model,
 )
 
-from .scalar_metadata_value import ScalarMetadataValue
-
 _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCustomer",
     "required": ["id", "email", "external_id", "name", "locale", "metadata"],
@@ -46,7 +44,22 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         },
         "metadata": {
             "kind": "map",
-            "values": {"kind": "any"},
+            "values": {
+                "kind": "nullable",
+                "inner": {
+                    "kind": "union",
+                    "variants": [
+                        {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                        {"kind": "primitive", "type": "number"},
+                        {"kind": "primitive", "type": "boolean"},
+                    ],
+                    "composition": "oneOf",
+                },
+            },
             "constraints": {"maxProperties": 50},
         },
     },
@@ -84,7 +97,22 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         },
         "metadata": {
             "kind": "map",
-            "values": {"kind": "any"},
+            "values": {
+                "kind": "nullable",
+                "inner": {
+                    "kind": "union",
+                    "variants": [
+                        {
+                            "kind": "primitive",
+                            "type": "string",
+                            "constraints": {"maxLength": 500},
+                        },
+                        {"kind": "primitive", "type": "number"},
+                        {"kind": "primitive", "type": "boolean"},
+                    ],
+                    "composition": "oneOf",
+                },
+            },
             "constraints": {"maxProperties": 50},
         },
     },
@@ -101,7 +129,7 @@ class CancelSubscriptionResponseValue200ApplicationJsonPropertyDataPropertyCusto
     external_id: str | None
     name: str | None
     locale: str | None
-    metadata: dict[str, ScalarMetadataValue]
+    metadata: dict[str, str | float | bool | None]
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )

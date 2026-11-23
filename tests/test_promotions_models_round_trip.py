@@ -10,6 +10,7 @@ from sellapp_sdk.promotions.models import (
     DeletePromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItem,
     GetPromotionResponseValue200ApplicationJsonPropertyData,
     GetPromotionResponseValue200ApplicationJsonPropertyDataPropertyPhasesItem,
+    GetPromotionUsageResponseValue200ApplicationJsonPropertyData,
     ListPromotionPhasesResponseValue200ApplicationJsonPropertyDataItem,
     ReplacePromotionPhasesRequestApplicationJsonPropertyPhasesItem,
     ReplacePromotionPhasesResponseValue200ApplicationJsonPropertyDataItem,
@@ -22,6 +23,7 @@ from sellapp_sdk.promotions.models import (
     SdkCreatePromotionResponseValue201ApplicationJson,
     SdkDeletePromotionResponseValue200ApplicationJson,
     SdkGetPromotionResponseValue200ApplicationJson,
+    SdkGetPromotionUsageResponseValue200ApplicationJson,
     SdkListPromotionPhasesResponseValue200ApplicationJson,
     SdkReplacePromotionPhasesResponseValue200ApplicationJson,
     SdkReplacePromotionResponseValue200ApplicationJson,
@@ -2481,3 +2483,55 @@ class TestModelRoundTrip:
         )
         serialized = instance.to_dict()
         assert "data" not in serialized
+
+    def test_get_promotion_usage_response_value_200_application_json_property_data_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "get_promotion_usage_response_value_200_application_json_property_data.json"
+        )
+        instance = (
+            GetPromotionUsageResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = (
+            GetPromotionUsageResponseValue200ApplicationJsonPropertyData.from_dict(
+                serialized
+            )
+        )
+        assert restored.to_dict() == serialized
+
+    def test_get_promotion_usage_response_value_200_application_json_property_data_minimal_payload(
+        self,
+    ):
+        data = {"promotion_id": 1, "uses": 1, "recent_order_ids": [1]}
+        instance = (
+            GetPromotionUsageResponseValue200ApplicationJsonPropertyData.from_dict(data)
+        )
+        serialized = instance.to_dict()
+        assert serialized["promotion_id"] == data["promotion_id"]
+        assert serialized["uses"] == data["uses"]
+        assert serialized["recent_order_ids"] == data["recent_order_ids"]
+
+    def test_sdk_get_promotion_usage_response_value_200_application_json_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "sdk_get_promotion_usage_response_value_200_application_json.json"
+        )
+        instance = SdkGetPromotionUsageResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SdkGetPromotionUsageResponseValue200ApplicationJson.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_sdk_get_promotion_usage_response_value_200_application_json_minimal_payload(
+        self,
+    ):
+        data = {"data": {"promotion_id": 1, "uses": 1, "recent_order_ids": [1]}}
+        instance = SdkGetPromotionUsageResponseValue200ApplicationJson.from_dict(data)
+        serialized = instance.to_dict()
+        assert serialized["data"] == data["data"]

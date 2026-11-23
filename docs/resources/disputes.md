@@ -16,6 +16,11 @@ def list_disputes(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        status: DisputesStatus | str | None = None,
+        provider: str | None = None,
+        opened_after: str | None = None,
+        opened_before: str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]:
 ```
@@ -26,6 +31,11 @@ def list_disputes(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
+| status | `DisputesStatus \| str \| None` | No |
+| provider | `str \| None` | No |
+| opened_after | `str \| None` | No |
+| opened_before | `str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[ListDisputesResponseValue200ApplicationJsonPropertyDataItem]`.

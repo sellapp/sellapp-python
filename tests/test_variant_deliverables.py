@@ -19,12 +19,46 @@ from sellapp_sdk.common.models import (
 from sellapp_sdk.variant_deliverables.models import (
     ReplaceVariantDeliverableConfigurationRequestApplicationJsonPropertyData,
     SdkGetVariantDeliverableConfigurationResponseValue200ApplicationJson,
+    SdkNotifyVariantBuyersResponseValue202ApplicationJson,
+    SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson,
     SdkReplaceVariantDeliverableConfigurationResponseValue200ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
 
 
 class TestVariantDeliverables:
+    def test_preview(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_preview_variant_buyer_notification_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.variant_deliverables.preview(
+            "test_product", "test_variant"
+        )
+        assert isinstance(
+            result, SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/products/test_product/variants/test_variant/deliverable/buyer-notification"
+        )
+
+    def test_notify(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_notify_variant_buyers_response_value_202_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.variant_deliverables.notify("test_product", "test_variant")
+        assert isinstance(result, SdkNotifyVariantBuyersResponseValue202ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/products/test_product/variants/test_variant/deliverable/buyer-notification"
+        )
+
     def test_get(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
@@ -74,13 +108,13 @@ class TestVariantDeliverables:
         assert "types" in body
         assert "data" in body
 
-    def test_get_with_request_options(self, sellapp_sdk, httpx_mock):
+    def test_preview_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
-                "sdk_get_variant_deliverable_configuration_response_value_200_application_json.json"
+                "sdk_preview_variant_buyer_notification_response_value_200_application_json.json"
             )
         )
-        sellapp_sdk.variant_deliverables.get(
+        sellapp_sdk.variant_deliverables.preview(
             "test_product",
             "test_variant",
             request_options={"headers": {"X-Custom": "value"}},
@@ -88,15 +122,15 @@ class TestVariantDeliverables:
         request = httpx_mock.get_request()
         assert request.headers["X-Custom"] == "value"
 
-    def test_get_unauthorized(self, sellapp_sdk, httpx_mock):
+    def test_preview_unauthorized(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             status_code=401,
             json={"message": "Unauthorized"},
         )
         with pytest.raises(AuthenticationError):
-            sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+            sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
 
-    def test_get_not_found(self, httpx_mock):
+    def test_preview_not_found(self, httpx_mock):
         sellapp_sdk = SellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -108,11 +142,11 @@ class TestVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=404, json={"message": "Not found"})
             with pytest.raises(NotFoundError):
-                sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+                sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
         finally:
             sellapp_sdk.close()
 
-    def test_get_rate_limited(self, httpx_mock):
+    def test_preview_rate_limited(self, httpx_mock):
         sellapp_sdk = SellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -128,11 +162,11 @@ class TestVariantDeliverables:
                 json={"message": "Slow down"},
             )
             with pytest.raises(RateLimitExceededError):
-                sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+                sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
         finally:
             sellapp_sdk.close()
 
-    def test_get_server_error(self, httpx_mock):
+    def test_preview_server_error(self, httpx_mock):
         sellapp_sdk = SellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -144,11 +178,11 @@ class TestVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=500, json={"message": "Server error"})
             with pytest.raises(ServerError):
-                sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+                sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
         finally:
             sellapp_sdk.close()
 
-    def test_get_bad_request(self, httpx_mock):
+    def test_preview_bad_request(self, httpx_mock):
         sellapp_sdk = SellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -160,11 +194,11 @@ class TestVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=400, json={"message": "Bad request"})
             with pytest.raises(BadRequestError):
-                sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+                sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
         finally:
             sellapp_sdk.close()
 
-    def test_get_unprocessable(self, httpx_mock):
+    def test_preview_unprocessable(self, httpx_mock):
         sellapp_sdk = SellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -176,12 +210,48 @@ class TestVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=422, json={"message": "Unprocessable"})
             with pytest.raises(UnprocessableEntityError):
-                sellapp_sdk.variant_deliverables.get("test_product", "test_variant")
+                sellapp_sdk.variant_deliverables.preview("test_product", "test_variant")
         finally:
             sellapp_sdk.close()
 
 
 class TestAsyncVariantDeliverables:
+    @pytest.mark.asyncio
+    async def test_preview(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_preview_variant_buyer_notification_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.variant_deliverables.preview(
+            "test_product", "test_variant"
+        )
+        assert isinstance(
+            result, SdkPreviewVariantBuyerNotificationResponseValue200ApplicationJson
+        )
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith(
+            "/v2/products/test_product/variants/test_variant/deliverable/buyer-notification"
+        )
+
+    @pytest.mark.asyncio
+    async def test_notify(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_notify_variant_buyers_response_value_202_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.variant_deliverables.notify(
+            "test_product", "test_variant"
+        )
+        assert isinstance(result, SdkNotifyVariantBuyersResponseValue202ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "POST"
+        assert request.url.path.endswith(
+            "/v2/products/test_product/variants/test_variant/deliverable/buyer-notification"
+        )
+
     @pytest.mark.asyncio
     async def test_get(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -233,13 +303,13 @@ class TestAsyncVariantDeliverables:
         )
 
     @pytest.mark.asyncio
-    async def test_get_with_request_options(self, async_sellapp_sdk, httpx_mock):
+    async def test_preview_with_request_options(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
             json=load_fixture(
-                "sdk_get_variant_deliverable_configuration_response_value_200_application_json.json"
+                "sdk_preview_variant_buyer_notification_response_value_200_application_json.json"
             )
         )
-        await async_sellapp_sdk.variant_deliverables.get(
+        await async_sellapp_sdk.variant_deliverables.preview(
             "test_product",
             "test_variant",
             request_options={"headers": {"X-Custom": "value"}},
@@ -248,15 +318,15 @@ class TestAsyncVariantDeliverables:
         assert request.headers["X-Custom"] == "value"
 
     @pytest.mark.asyncio
-    async def test_get_unauthorized(self, async_sellapp_sdk, httpx_mock):
+    async def test_preview_unauthorized(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(status_code=401, json={"message": "Unauthorized"})
         with pytest.raises(AuthenticationError):
-            await async_sellapp_sdk.variant_deliverables.get(
+            await async_sellapp_sdk.variant_deliverables.preview(
                 "test_product", "test_variant"
             )
 
     @pytest.mark.asyncio
-    async def test_get_not_found(self, httpx_mock):
+    async def test_preview_not_found(self, httpx_mock):
         sellapp_sdk = AsyncSellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -268,14 +338,14 @@ class TestAsyncVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=404, json={"message": "Not found"})
             with pytest.raises(NotFoundError):
-                await sellapp_sdk.variant_deliverables.get(
+                await sellapp_sdk.variant_deliverables.preview(
                     "test_product", "test_variant"
                 )
         finally:
             await sellapp_sdk.close()
 
     @pytest.mark.asyncio
-    async def test_get_rate_limited(self, httpx_mock):
+    async def test_preview_rate_limited(self, httpx_mock):
         sellapp_sdk = AsyncSellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -291,14 +361,14 @@ class TestAsyncVariantDeliverables:
                 json={"message": "Slow down"},
             )
             with pytest.raises(RateLimitExceededError):
-                await sellapp_sdk.variant_deliverables.get(
+                await sellapp_sdk.variant_deliverables.preview(
                     "test_product", "test_variant"
                 )
         finally:
             await sellapp_sdk.close()
 
     @pytest.mark.asyncio
-    async def test_get_server_error(self, httpx_mock):
+    async def test_preview_server_error(self, httpx_mock):
         sellapp_sdk = AsyncSellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -310,14 +380,14 @@ class TestAsyncVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=500, json={"message": "Server error"})
             with pytest.raises(ServerError):
-                await sellapp_sdk.variant_deliverables.get(
+                await sellapp_sdk.variant_deliverables.preview(
                     "test_product", "test_variant"
                 )
         finally:
             await sellapp_sdk.close()
 
     @pytest.mark.asyncio
-    async def test_get_bad_request(self, httpx_mock):
+    async def test_preview_bad_request(self, httpx_mock):
         sellapp_sdk = AsyncSellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -329,14 +399,14 @@ class TestAsyncVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=400, json={"message": "Bad request"})
             with pytest.raises(BadRequestError):
-                await sellapp_sdk.variant_deliverables.get(
+                await sellapp_sdk.variant_deliverables.preview(
                     "test_product", "test_variant"
                 )
         finally:
             await sellapp_sdk.close()
 
     @pytest.mark.asyncio
-    async def test_get_unprocessable(self, httpx_mock):
+    async def test_preview_unprocessable(self, httpx_mock):
         sellapp_sdk = AsyncSellAppClient(
             api_key="sk_test_123",
             store="store_test",
@@ -348,7 +418,7 @@ class TestAsyncVariantDeliverables:
         try:
             httpx_mock.add_response(status_code=422, json={"message": "Unprocessable"})
             with pytest.raises(UnprocessableEntityError):
-                await sellapp_sdk.variant_deliverables.get(
+                await sellapp_sdk.variant_deliverables.preview(
                     "test_product", "test_variant"
                 )
         finally:

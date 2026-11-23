@@ -16,14 +16,30 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerRequestApplicationJsonPropertyMetadata",
     "required": [],
     "properties": {},
-    "additionalProperties": {"kind": "any"},
+    "additionalProperties": {
+        "kind": "union",
+        "variants": [
+            {"kind": "primitive", "type": "string", "constraints": {"maxLength": 500}},
+            {"kind": "primitive", "type": "number"},
+            {"kind": "primitive", "type": "boolean"},
+        ],
+        "composition": "oneOf",
+    },
     "constraints": {"maxProperties": 50},
 }
 _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
     "name": "CreateCustomerRequestApplicationJsonPropertyMetadata",
     "required": [],
     "properties": {},
-    "additionalProperties": {"kind": "any"},
+    "additionalProperties": {
+        "kind": "union",
+        "variants": [
+            {"kind": "primitive", "type": "string", "constraints": {"maxLength": 500}},
+            {"kind": "primitive", "type": "number"},
+            {"kind": "primitive", "type": "boolean"},
+        ],
+        "composition": "oneOf",
+    },
     "constraints": {"maxProperties": 50},
 }
 

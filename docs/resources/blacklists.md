@@ -283,6 +283,9 @@ def v2_list_blacklists(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        search: str | None = None,
+        type: BlacklistsType | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[Blacklist]:
 ```
@@ -293,6 +296,9 @@ def v2_list_blacklists(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| page | `int \| None` | No |
+| search | `str \| None` | No |
+| type | `BlacklistsType \| str \| None` | No |
 | request_options | `RequestOptions \| None` | No |
 
 Returns: `SyncPage[Blacklist]`.

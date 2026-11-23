@@ -16,6 +16,7 @@ def list(
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        search: str | None = None,
         affiliate_id: int | None = None,
         order_id: int | None = None,
         status: AffiliateReferralsStatus | str | None = None,
@@ -32,6 +33,7 @@ def list(
 | before | `str \| None` | No |
 | after | `str \| None` | No |
 | order | `str \| None` | No |
+| search | `str \| None` | No |
 | affiliate_id | `int \| None` | No |
 | order_id | `int \| None` | No |
 | status | `AffiliateReferralsStatus \| str \| None` | No |

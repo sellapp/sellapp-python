@@ -10,12 +10,13 @@ if TYPE_CHECKING:
     from .._client import AsyncSellAppClient, SellAppClient
 
 from .._pagination import AsyncPage, SyncPage
-from .._types import RequestOptions, _validate_model
+from .._types import RequestOptions, _validate_model, enum_value
 from .models import (
     ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem,
     SdkGetWebhookDeliveryResponseValue200ApplicationJson,
     SdkListWebhookEventTypesResponseValue200ApplicationJson,
     SdkReplayWebhookDeliveryResponseValue201ApplicationJson,
+    WebhookPlatformStatus,
 )
 
 
@@ -92,17 +93,23 @@ class WebhookPlatform:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        event_type: str | None = None,
+        status: WebhookPlatformStatus | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> SyncPage[ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem]:
         """List webhook deliveries
 
-        Destination origin only; response bodies are redacted and capped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's outbound webhook deliveries, newest first, 25 per page by default. Each delivery shows only the destination origin; response bodies are redacted and capped. Filter by `event_type` or `status`; both must match exactly, and a value that matches nothing returns an empty page rather than an error. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Deliveries per page. Values below 1 are read as 1 and values above 100 as 100. Defaults to `25`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            event_type: Keep deliveries of this event type, as listed by `GET /v2/webhook-event-types`.
+            status: Keep deliveries in this state: `pending`, `retrying`, `succeeded`, `failed`, or `disabled`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -155,6 +162,9 @@ class WebhookPlatform:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "event_type": event_type,
+                "status": enum_value(status) if status is not None else None,
             }.items()
             if v is not None
         }
@@ -387,19 +397,25 @@ class AsyncWebhookPlatform:
         before: str | None = None,
         after: str | None = None,
         order: str | None = None,
+        page: int | None = None,
+        event_type: str | None = None,
+        status: WebhookPlatformStatus | str | None = None,
         request_options: RequestOptions | None = None,
     ) -> AsyncPage[
         ListWebhookDeliveriesResponseValue200ApplicationJsonPropertyDataItem
     ]:
         """List webhook deliveries
 
-        Destination origin only; response bodies are redacted and capped. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
+        List your store's outbound webhook deliveries, newest first, 25 per page by default. Each delivery shows only the destination origin; response bodies are redacted and capped. Filter by `event_type` or `status`; both must match exactly, and a value that matches nothing returns an empty page rather than an error. OAuth callers use the admin grant and select a store with X-STORE. Current membership and role permissions apply to every request.
 
         Args:
-            limit: The limit.
+            limit: Deliveries per page. Values below 1 are read as 1 and values above 100 as 100. Defaults to `25`.
             before: The before.
             after: The after.
             order: The order.
+            page: Page number, starting at 1. Defaults to `1`.
+            event_type: Keep deliveries of this event type, as listed by `GET /v2/webhook-event-types`.
+            status: Keep deliveries in this state: `pending`, `retrying`, `succeeded`, `failed`, or `disabled`.
             request_options: Per-request options. Supports extra_headers, timeout, max_retries, and base_url override.
 
         Returns:
@@ -452,6 +468,9 @@ class AsyncWebhookPlatform:
                 "before": before,
                 "after": after,
                 "order": order,
+                "page": page,
+                "event_type": event_type,
+                "status": enum_value(status) if status is not None else None,
             }.items()
             if v is not None
         }

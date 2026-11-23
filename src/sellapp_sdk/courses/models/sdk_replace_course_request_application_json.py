@@ -132,6 +132,24 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
             "type": "string",
             "format": "date-time",
         },
+        "title": {
+            "kind": "primitive",
+            "type": "string",
+            "constraints": {"minLength": 1, "maxLength": 255},
+        },
+        "slug": {
+            "kind": "primitive",
+            "type": "string",
+            "constraints": {"maxLength": 255, "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        },
+        "description": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"minLength": 5},
+            },
+        },
     },
     "additionalProperties": True,
 }
@@ -243,6 +261,24 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
             "type": "string",
             "format": "date-time",
         },
+        "title": {
+            "kind": "primitive",
+            "type": "string",
+            "constraints": {"minLength": 1, "maxLength": 255},
+        },
+        "slug": {
+            "kind": "primitive",
+            "type": "string",
+            "constraints": {"maxLength": 255, "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        },
+        "description": {
+            "kind": "nullable",
+            "inner": {
+                "kind": "primitive",
+                "type": "string",
+                "constraints": {"minLength": 5},
+            },
+        },
     },
     "additionalProperties": True,
 }
@@ -268,6 +304,13 @@ class SdkReplaceCourseRequestApplicationJson:
     delivery_text: str | None = None
     visibility: CatalogVisibility | None = None
     expected_updated_at: datetime | None = None
+    """The `updated_at` you last read. If the course changed since, the request returns `422` on `expected_updated_at` and changes nothing. It is checked even when the request changes nothing else."""
+    title: str | None = None
+    """The course name customers see."""
+    slug: str | None = None
+    """The last part of the course's storefront URL: lowercase letters and numbers in words joined by single hyphens, such as `design-foundations`. It must be unused by every other product in the store, or the request returns `422` on `slug`."""
+    description: str | None = None
+    """The course description as HTML, at least 5 characters long and at most 2000 characters of visible text. `null` keeps the current description. To clear the description of a draft course, send an empty element such as `<p></p>`; a published course must keep one, so clearing it returns `422` on `description`."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -314,6 +357,9 @@ class SdkReplaceCourseRequestApplicationJson:
                 if (_v_expected_updated_at := data.get("expected_updated_at"))
                 is not None
                 else None,
+                title=data.get("title"),
+                slug=data.get("slug"),
+                description=data.get("description"),
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -332,6 +378,9 @@ class SdkReplaceCourseRequestApplicationJson:
                         "delivery_text",
                         "visibility",
                         "expected_updated_at",
+                        "title",
+                        "slug",
+                        "description",
                     ],
                 ),
                 _from_response=True,
@@ -365,6 +414,11 @@ class SdkReplaceCourseRequestApplicationJson:
             _domain_data["visibility"] = self.visibility
         if self.expected_updated_at is not None:
             _domain_data["expected_updated_at"] = self.expected_updated_at
+        if self.title is not None:
+            _domain_data["title"] = self.title
+        if self.slug is not None:
+            _domain_data["slug"] = self.slug
+        _domain_data["description"] = self.description
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -432,4 +486,12 @@ class SdkReplaceCourseRequestApplicationJson:
             )
         if self.expected_updated_at is not None:
             result["expected_updated_at"] = _format_datetime(self.expected_updated_at)
+        if self.title is not None:
+            result["title"] = self.title
+        if self.slug is not None:
+            result["slug"] = self.slug
+        if self.description is not None:
+            result["description"] = self.description
+        else:
+            result["description"] = None
         return result

@@ -15,9 +15,12 @@ from sellapp_sdk._errors import (
 )
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.charges.models import (
+    ChargesPreset,
+    ChargesStatus,
     ListChargesResponseValue200ApplicationJsonPropertyDataItem,
     SdkCreateChargeResponseValue201ApplicationJson,
     SdkGetChargeResponseValue200ApplicationJson,
+    SdkGetChargeSummaryResponseValue200ApplicationJson,
     SdkMarkPendingChargeCompletedResponseValue200ApplicationJson,
     SdkMarkPendingChargeVoidedResponseValue200ApplicationJson,
 )
@@ -47,13 +50,24 @@ class TestCharges:
     def test_list_encodes_query_params(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         sellapp_sdk.charges.list(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=ChargesStatus("PENDING"),
+            customer_email="value customer_email/test",
+            created_after="value created_after/test",
+            created_before="value created_before/test",
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "PENDING"
+        assert request.url.params["customer_email"] == "value customer_email/test"
+        assert request.url.params["created_after"] == "value created_after/test"
+        assert request.url.params["created_before"] == "value created_before/test"
 
     def test_create(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(
@@ -113,6 +127,34 @@ class TestCharges:
         request = httpx_mock.get_request()
         assert request.method == "PUT"
         assert request.url.path.endswith("/v2/charges/test_charge_id/voided")
+
+    def test_get_summary(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_charge_summary_response_value_200_application_json.json"
+            ),
+        )
+        result = sellapp_sdk.charges.get_summary()
+        assert isinstance(result, SdkGetChargeSummaryResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/charges/summary")
+
+    def test_get_summary_encodes_query_params(self, sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_charge_summary_response_value_200_application_json.json"
+            )
+        )
+        sellapp_sdk.charges.get_summary(
+            preset=ChargesPreset("today"),
+            start_date="value start_date/test",
+            end_date="value end_date/test",
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["preset"] == "today"
+        assert request.url.params["start_date"] == "value start_date/test"
+        assert request.url.params["end_date"] == "value end_date/test"
 
     def test_list_with_request_options(self, sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
@@ -239,13 +281,24 @@ class TestAsyncCharges:
     async def test_list_encodes_query_params(self, async_sellapp_sdk, httpx_mock):
         httpx_mock.add_response(json={"data": [], "list_metadata": {}})
         await async_sellapp_sdk.charges.list(
-            limit=10, before="cursor before", after="cursor/after", page=7
+            limit=10,
+            before="cursor before",
+            after="cursor/after",
+            page=7,
+            status=ChargesStatus("PENDING"),
+            customer_email="value customer_email/test",
+            created_after="value created_after/test",
+            created_before="value created_before/test",
         )
         request = httpx_mock.get_request()
         assert request.url.params["limit"] == "10"
         assert request.url.params["before"] == "cursor before"
         assert request.url.params["after"] == "cursor/after"
         assert request.url.params["page"] == "7"
+        assert request.url.params["status"] == "PENDING"
+        assert request.url.params["customer_email"] == "value customer_email/test"
+        assert request.url.params["created_after"] == "value created_after/test"
+        assert request.url.params["created_before"] == "value created_before/test"
 
     @pytest.mark.asyncio
     async def test_create(self, async_sellapp_sdk, httpx_mock):
@@ -304,6 +357,38 @@ class TestAsyncCharges:
         request = httpx_mock.get_request()
         assert request.method == "PUT"
         assert request.url.path.endswith("/v2/charges/test_charge_id/voided")
+
+    @pytest.mark.asyncio
+    async def test_get_summary(self, async_sellapp_sdk, httpx_mock):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_charge_summary_response_value_200_application_json.json"
+            )
+        )
+        result = await async_sellapp_sdk.charges.get_summary()
+        assert isinstance(result, SdkGetChargeSummaryResponseValue200ApplicationJson)
+        request = httpx_mock.get_request()
+        assert request.method == "GET"
+        assert request.url.path.endswith("/v2/charges/summary")
+
+    @pytest.mark.asyncio
+    async def test_get_summary_encodes_query_params(
+        self, async_sellapp_sdk, httpx_mock
+    ):
+        httpx_mock.add_response(
+            json=load_fixture(
+                "sdk_get_charge_summary_response_value_200_application_json.json"
+            )
+        )
+        await async_sellapp_sdk.charges.get_summary(
+            preset=ChargesPreset("today"),
+            start_date="value start_date/test",
+            end_date="value end_date/test",
+        )
+        request = httpx_mock.get_request()
+        assert request.url.params["preset"] == "today"
+        assert request.url.params["start_date"] == "value start_date/test"
+        assert request.url.params["end_date"] == "value end_date/test"
 
     @pytest.mark.asyncio
     async def test_list_with_request_options(self, async_sellapp_sdk, httpx_mock):

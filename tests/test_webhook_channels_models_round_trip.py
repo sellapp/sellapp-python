@@ -7,6 +7,8 @@ from sellapp_sdk.webhook_channels.models import (
     DeleteWebhookChannelResponseValue200ApplicationJsonPropertyData,
     GetWebhookChannelResponseValue200ApplicationJsonPropertyData,
     ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem,
+    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth,
+    ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery,
     ReplaceWebhookChannelResponseValue200ApplicationJsonPropertyData,
     RotateWebhookSigningSecretResponseValue200ApplicationJsonPropertyData,
     SdkCreateWebhookChannelResponseValue201ApplicationJson,
@@ -20,6 +22,8 @@ from sellapp_sdk.webhook_channels.models import (
     SdkUpdateWebhookChannelResponseValue200ApplicationJson,
     SearchWebhookChannelsRequestApplicationJsonPropertySearch,
     SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem,
+    SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth,
+    SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery,
     SendTestWebhookResponseValue200ApplicationJsonPropertyData,
     UpdateWebhookChannelResponseValue200ApplicationJsonPropertyData,
 )
@@ -27,6 +31,121 @@ from tests.generated_helpers import load_fixture
 
 
 class TestModelRoundTrip:
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_health_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_webhook_channels_response_value_200_application_json_property_data_item_property_health.json"
+        )
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_health_minimal_payload(
+        self,
+    ):
+        data = {"state": "active", "last_success_at": None, "last_failure_at": None}
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["state"] == data["state"]
+        assert serialized["last_success_at"] == data["last_success_at"]
+        assert serialized["last_failure_at"] == data["last_failure_at"]
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_health_preserves_nullable_fields(
+        self,
+    ):
+        data = {"state": "active", "last_success_at": None, "last_failure_at": None}
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["last_success_at"] is None
+        assert serialized["last_failure_at"] is None
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_health_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "state": "unexpected_list_webhook_channels_response_value_200_application_json_property_data_item_property_health_state",
+            "last_success_at": "2023-01-01T00:00:00.000Z",
+            "last_failure_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery.json"
+        )
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "pending",
+            "created_at": None,
+        }
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["event_type"] == data["event_type"]
+        assert serialized["status"] == data["status"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "pending",
+            "created_at": None,
+        }
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["created_at"] is None
+
+    def test_list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "unexpected_list_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_status",
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_list_webhook_channels_response_value_200_application_json_property_data_item_round_trip(
         self,
     ):
@@ -52,6 +171,12 @@ class TestModelRoundTrip:
             "url": "https://example.com/sellapp/webhooks",
             "allowed_notifications": ["order.created", "order.paid"],
             "signing_secret_configured": True,
+            "health": {
+                "state": "active",
+                "last_success_at": "2023-01-01T00:00:00.000Z",
+                "last_failure_at": "2023-01-01T00:00:00.000Z",
+            },
+            "last_delivery": None,
         }
         instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -64,6 +189,8 @@ class TestModelRoundTrip:
         assert (
             serialized["signing_secret_configured"] == data["signing_secret_configured"]
         )
+        assert serialized["health"] == data["health"]
+        assert serialized["last_delivery"] == data["last_delivery"]
 
     def test_list_webhook_channels_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -74,12 +201,19 @@ class TestModelRoundTrip:
             "url": "https://example.com/sellapp/webhooks",
             "allowed_notifications": ["order.created", "order.paid"],
             "signing_secret_configured": True,
+            "health": {
+                "state": "active",
+                "last_success_at": "2023-01-01T00:00:00.000Z",
+                "last_failure_at": "2023-01-01T00:00:00.000Z",
+            },
+            "last_delivery": None,
         }
         instance = ListWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["name"] is None
+        assert serialized["last_delivery"] is None
 
     def test_sdk_list_webhook_channels_response_value_200_application_json_round_trip(
         self,
@@ -106,6 +240,17 @@ class TestModelRoundTrip:
                     "url": "https://example.com/sellapp/webhooks",
                     "allowed_notifications": ["order.created", "order.paid"],
                     "signing_secret_configured": True,
+                    "health": {
+                        "state": "active",
+                        "last_success_at": "2023-01-01T00:00:00.000Z",
+                        "last_failure_at": "2023-01-01T00:00:00.000Z",
+                    },
+                    "last_delivery": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "event_type": "test_event_type",
+                        "status": "pending",
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    },
                 }
             ],
             "links": {
@@ -268,6 +413,121 @@ class TestModelRoundTrip:
         serialized = instance.to_dict()
         assert serialized["value"] is None
 
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_health_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_webhook_channels_response_value_200_application_json_property_data_item_property_health.json"
+        )
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_health_minimal_payload(
+        self,
+    ):
+        data = {"state": "active", "last_success_at": None, "last_failure_at": None}
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["state"] == data["state"]
+        assert serialized["last_success_at"] == data["last_success_at"]
+        assert serialized["last_failure_at"] == data["last_failure_at"]
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_health_preserves_nullable_fields(
+        self,
+    ):
+        data = {"state": "active", "last_success_at": None, "last_failure_at": None}
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["last_success_at"] is None
+        assert serialized["last_failure_at"] is None
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_health_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "state": "unexpected_search_webhook_channels_response_value_200_application_json_property_data_item_property_health_state",
+            "last_success_at": "2023-01-01T00:00:00.000Z",
+            "last_failure_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyHealth.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_round_trip(
+        self,
+    ):
+        data = load_fixture(
+            "search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery.json"
+        )
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized == data
+        restored = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            serialized
+        )
+        assert restored.to_dict() == serialized
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_minimal_payload(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "pending",
+            "created_at": None,
+        }
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["id"] == data["id"]
+        assert serialized["event_type"] == data["event_type"]
+        assert serialized["status"] == data["status"]
+        assert serialized["created_at"] == data["created_at"]
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_preserves_nullable_fields(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "pending",
+            "created_at": None,
+        }
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        serialized = instance.to_dict()
+        assert serialized["created_at"] is None
+
+    def test_search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_round_trips_unknown_enum_values(
+        self,
+    ):
+        data = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "event_type": "test_event_type",
+            "status": "unexpected_search_webhook_channels_response_value_200_application_json_property_data_item_property_last_delivery_status",
+            "created_at": "2023-01-01T00:00:00.000Z",
+        }
+        instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItemPropertyLastDelivery.from_dict(
+            data
+        )
+        assert instance.to_dict() == data
+
     def test_search_webhook_channels_response_value_200_application_json_property_data_item_round_trip(
         self,
     ):
@@ -293,6 +553,12 @@ class TestModelRoundTrip:
             "url": "https://example.com/sellapp/webhooks",
             "allowed_notifications": ["order.created", "order.paid"],
             "signing_secret_configured": True,
+            "health": {
+                "state": "active",
+                "last_success_at": "2023-01-01T00:00:00.000Z",
+                "last_failure_at": "2023-01-01T00:00:00.000Z",
+            },
+            "last_delivery": None,
         }
         instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -305,6 +571,8 @@ class TestModelRoundTrip:
         assert (
             serialized["signing_secret_configured"] == data["signing_secret_configured"]
         )
+        assert serialized["health"] == data["health"]
+        assert serialized["last_delivery"] == data["last_delivery"]
 
     def test_search_webhook_channels_response_value_200_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -315,12 +583,19 @@ class TestModelRoundTrip:
             "url": "https://example.com/sellapp/webhooks",
             "allowed_notifications": ["order.created", "order.paid"],
             "signing_secret_configured": True,
+            "health": {
+                "state": "active",
+                "last_success_at": "2023-01-01T00:00:00.000Z",
+                "last_failure_at": "2023-01-01T00:00:00.000Z",
+            },
+            "last_delivery": None,
         }
         instance = SearchWebhookChannelsResponseValue200ApplicationJsonPropertyDataItem.from_dict(
             data
         )
         serialized = instance.to_dict()
         assert serialized["name"] is None
+        assert serialized["last_delivery"] is None
 
     def test_sdk_search_webhook_channels_response_value_200_application_json_round_trip(
         self,
@@ -349,6 +624,17 @@ class TestModelRoundTrip:
                     "url": "https://example.com/sellapp/webhooks",
                     "allowed_notifications": ["order.created", "order.paid"],
                     "signing_secret_configured": True,
+                    "health": {
+                        "state": "active",
+                        "last_success_at": "2023-01-01T00:00:00.000Z",
+                        "last_failure_at": "2023-01-01T00:00:00.000Z",
+                    },
+                    "last_delivery": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "event_type": "test_event_type",
+                        "status": "pending",
+                        "created_at": "2023-01-01T00:00:00.000Z",
+                    },
                 }
             ],
             "links": {
