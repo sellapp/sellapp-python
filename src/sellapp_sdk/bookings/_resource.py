@@ -24,13 +24,15 @@ from sellapp_sdk.common.models.sdk_create_booking_product_request_application_js
 from sellapp_sdk.common.models.sdk_create_booking_product_request_application_json_video_provider import (
     SdkCreateBookingProductRequestApplicationJsonVideoProvider,
 )
+from sellapp_sdk.common.models.sdk_create_booking_product_response_value_201_application_json import (
+    SdkCreateBookingProductResponseValue201ApplicationJson,
+)
 
 from .._pagination import AsyncPage, SyncPage
 from .._types import NOT_GIVEN, NotGiven, RequestOptions, _validate_model, enum_value
 from .models import (
     CreateBookingProductRequestApplicationJsonPropertyAvailabilityItem,
     SdkCancelAppointmentResponseValue200ApplicationJson,
-    SdkCreateBookingProductResponseValue201ApplicationJson,
     SdkGetAppointmentResponseValue200ApplicationJson,
     SdkListAppointmentsResponseValue200ApplicationJson,
     SdkSearchAppointmentsResponseValue200ApplicationJson,

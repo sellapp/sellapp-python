@@ -16,9 +16,11 @@ from sellapp_sdk._errors import (
 from sellapp_sdk._pagination import AsyncPage, SyncPage
 from sellapp_sdk.bookings.models import (
     SdkCancelAppointmentResponseValue200ApplicationJson,
-    SdkCreateBookingProductResponseValue201ApplicationJson,
     SdkGetAppointmentResponseValue200ApplicationJson,
     SdkUpdateAppointmentResponseValue200ApplicationJson,
+)
+from sellapp_sdk.common.models import (
+    SdkCreateBookingProductResponseValue201ApplicationJson,
 )
 from tests.generated_helpers import load_fixture
 

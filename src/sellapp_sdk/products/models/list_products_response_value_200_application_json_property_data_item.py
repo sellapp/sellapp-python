@@ -50,6 +50,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable",
         "variants",
         "url",
+        "type",
         "price_range",
         "stock",
         "sales",
@@ -90,6 +91,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable": {"kind": "primitive", "type": "boolean"},
         "variants": {"kind": "array", "items": {"kind": "any"}},
         "url": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "primitive", "type": "string"},
         "price_range": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
@@ -125,6 +127,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable",
         "variants",
         "url",
+        "type",
         "price_range",
         "stock",
         "sales",
@@ -165,6 +168,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable": {"kind": "primitive", "type": "boolean"},
         "variants": {"kind": "array", "items": {"kind": "any"}},
         "url": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "primitive", "type": "string"},
         "price_range": {
             "kind": "nullable",
             "inner": {"kind": "primitive", "type": "string"},
@@ -211,6 +215,8 @@ class ListProductsResponseValue200ApplicationJsonPropertyDataItem:
         ListProductsResponseValue200ApplicationJsonPropertyDataItemPropertyVariantsItem
     ]
     url: str
+    type: str
+    """What kind of product this is: `product`, `bundle`, `addon`, `credits`, `course`, or `booking`."""
     price_range: str | None
     """The lowest and highest price among the product's published variants, formatted for display with the currency symbol: `$19.99`, or `$9.99 - $19.99` when the prices differ. Null when no published variant has a price."""
     stock: int | None
@@ -277,6 +283,7 @@ class ListProductsResponseValue200ApplicationJsonPropertyDataItem:
                     for item in cast(list[Any], data["variants"])
                 ],
                 url=data["url"],
+                type=data["type"],
                 price_range=data["price_range"],
                 stock=data["stock"],
                 sales=data["sales"],
@@ -303,6 +310,7 @@ class ListProductsResponseValue200ApplicationJsonPropertyDataItem:
                         "is_discoverable",
                         "variants",
                         "url",
+                        "type",
                         "price_range",
                         "stock",
                         "sales",
@@ -338,6 +346,7 @@ class ListProductsResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["is_discoverable"] = self.is_discoverable
         _domain_data["variants"] = self.variants
         _domain_data["url"] = self.url
+        _domain_data["type"] = self.type
         _domain_data["price_range"] = self.price_range
         _domain_data["stock"] = self.stock
         _domain_data["sales"] = self.sales
@@ -387,6 +396,7 @@ class ListProductsResponseValue200ApplicationJsonPropertyDataItem:
         result["is_discoverable"] = self.is_discoverable
         result["variants"] = [item.to_dict() for item in self.variants]
         result["url"] = self.url
+        result["type"] = self.type
         if self.price_range is not None:
             result["price_range"] = self.price_range
         else:

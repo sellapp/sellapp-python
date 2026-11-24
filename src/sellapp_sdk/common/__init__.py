@@ -392,6 +392,9 @@ from .models import (
     CreateAffiliatePayoutResponseValue201ApplicationJsonPropertyDataStatus as CreateAffiliatePayoutResponseValue201ApplicationJsonPropertyDataStatus,
 )
 from .models import (
+    CreateBookingProductResponseValue201ApplicationJsonPropertyData as CreateBookingProductResponseValue201ApplicationJsonPropertyData,
+)
+from .models import (
     CreateCheckoutFieldTemplateRequestApplicationJsonPropertyFieldsItemType as CreateCheckoutFieldTemplateRequestApplicationJsonPropertyFieldsItemType,
 )
 from .models import (
@@ -1994,6 +1997,9 @@ from .models import (
 )
 from .models import (
     SdkCreateBookingProductRequestApplicationJsonVideoProvider as SdkCreateBookingProductRequestApplicationJsonVideoProvider,
+)
+from .models import (
+    SdkCreateBookingProductResponseValue201ApplicationJson as SdkCreateBookingProductResponseValue201ApplicationJson,
 )
 from .models import (
     SdkCreateChargeRequestApplicationJsonPaymentMethod as SdkCreateChargeRequestApplicationJsonPaymentMethod,

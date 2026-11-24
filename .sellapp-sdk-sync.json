@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "language": "python",
   "repository": "sellapp/sellapp-python",
-  "sourceSha": "77cf567815f22f4c07cf6b707ab25d4ca74877af",
-  "specSha256": "588138cc0421d9c2f8b7382d2924ce51982635c344b9e57f6f46b68e18ea4d69",
+  "sourceSha": "47e5b156f89777b62ae90a33cac16756b9830558",
+  "specSha256": "2319bc01512943c10a5788a130a1d189fbb2b14d76b0142e62a47b759c391662",
   "runId": "0",
   "runAttempt": "1",
-  "treeDigest": "88bcf062d5f5a2d000ca139813597de8441979ddde0e3c1de0cd7887b6978df7",
-  "contentDigest": "55bf2e87a1d3b5fc3bdfef52be26ad789f54b6e078be8d8247323b5c047aba0c",
+  "treeDigest": "0a0bc9cc3a832b6a4cc95d58aadbe5c5599db5bfc0deed7cfcd5b4193a0cde96",
+  "contentDigest": "016186e87ade84f37efe13c60cbd14b0b6fe82a941fafcd726b019d1789aa6bf",
   "files": [
     {
       "path": ".github/scripts/native-ci.mjs",
@@ -42,7 +42,7 @@
     {
       "path": ".oagen-manifest.json",
       "mode": "100644",
-      "sha256": "6db9b60034a5638e5fb9aa1072f3917fe2c0e066aa0fe9437fc6097d050cdec7"
+      "sha256": "e0a63d1bc436c823a3bf37f0141aae293681f4dd7a6c59212065d917ffc586a8"
     },
     {
       "path": "LICENSE.txt",
@@ -67,7 +67,7 @@
     {
       "path": "docs/migration.md",
       "mode": "100644",
-      "sha256": "93cb5f3632ba41e91cbef0eca56536cabd6d525e748dc9aac4e736502807b09e"
+      "sha256": "2a2c9726edcf4a78185eac87a67824fed8e50054d5c67c18bd1d44255cb49c8f"
     },
     {
       "path": "docs/operation-examples.json",
@@ -612,22 +612,22 @@
     {
       "path": "generation-manifest.json",
       "mode": "100644",
-      "sha256": "6b8716e62d9236de17c471d74e019b2eec092ad0d2b9f8d196aba61b8af00c9b"
+      "sha256": "64a9a4259793178d6caf3bc5c6fee90255a47b5c0baa9458bc4304ba48801b18"
     },
     {
       "path": "pyproject.toml",
       "mode": "100644",
-      "sha256": "a120e1d9d65567d7a553878c3d993fbffcf8751c6dc928227b35a5fcbbd48b6b"
+      "sha256": "85611b03293f40a1db576a86889b11af8f76388abe0bd9384f7fbf5b3184c0ca"
     },
     {
       "path": "src/sellapp_sdk/__init__.py",
       "mode": "100644",
-      "sha256": "dfc2b5d029c35d22ad845c606fbaaa3e76b5b7bd6623b8c133422c24160625d3"
+      "sha256": "38dfb7564dc0787456f24f54c242fe32ffb7a5fda74d836be420a5053233a3c3"
     },
     {
       "path": "src/sellapp_sdk/_base_client.py",
       "mode": "100644",
-      "sha256": "8d486982aab6b1433b1cbaaa96ed57359e91e197e5f1816dadfb4cb7e2b0edea"
+      "sha256": "5dedbe1708d450feb2b4b53c1f0fcef36845d1ea4786d78229288bac9511c962"
     },
     {
       "path": "src/sellapp_sdk/_client.py",
@@ -3242,12 +3242,12 @@
     {
       "path": "src/sellapp_sdk/bookings/_resource.py",
       "mode": "100644",
-      "sha256": "7423748b735b2f5e08fe5f62177a2f84e8f9dcfe0c26edf25649f3d7620d7d93"
+      "sha256": "3301d04783f26f414248ad938c94966f621741907d85002059d4bc24fceb2936"
     },
     {
       "path": "src/sellapp_sdk/bookings/models/__init__.py",
       "mode": "100644",
-      "sha256": "41dba0990b27f4f2e9b75d6ae9ab83a717a11fd4d1de05bbf719c9a9cfb54c14"
+      "sha256": "1046c01b9ef02080c437d059333a673a2720d2d907a9718e8279a76b5a57f716"
     },
     {
       "path": "src/sellapp_sdk/bookings/models/cancel_appointment_response_value_200_application_json_property_data.py",
@@ -3268,11 +3268,6 @@
       "path": "src/sellapp_sdk/bookings/models/create_booking_product_request_application_json_property_availability_item.py",
       "mode": "100644",
       "sha256": "03c7766db4d5274116fe5e995f1c2eff1f5af08a376ef3f60f80208d229d566f"
-    },
-    {
-      "path": "src/sellapp_sdk/bookings/models/create_booking_product_response_value_201_application_json_property_data.py",
-      "mode": "100644",
-      "sha256": "13c0f1204b6a2f434aef964462f36b22ed8ce6cca681844e30867fb2a54f3f79"
     },
     {
       "path": "src/sellapp_sdk/bookings/models/create_booking_product_response_value_201_application_json_property_data_property_additional_information_item.py",
@@ -3358,11 +3353,6 @@
       "path": "src/sellapp_sdk/bookings/models/sdk_create_booking_product_request_application_json.py",
       "mode": "100644",
       "sha256": "76095a57311ca98c23cef2a48bfc715eee18cafd9daf78848edddc5cf4c96ee5"
-    },
-    {
-      "path": "src/sellapp_sdk/bookings/models/sdk_create_booking_product_response_value_201_application_json.py",
-      "mode": "100644",
-      "sha256": "99da38f8f3abe69421fcae37c6f8c8c45cd248fe1596863eefed7be4dc62fdba"
     },
     {
       "path": "src/sellapp_sdk/bookings/models/sdk_get_appointment_response_value_200_application_json.py",
@@ -4202,12 +4192,12 @@
     {
       "path": "src/sellapp_sdk/common/__init__.py",
       "mode": "100644",
-      "sha256": "4f892398fb2007e95c69215e24d0224412addd950e463c506ef3f7f304815de4"
+      "sha256": "5525a33b933ffa5a5a0ba5f5ca6e462eff73c9fb94a1739bb6a4c35e436bff58"
     },
     {
       "path": "src/sellapp_sdk/common/models/__init__.py",
       "mode": "100644",
-      "sha256": "962a0fd3458cc2bcd269b435e5fa939bdd616665e2763385b9d6b1b62d4b4f8e"
+      "sha256": "00ef705d34c192b2280acb0b470a58ccfcbeb9cc95de5ec514cd52e640351d2b"
     },
     {
       "path": "src/sellapp_sdk/common/models/action_close_outcome.py",
@@ -4562,7 +4552,7 @@
     {
       "path": "src/sellapp_sdk/common/models/batch_create_products_response_value_200_application_json_property_data_item.py",
       "mode": "100644",
-      "sha256": "b75a71cb9a13e7974c81ba012e2e95c7a64d3be53898d2919cf92f024ac6d80f"
+      "sha256": "193b4eb5af200f578b988cec19548448ac150a225b5d3ecb9f2e25a6d2d8619c"
     },
     {
       "path": "src/sellapp_sdk/common/models/batch_create_products_response_value_200_application_json_property_data_item_property_additional_information_item.py",
@@ -4968,6 +4958,11 @@
       "path": "src/sellapp_sdk/common/models/create_affiliate_payout_response_value_201_application_json_property_data_status.py",
       "mode": "100644",
       "sha256": "110a7a4c0952bb76019a4d8a096831b19de7793755a43d767cd11b512f937bdb"
+    },
+    {
+      "path": "src/sellapp_sdk/common/models/create_booking_product_response_value_201_application_json_property_data.py",
+      "mode": "100644",
+      "sha256": "7991d9b4b06ed188984c4c84ecdac6362fc02b4f27ca49b3418e899a5aa2ce66"
     },
     {
       "path": "src/sellapp_sdk/common/models/create_checkout_field_template_request_application_json_property_fields_item_type.py",
@@ -7758,6 +7753,11 @@
       "path": "src/sellapp_sdk/common/models/sdk_create_booking_product_request_application_json_video_provider.py",
       "mode": "100644",
       "sha256": "7c676d73887c1dc40b1ec5f45ccd6d569077ccbdb536247b4d3e6f8db863fc7b"
+    },
+    {
+      "path": "src/sellapp_sdk/common/models/sdk_create_booking_product_response_value_201_application_json.py",
+      "mode": "100644",
+      "sha256": "99da38f8f3abe69421fcae37c6f8c8c45cd248fe1596863eefed7be4dc62fdba"
     },
     {
       "path": "src/sellapp_sdk/common/models/sdk_create_charge_request_application_json_payment_method.py",
@@ -17317,7 +17317,7 @@
     {
       "path": "src/sellapp_sdk/products/models/list_products_response_value_200_application_json_property_data_item.py",
       "mode": "100644",
-      "sha256": "ac1dab6f7734eb0e49081585943e26730a1fb33c60f189afaeeb179e8ce79e6f"
+      "sha256": "b61fe4abf41de242e1581f368f3dd2d2a747552ccc1df0e49ef667a99cc8b1d4"
     },
     {
       "path": "src/sellapp_sdk/products/models/list_products_response_value_200_application_json_property_data_item_property_additional_information_item.py",
@@ -17502,7 +17502,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_create_product_response_value_201_application_json.py",
       "mode": "100644",
-      "sha256": "45d056aeb191eca4fcf46f107dd690441bbad0a65c54c7808c210a55479f082c"
+      "sha256": "40a252fde91df6a9868bd01299ebf757babd229a028e3e38ef4ae90762e6402c"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_delete_product_request_application_json.py",
@@ -17512,12 +17512,12 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_delete_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "9830398240b4272df388eb8a1bfdcce2e340450b93a97bd1ab3568180fa3c1a0"
+      "sha256": "18000c4ab0ab027a5e3dc7c427e6b5ec52f78f71150666165986a3eb2a9cd434"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_duplicate_product_response_value_201_application_json.py",
       "mode": "100644",
-      "sha256": "cc5c4b7ed50e5e262889b1c32d9161b594cb47214108b273ceafc29fc781fa4a"
+      "sha256": "3ab824bd56bc030dc10f74d736247d43e23baaf2f22f42fbce22629d6bd28042"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_get_product_featured_variant_response_value_200_application_json.py",
@@ -17527,7 +17527,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_get_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "bfbfe90fd68636d49508fb3fc92c3b21ef636f57bae9996669e502b4191278fc"
+      "sha256": "da7f5ecf2bb353aedf6cbec13b8b00a76c41a4b7866ae36b87f7fd7b7497e1af"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_list_product_similar_products_response_value_200_application_json.py",
@@ -17547,7 +17547,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_move_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "43ba9ebcf1fde982e06946fdf2f76e3a701473b7aa708278feb84deca850a10e"
+      "sha256": "4a3eecee31a0e9088cb17629969987cf9742ddcd3e9ed2ea0e63614490978211"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_publish_product_request_application_json.py",
@@ -17557,7 +17557,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_publish_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "c5d9fa660df9e6309c222fb8420af07eaa8a1ab677b556b0d0e163aa10b9e8fc"
+      "sha256": "e2ef4bb39254ad23102a430435ed74c9fbdfeaba4349062f95b1caab419a17ea"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_replace_product_featured_variant_request_application_json.py",
@@ -17577,7 +17577,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_replace_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "73059a6d817c7b063b80eb878e6755f5f18ba664fd88bc72c195bf3dd1608bba"
+      "sha256": "42baa6747ee6b3cfef429ee1b1a17c51fd733869b5ffb7f18edaeed27aee56cc"
     },
     {
       "path": "src/sellapp_sdk/products/models/sdk_replace_product_similar_products_request_application_json.py",
@@ -17607,7 +17607,7 @@
     {
       "path": "src/sellapp_sdk/products/models/sdk_update_product_response_value_200_application_json.py",
       "mode": "100644",
-      "sha256": "8d0a6789427bf499be806620c5aeaf389ebd9d555d4833f024b1528f1cb5efd4"
+      "sha256": "de3ad8af63d628198fc6bf99eee0e9eed969d84721ec6a5a27860f448aa96861"
     },
     {
       "path": "src/sellapp_sdk/products/models/search_products_request_application_json_property_filters_item.py",
@@ -21582,7 +21582,7 @@
     {
       "path": "tests/connected-workflow.json",
       "mode": "100644",
-      "sha256": "d5e2aef6a8841470113f33cefbb6d11e45df01559548623d0baf6bd249525f34"
+      "sha256": "82feaf9dc634953ef6b3623f3af7e69665a6f91823d03734a1e4e7e2fe32619e"
     },
     {
       "path": "tests/fixtures/activate_license_key_response_value_200_application_json_property_data.json",
@@ -21857,7 +21857,7 @@
     {
       "path": "tests/fixtures/batch_create_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/batch_create_products_response_value_200_application_json_property_data_item_property_additional_information_item.json",
@@ -21887,7 +21887,7 @@
     {
       "path": "tests/fixtures/batch_create_products_response_value_201_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/batch_create_products_response_value_201_application_json_property_data_item_property_additional_information_item.json",
@@ -22022,7 +22022,7 @@
     {
       "path": "tests/fixtures/batch_delete_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/batch_delete_products_response_value_200_application_json_property_data_item_property_additional_information_item.json",
@@ -22232,7 +22232,7 @@
     {
       "path": "tests/fixtures/batch_update_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/batch_update_products_response_value_200_application_json_property_data_item_property_additional_information_item.json",
@@ -23652,7 +23652,7 @@
     {
       "path": "tests/fixtures/create_product_response_value_201_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/create_product_response_value_201_application_json_property_data_property_additional_information_item.json",
@@ -24207,7 +24207,7 @@
     {
       "path": "tests/fixtures/delete_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/delete_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -24482,7 +24482,7 @@
     {
       "path": "tests/fixtures/duplicate_product_response_value_201_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/duplicate_product_response_value_201_application_json_property_data_property_additional_information_item.json",
@@ -25482,7 +25482,7 @@
     {
       "path": "tests/fixtures/get_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/get_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -26877,7 +26877,7 @@
     {
       "path": "tests/fixtures/list_list_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "d51e9487ddd4a61f0540ec0bc8bc8c8b720b56514c902f86d092ca6aa5d54218"
+      "sha256": "17863442b7d38481fdc37ef128505066026e937d7a83ed2fc94ea6aa5ed00325"
     },
     {
       "path": "tests/fixtures/list_list_products_within_group_response_value_200_application_json_property_data_item.json",
@@ -27297,7 +27297,7 @@
     {
       "path": "tests/fixtures/list_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "1fc5903aa220916b2b9771cd3bb2a34d24227392d40381a4c17971a479d3391a"
+      "sha256": "70676f1ee0893151974d10804848fc9583e8b5c78786bd9355205cd96083e6d4"
     },
     {
       "path": "tests/fixtures/list_products_response_value_200_application_json_property_data_item_property_additional_information_item.json",
@@ -27427,7 +27427,7 @@
     {
       "path": "tests/fixtures/list_search_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "d51e9487ddd4a61f0540ec0bc8bc8c8b720b56514c902f86d092ca6aa5d54218"
+      "sha256": "17863442b7d38481fdc37ef128505066026e937d7a83ed2fc94ea6aa5ed00325"
     },
     {
       "path": "tests/fixtures/list_search_products_within_group_response_value_200_application_json_property_data_item.json",
@@ -27892,7 +27892,7 @@
     {
       "path": "tests/fixtures/move_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/move_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -28077,7 +28077,7 @@
     {
       "path": "tests/fixtures/publish_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/publish_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -28997,7 +28997,7 @@
     {
       "path": "tests/fixtures/replace_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/replace_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -29862,12 +29862,12 @@
     {
       "path": "tests/fixtures/sdk_batch_create_products_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f09e1a616d05a8f7628d7d244e33232333e8d0451e212e8a4edaed17f0ed3bcd"
+      "sha256": "71bed641939a144915b870fbbae4576ea738f09bb1ecedfd29b85d4ea8606c3e"
     },
     {
       "path": "tests/fixtures/sdk_batch_create_products_response_value_201_application_json.json",
       "mode": "100644",
-      "sha256": "f09e1a616d05a8f7628d7d244e33232333e8d0451e212e8a4edaed17f0ed3bcd"
+      "sha256": "71bed641939a144915b870fbbae4576ea738f09bb1ecedfd29b85d4ea8606c3e"
     },
     {
       "path": "tests/fixtures/sdk_batch_create_sections_request_application_json.json",
@@ -29907,7 +29907,7 @@
     {
       "path": "tests/fixtures/sdk_batch_delete_products_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f09e1a616d05a8f7628d7d244e33232333e8d0451e212e8a4edaed17f0ed3bcd"
+      "sha256": "71bed641939a144915b870fbbae4576ea738f09bb1ecedfd29b85d4ea8606c3e"
     },
     {
       "path": "tests/fixtures/sdk_batch_delete_sections_response_value_200_application_json.json",
@@ -29942,7 +29942,7 @@
     {
       "path": "tests/fixtures/sdk_batch_update_products_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f09e1a616d05a8f7628d7d244e33232333e8d0451e212e8a4edaed17f0ed3bcd"
+      "sha256": "71bed641939a144915b870fbbae4576ea738f09bb1ecedfd29b85d4ea8606c3e"
     },
     {
       "path": "tests/fixtures/sdk_batch_update_sections_request_application_json.json",
@@ -30387,7 +30387,7 @@
     {
       "path": "tests/fixtures/sdk_create_product_response_value_201_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_create_product_variant_request_application_json.json",
@@ -30622,7 +30622,7 @@
     {
       "path": "tests/fixtures/sdk_delete_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_delete_product_variant_request_application_json.json",
@@ -30747,7 +30747,7 @@
     {
       "path": "tests/fixtures/sdk_duplicate_product_response_value_201_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_duplicate_product_variant_response_value_201_application_json.json",
@@ -31032,7 +31032,7 @@
     {
       "path": "tests/fixtures/sdk_get_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_get_product_variant_response_value_200_application_json.json",
@@ -31527,7 +31527,7 @@
     {
       "path": "tests/fixtures/sdk_list_products_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "b3085a0c0d2ccbaaf95275aa352f85b3547760fdbf3f4e6e0611c132cd6b37af"
+      "sha256": "d667ef8ab44b36d3368c326135c688ee26569425b2eb464da8fd1583e935e706"
     },
     {
       "path": "tests/fixtures/sdk_list_products_within_group_response_value_200_application_json.json",
@@ -31722,7 +31722,7 @@
     {
       "path": "tests/fixtures/sdk_move_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_notify_variant_buyers_response_value_202_application_json.json",
@@ -31817,7 +31817,7 @@
     {
       "path": "tests/fixtures/sdk_publish_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_publish_product_variant_response_value_200_application_json.json",
@@ -32232,7 +32232,7 @@
     {
       "path": "tests/fixtures/sdk_replace_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_replace_product_s_add_ons_request_application_json.json",
@@ -32782,7 +32782,7 @@
     {
       "path": "tests/fixtures/sdk_search_products_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "b3085a0c0d2ccbaaf95275aa352f85b3547760fdbf3f4e6e0611c132cd6b37af"
+      "sha256": "d667ef8ab44b36d3368c326135c688ee26569425b2eb464da8fd1583e935e706"
     },
     {
       "path": "tests/fixtures/sdk_search_products_within_group_request_application_json.json",
@@ -33287,7 +33287,7 @@
     {
       "path": "tests/fixtures/sdk_update_product_response_value_200_application_json.json",
       "mode": "100644",
-      "sha256": "f3af7ab369143da53502c0d7dcab9c05780704c1a5968f196363f6dcc70b6b77"
+      "sha256": "d6378e581a9fe131db3bdaec21e38be131dec63a66bcc044497ba2fec530e998"
     },
     {
       "path": "tests/fixtures/sdk_update_product_variant_pricing_request_application_json.json",
@@ -34677,7 +34677,7 @@
     {
       "path": "tests/fixtures/search_products_response_value_200_application_json_property_data_item.json",
       "mode": "100644",
-      "sha256": "1fc5903aa220916b2b9771cd3bb2a34d24227392d40381a4c17971a479d3391a"
+      "sha256": "70676f1ee0893151974d10804848fc9583e8b5c78786bd9355205cd96083e6d4"
     },
     {
       "path": "tests/fixtures/search_products_response_value_200_application_json_property_data_item_property_additional_information_item.json",
@@ -35852,7 +35852,7 @@
     {
       "path": "tests/fixtures/update_product_response_value_200_application_json_property_data.json",
       "mode": "100644",
-      "sha256": "efeab483598f7e05ed92d576517c0a3831796a1076d4775d61cea650b936ca89"
+      "sha256": "20aaede3d91fe5a58c208beb875122a20d7ae2954df4d9fdfe3b1d7bc034b392"
     },
     {
       "path": "tests/fixtures/update_product_response_value_200_application_json_property_data_property_additional_information_item.json",
@@ -37252,7 +37252,7 @@
     {
       "path": "tests/test_bookings.py",
       "mode": "100644",
-      "sha256": "3685f52eda369ad59bdca55d0767bd6fe3890c2e8b298b461bcb476868bfe520"
+      "sha256": "d94db6716d554ef43239ee410eaa8daab57b8f24cb5d0ff34ad9704a8a8891fc"
     },
     {
       "path": "tests/test_bookings_calendar_events.py",
@@ -37262,7 +37262,7 @@
     {
       "path": "tests/test_bookings_models_round_trip.py",
       "mode": "100644",
-      "sha256": "1a2a56b1cb4d2380e8e3da5b96ebeac17b855acc4b84f7970f08d40c0bbdcac8"
+      "sha256": "a7a00a8196558af8298658044688a71ff12c006d5484af3a42c1616dca9daf69"
     },
     {
       "path": "tests/test_bundle_items.py",
@@ -37307,7 +37307,7 @@
     {
       "path": "tests/test_common_models_round_trip.py",
       "mode": "100644",
-      "sha256": "5d1630837d2d925aacce35d0ed8503f8a34d0ecfeb2a196812e943cc0cf42206"
+      "sha256": "894dfaee8ab3757ff8adc12f0f429b3cc46e91d29f0874734565c3cfaa84628a"
     },
     {
       "path": "tests/test_community_connections.py",
@@ -37652,7 +37652,7 @@
     {
       "path": "tests/test_products_models_round_trip.py",
       "mode": "100644",
-      "sha256": "0c9dbf6ab59f075f71f1bce96fcd0d8f1b147a6af21d09d030810136f98f6b37"
+      "sha256": "8ed8a9d470f4551919aeff5ff028e7cfb115262a32597abb2a9eee15bbffa16c"
     },
     {
       "path": "tests/test_products_similar_products.py",

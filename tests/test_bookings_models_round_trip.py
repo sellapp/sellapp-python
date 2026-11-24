@@ -2160,6 +2160,7 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "type": "test_type",
         }
         instance = (
             CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
@@ -2186,61 +2187,7 @@ class TestModelRoundTrip:
         assert serialized["is_discoverable"] == data["is_discoverable"]
         assert serialized["variants"] == data["variants"]
         assert serialized["url"] == data["url"]
-
-    def test_create_booking_product_response_value_201_application_json_property_data_omits_absent_optional_non_nullable_fields(
-        self,
-    ):
-        data = {
-            "id": 1,
-            "title": "test_title",
-            "slug": "test_slug",
-            "description": "test_description",
-            "images": [
-                {
-                    "path": "test_path",
-                    "metadata": {
-                        "size": 1,
-                        "filename": "Test",
-                        "extension": "test_extension",
-                        "mime_type": "test_mime_type",
-                    },
-                }
-            ],
-            "order": 1,
-            "visibility": "test_visibility",
-            "delivery_text": "test_delivery_text",
-            "additional_information": [
-                {
-                    "required": True,
-                    "key": "test_key",
-                    "type": "test_type",
-                    "label": "test_label",
-                }
-            ],
-            "other_settings": {
-                "faq": [{"question": "test_question", "answer": "test_answer"}],
-                "video_url": "video_url_01234",
-                "redirect_url": "https://example.com",
-                "product_title": "test_product_title",
-                "product_description": "test_product_description",
-            },
-            "deleted_at": "2023-01-01T00:00:00.000Z",
-            "created_at": "2023-01-01T00:00:00.000Z",
-            "updated_at": "2023-01-01T00:00:00.000Z",
-            "store_id": 1,
-            "section_id": 1,
-            "section_order": 1,
-            "is_discoverable": True,
-            "variants": [{"id": 1, "title": "test_title"}],
-            "url": "https://example.com",
-        }
-        instance = (
-            CreateBookingProductResponseValue201ApplicationJsonPropertyData.from_dict(
-                data
-            )
-        )
-        serialized = instance.to_dict()
-        assert "type" not in serialized
+        assert serialized["type"] == data["type"]
 
     def test_create_booking_product_response_value_201_application_json_property_data_preserves_nullable_fields(
         self,

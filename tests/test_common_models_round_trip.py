@@ -1696,6 +1696,7 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "type": "test_type",
         }
         instance = BatchCreateProductsResponseValue201ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -1720,6 +1721,7 @@ class TestModelRoundTrip:
         assert serialized["is_discoverable"] == data["is_discoverable"]
         assert serialized["variants"] == data["variants"]
         assert serialized["url"] == data["url"]
+        assert serialized["type"] == data["type"]
 
     def test_batch_create_products_response_value_201_application_json_property_data_item_preserves_nullable_fields(
         self,
@@ -1767,6 +1769,7 @@ class TestModelRoundTrip:
             "is_discoverable": True,
             "variants": [{"id": 1, "title": "test_title"}],
             "url": "https://example.com",
+            "type": "test_type",
         }
         instance = BatchCreateProductsResponseValue201ApplicationJsonPropertyDataItem.from_dict(
             data
@@ -1840,6 +1843,7 @@ class TestModelRoundTrip:
                     "is_discoverable": True,
                     "variants": [{"id": 1, "title": "test_title"}],
                     "url": "https://example.com",
+                    "type": "test_type",
                 }
             ]
         }

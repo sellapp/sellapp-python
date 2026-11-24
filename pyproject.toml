@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sellapp-sdk"
-version = "0.3.0"
+version = "0.3.1"
 description = "Official Python SDK for the SellApp API"
 readme = "README.md"
 requires-python = ">=3.10"

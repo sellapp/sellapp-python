@@ -50,6 +50,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable",
         "variants",
         "url",
+        "type",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
@@ -86,6 +87,7 @@ _DOMAIN_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable": {"kind": "primitive", "type": "boolean"},
         "variants": {"kind": "array", "items": {"kind": "any"}},
         "url": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "primitive", "type": "string"},
     },
     "additionalProperties": True,
 }
@@ -111,6 +113,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable",
         "variants",
         "url",
+        "type",
     ],
     "properties": {
         "id": {"kind": "primitive", "type": "integer"},
@@ -147,6 +150,7 @@ _WIRE_RUNTIME_SCHEMA: dict[str, Any] = {
         "is_discoverable": {"kind": "primitive", "type": "boolean"},
         "variants": {"kind": "array", "items": {"kind": "any"}},
         "url": {"kind": "primitive", "type": "string"},
+        "type": {"kind": "primitive", "type": "string"},
     },
     "additionalProperties": True,
 }
@@ -181,6 +185,8 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem:
         BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItemPropertyVariantsItem
     ]
     url: str
+    type: str
+    """What kind of product this is: `product`, `bundle`, `addon`, `credits`, `course`, or `booking`."""
     additional_properties: dict[str, Any] = dataclass_field(
         default_factory=dict, repr=False
     )
@@ -239,6 +245,7 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem:
                     for item in cast(list[Any], data["variants"])
                 ],
                 url=data["url"],
+                type=data["type"],
                 additional_properties=_preserve_unknown_fields(
                     data,
                     [
@@ -261,6 +268,7 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem:
                         "is_discoverable",
                         "variants",
                         "url",
+                        "type",
                     ],
                 ),
                 _from_response=True,
@@ -292,6 +300,7 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem:
         _domain_data["is_discoverable"] = self.is_discoverable
         _domain_data["variants"] = self.variants
         _domain_data["url"] = self.url
+        _domain_data["type"] = self.type
         _validate_model(
             _domain_data,
             _DOMAIN_RUNTIME_SCHEMA,
@@ -337,4 +346,5 @@ class BatchCreateProductsResponseValue200ApplicationJsonPropertyDataItem:
         result["is_discoverable"] = self.is_discoverable
         result["variants"] = [item.to_dict() for item in self.variants]
         result["url"] = self.url
+        result["type"] = self.type
         return result

@@ -2,10 +2,10 @@
 
 from typing import TypeAlias
 
-from .sdk_create_product_response_value_201_application_json import (
-    SdkCreateProductResponseValue201ApplicationJson,
+from sellapp_sdk.common.models.sdk_create_booking_product_response_value_201_application_json import (
+    SdkCreateBookingProductResponseValue201ApplicationJson,
 )
 
 SdkReplaceProductResponseValue200ApplicationJson: TypeAlias = (
-    SdkCreateProductResponseValue201ApplicationJson
+    SdkCreateBookingProductResponseValue201ApplicationJson
 )
